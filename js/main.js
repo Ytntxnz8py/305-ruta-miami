@@ -168,6 +168,41 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
+/* ===== ANIMACIÓN DE ENTRADA EN SCROLL (IntersectionObserver) =====
+   Cuando el usuario llega a cada sección, las tarjetas aparecen
+   de abajo hacia arriba con un retardo escalonado entre ellas.    */
+(function () {
+  /* Seleccionamos todas las tarjetas de actividad */
+  const tarjetasActividad = document.querySelectorAll('.actividad-card');
+
+  /* Asignamos el retardo CSS a cada tarjeta dentro de su grupo.
+     El índice se reinicia por sección para que el stagger
+     sea independiente en Tierra y en Mar.                          */
+  document.querySelectorAll('.seccion-actividades__grid').forEach(grid => {
+    grid.querySelectorAll('.actividad-card').forEach((tarjeta, i) => {
+      /* Cada tarjeta aparece 150ms después de la anterior */
+      tarjeta.style.transitionDelay = `${i * 0.15}s`;
+    });
+  });
+
+  /* Configuración del observer:
+     - threshold 0.15 → la tarjeta empieza a animarse cuando el 15%
+       de su área es visible en el viewport                          */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        /* Añadimos la clase que activa la transición CSS */
+        entry.target.classList.add('visible');
+        /* Dejamos de observar una vez que ya entró — solo anima una vez */
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  /* Registramos cada tarjeta en el observer */
+  tarjetasActividad.forEach(tarjeta => observer.observe(tarjeta));
+})();
+
 /* ===== FLECHA SCROLL HERO ===== */
 const flechaHero = document.getElementById('flechaHero');
 if (flechaHero) {
