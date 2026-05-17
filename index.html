@@ -4,14 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Explora Miami — Directorio de Experiencias Outdoor</title>
-  <meta name="description" content="Descubre las mejores experiencias outdoor en Miami: buceo, kayak, senderismo, paddle board, escalada y camping en South Florida." />
+  <meta name="description" content="Descubre las mejores experiencias outdoor en Miami: Everglades, buceo en Key Largo, kayak en Biscayne Bay y más." />
 
-  <!-- Google Fonts: Playfair Display para títulos, Lato para cuerpo -->
+  <!-- Google Fonts: Abril Fatface (títulos) + Nunito (cuerpo) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Aplica idioma antes de render para evitar flash -->
+  <script>
+    document.documentElement.classList.add('lang-' + (localStorage.getItem('em_idioma') || 'es'));
+  </script>
 </head>
 <body>
 
@@ -23,46 +28,46 @@
         <span class="header__logo-explora">Explora</span><span class="header__logo-miami">Miami</span>
       </a>
 
+      <!-- Botón hamburguesa (móvil) -->
       <button class="header__menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
 
       <nav class="header__nav" id="navMenu" aria-label="Navegación principal">
         <ul class="header__lista">
-          <li><a href="#inicio"   class="header__enlace">Inicio</a></li>
-          <li><a href="#destinos" class="header__enlace">Destinos</a></li>
-          <li><a href="#mapa"     class="header__enlace">Mapa</a></li>
-          <li><a href="#contacto" class="header__enlace header__enlace--cta">Contacto</a></li>
+          <li><a href="#inicio"   class="header__enlace" data-i18n="nav_inicio">Inicio</a></li>
+          <li><a href="#destinos" class="header__enlace" data-i18n="nav_destinos">Destinos</a></li>
+          <li><a href="#mapa"     class="header__enlace" data-i18n="nav_mapa">Mapa</a></li>
+          <li><a href="#trabaja"  class="header__enlace" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
         </ul>
       </nav>
+
+      <!-- Botón de idioma ES / EN -->
+      <button class="header__lang-btn" id="btnIdioma" aria-label="Cambiar idioma">ES</button>
 
     </div>
   </header>
 
   <main>
 
-    <!-- ===== HERO: video con overlay gradiente azul cielo fresco ===== -->
+    <!-- ===== HERO: video + overlay tropical ===== -->
     <section class="hero" id="inicio">
 
       <div class="hero__fondo" aria-hidden="true">
         <video class="hero__video" autoplay muted loop playsinline>
           <source src="assets/videos/hero-tierra.mp4.mp4" type="video/mp4" />
         </video>
-        <!-- Overlay fresco: azul cielo semitransparente, no negro -->
+        <!-- Overlay turquesa → coral: fresco y tropical -->
         <div class="hero__overlay"></div>
       </div>
 
       <div class="hero__contenido">
         <span class="hero__etiqueta">Miami · South Florida</span>
-        <h1 class="hero__titulo">
-          Explora
-          <span class="hero__titulo-acento">Miami</span>
-        </h1>
-        <p class="hero__tagline">Tu próxima aventura empieza aquí</p>
-        <p class="hero__subtexto" id="typewriterTexto" aria-live="polite"></p>
+        <h1 class="hero__titulo" data-i18n="hero_titulo">EXPLORA MIAMI</h1>
+        <p class="hero__tagline" data-i18n="hero_tagline">Tu próxima aventura empieza aquí</p>
         <div class="hero__botones">
-          <a href="#destinos" class="btn btn--primario">Ver destinos</a>
-          <a href="#mapa"     class="btn btn--secundario">Ver mapa</a>
+          <a href="#destinos" class="btn btn--primario" data-i18n="hero_btn_destinos">Ver destinos</a>
+          <a href="#mapa"     class="btn btn--secundario" data-i18n="hero_btn_mapa">Ver mapa</a>
         </div>
       </div>
 
@@ -72,227 +77,198 @@
 
     </section>
 
-    <!-- ===== INTRO: tres highlights del directorio ===== -->
+    <!-- ===== INTRO: 3 highlights ===== -->
     <section class="seccion-intro" id="nosotros">
       <div class="seccion-intro__contenedor">
 
-        <h2 class="seccion-intro__titulo">¿Por qué Explora Miami?</h2>
-        <p class="seccion-intro__subtitulo">La guía definitiva para aventureros en South Florida</p>
+        <h2 class="seccion-intro__titulo fade-up" data-i18n="intro_titulo">¿Por qué Explora Miami?</h2>
+        <p class="seccion-intro__subtitulo" data-i18n="intro_sub">La guía definitiva para aventureros en South Florida</p>
 
         <div class="seccion-intro__grid">
-
-          <div class="intro-card">
+          <div class="intro-card fade-up">
             <div class="intro-card__icono">🌊</div>
-            <h3 class="intro-card__titulo">Destinos Verificados</h3>
-            <p class="intro-card__texto">6 experiencias curadas en los mejores rincones de Miami y sus alrededores, listas para explorar.</p>
+            <h3 class="intro-card__titulo" data-i18n="intro_c1_titulo">Destinos Verificados</h3>
+            <p class="intro-card__texto" data-i18n="intro_c1_texto">6 experiencias curadas en los mejores rincones de Miami y sus alrededores.</p>
           </div>
-
-          <div class="intro-card">
+          <div class="intro-card fade-up" style="transition-delay:0.12s">
             <div class="intro-card__icono">🗺️</div>
-            <h3 class="intro-card__titulo">Guías Locales</h3>
-            <p class="intro-card__texto">Expertos que conocen cada sendero, bahía y arrecife del sur de Florida para guiarte con seguridad.</p>
+            <h3 class="intro-card__titulo" data-i18n="intro_c2_titulo">Guías Locales</h3>
+            <p class="intro-card__texto" data-i18n="intro_c2_texto">Expertos que conocen cada sendero, bahía y arrecife del sur de Florida.</p>
           </div>
-
-          <div class="intro-card">
+          <div class="intro-card fade-up" style="transition-delay:0.24s">
             <div class="intro-card__icono">🌿</div>
-            <h3 class="intro-card__titulo">Naturaleza Pura</h3>
-            <p class="intro-card__texto">Desde los Everglades hasta South Beach — aventura y paisajes únicos en cada destino.</p>
+            <h3 class="intro-card__titulo" data-i18n="intro_c3_titulo">Naturaleza Pura</h3>
+            <p class="intro-card__texto" data-i18n="intro_c3_texto">Desde los Everglades hasta South Beach — aventura en cada destino.</p>
           </div>
-
         </div>
+
       </div>
     </section>
 
-    <!-- ===== DESTINOS: 6 tarjetas con filtro Tierra / Mar ===== -->
+    <!-- ===== DESTINOS: 6 tarjetas renderizadas por JS ===== -->
     <section class="seccion-destinos" id="destinos">
       <div class="seccion-destinos__contenedor">
 
         <div class="seccion-destinos__encabezado">
-          <h2 class="seccion-titulo">Destinos en Miami</h2>
-          <p class="seccion-subtitulo">Descubre las mejores experiencias outdoor de South Florida</p>
+          <h2 class="seccion-titulo fade-up" data-i18n="destinos_titulo">Destinos en Miami</h2>
+          <p class="seccion-subtitulo" data-i18n="destinos_sub">Descubre las mejores experiencias outdoor de South Florida</p>
         </div>
 
-        <div class="filtros" role="group" aria-label="Filtrar destinos por tipo">
-          <button class="filtros__btn filtros__btn--activo" data-filtro="todos">Todos</button>
-          <button class="filtros__btn" data-filtro="tierra">🏔️ Tierra</button>
-          <button class="filtros__btn" data-filtro="mar">🌊 Mar</button>
+        <!-- Filtros -->
+        <div class="filtros" role="group" aria-label="Filtrar destinos">
+          <button class="filtros__btn filtros__btn--activo" data-filtro="todos" data-i18n="filtro_todos">Todos</button>
+          <button class="filtros__btn" data-filtro="tierra" data-i18n="filtro_tierra">🏔️ Tierra</button>
+          <button class="filtros__btn" data-filtro="mar"    data-i18n="filtro_mar">🌊 Mar</button>
         </div>
 
-        <div class="destinos-grid" id="destinosGrid">
+        <!-- Grid inyectado por main.js -->
+        <div class="destinos-grid" id="destinosGrid" aria-live="polite"></div>
 
-          <!-- 1 · Buceo en Key Largo -->
-          <article class="destino-card" data-tipo="mar">
-            <div class="destino-card__imagen-cont">
-              <img src="assets/images/istockphoto-155372056-612x612.jpg"
-                   alt="Buzo explorando arrecife de coral en Key Largo"
-                   class="destino-card__imagen" loading="lazy" />
-              <span class="destino-card__tipo destino-card__tipo--mar">Mar</span>
-              <span class="destino-card__dificultad destino-card__dificultad--intermedio">Intermedio</span>
-            </div>
-            <div class="destino-card__info">
-              <h3 class="destino-card__nombre">Buceo en Key Largo</h3>
-              <p class="destino-card__descripcion">Explora los arrecifes de coral más ricos del Atlántico Norte, con visibilidad hasta 30 metros y vida marina excepcional.</p>
-              <div class="destino-card__detalles">
-                <span class="destino-card__detalle"><span class="destino-card__detalle-icono">⏱</span>Medio día</span>
-                <span class="destino-card__detalle destino-card__detalle--precio"><span class="destino-card__detalle-icono">💲</span>Desde $95</span>
-              </div>
-              <a href="#mapa" class="btn btn--primario destino-card__btn">Ver más</a>
-            </div>
-          </article>
-
-          <!-- 2 · Kayak en Biscayne Bay -->
-          <article class="destino-card" data-tipo="mar">
-            <div class="destino-card__imagen-cont">
-              <img src="assets/images/istockphoto-1984030596-612x612.jpg"
-                   alt="Kayak navegando por Biscayne Bay con el skyline de Miami"
-                   class="destino-card__imagen" loading="lazy" />
-              <span class="destino-card__tipo destino-card__tipo--mar">Mar</span>
-              <span class="destino-card__dificultad destino-card__dificultad--facil">Fácil</span>
-            </div>
-            <div class="destino-card__info">
-              <h3 class="destino-card__nombre">Kayak en Biscayne Bay</h3>
-              <p class="destino-card__descripcion">Navega entre manglares y descubre la bahía de Miami desde el agua, con vistas únicas al skyline y fauna silvestre local.</p>
-              <div class="destino-card__detalles">
-                <span class="destino-card__detalle"><span class="destino-card__detalle-icono">⏱</span>2–4 horas</span>
-                <span class="destino-card__detalle destino-card__detalle--precio"><span class="destino-card__detalle-icono">💲</span>Desde $45</span>
-              </div>
-              <a href="#mapa" class="btn btn--primario destino-card__btn">Ver más</a>
-            </div>
-          </article>
-
-          <!-- 3 · Senderismo en Everglades -->
-          <article class="destino-card" data-tipo="tierra">
-            <div class="destino-card__imagen-cont">
-              <img src="assets/images/istockphoto-598222532-612x612.jpg"
-                   alt="Senderista en los senderos del Parque Nacional Everglades"
-                   class="destino-card__imagen" loading="lazy" />
-              <span class="destino-card__tipo destino-card__tipo--tierra">Tierra</span>
-              <span class="destino-card__dificultad destino-card__dificultad--facil">Fácil</span>
-            </div>
-            <div class="destino-card__info">
-              <h3 class="destino-card__nombre">Senderismo en Everglades</h3>
-              <p class="destino-card__descripcion">Recorre el pantanal más grande del mundo y avista caimanes, flamencos y aves exóticas en su hábitat natural.</p>
-              <div class="destino-card__detalles">
-                <span class="destino-card__detalle"><span class="destino-card__detalle-icono">⏱</span>Medio día</span>
-                <span class="destino-card__detalle destino-card__detalle--precio"><span class="destino-card__detalle-icono">💲</span>Desde $25</span>
-              </div>
-              <a href="#mapa" class="btn btn--primario destino-card__btn">Ver más</a>
-            </div>
-          </article>
-
-          <!-- 4 · Paddle Board en Miami Beach -->
-          <article class="destino-card" data-tipo="mar">
-            <div class="destino-card__imagen-cont">
-              <img src="assets/images/istockphoto-954434212-612x612.jpg"
-                   alt="Paddle board en las aguas turquesas de Miami Beach"
-                   class="destino-card__imagen" loading="lazy" />
-              <span class="destino-card__tipo destino-card__tipo--mar">Mar</span>
-              <span class="destino-card__dificultad destino-card__dificultad--facil">Fácil</span>
-            </div>
-            <div class="destino-card__info">
-              <h3 class="destino-card__nombre">Paddle Board en Miami Beach</h3>
-              <p class="destino-card__descripcion">Surfea de pie en las aguas turquesas de South Beach con el icónico skyline de Miami como telón de fondo.</p>
-              <div class="destino-card__detalles">
-                <span class="destino-card__detalle"><span class="destino-card__detalle-icono">⏱</span>1–2 horas</span>
-                <span class="destino-card__detalle destino-card__detalle--precio"><span class="destino-card__detalle-icono">💲</span>Desde $40</span>
-              </div>
-              <a href="#mapa" class="btn btn--primario destino-card__btn">Ver más</a>
-            </div>
-          </article>
-
-          <!-- 5 · Escalada en Vertical Rock Gym -->
-          <article class="destino-card" data-tipo="tierra">
-            <div class="destino-card__imagen-cont">
-              <img src="assets/images/istockphoto-2163402625-612x612.jpg"
-                   alt="Escalada en roca en Vertical Rock Gym Miami"
-                   class="destino-card__imagen" loading="lazy" />
-              <span class="destino-card__tipo destino-card__tipo--tierra">Tierra</span>
-              <span class="destino-card__dificultad destino-card__dificultad--variable">Variable</span>
-            </div>
-            <div class="destino-card__info">
-              <h3 class="destino-card__nombre">Escalada en Vertical Rock Gym</h3>
-              <p class="destino-card__descripcion">El rocódromo más completo de Miami, ideal para principiantes y escaladores experimentados que buscan superar sus límites.</p>
-              <div class="destino-card__detalles">
-                <span class="destino-card__detalle"><span class="destino-card__detalle-icono">⏱</span>2 horas</span>
-                <span class="destino-card__detalle destino-card__detalle--precio"><span class="destino-card__detalle-icono">💲</span>Desde $25</span>
-              </div>
-              <a href="#mapa" class="btn btn--primario destino-card__btn">Ver más</a>
-            </div>
-          </article>
-
-          <!-- 6 · Camping en Big Cypress -->
-          <article class="destino-card" data-tipo="tierra">
-            <div class="destino-card__imagen-cont">
-              <img src="assets/images/istockphoto-677059814-612x612.jpg"
-                   alt="Camping bajo las estrellas en Big Cypress National Preserve"
-                   class="destino-card__imagen" loading="lazy" />
-              <span class="destino-card__tipo destino-card__tipo--tierra">Tierra</span>
-              <span class="destino-card__dificultad destino-card__dificultad--facil">Fácil</span>
-            </div>
-            <div class="destino-card__info">
-              <h3 class="destino-card__nombre">Camping en Big Cypress</h3>
-              <p class="destino-card__descripcion">Duerme bajo las estrellas en la reserva de Big Cypress, rodeado de cipreses centenarios y la fauna más diversa de Florida.</p>
-              <div class="destino-card__detalles">
-                <span class="destino-card__detalle"><span class="destino-card__detalle-icono">⏱</span>1 noche+</span>
-                <span class="destino-card__detalle destino-card__detalle--precio"><span class="destino-card__detalle-icono">💲</span>Desde $20</span>
-              </div>
-              <a href="#mapa" class="btn btn--primario destino-card__btn">Ver más</a>
-            </div>
-          </article>
-
-        </div><!-- /destinos-grid -->
       </div>
     </section>
 
-    <!-- ===== MAPA INTERACTIVO: Google Maps embed ===== -->
+    <!-- ===== MAPA INTERACTIVO ===== -->
     <section class="seccion-mapa" id="mapa">
       <div class="seccion-mapa__contenedor">
 
-        <div class="seccion-mapa__encabezado">
-          <h2 class="seccion-titulo">Mapa de Destinos</h2>
-          <p class="seccion-subtitulo">Los 6 destinos outdoor en South Florida</p>
-        </div>
+        <h2 class="seccion-titulo fade-up" data-i18n="mapa_titulo">Mapa de Destinos</h2>
+        <p class="seccion-subtitulo" data-i18n="mapa_sub">Los 6 destinos outdoor en South Florida</p>
 
-        <!-- Chips de referencia visual para los 6 destinos -->
-        <div class="mapa-marcadores" aria-label="Lista de destinos en el mapa">
-          <div class="mapa-marcador mapa-marcador--mar">
-            <span class="mapa-marcador__num mapa-marcador__num--mar">1</span>
-            <span>Key Largo — Buceo</span>
+        <!-- Chips de referencia de los 6 destinos -->
+        <div class="mapa-marcadores">
+          <div class="mapa-marcador mapa-marcador--tierra">
+            <span class="mapa-marcador__num mapa-marcador__num--tierra">1</span>
+            <span class="lang-es">Everglades — Senderismo</span><span class="lang-en">Everglades — Hiking</span>
           </div>
           <div class="mapa-marcador mapa-marcador--mar">
             <span class="mapa-marcador__num mapa-marcador__num--mar">2</span>
-            <span>Biscayne Bay — Kayak</span>
-          </div>
-          <div class="mapa-marcador mapa-marcador--tierra">
-            <span class="mapa-marcador__num mapa-marcador__num--tierra">3</span>
-            <span>Everglades — Senderismo</span>
+            <span class="lang-es">Key Largo — Buceo</span><span class="lang-en">Key Largo — Diving</span>
           </div>
           <div class="mapa-marcador mapa-marcador--mar">
-            <span class="mapa-marcador__num mapa-marcador__num--mar">4</span>
-            <span>Miami Beach — Paddle Board</span>
+            <span class="mapa-marcador__num mapa-marcador__num--mar">3</span>
+            <span class="lang-es">Biscayne Bay — Kayak</span><span class="lang-en">Biscayne Bay — Kayak</span>
+          </div>
+          <div class="mapa-marcador mapa-marcador--tierra">
+            <span class="mapa-marcador__num mapa-marcador__num--tierra">4</span>
+            <span class="lang-es">Bill Baggs — Playa</span><span class="lang-en">Bill Baggs — Beach</span>
           </div>
           <div class="mapa-marcador mapa-marcador--tierra">
             <span class="mapa-marcador__num mapa-marcador__num--tierra">5</span>
-            <span>Miami — Escalada</span>
+            <span class="lang-es">Oleta River — Mountain Bike</span><span class="lang-en">Oleta River — Mountain Bike</span>
           </div>
-          <div class="mapa-marcador mapa-marcador--tierra">
-            <span class="mapa-marcador__num mapa-marcador__num--tierra">6</span>
-            <span>Big Cypress — Camping</span>
+          <div class="mapa-marcador mapa-marcador--mar">
+            <span class="mapa-marcador__num mapa-marcador__num--mar">6</span>
+            <span class="lang-es">Virginia Key — Paddle Board</span><span class="lang-en">Virginia Key — Paddle Board</span>
           </div>
         </div>
 
-        <!-- Google Maps iframe centrado en South Florida (sin API key) -->
-        <div class="mapa-iframe-cont">
+        <!-- Google Maps embed centrado en South Florida (sin API key) -->
+        <div class="mapa-iframe-cont fade-up">
           <iframe
             class="mapa-iframe"
-            src="https://maps.google.com/maps?q=South+Florida&t=&z=8&ie=UTF8&iwloc=&output=embed"
-            title="Mapa interactivo de destinos outdoor en South Florida"
+            src="https://maps.google.com/maps?q=South+Florida&t=&z=9&ie=UTF8&iwloc=&output=embed"
+            title="Mapa de destinos outdoor en South Florida"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             allowfullscreen
           ></iframe>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ===== TRABAJA CON NOSOTROS ===== -->
+    <section class="seccion-trabaja" id="trabaja">
+      <div class="seccion-trabaja__contenedor">
+
+        <h2 class="seccion-titulo fade-up" data-i18n="trabaja_titulo">Trabaja con Nosotros</h2>
+
+        <div class="trabaja-grid">
+
+          <!-- Columna izquierda: info y beneficios -->
+          <div class="trabaja-info fade-up">
+            <p class="trabaja-info__sub" data-i18n="trabaja_sub">
+              ¿Tienes un negocio relacionado con el turismo outdoor en Miami? Únete a nuestra plataforma.
+            </p>
+            <div class="trabaja-beneficios">
+              <div class="trabaja-beneficio">
+                <div class="trabaja-beneficio__icono">📍</div>
+                <span data-i18n="trabaja_item1">Listing en nuestro directorio</span>
+              </div>
+              <div class="trabaja-beneficio">
+                <div class="trabaja-beneficio__icono">💻</div>
+                <span data-i18n="trabaja_item2">Página web profesional</span>
+              </div>
+              <div class="trabaja-beneficio">
+                <div class="trabaja-beneficio__icono">📢</div>
+                <span data-i18n="trabaja_item3">Publicidad segmentada</span>
+              </div>
+              <div class="trabaja-beneficio">
+                <div class="trabaja-beneficio__icono">📦</div>
+                <span data-i18n="trabaja_item4">Integración con Amazon</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: formulario -->
+          <div class="trabaja-form-cont fade-up" style="transition-delay:0.14s">
+            <div class="form-card">
+
+              <form id="formTrabaja" novalidate>
+                <div class="form-fila">
+                  <div class="form-grupo">
+                    <label for="fNombre" data-i18n="form_nombre">Nombre completo</label>
+                    <input id="fNombre" name="nombre" type="text" required
+                           data-i18n-ph="form_nombre" placeholder="Nombre completo" />
+                  </div>
+                  <div class="form-grupo">
+                    <label for="fEmpresa" data-i18n="form_empresa">Empresa</label>
+                    <input id="fEmpresa" name="empresa" type="text"
+                           data-i18n-ph="form_empresa" placeholder="Empresa" />
+                  </div>
+                </div>
+                <div class="form-fila">
+                  <div class="form-grupo">
+                    <label for="fEmail" data-i18n="form_email">Email</label>
+                    <input id="fEmail" name="email" type="email" required
+                           data-i18n-ph="form_email" placeholder="Email" />
+                  </div>
+                  <div class="form-grupo">
+                    <label for="fTel" data-i18n="form_tel">Teléfono</label>
+                    <input id="fTel" name="tel" type="tel"
+                           data-i18n-ph="form_tel" placeholder="Teléfono" />
+                  </div>
+                </div>
+                <div class="form-grupo">
+                  <label for="fServicio" data-i18n="form_servicio">Tipo de servicio</label>
+                  <select id="fServicio" name="servicio" required>
+                    <option value="" data-i18n="form_servicio_opc">Selecciona una opción</option>
+                    <option value="listing"  data-i18n="form_servicio_listing">Listing en directorio</option>
+                    <option value="web"      data-i18n="form_servicio_web">Página web personalizada</option>
+                    <option value="pub"      data-i18n="form_servicio_pub">Publicidad en el sitio</option>
+                    <option value="amazon"   data-i18n="form_servicio_amazon">Productos en Amazon</option>
+                  </select>
+                </div>
+                <div class="form-grupo">
+                  <label for="fMensaje" data-i18n="form_mensaje">Mensaje</label>
+                  <textarea id="fMensaje" name="mensaje"
+                            data-i18n-ph="form_mensaje" placeholder="Mensaje"></textarea>
+                </div>
+                <button type="submit" class="btn btn--coral form-enviar" data-i18n="form_enviar">
+                  Enviar mensaje
+                </button>
+              </form>
+
+              <!-- Mensaje de éxito (oculto hasta envío) -->
+              <div id="formExito" class="form-exito" style="display:none" aria-live="polite">
+                <div class="form-exito__check">✓</div>
+                <h3 class="form-exito__titulo" data-i18n="form_exito_titulo">¡Mensaje enviado!</h3>
+                <p class="form-exito__texto" data-i18n="form_exito_texto">Nos pondremos en contacto contigo en menos de 24 horas.</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -304,39 +280,48 @@
 
       <div class="footer__marca">
         <a href="#inicio" class="footer__logo">
-          <span>Explora</span><span class="footer__logo-miami">Miami</span>
+          <span class="footer__logo-explora">Explora</span><span class="footer__logo-miami">Miami</span>
         </a>
-        <p class="footer__tagline">Tu próxima aventura empieza aquí</p>
+        <p class="footer__tagline" data-i18n="footer_tagline">Tu próxima aventura empieza aquí</p>
+        <div class="footer__sociales">
+          <a href="#" class="footer__social" aria-label="Instagram">📸</a>
+          <a href="#" class="footer__social" aria-label="Facebook">👍</a>
+          <a href="#" class="footer__social" aria-label="TikTok">🎵</a>
+        </div>
       </div>
 
       <nav class="footer__nav" aria-label="Pie de página">
-        <h4 class="footer__subtitulo">Navegación</h4>
+        <h4 class="footer__subtitulo" data-i18n="footer_nav">Navegación</h4>
         <ul class="footer__lista">
-          <li><a href="#inicio"   class="footer__enlace">Inicio</a></li>
-          <li><a href="#destinos" class="footer__enlace">Destinos</a></li>
-          <li><a href="#mapa"     class="footer__enlace">Mapa</a></li>
+          <li><a href="#inicio"   class="footer__enlace" data-i18n="nav_inicio">Inicio</a></li>
+          <li><a href="#destinos" class="footer__enlace" data-i18n="nav_destinos">Destinos</a></li>
+          <li><a href="#mapa"     class="footer__enlace" data-i18n="nav_mapa">Mapa</a></li>
+          <li><a href="#trabaja"  class="footer__enlace" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
         </ul>
       </nav>
 
-      <div class="footer__destinos">
-        <h4 class="footer__subtitulo">Destinos</h4>
+      <div class="footer__destinos-lista">
+        <h4 class="footer__subtitulo" data-i18n="footer_destinos">Destinos</h4>
         <ul class="footer__lista">
-          <li><span class="footer__enlace">Buceo · Key Largo</span></li>
-          <li><span class="footer__enlace">Kayak · Biscayne Bay</span></li>
-          <li><span class="footer__enlace">Senderismo · Everglades</span></li>
-          <li><span class="footer__enlace">Paddle Board · Miami Beach</span></li>
-          <li><span class="footer__enlace">Escalada · Vertical Rock Gym</span></li>
-          <li><span class="footer__enlace">Camping · Big Cypress</span></li>
+          <li><span class="footer__enlace lang-es">Everglades — Senderismo</span><span class="footer__enlace lang-en">Everglades — Hiking</span></li>
+          <li><span class="footer__enlace lang-es">Key Largo — Buceo</span><span class="footer__enlace lang-en">Key Largo — Diving</span></li>
+          <li><span class="footer__enlace">Biscayne Bay — Kayak</span></li>
+          <li><span class="footer__enlace lang-es">Bill Baggs — Playa</span><span class="footer__enlace lang-en">Bill Baggs — Beach</span></li>
+          <li><span class="footer__enlace">Oleta River — Mountain Bike</span></li>
+          <li><span class="footer__enlace lang-es">Virginia Key — Natación</span><span class="footer__enlace lang-en">Virginia Key — Swimming</span></li>
         </ul>
       </div>
 
     </div>
 
     <div class="footer__inferior">
-      <p>&copy; 2026 Explora Miami. Hecho con ❤️ para aventureros de South Florida.</p>
+      <span data-i18n="footer_copyright">© 2026 Explora Miami. Todos los derechos reservados.</span>
+      <a href="admin.html" class="footer__enlace" style="font-size:0.78rem;opacity:0.4">Admin</a>
     </div>
   </footer>
 
+  <!-- Scripts: i18n primero, luego main -->
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

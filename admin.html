@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Explora Miami</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Google Fonts: Abril Fatface + Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+<body>
+
+  <!-- ===== LOGIN OVERLAY (visible por defecto) ===== -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-card">
+      <div class="login-logo">
+        <span class="login-logo-e">Explora</span><span class="login-logo-m">Miami</span>
+      </div>
+      <p class="login-subtitulo">Panel de Administración</p>
+
+      <form id="formLogin" novalidate>
+        <label class="login-label" for="inputPass">Contraseña</label>
+        <input
+          id="inputPass"
+          type="password"
+          class="login-input"
+          placeholder="Ingresa la contraseña"
+          autocomplete="current-password"
+          required
+        />
+        <button type="submit" class="login-btn">Entrar</button>
+        <p id="loginError" class="login-error">Contraseña incorrecta. Intenta de nuevo.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== DASHBOARD (oculto hasta login) ===== -->
+  <div id="dashboard" style="display:none">
+
+    <!-- Header del admin -->
+    <header class="admin-header">
+      <div style="display:flex;align-items:center;gap:0.5rem">
+        <div class="admin-header__logo">
+          <span>Explora</span><span>Miami</span>
+        </div>
+        <span class="admin-header__tag">ADMIN</span>
+      </div>
+      <div class="admin-header__derecha">
+        <a href="index.html" target="_blank" class="admin-header__link">← Ver sitio</a>
+        <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <main class="admin-main">
+
+      <!-- ===== ESTADÍSTICAS ===== -->
+      <div class="admin-stats">
+        <div class="stat-card">
+          <div class="stat-num"  id="statDestinos">—</div>
+          <div class="stat-label">Destinos activos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num"  id="statContactos">—</div>
+          <div class="stat-label">Contactos recibidos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num"  id="statFecha">—</div>
+          <div class="stat-label">Última revisión</div>
+        </div>
+      </div>
+
+      <!-- ===== GESTIÓN DE DESTINOS ===== -->
+      <div class="admin-seccion">
+        <div class="admin-seccion__header">
+          <h2 class="admin-seccion__titulo">Destinos</h2>
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+            <button class="admin-btn admin-btn--new" onclick="toggleFormDestino()">+ Nuevo destino</button>
+          </div>
+        </div>
+
+        <!-- Formulario agregar / editar (oculto por defecto) -->
+        <div id="formDestinoWrap" class="admin-form" style="display:none;margin-bottom:2rem;padding:1.5rem;background:#f4f7fa;border-radius:12px">
+          <p class="admin-form__titulo" id="formDestinoTitulo">Agregar Destino</p>
+
+          <form id="formDestino">
+            <div class="admin-form__grid">
+
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Nombre (ES)</label>
+                <input name="nombre_es" class="admin-form__input" placeholder="ej: Everglades National Park" required />
+              </div>
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Nombre (EN)</label>
+                <input name="nombre_en" class="admin-form__input" placeholder="ej: Everglades National Park" required />
+              </div>
+
+              <div class="admin-form__grupo admin-form__grupo--full">
+                <label class="admin-form__label">Descripción (ES)</label>
+                <textarea name="desc_es" class="admin-form__textarea" placeholder="Descripción en español" required></textarea>
+              </div>
+              <div class="admin-form__grupo admin-form__grupo--full">
+                <label class="admin-form__label">Descripción (EN)</label>
+                <textarea name="desc_en" class="admin-form__textarea" placeholder="Description in English" required></textarea>
+              </div>
+
+              <div class="admin-form__grupo admin-form__grupo--full">
+                <label class="admin-form__label">URL de foto (Unsplash u otra)</label>
+                <input name="foto" class="admin-form__input" type="url" placeholder="https://images.unsplash.com/photo-..." />
+              </div>
+
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Latitud</label>
+                <input name="lat" class="admin-form__input" type="number" step="0.0001" placeholder="25.2866" required />
+              </div>
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Longitud</label>
+                <input name="lng" class="admin-form__input" type="number" step="0.0001" placeholder="-80.8987" required />
+              </div>
+
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Dificultad (ES)</label>
+                <input name="dificultad_es" class="admin-form__input" placeholder="ej: Fácil — Moderado" required />
+              </div>
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Dificultad (EN)</label>
+                <input name="dificultad_en" class="admin-form__input" placeholder="ej: Easy — Moderate" required />
+              </div>
+
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Nivel de dificultad (badge)</label>
+                <select name="dificultad_clase" class="admin-form__select">
+                  <option value="facil">Fácil</option>
+                  <option value="moderado">Moderado</option>
+                  <option value="dificil">Difícil</option>
+                </select>
+              </div>
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Tipo</label>
+                <select name="tipo" class="admin-form__select">
+                  <option value="tierra">🏔️ Tierra</option>
+                  <option value="mar">🌊 Mar</option>
+                </select>
+              </div>
+
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Tipo actividades (ES)</label>
+                <input name="tipo_es" class="admin-form__input" placeholder="ej: Senderismo · Kayak" required />
+              </div>
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Tipo actividades (EN)</label>
+                <input name="tipo_en" class="admin-form__input" placeholder="ej: Hiking · Kayak" required />
+              </div>
+
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Precio</label>
+                <input name="precio" class="admin-form__input" placeholder="ej: $35 / vehículo" required />
+              </div>
+              <div class="admin-form__grupo">
+                <label class="admin-form__label">Horarios</label>
+                <input name="horarios" class="admin-form__input" placeholder="ej: 8am – Sunset" required />
+              </div>
+
+            </div><!-- /grid -->
+
+            <div class="admin-form__acciones">
+              <button type="submit" class="admin-form__btn-guardar">Guardar destino</button>
+              <button type="button" class="admin-form__btn-cancelar" onclick="cancelarFormDestino()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Tabla de destinos registrados -->
+        <div class="admin-tabla-cont">
+          <table class="admin-tabla">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaDestinos">
+              <tr><td colspan="5" class="tabla-vacia">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== CONTACTOS RECIBIDOS ===== -->
+      <div class="admin-seccion">
+        <div class="admin-seccion__header">
+          <h2 class="admin-seccion__titulo">Contactos recibidos</h2>
+          <button class="admin-btn admin-btn--export" onclick="exportarContactos()">⬇ Exportar CSV</button>
+        </div>
+
+        <div class="admin-tabla-cont">
+          <table class="admin-tabla">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Empresa</th>
+                <th>Email</th>
+                <th>Servicio</th>
+                <th>Mensaje</th>
+              </tr>
+            </thead>
+            <tbody id="tablaContactos">
+              <tr><td colspan="6" class="tabla-vacia">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Notificación toast -->
+  <div id="toast" class="toast"></div>
+
+  <script src="assets/js/admin.js"></script>
+  <script>
+    /* Muestra / oculta el formulario de destino */
+    function toggleFormDestino() {
+      var w = document.getElementById('formDestinoWrap');
+      var visible = w.style.display !== 'none';
+      w.style.display = visible ? 'none' : 'block';
+      if (!visible) w.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function cancelarFormDestino() {
+      resetFormDestino();
+      document.getElementById('formDestinoWrap').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

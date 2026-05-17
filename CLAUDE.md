@@ -1,51 +1,74 @@
-# Explora Miami — directorio de experiencias outdoor en Miami
+# Explora Miami — Plataforma de experiencias outdoor en Miami
 
 ## Concepto
-Directorio de experiencias outdoor en Miami dividido en **dos mundos**:
-- 🏔️ **Tierra** — senderismo, escalada, camping
-- 🌊 **Mar** — buceo, kayak, snorkeling
+Directorio bilingüe (ES/EN) de experiencias outdoor en Miami con panel de administración privado.
+- 🏔️ **Tierra** — senderismo, ciclismo, camping
+- 🌊 **Mar** — buceo, kayak, snorkeling, paddle board
 
-## Tecnologías
-- HTML5, CSS3, JavaScript vanilla
-- Sin frameworks ni dependencias externas
-- Comentarios en español
-
-## Paleta de colores
-| Variable          | Hex       | Uso                        |
-|-------------------|-----------|----------------------------|
-| `--verde-oscuro`  | `#1a2e1a` | Fondo mundo Tierra, header |
-| `--azul-marino`   | `#0d1b2a` | Fondo mundo Mar            |
-| `--naranja`       | `#e8521a` | Acento principal, CTAs     |
-| `--amarillo`      | `#f5a623` | Acento secundario, precios |
-| `--blanco`        | `#f0ede8` | Texto principal, fondos    |
-
-## Diseño
-- **Mobile-first**: base para móvil, breakpoints en 768px, 1024px y 1200px
-- **Hero**: video de fondo con texto animado (typewriter) y efecto parallax
-- **Navbar**: transparente al inicio, sólido oscuro con blur al hacer scroll
-- **Tarjetas de actividad**: efecto 3D hover + animación de entrada con IntersectionObserver
-- **Tarjetas de producto**: efecto flip 3D en hover (CSS transform)
-- **Filtros**: botones para mostrar Todos / Tierra / Mar
-- **Transición gradiente**: franja visual entre sección Tierra y sección Mar
-
-## Estructura de carpetas
+## Archivos principales
 ```
 explora-miami/
-├── index.html
+├── index.html          ← sitio público bilingüe
+├── admin.html          ← panel de administración (contraseña: miami2026)
 ├── CLAUDE.md
 └── assets/
     ├── css/
-    │   └── styles.css
+    │   ├── styles.css  ← estilos del sitio público
+    │   └── admin.css   ← estilos del panel admin
     ├── js/
-    │   └── main.js
+    │   ├── main.js     ← JS público + datos de destinos (DESTINOS_DEFAULT)
+    │   ├── admin.js    ← lógica del panel admin
+    │   └── i18n.js     ← sistema de traducción ES/EN
     ├── images/
-    │   └── *.jpg
     └── videos/
-        └── hero-tierra.mp4.mp4
+        └── *.mp4       ← video hero
 ```
+
+## Arquitectura de datos
+- **Destinos**: `localStorage('em_destinos')` — sembrado desde `DESTINOS_DEFAULT` en `main.js` en la primera visita. Admin lee y escribe en la misma clave.
+- **Contactos**: `localStorage('em_contactos')` — array de objetos `{ fecha, nombre, empresa, email, tel, servicio, mensaje }`. Exportable como CSV desde el admin.
+- **Sesión admin**: `sessionStorage('em_admin') === 'ok'`
+- **Idioma**: `localStorage('em_idioma')` → `'es'` o `'en'`
+
+## Sistema de traducción (i18n)
+- **Elementos estáticos**: atributo `data-i18n="clave"` — `aplicarIdioma()` en `i18n.js` actualiza el texto.
+- **Placeholders**: atributo `data-i18n-ph="clave"`.
+- **Contenido dinámico (tarjetas)**: spans con clase `.lang-es` / `.lang-en` dentro de cada tarjeta. La visibilidad se controla con CSS:
+  ```css
+  html.lang-en .lang-es { display: none; }
+  html.lang-es .lang-en { display: none; }
+  ```
+- **Prevención de flash**: script inline en `<head>` aplica `html.lang-*` antes del render.
+
+## Paleta de colores — sitio público
+| Variable               | Hex       | Uso                        |
+|------------------------|-----------|----------------------------|
+| `--blanco-arena`       | `#FFFDF7` | Fondo principal            |
+| `--azul-cielo-suave`   | `#E3F4FF` | Sección Mar                |
+| `--verde-tropical`     | `#E8F5E9` | Sección Tierra             |
+| `--coral`              | `#FF6B6B` | Acento, CTAs Tierra        |
+| `--turquesa`           | `#00BCD4` | Acento, CTAs Mar           |
+| `--mostaza`            | `#FFB300` | Badges, precios            |
+
+Tipografía: **Abril Fatface** (títulos) + **Nunito** (cuerpo) vía Google Fonts.
+
+## Destinos reales (6)
+1. Everglades National Park — Senderismo y Kayak
+2. John Pennekamp Coral Reef — Buceo y Snorkeling (Key Largo)
+3. Biscayne Bay — Kayak y Paddle Board
+4. Bill Baggs Cape Florida — Playa y Ciclismo
+5. Oleta River State Park — Kayak y Mountain Bike
+6. Virginia Key Beach Park — Paddle Board y Natación
 
 ## Convenciones
 - Clases CSS en español con metodología BEM simplificada
-- Variables CSS definidas en `:root`
-- Animaciones declaradas en `@keyframes`
-- Todo el JS en `main.js`, sin librerías
+- Variables CSS en `:root`
+- Sin frameworks ni librerías externas
+- Comentarios en español
+- `esc(str)` en admin.js para prevenir XSS en el panel
+- `NUNCA` fondos negro sólido — usar gradientes azul oscuro
+
+## GitHub Pages
+- Repositorio: `https://github.com/Ytntxnz8py/mi-tienda`
+- URL pública: `https://ytntxnz8py.github.io/mi-tienda/`
+- Branch: `main`
