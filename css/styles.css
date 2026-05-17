@@ -85,7 +85,9 @@ ul  { list-style: none; }
   transition:
     background-color 0.45s ease,
     backdrop-filter  0.45s ease,
-    border-color     0.45s ease;
+    border-color     0.45s ease,
+    /* La sombra también se anima suavemente al hacer scroll */
+    box-shadow       0.45s ease;
 }
 
 /* Clase añadida por JS al hacer scroll > 60px */
@@ -93,6 +95,8 @@ ul  { list-style: none; }
   background-color: rgba(5, 5, 5, 0.96);
   backdrop-filter: blur(12px);
   border-bottom-color: rgba(245, 166, 35, 0.2);
+  /* Sombra inferior para dar profundidad al navbar sólido */
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
 }
 
 .header__contenedor {
@@ -207,12 +211,17 @@ ul  { list-style: none; }
   padding: 6rem 1.25rem 3rem;
 }
 
-/* Contenedor del video — recorta al tamaño del hero */
+/* Contenedor del video — sobresale un 20% arriba y abajo para dar
+   margen al movimiento de parallax sin mostrar el fondo del hero */
 .hero__fondo {
   position: absolute;
-  inset: 0;
+  top: -10%;
+  left: 0;
+  right: 0;
+  bottom: -10%;
   z-index: 0;
-  overflow: hidden;
+  /* El .hero tiene overflow:hidden, así que este div puede sobresalir sin problema */
+  will-change: transform;
 }
 
 /* Video ocupa toda la pantalla sin distorsionarse */
@@ -805,7 +814,18 @@ ul  { list-style: none; }
     grid-template-columns: 1fr 1fr;
   }
 
-  .gradiente-transicion { display: none; }
+  /* En desktop los paneles van lado a lado:
+     la franja de gradiente pasa a ser una columna vertical de 80px */
+  .banner-mundos {
+    grid-template-columns: 1fr 80px 1fr;
+  }
+
+  .gradiente-transicion {
+    display: block;
+    /* El gradiente va de izquierda (verde) a derecha (azul) para el corte vertical */
+    background: linear-gradient(to right, var(--verde-oscuro) 0%, var(--azul-marino) 100%);
+    height: auto;
+  }
 
   .footer__contenedor { grid-template-columns: repeat(3, 1fr); }
 }

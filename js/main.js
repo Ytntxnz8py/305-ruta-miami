@@ -150,12 +150,22 @@ document.addEventListener('click', (e) => {
   }
 });
 
-/* ===== SCROLL: NAVBAR ===== */
-const header = document.querySelector('.header');
+/* ===== SCROLL: NAVBAR + PARALLAX DEL VIDEO HERO ===== */
+const header    = document.querySelector('.header');
+const heroFondo = document.querySelector('.hero__fondo'); /* contenedor del video */
 
 window.addEventListener('scroll', () => {
-  /* Navbar: transparente → sólido oscuro al bajar 60px */
-  header.classList.toggle('header--scrolled', window.scrollY > 60);
+  const scrollY = window.scrollY;
+
+  /* 1. Navbar: añade clase al bajar 60px → fondo sólido oscuro con sombra */
+  header.classList.toggle('header--scrolled', scrollY > 60);
+
+  /* 2. Parallax: mueve el fondo del hero al 30% de la velocidad del scroll.
+        Al desplazarse hacia abajo, el video sube más lento que el contenido,
+        creando la sensación de profundidad. El .hero recorta el desbordamiento. */
+  if (heroFondo) {
+    heroFondo.style.transform = `translateY(${scrollY * 0.3}px)`;
+  }
 }, { passive: true });
 
 /* ===== FLECHA SCROLL HERO ===== */
