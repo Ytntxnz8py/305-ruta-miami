@@ -150,20 +150,12 @@ document.addEventListener('click', (e) => {
   }
 });
 
-/* ===== SCROLL: NAVBAR + PARALLAX HERO ===== */
-const header   = document.querySelector('.header');
-const heroFondo = document.querySelector('.hero__fondo');
+/* ===== SCROLL: NAVBAR ===== */
+const header = document.querySelector('.header');
 
 window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-
   /* Navbar: transparente → sólido oscuro al bajar 60px */
-  header.classList.toggle('header--scrolled', scrollY > 60);
-
-  /* Parallax: el fondo del hero sube más despacio que el scroll (40% de velocidad) */
-  if (heroFondo) {
-    heroFondo.style.transform = `translateY(${scrollY * 0.4}px)`;
-  }
+  header.classList.toggle('header--scrolled', window.scrollY > 60);
 }, { passive: true });
 
 /* ===== FLECHA SCROLL HERO ===== */
