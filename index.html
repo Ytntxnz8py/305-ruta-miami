@@ -13,19 +13,12 @@
   <header class="header">
     <div class="header__contenedor">
 
-      <!-- Logo -->
-      <a href="#inicio" class="header__logo">
-        Aventura<span>Outdoor</span>
-      </a>
+      <a href="#inicio" class="header__logo">Aventura<span>Outdoor</span></a>
 
-      <!-- Botón menú hamburguesa (visible solo en móvil) -->
       <button class="header__menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
 
-      <!-- Navegación principal -->
       <nav class="nav" id="nav" aria-label="Menú principal">
         <ul class="nav__lista">
           <li><a href="#inicio"    class="nav__enlace">Inicio</a></li>
@@ -35,10 +28,8 @@
         </ul>
       </nav>
 
-      <!-- Ícono del carrito -->
-      <a href="#" class="header__carrito" aria-label="Ver carrito de compras">
-        🛒
-        <span class="header__carrito-contador" id="contadorCarrito">0</span>
+      <a href="#" class="header__carrito" aria-label="Ver carrito">
+        🛒 <span class="header__carrito-contador" id="contadorCarrito">0</span>
       </a>
 
     </div>
@@ -46,17 +37,15 @@
 
   <main>
 
-    <!-- ===== HERO: MONTAÑA CON TEXTO ANIMADO ===== -->
+    <!-- ===== HERO ===== -->
     <section class="hero" id="inicio">
-
-      <!-- Fondo degradado + silueta de montañas (CSS) -->
+      <!-- Fondo con foto real + parallax JS + overlay CSS -->
       <div class="hero__fondo" aria-hidden="true"></div>
 
       <div class="hero__contenido">
         <span class="hero__etiqueta">🏔️ Equipamiento Premium Outdoor</span>
 
         <h1 class="hero__titulo">
-          <!-- El JS escribe aquí con efecto typewriter -->
           <span class="hero__titulo-dinamico" id="tituloDinamico"></span>
           <span class="cursor" aria-hidden="true"></span>
         </h1>
@@ -72,21 +61,17 @@
         </div>
       </div>
 
-      <!-- Flecha de scroll animada -->
       <div class="hero__flecha" id="flechaHero" aria-label="Ir a la siguiente sección">▼</div>
-
     </section>
 
-    <!-- ===== SECCIÓN DOS MUNDOS ===== -->
+    <!-- ===== DOS MUNDOS ===== -->
     <section class="mundos" id="mundos">
       <div class="mundos__contenedor">
-
         <h2 class="mundos__titulo">Dos Mundos, Una Aventura</h2>
         <p class="mundos__subtitulo">Haz clic en tu mundo para ver el equipamiento perfecto</p>
 
         <div class="mundos__grid">
 
-          <!-- Mundo Tierra -->
           <div class="mundo-card mundo-card--tierra" data-mundo="tierra" role="button" tabindex="0" aria-label="Filtrar productos de Tierra">
             <span class="mundo-card__icono" aria-hidden="true">🏔️</span>
             <div class="mundo-card__info">
@@ -99,7 +84,6 @@
             </div>
           </div>
 
-          <!-- Mundo Mar -->
           <div class="mundo-card mundo-card--mar" data-mundo="mar" role="button" tabindex="0" aria-label="Filtrar productos de Mar">
             <span class="mundo-card__icono" aria-hidden="true">🌊</span>
             <div class="mundo-card__info">
@@ -116,30 +100,28 @@
       </div>
     </section>
 
-    <!-- ===== SECCIÓN PRODUCTOS CON FLIP CARDS ===== -->
+    <!-- ===== PRODUCTOS — FLIP CARDS ===== -->
     <section class="productos" id="productos">
       <div class="productos__contenedor">
-
         <h2 class="productos__titulo">Nuestros Productos</h2>
         <p class="productos__subtitulo">Pasa el cursor sobre cada tarjeta para ver los detalles</p>
 
-        <!-- Filtros -->
         <div class="filtros" role="group" aria-label="Filtrar por mundo">
           <button class="filtros__btn activo" data-filtro="todos">Todos</button>
           <button class="filtros__btn" data-filtro="tierra">🏔️ Tierra</button>
           <button class="filtros__btn" data-filtro="mar">🌊 Mar</button>
         </div>
 
-        <!-- Grid de flip cards -->
         <div class="productos__grid">
 
-          <!-- ── TIERRA 1: Mochila de Senderismo ── -->
-          <article class="flip-card flip-card--tierra" data-mundo="tierra" aria-label="Mochila de Senderismo Pro">
+          <!-- ── TIERRA 1: Mochila Senderismo ── -->
+          <article class="flip-card flip-card--tierra" data-mundo="tierra">
             <div class="flip-card__inner">
-
-              <!-- Frente -->
               <div class="flip-card__frente">
-                <div class="flip-card__emoji" aria-hidden="true">🎒</div>
+                <div class="flip-card__imagen-cont">
+                  <!-- Senderista con mochila en bosque al atardecer -->
+                  <img src="image/istockphoto-598222532-612x612.jpg" alt="Senderista con mochila en bosque" class="flip-card__imagen" />
+                </div>
                 <div class="flip-card__datos">
                   <div>
                     <p class="flip-card__mundo">🏔️ Tierra · Senderismo</p>
@@ -149,8 +131,6 @@
                 </div>
                 <p class="flip-card__hint">↕ hover para detalles</p>
               </div>
-
-              <!-- Reverso -->
               <div class="flip-card__reverso">
                 <div>
                   <h3 class="flip-card__reverso-titulo">Mochila Senderismo Pro 65L</h3>
@@ -162,21 +142,20 @@
                 </div>
                 <div>
                   <p class="flip-card__reverso-precio">$189.00</p>
-                  <button class="btn btn--amarillo btn-carrito flip-card__reverso-btn" data-nombre="Mochila Senderismo Pro 65L">
-                    + Agregar al carrito
-                  </button>
+                  <button class="btn btn--amarillo btn-carrito flip-card__reverso-btn" data-nombre="Mochila Senderismo Pro 65L">+ Agregar al carrito</button>
                 </div>
               </div>
-
             </div>
           </article>
 
-          <!-- ── TIERRA 2: Kit de Escalada ── -->
-          <article class="flip-card flip-card--tierra" data-mundo="tierra" aria-label="Kit de Escalada Vertical">
+          <!-- ── TIERRA 2: Kit Escalada ── -->
+          <article class="flip-card flip-card--tierra" data-mundo="tierra">
             <div class="flip-card__inner">
-
               <div class="flip-card__frente">
-                <div class="flip-card__emoji" aria-hidden="true">🧗</div>
+                <div class="flip-card__imagen-cont">
+                  <!-- Botas de trekking con valle de montañas al fondo -->
+                  <img src="image/istockphoto-2163402625-612x612.jpg" alt="Botas de senderismo en montaña" class="flip-card__imagen" />
+                </div>
                 <div class="flip-card__datos">
                   <div>
                     <p class="flip-card__mundo">🏔️ Tierra · Escalada</p>
@@ -186,7 +165,6 @@
                 </div>
                 <p class="flip-card__hint">↕ hover para detalles</p>
               </div>
-
               <div class="flip-card__reverso">
                 <div>
                   <h3 class="flip-card__reverso-titulo">Kit Escalada Vertical</h3>
@@ -198,21 +176,20 @@
                 </div>
                 <div>
                   <p class="flip-card__reverso-precio">$340.00</p>
-                  <button class="btn btn--amarillo btn-carrito flip-card__reverso-btn" data-nombre="Kit Escalada Vertical">
-                    + Agregar al carrito
-                  </button>
+                  <button class="btn btn--amarillo btn-carrito flip-card__reverso-btn" data-nombre="Kit Escalada Vertical">+ Agregar al carrito</button>
                 </div>
               </div>
-
             </div>
           </article>
 
-          <!-- ── TIERRA 3: Carpa de Camping ── -->
-          <article class="flip-card flip-card--tierra" data-mundo="tierra" aria-label="Carpa Expedición 4 Estaciones">
+          <!-- ── TIERRA 3: Carpa Camping ── -->
+          <article class="flip-card flip-card--tierra" data-mundo="tierra">
             <div class="flip-card__inner">
-
               <div class="flip-card__frente">
-                <div class="flip-card__emoji" aria-hidden="true">⛺</div>
+                <div class="flip-card__imagen-cont">
+                  <!-- Fogata y tetera en lago de montaña al amanecer -->
+                  <img src="image/istockphoto-1305448692-612x612.jpg" alt="Fogata en lago de montaña" class="flip-card__imagen" />
+                </div>
                 <div class="flip-card__datos">
                   <div>
                     <p class="flip-card__mundo">🏔️ Tierra · Camping</p>
@@ -222,7 +199,6 @@
                 </div>
                 <p class="flip-card__hint">↕ hover para detalles</p>
               </div>
-
               <div class="flip-card__reverso">
                 <div>
                   <h3 class="flip-card__reverso-titulo">Carpa Expedición 4 Estaciones</h3>
@@ -234,21 +210,20 @@
                 </div>
                 <div>
                   <p class="flip-card__reverso-precio">$275.00</p>
-                  <button class="btn btn--amarillo btn-carrito flip-card__reverso-btn" data-nombre="Carpa Expedición 4 Estaciones">
-                    + Agregar al carrito
-                  </button>
+                  <button class="btn btn--amarillo btn-carrito flip-card__reverso-btn" data-nombre="Carpa Expedición 4 Estaciones">+ Agregar al carrito</button>
                 </div>
               </div>
-
             </div>
           </article>
 
-          <!-- ── MAR 1: Equipo de Buceo ── -->
-          <article class="flip-card flip-card--mar" data-mundo="mar" aria-label="Equipo Buceo Profesional">
+          <!-- ── MAR 1: Equipo Buceo ── -->
+          <article class="flip-card flip-card--mar" data-mundo="mar">
             <div class="flip-card__inner">
-
               <div class="flip-card__frente">
-                <div class="flip-card__emoji" aria-hidden="true">🤿</div>
+                <div class="flip-card__imagen-cont">
+                  <!-- Buzo explorando un naufragio en aguas azules -->
+                  <img src="image/istockphoto-155372056-612x612.jpg" alt="Buzo explorando naufragio" class="flip-card__imagen" />
+                </div>
                 <div class="flip-card__datos">
                   <div>
                     <p class="flip-card__mundo">🌊 Mar · Buceo</p>
@@ -258,7 +233,6 @@
                 </div>
                 <p class="flip-card__hint">↕ hover para detalles</p>
               </div>
-
               <div class="flip-card__reverso">
                 <div>
                   <h3 class="flip-card__reverso-titulo">Equipo Buceo Profesional</h3>
@@ -271,21 +245,20 @@
                 </div>
                 <div>
                   <p class="flip-card__reverso-precio">$520.00</p>
-                  <button class="btn btn--naranja btn-carrito flip-card__reverso-btn" data-nombre="Equipo Buceo Profesional">
-                    + Agregar al carrito
-                  </button>
+                  <button class="btn btn--naranja btn-carrito flip-card__reverso-btn" data-nombre="Equipo Buceo Profesional">+ Agregar al carrito</button>
                 </div>
               </div>
-
             </div>
           </article>
 
-          <!-- ── MAR 2: Kayak Inflable ── -->
-          <article class="flip-card flip-card--mar" data-mundo="mar" aria-label="Kayak Inflable Explorer">
+          <!-- ── MAR 2: Kayak ── -->
+          <article class="flip-card flip-card--mar" data-mundo="mar">
             <div class="flip-card__inner">
-
               <div class="flip-card__frente">
-                <div class="flip-card__emoji" aria-hidden="true">🛶</div>
+                <div class="flip-card__imagen-cont">
+                  <!-- Snorkeling en aguas cristalinas con peces -->
+                  <img src="image/istockphoto-954434212-612x612.jpg" alt="Snorkeling en aguas cristalinas" class="flip-card__imagen" />
+                </div>
                 <div class="flip-card__datos">
                   <div>
                     <p class="flip-card__mundo">🌊 Mar · Kayak</p>
@@ -295,7 +268,6 @@
                 </div>
                 <p class="flip-card__hint">↕ hover para detalles</p>
               </div>
-
               <div class="flip-card__reverso">
                 <div>
                   <h3 class="flip-card__reverso-titulo">Kayak Inflable Explorer</h3>
@@ -308,21 +280,20 @@
                 </div>
                 <div>
                   <p class="flip-card__reverso-precio">$430.00</p>
-                  <button class="btn btn--naranja btn-carrito flip-card__reverso-btn" data-nombre="Kayak Inflable Explorer">
-                    + Agregar al carrito
-                  </button>
+                  <button class="btn btn--naranja btn-carrito flip-card__reverso-btn" data-nombre="Kayak Inflable Explorer">+ Agregar al carrito</button>
                 </div>
               </div>
-
             </div>
           </article>
 
-          <!-- ── MAR 3: Set Snorkeling ── -->
-          <article class="flip-card flip-card--mar" data-mundo="mar" aria-label="Set Snorkeling Coral">
+          <!-- ── MAR 3: Snorkeling ── -->
+          <article class="flip-card flip-card--mar" data-mundo="mar">
             <div class="flip-card__inner">
-
               <div class="flip-card__frente">
-                <div class="flip-card__emoji" aria-hidden="true">🐠</div>
+                <div class="flip-card__imagen-cont">
+                  <!-- Buzo con tiburón en aguas profundas con rayos de luz -->
+                  <img src="image/istockphoto-804229282-612x612.jpg" alt="Buzo en aguas profundas" class="flip-card__imagen" />
+                </div>
                 <div class="flip-card__datos">
                   <div>
                     <p class="flip-card__mundo">🌊 Mar · Snorkeling</p>
@@ -332,7 +303,6 @@
                 </div>
                 <p class="flip-card__hint">↕ hover para detalles</p>
               </div>
-
               <div class="flip-card__reverso">
                 <div>
                   <h3 class="flip-card__reverso-titulo">Set Snorkeling Coral</h3>
@@ -344,21 +314,20 @@
                 </div>
                 <div>
                   <p class="flip-card__reverso-precio">$95.00</p>
-                  <button class="btn btn--naranja btn-carrito flip-card__reverso-btn" data-nombre="Set Snorkeling Coral">
-                    + Agregar al carrito
-                  </button>
+                  <button class="btn btn--naranja btn-carrito flip-card__reverso-btn" data-nombre="Set Snorkeling Coral">+ Agregar al carrito</button>
                 </div>
               </div>
-
             </div>
           </article>
 
-          <!-- ── TIERRA 4: Bastones de Trekking ── -->
-          <article class="flip-card flip-card--tierra" data-mundo="tierra" aria-label="Bastones de Trekking Carbono">
+          <!-- ── TIERRA 4: Bastones ── -->
+          <article class="flip-card flip-card--tierra" data-mundo="tierra">
             <div class="flip-card__inner">
-
               <div class="flip-card__frente">
-                <div class="flip-card__emoji" aria-hidden="true">🥾</div>
+                <div class="flip-card__imagen-cont">
+                  <!-- Piernas con bastones de trekking en sendero -->
+                  <img src="image/istockphoto-700861760-612x612.jpg" alt="Bastones de trekking en sendero" class="flip-card__imagen" />
+                </div>
                 <div class="flip-card__datos">
                   <div>
                     <p class="flip-card__mundo">🏔️ Tierra · Senderismo</p>
@@ -368,7 +337,6 @@
                 </div>
                 <p class="flip-card__hint">↕ hover para detalles</p>
               </div>
-
               <div class="flip-card__reverso">
                 <div>
                   <h3 class="flip-card__reverso-titulo">Bastones Trekking Carbono</h3>
@@ -381,21 +349,20 @@
                 </div>
                 <div>
                   <p class="flip-card__reverso-precio">$120.00</p>
-                  <button class="btn btn--amarillo btn-carrito flip-card__reverso-btn" data-nombre="Bastones Trekking Carbono">
-                    + Agregar al carrito
-                  </button>
+                  <button class="btn btn--amarillo btn-carrito flip-card__reverso-btn" data-nombre="Bastones Trekking Carbono">+ Agregar al carrito</button>
                 </div>
               </div>
-
             </div>
           </article>
 
-          <!-- ── MAR 4: Tabla de Paddle Surf ── -->
-          <article class="flip-card flip-card--mar" data-mundo="mar" aria-label="Tabla Paddle Surf Inflable">
+          <!-- ── MAR 4: Paddle Surf ── -->
+          <article class="flip-card flip-card--mar" data-mundo="mar">
             <div class="flip-card__inner">
-
               <div class="flip-card__frente">
-                <div class="flip-card__emoji" aria-hidden="true">🏄</div>
+                <div class="flip-card__imagen-cont">
+                  <!-- Buzo emergiendo en aguas azules con niebla -->
+                  <img src="image/istockphoto-627758576-612x612.jpg" alt="Buzo en el agua" class="flip-card__imagen" />
+                </div>
                 <div class="flip-card__datos">
                   <div>
                     <p class="flip-card__mundo">🌊 Mar · Kayak</p>
@@ -405,7 +372,6 @@
                 </div>
                 <p class="flip-card__hint">↕ hover para detalles</p>
               </div>
-
               <div class="flip-card__reverso">
                 <div>
                   <h3 class="flip-card__reverso-titulo">Tabla Paddle Surf Inflable</h3>
@@ -417,12 +383,9 @@
                 </div>
                 <div>
                   <p class="flip-card__reverso-precio">$380.00</p>
-                  <button class="btn btn--naranja btn-carrito flip-card__reverso-btn" data-nombre="Tabla Paddle Surf Inflable">
-                    + Agregar al carrito
-                  </button>
+                  <button class="btn btn--naranja btn-carrito flip-card__reverso-btn" data-nombre="Tabla Paddle Surf Inflable">+ Agregar al carrito</button>
                 </div>
               </div>
-
             </div>
           </article>
 
@@ -430,7 +393,7 @@
       </div>
     </section>
 
-    <!-- ===== BANNER DOS MUNDOS ===== -->
+    <!-- ===== BANNER DOS MUNDOS con gradiente de transición ===== -->
     <div class="banner-mundos">
 
       <div class="banner-mundo banner-mundo--tierra">
@@ -440,11 +403,14 @@
           Equípate para conquistar cimas, atravesar bosques y pasar noches
           bajo las estrellas.
         </p>
-        <button class="btn btn--amarillo filtros__btn" data-filtro="tierra"
+        <button class="btn btn--amarillo"
           onclick="document.querySelector('.filtros__btn[data-filtro=tierra]').click(); document.getElementById('productos').scrollIntoView({behavior:'smooth'})">
           Ver equipamiento
         </button>
       </div>
+
+      <!-- Gradiente de transición verde → azul marino (visible solo en móvil) -->
+      <div class="gradiente-transicion" aria-hidden="true"></div>
 
       <div class="banner-mundo banner-mundo--mar">
         <div class="banner-mundo__icono" aria-hidden="true">🌊</div>
@@ -453,7 +419,7 @@
           Sumérgete en las profundidades o navega sobre las olas con el
           equipo que necesitas.
         </p>
-        <button class="btn btn--naranja filtros__btn" data-filtro="mar"
+        <button class="btn btn--naranja"
           onclick="document.querySelector('.filtros__btn[data-filtro=mar]').click(); document.getElementById('productos').scrollIntoView({behavior:'smooth'})">
           Ver equipamiento
         </button>
@@ -466,14 +432,10 @@
   <!-- ===== FOOTER ===== -->
   <footer class="footer" id="contacto">
     <div class="footer__contenedor">
-
-      <!-- Marca -->
       <div>
         <p class="footer__logo">Aventura<span>Outdoor</span></p>
         <p class="footer__slogan">Equipamiento para quienes eligen vivir la aventura.</p>
       </div>
-
-      <!-- Navegación rápida -->
       <div>
         <h3 class="footer__titulo">Navegación</h3>
         <ul class="footer__lista">
@@ -482,8 +444,6 @@
           <li><a href="#productos" class="footer__enlace">Productos</a></li>
         </ul>
       </div>
-
-      <!-- Contacto -->
       <div>
         <h3 class="footer__titulo">Contacto</h3>
         <ul class="footer__lista">
@@ -492,13 +452,9 @@
           <li class="footer__texto">📍 Base Camp, Ciudad</li>
         </ul>
       </div>
-
     </div>
-
     <p class="footer__creditos">© 2026 AventuraOutdoor. Todos los derechos reservados.</p>
   </footer>
-
-  <!-- Notificación carrito (creada dinámicamente por JS) -->
 
   <script src="js/main.js"></script>
 </body>
