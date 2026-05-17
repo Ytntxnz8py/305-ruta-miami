@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ytntxnz8py.github.io/mi-tienda/sitemap.xml
