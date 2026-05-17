@@ -1,123 +1,162 @@
-﻿/* =============================================
-   MI TIENDA OUTDOOR — ESTILOS PRINCIPALES
-   Mobile-first | Paleta tierra y mar
-   ============================================= */
-
-/* ===== VARIABLES GLOBALES ===== */
+/* =======================================
+   VARIABLES Y RESET
+   Paleta fresca Explora Miami — sin fondos negros
+======================================= */
 :root {
-  --verde-oscuro: #1a2e1a;
-  --azul-marino:  #0d1b2a;
-  --naranja:      #e8521a;
-  --amarillo:     #f5a623;
-  --blanco:       #f0ede8;
-  --gris-oscuro:  #111111;
-  --sombra:       0 4px 20px rgba(0, 0, 0, 0.4);
-  --radio:        8px;
-  --transicion:   0.35s ease;
-  --fuente:       'Segoe UI', system-ui, sans-serif;
+  /* Paleta principal */
+  --azul-cielo:   #87CEEB;
+  --verde-pasto:  #7CB342;
+  --mostaza:      #F9A825;
+  --blanco-arena: #FFF8F0;
+  --azul-agua:    #0288D1;
+
+  /* Colores de apoyo */
+  --blanco:       #ffffff;
+  --texto-oscuro: #1a3040;
+  --texto-medio:  #4a6a7a;
+  --texto-suave:  #8aacba;
+  --borde-suave:  rgba(2, 136, 209, 0.15);
+
+  /* Tipografía */
+  --fuente-titulo: 'Playfair Display', Georgia, serif;
+  --fuente-cuerpo: 'Lato', 'Helvetica Neue', sans-serif;
+
+  /* Layout */
+  --radio-card:   20px;
+  --radio-btn:    50px;
+  --max-ancho:    1200px;
+
+  /* Sombras */
+  --sombra-suave:        0 4px 24px rgba(2, 136, 209, 0.10);
+  --sombra-card:         0 8px 32px rgba(2, 136, 209, 0.15);
+  --sombra-hover-mar:    0 20px 52px rgba(2, 136, 209, 0.26);
+  --sombra-hover-tierra: 0 20px 52px rgba(124, 179, 66, 0.26);
 }
 
-/* ===== RESET Y BASE ===== */
 *, *::before, *::after {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 
 body {
-  font-family: var(--fuente);
-  background-color: var(--gris-oscuro);
-  color: var(--blanco);
-  line-height: 1.6;
+  font-family: var(--fuente-cuerpo);
+  background-color: var(--blanco-arena);
+  color: var(--texto-oscuro);
+  line-height: 1.65;
   overflow-x: hidden;
 }
 
-img { max-width: 100%; display: block; }
-a   { text-decoration: none; color: inherit; }
-ul  { list-style: none; }
+img  { display: block; max-width: 100%; }
+a    { text-decoration: none; color: inherit; }
+ul   { list-style: none; }
 
-/* ===== BOTONES ===== */
+/* =======================================
+   BOTONES
+======================================= */
 .btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: var(--radio);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radio-btn);
+  font-family: var(--fuente-cuerpo);
   font-size: 0.95rem;
   font-weight: 700;
-  cursor: pointer;
-  transition: transform var(--transicion), box-shadow var(--transicion), background-color var(--transicion);
   letter-spacing: 0.03em;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--sombra);
-}
-
-.btn--naranja        { background-color: var(--naranja); color: var(--blanco); }
-.btn--naranja:hover  { background-color: #c94415; }
-.btn--amarillo       { background-color: var(--amarillo); color: var(--gris-oscuro); }
-.btn--amarillo:hover { background-color: #d4901f; }
-
-.btn--contorno {
-  background-color: transparent;
-  border: 2px solid var(--blanco);
+.btn--primario {
+  background-color: var(--azul-agua);
   color: var(--blanco);
-}
-.btn--contorno:hover {
-  background-color: var(--blanco);
-  color: var(--gris-oscuro);
+  box-shadow: 0 4px 16px rgba(2, 136, 209, 0.35);
 }
 
-/* ===== HEADER ===== */
+.btn--primario:hover {
+  background-color: #0277bd;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(2, 136, 209, 0.45);
+}
+
+.btn--secundario {
+  background-color: transparent;
+  color: var(--blanco);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+.btn--secundario:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+/* Títulos de sección reutilizables */
+.seccion-titulo {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--texto-oscuro);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.seccion-subtitulo {
+  font-size: 1.05rem;
+  color: var(--texto-medio);
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+}
+
+/* =======================================
+   HEADER / NAVBAR
+   Fondo arena claro — nunca negro
+======================================= */
 .header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 1000;
-  /* Arranca transparente sobre el hero */
-  background-color: transparent;
-  backdrop-filter: blur(0px);
+  right: 0;
+  z-index: 100;
+  background-color: rgba(255, 248, 240, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid transparent;
-  transition:
-    background-color 0.45s ease,
-    backdrop-filter  0.45s ease,
-    border-color     0.45s ease,
-    /* La sombra también se anima suavemente al hacer scroll */
-    box-shadow       0.45s ease;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-/* Clase añadida por JS al hacer scroll > 60px */
 .header--scrolled {
-  background-color: rgba(5, 5, 5, 0.96);
-  backdrop-filter: blur(12px);
-  border-bottom-color: rgba(245, 166, 35, 0.2);
-  /* Sombra inferior para dar profundidad al navbar sólido */
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 2px 20px rgba(2, 136, 209, 0.14);
+  border-bottom-color: var(--borde-suave);
 }
 
 .header__contenedor {
+  max-width: var(--max-ancho);
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
+/* Logo tipográfico */
 .header__logo {
-  font-size: 1.4rem;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  color: var(--amarillo);
-  text-transform: uppercase;
+  font-family: var(--fuente-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
 }
-.header__logo span { color: var(--naranja); }
 
-/* Menú hamburguesa */
+.header__logo-explora { color: var(--azul-agua); }
+.header__logo-miami   { color: var(--verde-pasto); }
+
+/* Botón hamburguesa */
 .header__menu-btn {
   display: flex;
   flex-direction: column;
@@ -126,14 +165,13 @@ ul  { list-style: none; }
   border: none;
   cursor: pointer;
   padding: 4px;
-  z-index: 1100;
 }
 
 .header__menu-btn span {
   display: block;
-  width: 26px;
+  width: 24px;
   height: 2px;
-  background-color: var(--blanco);
+  background-color: var(--texto-oscuro);
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -142,64 +180,80 @@ ul  { list-style: none; }
 .header__menu-btn.abierto span:nth-child(2) { opacity: 0; }
 .header__menu-btn.abierto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Nav móvil */
-.nav {
+/* Menú de navegación (móvil: desplegable vertical) */
+.header__nav {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%;
-  background-color: rgba(5, 5, 5, 0.97);
+  right: 0;
+  background-color: rgba(255, 248, 240, 0.98);
+  backdrop-filter: blur(12px);
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  border-bottom: 1px solid var(--borde-suave);
 }
 
-.nav.abierto { max-height: 400px; }
+.header__nav.abierto {
+  max-height: 400px;
+  padding: 1rem 0 1.5rem;
+}
 
-.nav__lista {
+.header__lista {
   display: flex;
   flex-direction: column;
-  padding: 1rem 1.25rem;
-  gap: 0.25rem;
-}
-
-.nav__enlace {
-  display: block;
-  padding: 0.6rem 0;
-  font-size: 1rem;
-  color: var(--blanco);
-  border-bottom: 1px solid rgba(240, 237, 232, 0.1);
-  transition: color var(--transicion), padding-left var(--transicion);
-}
-.nav__enlace:hover { color: var(--amarillo); padding-left: 8px; }
-
-/* Carrito */
-.header__carrito {
-  position: relative;
-  font-size: 1.4rem;
-  cursor: pointer;
-  transition: transform var(--transicion);
-}
-.header__carrito:hover { transform: scale(1.1); }
-
-.header__carrito-contador {
-  position: absolute;
-  top: -6px;
-  right: -8px;
-  background-color: var(--naranja);
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease;
+  gap: 0.2rem;
 }
 
-/* ===== HERO ===== */
+.header__enlace {
+  display: block;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  color: var(--texto-oscuro);
+  transition: color 0.2s ease;
+}
+
+.header__enlace:hover { color: var(--azul-agua); }
+
+.header__enlace--cta {
+  background-color: var(--azul-agua);
+  color: var(--blanco) !important;
+  border-radius: var(--radio-btn);
+  padding: 0.5rem 1.25rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.header__enlace--cta:hover { background-color: #0277bd; }
+
+/* Desktop: nav horizontal inline */
+@media (min-width: 768px) {
+  .header__menu-btn { display: none; }
+
+  .header__nav {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    border-bottom: none;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .header__lista {
+    flex-direction: row;
+    gap: 0.2rem;
+  }
+
+  .header__enlace        { font-size: 0.92rem; padding: 0.4rem 0.85rem; }
+  .header__enlace--cta   { margin-top: 0; }
+}
+
+/* =======================================
+   HERO
+   Video de fondo + overlay azul cielo fresco
+======================================= */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -207,12 +261,9 @@ ul  { list-style: none; }
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  text-align: center;
-  padding: 6rem 1.25rem 3rem;
 }
 
-/* Contenedor del video — sobresale un 20% arriba y abajo para dar
-   margen al movimiento de parallax sin mostrar el fondo del hero */
+/* Fondo extendido para margen de parallax */
 .hero__fondo {
   position: absolute;
   top: -10%;
@@ -220,11 +271,9 @@ ul  { list-style: none; }
   right: 0;
   bottom: -10%;
   z-index: 0;
-  /* El .hero tiene overflow:hidden, así que este div puede sobresalir sin problema */
   will-change: transform;
 }
 
-/* Video ocupa toda la pantalla sin distorsionarse */
 .hero__video {
   position: absolute;
   top: 50%;
@@ -237,831 +286,501 @@ ul  { list-style: none; }
   object-fit: cover;
 }
 
-/* Capa oscura semitransparente para que el texto se lea bien */
+/* Overlay gradiente fresco — azul cielo, no negro */
 .hero__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to bottom,
-    rgba(3,  8, 18, 0.55) 0%,
-    rgba(8, 18, 12, 0.38) 50%,
-    rgba(3, 10,  3, 0.72) 100%
+    160deg,
+    rgba(135, 206, 235, 0.60) 0%,
+    rgba(2,   136, 209, 0.42) 50%,
+    rgba(124, 179, 66,  0.32) 100%
   );
   z-index: 1;
 }
 
-/* Contenido del hero */
+/* Contenido central */
 .hero__contenido {
   position: relative;
   z-index: 2;
-  max-width: 700px;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  max-width: 720px;
+  color: var(--blanco);
 }
 
 .hero__etiqueta {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--amarillo);
-  margin-bottom: 1rem;
-  opacity: 0;
-  animation: subir 0.8s ease 0.3s forwards;
+  color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.22);
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(4px);
 }
 
 .hero__titulo {
-  font-size: 2.4rem;
-  font-weight: 900;
-  line-height: 1.15;
-  color: var(--blanco);
-  margin-bottom: 1.25rem;
-  opacity: 0;
-  animation: subir 0.8s ease 0.6s forwards;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(3.2rem, 11vw, 7rem);
+  font-weight: 700;
+  line-height: 1.0;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.28);
+  margin-bottom: 0.6rem;
 }
 
-.hero__titulo-dinamico {
+/* "Miami" en mostaza para contraste cálido sobre el azul */
+.hero__titulo-acento {
+  color: var(--mostaza);
   display: block;
-  color: var(--naranja);
-  min-height: 1.2em;
 }
 
-/* Cursor parpadeante del typewriter */
-.cursor {
-  display: inline-block;
-  width: 3px;
-  height: 0.9em;
-  background-color: var(--amarillo);
-  margin-left: 2px;
-  vertical-align: middle;
-  animation: cursorParpadeo 0.7s infinite;
+.hero__tagline {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 300;
+  opacity: 0.96;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.22);
 }
 
-@keyframes cursorParpadeo {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-.hero__subtitulo {
-  font-size: 1.05rem;
-  color: rgba(240, 237, 232, 0.85);
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: subir 0.8s ease 0.9s forwards;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+.hero__subtexto {
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.85;
+  min-height: 1.5em;
+  margin-bottom: 2.25rem;
 }
 
 .hero__botones {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
   justify-content: center;
-  opacity: 0;
-  animation: subir 0.8s ease 1.1s forwards;
 }
 
-.hero__flecha {
+/* Flecha de scroll animada */
+.hero__scroll {
   position: absolute;
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  animation: rebotar 2s infinite;
-  font-size: 1.6rem;
-  cursor: pointer;
 }
 
-@keyframes rebotar {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(10px); }
+.hero__scroll-flecha {
+  width: 26px;
+  height: 26px;
+  border-right: 3px solid rgba(255, 255, 255, 0.75);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.75);
+  transform: rotate(45deg);
+  animation: pulsoFlecha 1.7s ease-in-out infinite;
 }
 
-@keyframes subir {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes pulsoFlecha {
+  0%, 100% { opacity: 0.35; transform: rotate(45deg) translateY(0); }
+  50%       { opacity: 1;    transform: rotate(45deg) translateY(7px); }
 }
 
-/* ===== SECCIÓN: DOS MUNDOS ===== */
-.mundos {
-  padding: 4rem 1.25rem;
-  background-color: var(--gris-oscuro);
+/* =======================================
+   SECCIÓN INTRO
+   Fondo blanco con tarjetas con fade-in
+======================================= */
+.seccion-intro {
+  background-color: var(--blanco);
+  padding: 5.5rem 1.5rem;
 }
 
-.mundos__contenedor {
-  max-width: 1200px;
+.seccion-intro__contenedor {
+  max-width: var(--max-ancho);
   margin: 0 auto;
+  text-align: center;
 }
 
-.mundos__titulo {
-  text-align: center;
-  font-size: 1.9rem;
-  font-weight: 900;
-  color: var(--blanco);
+.seccion-intro__titulo {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+  color: var(--texto-oscuro);
   margin-bottom: 0.5rem;
 }
 
-.mundos__subtitulo {
-  text-align: center;
-  color: rgba(240, 237, 232, 0.6);
-  margin-bottom: 2.5rem;
-  font-size: 1rem;
+.seccion-intro__subtitulo {
+  font-size: 1.05rem;
+  color: var(--texto-medio);
+  margin-bottom: 3rem;
 }
 
-.mundos__grid {
+.seccion-intro__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
-/* Tarjetas mundo con foto real como fondo */
-.mundo-card {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  min-height: 220px;
-  display: flex;
-  align-items: flex-end;
-  cursor: pointer;
-  transition: transform var(--transicion);
-  background-size: cover;
-  background-position: center;
+@media (min-width: 640px) {
+  .seccion-intro__grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-.mundo-card:hover { transform: scale(1.02); }
-
-.mundo-card--tierra {
-  background-image:
-    linear-gradient(135deg, rgba(26,46,26,0.6), rgba(45,90,27,0.5)),
-    url('../images/istockphoto-1015508342-612x612.jpg');
-  background-size: cover;
-  background-position: center;
+/* Tarjetas de intro — estado inicial para fade-in */
+.intro-card {
+  padding: 2.25rem 1.5rem;
+  background: linear-gradient(135deg, var(--blanco-arena) 0%, var(--blanco) 100%);
+  border-radius: var(--radio-card);
+  border: 1px solid var(--borde-suave);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
 }
 
-.mundo-card--mar {
-  background-image:
-    linear-gradient(135deg, rgba(13,27,42,0.6), rgba(10,61,107,0.5)),
-    url('../images/istockphoto-954434212-612x612.jpg');
-  background-size: cover;
-  background-position: center;
+.intro-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.mundo-card__icono {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  font-size: 3rem;
-  opacity: 0.4;
-  transition: opacity var(--transicion), transform var(--transicion);
+.intro-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-card);
 }
 
-.mundo-card:hover .mundo-card__icono {
-  opacity: 0.7;
-  transform: scale(1.2) rotate(-5deg);
-}
+.intro-card__icono  { font-size: 2.6rem; margin-bottom: 1rem; }
 
-.mundo-card__info {
-  position: relative;
-  z-index: 1;
-  padding: 1.5rem;
-  width: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
-}
-
-.mundo-card__titulo {
-  font-size: 1.5rem;
-  font-weight: 900;
-  margin-bottom: 0.4rem;
-}
-
-.mundo-card--tierra .mundo-card__titulo { color: var(--amarillo); }
-.mundo-card--mar    .mundo-card__titulo { color: #5bc8e8; }
-
-.mundo-card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.mundo-card__tag {
-  font-size: 0.72rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 20px;
-  border: 1px solid;
-  font-weight: 600;
-}
-
-.mundo-card--tierra .mundo-card__tag { border-color: var(--amarillo); color: var(--amarillo); }
-.mundo-card--mar    .mundo-card__tag { border-color: #5bc8e8; color: #5bc8e8; }
-
-/* ===== SECCIÓN: PRODUCTOS ===== */
-.productos {
-  padding: 4rem 1.25rem;
-  background-color: #0e0e0e;
-}
-
-.productos__contenedor {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.productos__titulo {
-  text-align: center;
-  font-size: 1.9rem;
-  font-weight: 900;
-  color: var(--blanco);
+.intro-card__titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.2rem;
+  color: var(--texto-oscuro);
   margin-bottom: 0.5rem;
 }
 
-.productos__subtitulo {
-  text-align: center;
-  color: rgba(240, 237, 232, 0.6);
-  margin-bottom: 2rem;
-  font-size: 1rem;
+.intro-card__texto {
+  font-size: 0.95rem;
+  color: var(--texto-medio);
+  line-height: 1.65;
 }
 
-/* Filtros */
+/* =======================================
+   SECCIÓN DESTINOS
+   Gradiente suave arena → azul cielo tenue
+======================================= */
+.seccion-destinos {
+  background: linear-gradient(
+    180deg,
+    var(--blanco-arena) 0%,
+    rgba(135, 206, 235, 0.12) 100%
+  );
+  padding: 5.5rem 1.5rem 6.5rem;
+}
+
+.seccion-destinos__contenedor { max-width: var(--max-ancho); margin: 0 auto; }
+.seccion-destinos__encabezado { margin-bottom: 2rem; }
+
+/* =======================================
+   FILTROS
+======================================= */
 .filtros {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   justify-content: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.75rem;
 }
 
 .filtros__btn {
-  padding: 0.45rem 1.1rem;
-  border-radius: 20px;
-  border: 2px solid rgba(240, 237, 232, 0.3);
-  background: transparent;
-  color: rgba(240, 237, 232, 0.7);
-  font-size: 0.85rem;
-  font-weight: 600;
+  padding: 0.5rem 1.4rem;
+  border: 2px solid var(--borde-suave);
+  border-radius: var(--radio-btn);
+  background-color: var(--blanco);
+  color: var(--texto-medio);
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.9rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all var(--transicion);
-  letter-spacing: 0.03em;
+  transition: background-color 0.22s ease, color 0.22s ease,
+              border-color 0.22s ease, transform 0.2s ease;
 }
 
-.filtros__btn:hover { border-color: var(--amarillo); color: var(--amarillo); }
-.filtros__btn.activo {
-  background-color: var(--naranja);
-  border-color: var(--naranja);
-  color: #fff;
+.filtros__btn:hover {
+  border-color: var(--azul-agua);
+  color: var(--azul-agua);
+  transform: translateY(-2px);
 }
 
-.productos__grid {
+.filtros__btn--activo {
+  background-color: var(--azul-agua);
+  border-color: var(--azul-agua);
+  color: var(--blanco);
+}
+
+/* =======================================
+   GRID DE DESTINOS
+======================================= */
+.destinos-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.75rem;
+  gap: 2rem;
 }
 
-/* ===== FLIP CARD 3D ===== */
-.flip-card {
-  perspective: 1000px;
-  height: 380px;
-  cursor: pointer;
+@media (min-width: 620px)  { .destinos-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .destinos-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* =======================================
+   TARJETAS DE DESTINO
+======================================= */
+.destino-card {
+  background-color: var(--blanco);
+  border-radius: var(--radio-card);
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+
+  /* Estado inicial: invisible y desplazada hacia abajo */
+  opacity: 0;
+  transform: translateY(50px);
+  transition:
+    opacity    0.65s ease,
+    transform  0.65s ease,
+    box-shadow 0.35s ease;
 }
 
-.flip-card.oculto { display: none; }
+/* IntersectionObserver añade esta clase al entrar en el viewport */
+.destino-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-.flip-card__inner {
+/* Hover con elevación y sombra de color según tipo */
+.destino-card[data-tipo="mar"]:hover    { transform: translateY(-8px); box-shadow: var(--sombra-hover-mar); }
+.destino-card[data-tipo="tierra"]:hover { transform: translateY(-8px); box-shadow: var(--sombra-hover-tierra); }
+
+/* Oculta la tarjeta cuando el filtro no coincide */
+.destino-card.oculto { display: none; }
+
+/* Imagen superior */
+.destino-card__imagen-cont {
   position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.flip-card:hover .flip-card__inner { transform: rotateY(180deg); }
-
-.flip-card__frente,
-.flip-card__reverso {
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  height: 220px;
   overflow: hidden;
 }
 
-/* Frente */
-.flip-card__frente {
-  background-color: #1a1a1a;
-  display: flex;
-  flex-direction: column;
-}
-
-.flip-card__imagen-cont {
-  height: 210px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.flip-card__imagen {
+.destino-card__imagen {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.flip-card:hover .flip-card__imagen { transform: scale(1.06); }
+.destino-card:hover .destino-card__imagen { transform: scale(1.06); }
 
-.flip-card__datos {
-  padding: 1rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.flip-card__mundo {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.3rem;
-}
-
-.flip-card--tierra .flip-card__mundo { color: var(--amarillo); }
-.flip-card--mar    .flip-card__mundo { color: #5bc8e8; }
-
-.flip-card__nombre {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--blanco);
-  margin-bottom: 0.5rem;
-}
-
-.flip-card__precio {
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: var(--naranja);
-}
-
-/* Reverso */
-.flip-card__reverso {
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.5rem;
-}
-
-.flip-card--tierra .flip-card__reverso {
-  background: linear-gradient(160deg, #1a2e1a 0%, #0f1a0f 100%);
-  border: 1px solid rgba(245, 166, 35, 0.3);
-}
-
-.flip-card--mar .flip-card__reverso {
-  background: linear-gradient(160deg, #0d1b2a 0%, #060e18 100%);
-  border: 1px solid rgba(91, 200, 232, 0.3);
-}
-
-.flip-card__reverso-titulo {
-  font-size: 1.1rem;
-  font-weight: 900;
-  color: var(--blanco);
-  margin-bottom: 0.75rem;
-}
-
-.flip-card__descripcion {
-  font-size: 0.88rem;
-  color: rgba(240, 237, 232, 0.8);
-  line-height: 1.7;
-  flex: 1;
-}
-
-.flip-card__reverso-precio {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--amarillo);
-  margin: 1rem 0;
-}
-
-.flip-card__reverso-btn { width: 100%; padding: 0.7rem; font-size: 0.9rem; }
-
-.flip-card__hint {
+/* Badges de tipo y dificultad */
+.destino-card__tipo,
+.destino-card__dificultad {
+  position: absolute;
+  top: 1rem;
   font-size: 0.72rem;
-  color: rgba(240, 237, 232, 0.4);
-  text-align: center;
-  margin-top: 0.5rem;
+  font-weight: 700;
   letter-spacing: 0.05em;
+  padding: 0.28rem 0.75rem;
+  border-radius: 50px;
 }
 
-/* ===== BANNER DOS MUNDOS ===== */
-.banner-mundos {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
+.destino-card__tipo       { left: 1rem; }
+.destino-card__dificultad { right: 1rem; }
+
+.destino-card__tipo--mar    { background-color: var(--azul-agua);  color: var(--blanco); }
+.destino-card__tipo--tierra { background-color: var(--verde-pasto); color: var(--blanco); }
+
+.destino-card__dificultad--facil      { background: rgba(255,255,255,0.92); color: var(--verde-pasto); }
+.destino-card__dificultad--intermedio { background: rgba(255,255,255,0.92); color: #e65100; }
+.destino-card__dificultad--variable   { background: rgba(255,255,255,0.92); color: var(--azul-agua); }
+
+/* Información de la tarjeta */
+.destino-card__info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
 }
 
-.banner-mundo {
-  padding: 3rem 1.25rem;
-  text-align: center;
-  background-size: cover;
-  background-position: center;
+.destino-card__nombre {
+  font-family: var(--fuente-titulo);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--texto-oscuro);
+  line-height: 1.3;
 }
 
-.banner-mundo--tierra {
-  background-image:
-    linear-gradient(135deg, rgba(26,46,26,0.88), rgba(13,26,13,0.92)),
-    url('../images/istockphoto-598222532-612x612.jpg');
-}
-
-.banner-mundo--mar {
-  background-image:
-    linear-gradient(135deg, rgba(13,27,42,0.88), rgba(6,14,24,0.92)),
-    url('../images/istockphoto-804229282-612x612.jpg');
-}
-
-/* ===== GRADIENTE DE TRANSICIÓN TIERRA → MAR ===== */
-/* Separa visualmente el panel verde del panel azul en móvil */
-.gradiente-transicion {
-  height: 90px;
-  background: linear-gradient(to bottom, var(--verde-oscuro) 0%, var(--azul-marino) 100%);
-}
-
-.banner-mundo__icono { font-size: 3rem; margin-bottom: 1rem; }
-
-.banner-mundo__titulo {
-  font-size: 1.4rem;
-  font-weight: 900;
-  margin-bottom: 0.5rem;
-  color: var(--blanco);
-}
-
-.banner-mundo__texto {
+.destino-card__descripcion {
   font-size: 0.9rem;
-  color: rgba(240, 237, 232, 0.7);
-  max-width: 300px;
-  margin: 0 auto 1.5rem;
+  color: var(--texto-medio);
+  line-height: 1.65;
+  flex: 1;
 }
 
-/* ===== FOOTER ===== */
-.footer {
-  background-color: #080808;
-  border-top: 1px solid rgba(240, 237, 232, 0.08);
-  padding: 3rem 1.25rem 1.5rem;
+.destino-card__detalles { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+.destino-card__detalle {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.87rem;
+  color: var(--texto-medio);
 }
 
-.footer__contenedor {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+.destino-card__detalle--precio { color: var(--azul-agua); font-weight: 700; }
+.destino-card__detalle-icono   { font-size: 0.9rem; }
+
+.destino-card__btn {
+  align-self: flex-start;
+  font-size: 0.87rem;
+  padding: 0.58rem 1.35rem;
+}
+
+/* =======================================
+   SECCIÓN MAPA
+======================================= */
+.seccion-mapa {
+  background: linear-gradient(
+    135deg,
+    rgba(135, 206, 235, 0.10) 0%,
+    rgba(2,   136, 209, 0.06) 100%
+  );
+  padding: 5.5rem 1.5rem 6rem;
+}
+
+.seccion-mapa__contenedor { max-width: var(--max-ancho); margin: 0 auto; }
+.seccion-mapa__encabezado { margin-bottom: 2rem; }
+
+/* Chips de referencia visual */
+.mapa-marcadores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 
-.footer__logo {
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: var(--amarillo);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-}
-.footer__logo span { color: var(--naranja); }
-
-.footer__slogan { font-size: 0.85rem; color: rgba(240, 237, 232, 0.5); }
-
-.footer__titulo {
-  font-size: 0.85rem;
+.mapa-marcador {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 50px;
+  font-size: 0.84rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--amarillo);
-  margin-bottom: 0.75rem;
 }
 
-.footer__lista { display: flex; flex-direction: column; gap: 0.4rem; }
-
-.footer__enlace {
-  font-size: 0.88rem;
-  color: rgba(240, 237, 232, 0.6);
-  transition: color var(--transicion);
-}
-.footer__enlace:hover { color: var(--naranja); }
-
-.footer__texto { font-size: 0.88rem; color: rgba(240, 237, 232, 0.6); }
-
-.footer__creditos {
-  text-align: center;
-  font-size: 0.78rem;
-  color: rgba(240, 237, 232, 0.3);
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(240, 237, 232, 0.06);
-  max-width: 1200px;
-  margin: 0 auto;
+.mapa-marcador--mar {
+  background-color: rgba(2, 136, 209, 0.10);
+  color: var(--azul-agua);
+  border: 1px solid rgba(2, 136, 209, 0.25);
 }
 
-/* ===== NOTIFICACIÓN CARRITO ===== */
-.notificacion {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  background-color: var(--verde-oscuro);
-  border: 1px solid var(--amarillo);
-  color: var(--blanco);
-  padding: 0.8rem 1.2rem;
-  border-radius: var(--radio);
-  font-size: 0.88rem;
-  font-weight: 600;
-  z-index: 2000;
-  transform: translateY(100px);
-  opacity: 0;
-  transition: all 0.35s ease;
-  max-width: 280px;
+.mapa-marcador--tierra {
+  background-color: rgba(124, 179, 66, 0.10);
+  color: var(--verde-pasto);
+  border: 1px solid rgba(124, 179, 66, 0.25);
 }
 
-.notificacion.visible { transform: translateY(0); opacity: 1; }
-
-/* ===================================================
-   SECCIONES DE ACTIVIDADES — TIERRA Y MAR
-   =================================================== */
-
-/* --- Sección contenedora --- */
-.seccion-actividades {
-  padding: 5rem 1.25rem;
-}
-
-/* Fondo verde oscuro para Tierra */
-.seccion-actividades--tierra {
-  background-color: var(--verde-oscuro);
-}
-
-/* Fondo azul marino profundo para Mar */
-.seccion-actividades--mar {
-  background-color: var(--azul-marino);
-}
-
-/* --- Encabezado de sección --- */
-.seccion-actividades__contenedor {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.seccion-actividades__encabezado {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.seccion-actividades__etiqueta {
-  display: inline-block;
-  font-size: 0.8rem;
+.mapa-marcador__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--amarillo);
-  margin-bottom: 0.75rem;
-}
-
-.seccion-actividades__titulo {
-  font-size: 2rem;
-  font-weight: 900;
+  flex-shrink: 0;
   color: var(--blanco);
-  margin-bottom: 0.75rem;
-  line-height: 1.2;
 }
 
-.seccion-actividades__subtitulo {
-  font-size: 1rem;
-  color: rgba(240, 237, 232, 0.65);
-  max-width: 560px;
-  margin: 0 auto;
-}
+.mapa-marcador__num--mar    { background-color: var(--azul-agua); }
+.mapa-marcador__num--tierra { background-color: var(--verde-pasto); }
 
-/* --- Grid de tarjetas: 1 columna en móvil --- */
-.seccion-actividades__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.75rem;
-}
-
-/* ===================================================
-   TARJETA DE ACTIVIDAD — con efecto hover 3D
-   =================================================== */
-.actividad-card {
+/* Contenedor responsivo del iframe (mantiene proporción) */
+.mapa-iframe-cont {
   position: relative;
-  height: 420px;
-  border-radius: 16px;
+  width: 100%;
+  padding-bottom: 50%;
+  border-radius: var(--radio-card);
   overflow: hidden;
-  cursor: pointer;
-
-  /* Estado inicial para animación de entrada desde abajo */
-  opacity: 0;
-  transform: translateY(60px);
-  transition:
-    opacity    0.7s ease,
-    transform  0.7s ease,   /* entrada scroll */
-    box-shadow 0.45s ease;  /* sombra en hover */
+  box-shadow: var(--sombra-card);
 }
 
-/* Clase añadida por el IntersectionObserver al entrar en viewport */
-.actividad-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+@media (max-width: 640px) { .mapa-iframe-cont { padding-bottom: 72%; } }
 
-/* Efecto hover 3D — rotación suave en X e Y + elevación */
-.actividad-card:hover {
-  /* perspective inline para que cada tarjeta tenga su propio punto de fuga */
-  transform: perspective(900px) rotateX(-4deg) rotateY(7deg) translateY(-10px) scale(1.02);
-}
-
-/* Sombra dramática específica para Tierra (tono cálido) */
-.actividad-card--tierra:hover {
-  box-shadow:
-    -18px 28px 60px rgba(0, 0, 0, 0.65),
-     0    0  35px rgba(245, 166, 35, 0.15);
-}
-
-/* Sombra dramática específica para Mar (tono frío) */
-.actividad-card--mar:hover {
-  box-shadow:
-    -18px 28px 60px rgba(0, 0, 0, 0.65),
-     0    0  35px rgba(91, 200, 232, 0.15);
-}
-
-/* --- Imagen de fondo --- */
-.actividad-card__imagen {
+.mapa-iframe {
   position: absolute;
   inset: 0;
-  z-index: 0;
-}
-
-.actividad-card__imagen img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  /* La imagen hace zoom suave en hover */
-  transition: transform 0.6s ease;
+  border: none;
 }
 
-.actividad-card:hover .actividad-card__imagen img {
-  transform: scale(1.08);
+/* =======================================
+   FOOTER
+   Gradiente azulado oscuro — no negro puro
+======================================= */
+.footer {
+  background: linear-gradient(135deg, #1a3040 0%, #0d2030 100%);
+  color: rgba(255, 248, 240, 0.80);
+  padding: 4.5rem 1.5rem 0;
 }
 
-/* --- Overlay degradado sobre la imagen --- */
-.actividad-card__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  /* Oscurece el fondo de abajo hacia arriba para destacar el contenido */
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.88) 0%,
-    rgba(0, 0, 0, 0.30) 55%,
-    rgba(0, 0, 0, 0.05) 100%
-  );
-  transition: background 0.4s ease;
+.footer__contenedor {
+  max-width: var(--max-ancho);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Al hacer hover el overlay se oscurece un poco más */
-.actividad-card:hover .actividad-card__overlay {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.50) 55%,
-    rgba(0, 0, 0, 0.10) 100%
-  );
+@media (min-width: 640px) {
+  .footer__contenedor { grid-template-columns: 1.6fr 1fr 1.6fr; }
 }
 
-/* --- Contenido superpuesto --- */
-.actividad-card__contenido {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  padding: 1.75rem 1.5rem;
-  /* Sube ligeramente el contenido en hover */
-  transition: transform 0.4s ease;
-}
-
-.actividad-card:hover .actividad-card__contenido {
-  transform: translateY(-6px);
-}
-
-/* Ícono grande */
-.actividad-card__icono {
-  display: block;
-  font-size: 2.4rem;
-  margin-bottom: 0.5rem;
-  /* El ícono también sube en hover */
-  transition: transform 0.4s ease;
-}
-
-.actividad-card:hover .actividad-card__icono {
-  transform: scale(1.15);
-}
-
-/* Título de la actividad */
-.actividad-card__nombre {
-  font-size: 1.4rem;
-  font-weight: 900;
+.footer__logo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.65rem;
+  font-weight: 700;
   color: var(--blanco);
-  margin-bottom: 0.5rem;
 }
 
-/* Descripción corta — oculta por defecto, aparece en hover */
-.actividad-card__descripcion {
-  font-size: 0.88rem;
-  color: rgba(240, 237, 232, 0.85);
-  line-height: 1.6;
+.footer__logo-miami { color: var(--mostaza); }
+
+.footer__tagline {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.65;
+  margin-top: 0.5rem;
+}
+
+.footer__subtitulo {
+  font-family: var(--fuente-titulo);
+  font-size: 1rem;
+  color: var(--azul-cielo);
   margin-bottom: 1rem;
-  /* Transición suave de altura para la aparición */
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
-.actividad-card:hover .actividad-card__descripcion {
-  max-height: 80px;
-  opacity: 1;
+.footer__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-/* Botón Explorar — oculto hasta el hover */
-.actividad-card__btn {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
-  font-size: 0.85rem;
-  padding: 0.55rem 1.2rem;
+.footer__enlace {
+  font-size: 0.9rem;
+  opacity: 0.68;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  cursor: pointer;
 }
 
-.actividad-card:hover .actividad-card__btn {
-  opacity: 1;
-  transform: translateY(0);
-}
+.footer__enlace:hover { opacity: 1; color: var(--azul-cielo); }
 
-/* ===== RESPONSIVE: TABLETA (768px+) ===== */
-@media (min-width: 768px) {
-  .header__menu-btn { display: none; }
-
-  .nav {
-    position: static;
-    max-height: none;
-    overflow: visible;
-    background: transparent;
-    width: auto;
-  }
-
-  .nav__lista {
-    flex-direction: row;
-    padding: 0;
-    gap: 0;
-  }
-
-  .nav__enlace {
-    padding: 0.4rem 0.9rem;
-    border-bottom: none;
-    font-size: 0.9rem;
-    border-radius: 4px;
-  }
-
-  .nav__enlace:hover {
-    color: var(--amarillo);
-    padding-left: 0.9rem;
-    background-color: rgba(245, 166, 35, 0.08);
-  }
-
-  .hero__titulo       { font-size: 3.2rem; }
-  .mundos__grid       { grid-template-columns: 1fr 1fr; }
-  .productos__grid    { grid-template-columns: repeat(2, 1fr); }
-  /* En tableta las tarjetas de actividad van de 3 en 3 */
-  .seccion-actividades__grid { grid-template-columns: repeat(3, 1fr); }
-
-  /* En tableta los paneles van lado a lado — ocultar gradiente vertical */
-  .banner-mundos {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  /* En desktop los paneles van lado a lado:
-     la franja de gradiente pasa a ser una columna vertical de 80px */
-  .banner-mundos {
-    grid-template-columns: 1fr 80px 1fr;
-  }
-
-  .gradiente-transicion {
-    display: block;
-    /* El gradiente va de izquierda (verde) a derecha (azul) para el corte vertical */
-    background: linear-gradient(to right, var(--verde-oscuro) 0%, var(--azul-marino) 100%);
-    height: auto;
-  }
-
-  .footer__contenedor { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* ===== RESPONSIVE: ESCRITORIO (1024px+) ===== */
-@media (min-width: 1024px) {
-  .hero__titulo    { font-size: 4rem; }
-  .productos__grid { grid-template-columns: repeat(3, 1fr); }
-  .flip-card       { height: 400px; }
-  .flip-card__imagen-cont { height: 230px; }
-}
-
-/* ===== RESPONSIVE: 4 COLUMNAS (1200px+) ===== */
-@media (min-width: 1200px) {
-  .productos__grid { grid-template-columns: repeat(4, 1fr); }
+.footer__inferior {
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.84rem;
+  opacity: 0.55;
 }
