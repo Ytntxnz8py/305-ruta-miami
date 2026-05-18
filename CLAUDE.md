@@ -94,3 +94,34 @@ Tipografía: **Playfair Display** italic (títulos) + **Inter** (cuerpo) vía Go
 - Repositorio: `https://github.com/Ytntxnz8py/mi-tienda`
 - URL pública: `https://ytntxnz8py.github.io/mi-tienda/`
 - Branch: `main`
+
+---
+
+## Estado actual
+🚧 **En construcción activa**
+
+## Skills instaladas
+| Paquete | Skills |
+|---|---|
+| `emilkowalski/skill` | `emil-design-eng` |
+| `pbakaus/impeccable` | `impeccable` |
+| `Leonxlnx/taste-skill` | `brandkit`, `industrial-brutalist-ui`, `gpt-taste`, `image-to-code`, `imagegen-frontend-mobile`, `imagegen-frontend-web`, `minimalist-ui`, `full-output-enforcement`, `redesign-existing-projects`, `high-end-visual-design`, `stitch-design-taste`, `design-taste-frontend` |
+
+## Próximos pasos pendientes
+1. Ampliar de 6 a 9 destinos reales verificados
+2. Implementar Google Analytics GA4
+3. Aplicar audit `/impeccable` al diseño completo
+4. Aplicar `taste-skill` variante soft para eliminar look de plantilla
+5. Panel admin con métricas reales de localStorage
+
+## Objetivo del negocio
+Directorio de actividades outdoor en Miami monetizado con:
+- 💼 **Listings de empresas locales** — $80–100/mes por listing
+- 🛒 **Afiliados Amazon** — equipamiento outdoor
+- 🌐 **Servicios web** a negocios locales (diseño, SEO, publicidad)
+
+## Stack técnico
+- HTML / CSS / JS puro — sin frameworks
+- Mobile-first
+- Comentarios en español
+- Dominio: **pendiente de comprar en Namecheap**
