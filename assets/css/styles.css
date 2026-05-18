@@ -1768,3 +1768,296 @@ html.lang-es .lang-en { display: none; }
 @media (prefers-reduced-motion: reduce) and (min-width: 768px) {
   #destinosGrid .destino-card:nth-child(3n+2) { margin-top: 0 !important; }
 }
+
+/* ================================================================
+   REDESIGN PREMIUM FASE 2
+   taste-skill soft · efectos 21st.dev · motion profesional
+   fusion visual · ui-ux-pro-max
+   Sin frameworks — CSS/JS puro — Comentarios en espanol
+================================================================ */
+
+/* ================================================================
+   PASO 1 — TASTE-SKILL SOFT: estilo visual base
+================================================================ */
+
+/* Intro cards: border-top con color por posicion */
+.intro-card {
+  border-top: 3px solid var(--turquesa);
+  border-radius: var(--radio);
+  box-shadow: 0 8px 36px rgba(0,188,212,0.10);
+  will-change: transform;
+}
+.intro-card:nth-child(2) {
+  border-top-color: var(--mostaza);
+  box-shadow: 0 8px 36px rgba(255,179,0,0.10);
+}
+.intro-card:nth-child(3) {
+  border-top-color: var(--coral);
+  box-shadow: 0 8px 36px rgba(255,107,107,0.10);
+}
+
+/* Boton principal: gradiente coral a turquesa */
+.btn--primario {
+  background: linear-gradient(135deg, var(--coral) 0%, var(--turquesa) 100%) !important;
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(255,107,107,0.30) !important;
+  transition: transform 0.10s cubic-bezier(0.2,0,0,1),
+              box-shadow 0.22s cubic-bezier(0.2,0,0,1),
+              filter 0.22s cubic-bezier(0.2,0,0,1) !important;
+}
+.btn--primario:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 8px 32px rgba(255,107,107,0.42) !important;
+  filter: brightness(1.08);
+}
+.btn--primario:active { transform: scale(0.98) !important; }
+
+/* Micro-interaccion universal en botones */
+button { transition: transform 0.10s cubic-bezier(0.2,0,0,1); }
+button:active { transform: scale(0.98); }
+
+/* ================================================================
+   PASO 2 — EFECTOS 21st.dev convertidos a Vanilla CSS/JS
+================================================================ */
+
+/* SHUTTER HERO: estructura de capas por letra */
+.shutter-char {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.shutter-letter-base { visibility: hidden; }
+.shutter-layer {
+  display: block;
+  position: absolute;
+  inset: 0;
+  color: inherit;
+  font: inherit;
+  white-space: pre;
+  will-change: transform;
+}
+/* Clip-path por tercio: superior, medio, inferior */
+.shutter-layer--top    { clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%); }
+.shutter-layer--mid    { clip-path: polygon(0 35%, 100% 35%, 100% 65%, 0 65%); }
+.shutter-layer--bottom { clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%); }
+
+/* Keyframes: superior e inferior de izquierda, media de derecha */
+@keyframes shutter-top {
+  from { transform: translateX(-120%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes shutter-mid {
+  from { transform: translateX(120%);  opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes shutter-bottom {
+  from { transform: translateX(-120%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* H2 BLUR REVEAL: todos los titulos entran desde blur */
+.h2-reveal {
+  filter: blur(10px);
+  transition: filter 0.80s cubic-bezier(0.2,0,0,1) 0.05s;
+}
+.h2-reveal.visible { filter: blur(0px); }
+
+/* Subrayado que crece — solo h2 sin clase seccion-titulo */
+h2.h2-reveal:not(.seccion-titulo)::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--coral), var(--turquesa), var(--mostaza));
+  border-radius: 2px;
+  margin-top: 0.55rem;
+  transition: width 0.65s cubic-bezier(0.2,0,0,1) 0.55s;
+}
+h2.h2-reveal:not(.seccion-titulo).visible::after { width: 56px; }
+
+/* RADAR MAPA: barrido giratorio sobre el iframe */
+.mapa-radar-wrap { position: relative; }
+.mapa-radar-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: calc(var(--radio) + 14px);
+  background: conic-gradient(
+    rgba(0,188,212,0.22) 0deg,
+    rgba(0,188,212,0.05) 50deg,
+    transparent 75deg,
+    transparent 360deg
+  );
+  animation: radar-spin 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.mapa-radar-wrap > * { position: relative; z-index: 1; }
+
+@keyframes radar-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Chips del mapa: fade-in escalonado — JS anade .visible */
+.mapa-marcador {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s cubic-bezier(0.2,0,0,1),
+              transform 0.45s cubic-bezier(0.2,0,0,1);
+}
+.mapa-marcador.visible { opacity: 1; transform: translateY(0); }
+
+/* TRABAJA: fondo de puntos CSS animados */
+.seccion-trabaja { position: relative; overflow: hidden; }
+.seccion-trabaja::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0,188,212,0.20) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  animation: dots-pulse 6s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+.seccion-trabaja > * { position: relative; z-index: 1; }
+
+@keyframes dots-pulse {
+  0%   { opacity: 0.45; transform: scale(1); }
+  100% { opacity: 0.85; transform: scale(1.02); }
+}
+
+/* Beneficios: fade-up escalonado — JS anade .visible */
+.trabaja-beneficio {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.40s cubic-bezier(0.2,0,0,1),
+              transform 0.40s cubic-bezier(0.2,0,0,1);
+}
+.trabaja-beneficio.visible { opacity: 1; transform: translateY(0); }
+
+/* ================================================================
+   PASO 3 — MOTION PROFESIONAL (emil-design-eng)
+================================================================ */
+
+/* Hover states inmediatos (<100ms) */
+.header__enlace,
+.footer__enlace,
+.filtros__btn {
+  transition: color 0.09s cubic-bezier(0.2,0,0,1),
+              background-color 0.09s cubic-bezier(0.2,0,0,1),
+              border-color 0.09s cubic-bezier(0.2,0,0,1);
+}
+
+/* Micro-interacciones en botones del modal */
+.modal-accion-btn {
+  transition: transform 0.10s cubic-bezier(0.2,0,0,1),
+              box-shadow 0.22s cubic-bezier(0.2,0,0,1) !important;
+}
+.modal-accion-btn:hover  { transform: translateY(-2px) scale(1.02); }
+.modal-accion-btn:active { transform: scale(0.97); }
+
+/* Boton cerrar: respuesta inmediata */
+.modal-cerrar {
+  transition: transform 0.09s cubic-bezier(0.2,0,0,1),
+              background-color 0.09s cubic-bezier(0.2,0,0,1) !important;
+}
+.modal-cerrar:hover  { transform: rotate(90deg) scale(1.1) !important; }
+.modal-cerrar:active { transform: rotate(90deg) scale(0.95) !important; }
+
+/* ================================================================
+   PASO 4 — FUSION VISUAL ENTRE SECCIONES
+================================================================ */
+
+/* Divs de transicion: 120px de degradado suave */
+.section-fade {
+  height: 120px;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  margin: -1px 0;
+}
+.section-fade--hero-intro {
+  background: linear-gradient(to bottom, rgba(7,30,43,0.92) 0%, #FFFDF7 100%);
+}
+.section-fade--intro-destinos {
+  background: linear-gradient(to bottom, #FFFDF7 0%, #071e2b 100%);
+}
+.section-fade--destinos-mapa {
+  background: linear-gradient(to bottom, #071e2b 0%, #E3F4FF 100%);
+}
+.section-fade--mapa-trabaja {
+  background: linear-gradient(to bottom, #E3F4FF 0%, #E8F5E9 100%);
+}
+.section-fade--trabaja-footer {
+  background: linear-gradient(to bottom, #E8F5E9 0%, #00434F 100%);
+}
+
+/* ================================================================
+   PASO 5 — UI-UX-PRO-MAX: experiencia final
+================================================================ */
+
+/* IMAGE SKELETON: shimmer turquesa mientras carga */
+.destino-card__img {
+  background: linear-gradient(
+    90deg,
+    rgba(0,188,212,0.06) 25%,
+    rgba(0,188,212,0.16) 50%,
+    rgba(0,188,212,0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+.destino-card__img.img-cargada { animation: none; background: none; }
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* FOCUS STATES accesibles */
+:focus-visible {
+  outline: 3px solid var(--turquesa);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
+
+/* TOUCH TARGETS: minimo 44px en movil */
+@media (max-width: 767px) {
+  .btn, button, .filtros__btn,
+  .header__lang-btn, .header__menu-btn,
+  .footer__social { min-height: 44px; min-width: 44px; }
+}
+
+/* FORM VALIDATION: estados visuales en tiempo real */
+.form-grupo input.input-valido,
+.form-grupo select.input-valido,
+.form-grupo textarea.input-valido {
+  border-color: var(--turquesa) !important;
+  box-shadow: 0 0 0 3px rgba(0,188,212,0.15) !important;
+}
+.form-grupo input.input-error,
+.form-grupo select.input-error,
+.form-grupo textarea.input-error {
+  border-color: var(--coral) !important;
+  box-shadow: 0 0 0 3px rgba(255,107,107,0.15) !important;
+}
+.form-error-msg {
+  font-size: 0.75rem;
+  color: var(--coral);
+  margin-top: 0.25rem;
+  display: none;
+}
+.input-error ~ .form-error-msg { display: block; }
+
+/* REDUCED MOTION: desactiva todo lo nuevo */
+@media (prefers-reduced-motion: reduce) {
+  .shutter-layer                { animation: none !important; }
+  .h2-reveal, h2.h2-reveal::after { transition: none !important; filter: none !important; }
+  .mapa-radar-wrap::before      { animation: none !important; }
+  .seccion-trabaja::before      { animation: none !important; }
+  .mapa-marcador    { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .trabaja-beneficio { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .destino-card__img { animation: none !important; }
+}
