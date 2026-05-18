@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin — Explora Miami</title>
+  <!-- Evita que Google indexe el panel de administración -->
   <meta name="robots" content="noindex, nofollow" />
 
   <!-- Google Fonts: Playfair Display + Inter -->
@@ -15,9 +16,10 @@
 </head>
 <body>
 
-  <!-- ===== LOGIN OVERLAY (visible por defecto) ===== -->
+  <!-- ===== LOGIN: visible por defecto hasta autenticarse ===== -->
   <div id="loginOverlay" class="login-overlay">
     <div class="login-card">
+
       <div class="login-logo">
         <span class="login-logo-e">Explora</span><span class="login-logo-m">Miami</span>
       </div>
@@ -33,24 +35,26 @@
           autocomplete="current-password"
           required
         />
-        <button type="submit" class="login-btn">Entrar</button>
+        <button type="submit" class="login-btn">Entrar al panel</button>
         <p id="loginError" class="login-error">Contraseña incorrecta. Intenta de nuevo.</p>
       </form>
+
+      <p class="login-hint">Contraseña por defecto: <code>miami2026</code></p>
     </div>
   </div>
 
-  <!-- ===== DASHBOARD (oculto hasta login) ===== -->
+  <!-- ===== DASHBOARD: oculto hasta hacer login ===== -->
   <div id="dashboard" style="display:none">
 
-    <!-- Header del admin -->
+    <!-- Header fijo del panel -->
     <header class="admin-header">
-      <div style="display:flex;align-items:center;gap:0.5rem">
+      <div class="admin-header__izq">
         <div class="admin-header__logo">
           <span>Explora</span><span>Miami</span>
         </div>
         <span class="admin-header__tag">ADMIN</span>
       </div>
-      <div class="admin-header__derecha">
+      <div class="admin-header__der">
         <a href="index.html" target="_blank" class="admin-header__link">← Ver sitio</a>
         <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
       </div>
@@ -58,128 +62,171 @@
 
     <main class="admin-main">
 
-      <!-- ===== ESTADÍSTICAS ===== -->
-      <div class="admin-stats">
-        <div class="stat-card">
-          <div class="stat-num"  id="statDestinos">—</div>
-          <div class="stat-label">Destinos activos</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num"  id="statContactos">—</div>
-          <div class="stat-label">Contactos recibidos</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num"  id="statFecha">—</div>
-          <div class="stat-label">Última revisión</div>
-        </div>
-      </div>
-
-      <!-- ===== GESTIÓN DE DESTINOS ===== -->
-      <div class="admin-seccion">
+      <!-- ===== SECCIÓN: MÉTRICAS PRINCIPALES ===== -->
+      <section class="admin-seccion">
         <div class="admin-seccion__header">
-          <h2 class="admin-seccion__titulo">Destinos</h2>
-          <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
-            <button class="admin-btn admin-btn--new" onclick="toggleFormDestino()">+ Nuevo destino</button>
+          <h2 class="admin-seccion__titulo">Dashboard</h2>
+          <span class="admin-seccion__fecha" id="statFecha">—</span>
+        </div>
+
+        <!-- Tarjetas de métricas: 6 indicadores clave -->
+        <div class="metricas-grid">
+          <div class="metrica-card metrica-card--turquesa">
+            <div class="metrica-card__icono">👁️</div>
+            <div class="metrica-card__num" id="statHoy">—</div>
+            <div class="metrica-card__label">Visitas hoy</div>
+          </div>
+          <div class="metrica-card metrica-card--azul">
+            <div class="metrica-card__icono">📅</div>
+            <div class="metrica-card__num" id="statSemana">—</div>
+            <div class="metrica-card__label">Esta semana</div>
+          </div>
+          <div class="metrica-card metrica-card--verde">
+            <div class="metrica-card__icono">📈</div>
+            <div class="metrica-card__num" id="statMes">—</div>
+            <div class="metrica-card__label">Este mes</div>
+          </div>
+          <div class="metrica-card metrica-card--coral">
+            <div class="metrica-card__icono">🖱️</div>
+            <div class="metrica-card__num" id="statClicTotal">—</div>
+            <div class="metrica-card__label">Clics en destinos</div>
+          </div>
+          <div class="metrica-card metrica-card--mostaza">
+            <div class="metrica-card__icono">✉️</div>
+            <div class="metrica-card__num" id="statContactos">—</div>
+            <div class="metrica-card__label">Formularios recibidos</div>
+          </div>
+          <div class="metrica-card metrica-card--gris">
+            <div class="metrica-card__icono">📍</div>
+            <div class="metrica-card__num" id="statDestinos">—</div>
+            <div class="metrica-card__label">Destinos activos</div>
           </div>
         </div>
 
-        <!-- Formulario agregar / editar (oculto por defecto) -->
-        <div id="formDestinoWrap" class="admin-form" style="display:none;margin-bottom:2rem;padding:1.5rem;background:#f4f7fa;border-radius:12px">
-          <p class="admin-form__titulo" id="formDestinoTitulo">Agregar Destino</p>
-
-          <form id="formDestino">
-            <div class="admin-form__grid">
-
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Nombre (ES)</label>
-                <input name="nombre_es" class="admin-form__input" placeholder="ej: Everglades National Park" required />
-              </div>
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Nombre (EN)</label>
-                <input name="nombre_en" class="admin-form__input" placeholder="ej: Everglades National Park" required />
-              </div>
-
-              <div class="admin-form__grupo admin-form__grupo--full">
-                <label class="admin-form__label">Descripción (ES)</label>
-                <textarea name="desc_es" class="admin-form__textarea" placeholder="Descripción en español" required></textarea>
-              </div>
-              <div class="admin-form__grupo admin-form__grupo--full">
-                <label class="admin-form__label">Descripción (EN)</label>
-                <textarea name="desc_en" class="admin-form__textarea" placeholder="Description in English" required></textarea>
-              </div>
-
-              <div class="admin-form__grupo admin-form__grupo--full">
-                <label class="admin-form__label">URL de foto (Unsplash u otra)</label>
-                <input name="foto" class="admin-form__input" type="url" placeholder="https://images.unsplash.com/photo-..." />
-              </div>
-
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Latitud</label>
-                <input name="lat" class="admin-form__input" type="number" step="0.0001" placeholder="25.2866" required />
-              </div>
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Longitud</label>
-                <input name="lng" class="admin-form__input" type="number" step="0.0001" placeholder="-80.8987" required />
-              </div>
-
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Dificultad (ES)</label>
-                <input name="dificultad_es" class="admin-form__input" placeholder="ej: Fácil — Moderado" required />
-              </div>
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Dificultad (EN)</label>
-                <input name="dificultad_en" class="admin-form__input" placeholder="ej: Easy — Moderate" required />
-              </div>
-
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Nivel de dificultad (badge)</label>
-                <select name="dificultad_clase" class="admin-form__select">
-                  <option value="facil">Fácil</option>
-                  <option value="moderado">Moderado</option>
-                  <option value="dificil">Difícil</option>
-                </select>
-              </div>
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Tipo</label>
-                <select name="tipo" class="admin-form__select">
-                  <option value="tierra">🏔️ Tierra</option>
-                  <option value="mar">🌊 Mar</option>
-                </select>
-              </div>
-
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Tipo actividades (ES)</label>
-                <input name="tipo_es" class="admin-form__input" placeholder="ej: Senderismo · Kayak" required />
-              </div>
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Tipo actividades (EN)</label>
-                <input name="tipo_en" class="admin-form__input" placeholder="ej: Hiking · Kayak" required />
-              </div>
-
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Precio</label>
-                <input name="precio" class="admin-form__input" placeholder="ej: $35 / vehículo" required />
-              </div>
-              <div class="admin-form__grupo">
-                <label class="admin-form__label">Horarios</label>
-                <input name="horarios" class="admin-form__input" placeholder="ej: 8am – Sunset" required />
-              </div>
-
-            </div><!-- /grid -->
-
-            <div class="admin-form__acciones">
-              <button type="submit" class="admin-form__btn-guardar">Guardar destino</button>
-              <button type="button" class="admin-form__btn-cancelar" onclick="cancelarFormDestino()">Cancelar</button>
-            </div>
-          </form>
+        <!-- Gráfico de barras: visitas por día de la semana (7 días) -->
+        <div class="grafico-wrap">
+          <h3 class="grafico-titulo">Visitas — últimos 7 días</h3>
+          <div class="grafico-barras" id="graficoDias">
+            <!-- Las barras se renderizan dinámicamente desde admin.js -->
+          </div>
         </div>
 
-        <!-- Tabla de destinos registrados -->
+        <!-- Tabla de clics por destino -->
+        <div class="clics-wrap">
+          <h3 class="grafico-titulo">Clics por destino</h3>
+          <div class="clics-lista" id="clicsLista">
+            <!-- Se renderiza desde admin.js -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===== SECCIÓN: GESTIÓN DE DESTINOS ===== -->
+      <section class="admin-seccion">
+        <div class="admin-seccion__header">
+          <h2 class="admin-seccion__titulo">Destinos</h2>
+          <button class="admin-btn admin-btn--nuevo" onclick="toggleFormDestino()">+ Nuevo destino</button>
+        </div>
+
+        <!-- Formulario agregar / editar (oculto por defecto) -->
+        <div id="formDestinoWrap" style="display:none">
+          <div class="form-destino-card">
+            <p class="form-destino__titulo" id="formDestinoTitulo">Agregar Destino</p>
+
+            <form id="formDestino">
+              <div class="admin-form__grid">
+
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Nombre (ES)</label>
+                  <input name="nombre_es" class="admin-form__input" placeholder="ej: Everglades National Park" required />
+                </div>
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Nombre (EN)</label>
+                  <input name="nombre_en" class="admin-form__input" placeholder="ej: Everglades National Park" required />
+                </div>
+
+                <div class="admin-form__grupo admin-form__grupo--full">
+                  <label class="admin-form__label">Descripción corta (ES)</label>
+                  <textarea name="desc_es" class="admin-form__textarea" placeholder="Descripción breve en español" required></textarea>
+                </div>
+                <div class="admin-form__grupo admin-form__grupo--full">
+                  <label class="admin-form__label">Descripción corta (EN)</label>
+                  <textarea name="desc_en" class="admin-form__textarea" placeholder="Short description in English" required></textarea>
+                </div>
+
+                <div class="admin-form__grupo admin-form__grupo--full">
+                  <label class="admin-form__label">URL de foto principal (Unsplash u otra)</label>
+                  <input name="foto" class="admin-form__input" type="url" placeholder="https://images.unsplash.com/photo-..." />
+                </div>
+
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Latitud</label>
+                  <input name="lat" class="admin-form__input" type="number" step="0.0001" placeholder="25.2866" required />
+                </div>
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Longitud</label>
+                  <input name="lng" class="admin-form__input" type="number" step="0.0001" placeholder="-80.8987" required />
+                </div>
+
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Dificultad (ES)</label>
+                  <input name="dificultad_es" class="admin-form__input" placeholder="ej: Fácil — Moderado" required />
+                </div>
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Dificultad (EN)</label>
+                  <input name="dificultad_en" class="admin-form__input" placeholder="ej: Easy — Moderate" required />
+                </div>
+
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Nivel (badge color)</label>
+                  <select name="dificultad_clase" class="admin-form__select">
+                    <option value="facil">Fácil (verde)</option>
+                    <option value="moderado">Moderado (naranja)</option>
+                    <option value="dificil">Difícil (coral)</option>
+                  </select>
+                </div>
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Tipo de terreno</label>
+                  <select name="tipo" class="admin-form__select">
+                    <option value="tierra">🏔️ Tierra</option>
+                    <option value="mar">🌊 Mar</option>
+                  </select>
+                </div>
+
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Actividades (ES)</label>
+                  <input name="tipo_es" class="admin-form__input" placeholder="ej: Senderismo · Kayak" required />
+                </div>
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Actividades (EN)</label>
+                  <input name="tipo_en" class="admin-form__input" placeholder="ej: Hiking · Kayak" required />
+                </div>
+
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Precio</label>
+                  <input name="precio" class="admin-form__input" placeholder="ej: $35 / vehículo" required />
+                </div>
+                <div class="admin-form__grupo">
+                  <label class="admin-form__label">Horarios</label>
+                  <input name="horarios" class="admin-form__input" placeholder="ej: 8am – Sunset" required />
+                </div>
+
+              </div>
+
+              <div class="admin-form__acciones">
+                <button type="submit" class="admin-form__btn-guardar">Guardar destino</button>
+                <button type="button" class="admin-form__btn-cancelar" onclick="cancelarFormDestino()">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Tabla de destinos con toggle activo/inactivo -->
         <div class="admin-tabla-cont">
           <table class="admin-tabla">
             <thead>
               <tr>
-                <th>Nombre</th>
+                <th>Destino</th>
                 <th>Tipo</th>
                 <th>Precio</th>
                 <th>Estado</th>
@@ -191,50 +238,39 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </section>
 
-      <!-- ===== CONTACTOS RECIBIDOS ===== -->
-      <div class="admin-seccion">
+      <!-- ===== SECCIÓN: BANDEJA DE MENSAJES ===== -->
+      <section class="admin-seccion">
         <div class="admin-seccion__header">
-          <h2 class="admin-seccion__titulo">Contactos recibidos</h2>
-          <button class="admin-btn admin-btn--export" onclick="exportarContactos()">⬇ Exportar CSV</button>
+          <h2 class="admin-seccion__titulo">Mensajes de empresas</h2>
+          <button class="admin-btn admin-btn--exportar" onclick="exportarContactos()">⬇ Exportar CSV</button>
         </div>
 
-        <div class="admin-tabla-cont">
-          <table class="admin-tabla">
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Nombre</th>
-                <th>Empresa</th>
-                <th>Email</th>
-                <th>Servicio</th>
-                <th>Mensaje</th>
-              </tr>
-            </thead>
-            <tbody id="tablaContactos">
-              <tr><td colspan="6" class="tabla-vacia">Cargando…</td></tr>
-            </tbody>
-          </table>
+        <!-- Los mensajes se renderizan como tarjetas individuales -->
+        <div id="bandejaMensajes" class="bandeja-mensajes">
+          <p class="tabla-vacia">Cargando mensajes…</p>
         </div>
-      </div>
+      </section>
 
     </main>
   </div>
 
-  <!-- Notificación toast -->
+  <!-- Notificación toast para confirmaciones -->
   <div id="toast" class="toast"></div>
 
   <script src="assets/js/admin.js"></script>
+
   <script>
-    /* Muestra / oculta el formulario de destino */
+    /* Muestra / oculta el formulario de nuevo destino */
     function toggleFormDestino() {
       var w = document.getElementById('formDestinoWrap');
-      var visible = w.style.display !== 'none';
-      w.style.display = visible ? 'none' : 'block';
-      if (!visible) w.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var abierto = w.style.display !== 'none';
+      w.style.display = abierto ? 'none' : 'block';
+      if (!abierto) w.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    /* Cancela y resetea el formulario de destino */
     function cancelarFormDestino() {
       resetFormDestino();
       document.getElementById('formDestinoWrap').style.display = 'none';
