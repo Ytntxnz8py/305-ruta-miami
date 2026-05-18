@@ -1470,3 +1470,301 @@ html.lang-es .lang-en { display: none; }
   .destino-card__info { padding: 1.5rem; }
   .form-card { padding: 1.75rem 1.25rem; }
 }
+
+/* ================================================================
+   PREMIUM 3D REDESIGN — Nivel Agencia $20K
+   glassmorphism · dark ocean · cinematic scroll · 3D mouse tilt
+   No modifica HTML ni lógica JS existente.
+================================================================ */
+
+/* --- Tokens premium --- */
+:root {
+  --glass-bg:      rgba(255, 255, 255, 0.065);
+  --glass-border:  rgba(255, 255, 255, 0.11);
+  --glass-blur:    blur(22px) saturate(180%);
+  --glass-shadow:  0 8px 40px rgba(0, 0, 0, 0.40),
+                   inset 0 1px 0 rgba(255, 255, 255, 0.10),
+                   inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  --ocean-ini:     #071e2b;
+  --ocean-mid:     #0a2d3f;
+  --ocean-fin:     #051822;
+}
+
+/* --- HERO: orbs flotantes animados --- */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(ellipse 42% 52% at 18% 28%, rgba(0, 188, 212, 0.22) 0%, transparent 62%),
+    radial-gradient(ellipse 36% 46% at 82% 72%, rgba(255, 107, 107, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 28% 38% at 62% 18%, rgba(255, 179, 0, 0.12) 0%, transparent 55%);
+  animation: orbs-drift 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes orbs-drift {
+  0%   { transform: translate(0, 0)       scale(1);    }
+  30%  { transform: translate(-14px, 9px)  scale(1.03); }
+  65%  { transform: translate(9px, -11px)  scale(0.97); }
+  100% { transform: translate(-7px, 7px)   scale(1.02); }
+}
+
+/* Botones hero: glass con brillo */
+.hero .btn--primario {
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.82) 0%, rgba(0, 140, 170, 0.78) 100%);
+  border: 1px solid rgba(0, 188, 212, 0.50);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: 0 4px 28px rgba(0, 188, 212, 0.42),
+              inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+.hero .btn--primario:hover {
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.96) 0%, rgba(0, 150, 180, 0.90) 100%);
+  box-shadow: 0 6px 36px rgba(0, 188, 212, 0.55),
+              inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+}
+
+.hero .btn--secundario {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22),
+              inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+.hero .btn--secundario:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.50);
+  transform: translateY(-2px);
+}
+
+/* --- SECCIÓN DESTINOS: dark ocean --- */
+.seccion-destinos {
+  background: linear-gradient(160deg, var(--ocean-ini) 0%, var(--ocean-mid) 48%, var(--ocean-fin) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Luces de ambiente — coral y turquesa difuminadas en el fondo */
+.seccion-destinos::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 65% 45% at 10% 15%, rgba(0, 188, 212, 0.13) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 40% at 90% 80%, rgba(255, 107, 107, 0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 55% at 50% 105%, rgba(0, 60, 90, 0.30) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Todo el contenido flota sobre la capa de fondo */
+.seccion-destinos > * { position: relative; z-index: 1; }
+
+/* Título y subtítulo adaptados al fondo oscuro */
+.seccion-destinos .seccion-titulo        { color: #fff; }
+.seccion-destinos .seccion-subtitulo     { color: rgba(255, 255, 255, 0.72); }
+.seccion-destinos .seccion-titulo::after {
+  background: linear-gradient(90deg, var(--turquesa) 0%, var(--mostaza) 55%, var(--coral) 100%);
+}
+
+/* --- FILTROS sobre fondo oscuro --- */
+.seccion-destinos .filtros__btn {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.seccion-destinos .filtros__btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.20);
+}
+.seccion-destinos .filtros__btn--activo {
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.78) 0%, rgba(0, 140, 170, 0.68) 100%);
+  border-color: rgba(0, 188, 212, 0.50);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 188, 212, 0.38);
+}
+
+/* --- GLASSMORPHISM CARDS --- */
+.destino-card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transform-style: preserve-3d;
+  will-change: transform;
+  overflow: visible; /* permite el sheen */
+  position: relative;
+}
+
+/* Sheen diagonal — brillo interno de glass */
+.destino-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 60%
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.2, 0, 0, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+.destino-card:hover::before { opacity: 1; }
+
+/* Líneas de color por tipo — más visibles en fondo oscuro */
+.destino-card[data-tipo="mar"]    { border-top: 3px solid rgba(0, 188, 212, 0.60) !important; }
+.destino-card[data-tipo="tierra"] { border-top: 3px solid rgba(124, 179, 66, 0.55) !important; }
+.destino-card[data-tipo="mar"]:hover    { border-top-color: var(--turquesa)    !important; }
+.destino-card[data-tipo="tierra"]:hover { border-top-color: var(--verde-tierra) !important; }
+
+/* Texto claro dentro de cards glass sobre fondo oscuro */
+.destino-card__nombre      { color: #ffffff; }
+.destino-card__desc        { color: rgba(255, 255, 255, 0.76); }
+.destino-card__meta-item   { color: rgba(255, 255, 255, 0.62); }
+
+/* Imagen: clip correcto para overflow:visible del card */
+.destino-card__img-cont {
+  border-radius: var(--radio) var(--radio) 0 0;
+  overflow: hidden;
+}
+
+/* Overlay imagen más oscuro para contraste con texto */
+.destino-card__img-cont::after {
+  background: linear-gradient(180deg, transparent 25%, rgba(0, 10, 20, 0.55) 100%) !important;
+  opacity: 1 !important;
+}
+
+/* Badges tipo en fondo oscuro */
+.destino-card__badge--mar    { background: rgba(0, 188, 212, 0.88); }
+.destino-card__badge--tierra { background: rgba(99, 162, 40, 0.88); }
+
+/* Botón CTA glass dentro de la card */
+.destino-card .btn--primario,
+.destino-card__btn {
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.80) 0%, rgba(0, 140, 170, 0.72) 100%) !important;
+  border: 1px solid rgba(0, 188, 212, 0.40) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(0, 188, 212, 0.28) !important;
+}
+.destino-card .btn--primario:hover,
+.destino-card__btn:hover {
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.96) 0%, rgba(0, 150, 180, 0.88) 100%) !important;
+  box-shadow: 0 6px 24px rgba(0, 188, 212, 0.44) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* --- GRID CON PERSPECTIVA Y ESCALONADO --- */
+#destinosGrid {
+  perspective: 1400px;
+  perspective-origin: center 40%;
+}
+
+@media (min-width: 768px) {
+  #destinosGrid .destino-card:nth-child(3n+2) {
+    margin-top: 3rem;
+  }
+}
+
+/* --- ANIMACIÓN CINEMATIC DE ENTRADA --- */
+/* Override del fade-up genérico para cards de destino */
+#destinosGrid .destino-card.fade-up {
+  opacity: 0;
+  transform: translateY(55px) rotateX(14deg);
+  transform-origin: center bottom;
+  transition: opacity 0.80s cubic-bezier(0.2, 0, 0, 1),
+              transform 0.80s cubic-bezier(0.2, 0, 0, 1);
+}
+
+#destinosGrid .destino-card.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg);
+}
+
+/* Columna izquierda: entra girando desde la izquierda */
+@media (min-width: 768px) {
+  #destinosGrid .destino-card:nth-child(3n+1).fade-up {
+    transform: translateY(40px) rotateX(8deg) rotateY(-10deg);
+  }
+  #destinosGrid .destino-card:nth-child(3n+1).fade-up.visible {
+    transform: translateY(0) rotateX(0deg) rotateY(0deg);
+  }
+
+  /* Columna central: cae desde arriba con más profundidad */
+  #destinosGrid .destino-card:nth-child(3n+2).fade-up {
+    transform: translateY(80px) rotateX(18deg);
+  }
+  #destinosGrid .destino-card:nth-child(3n+2).fade-up.visible {
+    transform: translateY(0) rotateX(0deg);
+  }
+
+  /* Columna derecha: entra girando desde la derecha */
+  #destinosGrid .destino-card:nth-child(3n+3).fade-up {
+    transform: translateY(40px) rotateX(8deg) rotateY(10deg);
+  }
+  #destinosGrid .destino-card:nth-child(3n+3).fade-up.visible {
+    transform: translateY(0) rotateX(0deg) rotateY(0deg);
+  }
+}
+
+/* --- 3D MOUSE TILT: clase añadida por JS en mousemove --- */
+/* El JS setea style.transform directamente; esta clase solo mejora la sombra */
+.destino-card.tilt-active {
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.55),
+    0 8px 24px rgba(0, 188, 212, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+  transition: box-shadow 0.15s ease, border-color 0.25s ease !important;
+}
+
+/* Transición suave al abandonar la card (reset del tilt) */
+.destino-card:not(.tilt-active) {
+  transition:
+    opacity   0.80s cubic-bezier(0.2, 0, 0, 1),
+    transform 0.55s cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 0.45s cubic-bezier(0.2, 0, 0, 1),
+    border-color 0.25s ease !important;
+}
+
+/* --- REDUCED MOTION: desactiva todo el 3D --- */
+@media (prefers-reduced-motion: reduce) {
+  .hero::before { animation: none; }
+
+  #destinosGrid .destino-card.fade-up,
+  #destinosGrid .destino-card:nth-child(3n+1).fade-up,
+  #destinosGrid .destino-card:nth-child(3n+2).fade-up,
+  #destinosGrid .destino-card:nth-child(3n+3).fade-up {
+    transform: translateY(20px) !important;
+    opacity: 0;
+  }
+
+  #destinosGrid .destino-card.fade-up.visible {
+    transform: none !important;
+    opacity: 1;
+  }
+
+  .destino-card.tilt-active {
+    transform: none !important;
+    box-shadow: var(--glass-shadow) !important;
+  }
+}
+
+/* Sin escalonado cuando el usuario prefiere movimiento reducido */
+@media (prefers-reduced-motion: reduce) and (min-width: 768px) {
+  #destinosGrid .destino-card:nth-child(3n+2) { margin-top: 0 !important; }
+}

@@ -486,6 +486,37 @@ function registrarClic(idDestino) {
   localStorage.setItem('em_clics', JSON.stringify(clics));
 }
 
+/* ===== 3D MOUSE TILT ===== */
+/* Añade efecto de inclinación 3D en hover sobre cada card de destino.
+   Solo activo si el usuario no prefiere movimiento reducido. */
+function bindCardTilt(card) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var MAX_TILT = 10; /* grados máximos de rotación */
+
+  card.addEventListener('mousemove', function (e) {
+    /* Solo aplica tilt en tarjetas ya visibles (animación de entrada terminada) */
+    if (!card.classList.contains('visible')) return;
+
+    var rect   = card.getBoundingClientRect();
+    var cx     = rect.left + rect.width  / 2;
+    var cy     = rect.top  + rect.height / 2;
+    var dx     = (e.clientX - cx) / (rect.width  / 2); /* -1 a 1 */
+    var dy     = (e.clientY - cy) / (rect.height / 2); /* -1 a 1 */
+    var rotY   = dx * MAX_TILT;
+    var rotX   = -dy * MAX_TILT * 0.65; /* eje X con factor suavizado */
+
+    card.style.transform =
+      'perspective(1000px) rotateY(' + rotY.toFixed(2) + 'deg) rotateX(' + rotX.toFixed(2) + 'deg) translateZ(12px)';
+    card.classList.add('tilt-active');
+  });
+
+  card.addEventListener('mouseleave', function () {
+    card.style.transform = '';
+    card.classList.remove('tilt-active');
+  });
+}
+
 /* ===== RENDER DE TARJETAS DE DESTINO ===== */
 var filtroActivo = 'todos';
 
@@ -539,6 +570,11 @@ function renderDestinos(filtro) {
   }).join('');
 
   initScrollAnimation();
+
+  /* Activa tilt 3D en cada card renderizada */
+  grid.querySelectorAll('.destino-card').forEach(function (card) {
+    bindCardTilt(card);
+  });
 }
 
 /* ===== GALERÍA: ESTADO GLOBAL ===== */
