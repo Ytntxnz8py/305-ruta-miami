@@ -1217,3 +1217,256 @@ html.lang-es .lang-en { display: none; }
     will-change: auto;
   }
 }
+
+/* ================================================================
+   TASTE-SKILL SOFT PASS
+   Variante: tropical moderno · sin plantilla genérica
+   Toca solo tipografía, espaciado, composición y jerarquía visual.
+   No se modifica HTML ni JS.
+================================================================ */
+
+/* ---- TIPOGRAFÍA: jerarquía más intencional ---- */
+
+/* Títulos de sección: tracking negativo + subrayado más vibrante */
+.seccion-titulo {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  letter-spacing: -0.025em;
+}
+.seccion-titulo::after {
+  width: 72px;    /* era 56px */
+  height: 4px;    /* era 3px  */
+  margin-top: 0.7rem;
+  background: linear-gradient(90deg, var(--turquesa) 0%, var(--mostaza) 55%, var(--coral) 100%);
+}
+
+/* Subtítulo: Inter 500 — sale del look de plantilla */
+.seccion-subtitulo {
+  font-size: 1.075rem;
+  font-weight: 500;
+  letter-spacing: 0.004em;
+  margin-bottom: 3.25rem;
+  color: var(--texto-medio);
+}
+
+/* Nombre de tarjeta: más presencia */
+.destino-card__nombre {
+  font-size: 1.22rem;
+  letter-spacing: -0.015em;
+}
+
+/* Intro titles: tracking igual */
+.seccion-intro__titulo {
+  letter-spacing: -0.025em;
+}
+
+/* ---- HERO: atmósfera más tropical y profunda ---- */
+
+/* Overlay: capa azul-marino vignette abajo → más contraste CTA */
+.hero__overlay {
+  background: linear-gradient(
+    155deg,
+    rgba(0, 55, 68, 0.52) 0%,
+    rgba(0, 150, 180, 0.28) 42%,
+    rgba(190, 55, 40, 0.46) 100%
+  );
+}
+/* Vignette extra en el fondo para que los botones resalten */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at center bottom, rgba(0,0,0,0.28) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Etiqueta: más cristalina */
+.hero__etiqueta {
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.30);
+  letter-spacing: 0.15em;  /* era 0.2em — muy abierto en móvil */
+  backdrop-filter: blur(6px);
+}
+
+/* Tagline: sin opacity residual */
+.hero__tagline {
+  opacity: 1;
+  font-weight: 300;
+  color: rgba(255,255,255,0.96);
+}
+
+/* ---- INTRO CARDS: identidad de color por posición ---- */
+
+/* Turquesa, Mostaza, Coral — cada card tiene su personalidad */
+.seccion-intro__grid .intro-card:nth-child(1) {
+  background: linear-gradient(150deg, rgba(0,188,212,0.08) 0%, #ffffff 52%);
+  border: 1px solid rgba(0,188,212,0.18);
+  border-top: 3px solid var(--turquesa);
+}
+.seccion-intro__grid .intro-card:nth-child(2) {
+  background: linear-gradient(150deg, rgba(255,179,0,0.09) 0%, #ffffff 52%);
+  border: 1px solid rgba(255,179,0,0.20);
+  border-top: 3px solid var(--mostaza);
+}
+.seccion-intro__grid .intro-card:nth-child(3) {
+  background: linear-gradient(150deg, rgba(255,107,107,0.08) 0%, #ffffff 52%);
+  border: 1px solid rgba(255,107,107,0.18);
+  border-top: 3px solid var(--coral);
+}
+
+/* Icono más grande y con margen propio */
+.intro-card__icono {
+  font-size: 2.75rem;
+  margin-bottom: 1.25rem;
+  line-height: 1;
+}
+
+/* ---- DESTINO CARDS: acento de color por tipo que se revela ---- */
+
+/* Estado base: línea de color sutil como huella de identidad */
+.destino-card[data-tipo="mar"] {
+  border-top: 3px solid rgba(0,188,212,0.18);
+}
+.destino-card[data-tipo="tierra"] {
+  border-top: 3px solid rgba(124,179,66,0.22);
+}
+/* En hover se intensifica — ya sabías que era especial */
+.destino-card[data-tipo="mar"]:hover {
+  border-top-color: var(--turquesa);
+}
+.destino-card[data-tipo="tierra"]:hover {
+  border-top-color: var(--verde-tierra);
+}
+
+/* Más breathing room en el cuerpo de la tarjeta */
+.destino-card__info {
+  padding: 1.75rem;   /* era 1.5rem */
+}
+
+/* Overlay sutil en imagen en hover — da profundidad sin oscurecer */
+.destino-card__img-cont::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.20) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.2, 0, 0, 1);
+}
+.destino-card:hover .destino-card__img-cont::after {
+  opacity: 1;
+}
+
+/* ---- FILTROS: botón activo más prominente ---- */
+.filtros__btn--activo {
+  box-shadow: 0 4px 18px rgba(0,188,212,0.30);
+  letter-spacing: 0.01em;
+}
+.filtros__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0,188,212,0.15);
+}
+
+/* ---- BENEFITS: iconos con color de marca rotado ---- */
+.trabaja-beneficio:nth-child(1) .trabaja-beneficio__icono {
+  background: linear-gradient(135deg, var(--turquesa), #0097a7);
+}
+.trabaja-beneficio:nth-child(2) .trabaja-beneficio__icono {
+  background: linear-gradient(135deg, var(--mostaza), #e6a000);
+}
+.trabaja-beneficio:nth-child(3) .trabaja-beneficio__icono {
+  background: linear-gradient(135deg, var(--coral), #d63031);
+}
+.trabaja-beneficio:nth-child(4) .trabaja-beneficio__icono {
+  background: linear-gradient(135deg, #7CB342, #558B2F);
+}
+
+/* ---- MAPA CHIPS: interactividad sutil ---- */
+.mapa-marcador {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: transform 0.22s cubic-bezier(0.2,0,0,1), box-shadow 0.22s ease;
+}
+.mapa-marcador:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+}
+
+/* ---- FORM: labels con acento de identidad ---- */
+.form-grupo label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.form-grupo label::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background: linear-gradient(180deg, var(--turquesa), var(--mostaza));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Form card: sombra más dramática para separar del fondo */
+.form-card {
+  box-shadow: 0 16px 56px rgba(0,188,212,0.12), 0 4px 16px rgba(0,0,0,0.06);
+}
+
+/* ---- NAVBAR: subrayado en hover en lugar de solo color ---- */
+.header__enlace {
+  position: relative;
+}
+.header__enlace::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0.8rem; right: 0.8rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--turquesa), var(--coral));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+.header__enlace:hover::after { transform: scaleX(1); }
+.header__enlace:hover { color: var(--texto-oscuro); } /* override turquesa, el subrayado ya habla */
+
+/* ---- FOOTER: mejor jerarquía de marca ---- */
+.footer__tagline {
+  font-size: 0.875rem;
+  font-style: italic;
+  line-height: 1.55;
+  opacity: 0.72;
+  max-width: 22ch;   /* evita líneas largas sueltas */
+}
+
+/* Enlace de footer: underline en hover más limpio */
+.footer__enlace:hover {
+  text-decoration: underline;
+  text-decoration-color: rgba(0,188,212,0.5);
+  text-underline-offset: 3px;
+}
+
+/* ---- MODAL: badge dif más refinado ---- */
+.modal-badge--dif {
+  background: rgba(242,246,250,0.98);
+  border: 1px solid #dde8f0;
+  color: var(--texto-medio);
+}
+
+/* ---- STAT DECORATIVE: sección intro más generosa ---- */
+.seccion-intro__contenedor {
+  padding-top: 0.5rem;  /* respira un poco más del fade-in */
+}
+
+/* ---- SCROLL INDICATOR: más elegante ---- */
+.hero__scroll-flecha {
+  border-right-color: rgba(255,255,255,0.85);
+  border-bottom-color: rgba(255,255,255,0.85);
+  border-width: 2.5px;   /* era 3px — más delicado */
+}
+
+/* ---- RESPONSIVE: ajustes móvil ---- */
+@media (max-width: 640px) {
+  .seccion-titulo { letter-spacing: -0.015em; }
+  .destino-card__info { padding: 1.5rem; }
+  .form-card { padding: 1.75rem 1.25rem; }
+}
