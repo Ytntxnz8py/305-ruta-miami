@@ -1741,7 +1741,7 @@ html.lang-es .lang-en { display: none; }
     border-color 0.25s ease !important;
 }
 
-/* --- REDUCED MOTION: desactiva todo el 3D --- */
+/* --- REDUCED MOTION: desactiva animaciones 3D y orbs --- */
 @media (prefers-reduced-motion: reduce) {
   .hero::before { animation: none; }
 
@@ -1820,39 +1820,65 @@ button:active { transform: scale(0.98); }
    PASO 2 — EFECTOS 21st.dev convertidos a Vanilla CSS/JS
 ================================================================ */
 
-/* SHUTTER HERO: estructura de capas por letra */
-.shutter-char {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-}
-.shutter-letter-base { visibility: hidden; }
-.shutter-layer {
-  display: block;
-  position: absolute;
-  inset: 0;
-  color: inherit;
-  font: inherit;
-  white-space: pre;
-  will-change: transform;
-}
-/* Clip-path por tercio: superior, medio, inferior */
-.shutter-layer--top    { clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%); }
-.shutter-layer--mid    { clip-path: polygon(0 35%, 100% 35%, 100% 65%, 0 65%); }
-.shutter-layer--bottom { clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%); }
+/* HERO TITLE — animación cinematográfica CSS pura
+   Letter-spacing compression: el título entra expandido y se comprime
+   a su valor final. Funciona perfectamente con Playfair Display italic
+   a cualquier tamaño. Sin manipulación del DOM. */
 
-/* Keyframes: superior e inferior de izquierda, media de derecha */
-@keyframes shutter-top {
-  from { transform: translateX(-120%); opacity: 0; }
-  to   { transform: translateX(0);     opacity: 1; }
+/* Etiqueta: aparece primero, desliza desde abajo */
+.hero__etiqueta {
+  animation: hero-fade-up 0.70s cubic-bezier(0.2, 0, 0, 1) 0.10s both;
 }
-@keyframes shutter-mid {
-  from { transform: translateX(120%);  opacity: 0; }
-  to   { transform: translateX(0);     opacity: 1; }
+
+/* Título principal: letter-spacing compression + blur + translateY */
+.hero__titulo {
+  animation: hero-title-in 1.40s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both;
 }
-@keyframes shutter-bottom {
-  from { transform: translateX(-120%); opacity: 0; }
-  to   { transform: translateX(0);     opacity: 1; }
+
+@keyframes hero-title-in {
+  0% {
+    opacity: 0;
+    letter-spacing: 0.24em;      /* espaciado abierto inicial */
+    transform: translateY(20px);
+    filter: blur(6px);
+  }
+  65% {
+    opacity: 1;
+    filter: blur(0px);           /* blur resuelto a mitad de camino */
+  }
+  100% {
+    opacity: 1;
+    letter-spacing: -0.01em;     /* comprime al valor definitivo */
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+/* Tagline: aparece tras el título */
+.hero__tagline {
+  animation: hero-fade-up 0.70s cubic-bezier(0.2, 0, 0, 1) 0.68s both;
+}
+
+/* Botones: últimos en aparecer */
+.hero__botones {
+  animation: hero-fade-up 0.70s cubic-bezier(0.2, 0, 0, 1) 0.88s both;
+}
+
+/* Flecha scroll: aparece al final */
+.hero__scroll {
+  animation: hero-fade-up 0.60s cubic-bezier(0.2, 0, 0, 1) 1.10s both;
+}
+
+/* Keyframe compartido: fade + translateY suave */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* H2 BLUR REVEAL: todos los titulos entran desde blur */
@@ -2051,13 +2077,27 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 .input-error ~ .form-error-msg { display: block; }
 
-/* REDUCED MOTION: desactiva todo lo nuevo */
+/* REDUCED MOTION: desactiva todas las animaciones nuevas */
 @media (prefers-reduced-motion: reduce) {
-  .shutter-layer                { animation: none !important; }
-  .h2-reveal, h2.h2-reveal::after { transition: none !important; filter: none !important; }
-  .mapa-radar-wrap::before      { animation: none !important; }
-  .seccion-trabaja::before      { animation: none !important; }
-  .mapa-marcador    { opacity: 1 !important; transform: none !important; transition: none !important; }
+  /* Hero: muestra los elementos directamente sin animación */
+  .hero__etiqueta,
+  .hero__titulo,
+  .hero__tagline,
+  .hero__botones,
+  .hero__scroll          { animation: none !important; opacity: 1 !important; letter-spacing: -0.01em; }
+
+  /* H2 reveal sin blur */
+  .h2-reveal             { filter: none !important; transition: none !important; }
+  h2.h2-reveal::after    { transition: none !important; }
+
+  /* Radar y puntos estáticos */
+  .mapa-radar-wrap::before  { animation: none !important; }
+  .seccion-trabaja::before  { animation: none !important; }
+
+  /* Chips y beneficios visibles de inmediato */
+  .mapa-marcador     { opacity: 1 !important; transform: none !important; transition: none !important; }
   .trabaja-beneficio { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+  /* Skeleton desactivado */
   .destino-card__img { animation: none !important; }
 }
