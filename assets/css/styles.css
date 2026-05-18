@@ -1,7 +1,7 @@
 /* =========================================
    EXPLORA MIAMI — styles.css
    Paleta tropical · Mobile-first
-   Fuentes: Abril Fatface + Nunito (Google)
+   Fuentes: Playfair Display + Inter (Google)
 ========================================= */
 
 /* ===== VARIABLES ===== */
@@ -120,8 +120,17 @@ html.lang-es .lang-en { display: none; }
   font-size: clamp(1.9rem, 4vw, 3rem);
   color: var(--texto-oscuro);
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   line-height: 1.15;
+}
+/* Línea decorativa tropical bajo cada título de sección */
+.seccion-titulo::after {
+  content: '';
+  display: block;
+  width: 56px; height: 3px;
+  margin: 0.55rem auto 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--turquesa), var(--coral));
 }
 
 .seccion-subtitulo {
@@ -361,8 +370,8 @@ html.lang-es .lang-en { display: none; }
 
 /* ===== SECCIÓN INTRO ===== */
 .seccion-intro {
-  background: linear-gradient(180deg, var(--blanco-arena) 0%, rgba(255,243,240,0.45) 100%);
-  padding: 5.5rem 1.5rem;
+  background: linear-gradient(180deg, var(--blanco-arena) 0%, rgba(227,244,255,0.35) 60%, rgba(255,243,240,0.30) 100%);
+  padding: 5.5rem 1.5rem 6rem;
 }
 
 .seccion-intro__contenedor { max-width: var(--max); margin: 0 auto; text-align: center; }
@@ -391,6 +400,7 @@ html.lang-es .lang-en { display: none; }
 .intro-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 16px 44px rgba(255, 107, 107, 0.16), 0 4px 12px rgba(0, 188, 212, 0.10);
+  border-color: rgba(0, 188, 212, 0.32);
 }
 .intro-card__icono  { font-size: 2.5rem; margin-bottom: 1rem; }
 .intro-card__titulo { font-family: var(--fuente-titulo); font-style: italic; font-weight: 400; font-size: 1.25rem; margin-bottom: 0.5rem; }
