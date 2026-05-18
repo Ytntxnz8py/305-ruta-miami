@@ -706,3 +706,306 @@ html.lang-es .lang-en { display: none; }
 }
 .footer__inferior a { opacity: 0.6; transition: opacity 0.2s; }
 .footer__inferior a:hover { opacity: 1; }
+
+/* ===================================================
+   MODAL DE DESTINO — pantalla completa
+   Se abre al hacer clic en una tarjeta de destino
+=================================================== */
+
+/* Contenedor principal: overlay fijo sobre toda la pantalla */
+.modal-destino {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;      /* Entra desde abajo en móvil */
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.32s ease;
+}
+@media (min-width: 640px) {
+  .modal-destino { align-items: center; } /* Centrado vertical en desktop */
+}
+
+/* Clase .abierto activa el modal */
+.modal-destino.abierto {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Fondo oscuro semitransparente */
+.modal-fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 30, 40, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+/* Panel blanco del modal */
+.modal-panel {
+  position: relative;
+  z-index: 1;
+  background-color: #fff;
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 900px;
+  max-height: 92vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: translateY(60px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.26, 0.64, 1);
+  /* Scrollbar discreta */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,188,212,0.3) transparent;
+}
+@media (min-width: 640px) {
+  .modal-panel {
+    border-radius: 24px;
+    max-height: 88vh;
+    margin: 1rem;
+  }
+}
+.modal-destino.abierto .modal-panel { transform: translateY(0); }
+
+/* Botón cerrar (X) fijo en la esquina superior derecha del panel */
+.modal-cerrar {
+  position: sticky;
+  top: 0.75rem;
+  float: right;
+  margin: 0.75rem 0.75rem 0 0;
+  z-index: 10;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  font-size: 1rem;
+  color: var(--texto-oscuro);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background-color 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.modal-cerrar:hover { background: var(--coral); color: #fff; transform: rotate(90deg); }
+
+/* ---- Galería de fotos ---- */
+.modal-galeria { width: 100%; overflow: hidden; }
+
+/* Grid: foto grande izquierda + dos pequeñas derecha */
+.modal-galeria-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  height: 320px;
+  gap: 3px;
+}
+@media (max-width: 540px) { .modal-galeria-grid { height: 220px; } }
+
+.modal-galeria-main {
+  grid-row: 1 / 3;    /* ocupa las dos filas */
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.modal-galeria-lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.modal-galeria-lateral img {
+  width: 100%; flex: 1;
+  object-fit: cover;
+}
+
+/* Esquinas redondeadas solo en la parte superior del modal */
+.modal-galeria-grid img:first-child    { border-radius: 24px 0 0 0; }
+.modal-galeria-lateral img:last-child  { border-radius: 0 0 0 0; }
+@media (min-width: 640px) {
+  .modal-galeria-grid img:first-child   { border-radius: 24px 0 0 0; }
+  .modal-galeria-lateral img:first-child{ border-radius: 0 24px 0 0; }
+}
+
+.modal-galeria-simple img { width: 100%; height: 280px; object-fit: cover; }
+
+/* ---- Cuerpo del modal ---- */
+.modal-cuerpo {
+  padding: 2rem 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+@media (max-width: 540px) { .modal-cuerpo { padding: 1.5rem 1.25rem 2.5rem; } }
+
+/* ---- Encabezado: badges + título + texto ---- */
+.modal-encabezado { display: flex; flex-direction: column; gap: 0.85rem; }
+
+.modal-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.modal-badge {
+  display: inline-block;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.85rem;
+  border-radius: 50px;
+}
+.modal-badge--mar      { background: rgba(0,188,212,0.12); color: #00838f; }
+.modal-badge--tierra   { background: rgba(124,179,66,0.12); color: #558B2F; }
+.modal-badge--dif      { background: rgba(255,255,255,0.8); border: 1px solid #e0e8ee; color: var(--texto-medio); }
+.modal-badge--facil    { color: #388E3C; border-color: rgba(56,142,60,0.25); background: rgba(56,142,60,0.08); }
+.modal-badge--moderado { color: #F57C00; border-color: rgba(245,124,0,0.25); background: rgba(245,124,0,0.08); }
+.modal-badge--dificil  { color: var(--coral); border-color: rgba(255,107,107,0.25); background: rgba(255,107,107,0.08); }
+
+/* Título del modal en Playfair italic */
+.modal-nombre {
+  font-family: var(--fuente-titulo);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--texto-oscuro);
+  line-height: 1.15;
+}
+
+/* Descripción corta: texto más prominente */
+.modal-desc-corta {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--texto-medio);
+  line-height: 1.6;
+}
+
+/* Descripción larga: texto narrativo completo */
+.modal-desc-larga {
+  font-size: 0.95rem;
+  color: var(--texto-medio);
+  line-height: 1.75;
+}
+
+/* ---- Datos prácticos ---- */
+.modal-datos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 640px) { .modal-datos-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.modal-dato {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background: var(--blanco-arena);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(0,188,212,0.10);
+}
+
+.modal-dato__icono { font-size: 1.25rem; line-height: 1; flex-shrink: 0; }
+
+.modal-dato strong {
+  display: block;
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--texto-suave);
+  margin-bottom: 0.2rem;
+}
+.modal-dato span, .modal-dato a {
+  font-size: 0.88rem; color: var(--texto-oscuro); font-weight: 600;
+}
+.modal-dato a { color: var(--turquesa); }
+.modal-dato a:hover { text-decoration: underline; }
+
+/* ---- Cómo llegar ---- */
+.modal-llegar { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.modal-llegar-texto {
+  font-size: 0.93rem;
+  color: var(--texto-medio);
+  line-height: 1.75;
+  background: linear-gradient(135deg, rgba(0,188,212,0.06), rgba(0,188,212,0.02));
+  border-left: 3px solid var(--turquesa);
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.25rem;
+}
+
+/* ---- Subtítulos de sección dentro del modal ---- */
+.modal-subtitulo {
+  font-family: var(--fuente-titulo);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--texto-oscuro);
+  margin-bottom: 0.75rem;
+}
+
+/* ---- Mapa embed ---- */
+.modal-mapa-wrap { display: flex; flex-direction: column; }
+
+.modal-mapa-iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+@media (min-width: 640px) { .modal-mapa-iframe { height: 360px; } }
+
+/* ---- Reseñas de visitantes ---- */
+.modal-resenas-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modal-resena {
+  background: linear-gradient(145deg, #fff, var(--blanco-arena));
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(0,188,212,0.10);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.modal-resena__header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.modal-resena__avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(0,188,212,0.25);
+  flex-shrink: 0;
+}
+
+.modal-resena__nombre {
+  font-size: 0.9rem; font-weight: 700;
+  color: var(--texto-oscuro);
+  display: block;
+}
+.modal-resena__fecha {
+  font-size: 0.78rem; color: var(--texto-suave);
+  display: block;
+}
+
+.modal-resena__estrellas {
+  margin-left: auto;
+  display: flex; gap: 2px;
+}
+.modal-estrella       { font-size: 1rem; color: #e0e0e0; }
+.modal-estrella--llena{ color: var(--mostaza); }
+
+.modal-resena__texto {
+  font-size: 0.9rem;
+  color: var(--texto-medio);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* Cursor pointer en tarjetas clickeables */
+.destino-card { cursor: pointer; }

@@ -374,6 +374,55 @@
     </div>
   </footer>
 
+  <!-- ===== MODAL DE DESTINO — pantalla completa ===== -->
+  <div id="destinoModal" class="modal-destino" role="dialog" aria-modal="true" aria-labelledby="modalNombreH" style="display:none">
+    <!-- Fondo oscuro: clic cierra el modal -->
+    <div class="modal-fondo" id="modalFondo"></div>
+
+    <!-- Panel principal del modal -->
+    <div class="modal-panel">
+
+      <!-- Botón cerrar -->
+      <button class="modal-cerrar" id="modalCerrar" aria-label="Cerrar modal">✕</button>
+
+      <!-- Galería de fotos -->
+      <div class="modal-galeria" id="modalGaleria"></div>
+
+      <!-- Cuerpo scrolleable -->
+      <div class="modal-cuerpo">
+
+        <!-- Encabezado: badges, título y descripciones -->
+        <div class="modal-encabezado">
+          <div class="modal-badges" id="modalBadges"></div>
+          <h2 class="modal-nombre" id="modalNombreH"></h2>
+          <p class="modal-desc-corta" id="modalDescCorta"></p>
+          <p class="modal-desc-larga" id="modalDescLarga"></p>
+        </div>
+
+        <!-- Datos prácticos: precio, horario, dificultad, GPS -->
+        <div class="modal-datos-grid" id="modalDatosGrid"></div>
+
+        <!-- Cómo llegar -->
+        <div class="modal-llegar" id="modalLlegar"></div>
+
+        <!-- Mapa Google Maps embed del lugar exacto -->
+        <div class="modal-mapa-wrap">
+          <h3 class="modal-subtitulo lang-es">Ubicación</h3>
+          <h3 class="modal-subtitulo lang-en">Location</h3>
+          <iframe id="modalMapaIframe" class="modal-mapa-iframe"
+            loading="lazy" allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa del destino">
+          </iframe>
+        </div>
+
+        <!-- Reseñas de visitantes -->
+        <div id="modalResenas"></div>
+
+      </div><!-- /modal-cuerpo -->
+    </div><!-- /modal-panel -->
+  </div><!-- /destinoModal -->
+
   <!-- Scripts: i18n primero, luego main -->
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
