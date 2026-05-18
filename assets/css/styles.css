@@ -978,9 +978,8 @@ html.lang-es .lang-en { display: none; }
 .modal-resena__avatar {
   width: 44px; height: 44px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(0,188,212,0.25);
   flex-shrink: 0;
+  /* Sobreescrito más abajo para avatares con inicial */
 }
 
 .modal-resena__nombre {
@@ -1009,3 +1008,154 @@ html.lang-es .lang-en { display: none; }
 
 /* Cursor pointer en tarjetas clickeables */
 .destino-card { cursor: pointer; }
+
+/* ===== GALERÍA CON NAVEGACIÓN PREV/NEXT ===== */
+.modal-galeria-principal {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+  background: #000;
+}
+@media (min-width: 640px) { .modal-galeria-principal { height: 420px; } }
+
+.modal-galeria-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.25s ease;
+}
+
+.modal-galeria-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.48);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 42px; height: 42px;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+  transition: background 0.2s;
+}
+.modal-galeria-nav:hover { background: rgba(0,0,0,0.72); }
+.modal-galeria-nav--prev { left: 10px; }
+.modal-galeria-nav--next { right: 10px; }
+
+.modal-galeria-contador {
+  position: absolute;
+  bottom: 10px; right: 14px;
+  background: rgba(0,0,0,0.52);
+  color: #fff;
+  font-size: 0.78rem; font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Tira de miniaturas */
+.modal-thumbnails {
+  display: flex;
+  gap: 6px;
+  padding: 8px 0 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.modal-thumbnails::-webkit-scrollbar { display: none; }
+
+.modal-thumb {
+  flex-shrink: 0;
+  width: 72px; height: 52px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2.5px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  transition: border-color 0.2s, opacity 0.2s;
+  opacity: 0.65;
+}
+.modal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.modal-thumb--activa { border-color: var(--turquesa); opacity: 1; }
+.modal-thumb:hover { opacity: 0.9; }
+
+/* ===== BOTONES DE ACCIÓN DEL MODAL ===== */
+.modal-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.modal-accion-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.87rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.18s, transform 0.18s;
+  white-space: nowrap;
+}
+.modal-accion-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.modal-accion-btn--google {
+  background: #4CAF50;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(76,175,80,0.30);
+}
+.modal-accion-btn--apple {
+  background: #1C1C1E;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.20);
+}
+.modal-accion-btn--resenas {
+  background: var(--coral);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(255,107,107,0.30);
+}
+.modal-accion-btn--web {
+  background: transparent;
+  color: var(--turquesa);
+  border: 2px solid var(--turquesa);
+}
+
+/* ===== BADGE MEJOR ÉPOCA ===== */
+.modal-badge--epoca {
+  background: rgba(255,179,0,0.12);
+  color: #9a6700;
+  border: 1px solid rgba(255,179,0,0.35);
+  font-size: 0.72rem;
+}
+
+/* ===== DISCLAIMER DEL MODAL ===== */
+.modal-disclaimer {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  background: rgba(255,107,107,0.06);
+  border: 1px solid rgba(255,107,107,0.18);
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  margin-top: 1.25rem;
+  line-height: 1.5;
+}
+
+/* Avatar de reseña con inicial (círculo de color en lugar de foto) */
+.modal-resena__avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1rem;
+  color: #fff;
+  flex-shrink: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+}

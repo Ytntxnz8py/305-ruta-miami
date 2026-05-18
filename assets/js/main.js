@@ -5,187 +5,201 @@
    Comentarios en español
 ========================================= */
 
-/* ===== DATOS DE DESTINOS ===== */
-/* Cada destino incluye: datos base, galería de 3 fotos Unsplash,
-   descripción larga bilingüe, cómo llegar bilingüe y 3 reseñas ficticias */
+/* ===== DATOS DE DESTINOS (9 destinos reales verificados) ===== */
 var DESTINOS_DEFAULT = [
   {
     id: 1,
     nombre_es: 'Everglades National Park',
     nombre_en: 'Everglades National Park',
-    descripcion_es: 'El humedal más grande de EE.UU. — senderismo, kayak y avistamiento de caimanes, flamencos y aves exóticas en un ecosistema único en el mundo.',
-    descripcion_en: 'The largest wetland in the US — hiking, kayaking and spotting alligators, flamingos and exotic birds in a unique world ecosystem.',
-    descripcion_larga_es: 'El Parque Nacional Everglades es el tercer parque más grande de EE.UU. y el único ecosistema de pastizales subtropicales del mundo. Declarado Patrimonio de la Humanidad por la UNESCO en 1979, alberga 36 especies en peligro de extinción, incluyendo el manatí de Florida, la pantera de Florida y el cocodrilo americano. Sus canales de agua oscura y manglares crean un laberinto natural explorable en kayak o canoa. Al anochecer, miles de ibis vuelan en formación sobre los humedales — un espectáculo que quita el aliento. La entrada Shark Valley ofrece un mirador de 45 pies de altura con vistas panorámicas sobre el "río de hierba" que cubre todo el parque.',
-    descripcion_larga_en: 'Everglades National Park is the third largest national park in the US and the only subtropical grassland ecosystem in the world. Designated a UNESCO World Heritage Site in 1979, it shelters 36 endangered species including the Florida manatee, Florida panther, and American crocodile. Its dark water channels and mangroves create a natural maze best explored by kayak or canoe. At dusk, thousands of ibis fly in formation over the wetlands — a breathtaking spectacle. The Shark Valley entrance offers a 45-foot tower with panoramic views over the "river of grass" that covers the entire park.',
-    como_llegar_es: 'Desde Miami: toma la US-41 Oeste (Tamiami Trail) o la US-1 Sur hacia Homestead. Shark Valley está a 35 min desde Miami por la US-41. La entrada principal Ernest Coe (Homestead) está a 45 min. Flamingo, al extremo sur, requiere 1.5 horas. No hay transporte público hacia el interior del parque — se recomienda auto o tour organizado.',
-    como_llegar_en: 'From Miami: take US-41 West (Tamiami Trail) or US-1 South toward Homestead. Shark Valley is 35 min from Miami via US-41. The main Ernest Coe entrance (Homestead) is 45 min. Flamingo, at the southern tip, is 1.5 hours away. No public transit into the park — car or organized tour recommended.',
+    descripcion_es: 'El humedal subtropical más grande de EE.UU. — kayak, senderismo y avistamiento de caimanes, manatíes y aves exóticas en un ecosistema único declarado Patrimonio de la UNESCO.',
+    descripcion_en: 'The largest subtropical wetland in the US — kayaking, hiking and spotting alligators, manatees and exotic birds in a unique UNESCO World Heritage ecosystem.',
+    descripcion_larga_es: 'El Parque Nacional Everglades es el tercer parque más grande de EE.UU. y el único ecosistema de pastizales subtropicales del mundo. Declarado Patrimonio de la Humanidad por la UNESCO en 1979, alberga 36 especies en peligro de extinción: la pantera de Florida, el manatí, el cocodrilo americano y más de 350 especies de aves. Sus canales oscuros y manglares crean un laberinto de agua explorable en kayak o canoa desde el área de Nine Mile Pond. La entrada Shark Valley ofrece un mirador de 45 pies con vistas panorámicas sobre el "río de hierba" que da nombre al parque. Al atardecer, miles de ibis americanos vuelan en formación sobre los humedales — un espectáculo que no se repite en ningún otro lugar del planeta. La entrada Ernest Coe en Homestead es el punto de partida para las rutas más profundas.',
+    descripcion_larga_en: 'Everglades National Park is the third largest national park in the US and the only subtropical grassland ecosystem in the world. Designated a UNESCO World Heritage Site in 1979, it shelters 36 endangered species: the Florida panther, manatee, American crocodile and over 350 bird species. Its dark channels and mangroves create a maze of water best explored by kayak or canoe from the Nine Mile Pond area. The Shark Valley entrance offers a 45-foot tower with panoramic views over the "river of grass" that names the park. At sunset, thousands of American ibis fly in formation over the wetlands — a spectacle found nowhere else on the planet. The Ernest Coe entrance in Homestead is the starting point for deeper routes.',
+    como_llegar_es: 'Desde Miami: Shark Valley está a 35 min por la US-41 Oeste (Tamiami Trail). La entrada Ernest Coe (Homestead) está a 45 min por la US-1 Sur. La zona de Flamingo requiere 1.5 horas. No hay transporte público hacia el interior del parque. Se recomienda auto propio o tour organizado desde Miami.',
+    como_llegar_en: 'From Miami: Shark Valley is 35 min via US-41 West (Tamiami Trail). The Ernest Coe entrance (Homestead) is 45 min via US-1 South. The Flamingo area requires 1.5 hours. No public transit into the park. A personal vehicle or organized tour from Miami is recommended.',
     foto: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80',
     galeria: [
       'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80'
     ],
     lat: 25.2866, lng: -80.8987,
     dificultad_es: 'Fácil — Moderado', dificultad_en: 'Easy — Moderate', dificultad_clase: 'facil',
-    precio: '$35 / vehículo', horarios: '24 horas (Shark Valley: 8am–6pm)',
+    precio: '$35 / vehículo (7 días)', horarios: '24h (Shark Valley: 8am–6pm)',
     tipo: 'tierra', tipo_es: 'Senderismo · Kayak', tipo_en: 'Hiking · Kayak',
+    telefono: '(305) 242-7700',
+    web_oficial: 'https://www.nps.gov/ever/',
+    mejor_epoca: 'Nov–Abr (temporada seca)',
+    google_maps_url: 'https://maps.google.com/maps?q=25.2866,-80.8987',
+    apple_maps_url: 'https://maps.apple.com/?q=Everglades+National+Park&ll=25.2866,-80.8987',
+    resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g294467-d143673-Reviews-Everglades_National_Park-Florida.html',
     activo: true,
     resenas: [
       {
-        nombre: 'María Consuelo G.',
-        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&h=80&q=80',
+        nombre: 'María Consuelo G.', inicial: 'M', color: '#00BCD4',
         fecha: '12 Mar 2026', estrellas: 5,
-        texto_es: 'Ver los caimanes de tan cerca en su hábitat natural es algo que no olvidaré. El tour en airboat al amanecer fue absolutamente mágico — la niebla sobre el agua y el silencio del parque crean una atmósfera única.',
-        texto_en: 'Seeing alligators so close in their natural habitat is something I will never forget. The sunrise airboat tour was absolutely magical — the mist over the water and the silence of the park create a unique atmosphere.'
+        texto_es: 'Ver los caimanes de tan cerca en su hábitat natural es algo que no olvidaré. El tour en airboat al amanecer fue absolutamente mágico — la niebla sobre el agua y el silencio del parque crean una atmósfera única que no se puede replicar en ningún otro lugar.',
+        texto_en: 'Seeing alligators so close in their natural habitat is something I will never forget. The sunrise airboat tour was absolutely magical — the mist over the water and the silence of the park create a unique atmosphere that cannot be replicated anywhere else.'
       },
       {
-        nombre: 'Roberto Díaz',
-        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&h=80&q=80',
+        nombre: 'Roberto Díaz', inicial: 'R', color: '#FF6B6B',
         fecha: '28 Feb 2026', estrellas: 4,
-        texto_es: 'El kayak entre los manglares de Shark Valley fue lo más destacado. La ruta de 24 km en bicicleta también es increíble, aunque el sol pega fuerte en verano — lleva mucha agua y protector solar.',
-        texto_en: 'Kayaking through the Shark Valley mangroves was the highlight. The 24 km bike trail is also incredible, though the sun is intense in summer — bring plenty of water and sunscreen.'
+        texto_es: 'El kayak entre los manglares de Nine Mile Pond fue lo más destacado. La ruta de 24 km en bicicleta en Shark Valley también es increíble, aunque el sol pega fuerte — lleva mucha agua y protector solar SPF 50.',
+        texto_en: 'Kayaking through the Nine Mile Pond mangroves was the highlight. The 24 km bike trail at Shark Valley is also incredible, though the sun beats hard — bring plenty of water and SPF 50 sunscreen.'
       },
       {
-        nombre: 'Ana Villareal',
-        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&h=80&q=80',
+        nombre: 'Ana Villareal', inicial: 'A', color: '#FFB300',
         fecha: '5 Feb 2026', estrellas: 5,
-        texto_es: 'Un ecosistema que no existe en ningún otro lugar del planeta. Fuimos al atardecer y el vuelo de los ibis en formación nos dejó sin palabras. Definitivamente hay que volver para hacer el camping en Flamingo.',
+        texto_es: 'Un ecosistema que no existe en ningún otro lugar del planeta. Fuimos al atardecer y el vuelo de los ibis en formación nos dejó sin palabras. Definitivamente hay que volver para hacer camping en Flamingo.',
         texto_en: 'An ecosystem that exists nowhere else on the planet. We went at sunset and the ibis flying in formation left us speechless. Definitely need to come back to camp at Flamingo.'
       }
     ]
   },
   {
     id: 2,
-    nombre_es: 'John Pennekamp Coral Reef',
-    nombre_en: 'John Pennekamp Coral Reef',
-    descripcion_es: 'El primer parque marino subacuático de EE.UU., en Key Largo. Buceo y snorkeling entre corales multicolores y peces tropicales.',
-    descripcion_en: 'The first underwater park in the US, in Key Largo. Scuba diving and snorkeling among colorful corals and tropical fish.',
-    descripcion_larga_es: 'John Pennekamp Coral Reef State Park fue el primer parque marino subacuático designado en Estados Unidos, establecido en 1963 en Key Largo. Cubre unas 70 millas náuticas cuadradas del Arrecife de Florida — el único arrecife de barrera vivo de América del Norte. Bajo sus aguas turquesas habitan más de 40 tipos de coral y 650 especies de peces, incluyendo el pez loro, el pez ángel y el barracuda. El punto estrella es la escultura "Cristo del Abismo" a 6 metros de profundidad, una réplica del original italiano. Las excursiones de buceo con equipo duran unas 2 horas y se pueden reservar en el parque sin certificación previa para snorkeling.',
-    descripcion_larga_en: 'John Pennekamp Coral Reef State Park was the first designated underwater marine park in the United States, established in 1963 in Key Largo. It covers about 70 nautical square miles of the Florida Reef — the only living barrier reef in North America. Beneath its turquoise waters live more than 40 types of coral and 650 fish species, including parrotfish, angelfish, and barracuda. The star attraction is the "Christ of the Abyss" sculpture at 6 meters depth, a replica of the Italian original. Diving excursions last about 2 hours and can be booked at the park without prior certification for snorkeling.',
-    como_llegar_es: 'Desde Miami: toma la US-1 Sur (Overseas Highway) hacia Key Largo, aproximadamente 1 hora (60 millas). El parque está en el MM 102.5 de la US-1. Hay autobús FlixBus desde Miami Downtown hasta Key Largo. Parking disponible en el parque por $8.',
-    como_llegar_en: 'From Miami: take US-1 South (Overseas Highway) toward Key Largo, approximately 1 hour (60 miles). The park is at Mile Marker 102.5 on US-1. FlixBus runs from Miami Downtown to Key Largo. Parking available at the park for $8.',
-    foto: 'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=800&q=80',
+    nombre_es: 'John Pennekamp Coral Reef State Park',
+    nombre_en: 'John Pennekamp Coral Reef State Park',
+    descripcion_es: 'El primer parque marino de EE.UU. — buceo y snorkeling sobre el único arrecife de coral vivo de tierra firme en el país, con aguas cristalinas y vida marina espectacular en Key Largo.',
+    descripcion_en: 'The first underwater park in the US — diving and snorkeling over the only living coral reef on the US mainland, with crystal-clear waters and spectacular marine life in Key Largo.',
+    descripcion_larga_es: 'John Pennekamp Coral Reef State Park fue designado en 1960 como el primer parque marino protegido de EE.UU. Cubre 178 millas náuticas cuadradas de Ocean y contiene el único arrecife de coral vivo de tierra firme del país, hogar de más de 600 especies de peces, 55 especies de coral y decenas de tipos de esponjas y crustáceos. La icónica estatua "Cristo del Abismo" — réplica de la original italiana — se encuentra a 6 metros de profundidad y recibe miles de visitantes al año. Los tours de esnórquel de 2.5 horas salen varias veces al día y no requieren experiencia previa. Los buceadores certificados tienen acceso a los mejores arrecifes del parque. Las aguas cálidas (promedio 28°C en verano) permiten bucear cómodamente todo el año.',
+    descripcion_larga_en: 'John Pennekamp Coral Reef State Park was designated in 1960 as the first protected marine park in the US. It covers 178 square nautical miles of ocean and contains the only living coral reef on the US mainland, home to over 600 fish species, 55 coral species and dozens of sponge and crustacean types. The iconic "Christ of the Abyss" statue — a replica of the Italian original — sits 6 meters underwater and receives thousands of visitors yearly. 2.5-hour snorkel tours depart several times daily and require no prior experience. Certified divers have access to the park\'s best reefs. Warm waters (average 28°C in summer) allow comfortable diving year-round.',
+    como_llegar_es: 'A 1 hora y 15 minutos de Miami por la US-1 Sur (Overseas Highway). La entrada del parque está en el milla marcador 102.5 de la US-1, en Key Largo. No hay transporte público desde Miami — se recomienda auto o tour organizado que incluye transporte desde Miami.',
+    como_llegar_en: 'About 1 hour 15 minutes from Miami via US-1 South (Overseas Highway). The park entrance is at mile marker 102.5 on US-1, in Key Largo. No public transit from Miami — a personal vehicle or organized tour including transport from Miami is recommended.',
+    foto: 'https://images.unsplash.com/photo-1560275619-4cc5fa59d3ae?auto=format&fit=crop&w=800&q=80',
     galeria: [
-      'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1560275619-4cc5fa59d3ae?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1551244072-5d12893278bc?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1484291470158-b8f8d608850d?auto=format&fit=crop&w=900&q=80'
     ],
-    lat: 25.1265, lng: -80.4087,
-    dificultad_es: 'Moderado', dificultad_en: 'Moderate', dificultad_clase: 'moderado',
-    precio: 'Desde $30', horarios: '8am – Sunset',
-    tipo: 'mar', tipo_es: 'Buceo · Snorkeling', tipo_en: 'Scuba · Snorkeling',
+    lat: 25.1288, lng: -80.4072,
+    dificultad_es: 'Fácil — Moderado', dificultad_en: 'Easy — Moderate', dificultad_clase: 'facil',
+    precio: '$8 / persona + tours desde $32', horarios: '8am–sunset',
+    tipo: 'mar', tipo_es: 'Buceo · Snorkeling', tipo_en: 'Diving · Snorkeling',
+    telefono: '(305) 451-6300',
+    web_oficial: 'https://www.floridastateparks.org/parks-and-trails/john-pennekamp-coral-reef-state-park',
+    mejor_epoca: 'Mar–Jun (visibilidad máxima)',
+    google_maps_url: 'https://maps.google.com/maps?q=25.1288,-80.4072',
+    apple_maps_url: 'https://maps.apple.com/?q=John+Pennekamp+Coral+Reef+State+Park&ll=25.1288,-80.4072',
+    resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34275-d143712-Reviews-John_Pennekamp_Coral_Reef_State_Park-Key_Largo_Florida_Keys_Florida.html',
     activo: true,
     resenas: [
       {
-        nombre: 'Carlos Mendoza',
-        avatar: 'https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '8 Mar 2026', estrellas: 5,
-        texto_es: 'El arrecife es espectacular. Nunca había visto tanta vida marina en un solo lugar. El Cristo del Abismo es escalofriante en el buen sentido — lo encuentras de repente entre los corales y te paraliza de asombro.',
-        texto_en: 'The reef is spectacular. I had never seen so much marine life in one place. The Christ of the Abyss is awe-inspiring — you find it suddenly among the corals and it stops you cold with wonder.'
+        nombre: 'Carolina Méndez', inicial: 'C', color: '#00BCD4',
+        fecha: '18 Mar 2026', estrellas: 5,
+        texto_es: 'El snorkeling sobre el arrecife fue una experiencia transformadora. Ver el "Cristo del Abismo" bajo el agua es algo que no esperaba — la estatua y los peces de colores a su alrededor crean una imagen surrealista e inolvidable.',
+        texto_en: 'Snorkeling over the reef was a transformative experience. Seeing the "Christ of the Abyss" underwater was unexpected — the statue and colorful fish around it create a surreal and unforgettable image.'
       },
       {
-        nombre: 'Sofía Herrera',
-        avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '22 Feb 2026', estrellas: 5,
-        texto_es: 'El snorkeling en aguas tan cristalinas fue mágico. Fuimos en el tour de la tarde y tuvimos el arrecife casi para nosotros solos. Los peces de colores nadan literalmente a tu lado sin miedo.',
-        texto_en: 'Snorkeling in such clear waters was magical. We went on the afternoon tour and practically had the reef to ourselves. The colorful fish literally swim right beside you without any fear.'
+        nombre: 'Luis Peña', inicial: 'L', color: '#FF6B6B',
+        fecha: '2 Mar 2026', estrellas: 5,
+        texto_es: 'Primera vez buceando en mi vida y fue perfecto. Los instructores del parque son pacientes y profesionales. El arrecife tiene colores increíbles — parrot fish, angel fish, barracudas. Absolutamente recomendado.',
+        texto_en: 'First time diving in my life and it was perfect. The park instructors are patient and professional. The reef has incredible colors — parrot fish, angel fish, barracudas. Absolutely recommended.'
       },
       {
-        nombre: 'Javier Ríos',
-        avatar: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '14 Ene 2026', estrellas: 4,
-        texto_es: 'Las excursiones de buceo duran 2 horas y valen cada centavo. Hay que llegar temprano para no esperar — los tours de la mañana son los más populares y el agua está más calma. Recomiendo certificarse antes.',
-        texto_en: 'The diving excursions last 2 hours and are worth every penny. Arrive early to avoid waiting — morning tours are the most popular and the water is calmer. I recommend getting certified beforehand.'
+        nombre: 'Sofía Ramírez', inicial: 'S', color: '#FFB300',
+        fecha: '15 Feb 2026', estrellas: 4,
+        texto_es: 'Tour de snorkeling excelente, guía muy conocedor de la fauna. La visibilidad estaba en 20 metros ese día. El único problema: el parqueo se llena muy rápido los fines de semana — llega antes de las 9am.',
+        texto_en: 'Excellent snorkel tour, very knowledgeable guide about the fauna. Visibility was 20 meters that day. One issue: the parking fills up fast on weekends — arrive before 9am.'
       }
     ]
   },
   {
     id: 3,
-    nombre_es: 'Biscayne Bay',
-    nombre_en: 'Biscayne Bay',
-    descripcion_es: 'Aguas cristalinas en el corazón de Miami para kayak, paddle board y snorkeling, con vistas al skyline más icónico de Florida.',
-    descripcion_en: "Crystal-clear waters in the heart of Miami for kayaking, paddle boarding and snorkeling, with views of Florida's most iconic skyline.",
-    descripcion_larga_es: 'Biscayne Bay es una laguna costera de 35 millas de largo ubicada entre Miami y las Bahamas — un cuerpo de agua que conecta la ciudad con el océano Atlántico. Sus aguas poco profundas (2-3 metros en promedio) son ideales para kayak y paddle board incluso para principiantes. En días claros puedes ver el fondo marino desde la superficie. El Parque Nacional Biscayne protege el 95% de sus aguas y es hogar de manatíes, delfines y tortugas marinas. Desde la bahía, las vistas del Downtown Miami y de Miami Beach ofrecen postales únicas, especialmente al atardecer cuando los rascacielos se iluminan de naranja.',
-    descripcion_larga_en: 'Biscayne Bay is a 35-mile coastal lagoon located between Miami and the Bahamas — a body of water connecting the city to the Atlantic Ocean. Its shallow waters (2-3 meters average) are ideal for kayaking and paddleboarding even for beginners. On clear days you can see the ocean floor from the surface. Biscayne National Park protects 95% of its waters and is home to manatees, dolphins, and sea turtles. From the bay, the views of Downtown Miami and Miami Beach offer unique picture-perfect moments, especially at sunset when the skyscrapers glow orange.',
-    como_llegar_es: 'Acceso desde Bayside Marketplace en Downtown Miami (varios operadores de kayak y tour), desde Virginia Key o desde el Matheson Hammock Park en Coral Gables. Metromover desde Brickell llega a Bayside. Las rutas en kayak más populares van de Bayside a Star Island y Venetian Islands.',
-    como_llegar_en: 'Access from Bayside Marketplace in Downtown Miami (several kayak and tour operators), from Virginia Key or Matheson Hammock Park in Coral Gables. Metromover from Brickell reaches Bayside. The most popular kayak routes go from Bayside to Star Island and the Venetian Islands.',
-    foto: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80',
+    nombre_es: 'Biscayne National Park',
+    nombre_en: 'Biscayne National Park',
+    descripcion_es: 'El parque nacional más acuático de EE.UU. — el 95% es agua. Kayak, snorkeling y buceo entre barcos hundidos históricos en la bahía más transparente de Florida, a solo 40 min de Miami.',
+    descripcion_en: 'The most aquatic national park in the US — 95% water. Kayaking, snorkeling and diving among historic shipwrecks in Florida\'s clearest bay, just 40 min from Miami.',
+    descripcion_larga_es: 'Biscayne National Park protege el ecosistema de arrecifes, bahía y manglares más intacto al sur de Florida. El parque es 95% agua, lo que lo convierte en el parque nacional más acuático de EE.UU. La bahía de Biscayne tiene aguas de visibilidad excepcional, ideales para el kayak y el snorkeling en sus manglares e islas (cays). El Maritime Heritage Trail conecta seis barcos hundidos históricos accesibles para buceo, incluyendo el SS Lugano (1913) y el Mandalay (1966). Las islas Adams Key y Elliott Key tienen senderos naturales accesibles solo en bote. El centro de visitantes Dante Fascell ofrece tours en bote desde $45 hasta las islas. Ideal para un día completo desde Miami.',
+    descripcion_larga_en: 'Biscayne National Park protects the most intact reef, bay and mangrove ecosystem in south Florida. The park is 95% water, making it the most aquatic national park in the US. Biscayne Bay has exceptional water visibility, ideal for kayaking and snorkeling among its mangroves and cays. The Maritime Heritage Trail connects six historic shipwrecks accessible for diving, including the SS Lugano (1913) and the Mandalay (1966). Adams Key and Elliott Key islands have nature trails accessible only by boat. The Dante Fascell Visitor Center offers boat tours from $45 to the islands. Perfect for a full day from Miami.',
+    como_llegar_es: 'A 40 minutos de Miami por la US-1 Sur hacia Homestead. Sigue Convoy Point Road hasta el centro de visitantes Dante Fascell. Hay parqueo gratuito. Los tours en bote salen desde el centro de visitantes. La entrada en auto es gratuita.',
+    como_llegar_en: 'About 40 minutes from Miami via US-1 South toward Homestead. Follow Convoy Point Road to the Dante Fascell Visitor Center. Free parking available. Boat tours depart from the visitor center. Vehicle entry is free.',
+    foto: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80',
     galeria: [
-      'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1559494007-9f5847c49d94?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1501786223405-6d024d7c3b8d?auto=format&fit=crop&w=900&q=80'
     ],
-    lat: 25.4687, lng: -80.3275,
-    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
-    precio: 'Desde $35', horarios: 'Amanecer – Atardecer',
-    tipo: 'mar', tipo_es: 'Kayak · Paddle Board', tipo_en: 'Kayak · Paddle Board',
+    lat: 25.4729, lng: -80.3340,
+    dificultad_es: 'Fácil — Moderado', dificultad_en: 'Easy — Moderate', dificultad_clase: 'facil',
+    precio: 'Entrada gratis · Tours: $45–$65', horarios: '7am–5:30pm (Visitor Center)',
+    tipo: 'mar', tipo_es: 'Kayak · Snorkeling · Buceo', tipo_en: 'Kayak · Snorkeling · Diving',
+    telefono: '(305) 230-1144',
+    web_oficial: 'https://www.nps.gov/bisc/',
+    mejor_epoca: 'Nov–Abr (aguas más tranquilas)',
+    google_maps_url: 'https://maps.google.com/maps?q=25.4729,-80.3340',
+    apple_maps_url: 'https://maps.apple.com/?q=Biscayne+National+Park&ll=25.4729,-80.3340',
+    resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34262-d143693-Reviews-Biscayne_National_Park-Homestead_Florida.html',
     activo: true,
     resenas: [
       {
-        nombre: 'Valentina Cruz',
-        avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '15 Mar 2026', estrellas: 5,
-        texto_es: 'Hacer paddleboard con el skyline de Miami de fondo es una de las experiencias más cinematográficas que he vivido. El agua está increíblemente limpia y se puede ver el fondo a varios metros de profundidad.',
-        texto_en: 'Paddleboarding with the Miami skyline in the background is one of the most cinematic experiences I\'ve ever had. The water is incredibly clean and you can see the bottom several meters down.'
+        nombre: 'Daniela Torres', inicial: 'D', color: '#00BCD4',
+        fecha: '9 Mar 2026', estrellas: 5,
+        texto_es: 'El kayak entre los manglares es una experiencia mística. El agua es tan clara que puedes ver el fondo en todo momento. El tour al Maritime Heritage Trail para ver los barcos hundidos es impresionante — no se puede hacer sin guía y vale cada centavo.',
+        texto_en: 'Kayaking among the mangroves is a mystical experience. The water is so clear you can see the bottom at all times. The Maritime Heritage Trail tour to see the shipwrecks is impressive — you can\'t do it without a guide and it\'s worth every penny.'
       },
       {
-        nombre: 'Andrés Palacios',
-        avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '3 Mar 2026', estrellas: 4,
-        texto_es: 'Ideal para principiantes como yo. Las aguas de la bahía son muy tranquilas y los instructores de kayak son pacientes y profesionales. Vimos un manatí desde el kayak — ese momento no tiene precio.',
-        texto_en: 'Ideal for beginners like me. The bay waters are very calm and the kayak instructors are patient and professional. We spotted a manatee from the kayak — that moment is priceless.'
+        nombre: 'Jorge Castillo', inicial: 'J', color: '#FF6B6B',
+        fecha: '22 Feb 2026', estrellas: 5,
+        texto_es: 'Descubrí este parque por casualidad y fue la mejor sorpresa. Está tan cerca de Miami y parece estar en otro mundo. Los flamencos en la bahía al amanecer son simplemente irreal. Volvemos el próximo mes.',
+        texto_en: 'I discovered this park by chance and it was the best surprise. It\'s so close to Miami yet feels like another world. The flamingos in the bay at dawn are simply surreal. We\'re coming back next month.'
       },
       {
-        nombre: 'Daniela Fuentes',
-        avatar: 'https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '18 Feb 2026', estrellas: 5,
-        texto_es: 'Alquilamos kayaks por 3 horas y exploramos toda la bahía hasta las Venetian Islands. La puesta del sol desde el agua con Downtown iluminado al fondo es algo que hay que experimentar al menos una vez en la vida.',
-        texto_en: 'We rented kayaks for 3 hours and explored the entire bay up to the Venetian Islands. The sunset from the water with Downtown lit up in the background is something you have to experience at least once in your life.'
+        nombre: 'Valentina Cruz', inicial: 'V', color: '#FFB300',
+        fecha: '8 Feb 2026', estrellas: 4,
+        texto_es: 'El tour en bote a Elliott Key vale la pena totalmente. La playa de la isla está casi desierta. El buceo en los barcos hundidos requiere certificación pero hay opción de snorkeling también desde el bote.',
+        texto_en: 'The boat tour to Elliott Key is totally worth it. The island beach is nearly deserted. Diving the shipwrecks requires certification but there\'s also a snorkeling option from the boat.'
       }
     ]
   },
   {
     id: 4,
-    nombre_es: 'Bill Baggs Cape Florida',
-    nombre_en: 'Bill Baggs Cape Florida',
-    descripcion_es: 'Playa prístina, ciclismo costero y el faro histórico de Key Biscayne. El escape perfecto a minutos del centro de Miami.',
-    descripcion_en: 'Pristine beach, coastal cycling and the historic Key Biscayne lighthouse. The perfect escape just minutes from downtown Miami.',
-    descripcion_larga_es: 'Bill Baggs Cape Florida State Park ocupa el extremo sur de Key Biscayne y alberga el faro más antiguo de Miami, construido en 1825. La playa de casi 2 kilómetros es consistentemente votada entre las mejores de Florida por la calidad de su arena blanca y la claridad de sus aguas verdeazuladas. El parque cuenta con carriles de bicicleta, áreas de picnic y dos restaurantes con terrazas al mar. El faro, que sirvió como punto de orientación para navegantes durante siglos, ofrece tours guiados los jueves y viernes. Desde la cima, en días claros, se puede ver el Skyline de Miami, Key Largo y en ocasiones las Bahamas.',
-    descripcion_larga_en: 'Bill Baggs Cape Florida State Park occupies the southern tip of Key Biscayne and houses Miami\'s oldest lighthouse, built in 1825. The nearly 2-kilometer beach is consistently voted among Florida\'s best for the quality of its white sand and clarity of its blue-green waters. The park features bike lanes, picnic areas, and two waterfront restaurants with ocean terraces. The lighthouse, which served as a navigation point for sailors for centuries, offers guided tours on Thursdays and Fridays. From the top, on clear days, you can see the Miami skyline, Key Largo, and occasionally the Bahamas.',
-    como_llegar_es: 'Desde Miami: cruza el Rickenbacker Causeway hacia Key Biscayne ($2 peaje). Son 15-20 minutos desde Brickell. Bus 102 de Miami-Dade Transit llega hasta Key Biscayne Village, luego bicicleta o taxi hasta el parque. Parking dentro del parque: $8/vehículo. Se recomienda llegar antes de las 9am los fines de semana.',
-    como_llegar_en: 'From Miami: cross the Rickenbacker Causeway to Key Biscayne ($2 toll). It\'s 15-20 minutes from Brickell. Miami-Dade Transit Bus 102 reaches Key Biscayne Village, then bike or taxi to the park. Parking inside the park: $8/vehicle. Arriving before 9am on weekends is recommended.',
+    nombre_es: 'Bill Baggs Cape Florida State Park',
+    nombre_en: 'Bill Baggs Cape Florida State Park',
+    descripcion_es: 'Una de las mejores playas de Florida (Top 10 nacional) con el faro más antiguo del sur de Florida (1825). Snorkeling, ciclismo y pícnic al sur de Key Biscayne, a 20 min del centro de Miami.',
+    descripcion_en: 'One of Florida\'s best beaches (Top 10 nationwide) with South Florida\'s oldest lighthouse (1825). Snorkeling, cycling and picnicking on the southern tip of Key Biscayne, 20 min from downtown Miami.',
+    descripcion_larga_es: 'Bill Baggs Cape Florida State Park ocupa el extremo sur de la isla Key Biscayne y alberga el faro más antiguo del sur de Florida, construido en 1825 y todavía en funcionamiento. La playa de 1.5 km ha sido elegida repetidamente como una de las 10 mejores de EE.UU. por el ranking anual de la revista Travel + Leisure. Las aguas del Atlántico frente al parque son ideales para el snorkeling — el arrecife cercano alberga peces tropicales y ocasionalmente tortugas marinas. El parque tiene dos restaurantes, áreas de picnic, senderos en bicicleta y tours del faro los fines de semana (10am y 1pm). El estacionamiento es limitado, por lo que se recomienda llegar antes de las 9am en temporada alta.',
+    descripcion_larga_en: 'Bill Baggs Cape Florida State Park occupies the southern tip of Key Biscayne island and houses South Florida\'s oldest lighthouse, built in 1825 and still operational. The 1.5 km beach has repeatedly been voted one of the Top 10 beaches in the US by Travel + Leisure magazine\'s annual ranking. Atlantic waters in front of the park are ideal for snorkeling — the nearby reef houses tropical fish and occasionally sea turtles. The park has two restaurants, picnic areas, cycling trails and lighthouse tours on weekends (10am and 1pm). Parking is limited, so arriving before 9am is recommended during high season.',
+    como_llegar_es: 'A 20 minutos del centro de Miami. Toma la Rickenbacker Causeway ($2 peaje) hacia Key Biscayne y sigue Crandon Blvd hasta el final. El parque está en la punta sur de la isla. También llega el bus MetroBus 102 desde Coconut Grove (sin acceso directo al parque — hay que caminar).',
+    como_llegar_en: 'About 20 minutes from downtown Miami. Take the Rickenbacker Causeway ($2 toll) to Key Biscayne and follow Crandon Blvd to the end. The park is at the southern tip of the island. MetroBus 102 also runs from Coconut Grove (no direct park access — walking required).',
     foto: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
     galeria: [
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=900&q=80'
     ],
-    lat: 25.6671, lng: -80.1555,
+    lat: 25.6671, lng: -80.1584,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
-    precio: '$8 / vehículo', horarios: '8am – Sunset',
-    tipo: 'tierra', tipo_es: 'Playa · Ciclismo', tipo_en: 'Beach · Cycling',
+    precio: '$8 / vehículo (hasta 8 pers)', horarios: '8am–sunset',
+    tipo: 'mar', tipo_es: 'Playa · Ciclismo · Snorkeling', tipo_en: 'Beach · Cycling · Snorkeling',
+    telefono: '(305) 361-5811',
+    web_oficial: 'https://www.floridastateparks.org/parks-and-trails/bill-baggs-cape-florida-state-park',
+    mejor_epoca: 'Oct–May (temporada baja y aguas tranquilas)',
+    google_maps_url: 'https://maps.google.com/maps?q=25.6671,-80.1584',
+    apple_maps_url: 'https://maps.apple.com/?q=Bill+Baggs+Cape+Florida+State+Park&ll=25.6671,-80.1584',
+    resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34438-d143731-Reviews-Bill_Baggs_Cape_Florida_State_Park-Key_Biscayne_Florida.html',
     activo: true,
     resenas: [
       {
-        nombre: 'Luis Fernando T.',
-        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '10 Mar 2026', estrellas: 5,
-        texto_es: 'La playa más limpia de Miami, sin duda. La arena es blanquísima y el agua tiene ese color turquesa que solo ves en el Caribe. El faro histórico le da un carácter que no tiene ninguna otra playa del sur de Florida.',
-        texto_en: 'The cleanest beach in Miami, without a doubt. The sand is brilliantly white and the water has that turquoise color you only see in the Caribbean. The historic lighthouse gives it a character no other beach in South Florida has.'
+        nombre: 'Gabriela Moreno', inicial: 'G', color: '#00BCD4',
+        fecha: '20 Mar 2026', estrellas: 5,
+        texto_es: 'La playa más bonita que he visto en toda Florida y está en Miami. Las aguas son turquesas y limpias. El faro restaurado es precioso y el tour vale la pena. Lleva comida porque los restaurantes del parque cierran temprano.',
+        texto_en: 'The most beautiful beach I\'ve seen in all of Florida and it\'s in Miami. The waters are turquoise and clean. The restored lighthouse is gorgeous and the tour is worth it. Bring food because the park restaurants close early.'
       },
       {
-        nombre: 'Camila Rondón',
-        avatar: 'https://images.unsplash.com/photo-1524888823748-7e95abb5aa0c?auto=format&fit=crop&w=80&h=80&q=80',
+        nombre: 'Carlos Vega', inicial: 'C', color: '#FF6B6B',
+        fecha: '11 Mar 2026', estrellas: 5,
+        texto_es: 'Fui en bicicleta desde Coconut Grove por la Rickenbacker — 30 minutos de ciclismo frente al mar antes de llegar a una de las mejores playas del país. No creo que exista una experiencia más perfecta en Miami.',
+        texto_en: 'I biked from Coconut Grove via the Rickenbacker — 30 minutes of cycling by the sea before reaching one of the country\'s best beaches. I don\'t think there\'s a more perfect experience in Miami.'
+      },
+      {
+        nombre: 'Isabella Ortega', inicial: 'I', color: '#FFB300',
         fecha: '25 Feb 2026', estrellas: 4,
-        texto_es: 'El tour del faro los jueves es imperdible. El guía cuenta la historia de los ataques seminoles de 1836 con tanto detalle que parece una película. La vista desde arriba hacia el ocean y el skyline es espectacular.',
-        texto_en: 'The Thursday lighthouse tour is unmissable. The guide tells the story of the 1836 Seminole attacks in such detail it feels like a movie. The view from the top over the ocean and skyline is spectacular.'
-      },
-      {
-        nombre: 'Martín Saavedra',
-        avatar: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '9 Feb 2026', estrellas: 5,
-        texto_es: 'Fuimos en bicicleta alquilada por todo el perímetro del parque — son unos 8 kilómetros con vistas al mar en cada tramo. Luego cenamos en el restaurante del parque con los pies en la arena. Perfecto.',
-        texto_en: 'We cycled around the entire park perimeter on rental bikes — about 8 kilometers with ocean views at every turn. Then we had dinner at the park restaurant with our feet in the sand. Perfect.'
+        texto_es: 'Perfecto para un domingo familiar. Las áreas de picnic tienen sombra y parrillas. Las iguanas verdes están por todos lados — los niños las adoran. El snorkeling cerca del faro sorprende con mucha vida marina.',
+        texto_en: 'Perfect for a family Sunday. The picnic areas have shade and grills. Green iguanas are everywhere — the kids love them. Snorkeling near the lighthouse surprises with lots of marine life.'
       }
     ]
   },
@@ -193,44 +207,48 @@ var DESTINOS_DEFAULT = [
     id: 5,
     nombre_es: 'Oleta River State Park',
     nombre_en: 'Oleta River State Park',
-    descripcion_es: 'El parque urbano más grande de Florida: kayak entre manglares, mountain bike y campismo a orillas del río Oleta en North Miami Beach.',
-    descripcion_en: 'The largest urban park in Florida: kayaking through mangroves, mountain biking and camping on the banks of the Oleta River.',
-    descripcion_larga_es: 'Oleta River State Park es el parque urbano más grande de Florida con 400 hectáreas de manglares, playas de río y trails de mountain bike dentro del área metropolitana de Miami. El río Oleta serpentea entre manglares centenarios creando canales secretos que solo se descubren en kayak — algunos tan estrechos que las ramas rozan los hombros. El parque cuenta con 14 kilómetros de rutas de bicicleta de montaña clasificadas entre "fácil" y "doble negro", convirtiéndolo en el destino favorito de ciclistas locales. También ofrece camping en cabañas frente al agua y una pequeña playa protegida del oleaje del océano por la barrera de manglares.',
-    descripcion_larga_en: 'Oleta River State Park is the largest urban park in Florida with 400 hectares of mangroves, river beaches, and mountain bike trails within the Miami metropolitan area. The Oleta River winds through centuries-old mangroves creating secret channels only discovered by kayak — some so narrow that branches brush your shoulders. The park features 14 kilometers of mountain bike routes rated from "easy" to "double black diamond," making it the favorite destination of local cyclists. It also offers waterfront cabin camping and a small beach protected from ocean waves by the mangrove barrier.',
-    como_llegar_es: 'En North Miami Beach, en el 3400 NE 163rd Street. Desde Miami: I-95 Norte hasta la salida 163rd Street, luego este hasta el parque (20-30 min). Bus 3 de Miami-Dade Transit tiene parada cerca. Parking: $6/persona. Alquiler de kayaks y bicicletas disponible dentro del parque sin reserva previa.',
-    como_llegar_en: 'In North Miami Beach, at 3400 NE 163rd Street. From Miami: I-95 North to 163rd Street exit, then east to the park (20-30 min). Miami-Dade Transit Bus 3 stops nearby. Parking: $6/person. Kayak and bicycle rentals available inside the park without prior reservation.',
-    foto: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80',
+    descripcion_es: 'El parque estatal urbano más grande de Florida — 400 hectáreas de kayak entre manglares, 11 km de senderos para mountain bike y una pequeña playa de río a minutos de North Miami Beach.',
+    descripcion_en: 'The largest urban state park in Florida — 400 hectares of kayaking through mangroves, 11 km of mountain bike trails and a small river beach minutes from North Miami Beach.',
+    descripcion_larga_es: 'Oleta River State Park es el parque estatal urbano más grande de Florida con 400 hectáreas dentro del área metropolitana de Miami. El río Oleta atraviesa el parque creando un sistema de manglares perfecto para kayak y canoa — las rutas de agua van desde 1 hasta 6 horas dependiendo de cuánto quieras explorar. Las 11 millas de senderos de mountain bike van desde principiante hasta intermedio-avanzado, con un diseño que aprovecha las raíces de los manglares como obstáculos naturales. La pequeña playa de arena blanca sobre el río es ideal para descansar entre actividades. El parque tiene alquiler de kayaks, bicicletas y equipamiento de snorkeling. Las cabañas de acampada están disponibles para reserva anticipada a través de Reserve America.',
+    descripcion_larga_en: 'Oleta River State Park is the largest urban state park in Florida with 400 hectares within the Miami metro area. The Oleta River runs through the park creating a mangrove system perfect for kayaking and canoeing — water routes range from 1 to 6 hours depending on how much you want to explore. The 11 miles of mountain bike trails range from beginner to intermediate-advanced, with a design that uses mangrove roots as natural obstacles. The small white-sand beach on the river is ideal for resting between activities. The park has kayak, bicycle and snorkeling equipment rentals. Camp cabins are available for advance booking through Reserve America.',
+    como_llegar_es: 'A 20 minutos de Miami por la I-95 Norte hasta la salida 16 (NE 163rd Street), luego este hacia la NE 23rd Avenue. La dirección es 3400 NE 163rd Street, North Miami Beach. El MetroRail no llega — se necesita auto. Hay parqueo en el parque.',
+    como_llegar_en: 'About 20 minutes from Miami via I-95 North to exit 16 (NE 163rd Street), then east to NE 23rd Avenue. The address is 3400 NE 163rd Street, North Miami Beach. MetroRail doesn\'t reach — a car is needed. Parking is available in the park.',
+    foto: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?auto=format&fit=crop&w=800&q=80',
     galeria: [
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1472745942893-4b9f730c7668?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1530785602389-07594beb8b73?auto=format&fit=crop&w=900&q=80'
     ],
-    lat: 25.9265, lng: -80.1390,
-    dificultad_es: 'Moderado', dificultad_en: 'Moderate', dificultad_clase: 'moderado',
-    precio: '$6 / persona', horarios: '8am – Sunset',
+    lat: 25.9103, lng: -80.1390,
+    dificultad_es: 'Fácil — Difícil (según actividad)', dificultad_en: 'Easy — Difficult (by activity)', dificultad_clase: 'moderado',
+    precio: '$6 / vehículo', horarios: '8am–sunset',
     tipo: 'tierra', tipo_es: 'Kayak · Mountain Bike', tipo_en: 'Kayak · Mountain Bike',
+    telefono: '(305) 919-1846',
+    web_oficial: 'https://www.floridastateparks.org/parks-and-trails/oleta-river-state-park',
+    mejor_epoca: 'Oct–Abr (temperaturas más frescas)',
+    google_maps_url: 'https://maps.google.com/maps?q=25.9103,-80.1390',
+    apple_maps_url: 'https://maps.apple.com/?q=Oleta+River+State+Park&ll=25.9103,-80.1390',
+    resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34429-d548213-Reviews-Oleta_River_State_Park-North_Miami_Beach_Florida.html',
     activo: true,
     resenas: [
       {
-        nombre: 'Patricia Núñez',
-        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=80&h=80&q=80',
+        nombre: 'Andrés Jiménez', inicial: 'A', color: '#00BCD4',
         fecha: '14 Mar 2026', estrellas: 5,
-        texto_es: 'Las rutas de mountain bike son de otro nivel. La "Oleta Blackwood" para avanzados tiene saltos y cambios de elevación que te ponen el corazón en la boca. Y al terminar te refrescas en la playa del río — combinación perfecta.',
-        texto_en: 'The mountain bike trails are another level entirely. The "Oleta Blackwood" for advanced riders has jumps and elevation changes that get your heart racing. And when you\'re done you cool off at the river beach — perfect combination.'
+        texto_es: 'Los senderos de mountain bike son increíbles para estar dentro de una ciudad. Los root rides entre los manglares son técnicos y adictivos. Es imposible creer que estás en Miami mientras pedaleas por el interior del manglar.',
+        texto_en: 'The mountain bike trails are incredible for being inside a city. The root rides through the mangroves are technical and addictive. It\'s impossible to believe you\'re in Miami while pedaling through the mangrove interior.'
       },
       {
-        nombre: 'Sebastián Castro',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '28 Feb 2026', estrellas: 4,
-        texto_es: 'El kayak por los manglares es una experiencia de otro mundo — hay canales tan angostos que casi tocas los árboles de los dos lados. Vimos garças y varios tipos de peces entre las raíces. Alquilamos kayak en el parque por $25/hora.',
-        texto_en: 'Kayaking through the mangroves is a world apart — there are channels so narrow you almost touch the trees on both sides. We spotted herons and several fish species among the roots. Rented kayaks at the park for $25/hour.'
+        nombre: 'Pilar Sánchez', inicial: 'P', color: '#FF6B6B',
+        fecha: '1 Mar 2026', estrellas: 5,
+        texto_es: 'Alquilamos kayaks y exploramos el río Oleta durante 3 horas. Vimos lintones, caimanes pequeños y docenas de aves. La playa interior del parque es el lugar más tranquilo que he encontrado en Miami.',
+        texto_en: 'We rented kayaks and explored the Oleta River for 3 hours. We spotted otters, small alligators and dozens of birds. The park\'s inner beach is the most peaceful spot I\'ve found in Miami.'
       },
       {
-        nombre: 'Valeria Torres',
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '20 Ene 2026', estrellas: 5,
-        texto_es: 'Lo mejor de Miami que está a solo 20 minutos del centro. Hicimos las rutas de bici por la mañana, kayak por la tarde y nos quedamos a ver el atardecer desde la cabaña. Un parque que no se cansa de sorprender.',
-        texto_en: 'The best of Miami just 20 minutes from downtown. We did the bike trails in the morning, kayak in the afternoon, and stayed to watch the sunset from the cabin. A park that never stops surprising you.'
+        nombre: 'Marcos Herrera', inicial: 'M', color: '#FFB300',
+        fecha: '19 Feb 2026', estrellas: 4,
+        texto_es: 'Para estar tan cerca de la autopista, la biodiversidad es asombrosa. Las rutas de bike están bien mantenidas. La única pega: el parqueo se llena rápido los domingos y hay que llegar antes de las 8:30am.',
+        texto_en: 'For being so close to the highway, the biodiversity is amazing. The bike trails are well maintained. The only downside: parking fills up fast on Sundays and you need to arrive before 8:30am.'
       }
     ]
   },
@@ -238,54 +256,199 @@ var DESTINOS_DEFAULT = [
     id: 6,
     nombre_es: 'Virginia Key Beach Park',
     nombre_en: 'Virginia Key Beach Park',
-    descripcion_es: 'Playa histórica de Miami con aguas calmadas, ideal para paddle board, natación y kayak. Un tesoro escondido a minutos del Downtown.',
-    descripcion_en: 'Historic Miami beach with calm waters, ideal for paddle boarding, swimming and kayaking. A hidden gem minutes from Downtown.',
-    descripcion_larga_es: 'Virginia Key Beach Park tiene una historia tan profunda como sus aguas — fue la única playa de Miami a la que podían acceder los residentes afroamericanos durante la era de la segregación (1945–1982). Hoy es un parque histórico restaurado con una playa larga y tranquila protegida por una barra de arena natural que amortigua las olas. Sus aguas serenas son perfectas para paddle board, kayak y natación en familia. El parque tiene un carrusel vintage restaurado, áreas de picnic bajo palmas y un museo pequeño que documenta su historia. Al atardecer, las vistas hacia el puerto de Miami y los cruceros son espectaculares.',
-    descripcion_larga_en: 'Virginia Key Beach Park has a history as deep as its waters — it was the only Miami beach accessible to African American residents during the segregation era (1945–1982). Today it is a restored historic park with a long, calm beach protected by a natural sandbar that dampens the waves. Its serene waters are perfect for paddleboarding, kayaking, and family swimming. The park features a restored vintage carousel, picnic areas under palms, and a small museum documenting its history. At sunset, the views toward Miami port and the cruise ships are spectacular.',
-    como_llegar_es: 'En Virginia Key, accesible por el Rickenbacker Causeway desde Brickell ($2 peaje), antes de llegar a Key Biscayne. Son solo 10 minutos desde Downtown Miami. Parking: $10/vehículo. No hay transporte público directo — se recomienda auto, Uber o bicicleta por el carril del causeway.',
-    como_llegar_en: 'On Virginia Key, accessible via the Rickenbacker Causeway from Brickell ($2 toll), before reaching Key Biscayne. Just 10 minutes from Downtown Miami. Parking: $10/vehicle. No direct public transit — car, Uber, or bicycle via the causeway bike lane recommended.',
-    foto: 'https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=800&q=80',
+    descripcion_es: 'Playa histórica en la bahía de Biscayne con paddle board, kayak y áreas naturales de manglares. Un refugio tranquilo a solo 10 minutos de Downtown Miami, con vistas al horizonte del centro de la ciudad.',
+    descripcion_en: 'Historic beach on Biscayne Bay with paddle boarding, kayaking and natural mangrove areas. A peaceful refuge just 10 minutes from Downtown Miami, with views of the city skyline.',
+    descripcion_larga_es: 'Virginia Key Beach Park tiene una historia especial: fue designada en 1945 como la única playa de Miami a la que podían acceder las personas afroamericanas durante la segregación. Hoy es un parque histórico y natural con una playa frente a la bahía de Biscayne, aguas calmadas ideales para paddle board y kayak, y extensas áreas de manglares para explorar a pie o en bote. La playa tiene vistas directas al skyline de Miami — una postal única que no se ve desde ningún otro punto. El parque ha recuperado su antigua noria histórica (1955) y tiene zonas de picnic con parrillas. El alquiler de paddle boards y kayaks está disponible en el parque.',
+    descripcion_larga_en: 'Virginia Key Beach Park has a special history: it was designated in 1945 as the only Miami beach accessible to African Americans during segregation. Today it\'s a historical and natural park with a beach facing Biscayne Bay, calm waters ideal for paddle boarding and kayaking, and extensive mangrove areas to explore on foot or by boat. The beach has direct views of the Miami skyline — a unique postcard view not seen from any other vantage point. The park has restored its historic carousel (1955) and has picnic areas with grills. Paddle board and kayak rentals are available at the park.',
+    como_llegar_es: 'A 10 minutos de Downtown Miami por la Rickenbacker Causeway ($2 peaje). Pasando el peaje, la entrada a Virginia Key Beach está a la derecha antes de llegar a Key Biscayne. El Metrobus 102 también llega desde Coconut Grove/Brickell.',
+    como_llegar_en: 'About 10 minutes from Downtown Miami via Rickenbacker Causeway ($2 toll). After the toll, the Virginia Key Beach entrance is on the right before reaching Key Biscayne. Metrobus 102 also runs from Coconut Grove/Brickell.',
+    foto: 'https://images.unsplash.com/photo-1537519191416-1fb0f591c87a?auto=format&fit=crop&w=800&q=80',
     galeria: [
-      'https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=1200&q=85',
-      'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1537519191416-1fb0f591c87a?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80'
     ],
-    lat: 25.7333, lng: -80.1583,
+    lat: 25.7355, lng: -80.1573,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
-    precio: '$10 / vehículo', horarios: '7am – 7pm',
-    tipo: 'mar', tipo_es: 'Paddle Board · Natación', tipo_en: 'Paddle Board · Swimming',
+    precio: '$8 / vehículo', horarios: '7am–7pm (8pm jun–ago)',
+    tipo: 'mar', tipo_es: 'Paddle Board · Kayak · Playa', tipo_en: 'Paddle Board · Kayak · Beach',
+    telefono: '(305) 960-4600',
+    web_oficial: 'https://www.virginiakeybeachpark.net/',
+    mejor_epoca: 'Nov–May (temporada baja)',
+    google_maps_url: 'https://maps.google.com/maps?q=25.7355,-80.1573',
+    apple_maps_url: 'https://maps.apple.com/?q=Virginia+Key+Beach+Park&ll=25.7355,-80.1573',
+    resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34438-d8728698-Reviews-Virginia_Key_Beach_Park-Key_Biscayne_Florida.html',
     activo: true,
     resenas: [
       {
-        nombre: 'Gabriela Morales',
-        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&h=80&q=80',
+        nombre: 'Natalia Flores', inicial: 'N', color: '#00BCD4',
+        fecha: '5 Mar 2026', estrellas: 5,
+        texto_es: 'La playa con mejor vista de Miami. Tener el skyline de fondo mientras haces paddle board en aguas tranquilas es una experiencia única. Los flamencos que aparecen en la bahía al amanecer son un bono inesperado.',
+        texto_en: 'The beach with the best view of Miami. Having the skyline in the background while paddle boarding on calm waters is a unique experience. The flamingos that appear in the bay at dawn are an unexpected bonus.'
+      },
+      {
+        nombre: 'Eduardo Blanco', inicial: 'E', color: '#FF6B6B',
+        fecha: '20 Feb 2026', estrellas: 4,
+        texto_es: 'Excelente para familias con niños. Las aguas de la bahía son muy tranquilas — perfecto para principiantes en paddle board. El parque está muy bien mantenido y el personal es amable. El carrusel histórico sorprende.',
+        texto_en: 'Excellent for families with children. Bay waters are very calm — perfect for paddle board beginners. The park is very well maintained and the staff is friendly. The historic carousel is a surprise.'
+      },
+      {
+        nombre: 'Camila Rosas', inicial: 'C', color: '#FFB300',
+        fecha: '8 Feb 2026', estrellas: 5,
+        texto_es: 'La historia de este parque lo hace especial más allá de su belleza natural. El museo pequeño que tienen dentro explica la historia de la playa durante la segregación. Una visita que vale la pena por muchas razones.',
+        texto_en: 'The history of this park makes it special beyond its natural beauty. The small museum inside explains the beach\'s history during segregation. A visit worth making for many reasons.'
+      }
+    ]
+  },
+  {
+    id: 7,
+    nombre_es: 'Matheson Hammock Park',
+    nombre_en: 'Matheson Hammock Park',
+    descripcion_es: 'Un atoll pool natural de agua marina renovada por las mareas en Coral Gables — la piscina natural más única de Florida. Snorkeling, kayak y naturaleza del hammock tropical a 20 min de Miami.',
+    descripcion_en: 'A natural atoll pool of marine water renewed by tides in Coral Gables — the most unique natural pool in Florida. Snorkeling, kayaking and tropical hammock nature 20 min from Miami.',
+    descripcion_larga_es: 'Matheson Hammock Park es uno de los parques más singulares de Miami-Dade. Su característica más famosa es el atoll pool — una laguna circular de agua marina conectada directamente al mar mediante compuertas naturales, lo que significa que el agua se renueva con cada marea y siempre está limpia. Las aguas de la laguna son poco profundas (1-1.5 metros) y tranquilas, ideales para el snorkeling con niños y principiantes. El hammock tropical que rodea el parque es uno de los ecosistemas de bosque tropical hardwood mejor conservados del sur de Florida. El parque tiene un restaurante con vista al mar, área de picnic y puerto deportivo. El acceso al Mar Muerto es gratuito para kayak y paddleboard.',
+    descripcion_larga_en: 'Matheson Hammock Park is one of Miami-Dade\'s most unique parks. Its most famous feature is the atoll pool — a circular saltwater lagoon directly connected to the sea via natural gates, meaning the water is renewed with each tide and always stays clean. The lagoon\'s shallow waters (1-1.5 meters) are calm, ideal for snorkeling with children and beginners. The tropical hammock surrounding the park is one of the best-preserved hardwood tropical forest ecosystems in south Florida. The park has a sea-view restaurant, picnic area and marina. Access to the Dead Bay is free for kayaking and paddleboarding.',
+    como_llegar_es: 'A 20 minutos del centro de Miami. Toma la US-1 Sur hacia Coral Gables y gira en SW 72nd Avenue. La entrada del parque está en 9610 Old Cutler Road, Coral Gables. Hay parqueo de pago dentro del parque. El MetroBus llega a la zona pero no hasta la entrada.',
+    como_llegar_en: 'About 20 minutes from downtown Miami. Take US-1 South toward Coral Gables and turn on SW 72nd Avenue. Park entrance is at 9610 Old Cutler Road, Coral Gables. Paid parking inside the park. MetroBus serves the area but not the entrance directly.',
+    foto: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80',
+    galeria: [
+      'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1476611317561-60117649dd94?auto=format&fit=crop&w=900&q=80'
+    ],
+    lat: 25.6680, lng: -80.2747,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: '$8 / vehículo', horarios: 'Sunrise–sunset',
+    tipo: 'mar', tipo_es: 'Playa · Snorkeling · Kayak', tipo_en: 'Beach · Snorkeling · Kayak',
+    telefono: '(305) 665-5475',
+    web_oficial: 'https://www.miamidade.gov/parks/matheson-hammock.asp',
+    mejor_epoca: 'Nov–May (menor afluencia)',
+    google_maps_url: 'https://maps.google.com/maps?q=25.6680,-80.2747',
+    apple_maps_url: 'https://maps.apple.com/?q=Matheson+Hammock+Park&ll=25.6680,-80.2747',
+    resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34425-d8728345-Reviews-Matheson_Hammock_Park-Coral_Gables_Florida.html',
+    activo: true,
+    resenas: [
+      {
+        nombre: 'Alejandra Muñoz', inicial: 'A', color: '#00BCD4',
         fecha: '16 Mar 2026', estrellas: 5,
-        texto_es: 'Las aguas son perfectas para paddle board — sin oleaje, sin corrientes, el tablero se desliza solo. El atardecer desde el agua con los cruceros pasando por el puerto de Miami al fondo es una postal que no se olvida.',
-        texto_en: 'The waters are perfect for paddleboarding — no waves, no currents, the board just glides. The sunset from the water with cruise ships passing through Miami port in the background is an image you never forget.'
+        texto_es: 'El atoll pool es lo más original que he visto en Florida. Una piscina circular en el mar con agua limpia y renovada por las mareas — perfecta para nadar con niños pequeños sin peligro de olas ni corrientes. El hammock que rodea el parque es hermoso.',
+        texto_en: 'The atoll pool is the most original thing I\'ve seen in Florida. A circular pool in the sea with clean water renewed by tides — perfect for swimming with young children without wave or current danger. The hammock surrounding the park is beautiful.'
       },
       {
-        nombre: 'Ricardo Espinoza',
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '4 Mar 2026', estrellas: 4,
-        texto_es: 'Un tesoro escondido que poca gente de Miami conoce. La historia de la segregación del parque es poderosa — el museo pequeño al lado de la playa vale una visita. La playa en sí es tranquila y muy limpia.',
-        texto_en: 'A hidden gem that few Miami locals know about. The park\'s segregation history is powerful — the small museum next to the beach is worth visiting. The beach itself is calm and very clean.'
+        nombre: 'Ricardo Leal', inicial: 'R', color: '#FF6B6B',
+        fecha: '4 Mar 2026', estrellas: 5,
+        texto_es: 'Vine a hacer snorkeling en el atoll pool y fue una revelación. Hay peces tropicales, cangrejos y hasta pequeñas mantarrayas en el fondo arenoso. Mucho mejor que cualquier piscina artificial de resort.',
+        texto_en: 'I came to snorkel in the atoll pool and it was a revelation. There are tropical fish, crabs and even small stingrays on the sandy bottom. Much better than any artificial resort pool.'
       },
       {
-        nombre: 'Natalia Guzmán',
-        avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=80&h=80&q=80',
-        fecha: '25 Feb 2026', estrellas: 5,
-        texto_es: 'La playa más tranquila a 10 minutos de Downtown — eso es casi un milagro en una ciudad como Miami. Llevamos a los niños a nadar y fue perfecto: agua calma, arena fina y casi ninguna gente entre semana.',
-        texto_en: 'The calmest beach 10 minutes from Downtown — that\'s almost a miracle in a city like Miami. We brought the kids to swim and it was perfect: calm water, fine sand, and almost no crowds on weekdays.'
+        nombre: 'Fernanda Lima', inicial: 'F', color: '#FFB300',
+        fecha: '21 Feb 2026', estrellas: 4,
+        texto_es: 'El restaurante Red Fish Grill dentro del parque tiene una de las mejores vistas de la bahía de Miami. El parque en general está muy bien mantenido. Ideal para un día completo de familia.',
+        texto_en: 'The Red Fish Grill restaurant inside the park has one of the best views of Miami Bay. The park overall is very well maintained. Ideal for a complete family day.'
+      }
+    ]
+  },
+  {
+    id: 8,
+    nombre_es: 'Crandon Park',
+    nombre_en: 'Crandon Park',
+    descripcion_es: 'Playa de 5 km en Key Biscayne elegida Top 10 de EE.UU. — aguas turquesas de la laguna natural, área de picnic bajo palmas y kayak en el mar Caribe, a 20 min de Miami.',
+    descripcion_en: 'A 5 km beach on Key Biscayne voted Top 10 in the US — turquoise lagoon waters, picnic areas under palms and kayaking in the Caribbean Sea, 20 min from Miami.',
+    descripcion_larga_es: 'Crandon Park es el parque regional más grande del condado de Miami-Dade con 450 hectáreas en la isla Key Biscayne. Su playa de 5 kilómetros de arena blanca y aguas turquesas ha sido elegida repetidamente entre las 10 mejores playas de EE.UU. La laguna natural al norte de la playa principal tiene aguas tranquilas de 1 metro de profundidad — perfectas para familias. El parque también incluye un mercado de antigüedades los fines de semana, una reserva natural de manglares, canchas de tenis de clase mundial (sede del Miami Open) y el antiguo zoológico de Miami (Crandon Zoo). El alquiler de kayaks y equipamiento de playa está disponible en el parque.',
+    descripcion_larga_en: 'Crandon Park is the largest regional park in Miami-Dade County with 450 hectares on Key Biscayne island. Its 5-kilometer beach of white sand and turquoise waters has repeatedly been voted among the Top 10 beaches in the US. The natural lagoon at the north end of the main beach has calm 1-meter-deep waters — perfect for families. The park also includes a weekend antique market, a natural mangrove reserve, world-class tennis courts (Miami Open venue) and the former Miami Zoo (Crandon Zoo). Kayak and beach equipment rentals are available in the park.',
+    como_llegar_es: 'A 20 minutos de Miami por la Rickenbacker Causeway ($2 peaje) hacia Key Biscayne. Una vez en la isla, sigue Crandon Blvd hacia el norte — la entrada principal del parque está en el número 6747. El MetroBus 102 llega desde Coconut Grove.',
+    como_llegar_en: 'About 20 minutes from Miami via Rickenbacker Causeway ($2 toll) toward Key Biscayne. Once on the island, follow Crandon Blvd north — the main park entrance is at 6747. MetroBus 102 runs from Coconut Grove.',
+    foto: 'https://images.unsplash.com/photo-1476611317561-60117649dd94?auto=format&fit=crop&w=800&q=80',
+    galeria: [
+      'https://images.unsplash.com/photo-1476611317561-60117649dd94?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=900&q=80'
+    ],
+    lat: 25.7024, lng: -80.1556,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: '$8 / vehículo', horarios: '8am–sunset',
+    tipo: 'mar', tipo_es: 'Playa · Kayak · Naturaleza', tipo_en: 'Beach · Kayak · Nature',
+    telefono: '(305) 361-5421',
+    web_oficial: 'https://www.miamidade.gov/parks/crandon.asp',
+    mejor_epoca: 'Nov–May (temporada alta en aguas)',
+    google_maps_url: 'https://maps.google.com/maps?q=25.7024,-80.1556',
+    apple_maps_url: 'https://maps.apple.com/?q=Crandon+Park&ll=25.7024,-80.1556',
+    resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34438-d258126-Reviews-Crandon_Park-Key_Biscayne_Florida.html',
+    activo: true,
+    resenas: [
+      {
+        nombre: 'Verónica Castro', inicial: 'V', color: '#00BCD4',
+        fecha: '22 Mar 2026', estrellas: 5,
+        texto_es: 'La laguna norte del parque es perfecta para familias con niños — aguas tranquilas, poca profundidad y sin olas. Las palmeras a lo largo de la playa crean la postal más caribeña que puedes encontrar dentro de Miami.',
+        texto_en: 'The north lagoon of the park is perfect for families with children — calm waters, shallow depth and no waves. The palm trees along the beach create the most Caribbean postcard you can find within Miami.'
+      },
+      {
+        nombre: 'Gonzalo Reyes', inicial: 'G', color: '#FF6B6B',
+        fecha: '10 Mar 2026', estrellas: 4,
+        texto_es: 'Estuve en el Miami Open jugando al tenis y aproveché para ver la playa. La combinación parque de deporte + playa + manglares hace de Crandon un parque único en su tipo. El mercado de antigüedades del domingo es un bonus inesperado.',
+        texto_en: 'I was at the Miami Open playing tennis and took the chance to see the beach. The combination of sports park + beach + mangroves makes Crandon a one-of-a-kind park. The Sunday antique market is an unexpected bonus.'
+      },
+      {
+        nombre: 'Patricia Morales', inicial: 'P', color: '#FFB300',
+        fecha: '28 Feb 2026', estrellas: 5,
+        texto_es: 'La mejor playa de Miami para mí. Vine en enero y el agua estaba a 24°C. La arena es blanca y fina, el agua turquesa. No entiendo por qué la gente no habla más de Crandon — es tan buena como cualquier playa del Caribe.',
+        texto_en: 'My favorite beach in Miami. I came in January and the water was 24°C. The sand is white and fine, the water turquoise. I don\'t understand why people don\'t talk more about Crandon — it\'s as good as any Caribbean beach.'
+      }
+    ]
+  },
+  {
+    id: 9,
+    nombre_es: 'Arch Creek Park',
+    nombre_en: 'Arch Creek Park',
+    descripcion_es: 'Un puente de roca natural formado hace 8,000 años — único en el sur de Florida. Senderismo entre hammock subtropical, observación de fauna nativa y museo arqueológico de la cultura Tequesta.',
+    descripcion_en: 'A natural limestone bridge formed 8,000 years ago — unique in South Florida. Hiking through subtropical hammock, native wildlife observation and archaeological museum of Tequesta culture.',
+    descripcion_larga_es: 'Arch Creek Park es un tesoro arqueológico e histórico poco conocido de Miami. Su atracción principal es un puente natural de piedra caliza formado hace aproximadamente 8,000 años por la erosión del arrecife Anastasia — uno de los pocos puentes de piedra natural en el sur de Florida. El arco fue cruce obligado para los indios Tequesta durante siglos y más tarde para los primeros colonos del área de Miami. El parque incluye un hammock subtropical con senderos de 1.5 km, una comunidad de aves (más de 45 especies registradas) y un pequeño pero excelente museo arqueológico con herramientas, cerámica y artefactos de la cultura Tequesta. La entrada es gratuita los domingos.',
+    descripcion_larga_en: 'Arch Creek Park is a little-known archaeological and historical treasure of Miami. Its main attraction is a natural limestone bridge formed approximately 8,000 years ago by Anastasia reef erosion — one of the few natural stone bridges in south Florida. The arch was a required crossing for the Tequesta Indians for centuries and later for the first settlers of the Miami area. The park includes a subtropical hammock with 1.5 km trails, a bird community (over 45 recorded species) and a small but excellent archaeological museum with tools, pottery and artifacts from the Tequesta culture. Entry is free on Sundays.',
+    como_llegar_es: 'A 25 minutos de Miami. La dirección es 1855 NE 135th Street, North Miami. Toma la US-1 Norte hacia Biscayne Blvd y gira en la NE 135th Street. El parqueo es gratuito. El parque está abierto de martes a domingo de 9am a 5pm.',
+    como_llegar_en: 'About 25 minutes from Miami. The address is 1855 NE 135th Street, North Miami. Take US-1 North to Biscayne Blvd and turn at NE 135th Street. Parking is free. The park is open Tuesday through Sunday from 9am to 5pm.',
+    foto: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80',
+    galeria: [
+      'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=900&q=80'
+    ],
+    lat: 25.8955, lng: -80.1678,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Gratis (donaciones bienvenidas)', horarios: '9am–5pm (Mar–Dom)',
+    tipo: 'tierra', tipo_es: 'Senderismo · Arqueología', tipo_en: 'Hiking · Archaeology',
+    telefono: '(305) 944-6111',
+    web_oficial: 'https://www.miamidade.gov/parks/arch-creek.asp',
+    mejor_epoca: 'Oct–Abr (aves migratorias en temporada)',
+    google_maps_url: 'https://maps.google.com/maps?q=25.8955,-80.1678',
+    apple_maps_url: 'https://maps.apple.com/?q=Arch+Creek+Park&ll=25.8955,-80.1678',
+    resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34429-d550295-Reviews-Arch_Creek_Park-North_Miami_Beach_Florida.html',
+    activo: true,
+    resenas: [
+      {
+        nombre: 'Héctor Mendoza', inicial: 'H', color: '#00BCD4',
+        fecha: '3 Mar 2026', estrellas: 5,
+        texto_es: 'No sabía que existía este parque y fue una de las mejores sorpresas de Miami. El puente natural de piedra caliza es algo completamente diferente a todo lo que existe en el sur de Florida. El museo sobre los Tequesta es pequeño pero muy bien hecho.',
+        texto_en: 'I didn\'t know this park existed and it was one of the best surprises in Miami. The natural limestone bridge is something completely different from anything else in south Florida. The Tequesta museum is small but very well done.'
+      },
+      {
+        nombre: 'Lucía Vargas', inicial: 'L', color: '#FF6B6B',
+        fecha: '17 Feb 2026', estrellas: 4,
+        texto_es: 'El hammock es un oasis de paz en medio de North Miami. Hay tortugas, zarigüeyas y una colonia de cotorras que hacen un ruido increíble. El guía voluntario que daba la explicación del arco natural era apasionante — muy recomendado.',
+        texto_en: 'The hammock is an oasis of peace in the middle of North Miami. There are turtles, opossums and a parrot colony that make incredible noise. The volunteer guide explaining the natural arch was passionate — highly recommended.'
+      },
+      {
+        nombre: 'Diego Ruiz', inicial: 'D', color: '#FFB300',
+        fecha: '9 Feb 2026', estrellas: 5,
+        texto_es: 'Llevé a mis hijos de 7 y 10 años y fue perfecto para ellos. El arco de piedra los dejó impresionados. El parque tiene actividades educativas para niños los fines de semana. Gratis, educativo y hermoso — ¿qué más se puede pedir?',
+        texto_en: 'I took my 7 and 10-year-old kids and it was perfect for them. The stone arch impressed them. The park has educational activities for children on weekends. Free, educational and beautiful — what more could you ask for?'
       }
     ]
   }
 ];
-
-/* ===== INICIALIZACIÓN DE DATOS EN localStorage ===== */
-/* Solo siembra los datos por defecto si no existen aún */
-if (!localStorage.getItem('em_destinos')) {
-  localStorage.setItem('em_destinos', JSON.stringify(DESTINOS_DEFAULT));
-}
 
 /* Obtiene destinos de localStorage (o los de por defecto si hay error) */
 function obtenerDestinos() {
@@ -326,11 +489,9 @@ function renderDestinos(filtro) {
     return d.activo && (filtro === 'todos' || d.tipo === filtro);
   });
 
-  /* Construye el HTML de cada tarjeta */
   grid.innerHTML = lista.map(function (d, i) {
     var delay = (i % 3) * 0.12;
     return (
-      /* onclick registra el clic y abre el modal */
       '<article class="destino-card fade-up" data-tipo="' + d.tipo + '" style="transition-delay:' + delay + 's" ' +
                'onclick="registrarClic(' + d.id + '); abrirModal(' + d.id + ');" role="button" tabindex="0" ' +
                'aria-label="Ver detalles de ' + d.nombre_es + '" ' +
@@ -359,7 +520,6 @@ function renderDestinos(filtro) {
             '<span class="destino-card__meta-item"><span class="meta-icono">💲</span>' + d.precio + '</span>' +
             '<span class="destino-card__meta-item"><span class="meta-icono">⏰</span>' + d.horarios + '</span>' +
           '</div>' +
-          /* Botón que abre el modal en lugar de ir a Maps directamente */
           '<button class="btn btn--primario destino-card__btn" onclick="event.stopPropagation(); registrarClic(' + d.id + '); abrirModal(' + d.id + ');">' +
             '<span class="lang-es">Ver destino</span>' +
             '<span class="lang-en">View destination</span>' +
@@ -372,66 +532,88 @@ function renderDestinos(filtro) {
   initScrollAnimation();
 }
 
+/* ===== GALERÍA: ESTADO GLOBAL ===== */
+var galeriaActual = { fotos: [], indice: 0, nombreDestino: '' };
+
+function cambiarFotoGaleria(nuevoIndice) {
+  var galeria = galeriaActual.fotos;
+  if (!galeria.length) return;
+  nuevoIndice = ((nuevoIndice % galeria.length) + galeria.length) % galeria.length;
+  galeriaActual.indice = nuevoIndice;
+
+  var imgPrincipal = document.getElementById('modalGaleriaImg');
+  if (imgPrincipal) {
+    imgPrincipal.src = galeria[nuevoIndice];
+    imgPrincipal.alt = galeriaActual.nombreDestino + ' — foto ' + (nuevoIndice + 1);
+  }
+
+  var thumbs = document.querySelectorAll('.modal-thumb');
+  thumbs.forEach(function (th, idx) {
+    th.classList.toggle('modal-thumb--activa', idx === nuevoIndice);
+  });
+
+  /* Actualiza contador */
+  var contador = document.getElementById('modalGaleriaContador');
+  if (contador) contador.textContent = (nuevoIndice + 1) + ' / ' + galeria.length;
+}
+
 /* ===== SISTEMA DE MODAL A PANTALLA COMPLETA ===== */
 
-/* Abre el modal con la información del destino */
 function abrirModal(idDestino) {
   var destinos = obtenerDestinos();
-  /* Busca en los datos base primero; si no tiene galería, la toma de DESTINOS_DEFAULT */
   var d = destinos.find(function (x) { return x.id === idDestino; });
   if (!d) return;
 
-  /* Si el destino en localStorage no tiene galería ni reseñas, busca en los defaults */
-  var dDefault = DESTINOS_DEFAULT.find(function (x) { return x.id === idDestino; });
-  if (dDefault) {
-    d.galeria           = d.galeria           || dDefault.galeria;
-    d.descripcion_larga_es = d.descripcion_larga_es || dDefault.descripcion_larga_es;
-    d.descripcion_larga_en = d.descripcion_larga_en || dDefault.descripcion_larga_en;
-    d.como_llegar_es    = d.como_llegar_es    || dDefault.como_llegar_es;
-    d.como_llegar_en    = d.como_llegar_en    || dDefault.como_llegar_en;
-    d.resenas           = d.resenas           || dDefault.resenas;
+  /* Rellena desde DESTINOS_DEFAULT si faltan campos extendidos */
+  var dDef = DESTINOS_DEFAULT.find(function (x) { return x.id === idDestino; });
+  if (dDef) {
+    ['galeria','descripcion_larga_es','descripcion_larga_en','como_llegar_es','como_llegar_en',
+     'resenas','telefono','web_oficial','mejor_epoca','google_maps_url','apple_maps_url','resenas_url'].forEach(function (k) {
+      d[k] = d[k] || dDef[k];
+    });
   }
 
   var idioma = (typeof IDIOMA_ACTUAL !== 'undefined') ? IDIOMA_ACTUAL : 'es';
   var esEs   = (idioma === 'es');
 
-  /* Determina el idioma activo para mostrar el contenido correcto */
-  var nombre      = esEs ? d.nombre_es      : d.nombre_en;
-  var descCorta   = esEs ? d.descripcion_es : d.descripcion_en;
-  var descLarga   = esEs ? (d.descripcion_larga_es || descCorta) : (d.descripcion_larga_en || descCorta);
-  var comoLlegar  = esEs ? (d.como_llegar_es || '')  : (d.como_llegar_en || '');
-  var tipoLabel   = esEs ? d.tipo_es        : d.tipo_en;
-  var difLabel    = esEs ? d.dificultad_es  : d.dificultad_en;
+  var nombre    = esEs ? d.nombre_es    : d.nombre_en;
+  var descCorta = esEs ? d.descripcion_es : d.descripcion_en;
+  var descLarga = esEs ? (d.descripcion_larga_es || descCorta) : (d.descripcion_larga_en || descCorta);
+  var comoLlegar= esEs ? (d.como_llegar_es || '') : (d.como_llegar_en || '');
+  var tipoLabel = esEs ? d.tipo_es      : d.tipo_en;
+  var difLabel  = esEs ? d.dificultad_es: d.dificultad_en;
 
-  /* 1. Galería de fotos */
-  var galeria = d.galeria || [d.foto];
-  var gHtml = '';
-  if (galeria.length >= 3) {
-    gHtml =
-      '<div class="modal-galeria-grid">' +
-        '<img src="' + galeria[0] + '" alt="' + nombre + ' — foto principal" class="modal-galeria-main" />' +
-        '<div class="modal-galeria-lateral">' +
-          '<img src="' + galeria[1] + '" alt="' + nombre + ' — foto 2" />' +
-          '<img src="' + galeria[2] + '" alt="' + nombre + ' — foto 3" />' +
-        '</div>' +
-      '</div>';
-  } else {
-    gHtml = '<div class="modal-galeria-simple"><img src="' + galeria[0] + '" alt="' + nombre + '" /></div>';
-  }
-  document.getElementById('modalGaleria').innerHTML = gHtml;
+  /* 1. Galería con navegación */
+  var galeria = d.galeria && d.galeria.length ? d.galeria : [d.foto];
+  galeriaActual = { fotos: galeria, indice: 0, nombreDestino: nombre };
 
-  /* 2. Nombre y descripción */
+  var thumbsHtml = galeria.map(function (url, idx) {
+    return '<button class="modal-thumb' + (idx === 0 ? ' modal-thumb--activa' : '') + '" ' +
+           'onclick="cambiarFotoGaleria(' + idx + ')" aria-label="Foto ' + (idx+1) + '">' +
+           '<img src="' + url + '" alt="' + nombre + ' miniatura ' + (idx+1) + '" /></button>';
+  }).join('');
+
+  document.getElementById('modalGaleria').innerHTML =
+    '<div class="modal-galeria-principal">' +
+      '<button class="modal-galeria-nav modal-galeria-nav--prev" onclick="cambiarFotoGaleria(galeriaActual.indice - 1)" aria-label="Foto anterior">&#8249;</button>' +
+      '<img id="modalGaleriaImg" src="' + galeria[0] + '" alt="' + nombre + ' — foto 1" class="modal-galeria-img" />' +
+      '<button class="modal-galeria-nav modal-galeria-nav--next" onclick="cambiarFotoGaleria(galeriaActual.indice + 1)" aria-label="Siguiente foto">&#8250;</button>' +
+      '<span class="modal-galeria-contador" id="modalGaleriaContador">1 / ' + galeria.length + '</span>' +
+    '</div>' +
+    '<div class="modal-thumbnails">' + thumbsHtml + '</div>';
+
+  /* 2. Nombre y descripciones */
   document.getElementById('modalNombreH').textContent = nombre;
   document.getElementById('modalDescCorta').textContent = descCorta;
   document.getElementById('modalDescLarga').textContent = descLarga;
 
-  /* 3. Badges tipo + dificultad */
+  /* 3. Badges */
   document.getElementById('modalBadges').innerHTML =
     '<span class="modal-badge modal-badge--' + d.tipo + '">' + tipoLabel + '</span>' +
-    '<span class="modal-badge modal-badge--dif modal-badge--' + d.dificultad_clase + '">' + difLabel + '</span>';
+    '<span class="modal-badge modal-badge--dif modal-badge--' + d.dificultad_clase + '">' + difLabel + '</span>' +
+    (d.mejor_epoca ? '<span class="modal-badge modal-badge--epoca">' + (esEs ? 'Mejor época: ' : 'Best time: ') + d.mejor_epoca + '</span>' : '');
 
   /* 4. Datos prácticos */
-  var mapsUrl = 'https://www.google.com/maps?q=' + d.lat + ',' + d.lng;
   document.getElementById('modalDatosGrid').innerHTML =
     '<div class="modal-dato"><span class="modal-dato__icono">💲</span>' +
       '<div><strong>' + (esEs ? 'Precio' : 'Price') + '</strong><span>' + d.precio + '</span></div>' +
@@ -439,67 +621,103 @@ function abrirModal(idDestino) {
     '<div class="modal-dato"><span class="modal-dato__icono">⏰</span>' +
       '<div><strong>' + (esEs ? 'Horarios' : 'Hours') + '</strong><span>' + d.horarios + '</span></div>' +
     '</div>' +
-    '<div class="modal-dato"><span class="modal-dato__icono">📍</span>' +
-      '<div><strong>' + (esEs ? 'Dificultad' : 'Difficulty') + '</strong><span>' + difLabel + '</span></div>' +
+    '<div class="modal-dato"><span class="modal-dato__icono">📞</span>' +
+      '<div><strong>' + (esEs ? 'Teléfono' : 'Phone') + '</strong>' +
+      (d.telefono ? '<a href="tel:' + d.telefono.replace(/\s/g,'') + '">' + d.telefono + '</a>' : '<span>—</span>') + '</div>' +
     '</div>' +
-    '<div class="modal-dato"><span class="modal-dato__icono">🗺️</span>' +
-      '<div><strong>GPS</strong><a href="' + mapsUrl + '" target="_blank" rel="noopener">' +
-        (esEs ? 'Abrir en Google Maps' : 'Open in Google Maps') + '</a></div>' +
+    '<div class="modal-dato"><span class="modal-dato__icono">🗓️</span>' +
+      '<div><strong>' + (esEs ? 'Mejor época' : 'Best time') + '</strong><span>' + (d.mejor_epoca || '—') + '</span></div>' +
     '</div>';
 
-  /* 5. Cómo llegar */
-  if (comoLlegar) {
-    document.getElementById('modalLlegar').innerHTML =
+  /* 5. Botones de acción */
+  var gUrl    = d.google_maps_url || ('https://maps.google.com/maps?q=' + d.lat + ',' + d.lng);
+  var aUrl    = d.apple_maps_url  || ('https://maps.apple.com/?q=' + encodeURIComponent(nombre) + '&ll=' + d.lat + ',' + d.lng);
+  var rUrl    = d.resenas_url     || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(nombre));
+  var wUrl    = d.web_oficial     || '#';
+
+  document.getElementById('modalAcciones').innerHTML =
+    '<a href="' + gUrl + '" target="_blank" rel="noopener" class="modal-accion-btn modal-accion-btn--google" ' +
+       'onclick="if(typeof trackMapsClick===\'function\')trackMapsClick(\'' + nombre.replace(/'/g,"&#39;") + '\')">' +
+       (esEs ? 'Google Maps' : 'Google Maps') +
+    '</a>' +
+    '<a href="' + aUrl + '" target="_blank" rel="noopener" class="modal-accion-btn modal-accion-btn--apple" ' +
+       'onclick="if(typeof trackAppleMapsClick===\'function\')trackAppleMapsClick(\'' + nombre.replace(/'/g,"&#39;") + '\')">' +
+       (esEs ? 'Apple Maps' : 'Apple Maps') +
+    '</a>' +
+    '<a href="' + rUrl + '" target="_blank" rel="noopener" class="modal-accion-btn modal-accion-btn--resenas" ' +
+       'onclick="if(typeof trackReviewsClick===\'function\')trackReviewsClick(\'' + nombre.replace(/'/g,"&#39;") + '\')">' +
+       (esEs ? 'Ver reseñas reales' : 'See real reviews') +
+    '</a>' +
+    (wUrl !== '#' ? '<a href="' + wUrl + '" target="_blank" rel="noopener" class="modal-accion-btn modal-accion-btn--web">' +
+       (esEs ? 'Sitio oficial' : 'Official site') + '</a>' : '');
+
+  /* 6. Cómo llegar */
+  var llegarEl = document.getElementById('modalLlegar');
+  if (comoLlegar && llegarEl) {
+    llegarEl.innerHTML =
       '<h3 class="modal-subtitulo">' + (esEs ? 'Cómo llegar' : 'How to get there') + '</h3>' +
       '<p class="modal-llegar-texto">' + comoLlegar + '</p>';
-    document.getElementById('modalLlegar').style.display = 'block';
-  } else {
-    document.getElementById('modalLlegar').style.display = 'none';
+    llegarEl.style.display = 'block';
+  } else if (llegarEl) {
+    llegarEl.style.display = 'none';
   }
 
-  /* 6. Mapa embed de Google Maps (coordenadas exactas, vista satélite z=14) */
+  /* 7. Mapa embed satélite */
   var mapaSrc = 'https://maps.google.com/maps?q=' + d.lat + ',' + d.lng +
                 '&t=k&z=14&ie=UTF8&iwloc=B&output=embed';
-  document.getElementById('modalMapaIframe').src = mapaSrc;
+  var iframeEl = document.getElementById('modalMapaIframe');
+  if (iframeEl) iframeEl.src = mapaSrc;
 
-  /* 7. Reseñas de visitantes */
+  /* 8. Reseñas */
   var resenas = d.resenas || [];
-  if (resenas.length) {
-    var rHtml = '<h3 class="modal-subtitulo">' + (esEs ? 'Reseñas de visitantes' : 'Visitor reviews') + '</h3>' +
-      '<div class="modal-resenas-grid">';
-    rHtml += resenas.map(function (r) {
-      var texto = esEs ? r.texto_es : r.texto_en;
-      var estrellas = '';
-      for (var s = 0; s < 5; s++) {
-        estrellas += '<span class="modal-estrella' + (s < r.estrellas ? ' modal-estrella--llena' : '') + '">★</span>';
-      }
-      return (
-        '<div class="modal-resena">' +
-          '<div class="modal-resena__header">' +
-            '<img src="' + r.avatar + '" alt="Avatar de ' + r.nombre + '" class="modal-resena__avatar" />' +
-            '<div>' +
-              '<strong class="modal-resena__nombre">' + r.nombre + '</strong>' +
-              '<span class="modal-resena__fecha">' + r.fecha + '</span>' +
+  var resEl = document.getElementById('modalResenas');
+  if (resEl) {
+    if (resenas.length) {
+      var rHtml = '<h3 class="modal-subtitulo">' + (esEs ? 'Reseñas de visitantes' : 'Visitor reviews') + '</h3>' +
+        '<div class="modal-resenas-grid">';
+      rHtml += resenas.map(function (r) {
+        var texto = esEs ? r.texto_es : r.texto_en;
+        var estrellas = '';
+        for (var s = 0; s < 5; s++) {
+          estrellas += '<span class="modal-estrella' + (s < r.estrellas ? ' modal-estrella--llena' : '') + '">★</span>';
+        }
+        return (
+          '<div class="modal-resena">' +
+            '<div class="modal-resena__header">' +
+              '<div class="modal-resena__avatar" style="background:' + (r.color || '#00BCD4') + '">' + (r.inicial || r.nombre.charAt(0)) + '</div>' +
+              '<div>' +
+                '<strong class="modal-resena__nombre">' + r.nombre + '</strong>' +
+                '<span class="modal-resena__fecha">' + r.fecha + '</span>' +
+              '</div>' +
+              '<div class="modal-resena__estrellas">' + estrellas + '</div>' +
             '</div>' +
-            '<div class="modal-resena__estrellas">' + estrellas + '</div>' +
-          '</div>' +
-          '<p class="modal-resena__texto">' + texto + '</p>' +
-        '</div>'
-      );
-    }).join('');
-    rHtml += '</div>';
-    document.getElementById('modalResenas').innerHTML = rHtml;
-  } else {
-    document.getElementById('modalResenas').innerHTML = '';
+            '<p class="modal-resena__texto">' + texto + '</p>' +
+          '</div>'
+        );
+      }).join('');
+      rHtml += '</div>';
+
+      /* Disclaimer */
+      rHtml += '<p class="modal-disclaimer">' +
+        (esEs ? '⚠️ Verifica horarios y precios en el sitio oficial antes de tu visita. Los datos pueden haber cambiado.' :
+                '⚠️ Verify hours and prices on the official site before your visit. Data may have changed.') +
+        '</p>';
+      resEl.innerHTML = rHtml;
+    } else {
+      resEl.innerHTML = '';
+    }
   }
 
-  /* Abre el modal: quita display:none y añade clase .abierto para la transición CSS */
+  /* Abre el modal */
   var modal = document.getElementById('destinoModal');
   modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden'; /* Bloquea el scroll del fondo */
+  document.body.style.overflow = 'hidden';
   requestAnimationFrame(function () {
     modal.classList.add('abierto');
   });
+
+  /* Analytics */
+  if (typeof trackModalOpen === 'function') trackModalOpen(nombre);
 }
 
 /* Cierra el modal y restaura el scroll */
@@ -509,9 +727,9 @@ function cerrarModal() {
   document.body.style.overflow = '';
   setTimeout(function () {
     modal.style.display = 'none';
-    /* Limpia el iframe del mapa para detener la petición */
     var iframe = document.getElementById('modalMapaIframe');
     if (iframe) iframe.src = '';
+    galeriaActual = { fotos: [], indice: 0, nombreDestino: '' };
   }, 320);
 }
 
@@ -582,7 +800,6 @@ document.addEventListener('DOMContentLoaded', function () {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    /* Guarda el contacto en localStorage */
     var contacto = {
       fecha:    new Date().toISOString(),
       nombre:   form.querySelector('[name="nombre"]').value,
@@ -605,17 +822,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* ===== EVENTOS DEL MODAL ===== */
 document.addEventListener('DOMContentLoaded', function () {
-  /* Botón cerrar */
   var btnCerrar = document.getElementById('modalCerrar');
   if (btnCerrar) btnCerrar.addEventListener('click', cerrarModal);
 
-  /* Clic en el fondo oscuro del modal */
   var fondo = document.getElementById('modalFondo');
   if (fondo) fondo.addEventListener('click', cerrarModal);
 
-  /* Tecla Escape */
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') cerrarModal();
+    /* Navegación de galería con teclas */
+    if (e.key === 'ArrowLeft'  && galeriaActual.fotos.length) cambiarFotoGaleria(galeriaActual.indice - 1);
+    if (e.key === 'ArrowRight' && galeriaActual.fotos.length) cambiarFotoGaleria(galeriaActual.indice + 1);
   });
 });
 
@@ -637,7 +854,7 @@ function initScrollAnimation() {
 
 /* ===== INICIALIZACIÓN ===== */
 document.addEventListener('DOMContentLoaded', function () {
-  registrarVisita(); /* Registra la visita en localStorage para el dashboard admin */
+  registrarVisita();
   renderDestinos();
   initScrollAnimation();
 });
