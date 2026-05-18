@@ -39,6 +39,8 @@ function mostrarDashboard() {
   renderClicsPorDestino();
   cargarDestinos();
   cargarMensajes();
+  actualizarBadgeMensajes();
+  bindMarcarLeidos();
 }
 
 function bindLogin() {
@@ -404,6 +406,49 @@ function resetFormDestino() {
   destinoEditandoId = null;
   document.getElementById('formDestino').reset();
   document.getElementById('formDestinoTitulo').textContent = 'Agregar Destino';
+}
+
+/* ===== BADGE DE MENSAJES NO LEÍDOS ===== */
+
+/* Devuelve cuántos mensajes llegaron después de la última visita al admin */
+function contarNoLeidos() {
+  var ultimaLectura = localStorage.getItem('em_ultima_lectura_admin') || '1970-01-01T00:00:00Z';
+  var lista = obtenerContactos();
+  return lista.filter(function (c) { return c.fecha && c.fecha > ultimaLectura; }).length;
+}
+
+/* Actualiza el badge de número en el encabezado de mensajes */
+function actualizarBadgeMensajes() {
+  var badge = document.getElementById('badgeMensajes');
+  if (!badge) return;
+  var n = contarNoLeidos();
+  if (n > 0) {
+    badge.textContent = n;
+    badge.style.display = 'inline-flex';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+/* Marca todos los mensajes como leídos al hacer clic en el botón o al ver la sección */
+function marcarLeidos() {
+  localStorage.setItem('em_ultima_lectura_admin', new Date().toISOString());
+  actualizarBadgeMensajes();
+}
+
+/* Marca como leídos automáticamente cuando la sección de mensajes entra en pantalla */
+function bindMarcarLeidos() {
+  if (!window.IntersectionObserver) return;
+  var seccion = document.getElementById('bandejaMensajes');
+  if (!seccion) return;
+
+  var obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      marcarLeidos();
+      obs.disconnect();
+    }
+  }, { threshold: 0.20 });
+  obs.observe(seccion);
 }
 
 /* ===== EXPORTAR CONTACTOS A CSV ===== */

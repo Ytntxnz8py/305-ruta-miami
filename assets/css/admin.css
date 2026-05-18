@@ -686,6 +686,28 @@ ul { list-style: none; }
 }
 .toast--visible { transform: translateX(-50%) translateY(0); opacity: 1; }
 
+/* ===== BADGE MENSAJES NO LEÍDOS ===== */
+.badge-mensajes {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  min-width: 1.5rem; height: 1.5rem;
+  border-radius: 50px;
+  background: var(--admin-coral);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; font-weight: 800;
+  padding: 0 0.4rem;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  box-shadow: 0 2px 8px rgba(255,107,107,0.40);
+  animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+  0%,100% { box-shadow: 0 2px 8px rgba(255,107,107,0.40); }
+  50%      { box-shadow: 0 2px 16px rgba(255,107,107,0.70); }
+}
+
 /* ===== SECCIÓN GOOGLE ANALYTICS ===== */
 .admin-seccion--ga { border-top: 3px solid var(--admin-turquesa); }
 
