@@ -144,6 +144,9 @@
 
     </section>
 
+    <!-- Fusión visual: Hero (oscuro) → Intro (blanco arena) -->
+    <div class="section-fade section-fade--hero-intro" aria-hidden="true"></div>
+
     <!-- ===== INTRO: 3 highlights ===== -->
     <section class="seccion-intro" id="nosotros">
       <div class="seccion-intro__contenedor">
@@ -172,6 +175,9 @@
       </div>
     </section>
 
+    <!-- Fusión visual: Intro (blanco arena) → Destinos (dark ocean) -->
+    <div class="section-fade section-fade--intro-destinos" aria-hidden="true"></div>
+
     <!-- ===== DESTINOS: 6 tarjetas renderizadas por JS ===== -->
     <section class="seccion-destinos" id="destinos">
       <div class="seccion-destinos__contenedor">
@@ -193,6 +199,9 @@
 
       </div>
     </section>
+
+    <!-- Fusión visual: Destinos (dark ocean) → Mapa (azul cielo) -->
+    <div class="section-fade section-fade--destinos-mapa" aria-hidden="true"></div>
 
     <!-- ===== MAPA INTERACTIVO ===== -->
     <section class="seccion-mapa" id="mapa">
@@ -229,7 +238,8 @@
           </div>
         </div>
 
-        <!-- Google Maps embed centrado en South Florida (sin API key) -->
+        <!-- Google Maps embed centrado en South Florida — envuelto en radar wrapper -->
+        <div class="mapa-radar-wrap">
         <div class="mapa-iframe-cont fade-up">
           <iframe
             class="mapa-iframe"
@@ -240,9 +250,13 @@
             allowfullscreen
           ></iframe>
         </div>
+        </div><!-- /mapa-radar-wrap -->
 
       </div>
     </section>
+
+    <!-- Fusión visual: Mapa (azul cielo) → Trabaja (verde tropical) -->
+    <div class="section-fade section-fade--mapa-trabaja" aria-hidden="true"></div>
 
     <!-- ===== TRABAJA CON NOSOTROS ===== -->
     <section class="seccion-trabaja" id="trabaja">
@@ -287,6 +301,7 @@
                     <label for="fNombre" data-i18n="form_nombre">Nombre completo</label>
                     <input id="fNombre" name="nombre" type="text" required
                            data-i18n-ph="form_nombre" placeholder="Nombre completo" />
+                    <span class="form-error-msg">Campo requerido</span>
                   </div>
                   <div class="form-grupo">
                     <label for="fEmpresa" data-i18n="form_empresa">Empresa</label>
@@ -299,6 +314,7 @@
                     <label for="fEmail" data-i18n="form_email">Email</label>
                     <input id="fEmail" name="email" type="email" required
                            data-i18n-ph="form_email" placeholder="Email" />
+                    <span class="form-error-msg">Email inválido</span>
                   </div>
                   <div class="form-grupo">
                     <label for="fTel" data-i18n="form_tel">Teléfono</label>
@@ -315,6 +331,7 @@
                     <option value="pub"      data-i18n="form_servicio_pub">Publicidad en el sitio</option>
                     <option value="amazon"   data-i18n="form_servicio_amazon">Productos en Amazon</option>
                   </select>
+                  <span class="form-error-msg">Selecciona una opción</span>
                 </div>
                 <div class="form-grupo">
                   <label for="fMensaje" data-i18n="form_mensaje">Mensaje</label>
@@ -340,6 +357,9 @@
     </section>
 
   </main>
+
+  <!-- Fusión visual: Trabaja (verde tropical) → Footer (turquesa oscuro) -->
+  <div class="section-fade section-fade--trabaja-footer" aria-hidden="true"></div>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer" id="contacto">
@@ -439,9 +459,10 @@
     </div><!-- /modal-panel -->
   </div><!-- /destinoModal -->
 
-  <!-- Scripts: i18n primero, luego main -->
+  <!-- Scripts: i18n primero, luego main, luego animaciones -->
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/analytics.js"></script>
+  <script src="assets/js/animations.js"></script>
 </body>
 </html>
