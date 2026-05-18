@@ -7,6 +7,7 @@
 
 var ADMIN_PASS = 'miami2026';
 var destinoEditandoId = null;
+var DESTINOS_VERSION = 2; /* debe coincidir con main.js */
 
 /* ===== INICIALIZACIÓN ===== */
 document.addEventListener('DOMContentLoaded', function () {
@@ -242,6 +243,7 @@ function obtenerContactos() {
 
 function guardarDestinos(destinos) {
   localStorage.setItem('em_destinos', JSON.stringify(destinos));
+  localStorage.setItem('em_destinos_version', String(DESTINOS_VERSION));
   actualizarStats();
   renderClicsPorDestino();
 }

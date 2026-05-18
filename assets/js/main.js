@@ -450,11 +450,20 @@ var DESTINOS_DEFAULT = [
   }
 ];
 
-/* Obtiene destinos de localStorage (o los de por defecto si hay error) */
+/* Versión de los datos — incrementar cada vez que cambie DESTINOS_DEFAULT */
+var DESTINOS_VERSION = 2;
+
+/* Obtiene destinos de localStorage; migra automáticamente si la versión es antigua */
 function obtenerDestinos() {
   try {
+    var version = parseInt(localStorage.getItem('em_destinos_version') || '0', 10);
     var d = JSON.parse(localStorage.getItem('em_destinos'));
-    return (d && d.length) ? d : DESTINOS_DEFAULT;
+    if (version < DESTINOS_VERSION || !d || d.length < DESTINOS_DEFAULT.length) {
+      localStorage.setItem('em_destinos', JSON.stringify(DESTINOS_DEFAULT));
+      localStorage.setItem('em_destinos_version', String(DESTINOS_VERSION));
+      return DESTINOS_DEFAULT;
+    }
+    return d;
   } catch (e) { return DESTINOS_DEFAULT; }
 }
 
