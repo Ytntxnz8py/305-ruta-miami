@@ -685,3 +685,103 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 .toast--visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* ===== SECCIÓN GOOGLE ANALYTICS ===== */
+.admin-seccion--ga { border-top: 3px solid var(--admin-turquesa); }
+
+.ga-estado {
+  font-size: 0.82rem; font-weight: 700;
+  color: var(--admin-medio);
+  background: var(--admin-bg);
+  padding: 0.3rem 0.85rem;
+  border-radius: 50px;
+  border: 1.5px solid var(--admin-borde);
+}
+
+.ga-intro {
+  color: var(--admin-medio);
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+}
+
+.ga-pasos {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.ga-paso {
+  display: flex; align-items: flex-start; gap: 1rem;
+  background: var(--admin-blanco);
+  border: 1.5px solid var(--admin-borde);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+  transition: border-color 0.2s;
+}
+.ga-paso:hover { border-color: var(--admin-turquesa); }
+
+.ga-paso__num {
+  min-width: 2rem; height: 2rem;
+  background: linear-gradient(135deg, var(--admin-turquesa), #0097a7);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(0,188,212,0.3);
+}
+
+.ga-paso__cuerpo strong {
+  display: block;
+  font-size: 0.95rem; color: var(--admin-texto);
+  margin-bottom: 0.35rem;
+}
+.ga-paso__cuerpo p {
+  font-size: 0.88rem; color: var(--admin-medio);
+  line-height: 1.55; margin: 0;
+}
+.ga-paso__cuerpo code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.83rem;
+  background: var(--admin-bg);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid var(--admin-borde);
+  color: var(--admin-turquesa);
+}
+
+.ga-code-box {
+  margin-top: 0.6rem;
+  background: #002030;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+}
+.ga-code-box code {
+  background: transparent;
+  border: none;
+  color: #4DD0E1;
+  font-size: 0.85rem;
+}
+
+.ga-eventos { margin-top: 1rem; }
+.ga-eventos__titulo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--admin-texto);
+  margin-bottom: 0.85rem;
+}
+.ga-eventos__grid {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+}
+.ga-evento-chip {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  background: rgba(0,188,212,0.08);
+  color: var(--admin-turquesa);
+  border: 1px solid rgba(0,188,212,0.3);
+  padding: 0.28rem 0.75rem;
+  border-radius: 50px;
+  font-weight: 600;
+}

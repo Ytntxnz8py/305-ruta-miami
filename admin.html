@@ -7,6 +7,15 @@
   <!-- Evita que Google indexe el panel de administración -->
   <meta name="robots" content="noindex, nofollow" />
 
+  <!-- Google Analytics 4 — reemplaza G-XXXXXXXXXX con tu Measurement ID real -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <!-- Google Fonts: Playfair Display + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -250,6 +259,73 @@
         <!-- Los mensajes se renderizan como tarjetas individuales -->
         <div id="bandejaMensajes" class="bandeja-mensajes">
           <p class="tabla-vacia">Cargando mensajes…</p>
+        </div>
+      </section>
+
+      <!-- ===== SECCIÓN: GUÍA GOOGLE ANALYTICS ===== -->
+      <section class="admin-seccion admin-seccion--ga">
+        <div class="admin-seccion__header">
+          <h2 class="admin-seccion__titulo">Activar Google Analytics</h2>
+          <span class="ga-estado" id="gaEstado">⚪ No configurado</span>
+        </div>
+        <p class="ga-intro">Para ver datos reales de visitas, conecta tu propiedad GA4. Solo necesitas 5 minutos.</p>
+
+        <ol class="ga-pasos">
+          <li class="ga-paso">
+            <div class="ga-paso__num">1</div>
+            <div class="ga-paso__cuerpo">
+              <strong>Crea una cuenta en Google Analytics</strong>
+              <p>Ve a <code>analytics.google.com</code> e inicia sesión con tu cuenta Google. Haz clic en <em>Empezar a medir</em>.</p>
+            </div>
+          </li>
+          <li class="ga-paso">
+            <div class="ga-paso__num">2</div>
+            <div class="ga-paso__cuerpo">
+              <strong>Crea una propiedad GA4</strong>
+              <p>Nombre: "Explora Miami" — Zona horaria: Eastern Time (US) — Moneda: USD. Haz clic en <em>Siguiente</em>.</p>
+            </div>
+          </li>
+          <li class="ga-paso">
+            <div class="ga-paso__num">3</div>
+            <div class="ga-paso__cuerpo">
+              <strong>Crea un flujo de datos web</strong>
+              <p>URL: <code>ytntxnz8py.github.io/mi-tienda</code> — Nombre: "Sitio principal". GA4 te dará un <strong>Measurement ID</strong> con formato <code>G-XXXXXXXXXX</code>.</p>
+            </div>
+          </li>
+          <li class="ga-paso">
+            <div class="ga-paso__num">4</div>
+            <div class="ga-paso__cuerpo">
+              <strong>Reemplaza el ID en el código</strong>
+              <p>En <code>index.html</code> y <code>admin.html</code> busca <code>G-XXXXXXXXXX</code> (aparece 2 veces en cada archivo) y reemplázalo con tu Measurement ID real. Haz commit y push.</p>
+              <div class="ga-code-box">
+                <code>gtag('config', 'G-TU_ID_REAL');</code>
+              </div>
+            </div>
+          </li>
+          <li class="ga-paso">
+            <div class="ga-paso__num">5</div>
+            <div class="ga-paso__cuerpo">
+              <strong>Verifica que funciona</strong>
+              <p>En Google Analytics ve a <em>Informes → Tiempo real</em>. Visita tu sitio desde otro navegador — deberías ver 1 usuario activo. Los datos históricos tardan 24–48 horas en aparecer.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="ga-eventos">
+          <h3 class="ga-eventos__titulo">Eventos ya configurados</h3>
+          <div class="ga-eventos__grid">
+            <div class="ga-evento-chip">scroll_depth</div>
+            <div class="ga-evento-chip">section_view</div>
+            <div class="ga-evento-chip">destination_click</div>
+            <div class="ga-evento-chip">modal_open</div>
+            <div class="ga-evento-chip">maps_click</div>
+            <div class="ga-evento-chip">apple_maps_click</div>
+            <div class="ga-evento-chip">reviews_click</div>
+            <div class="ga-evento-chip">contact_form_click</div>
+            <div class="ga-evento-chip">contact_form_submit</div>
+            <div class="ga-evento-chip">language_change</div>
+            <div class="ga-evento-chip">filter_click</div>
+          </div>
         </div>
       </section>
 

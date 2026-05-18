@@ -67,6 +67,16 @@
 
   <link rel="stylesheet" href="assets/css/styles.css" />
 
+  <!-- Google Analytics 4 — reemplaza G-XXXXXXXXXX con tu Measurement ID real -->
+  <!-- Obtén tu ID en: analytics.google.com → Administrar → Flujos de datos -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <!-- Aplica idioma antes de render para evitar flash -->
   <script>
     document.documentElement.classList.add('lang-' + (localStorage.getItem('em_idioma') || 'es'));
@@ -426,5 +436,6 @@
   <!-- Scripts: i18n primero, luego main -->
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/analytics.js"></script>
 </body>
 </html>

@@ -50,15 +50,37 @@ explora-miami/
 | `--turquesa`           | `#00BCD4` | Acento, CTAs Mar           |
 | `--mostaza`            | `#FFB300` | Badges, precios            |
 
-Tipografía: **Abril Fatface** (títulos) + **Nunito** (cuerpo) vía Google Fonts.
+Tipografía: **Playfair Display** italic (títulos) + **Inter** (cuerpo) vía Google Fonts.
 
-## Destinos reales (6)
+## Google Analytics 4
+- Integración: `gtag.js` en `<head>` de `index.html` y `admin.html`
+- Measurement ID: `G-XXXXXXXXXX` (placeholder — reemplazar con ID real de analytics.google.com)
+- Archivo de eventos: `assets/js/analytics.js`
+- Eventos implementados:
+  | Evento                | Disparador                                |
+  |-----------------------|------------------------------------------|
+  | `scroll_depth`        | 25 / 50 / 75 / 100% de scroll            |
+  | `section_view`        | Sección visible por primera vez           |
+  | `destination_click`   | Clic en tarjeta de destino               |
+  | `modal_open`          | Apertura de modal de destino             |
+  | `maps_click`          | Clic en botón Google Maps                |
+  | `apple_maps_click`    | Clic en botón Apple Maps                 |
+  | `reviews_click`       | Clic en "Ver reseñas reales"             |
+  | `contact_form_click`  | Primer clic en formulario "Trabaja"      |
+  | `contact_form_submit` | Envío del formulario                     |
+  | `language_change`     | Cambio ES ↔ EN                           |
+  | `filter_click`        | Clic en filtro Tierra / Mar / Todos      |
+
+## Destinos reales (9)
 1. Everglades National Park — Senderismo y Kayak
-2. John Pennekamp Coral Reef — Buceo y Snorkeling (Key Largo)
-3. Biscayne Bay — Kayak y Paddle Board
-4. Bill Baggs Cape Florida — Playa y Ciclismo
+2. John Pennekamp Coral Reef State Park — Buceo y Snorkeling (Key Largo)
+3. Biscayne National Park — Kayak y Snorkeling
+4. Bill Baggs Cape Florida State Park — Playa y Ciclismo
 5. Oleta River State Park — Kayak y Mountain Bike
 6. Virginia Key Beach Park — Paddle Board y Natación
+7. Matheson Hammock Park — Playa y Snorkeling
+8. Crandon Park — Playa y Kayak
+9. Arch Creek Park — Senderismo y Naturaleza
 
 ## Convenciones
 - Clases CSS en español con metodología BEM simplificada
