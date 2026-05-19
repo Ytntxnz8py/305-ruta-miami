@@ -2157,101 +2157,65 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ================================================================
-   TRANSICIONES SUAVES ENTRE SECCIONES
-   Elimina la línea oscura entre bloques — fusión por gradiente.
-   fade-band oculto (si llega a existir en HTML).
+   FADE-BANDS — Transiciones suaves entre secciones
+   Divs independientes con gradiente exacto entre colores adyacentes.
 ================================================================ */
 
-.fade-band { display: none !important; }
-
-/* ---- hero-arc → seccion-intro ---- */
-/* Hero con más espacio abajo para que intro se solape suavemente */
-.hero-arc { padding-bottom: 6rem; }
-
-/* Intro arranca con tono oscuro del hero y se aclara */
-.seccion-intro {
-  margin-top: -3rem;
-  padding-top: 6rem;
-  background: linear-gradient(
-    to bottom,
-    rgba(7, 30, 43, 0.15) 0%,
-    var(--blanco-arena)    12%,
-    var(--azul-cielo-suave) 100%
-  );
-}
-.seccion-intro { padding-bottom: 0; }
-
-/* ---- seccion-intro → seccion-destinos ---- */
-/* ::before ya está ocupado (ambient lights) — se usa ::after para fade de entrada */
-.seccion-destinos {
-  padding-top: 5rem;
-}
-.seccion-destinos::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 120px;
-  background: linear-gradient(
-    to bottom,
-    var(--azul-cielo-suave) 0%,
-    transparent 100%
-  );
+.fade-band {
+  position: relative;
+  z-index: 5;
+  height: 80px;
+  width: 100%;
   pointer-events: none;
-  z-index: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+  border: none;
+  outline: none;
 }
 
-/* ---- seccion-destinos → seccion-mapa ---- */
-/* ::before libre en seccion-mapa */
-.seccion-mapa { position: relative; }
-.seccion-mapa::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 100px;
+/* Hero → Intro */
+.fade-hero-intro {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--blanco-arena) 100%
+  );
+  margin-top: -80px;
+}
+
+/* Intro → Destinos */
+.fade-intro-dest {
+  background: linear-gradient(
+    to bottom,
+    var(--blanco-arena) 0%,
+    var(--ocean-ini) 100%
+  );
+}
+
+/* Destinos → Mapa */
+.fade-dest-mapa {
   background: linear-gradient(
     to bottom,
     var(--ocean-fin) 0%,
-    transparent 100%
+    var(--azul-cielo-suave) 100%
   );
-  pointer-events: none;
-  z-index: 0;
 }
 
-/* ---- seccion-mapa → seccion-trabaja ---- */
-/* ::before ya está ocupado (dot grid animado) — se usa ::after */
-.seccion-trabaja::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 100px;
+/* Mapa → Trabaja */
+.fade-mapa-trabaja {
   background: linear-gradient(
     to bottom,
     var(--azul-cielo-suave) 0%,
-    transparent 100%
+    var(--verde-tropical) 100%
   );
-  pointer-events: none;
-  z-index: 0;
 }
 
-/* ---- seccion-trabaja → footer ---- */
-.footer { position: relative; }
-.footer::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 80px;
+/* Trabaja → Footer */
+.fade-trabaja-foot {
   background: linear-gradient(
     to bottom,
     var(--verde-tropical) 0%,
-    var(--footer-ini)     100%
+    var(--footer-ini) 100%
   );
-  pointer-events: none;
-}
-
-/* Reduced motion — desactivar si hay alguna transición */
-@media (prefers-reduced-motion: reduce) {
-  .seccion-mapa::before,
-  .seccion-trabaja::after,
-  .seccion-destinos::after,
-  .footer::before { display: none; }
 }
