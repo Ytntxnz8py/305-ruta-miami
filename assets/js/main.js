@@ -932,282 +932,289 @@ function leerConfigSitio() {
 }
 
 /* ===== HERO FOTO-ARC SCROLL ===== */
+var HERO_FOTOS = [
+  'assets/images/hero/hero-01.jpg',
+  'assets/images/hero/hero-02.jpg',
+  'assets/images/hero/hero-03.png',
+  'assets/images/hero/hero-04.png',
+  'assets/images/hero/hero-05.png',
+  'assets/images/hero/hero-06.jpg',
+  'assets/images/hero/hero-07.jpg',
+  'assets/images/hero/hero-08.jpg',
+  'assets/images/hero/hero-09.jpg',
+  'assets/images/hero/hero-10.jpg',
+  'assets/images/hero/hero-11.jpg',
+  'assets/images/hero/hero-12.jpg',
+  'assets/images/hero/hero-13.jpg',
+  'assets/images/hero/hero-14.jpg',
+  'assets/images/hero/hero-15.jpg'
+];
+
 function initHeroArc() {
+  var reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
   var contenedor = document.getElementById('heroFotos');
-  if (!contenedor) return;
+  var seccion    = document.querySelector('.hero-arc');
+  if (!contenedor || !seccion) return;
 
-  var HERO_FOTOS = [
-    'assets/images/hero/hero-01.jpg',
-    'assets/images/hero/hero-02.jpg',
-    'assets/images/hero/hero-03.png',
-    'assets/images/hero/hero-04.png',
-    'assets/images/hero/hero-05.png',
-    'https://upload.wikimedia.org/wikipedia/commons/9/94/Everglades_Landscape_%2849833757502%29.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/2/2a/Sunset_over_the_River_of_Grass%2C_NPSphoto%2C_G.Gardner_%289255157507%29.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/c/ce/9_Mile_Pond_Canoe_Trail_%285%29%2C_NPSPhoto%2C_R_Cammauf_%289101513830%29.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/f/f6/Gfp-florida-everglades-national-park-landscape-with-alligators-and-heron.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/a/a6/John_Pennekamp_Coral_Reef_State_Park_%289189335824%29.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/8/8b/John_Pennekamp_Coral_Reef_State_Park_%289189339738%29.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/9/9f/John_Pennekamp_Coral_Reef_State_Park_-_panoramio.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/9/93/Biscayne-lagoon.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/f/f2/Bill_Baggs_Cape_Florida_State_Park.jpg',
-    'https://upload.wikimedia.org/wikipedia/commons/1/16/Oleta_River_State_Park_-_North_Miami_Beach_-_Florida_-_panoramio.jpg'
-  ];
+  /* ---- Dimensiones ---- */
+  var W = window.innerWidth;
+  var H = window.innerHeight;
 
-  /* ---- Crear tarjetas de foto ---- */
+  /* ---- Estado ---- */
+  var fase          = 'scatter';
+  var introHecho    = false;
+  var scrollVirtual = 0;
+  var MAX_SCROLL    = 2800;
+  var rafPendiente  = false;
+
+  /* ---- Crear cards ---- */
   var cards = [];
   HERO_FOTOS.forEach(function (src, i) {
     var card = document.createElement('div');
     card.className = 'hero-foto-card';
     card.setAttribute('aria-hidden', 'true');
+    card.setAttribute('tabindex', '-1');
+
     var img = document.createElement('img');
     img.src = src;
     img.alt = '';
-    img.loading = i < 5 ? 'eager' : 'lazy';
+    img.loading  = i < 5 ? 'eager' : 'lazy';
     img.decoding = 'async';
+    img.onerror  = function () {
+      if (this.src !== window.location.origin + '/assets/images/hero/hero-01.jpg') {
+        this.src = 'assets/images/hero/hero-01.jpg';
+      }
+    };
     card.appendChild(img);
     contenedor.appendChild(card);
+
+    card.style.cssText =
+      'position:absolute;left:50%;top:50%;' +
+      'opacity:0;transform:translate(-50%,-50%) scale(0.3);' +
+      'will-change:transform,opacity;';
+
     cards.push(card);
   });
 
-  var N = cards.length;
-  var VW = window.innerWidth;
-  var VH = window.innerHeight;
-  var CX = VW / 2;
-  var CY = VH / 2;
+  var TOTAL = cards.length;
 
-  /* ---- Estado ---- */
-  var fase = 'scatter';   /* scatter → linea → circulo → arco */
-  var scrollVirtual = 0;  /* 0 – 2800 px */
-  var mouseX = 0, mouseY = 0;
-  var rafPendiente = false;
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---- Posiciones scatter (reproducibles) ---- */
+  var posScatter = cards.map(function (_, i) {
+    var angulo = (i / TOTAL) * Math.PI * 2.7;
+    var radio  = 300 + (i % 3) * 180;
+    return {
+      x: Math.cos(angulo) * radio,
+      y: Math.sin(angulo) * radio * 0.6,
+      r: (i % 7 - 3) * 22,
+      s: 0.6,
+      o: 0
+    };
+  });
 
-  /* ---- Calcular posición según fase ---- */
-  function calcularPosicion(idx, faseActual, t) {
-    var pct = idx / (N - 1);
-    var angBase = (idx / N) * Math.PI * 2;
+  /* ---- Aplicar transform directo ---- */
+  function aplicar(card, x, y, r, s, o) {
+    card.style.opacity   = o;
+    card.style.transform =
+      'translate(calc(-50% + ' + x.toFixed(1) + 'px),' +
+      'calc(-50% + '           + y.toFixed(1) + 'px))' +
+      'rotate('                + r.toFixed(1) + 'deg)' +
+      'scale('                 + s.toFixed(3) + ')';
+  }
 
-    /* SCATTER */
-    var sx = CX + (Math.sin(angBase * 3.1 + idx) * VW * 0.46);
-    var sy = CY + (Math.cos(angBase * 2.3 + idx) * VH * 0.44);
-    var sr = (idx % 3 - 1) * 32;
-    var ss = 0.72 + (idx % 5) * 0.07;
-    var so = 0.55 + (idx % 4) * 0.09;
+  /* ---- Lerp ---- */
+  function lerp(a, b, t) { return a + (b - a) * t; }
 
-    /* LÍNEA */
-    var lx = VW * 0.06 + pct * VW * 0.88;
-    var ly = CY + Math.sin(pct * Math.PI * 2) * 28;
-    var lr = 0;
-    var ls = 0.78;
-    var lo = 0.82;
+  /* ---- Estado actual de cada card ---- */
+  var estadoActual = posScatter.map(function (p) {
+    return { x: p.x, y: p.y, r: p.r, s: p.s, o: p.o };
+  });
 
-    /* CÍRCULO */
-    var radio = Math.min(VW, VH) * 0.32;
-    var ang = (idx / N) * Math.PI * 2 - Math.PI / 2;
-    var cx2 = CX + Math.cos(ang) * radio;
-    var cy2 = CY + Math.sin(ang) * radio;
-    var cr = (ang * 180 / Math.PI) + 90;
-    var cs = 0.82;
-    var co = 0.88;
+  /* ---- Calcular posicion objetivo segun fase ---- */
+  function calcularObjetivo(i) {
+    var isMobile = W < 768;
+    var minDim   = Math.min(W, H);
 
-    /* ARCO (fase final, scroll driven) */
-    var arcW  = VW * 0.92;
-    var arcH  = VH * 0.38;
-    var arcAng = -Math.PI * 0.72 + pct * Math.PI * 1.44;
-    var ax = CX + Math.cos(arcAng) * (arcW / 2);
-    var ay = VH * 0.72 + Math.sin(arcAng) * arcH;
-    var ar = arcAng * (180 / Math.PI) + 90;
-    var as2 = 0.70 + Math.abs(Math.sin(arcAng)) * 0.22;
-    var ao = 0.72 + Math.abs(Math.sin(arcAng)) * 0.20;
+    if (fase === 'scatter') return posScatter[i];
 
-    /* Interpolación lineal helper */
-    function lerp(a, b, t2) { return a + (b - a) * t2; }
+    if (fase === 'linea') {
+      var spacing = isMobile ? 54 : 70;
+      var total   = TOTAL * spacing;
+      return { x: i * spacing - total / 2, y: 0, r: 0, s: 1, o: 1 };
+    }
 
-    if (faseActual === 'scatter') {
-      return { x: sx, y: sy, rot: sr, sc: ss, op: so };
-    } else if (faseActual === 'linea') {
-      return {
-        x: lerp(sx, lx, t), y: lerp(sy, ly, t),
-        rot: lerp(sr, lr, t), sc: lerp(ss, ls, t), op: lerp(so, lo, t)
-      };
-    } else if (faseActual === 'circulo') {
-      return {
-        x: lerp(lx, cx2, t), y: lerp(ly, cy2, t),
-        rot: lerp(lr, cr, t), sc: lerp(ls, cs, t), op: lerp(lo, co, t)
-      };
-    } else { /* arco */
-      /* t aquí es el progreso circulo→arco (0–1) */
-      var easeT = t * t * (3 - 2 * t); /* smoothstep */
-      return {
-        x: lerp(cx2, ax, easeT), y: lerp(cy2, ay, easeT),
-        rot: lerp(cr, ar, easeT), sc: lerp(cs, as2, easeT), op: lerp(co, ao, easeT)
-      };
+    var radioC  = Math.min(minDim * 0.36, 300);
+    var angC    = (i / TOTAL) * 360;
+    var radC    = angC * Math.PI / 180;
+    var circulo = {
+      x: Math.cos(radC) * radioC,
+      y: Math.sin(radC) * radioC,
+      r: angC + 90, s: 1, o: 1
+    };
+
+    var radioBase = Math.min(W, H * 1.5);
+    var radioA    = radioBase * (isMobile ? 1.3 : 1.0);
+    var apiceY    = H * (isMobile ? 0.30 : 0.20);
+    var centroA   = apiceY + radioA - H / 2;
+    var apertura  = isMobile ? 90 : 120;
+    var angIni    = -90 - apertura / 2;
+    var paso      = apertura / (TOTAL - 1);
+    var progS     = Math.min(Math.max(scrollVirtual / MAX_SCROLL, 0), 1);
+    var rotS      = -progS * apertura * 0.7;
+    var angA      = angIni + i * paso + rotS;
+    var radA      = angA * Math.PI / 180;
+    var escalaA   = isMobile ? 1.45 : 1.8;
+    var arco = {
+      x: Math.cos(radA) * radioA,
+      y: Math.sin(radA) * radioA + centroA,
+      r: angA + 90, s: escalaA, o: 1
+    };
+
+    var mt = Math.min(Math.max(scrollVirtual / 500, 0), 1);
+    var t  = mt < 0.5
+      ? 4 * mt * mt * mt
+      : 1 - Math.pow(-2 * mt + 2, 3) / 2;
+
+    return {
+      x: lerp(circulo.x, arco.x, t),
+      y: lerp(circulo.y, arco.y, t),
+      r: lerp(circulo.r, arco.r, t),
+      s: lerp(circulo.s, arco.s, t),
+      o: 1
+    };
+  }
+
+  /* ---- Loop RAF ---- */
+  var SUAVIZADO_INTRO  = 0.12;
+  var SUAVIZADO_SCROLL = 0.28;
+
+  function loop() {
+    rafPendiente = false;
+    var suavizado = introHecho ? SUAVIZADO_SCROLL : SUAVIZADO_INTRO;
+    var hayMovimiento = false;
+
+    cards.forEach(function (card, i) {
+      var obj = calcularObjetivo(i);
+      var cur = estadoActual[i];
+      var dx = Math.abs(obj.x - cur.x);
+      var dy = Math.abs(obj.y - cur.y);
+
+      cur.x = lerp(cur.x, obj.x, suavizado);
+      cur.y = lerp(cur.y, obj.y, suavizado);
+      cur.r = lerp(cur.r, obj.r, suavizado);
+      cur.s = lerp(cur.s, obj.s, suavizado);
+      cur.o = lerp(cur.o, obj.o, suavizado * 1.5);
+
+      aplicar(card, cur.x, cur.y, cur.r, cur.s, cur.o);
+      if (dx > 0.3 || dy > 0.3) hayMovimiento = true;
+    });
+
+    if (hayMovimiento) solicitarLoop();
+  }
+
+  function solicitarLoop() {
+    if (!rafPendiente) {
+      rafPendiente = true;
+      requestAnimationFrame(loop);
     }
   }
 
-  /* ---- Aplicar posición a DOM ---- */
-  function aplicarPosiciones(faseActual, t) {
-    cards.forEach(function (card, i) {
-      var p = calcularPosicion(i, faseActual, t);
-      var mx = (mouseX - 0.5) * 18;
-      var my = (mouseY - 0.5) * 12;
-      card.style.transform =
-        'translate(' + (p.x - 34) + 'px, ' + (p.y - 48) + 'px) ' +
-        'rotate(' + (p.rot + mx * 0.4) + 'deg) ' +
-        'scale(' + p.sc + ') ' +
-        'translateZ(0)';
-      card.style.opacity = p.op;
-    });
-  }
-
-  /* ---- RAF batch ---- */
-  function pedirFrame() {
-    if (rafPendiente) return;
-    rafPendiente = true;
-    requestAnimationFrame(function () {
-      rafPendiente = false;
-      /* Determinar fase y t desde scrollVirtual */
-      if (scrollVirtual < 700) {
-        aplicarPosiciones('linea', Math.min(scrollVirtual / 700, 1));
-      } else if (scrollVirtual < 1400) {
-        aplicarPosiciones('circulo', Math.min((scrollVirtual - 700) / 700, 1));
-      } else {
-        aplicarPosiciones('arco', Math.min((scrollVirtual - 1400) / 1400, 1));
-      }
-    });
-  }
-
-  /* ---- Scroll virtual: wheel + touch ---- */
-  var heroEl = document.getElementById('inicio');
-  var tocandoY = 0;
-
-  if (heroEl && !reducedMotion) {
-    heroEl.addEventListener('wheel', function (e) {
-      scrollVirtual = Math.max(0, Math.min(2800, scrollVirtual + e.deltaY));
+  /* ---- Scroll virtual: SOLO cuando hero activo ---- */
+  seccion.addEventListener('wheel', function (e) {
+    var rect       = seccion.getBoundingClientRect();
+    var heroActivo = rect.top <= 0 && rect.bottom >= window.innerHeight * 0.3;
+    var puedeScroll =
+      (e.deltaY > 0 && scrollVirtual < MAX_SCROLL) ||
+      (e.deltaY < 0 && scrollVirtual > 0);
+    if (heroActivo && puedeScroll && introHecho) {
       e.preventDefault();
-      pedirFrame();
-    }, { passive: false });
+      scrollVirtual = Math.min(Math.max(scrollVirtual + e.deltaY * 0.8, 0), MAX_SCROLL);
+      solicitarLoop();
+    }
+  }, { passive: false });
 
-    heroEl.addEventListener('touchstart', function (e) {
-      tocandoY = e.touches[0].clientY;
-    }, { passive: true });
-
-    heroEl.addEventListener('touchmove', function (e) {
-      var dy = tocandoY - e.touches[0].clientY;
-      tocandoY = e.touches[0].clientY;
-      scrollVirtual = Math.max(0, Math.min(2800, scrollVirtual + dy * 1.6));
-      pedirFrame();
-    }, { passive: true });
-  }
-
-  /* ---- Parallax mouse ---- */
-  if (!reducedMotion) {
-    document.addEventListener('mousemove', function (e) {
-      mouseX = e.clientX / VW;
-      mouseY = e.clientY / VH;
-      pedirFrame();
-    }, { passive: true });
-  }
-
-  /* ---- Resize ---- */
-  window.addEventListener('resize', function () {
-    VW = window.innerWidth;
-    VH = window.innerHeight;
-    CX = VW / 2;
-    CY = VH / 2;
-    pedirFrame();
+  var touchY0 = 0;
+  seccion.addEventListener('touchstart', function (e) {
+    touchY0 = e.touches[0].clientY;
   }, { passive: true });
 
-  /* ---- Efecto shutter en el título ---- */
-  function initShutter() {
+  seccion.addEventListener('touchmove', function (e) {
+    if (!introHecho) return;
+    var delta = (touchY0 - e.touches[0].clientY) * 1.2;
+    touchY0   = e.touches[0].clientY;
+    var puedeScroll =
+      (delta > 0 && scrollVirtual < MAX_SCROLL) ||
+      (delta < 0 && scrollVirtual > 0);
+    if (puedeScroll) {
+      scrollVirtual = Math.min(Math.max(scrollVirtual + delta, 0), MAX_SCROLL);
+      solicitarLoop();
+    }
+  }, { passive: true });
+
+  seccion.addEventListener('mousemove', function () {
+    if (reducedMotion || !introHecho) return;
+    solicitarLoop();
+  });
+
+  window.addEventListener('resize', function () {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    solicitarLoop();
+  }, { passive: true });
+
+  /* ---- Shutter titulo ---- */
+  function initShutter(conDelay) {
     var titulo = document.getElementById('heroTitulo');
     if (!titulo) return;
-    var texto = 'Explora Miami';
     titulo.innerHTML = '';
-    titulo.setAttribute('aria-label', texto);
-    texto.split('').forEach(function (letra, i) {
-      var span = document.createElement('span');
-      span.className = 'shutter-letra';
-      span.setAttribute('aria-hidden', 'true');
+    titulo.setAttribute('aria-label', 'EXPLORA MIAMI');
+    'EXPLORA MIAMI'.split('').forEach(function (c, i) {
+      if (c === ' ') {
+        var sp = document.createElement('span');
+        sp.style.cssText = 'display:inline-block;width:0.28em';
+        titulo.appendChild(sp);
+        return;
+      }
+      var wrap = document.createElement('span');
+      wrap.className = 'shutter-letra';
       var capa = document.createElement('span');
       capa.className = 'shutter-capa';
-      capa.textContent = letra === ' ' ? ' ' : letra;
-      capa.style.animationDelay = (0.4 + i * 0.045) + 's';
-      span.appendChild(capa);
-      titulo.appendChild(span);
+      capa.textContent = c;
+      if (conDelay) capa.style.animationDelay = (0.5 + i * 0.048) + 's';
+      wrap.appendChild(capa);
+      titulo.appendChild(wrap);
     });
   }
 
   /* ---- Secuencia de intro ---- */
-  function introSequence() {
-    /* Posición inicial: scatter */
-    cards.forEach(function (card, i) {
-      var p = calcularPosicion(i, 'scatter', 0);
-      card.style.transform =
-        'translate(' + (p.x - 34) + 'px, ' + (p.y - 48) + 'px) ' +
-        'rotate(' + p.rot + 'deg) scale(' + p.sc + ') translateZ(0)';
-      card.style.opacity = 0;
-      card.style.transition = 'none';
-    });
-
-    if (reducedMotion) {
-      /* Sin animación: ir directo al arco */
-      scrollVirtual = 2800;
-      pedirFrame();
-      initShutter();
-      return;
-    }
-
-    /* Fase 1: fade in scatter (0 – 0.6 s) */
-    setTimeout(function () {
-      cards.forEach(function (card, i) {
-        card.style.transition = 'opacity 0.5s ease ' + (i * 0.04) + 's';
-        var p = calcularPosicion(i, 'scatter', 0);
-        card.style.opacity = p.op;
-      });
-    }, 80);
-
-    /* Fase 2: → línea (0.9 s) */
-    setTimeout(function () {
-      cards.forEach(function (card) {
-        card.style.transition = 'transform 0.9s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease';
-      });
-      scrollVirtual = 700;
-      pedirFrame();
-    }, 900);
-
-    /* Fase 3: → círculo (1.1 s) */
-    setTimeout(function () {
-      cards.forEach(function (card) {
-        card.style.transition = 'transform 1.1s cubic-bezier(0.16,1,0.3,1), opacity 0.7s ease';
-      });
-      scrollVirtual = 1400;
-      pedirFrame();
-    }, 2100);
-
-    /* Fase 4: → arco (1.3 s) — estado final de reposo */
-    setTimeout(function () {
-      cards.forEach(function (card) {
-        card.style.transition = 'transform 1.3s cubic-bezier(0.16,1,0.3,1), opacity 0.8s ease';
-      });
-      scrollVirtual = 2800;
-      pedirFrame();
-
-      /* Quitar transition para que scroll sea fluido */
-      setTimeout(function () {
-        cards.forEach(function (card) {
-          card.style.transition = 'none';
-        });
-      }, 1400);
-    }, 3500);
-
-    /* Título shutter */
-    setTimeout(initShutter, 500);
+  if (reducedMotion) {
+    fase = 'circulo';
+    introHecho = true;
+    loop();
+    initShutter(false);
+    return;
   }
 
-  introSequence();
+  cards.forEach(function (card, i) {
+    var p = posScatter[i];
+    estadoActual[i] = { x: p.x, y: p.y, r: p.r, s: p.s, o: 0 };
+    aplicar(card, p.x, p.y, p.r, p.s, 0);
+  });
+
+  setTimeout(function () {
+    fase = 'scatter';
+    cards.forEach(function (_, i) { estadoActual[i].o = 1; });
+    solicitarLoop();
+  }, 300);
+
+  setTimeout(function () { fase = 'linea';   solicitarLoop(); }, 1200);
+  setTimeout(function () { fase = 'circulo'; solicitarLoop(); }, 2800);
+  setTimeout(function () { introHecho = true; }, 4500);
+  setTimeout(function () { initShutter(true); }, 500);
 }
+
 
 /* ===== INICIALIZACIÓN ===== */
 document.addEventListener('DOMContentLoaded', function () {
