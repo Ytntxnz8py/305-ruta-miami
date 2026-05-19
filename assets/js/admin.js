@@ -6,7 +6,10 @@
 
 /* ===== CONSTANTES Y ESTADO ===== */
 var ADMIN_PASS = 'miami2026';
-var GAS_SECRET = 'explora_miami_gas_2026'; /* Debe coincidir con gas-proxy.js */
+/* GAS_SECRET se lee desde admin-config.js → ADMIN_CONFIG.GAS_SECRET */
+var GAS_SECRET = (typeof ADMIN_CONFIG !== 'undefined' && ADMIN_CONFIG.GAS_SECRET)
+  ? ADMIN_CONFIG.GAS_SECRET
+  : 'explora_miami_gas_2026';
 var DESTINOS_VERSION = 3;  /* debe coincidir con main.js */
 var MAX_INTENTOS = 5;
 
