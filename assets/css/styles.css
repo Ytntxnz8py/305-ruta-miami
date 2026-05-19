@@ -457,7 +457,7 @@ html.lang-es .lang-en { display: none; }
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url('../images/hero-bg.jpg');
+  background-image: url('../images/hero-bg.png');
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
