@@ -948,6 +948,85 @@ var HERO_FOTOS = [
   /* hero-13, hero-14, hero-15 omitidos — total 12 cards */
 ];
 
+/* ===== HERO TRAIL — ImageTrail vanilla (port del componente React) ===== */
+function initHeroTrail() {
+  var hero  = document.getElementById('inicio');
+  var trail = document.getElementById('heroTrail');
+  if (!hero || !trail) return;
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Shutter en el título */
+  (function initShutter() {
+    var titulo = document.getElementById('heroTitulo');
+    if (!titulo) return;
+    titulo.innerHTML = '';
+    titulo.setAttribute('aria-label', 'EXPLORA MIAMI');
+    'EXPLORA MIAMI'.split('').forEach(function(c, i) {
+      if (c === ' ') {
+        var sp = document.createElement('span');
+        sp.style.cssText = 'display:inline-block;width:0.28em';
+        titulo.appendChild(sp);
+        return;
+      }
+      var wrap = document.createElement('span');
+      wrap.className = 'shutter-letra';
+      var capa = document.createElement('span');
+      capa.className = 'shutter-capa';
+      capa.textContent = c;
+      if (!reducedMotion) capa.style.animationDelay = (0.4 + i * 0.048) + 's';
+      wrap.appendChild(capa);
+      titulo.appendChild(wrap);
+    });
+  })();
+
+  if (reducedMotion) return;
+
+  var interval   = 100;  /* ms mínimo entre spawns */
+  var rotRange   = 15;   /* ± grados de rotación aleatoria */
+  var currentIdx = 0;
+  var lastTime   = 0;
+
+  function spawnItem(x, y) {
+    var img = new Image();
+    img.src = HERO_FOTOS[currentIdx];
+    img.alt = '';
+    currentIdx = (currentIdx + 1) % HERO_FOTOS.length;
+    img.className = 'hero-trail-img';
+    img.style.left = x + 'px';
+    img.style.top  = y + 'px';
+    trail.appendChild(img);
+
+    var rot = (Math.random() - 0.5) * rotRange * 2;
+    img.animate([
+      { transform: 'translate(-50%,-50%) rotate(' + rot + 'deg) scale(0)',   opacity: 1 },
+      { transform: 'translate(-50%,-50%) rotate(' + rot + 'deg) scale(1.2)', opacity: 1, offset: 0.15 },
+      { transform: 'translate(-50%,-50%) rotate(' + rot + 'deg) scale(0)',   opacity: 0 }
+    ], { duration: 700, easing: 'ease-in-out', fill: 'forwards' })
+    .onfinish = function() {
+      if (img.parentNode) img.parentNode.removeChild(img);
+    };
+  }
+
+  hero.addEventListener('mousemove', function(e) {
+    var now = performance.now();
+    if (now - lastTime < interval) return;
+    lastTime = now;
+    var rect = hero.getBoundingClientRect();
+    spawnItem(e.clientX - rect.left, e.clientY - rect.top);
+  }, { passive: true });
+
+  hero.addEventListener('touchmove', function(e) {
+    var now = performance.now();
+    if (now - lastTime < interval) return;
+    lastTime = now;
+    var touch = e.touches[0];
+    var rect  = hero.getBoundingClientRect();
+    spawnItem(touch.clientX - rect.left, touch.clientY - rect.top);
+  }, { passive: true });
+}
+
+/* ===== [REMOVED: initHeroArc — reemplazado por initHeroTrail] ===== */
 function initHeroArc() {
   var reducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
@@ -1586,7 +1665,7 @@ document.addEventListener('DOMContentLoaded', function () {
   registrarVisita();
   renderDestinos();
   initScrollAnimation();
-  initHeroArc();
+  initHeroTrail();
   initGlobo();
   initReferenciasGlobo();
   if (document.readyState === 'complete') {
