@@ -534,8 +534,83 @@ html.lang-es .lang-en { display: none; }
 
 /* ===== SECCIÓN INTRO ===== */
 .seccion-intro {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(180deg, var(--blanco-arena) 0%, rgba(227,244,255,0.35) 60%, rgba(255,243,240,0.30) 100%);
   padding: var(--seccion-py) 1.5rem;
+}
+
+/* ---- Video de fondo ---- */
+.seccion-intro__video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.seccion-intro__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.05);
+}
+
+.seccion-intro__video-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 253, 247, 0.85) 0%,
+      rgba(255, 253, 247, 0.55) 30%,
+      rgba(255, 253, 247, 0.55) 70%,
+      rgba(255, 253, 247, 0.90) 100%
+    );
+}
+
+/* Contenido encima del video */
+.seccion-intro__contenedor {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cards con fondo sólido y sombra sobre el video */
+.intro-card {
+  background: rgba(255, 253, 247, 0.92) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px  rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Título y subtítulo legibles sobre video */
+.seccion-intro__titulo,
+.seccion-intro__subtitulo {
+  text-shadow: 0 1px 12px rgba(255, 253, 247, 0.9);
+}
+
+/* Reduced motion — ocultar video */
+@media (prefers-reduced-motion: reduce) {
+  .seccion-intro__video { display: none; }
+}
+
+/* Mobile — overlay más denso */
+@media (max-width: 768px) {
+  .seccion-intro__video { object-position: center center; }
+  .seccion-intro__video-overlay {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(255, 253, 247, 0.88) 0%,
+        rgba(255, 253, 247, 0.65) 30%,
+        rgba(255, 253, 247, 0.65) 70%,
+        rgba(255, 253, 247, 0.92) 100%
+      );
+  }
 }
 
 .seccion-intro__contenedor { max-width: var(--max); margin: 0 auto; text-align: center; }
