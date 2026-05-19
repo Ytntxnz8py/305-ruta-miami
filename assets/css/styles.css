@@ -449,6 +449,54 @@ html.lang-es .lang-en { display: none; }
     animation: none !important;
     opacity: 1 !important;
   }
+  .hfa-item { animation: none !important; opacity: 0.65 !important; }
+}
+
+/* ===== HERO — Imagen de fondo subacuática ===== */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('../images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  opacity: 0.16;        /* sutil — preserva el tema blanco arena */
+  pointer-events: none;
+}
+
+/* ===== HERO — Frases emotivas flotantes ===== */
+.hero-frases-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hfa-item {
+  position: absolute;
+  left: var(--x);
+  top:  var(--y);
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  white-space: nowrap;
+  opacity: 0;
+  animation: hfa-aparece 1s ease forwards var(--d);
+}
+
+.hfa-item--wide {
+  font-size: 0.74rem;
+  transform: translateX(-50%);
+}
+
+@keyframes hfa-aparece {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  100% { opacity: 0.68; transform: translateX(-50%) translateY(0); }
 }
 
 /* ===== SECCIÓN INTRO ===== */
@@ -2340,9 +2388,16 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   transform: translateY(-4px) !important;
 }
 
-/* Texto de las cards: color oscuro */
-.destino-card__nombre { color: var(--texto-oscuro) !important; }
-.destino-card__descripcion { color: var(--texto-medio) !important; }
+/* Texto de las cards: color oscuro (corregido: __desc y __meta-item) */
+.destino-card__nombre    { color: var(--texto-oscuro) !important; }
+.destino-card__desc      { color: var(--texto-medio)  !important; }
+.destino-card__meta-item { color: var(--texto-medio)  !important; }
+
+/* Imagen de las cards: altura reducida para tarjetas más compactas */
+.destino-card__img-cont  { height: 190px !important; }
+
+/* Grid: más separación entre tarjetas */
+#destinosGrid            { gap: 3.2rem 2rem !important; }
 
 /* --- Fade bands: no necesarias con un solo color de fondo --- */
 .fade-band { height: 0 !important; overflow: hidden !important; }
