@@ -19,6 +19,7 @@ var TEXTOS = {
     hero_tagline:      'Tu próxima aventura empieza aquí',
     hero_btn_destinos: 'Ver destinos',
     hero_btn_mapa:     'Ver mapa',
+    hero_scroll:       'Desliza',
 
     /* Intro */
     intro_titulo:    '¿Por qué Explora Miami?',
@@ -85,6 +86,7 @@ var TEXTOS = {
     hero_tagline:      'Your next adventure starts here',
     hero_btn_destinos: 'See destinations',
     hero_btn_mapa:     'View map',
+    hero_scroll:       'Scroll',
 
     /* Intro */
     intro_titulo:    'Why Explora Miami?',

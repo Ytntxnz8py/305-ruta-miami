@@ -117,29 +117,39 @@
 
   <main>
 
-    <!-- ===== HERO: video + overlay tropical ===== -->
-    <section class="hero" id="inicio">
+    <!-- ===== NUEVO HERO: Foto-Arc Scroll ===== -->
+    <section class="hero-arc" id="inicio" aria-label="Hero principal">
 
-      <div class="hero__fondo" aria-hidden="true">
-        <video class="hero__video" autoplay muted loop playsinline>
-          <source src="assets/videos/hero-tierra.mp4.mp4" type="video/mp4" />
-        </video>
-        <!-- Overlay turquesa → coral: fresco y tropical -->
-        <div class="hero__overlay"></div>
-      </div>
+      <!-- Fondo oscuro con luces de ambiente -->
+      <div class="hero-arc__fondo" aria-hidden="true"></div>
 
-      <div class="hero__contenido">
-        <span class="hero__etiqueta">Miami · South Florida</span>
-        <h1 class="hero__titulo" data-i18n="hero_titulo">EXPLORA MIAMI</h1>
-        <p class="hero__tagline" data-i18n="hero_tagline">Tu próxima aventura empieza aquí</p>
-        <div class="hero__botones">
-          <a href="#destinos" class="btn btn--primario" data-i18n="hero_btn_destinos">Ver destinos</a>
+      <!-- Contenedor de fotos animadas (cards generadas por JS) -->
+      <div class="hero-arc__fotos" id="heroFotos" aria-hidden="true"></div>
+
+      <!-- Contenido central -->
+      <div class="hero-arc__contenido">
+        <span class="hero-arc__etiqueta">Miami · South Florida</span>
+
+        <h1 class="hero-arc__titulo"
+            id="heroTitulo"
+            aria-label="Explora Miami">
+          <!-- Letras inyectadas por JS con efecto shutter -->
+        </h1>
+
+        <p class="hero-arc__tagline" data-i18n="hero_tagline">
+          Tu próxima aventura empieza aquí
+        </p>
+
+        <div class="hero-arc__botones">
+          <a href="#destinos" class="btn btn--primario"   data-i18n="hero_btn_destinos">Ver destinos</a>
           <a href="#mapa"     class="btn btn--secundario" data-i18n="hero_btn_mapa">Ver mapa</a>
         </div>
       </div>
 
-      <div class="hero__scroll" aria-hidden="true">
-        <div class="hero__scroll-flecha"></div>
+      <!-- Indicador de scroll -->
+      <div class="hero-arc__scroll" aria-hidden="true">
+        <span class="hero-arc__scroll-texto" data-i18n="hero_scroll">Desliza</span>
+        <div class="hero-arc__scroll-linea"></div>
       </div>
 
     </section>
