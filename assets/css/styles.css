@@ -774,16 +774,17 @@ html.lang-es .lang-en { display: none; }
 }
 
 /* ---- COLUMNA GLOBO ---- */
+/* Fondo claro — el globo cobe.js es blanco */
 .mapa-globo-wrap {
-  background: linear-gradient(135deg, var(--ocean-ini) 0%, var(--ocean-mid) 100%);
+  background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%) !important;
   border-radius: 24px;
   padding: 1.8rem;
   position: relative;
   overflow: hidden;
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-  border: 1px solid var(--glass-border);
+    0 20px 60px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+  border: 1px solid rgba(100, 150, 255, 0.15);
 }
 
 .mapa-globo-header {
@@ -793,20 +794,25 @@ html.lang-es .lang-en { display: none; }
   margin-bottom: 1.2rem;
 }
 
+/* Label oscuro sobre fondo claro */
 .mapa-globo-label {
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255,253,247,0.65);
+  color: rgba(30, 50, 100, 0.55);
 }
 
+/* Canvas con fade-in — cobe lo pinta en su propio loop */
 .mapa-globo-canvas {
   width: 100%;
   aspect-ratio: 1 / 1;
   display: block;
   border-radius: 50%;
   cursor: grab;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  background: transparent;
 }
 
 .mapa-globo-canvas:active { cursor: grabbing; }
@@ -819,25 +825,26 @@ html.lang-es .lang-en { display: none; }
   gap: 0.45rem;
 }
 
+/* Chips — tema claro sobre fondo claro */
 .mapa-ref-chip {
   font-size: 0.68rem;
   font-weight: 500;
-  padding: 0.25rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,253,247,0.80);
-  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  color: rgba(30, 50, 80, 0.75);
+  background: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
-  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  transition: background 0.2s ease, color 0.2s ease;
   cursor: default;
 }
-.mapa-ref-chip:hover { background: rgba(255,255,255,0.14); color: rgba(255,253,247,1); }
+.mapa-ref-chip:hover { background: rgba(255, 255, 255, 0.95); color: rgba(30, 50, 80, 1); }
 
-.mapa-ref-chip--playa    { border-color: rgba(0,188,212,0.35);   color: rgba(0,220,240,0.90); }
-.mapa-ref-chip--parque   { border-color: rgba(124,179,66,0.35);  color: rgba(160,220,80,0.90); }
-.mapa-ref-chip--cultura  { border-color: rgba(255,179,0,0.35);   color: rgba(255,200,60,0.90); }
-.mapa-ref-chip--aventura { border-color: rgba(255,107,107,0.35); color: rgba(255,140,120,0.90); }
-.mapa-ref-chip--agua     { border-color: rgba(100,181,246,0.35); color: rgba(140,200,255,0.90); }
+.mapa-ref-chip--playa    { border-color: rgba(0, 150, 200, 0.30);   color: rgba(0, 120, 180, 0.90); }
+.mapa-ref-chip--parque   { border-color: rgba(80, 160, 50, 0.30);   color: rgba(60, 140, 40, 0.90); }
+.mapa-ref-chip--cultura  { border-color: rgba(200, 140, 0, 0.30);   color: rgba(170, 110, 0, 0.90); }
+.mapa-ref-chip--aventura { border-color: rgba(200, 60, 60, 0.30);   color: rgba(180, 50, 50, 0.90); }
+.mapa-ref-chip--agua     { border-color: rgba(50, 140, 220, 0.30);  color: rgba(40, 120, 200, 0.90); }
 
 /* ---- COLUMNA MAPA LEAFLET ---- */
 .mapa-leaflet-wrap {
@@ -881,7 +888,7 @@ html.lang-es .lang-en { display: none; }
 .mapa-leyenda-dot--mar    { background: var(--turquesa); }
 .mapa-leyenda-dot--ref    { background: var(--mostaza); opacity: 0.7; }
 
-/* Overrides Leaflet */
+/* Overrides Leaflet generales */
 .leaflet-container { font-family: var(--sans) !important; }
 .leaflet-popup-content-wrapper {
   border-radius: 12px !important;
@@ -892,6 +899,22 @@ html.lang-es .lang-en { display: none; }
   margin: 12px 16px !important;
   font-size: 0.88rem !important;
   line-height: 1.5 !important;
+}
+
+/* Popup personalizado para destinos principales */
+.explora-popup .leaflet-popup-content-wrapper {
+  border-radius: 14px !important;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.14),
+    0 2px 8px  rgba(0,0,0,0.08) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  padding: 0 !important;
+}
+.explora-popup .leaflet-popup-content {
+  margin: 14px 18px !important;
+}
+.explora-popup .leaflet-popup-tip {
+  box-shadow: none !important;
 }
 
 /* Responsive */
