@@ -935,19 +935,17 @@ function leerConfigSitio() {
 var HERO_FOTOS = [
   'assets/images/hero/hero-01.jpg',
   'assets/images/hero/hero-02.jpg',
-  'assets/images/hero/hero-03.png',
-  'assets/images/hero/hero-04.png',
-  'assets/images/hero/hero-05.png',
+  'assets/images/hero/hero-03.jpg',
+  'assets/images/hero/hero-04.jpg',
+  'assets/images/hero/hero-05.jpg',
   'assets/images/hero/hero-06.jpg',
   'assets/images/hero/hero-07.jpg',
   'assets/images/hero/hero-08.jpg',
   'assets/images/hero/hero-09.jpg',
   'assets/images/hero/hero-10.jpg',
   'assets/images/hero/hero-11.jpg',
-  'assets/images/hero/hero-12.jpg',
-  'assets/images/hero/hero-13.jpg',
-  'assets/images/hero/hero-14.jpg',
-  'assets/images/hero/hero-15.jpg'
+  'assets/images/hero/hero-12.jpg'
+  /* hero-13, hero-14, hero-15 omitidos — total 12 cards */
 ];
 
 function initHeroArc() {
@@ -1087,8 +1085,8 @@ function initHeroArc() {
   }
 
   /* ---- Loop RAF ---- */
-  var SUAVIZADO_INTRO  = 0.12;
-  var SUAVIZADO_SCROLL = 0.28;
+  var SUAVIZADO_INTRO  = 0.22;
+  var SUAVIZADO_SCROLL = 0.35;
 
   function loop() {
     rafPendiente = false;
@@ -1108,7 +1106,7 @@ function initHeroArc() {
       cur.o = lerp(cur.o, obj.o, suavizado * 1.5);
 
       aplicar(card, cur.x, cur.y, cur.r, cur.s, cur.o);
-      if (dx > 0.3 || dy > 0.3) hayMovimiento = true;
+      if (dx > 1.5 || dy > 1.5) hayMovimiento = true;
     });
 
     if (hayMovimiento) solicitarLoop();
@@ -1207,11 +1205,11 @@ function initHeroArc() {
     fase = 'scatter';
     cards.forEach(function (_, i) { estadoActual[i].o = 1; });
     solicitarLoop();
-  }, 300);
+  }, 100);
 
-  setTimeout(function () { fase = 'linea';   solicitarLoop(); }, 1200);
-  setTimeout(function () { fase = 'circulo'; solicitarLoop(); }, 2800);
-  setTimeout(function () { introHecho = true; }, 4500);
+  setTimeout(function () { fase = 'linea';   solicitarLoop(); }, 600);
+  setTimeout(function () { fase = 'circulo'; solicitarLoop(); }, 1400);
+  setTimeout(function () { introHecho = true; }, 2200);
   setTimeout(function () { initShutter(true); }, 500);
 }
 
