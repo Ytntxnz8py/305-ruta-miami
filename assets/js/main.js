@@ -1214,6 +1214,379 @@ function initHeroArc() {
 }
 
 
+/* ===== GLOBO 3D CANVAS ===== */
+function initGlobo() {
+  var canvas = document.getElementById('globoCanvas');
+  if (!canvas) return;
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx    = canvas.getContext('2d');
+  var W      = 0;
+  var phi    = 0;
+  var theta  = 0.25;
+  var speed  = 0.003;
+
+  var dragging  = false;
+  var dragStart = { x: 0, y: 0 };
+  var phiDrag   = 0;
+  var thetaDrag = 0;
+
+  var MARCADORES = [
+    { lat: 25.77,  lng: -80.19, color: '#00BCD4', r: 5,  label: 'Miami' },
+    { lat: 25.28,  lng: -80.89, color: '#FF6B6B', r: 4,  label: 'Everglades' },
+    { lat: 25.12,  lng: -80.40, color: '#00BCD4', r: 4,  label: 'Key Largo' },
+    { lat: 25.47,  lng: -80.33, color: '#00BCD4', r: 4,  label: 'Biscayne' },
+    { lat: 25.66,  lng: -80.15, color: '#00BCD4', r: 3,  label: 'Bill Baggs' },
+    { lat: 25.91,  lng: -80.13, color: '#FF6B6B', r: 3,  label: 'Oleta River' },
+    { lat: 25.73,  lng: -80.15, color: '#00BCD4', r: 3,  label: 'Virginia Key' },
+    { lat: 25.76,  lng: -80.19, color: '#FFB300', r: 6,  label: 'Downtown Miami' }
+  ];
+
+  var ARCOS = [
+    { from: [25.77, -80.19], to: [25.28, -80.89] },
+    { from: [25.77, -80.19], to: [25.12, -80.40] },
+    { from: [25.77, -80.19], to: [25.47, -80.33] },
+    { from: [25.77, -80.19], to: [25.91, -80.13] }
+  ];
+
+  function latLngTo3D(lat, lng, phiR, thetaR, radio) {
+    var latR  = lat * Math.PI / 180;
+    var lngR  = lng * Math.PI / 180;
+    var x0 = Math.cos(latR) * Math.cos(lngR);
+    var y0 = Math.sin(latR);
+    var z0 = Math.cos(latR) * Math.sin(lngR);
+    var sinPhi = Math.sin(phiR),  cosPhi = Math.cos(phiR);
+    var x1 =  x0 * cosPhi + z0 * sinPhi;
+    var z1 = -x0 * sinPhi + z0 * cosPhi;
+    var sinT = Math.sin(thetaR), cosT = Math.cos(thetaR);
+    var y2 = y0 * cosT - z1 * sinT;
+    var z2 = y0 * sinT + z1 * cosT;
+    return { x: W/2 + x1 * radio, y: W/2 - y2 * radio, visible: z2 > 0 };
+  }
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.offsetWidth;
+    canvas.width  = W * dpr;
+    canvas.height = W * dpr;
+    ctx.scale(dpr, dpr);
+  }
+
+  function draw() {
+    if (!W) return;
+    ctx.clearRect(0, 0, W, W);
+    var radio  = W * 0.44;
+    var cx = W / 2, cy = W / 2;
+    var phiT   = phi + phiDrag;
+    var thetaT = theta + thetaDrag;
+
+    /* Fondo gradiente */
+    var grad = ctx.createRadialGradient(
+      cx - radio * 0.3, cy - radio * 0.3, radio * 0.1,
+      cx, cy, radio
+    );
+    grad.addColorStop(0,   'rgba(0,188,212,0.22)');
+    grad.addColorStop(0.5, 'rgba(7,30,43,0.85)');
+    grad.addColorStop(1,   'rgba(5,18,22,0.95)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, radio, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    /* Grid lat/lng */
+    ctx.strokeStyle = 'rgba(0,188,212,0.10)';
+    ctx.lineWidth   = 0.5;
+    var lat, lng2, lat2, lng3, pts, p;
+
+    for (lat = -80; lat <= 80; lat += 20) {
+      ctx.beginPath(); pts = [];
+      for (lng2 = -180; lng2 <= 180; lng2 += 3) {
+        p = latLngTo3D(lat, lng2, phiT, thetaT, radio);
+        if (p.visible) {
+          if (!pts.length) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+          pts.push(p);
+        } else if (pts.length) { ctx.stroke(); ctx.beginPath(); pts = []; }
+      }
+      ctx.stroke();
+    }
+    for (lng3 = -180; lng3 < 180; lng3 += 20) {
+      ctx.beginPath(); pts = [];
+      for (lat2 = -90; lat2 <= 90; lat2 += 3) {
+        p = latLngTo3D(lat2, lng3, phiT, thetaT, radio);
+        if (p.visible) {
+          if (!pts.length) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+          pts.push(p);
+        } else if (pts.length) { ctx.stroke(); ctx.beginPath(); pts = []; }
+      }
+      ctx.stroke();
+    }
+
+    /* Arcos */
+    ARCOS.forEach(function (arco) {
+      var puntos = [], i;
+      for (i = 0; i <= 40; i++) {
+        var t    = i / 40;
+        var elev = Math.sin(t * Math.PI) * 8;
+        var pa   = latLngTo3D(
+          arco.from[0] + (arco.to[0] - arco.from[0]) * t + elev * 0.05,
+          arco.from[1] + (arco.to[1] - arco.from[1]) * t,
+          phiT, thetaT, radio + elev * 0.5
+        );
+        if (pa.visible) { puntos.push(pa); }
+        else if (puntos.length > 1) {
+          ctx.beginPath();
+          ctx.moveTo(puntos[0].x, puntos[0].y);
+          for (var j = 1; j < puntos.length; j++) ctx.lineTo(puntos[j].x, puntos[j].y);
+          ctx.strokeStyle = 'rgba(0,188,212,0.55)';
+          ctx.lineWidth   = 1.2;
+          ctx.stroke();
+          puntos = [];
+        }
+      }
+      if (puntos.length > 1) {
+        ctx.beginPath();
+        ctx.moveTo(puntos[0].x, puntos[0].y);
+        for (var k = 1; k < puntos.length; k++) ctx.lineTo(puntos[k].x, puntos[k].y);
+        ctx.strokeStyle = 'rgba(0,188,212,0.55)';
+        ctx.lineWidth   = 1.2;
+        ctx.stroke();
+      }
+    });
+
+    /* Marcadores */
+    MARCADORES.forEach(function (m) {
+      var pm = latLngTo3D(m.lat, m.lng, phiT, thetaT, radio);
+      if (!pm.visible) return;
+      ctx.beginPath();
+      ctx.arc(pm.x, pm.y, m.r * 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = m.color.replace(/^(#[0-9a-f]{6})$/i, function (_, h) {
+        var r = parseInt(h.slice(1,3), 16);
+        var g = parseInt(h.slice(3,5), 16);
+        var b = parseInt(h.slice(5,7), 16);
+        return 'rgba(' + r + ',' + g + ',' + b + ',0.18)';
+      });
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(pm.x, pm.y, m.r, 0, Math.PI * 2);
+      ctx.fillStyle = m.color;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(pm.x - m.r * 0.3, pm.y - m.r * 0.3, m.r * 0.35, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.fill();
+    });
+
+    /* Borde y brillo */
+    ctx.beginPath();
+    ctx.arc(cx, cy, radio, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(0,188,212,0.25)';
+    ctx.lineWidth   = 1;
+    ctx.stroke();
+
+    var gb = ctx.createRadialGradient(
+      cx - radio * 0.4, cy - radio * 0.4, 0,
+      cx - radio * 0.4, cy - radio * 0.4, radio * 0.7
+    );
+    gb.addColorStop(0, 'rgba(255,255,255,0.08)');
+    gb.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, radio, 0, Math.PI * 2);
+    ctx.fillStyle = gb;
+    ctx.fill();
+  }
+
+  /* IntersectionObserver — parar cuando invisible */
+  var visible  = true;
+  var rafId    = null;
+  var observer = new IntersectionObserver(function (entries) {
+    visible = entries[0].isIntersecting;
+    if (visible && !rafId) rafId = requestAnimationFrame(loop);
+  }, { threshold: 0.1 });
+  observer.observe(canvas);
+
+  function loop() {
+    rafId = null;
+    if (!visible) return;
+    if (!reducedMotion && !dragging) phi += speed;
+    draw();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  /* Drag */
+  canvas.addEventListener('pointerdown', function (e) {
+    dragging = true;
+    dragStart = { x: e.clientX, y: e.clientY };
+    phiDrag = 0; thetaDrag = 0;
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    phiDrag   = (e.clientX - dragStart.x) / 200;
+    thetaDrag = (e.clientY - dragStart.y) / 600;
+    draw();
+  });
+  canvas.addEventListener('pointerup', function () {
+    phi += phiDrag; theta += thetaDrag;
+    phiDrag = 0; thetaDrag = 0;
+    dragging = false;
+  });
+
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+  rafId = requestAnimationFrame(loop);
+}
+
+/* ===== REFERENCIAS GLOBO ===== */
+function initReferenciasGlobo() {
+  var contenedor = document.getElementById('mapaReferencias');
+  if (!contenedor) return;
+
+  var REFS = [
+    { nombre: 'South Beach',       cat: 'playa' },
+    { nombre: 'Wynwood',            cat: 'cultura' },
+    { nombre: 'Coconut Grove',      cat: 'cultura' },
+    { nombre: 'Key Biscayne',       cat: 'playa' },
+    { nombre: 'Coral Gables',       cat: 'cultura' },
+    { nombre: 'Brickell',           cat: 'cultura' },
+    { nombre: 'Everglades',         cat: 'aventura' },
+    { nombre: 'Shark Valley',       cat: 'aventura' },
+    { nombre: 'Anhinga Trail',      cat: 'aventura' },
+    { nombre: 'Big Cypress',        cat: 'parque' },
+    { nombre: 'Homestead',          cat: 'aventura' },
+    { nombre: 'Florida Keys',       cat: 'agua' },
+    { nombre: 'Biscayne Bay',       cat: 'agua' },
+    { nombre: 'Virginia Key',       cat: 'playa' },
+    { nombre: 'Matheson Hammock',   cat: 'parque' },
+    { nombre: 'Crandon Park',       cat: 'parque' },
+    { nombre: 'Arch Creek',         cat: 'aventura' },
+    { nombre: 'Oleta River',        cat: 'agua' },
+    { nombre: 'Hollywood Beach',    cat: 'playa' },
+    { nombre: 'Aventura',           cat: 'cultura' },
+    { nombre: 'Little Havana',      cat: 'cultura' },
+    { nombre: 'Design District',    cat: 'cultura' }
+  ];
+
+  REFS.forEach(function (ref) {
+    var chip = document.createElement('span');
+    chip.className   = 'mapa-ref-chip mapa-ref-chip--' + ref.cat;
+    chip.textContent = ref.nombre;
+    contenedor.appendChild(chip);
+  });
+}
+
+/* ===== MAPA LEAFLET ===== */
+function initMapaLeaflet() {
+  if (typeof L === 'undefined') return;
+  var el = document.getElementById('mapaLeaflet');
+  if (!el) return;
+
+  var mapa = L.map('mapaLeaflet', {
+    center:          [25.75, -80.30],
+    zoom:            10,
+    zoomControl:     true,
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer(
+    'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains:  'abcd',
+      maxZoom:     19
+    }
+  ).addTo(mapa);
+
+  function crearIcono(color, tam) {
+    tam = tam || 12;
+    return L.divIcon({
+      className: '',
+      html: '<div style="width:' + tam + 'px;height:' + tam + 'px;' +
+            'background:' + color + ';border-radius:50%;' +
+            'border:2px solid rgba(255,255,255,0.9);' +
+            'box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>',
+      iconSize:   [tam, tam],
+      iconAnchor: [tam/2, tam/2]
+    });
+  }
+
+  var DESTINOS_MAPA = [
+    { lat:25.2866, lng:-80.8987, tipo:'tierra',
+      nombre_es:'Everglades National Park',   nombre_en:'Everglades National Park' },
+    { lat:25.1288, lng:-80.4072, tipo:'mar',
+      nombre_es:'John Pennekamp Coral Reef',  nombre_en:'John Pennekamp Coral Reef' },
+    { lat:25.4729, lng:-80.3340, tipo:'mar',
+      nombre_es:'Biscayne National Park',     nombre_en:'Biscayne National Park' },
+    { lat:25.6671, lng:-80.1584, tipo:'mar',
+      nombre_es:'Bill Baggs Cape Florida',    nombre_en:'Bill Baggs Cape Florida' },
+    { lat:25.9103, lng:-80.1390, tipo:'tierra',
+      nombre_es:'Oleta River State Park',     nombre_en:'Oleta River State Park' },
+    { lat:25.7355, lng:-80.1573, tipo:'mar',
+      nombre_es:'Virginia Key Beach Park',    nombre_en:'Virginia Key Beach Park' },
+    { lat:25.6680, lng:-80.2747, tipo:'mar',
+      nombre_es:'Matheson Hammock Park',      nombre_en:'Matheson Hammock Park' },
+    { lat:25.7024, lng:-80.1556, tipo:'mar',
+      nombre_es:'Crandon Park',               nombre_en:'Crandon Park' },
+    { lat:25.8955, lng:-80.1678, tipo:'tierra',
+      nombre_es:'Arch Creek Park',            nombre_en:'Arch Creek Park' }
+  ];
+
+  var REFERENCIAS_MAPA = [
+    { lat:25.7617, lng:-80.1918, nombre:'Downtown Miami',        cat:'cultura' },
+    { lat:25.7743, lng:-80.1937, nombre:'Wynwood Arts District', cat:'cultura' },
+    { lat:25.7907, lng:-80.1300, nombre:'Miami Beach',           cat:'playa'   },
+    { lat:25.8103, lng:-80.1200, nombre:'South Beach',           cat:'playa'   },
+    { lat:25.7650, lng:-80.2568, nombre:'Coral Gables',          cat:'cultura' },
+    { lat:25.8220, lng:-80.2684, nombre:'Hialeah',               cat:'cultura' },
+    { lat:25.9401, lng:-80.2456, nombre:'Miramar Prairie',       cat:'parque'  },
+    { lat:25.6102, lng:-80.3984, nombre:'Homestead',             cat:'aventura'},
+    { lat:25.6985, lng:-80.4474, nombre:'Shark Valley',          cat:'aventura'},
+    { lat:25.4633, lng:-80.4724, nombre:'Florida City',          cat:'aventura'},
+    { lat:25.8576, lng:-80.1781, nombre:'Aventura',              cat:'cultura' },
+    { lat:25.9781, lng:-80.1495, nombre:'Hollywood Beach',       cat:'playa'   },
+    { lat:25.7478, lng:-80.2456, nombre:'Coconut Grove',         cat:'cultura' },
+    { lat:25.7200, lng:-80.2684, nombre:'South Miami',           cat:'parque'  },
+    { lat:25.6366, lng:-80.3284, nombre:'Cutler Bay',            cat:'parque'  },
+    { lat:25.7741, lng:-80.3274, nombre:'Doral',                 cat:'cultura' },
+    { lat:25.8450, lng:-80.3100, nombre:'Medley Wetlands',       cat:'agua'    },
+    { lat:25.5560, lng:-80.5100, nombre:'Big Cypress Preserve',  cat:'aventura'},
+    { lat:25.3384, lng:-80.6684, nombre:'Anhinga Trail',         cat:'aventura'},
+    { lat:25.6890, lng:-80.0984, nombre:'Key Biscayne',          cat:'playa'   }
+  ];
+
+  var colorTipo = {
+    tierra:   '#FF6B6B',
+    mar:      '#00BCD4',
+    cultura:  '#FFB300',
+    playa:    '#00BCD4',
+    parque:   '#7CB342',
+    aventura: '#FF6B6B',
+    agua:     '#4FC3F7'
+  };
+
+  var idioma = localStorage.getItem('em_idioma') || 'es';
+
+  DESTINOS_MAPA.forEach(function (d) {
+    var color  = colorTipo[d.tipo] || '#FFB300';
+    var nombre = idioma === 'en' ? d.nombre_en : d.nombre_es;
+    var emoji  = d.tipo === 'tierra' ? '🏔️' : '🌊';
+    L.marker([d.lat, d.lng], { icon: crearIcono(color, 14) })
+      .addTo(mapa)
+      .bindPopup(
+        '<strong style="font-family:\'Playfair Display\',serif;' +
+        'font-style:italic;font-size:1rem;">' + nombre + '</strong><br>' +
+        '<span style="font-size:0.78rem;color:#4a6070;">' +
+        emoji + ' Explora Miami</span>'
+      );
+  });
+
+  REFERENCIAS_MAPA.forEach(function (r) {
+    var color = colorTipo[r.cat] || '#FFB300';
+    L.marker([r.lat, r.lng], { icon: crearIcono(color, 8) })
+      .addTo(mapa)
+      .bindPopup('<span style="font-size:0.85rem;font-weight:600;">' + r.nombre + '</span>');
+  });
+}
+
 /* ===== INICIALIZACIÓN ===== */
 document.addEventListener('DOMContentLoaded', function () {
   leerConfigSitio();
@@ -1221,4 +1594,11 @@ document.addEventListener('DOMContentLoaded', function () {
   renderDestinos();
   initScrollAnimation();
   initHeroArc();
+  initGlobo();
+  initReferenciasGlobo();
+  if (document.readyState === 'complete') {
+    initMapaLeaflet();
+  } else {
+    window.addEventListener('load', initMapaLeaflet);
+  }
 });

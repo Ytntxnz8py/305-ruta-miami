@@ -741,47 +741,168 @@ html.lang-es .lang-en { display: none; }
 .destino-card__btn { align-self: flex-start; font-size: 0.87rem; padding: 0.55rem 1.3rem; }
 
 /* ===== SECCIÓN MAPA ===== */
+/* ============================================
+   SECCIÓN MAPA REDISEÑADA — Globo Canvas + Leaflet
+   ============================================ */
 .seccion-mapa {
-  background: linear-gradient(180deg,
-    rgba(232, 245, 233, 0.40) 0%,
-    var(--blanco-arena) 30%,
-    rgba(227, 244, 255, 0.50) 100%
-  );
-  padding: var(--seccion-py) 1.5rem;
+  position: relative;
+  padding: 6rem 1.5rem 7rem;
+  background: var(--azul-cielo-suave);
+  overflow: hidden;
 }
 
-.seccion-mapa__contenedor { max-width: var(--max); margin: 0 auto; }
-.seccion-mapa__encabezado { margin-bottom: 2rem; }
+.seccion-mapa__contenedor {
+  max-width: 1300px;
+  margin: 0 auto;
+}
 
-.mapa-marcadores { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; margin-bottom: 2rem; }
+.seccion-mapa__encabezado {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
 
-.mapa-marcador {
+/* Grid principal */
+.mapa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .mapa-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- COLUMNA GLOBO ---- */
+.mapa-globo-wrap {
+  background: linear-gradient(135deg, var(--ocean-ini) 0%, var(--ocean-mid) 100%);
+  border-radius: 24px;
+  padding: 1.8rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  border: 1px solid var(--glass-border);
+}
+
+.mapa-globo-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: 50px;
-  font-size: 0.84rem;
-  font-weight: 700;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
 }
-.mapa-marcador--mar    { background: rgba(0,188,212,0.12); color: #00838f; border: 1px solid rgba(0,188,212,0.28); }
-.mapa-marcador--tierra { background: rgba(124,179,66,0.12); color: #558B2F; border: 1px solid rgba(124,179,66,0.28); }
 
-.mapa-marcador__num {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 20px; height: 20px; border-radius: 50%;
-  font-size: 0.72rem; font-weight: 700; color: #fff; flex-shrink: 0;
+.mapa-globo-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,253,247,0.65);
 }
-.mapa-marcador__num--mar    { background-color: var(--turquesa); }
-.mapa-marcador__num--tierra { background-color: #7CB342; }
 
-.mapa-iframe-cont {
-  position: relative; width: 100%; padding-bottom: 50%;
-  border-radius: var(--radio); overflow: hidden;
-  box-shadow: var(--sombra-card);
+.mapa-globo-canvas {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  border-radius: 50%;
+  cursor: grab;
 }
-@media (max-width: 640px) { .mapa-iframe-cont { padding-bottom: 72%; } }
-.mapa-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
+.mapa-globo-canvas:active { cursor: grabbing; }
+
+/* Referencias de lugares */
+.mapa-referencias {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.mapa-ref-chip {
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,253,247,0.80);
+  background: rgba(255,255,255,0.06);
+  white-space: nowrap;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  cursor: default;
+}
+.mapa-ref-chip:hover { background: rgba(255,255,255,0.14); color: rgba(255,253,247,1); }
+
+.mapa-ref-chip--playa    { border-color: rgba(0,188,212,0.35);   color: rgba(0,220,240,0.90); }
+.mapa-ref-chip--parque   { border-color: rgba(124,179,66,0.35);  color: rgba(160,220,80,0.90); }
+.mapa-ref-chip--cultura  { border-color: rgba(255,179,0,0.35);   color: rgba(255,200,60,0.90); }
+.mapa-ref-chip--aventura { border-color: rgba(255,107,107,0.35); color: rgba(255,140,120,0.90); }
+.mapa-ref-chip--agua     { border-color: rgba(100,181,246,0.35); color: rgba(140,200,255,0.90); }
+
+/* ---- COLUMNA MAPA LEAFLET ---- */
+.mapa-leaflet-wrap {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(0,188,212,0.15);
+}
+
+.mapa-leaflet {
+  width: 100%;
+  height: 480px;
+  z-index: 1;
+}
+
+/* Leyenda */
+.mapa-leyenda {
+  display: flex;
+  gap: 1.4rem;
+  padding: 0.9rem 1.2rem;
+  background: white;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  flex-wrap: wrap;
+}
+
+.mapa-leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--texto-medio);
+}
+
+.mapa-leyenda-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.mapa-leyenda-dot--tierra { background: var(--coral); }
+.mapa-leyenda-dot--mar    { background: var(--turquesa); }
+.mapa-leyenda-dot--ref    { background: var(--mostaza); opacity: 0.7; }
+
+/* Overrides Leaflet */
+.leaflet-container { font-family: var(--sans) !important; }
+.leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+  font-family: var(--sans) !important;
+}
+.leaflet-popup-content {
+  margin: 12px 16px !important;
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mapa-leaflet { height: 360px; }
+  .mapa-globo-wrap { padding: 1.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mapa-globo-canvas { animation: none !important; }
+}
 
 /* ===== SECCIÓN TRABAJA CON NOSOTROS ===== */
 .seccion-trabaja {

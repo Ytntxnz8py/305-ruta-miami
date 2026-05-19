@@ -68,6 +68,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="anonymous"
+  />
   <link rel="stylesheet" href="assets/css/styles.css" />
 
   <!-- Google Analytics 4 — reemplaza G-7HMBMBQNQZ con tu Measurement ID real -->
@@ -233,51 +240,65 @@
     <section class="seccion-mapa" id="mapa">
       <div class="seccion-mapa__contenedor">
 
-        <h2 class="seccion-titulo fade-up" data-i18n="mapa_titulo">Mapa de Destinos</h2>
-        <p class="seccion-subtitulo" data-i18n="mapa_sub">Los 6 destinos outdoor en South Florida</p>
-
-        <!-- Chips de referencia de los 6 destinos -->
-        <div class="mapa-marcadores">
-          <div class="mapa-marcador mapa-marcador--tierra">
-            <span class="mapa-marcador__num mapa-marcador__num--tierra">1</span>
-            <span class="lang-es">Everglades — Senderismo</span><span class="lang-en">Everglades — Hiking</span>
-          </div>
-          <div class="mapa-marcador mapa-marcador--mar">
-            <span class="mapa-marcador__num mapa-marcador__num--mar">2</span>
-            <span class="lang-es">Key Largo — Buceo</span><span class="lang-en">Key Largo — Diving</span>
-          </div>
-          <div class="mapa-marcador mapa-marcador--mar">
-            <span class="mapa-marcador__num mapa-marcador__num--mar">3</span>
-            <span class="lang-es">Biscayne Bay — Kayak</span><span class="lang-en">Biscayne Bay — Kayak</span>
-          </div>
-          <div class="mapa-marcador mapa-marcador--tierra">
-            <span class="mapa-marcador__num mapa-marcador__num--tierra">4</span>
-            <span class="lang-es">Bill Baggs — Playa</span><span class="lang-en">Bill Baggs — Beach</span>
-          </div>
-          <div class="mapa-marcador mapa-marcador--tierra">
-            <span class="mapa-marcador__num mapa-marcador__num--tierra">5</span>
-            <span class="lang-es">Oleta River — Mountain Bike</span><span class="lang-en">Oleta River — Mountain Bike</span>
-          </div>
-          <div class="mapa-marcador mapa-marcador--mar">
-            <span class="mapa-marcador__num mapa-marcador__num--mar">6</span>
-            <span class="lang-es">Virginia Key — Paddle Board</span><span class="lang-en">Virginia Key — Paddle Board</span>
-          </div>
+        <!-- Encabezado -->
+        <div class="seccion-mapa__encabezado">
+          <h2 class="seccion-titulo fade-up"
+              data-i18n="mapa_titulo">
+            Mapa de Destinos
+          </h2>
+          <p class="seccion-subtitulo"
+             data-i18n="mapa_sub">
+            Descubre experiencias outdoor en Miami y South Florida
+          </p>
         </div>
 
-        <!-- Google Maps embed centrado en South Florida — envuelto en radar wrapper -->
-        <div class="mapa-radar-wrap">
-        <div class="mapa-iframe-cont fade-up">
-          <iframe
-            class="mapa-iframe"
-            src="https://maps.google.com/maps?q=South+Florida&t=&z=9&ie=UTF8&iwloc=&output=embed"
-            title="Mapa de destinos outdoor en South Florida"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen
-          ></iframe>
-        </div>
-        </div><!-- /mapa-radar-wrap -->
+        <!-- Grid principal: globo + mapa -->
+        <div class="mapa-grid">
 
+          <!-- COLUMNA IZQUIERDA: Globo 3D -->
+          <div class="mapa-globo-wrap">
+            <div class="mapa-globo-header">
+              <span class="mapa-globo-label"
+                    data-i18n="mapa_globo_label">
+                Miami · South Florida
+              </span>
+            </div>
+            <canvas id="globoCanvas"
+                    class="mapa-globo-canvas"
+                    aria-label="Globo interactivo centrado en Miami"
+                    role="img">
+            </canvas>
+            <!-- Referencias de lugares — generadas por JS -->
+            <div class="mapa-referencias" id="mapaReferencias"></div>
+          </div>
+
+          <!-- COLUMNA DERECHA: Mapa Leaflet -->
+          <div class="mapa-leaflet-wrap">
+            <div id="mapaLeaflet"
+                 class="mapa-leaflet"
+                 aria-label="Mapa interactivo de destinos en Miami">
+            </div>
+            <!-- Leyenda -->
+            <div class="mapa-leyenda">
+              <div class="mapa-leyenda-item">
+                <span class="mapa-leyenda-dot mapa-leyenda-dot--tierra"></span>
+                <span class="lang-es">Tierra</span>
+                <span class="lang-en">Land</span>
+              </div>
+              <div class="mapa-leyenda-item">
+                <span class="mapa-leyenda-dot mapa-leyenda-dot--mar"></span>
+                <span class="lang-es">Mar</span>
+                <span class="lang-en">Sea</span>
+              </div>
+              <div class="mapa-leyenda-item">
+                <span class="mapa-leyenda-dot mapa-leyenda-dot--ref"></span>
+                <span class="lang-es">Referencias</span>
+                <span class="lang-en">References</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /mapa-grid -->
       </div>
     </section>
 
@@ -486,6 +507,12 @@
   </div><!-- /destinoModal -->
 
   <!-- Scripts: i18n primero, luego main, luego animaciones -->
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLcE="
+    crossorigin="anonymous">
+  </script>
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/analytics.js"></script>

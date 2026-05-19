@@ -40,8 +40,9 @@ var TEXTOS = {
     card_ver_mapa:   'Ver en mapa',
 
     /* Mapa */
-    mapa_titulo: 'Mapa de Destinos',
-    mapa_sub:    'Los 6 destinos outdoor en South Florida',
+    mapa_titulo:       'Mapa de Destinos',
+    mapa_sub:          'Descubre experiencias outdoor en Miami y South Florida',
+    mapa_globo_label:  'Miami · South Florida',
 
     /* Trabaja */
     trabaja_titulo: 'Trabaja con Nosotros',
@@ -107,8 +108,9 @@ var TEXTOS = {
     card_ver_mapa:   'View on map',
 
     /* Map */
-    mapa_titulo: 'Destinations Map',
-    mapa_sub:    'All 6 outdoor destinations in South Florida',
+    mapa_titulo:       'Destinations Map',
+    mapa_sub:          'Discover outdoor experiences in Miami and South Florida',
+    mapa_globo_label:  'Miami · South Florida',
 
     /* Work with us */
     trabaja_titulo: 'Work with Us',
