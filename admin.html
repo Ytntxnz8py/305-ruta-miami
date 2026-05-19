@@ -7,7 +7,7 @@
   <!-- Evita que Google indexe el panel de administración -->
   <meta name="robots" content="noindex, nofollow" />
 
-  <!-- Google Analytics 4 — reemplaza G-7HMBMBQNQZ con tu Measurement ID real -->
+  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7HMBMBQNQZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,6 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Configuración pública (sin credenciales) -->
+  <script src="assets/js/admin-config.js"></script>
 
   <link rel="stylesheet" href="assets/css/admin.css" />
 </head>
@@ -45,40 +48,80 @@
           required
         />
         <button type="submit" class="login-btn">Entrar al panel</button>
-        <p id="loginError" class="login-error">Contraseña incorrecta. Intenta de nuevo.</p>
+        <p id="loginError"  class="login-error">Contraseña incorrecta. Intenta de nuevo.</p>
+        <p id="loginBloqueado" class="login-error" style="display:none">Demasiados intentos. Recarga la página.</p>
       </form>
 
-      <p class="login-hint">Contraseña por defecto: <code>miami2026</code></p>
     </div>
   </div>
 
-  <!-- ===== DASHBOARD: oculto hasta hacer login ===== -->
-  <div id="dashboard" style="display:none">
+  <!-- ===== CENTRO DE COMANDO: oculto hasta hacer login ===== -->
+  <div id="dashboard" class="dashboard" style="display:none">
 
-    <!-- Header fijo del panel -->
-    <header class="admin-header">
-      <div class="admin-header__izq">
-        <div class="admin-header__logo">
-          <span>Explora</span><span>Miami</span>
-        </div>
-        <span class="admin-header__tag">ADMIN</span>
+    <!-- ====================== SIDEBAR ====================== -->
+    <aside class="sidebar" id="sidebar">
+
+      <!-- Logo -->
+      <div class="sidebar__logo">
+        <span class="sidebar__logo-e">Explora</span><span class="sidebar__logo-m">Miami</span>
+        <span class="sidebar__version">v2.0</span>
       </div>
-      <div class="admin-header__der">
-        <a href="index.html" target="_blank" class="admin-header__link">← Ver sitio</a>
-        <button id="btnLogout" class="btn-logout">Cerrar sesión</button>
+
+      <!-- Navegación por tabs -->
+      <nav class="sidebar__nav">
+        <button class="sidebar__item sidebar__item--activo" data-tab="dashboard">
+          <span class="sidebar__icon">📊</span>
+          <span class="sidebar__label">Dashboard</span>
+        </button>
+        <button class="sidebar__item" data-tab="destinos">
+          <span class="sidebar__icon">📍</span>
+          <span class="sidebar__label">Destinos</span>
+          <span class="sidebar__badge" id="sidebarBadgeDestinos" style="display:none">0</span>
+        </button>
+        <button class="sidebar__item" data-tab="editor">
+          <span class="sidebar__icon">✏️</span>
+          <span class="sidebar__label">Editor sitio</span>
+        </button>
+        <button class="sidebar__item" data-tab="mensajes">
+          <span class="sidebar__icon">✉️</span>
+          <span class="sidebar__label">Mensajes</span>
+          <span class="sidebar__badge sidebar__badge--coral" id="sidebarBadgeMensajes" style="display:none">0</span>
+        </button>
+        <button class="sidebar__item" data-tab="config">
+          <span class="sidebar__icon">⚙️</span>
+          <span class="sidebar__label">Configuración</span>
+        </button>
+      </nav>
+
+      <!-- Footer del sidebar -->
+      <div class="sidebar__footer">
+        <a href="index.html" target="_blank" class="sidebar__link-sitio">
+          <span>↗</span> Ver sitio
+        </a>
+        <button id="btnLogout" class="sidebar__logout">Cerrar sesión</button>
       </div>
-    </header>
 
-    <main class="admin-main">
+    </aside>
 
-      <!-- ===== SECCIÓN: MÉTRICAS PRINCIPALES ===== -->
-      <section class="admin-seccion">
-        <div class="admin-seccion__header">
-          <h2 class="admin-seccion__titulo">Dashboard</h2>
-          <span class="admin-seccion__fecha" id="statFecha">—</span>
-        </div>
+    <!-- Overlay para cerrar sidebar en móvil -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-        <!-- Tarjetas de métricas: 6 indicadores clave -->
+    <!-- ====================== CONTENIDO PRINCIPAL ====================== -->
+    <div class="admin-wrap">
+
+      <!-- Header móvil -->
+      <header class="admin-header" id="adminHeader">
+        <button class="header-menu-btn" id="btnMenuSidebar" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+        <span class="header-titulo" id="headerTitulo">Dashboard</span>
+        <span class="header-fecha" id="headerFecha"></span>
+      </header>
+
+      <!-- ===== TAB: DASHBOARD ===== -->
+      <section class="tab-panel" id="tab-dashboard">
+
+        <!-- Tarjetas de métricas -->
         <div class="metricas-grid">
           <div class="metrica-card metrica-card--turquesa">
             <div class="metrica-card__icono">👁️</div>
@@ -98,12 +141,12 @@
           <div class="metrica-card metrica-card--coral">
             <div class="metrica-card__icono">🖱️</div>
             <div class="metrica-card__num" id="statClicTotal">—</div>
-            <div class="metrica-card__label">Clics en destinos</div>
+            <div class="metrica-card__label">Clics destinos</div>
           </div>
           <div class="metrica-card metrica-card--mostaza">
             <div class="metrica-card__icono">✉️</div>
             <div class="metrica-card__num" id="statContactos">—</div>
-            <div class="metrica-card__label">Formularios recibidos</div>
+            <div class="metrica-card__label">Formularios</div>
           </div>
           <div class="metrica-card metrica-card--gris">
             <div class="metrica-card__icono">📍</div>
@@ -112,248 +155,403 @@
           </div>
         </div>
 
-        <!-- Gráfico de barras: visitas por día de la semana (7 días) -->
-        <div class="grafico-wrap">
-          <h3 class="grafico-titulo">Visitas — últimos 7 días</h3>
-          <div class="grafico-barras" id="graficoDias">
-            <!-- Las barras se renderizan dinámicamente desde admin.js -->
+        <!-- Fila de gráficos -->
+        <div class="charts-row">
+
+          <!-- Gráfico SVG: visitas 30 días -->
+          <div class="chart-card chart-card--line">
+            <div class="chart-card__header">
+              <h3 class="chart-card__titulo">Visitas — últimos 30 días</h3>
+              <span class="chart-fuente" id="chartFuente">LocalStorage</span>
+            </div>
+            <div class="chart-svg-wrap" id="chartLineWrap">
+              <!-- SVG generado por admin.js -->
+            </div>
           </div>
+
+          <!-- Gráfico SVG: dispositivos (donut) -->
+          <div class="chart-card chart-card--donut">
+            <div class="chart-card__header">
+              <h3 class="chart-card__titulo">Dispositivos</h3>
+            </div>
+            <div class="donut-wrap" id="donutWrap">
+              <!-- SVG generado por admin.js -->
+            </div>
+            <div class="donut-leyenda" id="donutLeyenda">
+              <!-- Leyenda generada por admin.js -->
+            </div>
+          </div>
+
         </div>
 
-        <!-- Tabla de clics por destino -->
-        <div class="clics-wrap">
-          <h3 class="grafico-titulo">Clics por destino</h3>
+        <!-- Clics por destino -->
+        <div class="panel-card">
+          <div class="panel-card__header">
+            <h3 class="panel-card__titulo">Clics por destino</h3>
+          </div>
           <div class="clics-lista" id="clicsLista">
-            <!-- Se renderiza desde admin.js -->
+            <!-- Generado por admin.js -->
           </div>
         </div>
 
       </section>
 
-      <!-- ===== SECCIÓN: GESTIÓN DE DESTINOS ===== -->
-      <section class="admin-seccion">
-        <div class="admin-seccion__header">
-          <h2 class="admin-seccion__titulo">Destinos</h2>
-          <button class="admin-btn admin-btn--nuevo" onclick="toggleFormDestino()">+ Nuevo destino</button>
-        </div>
+      <!-- ===== TAB: DESTINOS ===== -->
+      <section class="tab-panel" id="tab-destinos" style="display:none">
 
-        <!-- Formulario agregar / editar (oculto por defecto) -->
-        <div id="formDestinoWrap" style="display:none">
-          <div class="form-destino-card">
-            <p class="form-destino__titulo" id="formDestinoTitulo">Agregar Destino</p>
+        <div class="panel-card">
+          <div class="panel-card__header">
+            <h3 class="panel-card__titulo">Gestión de Destinos</h3>
+            <button class="admin-btn admin-btn--nuevo" id="btnNuevoDestino">+ Nuevo destino</button>
+          </div>
 
-            <form id="formDestino">
-              <div class="admin-form__grid">
-
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Nombre (ES)</label>
-                  <input name="nombre_es" class="admin-form__input" placeholder="ej: Everglades National Park" required />
-                </div>
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Nombre (EN)</label>
-                  <input name="nombre_en" class="admin-form__input" placeholder="ej: Everglades National Park" required />
-                </div>
-
-                <div class="admin-form__grupo admin-form__grupo--full">
-                  <label class="admin-form__label">Descripción corta (ES)</label>
-                  <textarea name="desc_es" class="admin-form__textarea" placeholder="Descripción breve en español" required></textarea>
-                </div>
-                <div class="admin-form__grupo admin-form__grupo--full">
-                  <label class="admin-form__label">Descripción corta (EN)</label>
-                  <textarea name="desc_en" class="admin-form__textarea" placeholder="Short description in English" required></textarea>
-                </div>
-
-                <div class="admin-form__grupo admin-form__grupo--full">
-                  <label class="admin-form__label">URL de foto principal (Unsplash u otra)</label>
-                  <input name="foto" class="admin-form__input" type="url" placeholder="https://images.unsplash.com/photo-..." />
-                </div>
-
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Latitud</label>
-                  <input name="lat" class="admin-form__input" type="number" step="0.0001" placeholder="25.2866" required />
-                </div>
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Longitud</label>
-                  <input name="lng" class="admin-form__input" type="number" step="0.0001" placeholder="-80.8987" required />
-                </div>
-
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Dificultad (ES)</label>
-                  <input name="dificultad_es" class="admin-form__input" placeholder="ej: Fácil — Moderado" required />
-                </div>
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Dificultad (EN)</label>
-                  <input name="dificultad_en" class="admin-form__input" placeholder="ej: Easy — Moderate" required />
-                </div>
-
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Nivel (badge color)</label>
-                  <select name="dificultad_clase" class="admin-form__select">
-                    <option value="facil">Fácil (verde)</option>
-                    <option value="moderado">Moderado (naranja)</option>
-                    <option value="dificil">Difícil (coral)</option>
-                  </select>
-                </div>
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Tipo de terreno</label>
-                  <select name="tipo" class="admin-form__select">
-                    <option value="tierra">🏔️ Tierra</option>
-                    <option value="mar">🌊 Mar</option>
-                  </select>
-                </div>
-
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Actividades (ES)</label>
-                  <input name="tipo_es" class="admin-form__input" placeholder="ej: Senderismo · Kayak" required />
-                </div>
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Actividades (EN)</label>
-                  <input name="tipo_en" class="admin-form__input" placeholder="ej: Hiking · Kayak" required />
-                </div>
-
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Precio</label>
-                  <input name="precio" class="admin-form__input" placeholder="ej: $35 / vehículo" required />
-                </div>
-                <div class="admin-form__grupo">
-                  <label class="admin-form__label">Horarios</label>
-                  <input name="horarios" class="admin-form__input" placeholder="ej: 8am – Sunset" required />
-                </div>
-
-              </div>
-
-              <div class="admin-form__acciones">
-                <button type="submit" class="admin-form__btn-guardar">Guardar destino</button>
-                <button type="button" class="admin-form__btn-cancelar" onclick="cancelarFormDestino()">Cancelar</button>
-              </div>
-            </form>
+          <div class="admin-tabla-cont">
+            <table class="admin-tabla">
+              <thead>
+                <tr>
+                  <th>Destino</th>
+                  <th>Tipo</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaDestinos">
+                <tr><td colspan="5" class="tabla-vacia">Cargando…</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <!-- Tabla de destinos con toggle activo/inactivo -->
-        <div class="admin-tabla-cont">
-          <table class="admin-tabla">
-            <thead>
-              <tr>
-                <th>Destino</th>
-                <th>Tipo</th>
-                <th>Precio</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="tablaDestinos">
-              <tr><td colspan="5" class="tabla-vacia">Cargando…</td></tr>
-            </tbody>
-          </table>
-        </div>
       </section>
 
-      <!-- ===== SECCIÓN: BANDEJA DE MENSAJES ===== -->
-      <section class="admin-seccion">
-        <div class="admin-seccion__header">
-          <h2 class="admin-seccion__titulo">
-            Mensajes de empresas
-            <span id="badgeMensajes" class="badge-mensajes" style="display:none">0</span>
-          </h2>
-          <button class="admin-btn admin-btn--exportar" onclick="exportarContactos()">⬇ Exportar CSV</button>
-        </div>
+      <!-- ===== TAB: EDITOR SITIO ===== -->
+      <section class="tab-panel" id="tab-editor" style="display:none">
 
-        <!-- Los mensajes se renderizan como tarjetas individuales -->
-        <div id="bandejaMensajes" class="bandeja-mensajes">
-          <p class="tabla-vacia">Cargando mensajes…</p>
-        </div>
-      </section>
+        <div class="editor-layout">
 
-      <!-- ===== SECCIÓN: GUÍA GOOGLE ANALYTICS ===== -->
-      <section class="admin-seccion admin-seccion--ga">
-        <div class="admin-seccion__header">
-          <h2 class="admin-seccion__titulo">Activar Google Analytics</h2>
-          <span class="ga-estado" id="gaEstado">⚪ No configurado</span>
-        </div>
-        <p class="ga-intro">Para ver datos reales de visitas, conecta tu propiedad GA4. Solo necesitas 5 minutos.</p>
+          <!-- Panel izquierdo: campos editables -->
+          <div class="editor-form-col">
+            <div class="panel-card">
+              <div class="panel-card__header">
+                <h3 class="panel-card__titulo">Textos del sitio</h3>
+                <button class="admin-btn admin-btn--guardar" id="btnGuardarConfig">💾 Guardar</button>
+              </div>
 
-        <ol class="ga-pasos">
-          <li class="ga-paso">
-            <div class="ga-paso__num">1</div>
-            <div class="ga-paso__cuerpo">
-              <strong>Crea una cuenta en Google Analytics</strong>
-              <p>Ve a <code>analytics.google.com</code> e inicia sesión con tu cuenta Google. Haz clic en <em>Empezar a medir</em>.</p>
+              <div class="editor-grupo">
+                <p class="editor-seccion-label">🦸 Hero</p>
+                <label class="admin-form__label">Título (ES)</label>
+                <input id="cfg_hero_titulo_es" class="admin-form__input" type="text" />
+                <label class="admin-form__label">Título (EN)</label>
+                <input id="cfg_hero_titulo_en" class="admin-form__input" type="text" />
+                <label class="admin-form__label">Tagline (ES)</label>
+                <input id="cfg_hero_tagline_es" class="admin-form__input" type="text" />
+                <label class="admin-form__label">Tagline (EN)</label>
+                <input id="cfg_hero_tagline_en" class="admin-form__input" type="text" />
+              </div>
+
+              <div class="editor-grupo">
+                <p class="editor-seccion-label">📋 Secciones</p>
+                <label class="admin-form__label">Subtítulo Intro (ES)</label>
+                <input id="cfg_intro_sub_es" class="admin-form__input" type="text" />
+                <label class="admin-form__label">Subtítulo Intro (EN)</label>
+                <input id="cfg_intro_sub_en" class="admin-form__input" type="text" />
+                <label class="admin-form__label">Título Destinos (ES)</label>
+                <input id="cfg_destinos_titulo_es" class="admin-form__input" type="text" />
+                <label class="admin-form__label">Subtítulo Destinos (ES)</label>
+                <input id="cfg_destinos_sub_es" class="admin-form__input" type="text" />
+              </div>
+
+              <div class="editor-grupo">
+                <p class="editor-seccion-label">🎨 Color de acento</p>
+                <div class="color-picker-row">
+                  <input id="cfg_color_acento" class="color-picker" type="color" value="#00BCD4" />
+                  <span class="color-picker-label">Color turquesa principal</span>
+                </div>
+              </div>
+
+              <div class="editor-grupo">
+                <p class="editor-seccion-label">🔗 Info de contacto</p>
+                <label class="admin-form__label">Email de contacto</label>
+                <input id="cfg_email_contacto" class="admin-form__input" type="email" placeholder="hola@exploramiami.com" />
+                <label class="admin-form__label">Teléfono</label>
+                <input id="cfg_telefono" class="admin-form__input" type="text" placeholder="+1 (305) 555-0000" />
+              </div>
+
+              <div class="editor-acciones">
+                <button class="admin-btn admin-btn--nuevo" id="btnGuardarConfig2">💾 Guardar cambios</button>
+                <button class="admin-btn admin-btn--cancelar" id="btnResetConfig">↺ Restaurar defaults</button>
+              </div>
+
             </div>
-          </li>
-          <li class="ga-paso">
-            <div class="ga-paso__num">2</div>
-            <div class="ga-paso__cuerpo">
-              <strong>Crea una propiedad GA4</strong>
-              <p>Nombre: "Explora Miami" — Zona horaria: Eastern Time (US) — Moneda: USD. Haz clic en <em>Siguiente</em>.</p>
-            </div>
-          </li>
-          <li class="ga-paso">
-            <div class="ga-paso__num">3</div>
-            <div class="ga-paso__cuerpo">
-              <strong>Crea un flujo de datos web</strong>
-              <p>URL: <code>ytntxnz8py.github.io/mi-tienda</code> — Nombre: "Sitio principal". GA4 te dará un <strong>Measurement ID</strong> con formato <code>G-7HMBMBQNQZ</code>.</p>
-            </div>
-          </li>
-          <li class="ga-paso">
-            <div class="ga-paso__num">4</div>
-            <div class="ga-paso__cuerpo">
-              <strong>Reemplaza el ID en el código</strong>
-              <p>En <code>index.html</code> y <code>admin.html</code> busca <code>G-7HMBMBQNQZ</code> (aparece 2 veces en cada archivo) y reemplázalo con tu Measurement ID real. Haz commit y push.</p>
-              <div class="ga-code-box">
-                <code>gtag('config', 'G-TU_ID_REAL');</code>
+          </div>
+
+          <!-- Panel derecho: preview iframe -->
+          <div class="editor-preview-col">
+            <div class="panel-card editor-preview-card">
+              <div class="panel-card__header">
+                <h3 class="panel-card__titulo">Vista previa</h3>
+                <button class="admin-btn" id="btnRefreshPreview">↺ Actualizar</button>
+              </div>
+              <div class="preview-frame-wrap">
+                <iframe id="previewFrame" src="index.html" class="preview-frame" title="Vista previa del sitio"></iframe>
               </div>
             </div>
-          </li>
-          <li class="ga-paso">
-            <div class="ga-paso__num">5</div>
-            <div class="ga-paso__cuerpo">
-              <strong>Verifica que funciona</strong>
-              <p>En Google Analytics ve a <em>Informes → Tiempo real</em>. Visita tu sitio desde otro navegador — deberías ver 1 usuario activo. Los datos históricos tardan 24–48 horas en aparecer.</p>
-            </div>
-          </li>
-        </ol>
-
-        <div class="ga-eventos">
-          <h3 class="ga-eventos__titulo">Eventos ya configurados</h3>
-          <div class="ga-eventos__grid">
-            <div class="ga-evento-chip">scroll_depth</div>
-            <div class="ga-evento-chip">section_view</div>
-            <div class="ga-evento-chip">destination_click</div>
-            <div class="ga-evento-chip">modal_open</div>
-            <div class="ga-evento-chip">maps_click</div>
-            <div class="ga-evento-chip">apple_maps_click</div>
-            <div class="ga-evento-chip">reviews_click</div>
-            <div class="ga-evento-chip">contact_form_click</div>
-            <div class="ga-evento-chip">contact_form_submit</div>
-            <div class="ga-evento-chip">language_change</div>
-            <div class="ga-evento-chip">filter_click</div>
           </div>
+
         </div>
+
       </section>
 
-    </main>
+      <!-- ===== TAB: MENSAJES ===== -->
+      <section class="tab-panel" id="tab-mensajes" style="display:none">
+
+        <div class="panel-card">
+          <div class="panel-card__header">
+            <h3 class="panel-card__titulo">
+              Bandeja de mensajes
+              <span id="badgeMensajes" class="badge-mensajes" style="display:none">0</span>
+            </h3>
+            <button class="admin-btn admin-btn--exportar" id="btnExportarCSV">⬇ Exportar CSV</button>
+          </div>
+          <div id="bandejaMensajes" class="bandeja-mensajes">
+            <p class="tabla-vacia">Cargando mensajes…</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===== TAB: CONFIGURACIÓN ===== -->
+      <section class="tab-panel" id="tab-config" style="display:none">
+
+        <!-- Guía GA4 — solo visible después del login, dentro del panel -->
+        <div class="panel-card">
+          <div class="panel-card__header">
+            <h3 class="panel-card__titulo">Activar Google Analytics</h3>
+            <span class="ga-estado" id="gaEstado">⚪ No configurado</span>
+          </div>
+          <p class="ga-intro">Para ver datos reales de visitas, conecta tu propiedad GA4 mediante el proxy.</p>
+
+          <ol class="ga-pasos">
+            <li class="ga-paso">
+              <div class="ga-paso__num">1</div>
+              <div class="ga-paso__cuerpo">
+                <strong>Despliega el Google Apps Script proxy</strong>
+                <p>Sigue las instrucciones en <code>_privado/SETUP_GAS.md</code>. El proxy actúa como puente entre el sitio estático y la GA4 Data API.</p>
+              </div>
+            </li>
+            <li class="ga-paso">
+              <div class="ga-paso__num">2</div>
+              <div class="ga-paso__cuerpo">
+                <strong>Copia la URL del Web App desplegado</strong>
+                <p>Formato: <code>https://script.google.com/macros/s/AKfyc.../exec</code></p>
+              </div>
+            </li>
+            <li class="ga-paso">
+              <div class="ga-paso__num">3</div>
+              <div class="ga-paso__cuerpo">
+                <strong>Configura la URL del proxy</strong>
+                <p>Pega la URL en <code>assets/js/admin-config.js</code> → campo <code>GAS_PROXY_URL</code>. Haz commit y push.</p>
+                <div class="ga-code-box"><code>GAS_PROXY_URL: 'https://script.google.com/macros/s/AKfyc.../exec'</code></div>
+              </div>
+            </li>
+            <li class="ga-paso">
+              <div class="ga-paso__num">4</div>
+              <div class="ga-paso__cuerpo">
+                <strong>Verifica en el Dashboard</strong>
+                <p>El tab Dashboard mostrará "GA4 Real" en lugar de "LocalStorage" cuando el proxy esté activo.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="ga-eventos">
+            <h4 class="ga-eventos__titulo">Eventos ya configurados en el sitio</h4>
+            <div class="ga-eventos__grid">
+              <div class="ga-evento-chip">scroll_depth</div>
+              <div class="ga-evento-chip">section_view</div>
+              <div class="ga-evento-chip">destination_click</div>
+              <div class="ga-evento-chip">modal_open</div>
+              <div class="ga-evento-chip">maps_click</div>
+              <div class="ga-evento-chip">apple_maps_click</div>
+              <div class="ga-evento-chip">reviews_click</div>
+              <div class="ga-evento-chip">contact_form_click</div>
+              <div class="ga-evento-chip">contact_form_submit</div>
+              <div class="ga-evento-chip">language_change</div>
+              <div class="ga-evento-chip">filter_click</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cambiar contraseña -->
+        <div class="panel-card">
+          <div class="panel-card__header">
+            <h3 class="panel-card__titulo">Seguridad</h3>
+          </div>
+          <div class="config-seccion">
+            <p class="config-info">
+              La contraseña del admin se define en <code>assets/js/admin.js</code> (variable <code>ADMIN_PASS</code>).
+              Cámbiala directamente en el código y haz commit. Recuerda actualizar <code>_privado/admin-secret.txt</code> con la nueva contraseña.
+            </p>
+            <div class="config-info-box">
+              <span class="config-info-box__icon">🔒</span>
+              <div>
+                <strong>Intentos fallidos registrados:</strong>
+                <span id="statIntentos">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info del sistema -->
+        <div class="panel-card">
+          <div class="panel-card__header">
+            <h3 class="panel-card__titulo">Información del sistema</h3>
+          </div>
+          <div class="config-info-grid">
+            <div class="config-info-item">
+              <span class="config-info-item__label">Versión admin</span>
+              <span class="config-info-item__val" id="infoVersion">—</span>
+            </div>
+            <div class="config-info-item">
+              <span class="config-info-item__label">GA4 Measurement ID</span>
+              <span class="config-info-item__val" id="infoGAId">—</span>
+            </div>
+            <div class="config-info-item">
+              <span class="config-info-item__label">Proxy GA4</span>
+              <span class="config-info-item__val" id="infoProxy">—</span>
+            </div>
+            <div class="config-info-item">
+              <span class="config-info-item__label">Destinos en localStorage</span>
+              <span class="config-info-item__val" id="infoDestinos">—</span>
+            </div>
+            <div class="config-info-item">
+              <span class="config-info-item__label">Formularios en localStorage</span>
+              <span class="config-info-item__val" id="infoFormularios">—</span>
+            </div>
+          </div>
+          <div class="config-acciones">
+            <button class="admin-btn admin-btn--del" id="btnLimpiarDemo">🗑 Limpiar datos demo</button>
+          </div>
+        </div>
+
+      </section>
+
+    </div><!-- /admin-wrap -->
+
+  </div><!-- /dashboard -->
+
+  <!-- ===== SLIDE PANEL — CRUD de destinos ===== -->
+  <div class="slide-panel" id="slidePanel">
+    <div class="slide-panel__header">
+      <h3 class="slide-panel__titulo" id="slidePanelTitulo">Nuevo destino</h3>
+      <button class="slide-panel__cerrar" id="slidePanelCerrar">✕</button>
+    </div>
+    <div class="slide-panel__body">
+      <form id="formDestino" novalidate>
+
+        <div class="admin-form__grupo">
+          <label class="admin-form__label">Nombre (ES)</label>
+          <input name="nombre_es" class="admin-form__input" placeholder="ej: Everglades National Park" required />
+        </div>
+        <div class="admin-form__grupo">
+          <label class="admin-form__label">Nombre (EN)</label>
+          <input name="nombre_en" class="admin-form__input" placeholder="ej: Everglades National Park" required />
+        </div>
+
+        <div class="admin-form__grupo">
+          <label class="admin-form__label">Descripción corta (ES)</label>
+          <textarea name="desc_es" class="admin-form__textarea" placeholder="Descripción breve en español" required></textarea>
+        </div>
+        <div class="admin-form__grupo">
+          <label class="admin-form__label">Descripción corta (EN)</label>
+          <textarea name="desc_en" class="admin-form__textarea" placeholder="Short description in English" required></textarea>
+        </div>
+
+        <div class="admin-form__grupo">
+          <label class="admin-form__label">URL foto principal</label>
+          <input name="foto" class="admin-form__input" type="url" placeholder="https://upload.wikimedia.org/..." />
+        </div>
+
+        <div class="admin-form__row">
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Latitud</label>
+            <input name="lat" class="admin-form__input" type="number" step="0.0001" placeholder="25.2866" required />
+          </div>
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Longitud</label>
+            <input name="lng" class="admin-form__input" type="number" step="0.0001" placeholder="-80.8987" required />
+          </div>
+        </div>
+
+        <div class="admin-form__row">
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Dificultad (ES)</label>
+            <input name="dificultad_es" class="admin-form__input" placeholder="Fácil — Moderado" required />
+          </div>
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Dificultad (EN)</label>
+            <input name="dificultad_en" class="admin-form__input" placeholder="Easy — Moderate" required />
+          </div>
+        </div>
+
+        <div class="admin-form__row">
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Nivel (badge)</label>
+            <select name="dificultad_clase" class="admin-form__select">
+              <option value="facil">Fácil (verde)</option>
+              <option value="moderado">Moderado (naranja)</option>
+              <option value="dificil">Difícil (coral)</option>
+            </select>
+          </div>
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Terreno</label>
+            <select name="tipo" class="admin-form__select">
+              <option value="tierra">🏔️ Tierra</option>
+              <option value="mar">🌊 Mar</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-form__row">
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Actividades (ES)</label>
+            <input name="tipo_es" class="admin-form__input" placeholder="Senderismo · Kayak" required />
+          </div>
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Actividades (EN)</label>
+            <input name="tipo_en" class="admin-form__input" placeholder="Hiking · Kayak" required />
+          </div>
+        </div>
+
+        <div class="admin-form__row">
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Precio</label>
+            <input name="precio" class="admin-form__input" placeholder="$35 / vehículo" required />
+          </div>
+          <div class="admin-form__grupo">
+            <label class="admin-form__label">Horarios</label>
+            <input name="horarios" class="admin-form__input" placeholder="8am – Sunset" required />
+          </div>
+        </div>
+
+        <div class="admin-form__grupo">
+          <label class="admin-form__label">Web oficial</label>
+          <input name="web_oficial" class="admin-form__input" type="url" placeholder="https://www.nps.gov/ever/" />
+        </div>
+
+        <div class="slide-panel__acciones">
+          <button type="submit" class="admin-btn admin-btn--nuevo">Guardar destino</button>
+          <button type="button" class="admin-btn admin-btn--cancelar" id="slidePanelCancelar">Cancelar</button>
+        </div>
+
+      </form>
+    </div>
   </div>
+  <div class="slide-panel-overlay" id="slidePanelOverlay"></div>
 
-  <!-- Notificación toast para confirmaciones -->
+  <!-- Notificación toast -->
   <div id="toast" class="toast"></div>
 
   <script src="assets/js/admin.js"></script>
-
-  <script>
-    /* Muestra / oculta el formulario de nuevo destino */
-    function toggleFormDestino() {
-      var w = document.getElementById('formDestinoWrap');
-      var abierto = w.style.display !== 'none';
-      w.style.display = abierto ? 'none' : 'block';
-      if (!abierto) w.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    /* Cancela y resetea el formulario de destino */
-    function cancelarFormDestino() {
-      resetFormDestino();
-      document.getElementById('formDestinoWrap').style.display = 'none';
-    }
-  </script>
 </body>
 </html>

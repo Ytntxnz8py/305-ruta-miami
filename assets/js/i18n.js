@@ -187,6 +187,35 @@ function cambiarIdioma(lang) {
   if (btn) btn.textContent = lang === 'es' ? 'EN' : 'ES';
 }
 
+/* ===== SOPORTE DE OVERRIDES DESDE admin (em_config_sitio) ===== */
+/* Si el admin guardó textos personalizados en localStorage,
+   se inyectan en el diccionario TEXTOS antes de la primera aplicación. */
+(function aplicarOverridesConfig() {
+  var config = {};
+  try { config = JSON.parse(localStorage.getItem('em_config_sitio')) || {}; }
+  catch (e) { return; }
+
+  if (!Object.keys(config).length) return;
+
+  /* Mapeo: clave de em_config_sitio → {lang, key} en TEXTOS */
+  var mapa = {
+    hero_titulo_es:     { lang: 'es', key: 'hero_titulo'      },
+    hero_titulo_en:     { lang: 'en', key: 'hero_titulo'      },
+    hero_tagline_es:    { lang: 'es', key: 'hero_tagline'     },
+    hero_tagline_en:    { lang: 'en', key: 'hero_tagline'     },
+    intro_sub_es:       { lang: 'es', key: 'intro_sub'        },
+    intro_sub_en:       { lang: 'en', key: 'intro_sub'        },
+    destinos_titulo_es: { lang: 'es', key: 'destinos_titulo'  },
+    destinos_sub_es:    { lang: 'es', key: 'destinos_sub'     }
+  };
+
+  Object.keys(mapa).forEach(function (cfgKey) {
+    if (!config[cfgKey] || config[cfgKey] === '') return;
+    var m = mapa[cfgKey];
+    if (TEXTOS[m.lang]) TEXTOS[m.lang][m.key] = config[cfgKey];
+  });
+})();
+
 /* ===== INICIALIZACIÓN AL CARGAR ===== */
 document.addEventListener('DOMContentLoaded', function () {
   aplicarIdioma(IDIOMA_ACTUAL);

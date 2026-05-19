@@ -1,0 +1,25 @@
+# ===== PRIVADO: NUNCA subir a GitHub =====
+_privado/
+*.json
+!package.json
+!skills-lock.json
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Claves y secretos
+*.key
+*.pem
+*.p12
+*.pfx
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node (por si acaso)
+node_modules/

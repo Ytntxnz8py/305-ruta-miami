@@ -892,8 +892,52 @@ function initScrollAnimation() {
   });
 }
 
+/* ===== CONFIGURACIÓN DEL SITIO (em_config_sitio) ===== */
+/* Lee la config guardada desde el panel admin y la aplica al DOM.
+   Permite al admin editar textos del hero, tagline, colores, etc.
+   sin tocar el código HTML directamente. */
+function leerConfigSitio() {
+  var config = {};
+  try { config = JSON.parse(localStorage.getItem('em_config_sitio')) || {}; }
+  catch (e) { return; }
+
+  if (!Object.keys(config).length) return;
+
+  /* Idioma activo */
+  var lang = (typeof IDIOMA_ACTUAL !== 'undefined') ? IDIOMA_ACTUAL : 'es';
+
+  /* Mapeo: clave de config → data-i18n del DOM */
+  var mapa = {
+    hero_titulo_es:     { lang: 'es', key: 'hero_titulo'  },
+    hero_titulo_en:     { lang: 'en', key: 'hero_titulo'  },
+    hero_tagline_es:    { lang: 'es', key: 'hero_tagline' },
+    hero_tagline_en:    { lang: 'en', key: 'hero_tagline' },
+    intro_sub_es:       { lang: 'es', key: 'intro_sub'    },
+    intro_sub_en:       { lang: 'en', key: 'intro_sub'    },
+    destinos_titulo_es: { lang: 'es', key: 'destinos_titulo' },
+    destinos_sub_es:    { lang: 'es', key: 'destinos_sub'    }
+  };
+
+  /* Aplicar overrides al diccionario TEXTOS si i18n está cargado */
+  if (typeof TEXTOS !== 'undefined') {
+    Object.keys(mapa).forEach(function (cfgKey) {
+      if (config[cfgKey] === undefined || config[cfgKey] === '') return;
+      var m = mapa[cfgKey];
+      if (TEXTOS[m.lang]) TEXTOS[m.lang][m.key] = config[cfgKey];
+    });
+    /* Re-aplicar el idioma activo con los nuevos valores */
+    if (typeof aplicarIdioma === 'function') aplicarIdioma(lang);
+  }
+
+  /* Color de acento — actualiza la variable CSS en :root */
+  if (config.color_acento) {
+    document.documentElement.style.setProperty('--turquesa', config.color_acento);
+  }
+}
+
 /* ===== INICIALIZACIÓN ===== */
 document.addEventListener('DOMContentLoaded', function () {
+  leerConfigSitio();
   registrarVisita();
   renderDestinos();
   initScrollAnimation();
