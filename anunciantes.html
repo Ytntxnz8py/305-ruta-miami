@@ -29,28 +29,45 @@
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header class="header" id="an-header">
-    <div class="header__contenedor">
+  <!-- ===== FLOATING PILL NAV ===== -->
+  <div class="fn-wrap" role="banner">
+    <nav class="fn" id="floatingNav" aria-label="Navegación principal">
 
-      <a href="index.html" class="header__logo" aria-label="Explora Miami — Ir al inicio">
-        <span class="header__logo-explora">Explora</span><span class="header__logo-miami">Miami</span>
+      <!-- Logo -->
+      <a href="index.html" class="fn__logo" aria-label="Explora Miami — ir al inicio">
+        <span class="fn__logo-explora">Explora</span><span class="fn__logo-miami">Miami</span>
       </a>
 
-      <button class="header__menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+      <!-- Separador visual -->
+      <div class="fn__divider" aria-hidden="true"></div>
+
+      <!-- Links desktop -->
+      <ul class="fn__links">
+        <li><a href="index.html"          class="fn__link fn__link--back">Inicio</a></li>
+        <li><a href="index.html#destinos" class="fn__link">Destinos</a></li>
+        <li><a href="#hero-anunciantes"   class="fn__link fn__link--active" aria-current="page">Para empresas</a></li>
+        <li><a href="#precios"            class="fn__link">Precios</a></li>
+      </ul>
+
+      <!-- Ícono hamburguesa (collapsed + mobile) -->
+      <button class="fn__collapse-icon" aria-label="Abrir menú" aria-expanded="false" style="margin-right:0">
         <span></span><span></span><span></span>
       </button>
 
-      <nav class="header__nav" id="navMenu" aria-label="Navegación principal">
-        <ul class="header__lista">
-          <li><a href="index.html#destinos" class="header__enlace">Destinos</a></li>
-          <li><a href="index.html#mapa"     class="header__enlace">Mapa</a></li>
-          <li><a href="#contacto-empresas"  class="header__enlace header__enlace--cta active" aria-current="page">Para empresas</a></li>
-        </ul>
-      </nav>
+      <!-- Dropdown (mobile / collapsed) -->
+      <ul class="fn__dropdown" id="fnDropdown" role="menu">
+        <li><a href="index.html"              class="fn__dd-link fn__dd-link--back">Inicio</a></li>
+        <li><div class="fn__dd-sep" role="separator"></div></li>
+        <li><a href="index.html#destinos"     class="fn__dd-link">Destinos</a></li>
+        <li><a href="index.html#mapa"         class="fn__dd-link">Mapa</a></li>
+        <li><div class="fn__dd-sep" role="separator"></div></li>
+        <li><a href="#hero-anunciantes"       class="fn__dd-link fn__dd-link--active" aria-current="page">Para empresas</a></li>
+        <li><a href="#precios"                class="fn__dd-link">Ver precios</a></li>
+        <li><a href="#contacto-empresas"      class="fn__dd-link">Contacto</a></li>
+      </ul>
 
-    </div>
-  </header>
+    </nav>
+  </div>
 
   <main>
 
@@ -891,6 +908,7 @@
       <span class="an-footer__logo-explora">Explora</span><span class="an-footer__logo-miami">Miami</span>
     </a>
     <nav class="an-footer__links" aria-label="Links del footer">
+      <a href="index.html"               class="an-footer__link">← Inicio</a>
       <a href="index.html#destinos"      class="an-footer__link">Destinos</a>
       <a href="index.html#mapa"          class="an-footer__link">Mapa</a>
       <a href="index.html#trabaja"       class="an-footer__link">Trabaja con nosotros</a>

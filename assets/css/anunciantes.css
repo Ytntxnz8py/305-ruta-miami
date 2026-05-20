@@ -1155,3 +1155,150 @@ p  { font-weight: 300; }
   .an-section     { padding: 4rem 1.25rem; }
   .numeros-grid   { grid-template-columns: 1fr 1fr; }
 }
+
+/* =====================================================
+   FLOATING PILL NAV — fn-* classes
+   Porta React AnimatedNavFramer → vanilla ES5 / CSS puro
+   Funciona en anunciantes.html — usa las vars de anunciantes.css
+===================================================== */
+.fn-wrap {
+  position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%);
+  z-index: 200;
+}
+.fn {
+  position: relative; display: inline-flex; align-items: center;
+  height: 48px; border-radius: 50px;
+  background: rgba(255, 253, 247, 0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(0, 188, 212, 0.18);
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
+  overflow: hidden; white-space: nowrap; cursor: default;
+  transition: width 0.45s var(--ease), box-shadow 0.3s ease;
+  will-change: width;
+}
+.fn.is-collapsed {
+  cursor: pointer;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.14);
+}
+.fn.is-collapsed:hover { box-shadow: 0 6px 28px rgba(0, 188, 212, 0.22); }
+
+/* Logo */
+.fn__logo {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.06em;
+  padding: 0 0.65rem 0 1.25rem;
+  font-family: var(--serif); font-style: italic; font-size: 1.1rem;
+  text-decoration: none;
+  opacity: 1; transform: translateX(0) rotate(0deg);
+  transition: opacity 0.22s ease, transform 0.3s var(--ease);
+  will-change: opacity, transform;
+}
+.fn__logo-explora { color: var(--turquesa); font-weight: 600; font-style: normal; }
+.fn__logo-miami   { color: var(--coral);    font-weight: 400; font-style: italic; }
+.fn.is-collapsed .fn__logo {
+  opacity: 0; transform: translateX(-18px) rotate(-12deg); pointer-events: none;
+}
+
+/* Divider */
+.fn__divider {
+  flex-shrink: 0; width: 1px; height: 22px;
+  background: rgba(26, 42, 53, 0.13); margin: 0 0.2rem;
+  opacity: 1; transition: opacity 0.22s ease;
+}
+.fn.is-collapsed .fn__divider { opacity: 0; }
+
+/* Nav links */
+.fn__links {
+  display: flex; align-items: center; gap: 0; list-style: none;
+  padding: 0 0.35rem 0 0.15rem;
+  opacity: 1; transition: opacity 0.22s ease;
+}
+.fn.is-collapsed .fn__links { opacity: 0; pointer-events: none; }
+.fn__link {
+  display: inline-block; padding: 0.38rem 0.68rem;
+  font-size: 0.84rem; font-weight: 500; color: var(--tinta);
+  text-decoration: none; border-radius: 50px; white-space: nowrap;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+.fn__link:hover { color: var(--turquesa); background: rgba(0, 188, 212, 0.09); }
+.fn__link--active { color: var(--turquesa); font-weight: 600; }
+.fn__link--cta {
+  background: linear-gradient(135deg, var(--coral), var(--turquesa));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; font-weight: 700;
+}
+.fn__link--back { color: rgba(26, 42, 53, 0.52); font-size: 0.8rem; }
+.fn__link--back::before { content: '← '; }
+
+/* Language button (omitido en anunciantes — incluido para extensibilidad) */
+.fn__lang {
+  flex-shrink: 0; margin: 0 0.75rem 0 0.1rem;
+  background: var(--turquesa); color: #fff;
+  border: none; border-radius: 50px;
+  padding: 0.24rem 0.82rem;
+  font-family: var(--sans); font-size: 0.76rem; font-weight: 700;
+  cursor: pointer; letter-spacing: 0.04em;
+  opacity: 1;
+  transition: opacity 0.22s ease, background 0.2s ease, transform 0.2s ease;
+}
+.fn__lang:hover { background: var(--turquesa-oscuro); transform: scale(1.06); }
+.fn.is-collapsed .fn__lang { opacity: 0; pointer-events: none; }
+
+/* Collapsed hamburger (rellena el círculo de 48px) */
+.fn__collapse-icon {
+  position: absolute; inset: 0; background: none; border: none; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  padding: 0; opacity: 0; pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+.fn.is-collapsed .fn__collapse-icon { opacity: 1; pointer-events: auto; }
+.fn__collapse-icon span {
+  display: block; width: 20px; height: 2px;
+  background: var(--tinta); border-radius: 2px;
+}
+
+/* Dropdown (móvil y collapsed) */
+.fn__dropdown {
+  position: absolute; top: calc(100% + 0.6rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px) scale(0.97);
+  min-width: 220px; border-radius: 18px;
+  background: rgba(255, 253, 247, 0.98);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 188, 212, 0.14);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 0.5rem; list-style: none;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+}
+.fn__dropdown.is-open {
+  opacity: 1; pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+.fn__dd-link {
+  display: block; padding: 0.68rem 1rem;
+  font-size: 0.9rem; font-weight: 500; color: var(--tinta);
+  text-decoration: none; border-radius: 12px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.fn__dd-link:hover { background: rgba(0, 188, 212, 0.09); color: var(--turquesa); }
+.fn__dd-link--active { color: var(--turquesa); font-weight: 600; }
+.fn__dd-link--cta { color: var(--coral); font-weight: 700; }
+.fn__dd-link--back { color: rgba(26, 42, 53, 0.50); font-size: 0.84rem; }
+.fn__dd-link--back::before { content: '← '; }
+.fn__dd-sep { height: 1px; background: rgba(0, 188, 212, 0.10); margin: 0.35rem 0.5rem; }
+
+/* Móvil: siempre colapsado → dropdown */
+@media (max-width: 768px) {
+  .fn { width: 48px !important; cursor: pointer; }
+  .fn__logo,
+  .fn__divider,
+  .fn__links,
+  .fn__lang { display: none !important; }
+  .fn__collapse-icon { opacity: 1 !important; pointer-events: auto !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fn { transition: none !important; }
+  .fn__logo, .fn__dropdown { transition: none !important; }
+}

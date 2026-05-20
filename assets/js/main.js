@@ -788,34 +788,120 @@ function cerrarModal() {
   }, 320);
 }
 
-/* ===== NAVBAR: scroll → sombra ===== */
+/* ===== FLOATING PILL NAV ===== */
 (function () {
-  var header = document.querySelector('.header');
-  if (!header) return;
-  window.addEventListener('scroll', function () {
-    header.classList.toggle('header--scrolled', window.scrollY > 60);
-  }, { passive: true });
-})();
+  function initFloatingNav() {
+    var nav    = document.getElementById('floatingNav');
+    var colBtn = nav && nav.querySelector('.fn__collapse-icon');
+    var drop   = document.getElementById('fnDropdown');
+    if (!nav) return;
 
-/* ===== MENÚ HAMBURGUESA ===== */
-(function () {
-  var btn = document.getElementById('menuBtn');
-  var nav = document.getElementById('navMenu');
-  if (!btn || !nav) return;
+    var isMobile      = window.innerWidth <= 768;
+    var isExpanded    = true;
+    var lastScrollY   = window.pageYOffset;
+    var collapseAtY   = 0;
+    var EXPAND_DELTA  = 80;
+    var expandedWidth = 0;
 
-  btn.addEventListener('click', function () {
-    var ab = nav.classList.toggle('abierto');
-    btn.classList.toggle('abierto', ab);
-    btn.setAttribute('aria-expanded', String(ab));
-  });
+    /* Fija el ancho medido para que CSS pueda transicionar desde/hacia él */
+    function measureWidth() {
+      nav.style.width = '';
+      expandedWidth = nav.offsetWidth;
+      nav.style.width = expandedWidth + 'px';
+    }
 
-  nav.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () {
-      nav.classList.remove('abierto');
-      btn.classList.remove('abierto');
-      btn.setAttribute('aria-expanded', 'false');
+    /* Colapsar → píldora de 48px */
+    function collapse() {
+      if (!isExpanded || isMobile) return;
+      isExpanded = false;
+      nav.classList.add('is-collapsed');
+      nav.style.width = '48px';
+      if (drop) drop.classList.remove('is-open');
+      if (colBtn) colBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    /* Expandir → ancho medido → luego auto */
+    function expand() {
+      if (isExpanded) return;
+      isExpanded = true;
+      nav.classList.remove('is-collapsed');
+      nav.style.width = expandedWidth + 'px';
+      if (drop) drop.classList.remove('is-open');
+      if (colBtn) colBtn.setAttribute('aria-expanded', 'false');
+      nav.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName !== 'width') return;
+        nav.removeEventListener('transitionend', onEnd);
+        nav.style.width = ''; /* vuelve a auto para que el contenido pueda crecer */
+      });
+    }
+
+    /* Scroll: colapsar al bajar, expandir al subir */
+    window.addEventListener('scroll', function () {
+      var y = window.pageYOffset;
+      if (!isMobile) {
+        if (isExpanded && y > lastScrollY && y > 150) {
+          collapseAtY = y;
+          collapse();
+        } else if (!isExpanded && y < lastScrollY && (collapseAtY - y > EXPAND_DELTA)) {
+          expand();
+        }
+      }
+      lastScrollY = y;
+    }, { passive: true });
+
+    /* Clic en píldora colapsada → expandir (desktop) */
+    nav.addEventListener('click', function (e) {
+      if (!isExpanded && !isMobile) {
+        e.stopPropagation();
+        expand();
+      }
     });
-  });
+
+    /* Botón hamburguesa → dropdown (mobile / collapsed) */
+    if (colBtn) {
+      colBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (drop) {
+          var open = drop.classList.toggle('is-open');
+          colBtn.setAttribute('aria-expanded', String(open));
+        } else if (!isExpanded && !isMobile) {
+          expand();
+        }
+      });
+    }
+
+    /* Clic fuera → cierra dropdown */
+    document.addEventListener('click', function () {
+      if (drop) drop.classList.remove('is-open');
+    });
+
+    /* Links del dropdown → cierra al navegar */
+    if (drop) {
+      drop.querySelectorAll('.fn__dd-link').forEach(function (a) {
+        a.addEventListener('click', function () {
+          drop.classList.remove('is-open');
+          if (colBtn) colBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    /* Resize: recalcula isMobile y ancho */
+    window.addEventListener('resize', function () {
+      isMobile = window.innerWidth <= 768;
+      if (!isMobile && isExpanded) {
+        nav.style.width = '';
+        measureWidth();
+      }
+    });
+
+    /* Init: medir en el siguiente frame cuando el layout ya está listo */
+    requestAnimationFrame(function () {
+      measureWidth();
+      lastScrollY = window.pageYOffset;
+    });
+  }
+
+  initFloatingNav();
 })();
 
 /* ===== BOTÓN ES / EN ===== */

@@ -6,35 +6,105 @@
 (function () {
   'use strict';
 
-  /* ===== NAVBAR SCROLL ===== */
-  function initNavbarScroll() {
-    var header = document.getElementById('an-header');
-    if (!header) return;
-    function onScroll() {
-      if (window.pageYOffset > 30) { header.classList.add('scrolled'); }
-      else                         { header.classList.remove('scrolled'); }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
+  /* ===== FLOATING PILL NAV ===== */
+  function initFloatingNav() {
+    var nav    = document.getElementById('floatingNav');
+    var colBtn = nav && nav.querySelector('.fn__collapse-icon');
+    var drop   = document.getElementById('fnDropdown');
+    if (!nav) return;
 
-  /* ===== HAMBURGER ===== */
-  function initHamburger() {
-    var btn = document.getElementById('menuBtn');
-    var nav = document.getElementById('navMenu');
-    if (!btn || !nav) return;
-    btn.addEventListener('click', function () {
-      var open = nav.classList.toggle('is-open');
-      btn.classList.toggle('is-open', open);
-      btn.setAttribute('aria-expanded', String(open));
-    });
-    /* Cierra al hacer clic en un enlace */
-    nav.querySelectorAll('.header__enlace').forEach(function (a) {
-      a.addEventListener('click', function () {
-        nav.classList.remove('is-open');
-        btn.classList.remove('is-open');
-        btn.setAttribute('aria-expanded', 'false');
+    var isMobile      = window.innerWidth <= 768;
+    var isExpanded    = true;
+    var lastScrollY   = window.pageYOffset;
+    var collapseAtY   = 0;
+    var EXPAND_DELTA  = 80;
+    var expandedWidth = 0;
+
+    function measureWidth() {
+      nav.style.width = '';
+      expandedWidth = nav.offsetWidth;
+      nav.style.width = expandedWidth + 'px';
+    }
+
+    function collapse() {
+      if (!isExpanded || isMobile) return;
+      isExpanded = false;
+      nav.classList.add('is-collapsed');
+      nav.style.width = '48px';
+      if (drop) drop.classList.remove('is-open');
+      if (colBtn) colBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    function expand() {
+      if (isExpanded) return;
+      isExpanded = true;
+      nav.classList.remove('is-collapsed');
+      nav.style.width = expandedWidth + 'px';
+      if (drop) drop.classList.remove('is-open');
+      if (colBtn) colBtn.setAttribute('aria-expanded', 'false');
+      nav.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName !== 'width') return;
+        nav.removeEventListener('transitionend', onEnd);
+        nav.style.width = '';
       });
+    }
+
+    window.addEventListener('scroll', function () {
+      var y = window.pageYOffset;
+      if (!isMobile) {
+        if (isExpanded && y > lastScrollY && y > 150) {
+          collapseAtY = y;
+          collapse();
+        } else if (!isExpanded && y < lastScrollY && (collapseAtY - y > EXPAND_DELTA)) {
+          expand();
+        }
+      }
+      lastScrollY = y;
+    }, { passive: true });
+
+    nav.addEventListener('click', function (e) {
+      if (!isExpanded && !isMobile) {
+        e.stopPropagation();
+        expand();
+      }
+    });
+
+    if (colBtn) {
+      colBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (drop) {
+          var open = drop.classList.toggle('is-open');
+          colBtn.setAttribute('aria-expanded', String(open));
+        } else if (!isExpanded && !isMobile) {
+          expand();
+        }
+      });
+    }
+
+    document.addEventListener('click', function () {
+      if (drop) drop.classList.remove('is-open');
+    });
+
+    if (drop) {
+      drop.querySelectorAll('.fn__dd-link').forEach(function (a) {
+        a.addEventListener('click', function () {
+          drop.classList.remove('is-open');
+          if (colBtn) colBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    window.addEventListener('resize', function () {
+      isMobile = window.innerWidth <= 768;
+      if (!isMobile && isExpanded) {
+        nav.style.width = '';
+        measureWidth();
+      }
+    });
+
+    requestAnimationFrame(function () {
+      measureWidth();
+      lastScrollY = window.pageYOffset;
     });
   }
 
@@ -475,8 +545,7 @@
   /* ===== INIT ===== */
   document.addEventListener('DOMContentLoaded', function () {
     initHeroShutter();      /* shutter text — antes que fade-up para que no compita */
-    initNavbarScroll();
-    initHamburger();
+    initFloatingNav();
     initMetalButtons();
     initScrollAnimation();
     initCounters();

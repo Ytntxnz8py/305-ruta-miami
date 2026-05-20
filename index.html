@@ -87,40 +87,47 @@
 </head>
 <body>
 
-  <!-- ===== HEADER FIJO ===== -->
-  <header class="header" id="header">
-    <div class="header__contenedor">
+  <!-- ===== FLOATING PILL NAV ===== -->
+  <div class="fn-wrap" role="banner">
+    <nav class="fn" id="floatingNav" aria-label="Navegación principal">
 
-      <a href="#inicio" class="header__logo">
-        <span class="header__logo-explora">Explora</span><span class="header__logo-miami">Miami</span>
+      <!-- Logo -->
+      <a href="#inicio" class="fn__logo" aria-label="Explora Miami — ir al inicio">
+        <span class="fn__logo-explora">Explora</span><span class="fn__logo-miami">Miami</span>
       </a>
 
-      <!-- Botón hamburguesa (móvil) -->
-      <button class="header__menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+      <!-- Separador visual -->
+      <div class="fn__divider" aria-hidden="true"></div>
+
+      <!-- Links desktop -->
+      <ul class="fn__links">
+        <li><a href="#inicio"          class="fn__link" data-i18n="nav_inicio">Inicio</a></li>
+        <li><a href="#destinos"        class="fn__link" data-i18n="nav_destinos">Destinos</a></li>
+        <li><a href="#mapa"            class="fn__link" data-i18n="nav_mapa">Mapa</a></li>
+        <li><a href="#trabaja"         class="fn__link" data-i18n="nav_trabaja">Trabaja</a></li>
+        <li><a href="anunciantes.html" class="fn__link fn__link--cta" data-i18n="nav_empresas">Para empresas</a></li>
+      </ul>
+
+      <!-- Botón idioma ES/EN -->
+      <button class="fn__lang" id="btnIdioma" aria-label="Cambiar idioma">ES</button>
+
+      <!-- Ícono hamburguesa (collapsed + mobile) -->
+      <button class="fn__collapse-icon" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
 
-      <nav class="header__nav" id="navMenu" aria-label="Navegación principal">
-        <ul class="header__lista">
-          <li><a href="#inicio"   class="header__enlace" data-i18n="nav_inicio">Inicio</a></li>
-          <li><a href="#destinos" class="header__enlace" data-i18n="nav_destinos">Destinos</a></li>
-          <li><a href="#mapa"     class="header__enlace" data-i18n="nav_mapa">Mapa</a></li>
-          <li><a href="#trabaja"  class="header__enlace" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
-          <li><a href="anunciantes.html" class="header__enlace header__enlace--cta" data-i18n="nav_empresas">Para empresas</a></li>
-        </ul>
-      </nav>
+      <!-- Dropdown (mobile / collapsed) -->
+      <ul class="fn__dropdown" id="fnDropdown" role="menu">
+        <li><a href="#inicio"          class="fn__dd-link" data-i18n="nav_inicio">Inicio</a></li>
+        <li><a href="#destinos"        class="fn__dd-link" data-i18n="nav_destinos">Destinos</a></li>
+        <li><a href="#mapa"            class="fn__dd-link" data-i18n="nav_mapa">Mapa</a></li>
+        <li><a href="#trabaja"         class="fn__dd-link" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
+        <li><div class="fn__dd-sep" role="separator"></div></li>
+        <li><a href="anunciantes.html" class="fn__dd-link fn__dd-link--cta" data-i18n="nav_empresas">Para empresas</a></li>
+      </ul>
 
-      <!-- Botón de idioma ES / EN — Metal silver pill -->
-      <div class="metal-btn-wrap header-lang-wrap" data-variant="default">
-        <div class="metal-btn-inner"></div>
-        <button class="metal-btn header__lang-btn" id="btnIdioma" aria-label="Cambiar idioma">
-          <div class="metal-btn-shine"></div>
-          ES
-        </button>
-      </div>
-
-    </div>
-  </header>
+    </nav>
+  </div>
 
   <main>
 
@@ -628,10 +635,11 @@
       <nav class="footer__nav" aria-label="Pie de página">
         <h4 class="footer__subtitulo" data-i18n="footer_nav">Navegación</h4>
         <ul class="footer__lista">
-          <li><a href="#inicio"   class="footer__enlace" data-i18n="nav_inicio">Inicio</a></li>
-          <li><a href="#destinos" class="footer__enlace" data-i18n="nav_destinos">Destinos</a></li>
-          <li><a href="#mapa"     class="footer__enlace" data-i18n="nav_mapa">Mapa</a></li>
-          <li><a href="#trabaja"  class="footer__enlace" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
+          <li><a href="#inicio"          class="footer__enlace" data-i18n="nav_inicio">Inicio</a></li>
+          <li><a href="#destinos"        class="footer__enlace" data-i18n="nav_destinos">Destinos</a></li>
+          <li><a href="#mapa"            class="footer__enlace" data-i18n="nav_mapa">Mapa</a></li>
+          <li><a href="#trabaja"         class="footer__enlace" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
+          <li><a href="anunciantes.html" class="footer__enlace" data-i18n="nav_empresas">Para empresas</a></li>
         </ul>
       </nav>
 
