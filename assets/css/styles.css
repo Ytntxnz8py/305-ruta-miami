@@ -2708,31 +2708,31 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   HERO FOTO DOMINANTE v2 — Miami Iconic Photo
-   Cormorant Garamond ultra-thin · photo-first · glassmorphism
+   HERO FOTO DOMINANTE v3 — foto directamente en .hero-arc
+   Sin div intermedio, sin problemas de stacking/opacity
    ============================================================ */
 
-/* Base oscuro para que la foto resalte antes de cargar */
+/* Foto + overlay de gradiente en una sola declaración sobre .hero-arc */
 .hero-arc {
-  background: #05131e !important;
+  background-image:
+    linear-gradient(
+      165deg,
+      rgba(5,19,30,0.22) 0%,
+      rgba(5,19,30,0.04) 30%,
+      rgba(5,19,30,0.55) 68%,
+      rgba(5,19,30,0.90) 100%
+    ),
+    url('../images/photo-1595323397978-65433d24fc23.avif') !important;
+  background-size: cover, cover !important;
+  background-position: center 40%, center 40% !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-color: #05131e !important;
 }
 
-/* Overlay oscuro para legibilidad del texto sobre la foto */
-.hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    165deg,
-    rgba(5,19,30,0.15) 0%,
-    rgba(5,19,30,0.04) 28%,
-    rgba(5,19,30,0.50) 68%,
-    rgba(5,19,30,0.84) 100%
-  );
-  pointer-events: none;
-}
+/* El div .hero-bg ya no es necesario — lo ocultamos */
+.hero-bg { display: none !important; }
 
-/* Contenido: sobre foto + overlay */
+/* Contenido: sobre la foto */
 .hero-arc__contenido {
   position: relative;
   z-index: 2;
