@@ -277,76 +277,146 @@
     </section>
 
     <!-- ===================================================
-         SECCIÓN 4: PLANES Y PRECIOS
+         SECCIÓN 4: PLANES Y PRECIOS — toggle mensual/anual
     =================================================== -->
     <section class="seccion-precios" id="precios" aria-label="Planes y precios">
       <div class="an-container">
 
-        <h2 class="precios-titulo fade-up">Planes simples, sin letra chica</h2>
-        <p class="precios-sub fade-up" style="transition-delay:0.08s">
-          Pago mensual, sin contrato de permanencia. Cancela cuando quieras.
-        </p>
-
-        <div class="precios-grid">
-
-          <!-- Card Básico -->
-          <div class="precio-card glass-card shine-card fade-up" style="transition-delay:0.12s">
-            <div class="precio-badge precio-badge--popular">Más popular</div>
-            <div class="precio-numero">
-              <span class="precio-valor">$80</span>
-              <span class="precio-periodo">/mes</span>
-            </div>
-            <h3 class="precio-nombre">Plan Básico</h3>
-            <p class="precio-desc">Todo lo que necesitas para empezar a captar clientes desde el primer día.</p>
-            <ul class="precio-features" aria-label="Incluye">
-              <li class="precio-feature">Card en el grid principal de destinos</li>
-              <li class="precio-feature">Página de detalle con galería de 4 fotos</li>
-              <li class="precio-feature">Descripción en español e inglés</li>
-              <li class="precio-feature">Datos prácticos y botones de mapa</li>
-              <li class="precio-feature">Métricas de clics mensuales</li>
-              <li class="precio-feature">Soporte por email y WhatsApp</li>
-            </ul>
-            <div class="metal-btn-wrap" data-variant="turquesa" data-size="full">
-              <div class="metal-btn-inner"></div>
-              <button class="metal-btn" onclick="anScrollTo('contacto-empresas')">
-                <div class="metal-btn-shine"></div>
-                <div class="metal-btn-hover-glow"></div>
-                <span>Empezar ahora →</span>
-              </button>
-            </div>
+        <!-- Encabezado: título izquierda · toggle derecha -->
+        <div class="precios-header fade-up">
+          <div class="precios-header__text">
+            <span class="an-eyebrow" style="text-align:left;display:block">Sin contratos · Sin letra chica</span>
+            <h2 class="precios-titulo">Planes simples, resultados reales</h2>
+            <p class="precios-sub">Pago mensual o anual. Cancela cuando quieras.</p>
           </div>
 
-          <!-- Card Premium -->
-          <div class="precio-card glass-card shine-card fade-up" style="transition-delay:0.22s">
-            <div class="precio-badge precio-badge--premium">Premium</div>
-            <div class="precio-numero">
-              <span class="precio-valor">$100</span>
-              <span class="precio-periodo">/mes</span>
-            </div>
-            <h3 class="precio-nombre">Plan Premium</h3>
-            <p class="precio-desc">Para negocios que quieren máxima visibilidad y diferenciarse de la competencia.</p>
-            <ul class="precio-features" aria-label="Incluye">
-              <li class="precio-feature">Todo lo del Plan Básico</li>
-              <li class="precio-feature precio-feature--plus">Posición destacada en el grid (primeras 3 cards)</li>
-              <li class="precio-feature precio-feature--plus">Badge "Recomendado" en tu card</li>
-              <li class="precio-feature precio-feature--plus">Mención en el newsletter mensual</li>
-              <li class="precio-feature precio-feature--plus">Reseñas destacadas en tu página</li>
-              <li class="precio-feature precio-feature--plus">Acceso prioritario a nuevas funciones</li>
-            </ul>
-            <div class="metal-btn-wrap" data-variant="gold" data-size="full">
-              <div class="metal-btn-inner"></div>
-              <button class="metal-btn" onclick="anScrollTo('contacto-empresas')">
-                <div class="metal-btn-shine"></div>
-                <div class="metal-btn-hover-glow"></div>
-                <span>Elegir Premium →</span>
-              </button>
-            </div>
+          <!-- Toggle mensual / anual -->
+          <div class="pricing-toggle" role="group" aria-label="Periodo de facturación">
+            <div class="pricing-toggle__slider" id="pricingSlider" aria-hidden="true"></div>
+            <button class="pricing-toggle__btn is-active" id="pricingMonthly" aria-pressed="true">
+              Mensual
+            </button>
+            <button class="pricing-toggle__btn" id="pricingYearly" aria-pressed="false">
+              Anual
+              <span class="pricing-toggle__badge">Ahorra 20%</span>
+            </button>
           </div>
-
         </div>
 
+        <!-- Contenedor de cards -->
+        <div class="precios-grid-wrap fade-up" style="transition-delay:0.12s">
+          <div class="precios-grid">
+
+            <!-- Card Básico (light) -->
+            <div class="precio-card precio-card--light shine-card">
+              <div class="precio-badge precio-badge--popular">Más popular</div>
+              <div class="precio-numero">
+                <span class="precio-symbol" aria-hidden="true">$</span>
+                <span class="precio-valor"
+                      data-monthly="80" data-yearly="64"
+                      aria-live="polite" aria-atomic="true">80</span>
+                <span class="precio-periodo"
+                      data-monthly="/mes" data-yearly="/mes*">/mes</span>
+              </div>
+              <h3 class="precio-nombre">Plan Básico</h3>
+              <p class="precio-desc">Todo lo que necesitas para empezar a captar clientes desde el primer día.</p>
+              <div class="precio-includes">
+                <h4 class="precio-includes__title">Incluye:</h4>
+                <ul class="precio-features" aria-label="Características del Plan Básico">
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Card en el grid principal de destinos
+                  </li>
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Página de detalle con galería de 4 fotos
+                  </li>
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Descripción en español e inglés
+                  </li>
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Datos prácticos y botones de mapa
+                  </li>
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Métricas de clics mensuales
+                  </li>
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Soporte por email y WhatsApp
+                  </li>
+                </ul>
+              </div>
+              <div class="metal-btn-wrap" data-variant="turquesa" data-size="full">
+                <div class="metal-btn-inner"></div>
+                <button class="metal-btn" onclick="anScrollTo('contacto-empresas')">
+                  <div class="metal-btn-shine"></div>
+                  <div class="metal-btn-hover-glow"></div>
+                  <span>Empezar ahora →</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card Premium (dark / featured) -->
+            <div class="precio-card precio-card--dark shine-card">
+              <div class="precio-badge precio-badge--premium">Premium</div>
+              <div class="precio-numero">
+                <span class="precio-symbol" aria-hidden="true">$</span>
+                <span class="precio-valor"
+                      data-monthly="100" data-yearly="80"
+                      aria-live="polite" aria-atomic="true">100</span>
+                <span class="precio-periodo"
+                      data-monthly="/mes" data-yearly="/mes*">/mes</span>
+              </div>
+              <h3 class="precio-nombre">Plan Premium</h3>
+              <p class="precio-desc">Para negocios que quieren máxima visibilidad y diferenciarse de la competencia.</p>
+              <div class="precio-includes">
+                <h4 class="precio-includes__title">Todo lo del Básico, más:</h4>
+                <ul class="precio-features" aria-label="Características del Plan Premium">
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Posición destacada en el grid (primeras 3 cards)
+                  </li>
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Badge "Recomendado" en tu card
+                  </li>
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Mención en el newsletter mensual
+                  </li>
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Reseñas destacadas en tu página
+                  </li>
+                  <li class="precio-feature">
+                    <span class="precio-feature__check" aria-hidden="true">✓</span>
+                    Acceso prioritario a nuevas funciones
+                  </li>
+                </ul>
+              </div>
+              <div class="metal-btn-wrap" data-variant="gold" data-size="full">
+                <div class="metal-btn-inner"></div>
+                <button class="metal-btn" onclick="anScrollTo('contacto-empresas')">
+                  <div class="metal-btn-shine"></div>
+                  <div class="metal-btn-hover-glow"></div>
+                  <span>Elegir Premium →</span>
+                </button>
+              </div>
+            </div>
+
+          </div><!-- /precios-grid -->
+
+          <!-- Nota plan anual (visible solo en modo anual) -->
+          <p class="precio-anual-nota" id="precioAnualNota" style="display:none" aria-live="polite">
+            * Facturado en un solo pago anual: $768/año (Plan Básico) · $960/año (Plan Premium).
+          </p>
+        </div><!-- /precios-grid-wrap -->
+
         <p class="precio-nota fade-up">
-          Los precios son mensuales, sin contrato de permanencia. Puedes cancelar en cualquier momento con 7 días de anticipación antes del siguiente ciclo de facturación.
+          Los precios son en USD, sin contrato de permanencia. Cancela en cualquier momento con 7 días de anticipación.
         </p>
 
       </div>
