@@ -164,26 +164,83 @@
     }
   }
 
-  /* ===== FAQ ACCORDION ===== */
+  /* ===== FAQ ACCORDION — height real + clip-path spring ===== */
   function initAccordion() {
-    var items = document.querySelectorAll('.faq-item');
+    var items  = document.querySelectorAll('.faq-item');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Cierra un ítem con animación */
+    function closeItem(item) {
+      var wrap    = item.querySelector('.faq-respuesta-wrap');
+      var trigger = item.querySelector('.faq-trigger');
+      if (!wrap || !item.classList.contains('is-open')) return;
+
+      if (reduced) {
+        item.classList.remove('is-open');
+        wrap.style.height = '0';
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        return;
+      }
+
+      /* Congela la altura actual antes de quitar la clase */
+      wrap.style.height = wrap.scrollHeight + 'px';
+      item.classList.remove('is-open');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+
+      /* Siguiente frame: anima a 0 */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          wrap.style.height = '0';
+        });
+      });
+    }
+
+    /* Abre un ítem con animación */
+    function openItem(item) {
+      var wrap    = item.querySelector('.faq-respuesta-wrap');
+      var trigger = item.querySelector('.faq-trigger');
+      if (!wrap || item.classList.contains('is-open')) return;
+
+      /* Añade clase primero → activa clip-path CSS */
+      item.classList.add('is-open');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+
+      if (reduced) {
+        wrap.style.height = 'auto';
+        return;
+      }
+
+      /* scrollHeight devuelve el alto real aunque height:0 overflow:hidden */
+      var fullH = wrap.scrollHeight;
+      wrap.style.height = '0';
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          wrap.style.height = fullH + 'px';
+        });
+      });
+
+      /* Tras la transición: libera a 'auto' para que el contenido pueda crecer */
+      function onEnd(e) {
+        if (e.propertyName !== 'height') return;
+        if (item.classList.contains('is-open')) wrap.style.height = 'auto';
+        wrap.removeEventListener('transitionend', onEnd);
+      }
+      wrap.addEventListener('transitionend', onEnd);
+    }
+
+    /* Bind de triggers */
     items.forEach(function (item) {
       var trigger = item.querySelector('.faq-trigger');
       if (!trigger) return;
       trigger.setAttribute('aria-expanded', 'false');
+
       trigger.addEventListener('click', function () {
         var isOpen = item.classList.contains('is-open');
-        /* cierra todos */
-        items.forEach(function (i) {
-          i.classList.remove('is-open');
-          var t = i.querySelector('.faq-trigger');
-          if (t) t.setAttribute('aria-expanded', 'false');
-        });
-        /* abre el actual si estaba cerrado */
-        if (!isOpen) {
-          item.classList.add('is-open');
-          trigger.setAttribute('aria-expanded', 'true');
-        }
+        /* Cierra todos los abiertos */
+        items.forEach(function (i) { closeItem(i); });
+        /* Abre el actual solo si estaba cerrado */
+        if (!isOpen) openItem(item);
       });
     });
   }
