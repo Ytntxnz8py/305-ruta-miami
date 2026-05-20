@@ -1293,122 +1293,141 @@ function initHeroArc() {
 }
 
 
-/* ===== GLOBO 3D COBE.JS — decorativo ===== */
+/* ===== GLOBO 3D COBE.JS — GlobeStickers port (vanilla JS) ===== */
+/*
+ * Bug raíz anterior: createGlobe se llamaba con width=0 porque
+ * el layout CSS grid no estaba calculado en DOMContentLoaded.
+ * Fix: igual que el componente React — no crear el globo hasta
+ * que canvas.offsetWidth > 0 (ResizeObserver lo detecta).
+ */
 function initGlobo() {
   var canvas = document.getElementById('globoCanvas');
   if (!canvas || typeof createGlobe === 'undefined') return;
 
-  var reducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
+  /* Si el canvas todavía no tiene dimensiones reales, esperar */
+  if (canvas.offsetWidth === 0) {
+    var roEspera = new ResizeObserver(function(entries) {
+      if (entries[0].contentRect.width > 0) {
+        roEspera.disconnect();
+        initGlobo();
+      }
+    });
+    roEspera.observe(canvas);
+    return;
+  }
 
-  /* Estado de drag */
-  var pointerDown  = false;
-  var pointerStart = { x: 0, y: 0 };
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Estado interacción — igual que el componente React */
+  var pointerInteracting = null;   /* {x,y} o null */
+  var dragOffset   = { phi: 0, theta: 0 };
   var phiOffset    = 0;
   var thetaOffset  = 0;
-  var dragPhi      = 0;
-  var dragTheta    = 0;
   var isPaused     = false;
   var phi          = 0;
+  var animId;
 
-  /* Crear el globo con cobe.js — GlobeStickers world cities */
+  /* Marcadores — 17 ciudades mundiales */
+  var MARKERS = [
+    { location: [ 25.76, -80.19], size: 0.07 },  /* Miami */
+    { location: [ 48.86,   2.35], size: 0.03 },  /* París */
+    { location: [ 35.68, 139.65], size: 0.03 },  /* Tokyo */
+    { location: [ 40.71, -74.01], size: 0.03 },  /* Nueva York */
+    { location: [-22.91, -43.17], size: 0.03 },  /* Río */
+    { location: [-33.87, 151.21], size: 0.03 },  /* Sydney */
+    { location: [ 30.04,  31.24], size: 0.03 },  /* El Cairo */
+    { location: [ 41.90,  12.50], size: 0.03 },  /* Roma */
+    { location: [ 19.43, -99.13], size: 0.03 },  /* Ciudad de México */
+    { location: [ 28.61,  77.21], size: 0.03 },  /* Nueva Delhi */
+    { location: [ 64.15, -21.94], size: 0.03 },  /* Reykjavik */
+    { location: [ 51.51,  -0.13], size: 0.03 },  /* Londres */
+    { location: [ 21.31,-157.86], size: 0.03 },  /* Hawái */
+    { location: [ 52.37,   4.90], size: 0.03 },  /* Ámsterdam */
+    { location: [ 39.90, 116.40], size: 0.03 },  /* Pekín */
+    { location: [ 55.75,  37.62], size: 0.03 },  /* Moscú */
+    { location: [ 37.57, 126.98], size: 0.03 }   /* Seúl */
+  ];
+
+  /* Crear el globo — ancho real garantizado en este punto */
+  var w = canvas.offsetWidth;
   var globo = createGlobe(canvas, {
     devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
-    width:            canvas.offsetWidth  * 2,
-    height:           canvas.offsetWidth  * 2,
-    phi:              0,
-    theta:            0.2,
-    /* Apariencia — globo blanco con océano levemente más oscuro para contraste */
-    dark:             0.12,   /* 0 → invisible sobre fondo claro; 0.12 → continentes visibles */
-    diffuse:          1.5,
-    mapSamples:       16000,
-    mapBrightness:    8,
-    /* Colores — blanco puro con marcadores mostaza */
-    baseColor:        [1.0,  1.0,  1.0 ],
-    markerColor:      [1.0,  0.70, 0.0 ],   /* mostaza #FFB300 */
-    glowColor:        [0.75, 0.88, 0.98],   /* halo azul cielo — combina con el fondo */
-    /* 16 ciudades del mundo — decorativas */
-    markers: [
-      { location: [ 25.76, -80.19], size: 0.07 },  /* Miami — destino */
-      { location: [ 48.86,   2.35], size: 0.03 },  /* París */
-      { location: [ 35.68, 139.65], size: 0.03 },  /* Tokyo */
-      { location: [ 40.71, -74.01], size: 0.03 },  /* Nueva York */
-      { location: [-22.91, -43.17], size: 0.03 },  /* Río de Janeiro */
-      { location: [-33.87, 151.21], size: 0.03 },  /* Sydney */
-      { location: [ 30.04,  31.24], size: 0.03 },  /* El Cairo */
-      { location: [ 41.90,  12.50], size: 0.03 },  /* Roma */
-      { location: [ 19.43, -99.13], size: 0.03 },  /* Ciudad de México */
-      { location: [ 28.61,  77.21], size: 0.03 },  /* Nueva Delhi */
-      { location: [ 64.15, -21.94], size: 0.03 },  /* Reykjavik */
-      { location: [ 51.51,  -0.13], size: 0.03 },  /* Londres */
-      { location: [ 21.31,-157.86], size: 0.03 },  /* Hawái */
-      { location: [ 52.37,   4.90], size: 0.03 },  /* Ámsterdam */
-      { location: [ 39.90, 116.40], size: 0.03 },  /* Pekín */
-      { location: [ 55.75,  37.62], size: 0.03 },  /* Moscú */
-      { location: [ 37.57, 126.98], size: 0.03 }   /* Seúl */
-    ],
-    /* Sin arcos — limpio y fluido */
-    arcs:             [],
-    opacity:          0.7,
-    /* Callback de animación */
-    onRender: function(state) {
-      if (!isPaused && !reducedMotion) phi += 0.003;
-      state.phi   = phi + phiOffset   + dragPhi;
-      state.theta = 0.2 + thetaOffset + dragTheta;
-      state.width  = canvas.offsetWidth  * 2;
-      state.height = canvas.offsetWidth  * 2;
-    }
+    width:         w,
+    height:        w,
+    phi:           0,
+    theta:         0.2,
+    /* Apariencia — fondo azul claro wrapper contrasta con el globo blanco */
+    dark:          0,        /* oscuridad 0 = blanco puro, el fondo del wrapper da el contraste */
+    diffuse:       1.2,
+    mapSamples:    16000,
+    mapBrightness: 6,
+    baseColor:     [1.0, 1.0, 1.0],
+    markerColor:   [1.0, 0.70, 0.0],   /* mostaza #FFB300 */
+    glowColor:     [0.7,  0.85, 0.98], /* halo azul que se funde con el fondo */
+    markers:       MARKERS,
+    arcs:          [],
+    opacity:       0.7   /* translúcido — el fondo azul del wrapper se ve a través */
   });
 
-  /* Fade in del canvas */
-  setTimeout(function() {
-    canvas.style.opacity = '1';
-  }, 100);
+  /* Loop de animación externo — mismo patrón que el componente React */
+  function animar() {
+    if (!isPaused && !reducedMotion) phi += 0.003;
+    globo.update({
+      phi:   phi   + phiOffset   + dragOffset.phi,
+      theta: 0.2   + thetaOffset + dragOffset.theta
+    });
+    animId = requestAnimationFrame(animar);
+  }
+  animar();
 
-  /* Drag interactivo */
+  /* Fade-in inmediato (igual que setTimeout 0 del React) */
+  setTimeout(function() { if (canvas) canvas.style.opacity = '1'; }, 0);
+
+  /* Drag — pointerdown en canvas */
   canvas.addEventListener('pointerdown', function(e) {
-    pointerDown  = true;
-    pointerStart = { x: e.clientX, y: e.clientY };
-    isPaused     = true;
+    pointerInteracting = { x: e.clientX, y: e.clientY };
     canvas.style.cursor = 'grabbing';
+    isPaused = true;
     canvas.setPointerCapture(e.pointerId);
   });
 
+  /* Drag — pointermove en window */
   window.addEventListener('pointermove', function(e) {
-    if (!pointerDown) return;
-    dragPhi   = (e.clientX - pointerStart.x) / 300;
-    dragTheta = (e.clientY - pointerStart.y) / 800;
+    if (pointerInteracting === null) return;
+    dragOffset = {
+      phi:   (e.clientX - pointerInteracting.x) / 300,
+      theta: (e.clientY - pointerInteracting.y) / 1000
+    };
   }, { passive: true });
 
+  /* Drag — pointerup en window */
   window.addEventListener('pointerup', function() {
-    if (!pointerDown) return;
-    phiOffset   += dragPhi;
-    thetaOffset += dragTheta;
-    dragPhi      = 0;
-    dragTheta    = 0;
-    pointerDown  = false;
-    isPaused     = false;
+    if (pointerInteracting !== null) {
+      phiOffset   += dragOffset.phi;
+      thetaOffset += dragOffset.theta;
+      dragOffset   = { phi: 0, theta: 0 };
+    }
+    pointerInteracting = null;
     canvas.style.cursor = 'grab';
+    isPaused = false;
   }, { passive: true });
 
-  /* Resize */
+  /* Resize — usar globo.resize() como hace la versión previa */
   var roGlobo = new ResizeObserver(function() {
-    globo.resize(
-      canvas.offsetWidth * 2,
-      canvas.offsetWidth * 2
-    );
+    var nw = canvas.offsetWidth;
+    if (nw > 0) globo.resize(nw, nw);
   });
   roGlobo.observe(canvas);
 
-  /* IntersectionObserver — pausar fuera de viewport */
+  /* Pausar cuando el globo sale del viewport */
   var ioGlobo = new IntersectionObserver(function(entries) {
     isPaused = !entries[0].isIntersecting;
   }, { threshold: 0.1 });
   ioGlobo.observe(canvas);
 
-  /* Cleanup al desmontar */
+  /* Cleanup */
   canvas._cobeDestroy = function() {
+    cancelAnimationFrame(animId);
     globo.destroy();
     roGlobo.disconnect();
     ioGlobo.disconnect();
