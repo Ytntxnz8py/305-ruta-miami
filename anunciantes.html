@@ -457,7 +457,7 @@
     </section>
 
     <!-- ===================================================
-         SECCIÓN 7: TESTIMONIOS
+         SECCIÓN 7: TESTIMONIOS — columnas con scroll infinito
          PLACEHOLDER: reemplazar con testimonios reales cuando estén disponibles
     =================================================== -->
     <section class="seccion-testimonios an-section" id="testimonios" aria-label="Testimonios de anunciantes">
@@ -468,41 +468,183 @@
           <h2>Resultados reales</h2>
         </div>
 
-        <div class="testimonios-grid">
+        <div class="testimonios-cols">
 
-          <!-- PLACEHOLDER: testimonio 1 -->
-          <div class="testimonio-card shine-card fade-up">
-            <div class="testimonio-header">
-              <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #00434F);" aria-hidden="true">C</div>
-              <div class="testimonio-info">
-                <div class="testimonio-nombre">Carlos M.</div>
-                <div class="testimonio-empresa">Diver's Paradise · Key Largo</div>
-                <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+          <!-- ── Columna 1 · velocidad 14s ── -->
+          <div class="testimonios-col testimonios-col--1" aria-label="Testimonios (carrusel automático)">
+            <div class="testimonios-track">
+
+              <!-- testimonio 1 -->
+              <div class="testimonio-card shine-card">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #00434F);" aria-hidden="true">C</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Carlos M.</div>
+                    <div class="testimonio-empresa">Diver's Paradise · Key Largo</div>
+                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.</p>
+                <span class="testimonio-tipo">Escuela de buceo</span>
               </div>
-            </div>
-            <p class="testimonio-quote">
-              En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.
-            </p>
-            <span class="testimonio-tipo">Escuela de buceo</span>
-          </div>
 
-          <!-- PLACEHOLDER: testimonio 2 -->
-          <div class="testimonio-card shine-card fade-up" style="transition-delay:0.12s">
-            <div class="testimonio-header">
-              <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FF6B6B, #B83E3E);" aria-hidden="true">A</div>
-              <div class="testimonio-info">
-                <div class="testimonio-nombre">Ana R.</div>
-                <div class="testimonio-empresa">Biscayne Kayak Tours</div>
-                <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+              <!-- testimonio 2 -->
+              <div class="testimonio-card shine-card">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FFB300, #f57f17);" aria-hidden="true">M</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Miguel A.</div>
+                    <div class="testimonio-empresa">Miami Bike Trails</div>
+                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">Nuestros clientes nos dijeron que nos encontraron en Explora Miami. Es exactamente el público que buscábamos.</p>
+                <span class="testimonio-tipo">Bici y mountain bike</span>
               </div>
-            </div>
-            <p class="testimonio-quote">
-              Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.
-            </p>
-            <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
-          </div>
 
-        </div>
+              <!-- testimonio 3 -->
+              <div class="testimonio-card shine-card">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00434F, #071e2b);" aria-hidden="true">L</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Laura S.</div>
+                    <div class="testimonio-empresa">Oleta Kayak Rental</div>
+                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">El proceso fue rapidísimo — en menos de 48 horas ya estábamos publicados y empezando a recibir consultas.</p>
+                <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
+              </div>
+
+              <!-- duplicados para loop seamless (ocultos de accesibilidad) -->
+              <div class="testimonio-card shine-card" aria-hidden="true">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #00434F);" aria-hidden="true">C</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Carlos M.</div>
+                    <div class="testimonio-empresa">Diver's Paradise · Key Largo</div>
+                    <div class="testimonio-estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.</p>
+                <span class="testimonio-tipo">Escuela de buceo</span>
+              </div>
+              <div class="testimonio-card shine-card" aria-hidden="true">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FFB300, #f57f17);" aria-hidden="true">M</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Miguel A.</div>
+                    <div class="testimonio-empresa">Miami Bike Trails</div>
+                    <div class="testimonio-estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">Nuestros clientes nos dijeron que nos encontraron en Explora Miami. Es exactamente el público que buscábamos.</p>
+                <span class="testimonio-tipo">Bici y mountain bike</span>
+              </div>
+              <div class="testimonio-card shine-card" aria-hidden="true">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00434F, #071e2b);" aria-hidden="true">L</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Laura S.</div>
+                    <div class="testimonio-empresa">Oleta Kayak Rental</div>
+                    <div class="testimonio-estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">El proceso fue rapidísimo — en menos de 48 horas ya estábamos publicados y empezando a recibir consultas.</p>
+                <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
+              </div>
+
+            </div><!-- /testimonios-track -->
+          </div><!-- /col-1 -->
+
+          <!-- ── Columna 2 · velocidad 20s · offset -7s ── -->
+          <div class="testimonios-col testimonios-col--2" aria-label="Más testimonios (carrusel automático)">
+            <div class="testimonios-track">
+
+              <!-- testimonio 4 -->
+              <div class="testimonio-card shine-card">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FF6B6B, #B83E3E);" aria-hidden="true">A</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Ana R.</div>
+                    <div class="testimonio-empresa">Biscayne Kayak Tours</div>
+                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.</p>
+                <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
+              </div>
+
+              <!-- testimonio 5 -->
+              <div class="testimonio-card shine-card">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #0a2d3f, #071e2b);" aria-hidden="true">R</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Roberto C.</div>
+                    <div class="testimonio-empresa">Everglades Eco Tours</div>
+                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">Por fin un directorio que entiende al turista hispanohablante. Nuestra tasa de conversión es muy superior a otros canales.</p>
+                <span class="testimonio-tipo">Tours de naturaleza</span>
+              </div>
+
+              <!-- testimonio 6 -->
+              <div class="testimonio-card shine-card">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #0097a7);" aria-hidden="true">P</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Patricia V.</div>
+                    <div class="testimonio-empresa">South Beach Surf School</div>
+                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">Cancelar es fácil pero no hemos necesitado hacerlo. El retorno se ve desde el primer mes y el soporte en español es clave.</p>
+                <span class="testimonio-tipo">Playa y deportes acuáticos</span>
+              </div>
+
+              <!-- duplicados para loop seamless -->
+              <div class="testimonio-card shine-card" aria-hidden="true">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FF6B6B, #B83E3E);" aria-hidden="true">A</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Ana R.</div>
+                    <div class="testimonio-empresa">Biscayne Kayak Tours</div>
+                    <div class="testimonio-estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.</p>
+                <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
+              </div>
+              <div class="testimonio-card shine-card" aria-hidden="true">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #0a2d3f, #071e2b);" aria-hidden="true">R</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Roberto C.</div>
+                    <div class="testimonio-empresa">Everglades Eco Tours</div>
+                    <div class="testimonio-estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">Por fin un directorio que entiende al turista hispanohablante. Nuestra tasa de conversión es muy superior a otros canales.</p>
+                <span class="testimonio-tipo">Tours de naturaleza</span>
+              </div>
+              <div class="testimonio-card shine-card" aria-hidden="true">
+                <div class="testimonio-header">
+                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #0097a7);" aria-hidden="true">P</div>
+                  <div class="testimonio-info">
+                    <div class="testimonio-nombre">Patricia V.</div>
+                    <div class="testimonio-empresa">South Beach Surf School</div>
+                    <div class="testimonio-estrellas">★★★★★</div>
+                  </div>
+                </div>
+                <p class="testimonio-quote">Cancelar es fácil pero no hemos necesitado hacerlo. El retorno se ve desde el primer mes y el soporte en español es clave.</p>
+                <span class="testimonio-tipo">Playa y deportes acuáticos</span>
+              </div>
+
+            </div><!-- /testimonios-track -->
+          </div><!-- /col-2 -->
+
+        </div><!-- /testimonios-cols -->
       </div>
     </section>
 

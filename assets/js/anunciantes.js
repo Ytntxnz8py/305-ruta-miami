@@ -355,6 +355,36 @@
     window.replayHeroShutter = play;
   }
 
+  /* ===== TESTIMONIOS SCROLL — pausa en focus para accesibilidad ===== */
+  function initTestimoniosScroll() {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cols = document.querySelectorAll('.testimonios-col');
+    if (!cols.length) return;
+
+    /* Si el usuario prefiere movimiento reducido, CSS ya detiene la animación.
+       Aquí reforzamos vía JS para garantía cross-browser. */
+    if (reduced) {
+      cols.forEach(function (col) {
+        var track = col.querySelector('.testimonios-track');
+        if (track) track.style.animationPlayState = 'paused';
+      });
+      return;
+    }
+
+    /* Pausa cuando el foco de teclado entra en la columna (accesibilidad) */
+    cols.forEach(function (col) {
+      var track = col.querySelector('.testimonios-track');
+      if (!track) return;
+
+      col.addEventListener('focusin', function () {
+        track.style.animationPlayState = 'paused';
+      });
+      col.addEventListener('focusout', function () {
+        track.style.animationPlayState = '';
+      });
+    });
+  }
+
   /* ===== SMOOTH SCROLL para anclas internas ===== */
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(function (a) {
@@ -385,6 +415,7 @@
     initCounters();
     initCardTilts();
     initAccordion();
+    initTestimoniosScroll();
     initFormContacto();
     initSmoothScroll();
   });
