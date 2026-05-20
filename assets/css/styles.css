@@ -2751,58 +2751,69 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   TÍTULO HERO — Foto recortada a través de las letras
-   La imagen de Miami se ve dentro de "Explora Miami"
-   background-clip:text + paneo continuo suave
+   TÍTULO HERO — SpinningText (port React → vanilla SVG)
+   Texto "Explora Miami • South Florida" girando en círculo
    ============================================================ */
-@keyframes titulo-paneo {
-  0%   { background-position: 0%   35%; }
-  50%  { background-position: 100% 20%; }
-  100% { background-position: 0%   35%; }
+
+/* Rotación continua — equivale al animate-spin de Tailwind */
+@keyframes hero-spin-anim {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
-@keyframes hero-word-in {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0);    }
+/* Contenedor del SVG: centrado, tamaño fijo */
+.hero-spin-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 210px !important;
+  height: 210px !important;
+  margin: 0 auto 0.5rem !important;
+  position: relative !important;
+  z-index: 2 !important;
 }
 
-.hero-arc__titulo {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif !important;
-  font-weight: 300 !important;
-  font-style: italic !important;
+/* El SVG ocupa todo el wrapper */
+.hero-spin-svg {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: visible !important;
+}
+
+/* El <g> que gira — transform-origin al centro del viewBox 100×100 */
+.hero-spin-group {
+  transform-origin: 50px 50px !important;
+  animation: hero-spin-anim 12s linear infinite !important;
+}
+
+/* Texto sobre el path circular */
+.hero-spin-text {
+  font-size: 4.2px !important;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
   letter-spacing: 0.04em !important;
-
-  /* Arrecife turquesa recortado dentro de las letras
-     (foto diferente al hero — contraste máximo sobre fondo oscuro) */
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-  text-shadow: none !important;
-
-  background-image: url('../images/hero/hero-01.jpg') !important;
-  background-size: 200% auto !important;
-  background-clip: text !important;
-  -webkit-background-clip: text !important;
-
-  /* Paneo lento — muestra el turquesa brillante a través de las letras */
-  animation: titulo-paneo 10s ease-in-out infinite !important;
-
-  /* Halo azul aqua que rodea las letras */
-  filter: drop-shadow(0 0 18px rgba(0, 190, 220, 0.55))
-          drop-shadow(0 2px 6px rgba(0, 0, 0, 0.50)) !important;
+  fill: rgba(255, 255, 255, 0.88) !important;
 }
 
-/* Palabras estáticas — entrada suave desde abajo */
-.hero-t-word {
-  display: inline-block;
-  animation: hero-word-in 0.9s cubic-bezier(0.2, 0, 0, 1) both;
+/* Punto decorativo en el centro */
+.hero-spin-center {
+  fill: rgba(255, 255, 255, 0.70) !important;
 }
-.hero-t-word:first-child { animation-delay: 0.10s; }
-.hero-t-word:last-child  { animation-delay: 0.32s; }
 
-/* Si el shutter JS se activa, misma transparencia */
-.hero-arc__titulo .shutter-capa {
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
+/* Reducir velocidad si prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-spin-group {
+    animation-duration: 60s !important;
+  }
+}
+
+/* Mobile: ligeramente más pequeño */
+@media (max-width: 480px) {
+  .hero-spin-wrapper {
+    width: 168px !important;
+    height: 168px !important;
+  }
 }
 
 /* ── Tagline: trazo fino blanco ── */

@@ -956,12 +956,12 @@ function initHeroTrail() {
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Shutter en el título — sólo si el título está vacío */
+  /* Shutter en el título — omitir si ya es el SVG SpinningText */
   (function initShutter() {
     var titulo = document.getElementById('heroTitulo');
     if (!titulo) return;
-    /* Si el HTML estático ya tiene contenido, no sobreescribir */
-    if (titulo.textContent.trim() !== '') return;
+    /* Si contiene SVG (SpinningText) o texto estático, no sobreescribir */
+    if (titulo.querySelector('svg') || titulo.textContent.trim() !== '') return;
     titulo.innerHTML = '';
     titulo.setAttribute('aria-label', 'EXPLORA MIAMI');
     'EXPLORA MIAMI'.split('').forEach(function(c, i) {

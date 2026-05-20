@@ -136,13 +136,28 @@
           <span class="hero-eyebrow__linea"></span>
         </div>
 
-        <h1 class="hero-arc__titulo"
-            id="heroTitulo"
-            aria-label="Explora Miami">
-          <span class="hero-t-word">Explora</span>
-          <span class="hero-t-esp"> </span>
-          <span class="hero-t-word">Miami</span>
-        </h1>
+        <!-- SpinningText: texto circular giratorio — port de React a vanilla SVG -->
+        <div class="hero-spin-wrapper" id="heroTitulo"
+             role="heading" aria-level="1" aria-label="Explora Miami">
+          <svg viewBox="0 0 100 100"
+               class="hero-spin-svg"
+               aria-hidden="true"
+               focusable="false"
+               xmlns="http://www.w3.org/2000/svg">
+            <g class="hero-spin-group">
+              <path id="heroSpinPath"
+                    d="M 50,50 m -25,0 a 25,25 0 1,1 50,0 a 25,25 0 1,1 -50,0"
+                    fill="none"/>
+              <text class="hero-spin-text">
+                <textPath href="#heroSpinPath" startOffset="0%">
+                  EXPLORA MIAMI ✦ SOUTH FLORIDA ✦ EXPLORA MIAMI ✦ SOUTH FLORIDA ✦
+                </textPath>
+              </text>
+            </g>
+            <!-- Centro decorativo -->
+            <circle cx="50" cy="50" r="1.8" class="hero-spin-center" aria-hidden="true"/>
+          </svg>
+        </div>
 
         <p class="hero-arc__tagline" data-i18n="hero_tagline">
           Tu próxima aventura empieza aquí
