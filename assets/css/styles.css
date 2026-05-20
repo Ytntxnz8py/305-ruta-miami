@@ -463,7 +463,7 @@ html.lang-es .lang-en { display: none; }
   background-size: cover;
   background-position: center 45%;
   background-repeat: no-repeat;
-  opacity: 0.01;
+  opacity: 0.90;
   pointer-events: none;
 }
 
