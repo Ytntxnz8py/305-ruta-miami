@@ -447,21 +447,6 @@
          SECCIÓN 5: CÓMO FUNCIONA
     =================================================== -->
     <section class="seccion-como an-section" id="como-funciona" aria-label="Cómo funciona el proceso">
-
-      <!-- ===== PARALLAX MOUNTAIN BACKGROUND ===== -->
-      <!-- Técnica: background-position-x animado a velocidades distintas por capa -->
-      <!-- Imágenes: siluetas de montañas públicas de S3 (Sarah Drasner / CodePen) -->
-      <div class="par-bg" aria-hidden="true">
-        <div class="par-layer par-l6"></div>
-        <div class="par-layer par-l5"></div>
-        <div class="par-layer par-l4"></div>
-        <div class="par-layer par-bike1"></div>
-        <div class="par-layer par-bike2"></div>
-        <div class="par-layer par-l3"></div>
-        <div class="par-layer par-l2"></div>
-        <div class="par-layer par-l1"></div>
-      </div>
-
       <div class="an-container">
 
         <div class="an-section-header fade-up">
@@ -469,38 +454,110 @@
           <h2>En 3 pasos, tu negocio visible</h2>
         </div>
 
-        <div class="steps-container" role="list">
+        <div class="cf-grid">
 
-          <div class="step fade-up" role="listitem">
-            <div class="step-number step-number--1" aria-hidden="true">1</div>
-            <span class="step-emoji" aria-hidden="true">📝</span>
-            <h3 class="step-titulo">Contáctanos</h3>
-            <p class="step-desc">Llena el formulario o escríbenos por WhatsApp. Te respondemos en menos de 24 horas.</p>
+          <!-- ─── Paso 1 ─── -->
+          <div class="cf-folder fade-up"
+               data-step="1"
+               tabindex="0"
+               role="button"
+               aria-expanded="false"
+               aria-label="Paso 1: Contáctanos — pasa el cursor para ver los detalles">
+
+            <!-- Card that flies up on hover -->
+            <div class="cf-folder__card" aria-hidden="true">
+              <span class="cf-card__number">01</span>
+              <span class="cf-card__icon">📝</span>
+              <h3 class="cf-card__title">Contáctanos</h3>
+              <p class="cf-card__desc">Llena el formulario o escríbenos por WhatsApp. Te respondemos en menos de 24 horas.</p>
+            </div>
+
+            <!-- 3D folder body -->
+            <div class="cf-folder__scene" aria-hidden="true">
+              <div class="cf-folder__back"></div>
+              <div class="cf-folder__tab"></div>
+              <div class="cf-folder__front"></div>
+              <div class="cf-folder__shine"></div>
+            </div>
+
+            <div class="cf-folder__label">
+              <span class="cf-folder__step-num">Paso 1</span>
+              <strong class="cf-folder__step-title">Contáctanos</strong>
+            </div>
+            <p class="cf-folder__hint" aria-hidden="true">Pasa el cursor ↑</p>
           </div>
 
-          <div class="step-connector" aria-hidden="true">
-            <div class="step-connector__line"></div>
+          <!-- Connector -->
+          <div class="cf-connector" aria-hidden="true">
+            <div class="cf-connector__line"></div>
           </div>
 
-          <div class="step fade-up" style="transition-delay:0.12s" role="listitem">
-            <div class="step-number step-number--2" aria-hidden="true">2</div>
-            <span class="step-emoji" aria-hidden="true">🎨</span>
-            <h3 class="step-titulo">Creamos tu listing</h3>
-            <p class="step-desc">Nuestro equipo diseña tu card con tus fotos, descripción y datos. Activo en 48 horas.</p>
+          <!-- ─── Paso 2 ─── -->
+          <div class="cf-folder fade-up"
+               data-step="2"
+               style="transition-delay:0.12s"
+               tabindex="0"
+               role="button"
+               aria-expanded="false"
+               aria-label="Paso 2: Creamos tu listing — pasa el cursor para ver los detalles">
+
+            <div class="cf-folder__card" aria-hidden="true">
+              <span class="cf-card__number">02</span>
+              <span class="cf-card__icon">🎨</span>
+              <h3 class="cf-card__title">Creamos tu listing</h3>
+              <p class="cf-card__desc">Nuestro equipo diseña tu card con tus fotos, descripción y datos. Activo en 48 horas.</p>
+            </div>
+
+            <div class="cf-folder__scene" aria-hidden="true">
+              <div class="cf-folder__back"></div>
+              <div class="cf-folder__tab"></div>
+              <div class="cf-folder__front"></div>
+              <div class="cf-folder__shine"></div>
+            </div>
+
+            <div class="cf-folder__label">
+              <span class="cf-folder__step-num">Paso 2</span>
+              <strong class="cf-folder__step-title">Creamos tu listing</strong>
+            </div>
+            <p class="cf-folder__hint" aria-hidden="true">Pasa el cursor ↑</p>
           </div>
 
-          <div class="step-connector" aria-hidden="true">
-            <div class="step-connector__line"></div>
+          <!-- Connector -->
+          <div class="cf-connector" aria-hidden="true">
+            <div class="cf-connector__line"></div>
           </div>
 
-          <div class="step fade-up" style="transition-delay:0.24s" role="listitem">
-            <div class="step-number step-number--3" aria-hidden="true">3</div>
-            <span class="step-emoji" aria-hidden="true">🚀</span>
-            <h3 class="step-titulo">Empieza a recibir clientes</h3>
-            <p class="step-desc">Tu negocio aparece frente a turistas y residentes que buscan experiencias outdoor en Miami.</p>
+          <!-- ─── Paso 3 ─── -->
+          <div class="cf-folder fade-up"
+               data-step="3"
+               style="transition-delay:0.24s"
+               tabindex="0"
+               role="button"
+               aria-expanded="false"
+               aria-label="Paso 3: Empieza a recibir clientes — pasa el cursor para ver los detalles">
+
+            <div class="cf-folder__card" aria-hidden="true">
+              <span class="cf-card__number">03</span>
+              <span class="cf-card__icon">🚀</span>
+              <h3 class="cf-card__title">Empieza a recibir clientes</h3>
+              <p class="cf-card__desc">Tu negocio aparece frente a turistas y residentes que buscan experiencias outdoor en Miami.</p>
+            </div>
+
+            <div class="cf-folder__scene" aria-hidden="true">
+              <div class="cf-folder__back"></div>
+              <div class="cf-folder__tab"></div>
+              <div class="cf-folder__front"></div>
+              <div class="cf-folder__shine"></div>
+            </div>
+
+            <div class="cf-folder__label">
+              <span class="cf-folder__step-num">Paso 3</span>
+              <strong class="cf-folder__step-title">Empieza a recibir clientes</strong>
+            </div>
+            <p class="cf-folder__hint" aria-hidden="true">Pasa el cursor ↑</p>
           </div>
 
-        </div>
+        </div><!-- /.cf-grid -->
       </div>
     </section>
 

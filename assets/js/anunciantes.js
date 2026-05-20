@@ -546,6 +546,68 @@
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  /* ===== ANIMATED FOLDER STEPS ===== */
+  /*
+    Porta AnimatedFolder (React) → vanilla ES5.
+    :hover en CSS maneja el efecto en desktop.
+    JS agrega soporte para teclado (Enter/Space) y touch (toggle .is-open).
+  */
+  function initFolders() {
+    var folders = document.querySelectorAll('.cf-folder');
+    if (!folders.length) return;
+
+    var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+    function openFolder(folder) {
+      folders.forEach(function (f) {
+        f.classList.remove('is-open');
+        f.setAttribute('aria-expanded', 'false');
+      });
+      folder.classList.add('is-open');
+      folder.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeFolder(folder) {
+      folder.classList.remove('is-open');
+      folder.setAttribute('aria-expanded', 'false');
+    }
+
+    folders.forEach(function (folder) {
+      /* Keyboard: Enter / Space toggle */
+      folder.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (folder.classList.contains('is-open')) {
+            closeFolder(folder);
+          } else {
+            openFolder(folder);
+          }
+        }
+        if (e.key === 'Escape') { closeFolder(folder); }
+      });
+
+      /* Touch devices: tap to toggle (no :hover on mobile) */
+      if (isTouchDevice) {
+        folder.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (folder.classList.contains('is-open')) {
+            closeFolder(folder);
+          } else {
+            openFolder(folder);
+          }
+        });
+      }
+    });
+
+    /* Close open folder when clicking outside */
+    document.addEventListener('click', function () {
+      folders.forEach(function (f) {
+        f.classList.remove('is-open');
+        f.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   /* ===== INIT ===== */
   document.addEventListener('DOMContentLoaded', function () {
     initHeroShutter();      /* shutter text — antes que fade-up para que no compita */
@@ -554,6 +616,7 @@
     initScrollAnimation();
     initCounters();
     initCardTilts();
+    initFolders();
     initPricingToggle();
     initAccordion();
     initTestimoniosScroll();
