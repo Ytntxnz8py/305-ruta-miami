@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anúnciate en Explora Miami — Para Empresas Outdoor en South Florida</title>
+  <meta name="description" content="Conecta tu negocio outdoor con miles de turistas y residentes en Miami. Listing en el directorio bilingüe más completo de South Florida. Desde $80/mes." />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://ytntxnz8py.github.io/mi-tienda/anunciantes.html" />
+  <meta property="og:title"       content="Anúnciate en Explora Miami — Directorio Outdoor" />
+  <meta property="og:description" content="Tu negocio frente a miles de aventureros. Listing en el directorio bilingüe de South Florida desde $80/mes." />
+  <meta property="og:image"       content="https://ytntxnz8py.github.io/mi-tienda/assets/images/istockphoto-155372056-612x612.jpg" />
+  <meta property="og:locale"      content="es_US" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/anunciantes.css" />
+
+  <!-- Aplica idioma guardado (compatibilidad con visitas desde index.html) -->
+  <script>
+    document.documentElement.lang = localStorage.getItem('em_idioma') || 'es';
+  </script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="an-header">
+    <div class="header__contenedor">
+
+      <a href="index.html" class="header__logo" aria-label="Explora Miami — Ir al inicio">
+        <span class="header__logo-explora">Explora</span><span class="header__logo-miami">Miami</span>
+      </a>
+
+      <button class="header__menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="header__nav" id="navMenu" aria-label="Navegación principal">
+        <ul class="header__lista">
+          <li><a href="index.html#destinos" class="header__enlace">Destinos</a></li>
+          <li><a href="index.html#mapa"     class="header__enlace">Mapa</a></li>
+          <li><a href="#contacto-empresas"  class="header__enlace header__enlace--cta active" aria-current="page">Para empresas</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================================================
+         SECCIÓN 1: HERO
+    =================================================== -->
+    <section class="seccion-hero" id="hero-anunciantes" aria-label="Bienvenida para anunciantes">
+
+      <!-- Aurora gradient mesh animado -->
+      <div class="hero-aurora" aria-hidden="true"></div>
+
+      <div class="hero-contenido">
+        <p class="hero-pill fade-up" style="transition-delay:0s">Para empresas · Miami</p>
+
+        <h1 class="hero-titulo fade-up" style="transition-delay:0.08s">
+          Tu negocio frente a miles de aventureros
+        </h1>
+
+        <p class="hero-subtitulo fade-up" style="transition-delay:0.16s">
+          El directorio outdoor más completo de South Florida. Conectamos a turistas y residentes hispanohablantes con las mejores experiencias — y con las empresas que las hacen posible.
+        </p>
+
+        <div class="hero-ctas fade-up" style="transition-delay:0.24s">
+          <!-- CTA primario -->
+          <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
+            <div class="metal-btn-inner"></div>
+            <button class="metal-btn" onclick="anScrollTo('precios')">
+              <div class="metal-btn-shine"></div>
+              <div class="metal-btn-hover-glow"></div>
+              <span>Ver planes y precios →</span>
+            </button>
+          </div>
+          <!-- CTA secundario -->
+          <div class="metal-btn-wrap" data-variant="ghost" data-size="lg">
+            <div class="metal-btn-inner"></div>
+            <button class="metal-btn" onclick="anScrollTo('como-funciona')">
+              <div class="metal-btn-shine"></div>
+              <div class="metal-btn-hover-glow"></div>
+              <span>¿Cómo funciona?</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats flotantes -->
+        <div class="hero-stats fade-up" style="transition-delay:0.32s" aria-label="Datos del directorio">
+          <div class="hero-stat">
+            <div class="hero-stat__numero">9</div>
+            <div class="hero-stat__label">destinos activos</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat__numero">Miami</div>
+            <div class="hero-stat__label">cobertura</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat__numero">ES/EN</div>
+            <div class="hero-stat__label">bilingüe</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="scroll-hint" aria-hidden="true">
+        <div class="scroll-hint__line"></div>
+        <span>scroll</span>
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         SECCIÓN 2: NÚMEROS / PRUEBA SOCIAL
+    =================================================== -->
+    <section class="seccion-numeros" id="numeros" aria-label="Datos del directorio">
+      <div class="an-container">
+
+        <div class="numeros-grid">
+
+          <div class="numero-item fade-up" style="transition-delay:0s">
+            <div class="numero-icono" aria-hidden="true">📍</div>
+            <div class="numero-valor" data-count="9" aria-label="9">0</div>
+            <div class="numero-label">destinos verificados</div>
+          </div>
+
+          <div class="numero-item fade-up" style="transition-delay:0.1s">
+            <div class="numero-icono" aria-hidden="true">🏄</div>
+            <div class="numero-valor" data-count="3" aria-label="3">0</div>
+            <div class="numero-label">categorías outdoor</div>
+          </div>
+
+          <div class="numero-item fade-up" style="transition-delay:0.2s">
+            <div class="numero-icono" aria-hidden="true">🚀</div>
+            <div class="numero-valor" data-count="2026" aria-label="2026">0</div>
+            <div class="numero-label">año de lanzamiento</div>
+          </div>
+
+          <div class="numero-item fade-up" style="transition-delay:0.3s">
+            <div class="numero-icono" aria-hidden="true">✅</div>
+            <div class="numero-valor" data-count="100" data-suffix="%" aria-label="100%">0</div>
+            <div class="numero-label">datos reales</div>
+          </div>
+
+        </div>
+
+        <!-- Banner de confianza -->
+        <div class="trust-banner fade-up">
+          <div class="trust-item">Sin contratos</div>
+          <div class="trust-item">Cancela cuando quieras</div>
+          <div class="trust-item">Listing activo en 48h</div>
+          <div class="trust-item">Soporte en español</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         SECCIÓN 3: QUÉ INCLUYE TU LISTING
+    =================================================== -->
+    <section class="seccion-incluye an-section" id="que-incluye" aria-label="Qué incluye el listing">
+      <div class="an-container">
+
+        <div class="an-section-header fade-up">
+          <span class="an-eyebrow">Tu presencia online</span>
+          <h2>Lo que obtienes con tu listing</h2>
+        </div>
+
+        <div class="incluye-grid">
+
+          <!-- Mockup 3D -->
+          <div class="mockup-col fade-up">
+            <p class="mockup-label" aria-label="Vista previa">Así verán tu negocio miles de usuarios</p>
+            <div class="mockup-scene" role="img" aria-label="Vista previa de cómo se verá tu listing en Explora Miami">
+              <div class="mockup-card">
+
+                <div class="mockup-img-cont">
+                  <img
+                    class="mockup-img"
+                    src="assets/images/hero/hero-06.jpg"
+                    alt="Biscayne Kayak Tours — ejemplo de listing"
+                    loading="lazy"
+                  />
+                  <span class="mockup-badge" aria-hidden="true">🌊 Mar</span>
+                </div>
+
+                <div class="mockup-info">
+                  <h3 class="mockup-nombre">Biscayne Kayak Tours</h3>
+                  <p class="mockup-desc">Tours de kayak en Biscayne Bay — avistamiento de fauna marina, manglares y atardeceres únicos en South Florida.</p>
+                  <div class="mockup-meta">
+                    <span class="mockup-meta-item"><span aria-hidden="true">💲</span> Desde $65/tour</span>
+                    <span class="mockup-meta-item"><span aria-hidden="true">⏰</span> 8am – 5pm</span>
+                  </div>
+                  <!-- MetalButton demo -->
+                  <div class="metal-btn-wrap" data-variant="coral" data-size="sm" style="pointer-events:none" aria-hidden="true">
+                    <div class="metal-btn-inner"></div>
+                    <button class="metal-btn" tabindex="-1">
+                      <div class="metal-btn-shine"></div>
+                      <div class="metal-btn-hover-glow"></div>
+                      <span>Ver destino</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Lista de features -->
+          <div class="features-col fade-up" style="transition-delay:0.12s">
+            <span class="an-eyebrow">Incluido en todos los planes</span>
+            <h2>Visibilidad completa para tu negocio</h2>
+            <p class="features-lead">Cada listing está diseñado para convertir — información clara, fotos reales y botones de acción directa.</p>
+
+            <ul class="features-list">
+              <li class="feature-item" style="transition-delay:0s">
+                <div class="feature-icon" aria-hidden="true">📋</div>
+                <span class="feature-text"><strong>Card en el grid principal</strong> de destinos, visible en la página de inicio</span>
+              </li>
+              <li class="feature-item" style="transition-delay:0.08s">
+                <div class="feature-icon" aria-hidden="true">🖼️</div>
+                <span class="feature-text"><strong>Página de detalle</strong> con galería de hasta 4 fotos</span>
+              </li>
+              <li class="feature-item" style="transition-delay:0.16s">
+                <div class="feature-icon" aria-hidden="true">🌐</div>
+                <span class="feature-text"><strong>Descripción completa en español e inglés</strong> (ES + EN)</span>
+              </li>
+              <li class="feature-item" style="transition-delay:0.24s">
+                <div class="feature-icon" aria-hidden="true">📞</div>
+                <span class="feature-text"><strong>Datos prácticos:</strong> precio, horarios, teléfono y web oficial</span>
+              </li>
+              <li class="feature-item" style="transition-delay:0.32s">
+                <div class="feature-icon" aria-hidden="true">🗺️</div>
+                <span class="feature-text"><strong>Botones directos:</strong> Google Maps, Apple Maps y reseñas</span>
+              </li>
+              <li class="feature-item" style="transition-delay:0.40s">
+                <div class="feature-icon" aria-hidden="true">📊</div>
+                <span class="feature-text"><strong>Métricas de clics mensuales</strong> en tu panel de anunciante</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         SECCIÓN 4: PLANES Y PRECIOS
+    =================================================== -->
+    <section class="seccion-precios" id="precios" aria-label="Planes y precios">
+      <div class="an-container">
+
+        <h2 class="precios-titulo fade-up">Planes simples, sin letra chica</h2>
+        <p class="precios-sub fade-up" style="transition-delay:0.08s">
+          Pago mensual, sin contrato de permanencia. Cancela cuando quieras.
+        </p>
+
+        <div class="precios-grid">
+
+          <!-- Card Básico -->
+          <div class="precio-card glass-card shine-card fade-up" style="transition-delay:0.12s">
+            <div class="precio-badge precio-badge--popular">Más popular</div>
+            <div class="precio-numero">
+              <span class="precio-valor">$80</span>
+              <span class="precio-periodo">/mes</span>
+            </div>
+            <h3 class="precio-nombre">Plan Básico</h3>
+            <p class="precio-desc">Todo lo que necesitas para empezar a captar clientes desde el primer día.</p>
+            <ul class="precio-features" aria-label="Incluye">
+              <li class="precio-feature">Card en el grid principal de destinos</li>
+              <li class="precio-feature">Página de detalle con galería de 4 fotos</li>
+              <li class="precio-feature">Descripción en español e inglés</li>
+              <li class="precio-feature">Datos prácticos y botones de mapa</li>
+              <li class="precio-feature">Métricas de clics mensuales</li>
+              <li class="precio-feature">Soporte por email y WhatsApp</li>
+            </ul>
+            <div class="metal-btn-wrap" data-variant="turquesa" data-size="full">
+              <div class="metal-btn-inner"></div>
+              <button class="metal-btn" onclick="anScrollTo('contacto-empresas')">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span>Empezar ahora →</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Premium -->
+          <div class="precio-card glass-card shine-card fade-up" style="transition-delay:0.22s">
+            <div class="precio-badge precio-badge--premium">Premium</div>
+            <div class="precio-numero">
+              <span class="precio-valor">$100</span>
+              <span class="precio-periodo">/mes</span>
+            </div>
+            <h3 class="precio-nombre">Plan Premium</h3>
+            <p class="precio-desc">Para negocios que quieren máxima visibilidad y diferenciarse de la competencia.</p>
+            <ul class="precio-features" aria-label="Incluye">
+              <li class="precio-feature">Todo lo del Plan Básico</li>
+              <li class="precio-feature precio-feature--plus">Posición destacada en el grid (primeras 3 cards)</li>
+              <li class="precio-feature precio-feature--plus">Badge "Recomendado" en tu card</li>
+              <li class="precio-feature precio-feature--plus">Mención en el newsletter mensual</li>
+              <li class="precio-feature precio-feature--plus">Reseñas destacadas en tu página</li>
+              <li class="precio-feature precio-feature--plus">Acceso prioritario a nuevas funciones</li>
+            </ul>
+            <div class="metal-btn-wrap" data-variant="gold" data-size="full">
+              <div class="metal-btn-inner"></div>
+              <button class="metal-btn" onclick="anScrollTo('contacto-empresas')">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span>Elegir Premium →</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="precio-nota fade-up">
+          Los precios son mensuales, sin contrato de permanencia. Puedes cancelar en cualquier momento con 7 días de anticipación antes del siguiente ciclo de facturación.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         SECCIÓN 5: CÓMO FUNCIONA
+    =================================================== -->
+    <section class="seccion-como an-section" id="como-funciona" aria-label="Cómo funciona el proceso">
+      <div class="an-container">
+
+        <div class="an-section-header fade-up">
+          <span class="an-eyebrow">Proceso simple</span>
+          <h2>En 3 pasos, tu negocio visible</h2>
+        </div>
+
+        <div class="steps-container" role="list">
+
+          <div class="step fade-up" role="listitem">
+            <div class="step-number step-number--1" aria-hidden="true">1</div>
+            <span class="step-emoji" aria-hidden="true">📝</span>
+            <h3 class="step-titulo">Contáctanos</h3>
+            <p class="step-desc">Llena el formulario o escríbenos por WhatsApp. Te respondemos en menos de 24 horas.</p>
+          </div>
+
+          <div class="step-connector" aria-hidden="true">
+            <div class="step-connector__line"></div>
+          </div>
+
+          <div class="step fade-up" style="transition-delay:0.12s" role="listitem">
+            <div class="step-number step-number--2" aria-hidden="true">2</div>
+            <span class="step-emoji" aria-hidden="true">🎨</span>
+            <h3 class="step-titulo">Creamos tu listing</h3>
+            <p class="step-desc">Nuestro equipo diseña tu card con tus fotos, descripción y datos. Activo en 48 horas.</p>
+          </div>
+
+          <div class="step-connector" aria-hidden="true">
+            <div class="step-connector__line"></div>
+          </div>
+
+          <div class="step fade-up" style="transition-delay:0.24s" role="listitem">
+            <div class="step-number step-number--3" aria-hidden="true">3</div>
+            <span class="step-emoji" aria-hidden="true">🚀</span>
+            <h3 class="step-titulo">Empieza a recibir clientes</h3>
+            <p class="step-desc">Tu negocio aparece frente a turistas y residentes que buscan experiencias outdoor en Miami.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         SECCIÓN 6: PARA QUIÉN ES
+    =================================================== -->
+    <section class="seccion-para-quien an-section" id="para-quien" aria-label="Tipos de negocio que encajan">
+      <div class="an-container">
+
+        <div class="an-section-header fade-up">
+          <span class="an-eyebrow">Negocios outdoor en Miami</span>
+          <h2>¿Tu negocio encaja aquí?</h2>
+        </div>
+
+        <div class="para-quien-grid">
+
+          <div class="tipo-card fade-up" style="transition-delay:0s">
+            <span class="tipo-emoji" aria-hidden="true">🤿</span>
+            <h3 class="tipo-nombre">Escuelas de buceo</h3>
+            <p class="tipo-desc">Key Largo, Biscayne Bay y arrecifes de coral</p>
+          </div>
+
+          <div class="tipo-card fade-up" style="transition-delay:0.08s">
+            <span class="tipo-emoji" aria-hidden="true">🚣</span>
+            <h3 class="tipo-nombre">Kayak y paddle board</h3>
+            <p class="tipo-desc">Tours, rentals y clases en aguas de South Florida</p>
+          </div>
+
+          <div class="tipo-card fade-up" style="transition-delay:0.16s">
+            <span class="tipo-emoji" aria-hidden="true">🚴</span>
+            <h3 class="tipo-nombre">Bici y mountain bike</h3>
+            <p class="tipo-desc">Oleta River State Park, Bill Baggs y más</p>
+          </div>
+
+          <div class="tipo-card fade-up" style="transition-delay:0.24s">
+            <span class="tipo-emoji" aria-hidden="true">🏕️</span>
+            <h3 class="tipo-nombre">Camping y senderismo</h3>
+            <p class="tipo-desc">Everglades, Arch Creek y parques naturales</p>
+          </div>
+
+          <div class="tipo-card fade-up" style="transition-delay:0.32s">
+            <span class="tipo-emoji" aria-hidden="true">🐬</span>
+            <h3 class="tipo-nombre">Tours de naturaleza</h3>
+            <p class="tipo-desc">Wildlife, fotografía y ecoturismo en Miami</p>
+          </div>
+
+          <div class="tipo-card fade-up" style="transition-delay:0.40s">
+            <span class="tipo-emoji" aria-hidden="true">🏄</span>
+            <h3 class="tipo-nombre">Playa y deportes acuáticos</h3>
+            <p class="tipo-desc">Surf, snorkel, natación y más</p>
+          </div>
+
+        </div>
+
+        <p class="para-quien-nota fade-up">
+          ¿Tu negocio es outdoor pero no está en esta lista? Escríbenos — probablemente sí encaja.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ===================================================
+         SECCIÓN 7: TESTIMONIOS
+         PLACEHOLDER: reemplazar con testimonios reales cuando estén disponibles
+    =================================================== -->
+    <section class="seccion-testimonios an-section" id="testimonios" aria-label="Testimonios de anunciantes">
+      <div class="an-container">
+
+        <div class="an-section-header fade-up">
+          <span class="an-eyebrow">Lo que dicen nuestros anunciantes</span>
+          <h2>Resultados reales</h2>
+        </div>
+
+        <div class="testimonios-grid">
+
+          <!-- PLACEHOLDER: testimonio 1 -->
+          <div class="testimonio-card shine-card fade-up">
+            <div class="testimonio-header">
+              <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #00434F);" aria-hidden="true">C</div>
+              <div class="testimonio-info">
+                <div class="testimonio-nombre">Carlos M.</div>
+                <div class="testimonio-empresa">Diver's Paradise · Key Largo</div>
+                <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+              </div>
+            </div>
+            <p class="testimonio-quote">
+              En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.
+            </p>
+            <span class="testimonio-tipo">Escuela de buceo</span>
+          </div>
+
+          <!-- PLACEHOLDER: testimonio 2 -->
+          <div class="testimonio-card shine-card fade-up" style="transition-delay:0.12s">
+            <div class="testimonio-header">
+              <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FF6B6B, #B83E3E);" aria-hidden="true">A</div>
+              <div class="testimonio-info">
+                <div class="testimonio-nombre">Ana R.</div>
+                <div class="testimonio-empresa">Biscayne Kayak Tours</div>
+                <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
+              </div>
+            </div>
+            <p class="testimonio-quote">
+              Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.
+            </p>
+            <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         SECCIÓN 8: FAQ
+    =================================================== -->
+    <section class="seccion-faq an-section" id="faq" aria-label="Preguntas frecuentes">
+      <div class="an-container">
+
+        <div class="an-section-header fade-up">
+          <span class="an-eyebrow">Respuestas rápidas</span>
+          <h2>Preguntas frecuentes</h2>
+        </div>
+
+        <div class="faq-list fade-up">
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-controls="faq-r1" aria-expanded="false">
+              <span class="faq-pregunta">¿Cuántos visitantes tiene el sitio?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-respuesta-wrap" id="faq-r1">
+              <div class="faq-respuesta">
+                Explora Miami está en fase de crecimiento activo. Publicamos nuestras métricas reales en el panel de administración — cada anunciante tiene acceso a sus clics e impresiones mensuales. Preferimos transparencia a números inflados.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-controls="faq-r2" aria-expanded="false">
+              <span class="faq-pregunta">¿Puedo cancelar en cualquier momento?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-respuesta-wrap" id="faq-r2">
+              <div class="faq-respuesta">
+                Sí, sin penalizaciones. Solo necesitamos 7 días de anticipación antes del siguiente ciclo de facturación. Tu listing permanece activo hasta el último día pagado.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-controls="faq-r3" aria-expanded="false">
+              <span class="faq-pregunta">¿Cuánto tiempo tarda en estar activo mi listing?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-respuesta-wrap" id="faq-r3">
+              <div class="faq-respuesta">
+                Máximo 48 horas desde que confirmamos el pago y recibimos tus fotos y datos. Nuestro equipo se encarga de todo el diseño y la publicación — tú solo nos envías la información.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-controls="faq-r4" aria-expanded="false">
+              <span class="faq-pregunta">¿Necesito tener una página web propia?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-respuesta-wrap" id="faq-r4">
+              <div class="faq-respuesta">
+                No. Tu listing en Explora Miami funciona como tu presencia digital principal: incluye toda la información que un cliente necesita para contactarte o reservar. Si ya tienes web, la enlazamos directamente.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-controls="faq-r5" aria-expanded="false">
+              <span class="faq-pregunta">¿Cómo funciona el pago?</span>
+              <span class="faq-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="faq-respuesta-wrap" id="faq-r5">
+              <div class="faq-respuesta">
+                El pago es mensual y se procesa el mismo día de cada mes. Aceptamos Zelle, Venmo y transferencia bancaria. Al confirmar el pago, activamos tu listing en las siguientes 48 horas.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         SECCIÓN 9: CTA FINAL + FORMULARIO
+    =================================================== -->
+    <section class="seccion-cta" id="contacto-empresas" aria-label="Formulario de contacto para empresas">
+
+      <div class="an-container">
+
+        <div class="cta-encabezado fade-up">
+          <span class="an-eyebrow" style="color: rgba(255,255,255,0.55)">Empieza hoy</span>
+          <h2 class="cta-titulo">¿Listo para dar el paso?</h2>
+          <p class="cta-sub">Cuéntanos sobre tu negocio y te respondemos en menos de 24 horas.</p>
+        </div>
+
+        <div class="form-empresas-wrap">
+
+          <form id="formEmpresas" class="form-empresas fade-up" style="transition-delay:0.12s" novalidate aria-label="Formulario de contacto para anunciantes">
+
+            <div class="form-row">
+              <div class="form-grupo">
+                <label for="fNombre">Nombre completo *</label>
+                <input id="fNombre" name="nombre" type="text" placeholder="Tu nombre" required autocomplete="name" />
+                <span class="form-error-msg">Ingresa tu nombre</span>
+              </div>
+              <div class="form-grupo">
+                <label for="fEmpresa">Nombre del negocio *</label>
+                <input id="fEmpresa" name="empresa" type="text" placeholder="Tu empresa" required autocomplete="organization" />
+                <span class="form-error-msg">Ingresa el nombre de tu negocio</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-grupo">
+                <label for="fEmail">Email *</label>
+                <input id="fEmail" name="email" type="email" placeholder="tu@email.com" required autocomplete="email" />
+                <span class="form-error-msg">Ingresa un email válido</span>
+              </div>
+              <div class="form-grupo">
+                <label for="fTel">Teléfono / WhatsApp</label>
+                <input id="fTel" name="tel" type="tel" placeholder="+1 (305) 000-0000" autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="form-grupo">
+              <label for="fTipo">Tipo de negocio *</label>
+              <select id="fTipo" name="tipo" required>
+                <option value="">Selecciona una opción</option>
+                <option value="buceo">Escuela de buceo / snorkel</option>
+                <option value="kayak">Kayak y paddle board</option>
+                <option value="bici">Bici y mountain bike</option>
+                <option value="camping">Camping y senderismo</option>
+                <option value="tours">Tours de naturaleza / ecoturismo</option>
+                <option value="playa">Playa y deportes acuáticos</option>
+                <option value="otro">Otro negocio outdoor</option>
+              </select>
+              <span class="form-error-msg">Selecciona una opción</span>
+            </div>
+
+            <div class="form-grupo">
+              <label for="fMensaje">Cuéntanos sobre tu negocio</label>
+              <textarea id="fMensaje" name="mensaje" placeholder="Ubicación, servicios que ofreces, cualquier pregunta..."></textarea>
+            </div>
+
+            <div class="metal-btn-wrap" data-variant="turquesa" data-size="full">
+              <div class="metal-btn-inner"></div>
+              <button type="submit" class="metal-btn">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span>Enviar mensaje →</span>
+              </button>
+            </div>
+
+            <p class="form-legal">
+              Al enviar este formulario, tu información se guarda localmente para que nuestro equipo pueda contactarte. No compartimos tus datos con terceros.
+            </p>
+
+          </form>
+
+          <!-- Mensaje de éxito (oculto hasta envío) -->
+          <div id="formEmpresasExito" class="form-exito" style="display:none" role="status">
+            <div class="form-exito__check" aria-hidden="true">✓</div>
+            <h3 class="form-exito__titulo">¡Mensaje enviado!</h3>
+            <p class="form-exito__texto">Nos pondremos en contacto contigo en menos de 24 horas. Revisa tu email — también te mandamos una confirmación.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="an-footer">
+    <a href="index.html" class="an-footer__logo" aria-label="Explora Miami — inicio">
+      <span class="an-footer__logo-explora">Explora</span><span class="an-footer__logo-miami">Miami</span>
+    </a>
+    <nav class="an-footer__links" aria-label="Links del footer">
+      <a href="index.html#destinos"      class="an-footer__link">Destinos</a>
+      <a href="index.html#mapa"          class="an-footer__link">Mapa</a>
+      <a href="index.html#trabaja"       class="an-footer__link">Trabaja con nosotros</a>
+      <a href="#hero-anunciantes"        class="an-footer__link">Para empresas</a>
+      <a href="#faq"                     class="an-footer__link">FAQ</a>
+    </nav>
+    <p class="an-footer__copy">© 2026 Explora Miami. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="assets/js/anunciantes.js"></script>
+
+</body>
+</html>

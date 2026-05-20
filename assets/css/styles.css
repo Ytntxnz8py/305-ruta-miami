@@ -249,6 +249,21 @@ html.lang-es .lang-en { display: none; }
 }
 .header__enlace:hover { color: var(--turquesa); }
 
+/* Link CTA "Para empresas" en el navbar — ANUNCIANTES */
+.header__enlace--cta {
+  background: linear-gradient(135deg, var(--coral), var(--turquesa));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+}
+.header__enlace--cta:hover {
+  opacity: 0.8;
+  color: inherit; /* sin sobrescribir el gradient text */
+}
+
 /* Botón de idioma */
 .header__lang-btn {
   background: var(--turquesa);
@@ -911,6 +926,41 @@ html.lang-es .lang-en { display: none; }
 }
 
 .seccion-trabaja__contenedor { max-width: var(--max); margin: 0 auto; }
+
+/* ===== TEASER B2B (reemplaza formulario inline) ===== */
+.trabaja-teaser {
+  max-width: 760px; margin: 0 auto;
+  text-align: center; padding: 1rem 0;
+}
+.trabaja-teaser__badge {
+  display: inline-block;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--turquesa);
+  background: rgba(0,188,212,0.08); border: 1px solid rgba(0,188,212,0.2);
+  border-radius: 50px; padding: 0.35rem 1rem; margin-bottom: 1.5rem;
+}
+.trabaja-teaser__titulo {
+  margin-top: 0 !important; /* sobrescribe el margin-top del .seccion-titulo base si existe */
+}
+.trabaja-teaser__sub {
+  font-size: 1.1rem; color: var(--texto-medio);
+  line-height: 1.7; max-width: 540px; margin: 0 auto 2rem;
+}
+.trabaja-teaser__sub strong { color: var(--tinta); font-weight: 700; }
+.trabaja-teaser__pills {
+  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem;
+}
+.trabaja-teaser__pill {
+  font-size: 0.82rem; font-weight: 600; color: var(--turquesa-oscuro, #00434F);
+  background: rgba(0,188,212,0.07); border: 1px solid rgba(0,188,212,0.15);
+  border-radius: 50px; padding: 0.3rem 0.85rem;
+}
+.trabaja-teaser__cta { display: flex; justify-content: center; }
+/* Hace que el <a> funcione igual que <button> dentro del metal-btn-wrap */
+.trabaja-teaser__cta .metal-btn {
+  text-decoration: none;
+}
+/* ===== FIN TEASER B2B ===== */
 
 .trabaja-grid {
   display: grid;

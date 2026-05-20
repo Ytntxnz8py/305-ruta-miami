@@ -106,6 +106,7 @@
           <li><a href="#destinos" class="header__enlace" data-i18n="nav_destinos">Destinos</a></li>
           <li><a href="#mapa"     class="header__enlace" data-i18n="nav_mapa">Mapa</a></li>
           <li><a href="#trabaja"  class="header__enlace" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
+          <li><a href="anunciantes.html" class="header__enlace header__enlace--cta" data-i18n="nav_empresas">Para empresas</a></li>
         </ul>
       </nav>
 
@@ -562,103 +563,44 @@
     <section class="seccion-trabaja" id="trabaja">
       <div class="seccion-trabaja__contenedor">
 
-        <h2 class="seccion-titulo fade-up" data-i18n="trabaja_titulo">Trabaja con Nosotros</h2>
+        <!-- Teaser B2B — enlaza a anunciantes.html -->
+        <div class="trabaja-teaser">
 
-        <div class="trabaja-grid">
+          <div class="trabaja-teaser__badge fade-up" aria-hidden="true">🏄 Para empresas</div>
 
-          <!-- Columna izquierda: info y beneficios -->
-          <div class="trabaja-info fade-up">
-            <p class="trabaja-info__sub" data-i18n="trabaja_sub">
-              ¿Tienes un negocio relacionado con el turismo outdoor en Miami? Únete a nuestra plataforma.
-            </p>
-            <div class="trabaja-beneficios">
-              <div class="trabaja-beneficio">
-                <div class="trabaja-beneficio__icono">📍</div>
-                <span data-i18n="trabaja_item1">Listing en nuestro directorio</span>
-              </div>
-              <div class="trabaja-beneficio">
-                <div class="trabaja-beneficio__icono">💻</div>
-                <span data-i18n="trabaja_item2">Página web profesional</span>
-              </div>
-              <div class="trabaja-beneficio">
-                <div class="trabaja-beneficio__icono">📢</div>
-                <span data-i18n="trabaja_item3">Publicidad segmentada</span>
-              </div>
-              <div class="trabaja-beneficio">
-                <div class="trabaja-beneficio__icono">📦</div>
-                <span data-i18n="trabaja_item4">Integración con Amazon</span>
-              </div>
+          <h2 class="seccion-titulo trabaja-teaser__titulo fade-up" style="transition-delay:0.06s">
+            <span class="lang-es">¿Tienes un negocio outdoor en Miami?</span>
+            <span class="lang-en">Do you have an outdoor business in Miami?</span>
+          </h2>
+
+          <p class="trabaja-teaser__sub fade-up" style="transition-delay:0.12s">
+            <span class="lang-es">Tu empresa frente a miles de aventureros desde <strong>$80/mes</strong>. Sin contratos, activo en 48h.</span>
+            <span class="lang-en">Your business in front of thousands of adventurers from <strong>$80/mo</strong>. No contracts, live in 48h.</span>
+          </p>
+
+          <!-- Beneficios rápidos -->
+          <div class="trabaja-teaser__pills fade-up" style="transition-delay:0.18s" aria-hidden="true">
+            <span class="trabaja-teaser__pill">✓ Card en el directorio</span>
+            <span class="trabaja-teaser__pill">✓ Página de detalle</span>
+            <span class="trabaja-teaser__pill">✓ ES &amp; EN</span>
+            <span class="trabaja-teaser__pill">✓ Métricas mensuales</span>
+          </div>
+
+          <!-- CTA -->
+          <div class="trabaja-teaser__cta fade-up" style="transition-delay:0.24s">
+            <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
+              <div class="metal-btn-inner"></div>
+              <a href="anunciantes.html" class="metal-btn">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span class="lang-es">Ver planes y precios →</span>
+                <span class="lang-en">See plans and pricing →</span>
+              </a>
             </div>
           </div>
 
-          <!-- Columna derecha: formulario -->
-          <div class="trabaja-form-cont fade-up" style="transition-delay:0.14s">
-            <div class="form-card">
+        </div><!-- /trabaja-teaser -->
 
-              <form id="formTrabaja" novalidate>
-                <div class="form-fila">
-                  <div class="form-grupo">
-                    <label for="fNombre" data-i18n="form_nombre">Nombre completo</label>
-                    <input id="fNombre" name="nombre" type="text" required
-                           data-i18n-ph="form_nombre" placeholder="Nombre completo" />
-                    <span class="form-error-msg">Campo requerido</span>
-                  </div>
-                  <div class="form-grupo">
-                    <label for="fEmpresa" data-i18n="form_empresa">Empresa</label>
-                    <input id="fEmpresa" name="empresa" type="text"
-                           data-i18n-ph="form_empresa" placeholder="Empresa" />
-                  </div>
-                </div>
-                <div class="form-fila">
-                  <div class="form-grupo">
-                    <label for="fEmail" data-i18n="form_email">Email</label>
-                    <input id="fEmail" name="email" type="email" required
-                           data-i18n-ph="form_email" placeholder="Email" />
-                    <span class="form-error-msg">Email inválido</span>
-                  </div>
-                  <div class="form-grupo">
-                    <label for="fTel" data-i18n="form_tel">Teléfono</label>
-                    <input id="fTel" name="tel" type="tel"
-                           data-i18n-ph="form_tel" placeholder="Teléfono" />
-                  </div>
-                </div>
-                <div class="form-grupo">
-                  <label for="fServicio" data-i18n="form_servicio">Tipo de servicio</label>
-                  <select id="fServicio" name="servicio" required>
-                    <option value="" data-i18n="form_servicio_opc">Selecciona una opción</option>
-                    <option value="listing"  data-i18n="form_servicio_listing">Listing en directorio</option>
-                    <option value="web"      data-i18n="form_servicio_web">Página web personalizada</option>
-                    <option value="pub"      data-i18n="form_servicio_pub">Publicidad en el sitio</option>
-                    <option value="amazon"   data-i18n="form_servicio_amazon">Productos en Amazon</option>
-                  </select>
-                  <span class="form-error-msg">Selecciona una opción</span>
-                </div>
-                <div class="form-grupo">
-                  <label for="fMensaje" data-i18n="form_mensaje">Mensaje</label>
-                  <textarea id="fMensaje" name="mensaje"
-                            data-i18n-ph="form_mensaje" placeholder="Mensaje"></textarea>
-                </div>
-                <!-- Metal coral: Enviar mensaje -->
-                <div class="metal-btn-wrap" data-variant="coral" data-size="full">
-                  <div class="metal-btn-inner"></div>
-                  <button type="submit" class="metal-btn form-enviar" data-i18n="form_enviar">
-                    <div class="metal-btn-shine"></div>
-                    <div class="metal-btn-hover-glow"></div>
-                    Enviar mensaje
-                  </button>
-                </div>
-              </form>
-
-              <!-- Mensaje de éxito (oculto hasta envío) -->
-              <div id="formExito" class="form-exito" style="display:none" aria-live="polite">
-                <div class="form-exito__check">✓</div>
-                <h3 class="form-exito__titulo" data-i18n="form_exito_titulo">¡Mensaje enviado!</h3>
-                <p class="form-exito__texto" data-i18n="form_exito_texto">Nos pondremos en contacto contigo en menos de 24 horas.</p>
-              </div>
-
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 

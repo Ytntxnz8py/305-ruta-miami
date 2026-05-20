@@ -13,6 +13,7 @@ var TEXTOS = {
     nav_destinos: 'Destinos',
     nav_mapa:     'Mapa',
     nav_trabaja:  'Trabaja con nosotros',
+    nav_empresas: 'Para empresas',
 
     /* Hero */
     hero_titulo:       'EXPLORA MIAMI',
@@ -81,6 +82,7 @@ var TEXTOS = {
     nav_destinos: 'Destinations',
     nav_mapa:     'Map',
     nav_trabaja:  'Work with us',
+    nav_empresas: 'For businesses',
 
     /* Hero */
     hero_titulo:       'EXPLORE MIAMI',

@@ -1,0 +1,287 @@
+/* =========================================
+   EXPLORA MIAMI — anunciantes.js
+   Página de ventas B2B para anunciantes
+   ES5 puro, IIFE, sin librerías externas
+========================================= */
+(function () {
+  'use strict';
+
+  /* ===== NAVBAR SCROLL ===== */
+  function initNavbarScroll() {
+    var header = document.getElementById('an-header');
+    if (!header) return;
+    function onScroll() {
+      if (window.pageYOffset > 30) { header.classList.add('scrolled'); }
+      else                         { header.classList.remove('scrolled'); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ===== HAMBURGER ===== */
+  function initHamburger() {
+    var btn = document.getElementById('menuBtn');
+    var nav = document.getElementById('navMenu');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      btn.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    /* Cierra al hacer clic en un enlace */
+    nav.querySelectorAll('.header__enlace').forEach(function (a) {
+      a.addEventListener('click', function () {
+        nav.classList.remove('is-open');
+        btn.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* ===== METAL BUTTONS ===== */
+  function initMetalButtons(root) {
+    var scope = root || document;
+    scope.querySelectorAll('.metal-btn-wrap').forEach(function (wrap) {
+      if (wrap.dataset.metalInit) return;
+      wrap.dataset.metalInit = '1';
+      wrap.addEventListener('mousedown',   function () { wrap.classList.add('is-pressed'); });
+      wrap.addEventListener('mouseup',     function () { wrap.classList.remove('is-pressed'); });
+      wrap.addEventListener('mouseleave',  function () {
+        wrap.classList.remove('is-pressed');
+        wrap.classList.remove('is-hovered');
+      });
+      wrap.addEventListener('mouseenter',  function () { wrap.classList.add('is-hovered'); });
+      wrap.addEventListener('touchstart',  function () { wrap.classList.add('is-pressed'); },  { passive: true });
+      wrap.addEventListener('touchend',    function () { wrap.classList.remove('is-pressed'); });
+      wrap.addEventListener('touchcancel', function () { wrap.classList.remove('is-pressed'); });
+    });
+  }
+
+  /* ===== SCROLL ANIMATION (fade-up) ===== */
+  function initScrollAnimation() {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(function (el) { io.observe(el); });
+  }
+
+  /* ===== COUNTERS ===== */
+  function initCounters() {
+    var items = document.querySelectorAll('[data-count]');
+    if (!items.length) return;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+
+        var el      = entry.target;
+        var target  = parseFloat(el.dataset.count);
+        var suffix  = el.dataset.suffix  || '';
+        var prefix  = el.dataset.prefix  || '';
+        var isFloat = el.dataset.count.indexOf('.') !== -1;
+
+        if (reduced) {
+          el.textContent = prefix + (isFloat ? target.toFixed(1) : Math.round(target)) + suffix;
+          return;
+        }
+
+        var dur   = 1600;
+        var start = null;
+
+        function tick(now) {
+          if (!start) start = now;
+          var elapsed  = now - start;
+          var progress = Math.min(elapsed / dur, 1);
+          var eased    = 1 - Math.pow(1 - progress, 3); /* ease-out cubic */
+          var value    = target * eased;
+          el.textContent = prefix + (isFloat ? value.toFixed(1) : Math.round(value)) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.5 });
+
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ===== 3D CARD TILT ===== */
+  function bindTilt(el, maxTilt) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    maxTilt = maxTilt || 8;
+
+    el.addEventListener('mousemove', function (e) {
+      el.classList.add('tilting');
+      var rect = el.getBoundingClientRect();
+      var cx   = rect.left + rect.width  / 2;
+      var cy   = rect.top  + rect.height / 2;
+      var dx   = (e.clientX - cx) / (rect.width  / 2);
+      var dy   = (e.clientY - cy) / (rect.height / 2);
+      var rotY = dx * maxTilt;
+      var rotX = -dy * maxTilt * 0.65;
+      el.style.transform =
+        'perspective(1000px) rotateY(' + rotY.toFixed(2) + 'deg) rotateX(' + rotX.toFixed(2) + 'deg) translateZ(8px)';
+    });
+
+    el.addEventListener('mouseleave', function () {
+      el.classList.remove('tilting');
+      el.style.transform = '';
+    });
+  }
+
+  function initCardTilts() {
+    document.querySelectorAll('.precio-card').forEach(function (card) { bindTilt(card, 6); });
+    /* Tilt en la escena del mockup (no en la card directamente para no romper transform 3D) */
+    var scene = document.querySelector('.mockup-scene');
+    if (scene) {
+      scene.addEventListener('mousemove', function (e) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var card = scene.querySelector('.mockup-card');
+        if (!card) return;
+        var rect = scene.getBoundingClientRect();
+        var cx   = rect.left + rect.width  / 2;
+        var cy   = rect.top  + rect.height / 2;
+        var dx   = (e.clientX - cx) / (rect.width  / 2);
+        var dy   = (e.clientY - cy) / (rect.height / 2);
+        var rotY = -15 + dx * 10;
+        var rotX =   5 + dy * -4;
+        card.style.transition = 'none';
+        card.style.transform =
+          'rotateY(' + rotY.toFixed(2) + 'deg) rotateX(' + rotX.toFixed(2) + 'deg) scale(0.94)';
+      });
+      scene.addEventListener('mouseleave', function () {
+        var card = scene.querySelector('.mockup-card');
+        if (!card) return;
+        card.style.transition = 'transform 0.55s var(--ease, cubic-bezier(0.2,0,0,1))';
+        card.style.transform  = 'rotateY(-15deg) rotateX(5deg) scale(0.92)';
+      });
+    }
+  }
+
+  /* ===== FAQ ACCORDION ===== */
+  function initAccordion() {
+    var items = document.querySelectorAll('.faq-item');
+    items.forEach(function (item) {
+      var trigger = item.querySelector('.faq-trigger');
+      if (!trigger) return;
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.addEventListener('click', function () {
+        var isOpen = item.classList.contains('is-open');
+        /* cierra todos */
+        items.forEach(function (i) {
+          i.classList.remove('is-open');
+          var t = i.querySelector('.faq-trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+        /* abre el actual si estaba cerrado */
+        if (!isOpen) {
+          item.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+
+  /* ===== FORMULARIO DE CONTACTO ===== */
+  function initFormContacto() {
+    var form  = document.getElementById('formEmpresas');
+    var exito = document.getElementById('formEmpresasExito');
+    if (!form) return;
+
+    var campos = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+    function validateField(campo) {
+      var grupo  = campo.parentElement;
+      var errMsg = grupo ? grupo.querySelector('.form-error-msg') : null;
+      var valid  = campo.checkValidity();
+      if (grupo) grupo.classList.toggle('has-error', !valid);
+      if (errMsg) errMsg.style.display = valid ? 'none' : 'block';
+      return valid;
+    }
+
+    campos.forEach(function (campo) {
+      campo.addEventListener('blur', function () { validateField(campo); });
+      campo.addEventListener('input', function () {
+        if (campo.parentElement && campo.parentElement.classList.contains('has-error')) {
+          validateField(campo);
+        }
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var allValid = true;
+      campos.forEach(function (campo) { if (!validateField(campo)) allValid = false; });
+      if (!allValid) return;
+
+      function val(name) {
+        var el = form.querySelector('[name="' + name + '"]');
+        return el ? el.value : '';
+      }
+
+      var data = {
+        nombre:  val('nombre'),
+        empresa: val('empresa'),
+        email:   val('email'),
+        tel:     val('tel'),
+        tipo:    val('tipo'),
+        mensaje: val('mensaje'),
+        fecha:   new Date().toISOString()
+      };
+
+      try {
+        var lista = [];
+        try { lista = JSON.parse(localStorage.getItem('em_contactos_empresas') || '[]'); }
+        catch (e2) { lista = []; }
+        lista.push(data);
+        localStorage.setItem('em_contactos_empresas', JSON.stringify(lista));
+      } catch (err) { /* continúa sin localStorage */ }
+
+      form.style.display = 'none';
+      if (exito) {
+        exito.removeAttribute('style');
+        exito.setAttribute('aria-live', 'polite');
+      }
+    });
+  }
+
+  /* ===== SMOOTH SCROLL para anclas internas ===== */
+  function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id     = a.getAttribute('href');
+        var target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }
+
+  /* ===== BOTÓN: scroll a sección por id ===== */
+  /* Expuesto como global para onclick inline en HTML */
+  window.anScrollTo = function (id) {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  /* ===== INIT ===== */
+  document.addEventListener('DOMContentLoaded', function () {
+    initNavbarScroll();
+    initHamburger();
+    initMetalButtons();
+    initScrollAnimation();
+    initCounters();
+    initCardTilts();
+    initAccordion();
+    initFormContacto();
+    initSmoothScroll();
+  });
+
+}());
