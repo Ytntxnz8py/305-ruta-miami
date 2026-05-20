@@ -2756,9 +2756,9 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
    background-clip:text + paneo continuo suave
    ============================================================ */
 @keyframes titulo-paneo {
-  0%   { background-position: 0%   60%; }
-  50%  { background-position: 100% 40%; }
-  100% { background-position: 0%   60%; }
+  0%   { background-position: 0%   35%; }
+  50%  { background-position: 100% 20%; }
+  100% { background-position: 0%   35%; }
 }
 
 @keyframes hero-word-in {
@@ -2772,18 +2772,23 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   font-style: italic !important;
   letter-spacing: 0.04em !important;
 
-  /* Foto de Miami recortada dentro del texto */
+  /* Arrecife turquesa recortado dentro de las letras
+     (foto diferente al hero — contraste máximo sobre fondo oscuro) */
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
   text-shadow: none !important;
 
-  background-image: url('../images/photo-1595323397978-65433d24fc23.avif') !important;
-  background-size: 220% auto !important;
+  background-image: url('../images/hero/hero-01.jpg') !important;
+  background-size: 200% auto !important;
   background-clip: text !important;
   -webkit-background-clip: text !important;
 
-  /* Paneo lento de la imagen a través de las letras */
+  /* Paneo lento — muestra el turquesa brillante a través de las letras */
   animation: titulo-paneo 10s ease-in-out infinite !important;
+
+  /* Halo azul aqua que rodea las letras */
+  filter: drop-shadow(0 0 18px rgba(0, 190, 220, 0.55))
+          drop-shadow(0 2px 6px rgba(0, 0, 0, 0.50)) !important;
 }
 
 /* Palabras estáticas — entrada suave desde abajo */
