@@ -210,7 +210,11 @@
   }
 
   function initCardTilts() {
-    document.querySelectorAll('.precio-card').forEach(function (card) { bindTilt(card, 6); });
+    /* Skip pricing cards — they use CSS 3D rotate3d via .pc-wrap:hover */
+    document.querySelectorAll('.precio-card').forEach(function (card) {
+      if (card.closest('.seccion-precios')) return;
+      bindTilt(card, 6);
+    });
     /* Tilt en la escena del mockup (no en la card directamente para no romper transform 3D) */
     var scene = document.querySelector('.mockup-scene');
     if (scene) {

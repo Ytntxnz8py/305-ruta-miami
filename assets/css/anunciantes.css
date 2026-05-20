@@ -2752,3 +2752,181 @@ p  { font-weight: 300; }
   .seccion-precios .precio-card::after { animation: none; }
   .seccion-precios .precio-card { transition: none; }
 }
+
+/* ============================================
+   PRECIOS — Fondo blanco arena + efecto GlassCard 3D
+   (Override del bloque oscuro anterior)
+   ============================================ */
+
+/* 1. Cambio de fondo: azul marino → blanco arena */
+.seccion-precios {
+  background: var(--blanco-arena);
+}
+.seccion-precios::before {
+  display: none; /* ya no necesitamos las luces de ambiente dark */
+}
+
+/* 2. Colores de texto adaptados al fondo claro */
+.seccion-precios__titulo {
+  color: var(--tinta);
+}
+.seccion-precios__sub {
+  color: rgba(26,42,53,0.60);
+}
+.precios-toggle__btn {
+  color: rgba(26,42,53,0.58);
+  border-color: rgba(26,42,53,0.18);
+}
+.precios-toggle__btn--activo {
+  background: rgba(26,42,53,0.07);
+  color: var(--tinta);
+  border-color: rgba(26,42,53,0.28);
+}
+.precios-toggle__badge {
+  background: var(--turquesa);
+  color: #fff;
+}
+.precios-nota {
+  color: rgba(26,42,53,0.42);
+}
+.precios-nota__anual {
+  color: rgba(26,42,53,0.55);
+}
+
+/* 3. Wrapper de perspectiva — uno por card → vanishing point independiente */
+.pc-wrap {
+  perspective: 1000px;
+}
+
+/* 4. Cards: sólidas dark por tier (en lugar de glassmorphism transparente) */
+.seccion-precios .precio-card {
+  /* Fondo sólido — visible sobre blanco arena */
+  background: linear-gradient(145deg, #071e2b, #0c2638);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  /* 3D setup */
+  overflow: visible; /* preserve-3d requiere overflow visible */
+  transform-style: preserve-3d;
+  transform: none; /* reset */
+  transition: transform 0.5s cubic-bezier(0.2,0,0,1),
+              box-shadow 0.5s cubic-bezier(0.2,0,0,1);
+}
+
+/* Tint de color por tier — oscuro con acento de marca */
+.precio-card--esencial {
+  background: linear-gradient(145deg, #071e2b 0%, #003542 100%);
+}
+.precio-card--profesional {
+  background: linear-gradient(145deg, #1a1100 0%, #2b1c00 100%);
+}
+.precio-card--elite {
+  background: linear-gradient(145deg, #1a0404 0%, #2d0808 100%);
+}
+
+/* 5. Hover 3D — activado desde .pc-wrap:hover para que no haya conflicto */
+.pc-wrap:hover .precio-card {
+  transform: rotate3d(1, 1, 0, 20deg);
+  box-shadow:
+    rgba(0,0,0,0.28) 28px 48px 22px -38px,
+    rgba(0,0,0,0.10) 0px 22px 28px 0px;
+}
+
+/* Elite mantiene su glow coral en hover */
+.pc-wrap:hover .precio-card--elite {
+  box-shadow:
+    rgba(0,0,0,0.28) 28px 48px 22px -38px,
+    rgba(0,0,0,0.10) 0px 22px 28px 0px,
+    0 0 38px rgba(255,107,107,0.22);
+}
+
+/* Turquesa glow para Esencial */
+.pc-wrap:hover .precio-card--esencial {
+  box-shadow:
+    rgba(0,0,0,0.28) 28px 48px 22px -38px,
+    rgba(0,0,0,0.10) 0px 22px 28px 0px,
+    0 0 32px rgba(0,188,212,0.18);
+}
+
+/* Mostaza glow para Profesional */
+.pc-wrap:hover .precio-card--profesional {
+  box-shadow:
+    rgba(0,0,0,0.28) 28px 48px 22px -38px,
+    rgba(0,0,0,0.10) 0px 22px 28px 0px,
+    0 0 32px rgba(255,179,0,0.18);
+}
+
+/* Anular el :hover translateY del bloque base (el pc-wrap lo gestiona) */
+.seccion-precios .precio-card:hover {
+  transform: none;
+}
+
+/* 6. Capa interna de vidrio — flotando en Z+22px (el "glasspanel" del GlassCard) */
+.seccion-precios .precio-card::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: calc(var(--r-lg) - 8px);
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  border-left:   1px solid rgba(255,255,255,0.14);
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.16) 0%,
+    rgba(255,255,255,0.04) 100%);
+  transform: translate3d(0, 0, 22px);
+  transform-style: preserve-3d;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.2,0,0,1);
+}
+
+/* En hover, la capa de vidrio sube un poco más */
+.pc-wrap:hover .precio-card::before {
+  transform: translate3d(0, 0, 28px);
+}
+
+/* 7. Profesional: en lugar de scale(1.04) estático,
+      usamos sombra base más prominente para dar jerarquía */
+@media (min-width: 900px) {
+  .precio-card--destacada {
+    transform: none;
+    box-shadow:
+      0 0 0 2px rgba(255,179,0,0.25),
+      0 8px 40px rgba(0,0,0,0.30);
+  }
+  .precio-card--destacada:hover { transform: none; }
+  .pc-wrap:hover .precio-card--destacada {
+    transform: rotate3d(1, 1, 0, 20deg);
+  }
+}
+
+/* 8. Contenido de la card en Z elevado para estar sobre la capa de vidrio */
+.seccion-precios .precio-card__header,
+.seccion-precios .precio-card__lista,
+.seccion-precios .precio-card__cta,
+.seccion-precios .precio-card__badge {
+  position: relative;
+  transform: translate3d(0, 0, 30px);
+  transform-style: preserve-3d;
+}
+
+/* 9. Accesibilidad: sin 3D si el usuario prefiere movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .pc-wrap:hover .precio-card,
+  .pc-wrap:hover .precio-card--elite,
+  .pc-wrap:hover .precio-card--esencial,
+  .pc-wrap:hover .precio-card--profesional,
+  .pc-wrap:hover .precio-card--destacada { transform: none; box-shadow: none; }
+  .seccion-precios .precio-card::before { transform: none; transition: none; }
+  .seccion-precios .precio-card__header,
+  .seccion-precios .precio-card__lista,
+  .seccion-precios .precio-card__cta,
+  .seccion-precios .precio-card__badge { transform: none; }
+}
+
+/* 10. Mobile: perspectiva menos agresiva (táctil no tiene hover de todos modos) */
+@media (max-width: 900px) {
+  .pc-wrap { perspective: 800px; }
+  .seccion-precios .precio-card__header,
+  .seccion-precios .precio-card__lista,
+  .seccion-precios .precio-card__cta,
+  .seccion-precios .precio-card__badge { transform: none; }
+  .seccion-precios .precio-card::before { transform: none; }
+}
