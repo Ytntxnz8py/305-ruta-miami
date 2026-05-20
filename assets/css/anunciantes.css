@@ -2504,3 +2504,251 @@ p  { font-weight: 300; }
     overflow: visible;
   }
 }
+
+/* ============================================
+   SECCIÓN PRECIOS — 3 tiers (Esencial / Profesional / Élite)
+   Reemplaza la sección de 2 cards anterior
+   ============================================ */
+.seccion-precios {
+  padding: 7rem 1.5rem 8rem;
+  background: linear-gradient(160deg, var(--ocean-ini) 0%, var(--ocean-mid) 48%, #051822 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.seccion-precios::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 15% 50%, rgba(0,188,212,0.10), transparent 65%),
+    radial-gradient(50% 40% at 85% 50%, rgba(255,107,107,0.08), transparent 65%),
+    radial-gradient(40% 60% at 50% 100%, rgba(255,179,0,0.06), transparent 65%);
+}
+
+.seccion-precios__contenedor {
+  max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.seccion-precios__encabezado { text-align: center; margin-bottom: 3rem; }
+
+.seccion-precios__eyebrow {
+  display: inline-block;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--turquesa); margin-bottom: 1rem;
+}
+
+.seccion-precios__titulo {
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--blanco-arena); margin-bottom: 0.75rem;
+}
+
+.seccion-precios__sub {
+  font-size: 1rem; font-weight: 300;
+  color: rgba(255,253,247,0.65); max-width: 520px; margin: 0 auto;
+}
+
+/* ── Toggle mensual/anual ── */
+.precios-toggle {
+  display: flex; justify-content: center; gap: 0.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.precios-toggle__btn {
+  padding: 0.55rem 1.4rem; border-radius: 999px;
+  font-size: 0.88rem; font-weight: 500;
+  color: rgba(255,253,247,0.6);
+  background: transparent;
+  border: 1px solid rgba(255,253,247,0.15);
+  cursor: pointer;
+  transition: all var(--dur) var(--ease);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+
+.precios-toggle__btn--activo {
+  background: rgba(255,253,247,0.1);
+  color: var(--blanco-arena);
+  border-color: rgba(255,253,247,0.3);
+}
+
+.precios-toggle__badge {
+  background: var(--turquesa); color: var(--azul-profundo);
+  font-size: 0.7rem; font-weight: 700;
+  padding: 0.15rem 0.5rem; border-radius: 999px;
+}
+
+/* ── Grid 3 cards ── */
+.seccion-precios .precios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .seccion-precios .precios-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+/* ── Card base ── */
+.seccion-precios .precio-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  padding: 2rem 1.8rem 2.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  color: var(--blanco-arena);
+}
+
+.seccion-precios .precio-card:hover { transform: translateY(-6px); }
+
+/* ── ShineBorder base ── */
+.seccion-precios .precio-card::after {
+  content: ''; position: absolute; inset: 0;
+  border-radius: inherit; padding: 1px;
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: shine-pulse 10s linear infinite;
+  pointer-events: none;
+}
+
+/* ── ShineBorder por tier ── */
+.precio-card--esencial::after {
+  background-image: radial-gradient(transparent, transparent,
+    #00BCD4, #0097a7, #FFB300, transparent, transparent);
+}
+
+.precio-card--profesional::after {
+  background-image: radial-gradient(transparent, transparent,
+    #FFB300, #FF6B6B, #00BCD4, transparent, transparent);
+  animation-duration: 8s;
+}
+
+.precio-card--elite::after {
+  background-image: radial-gradient(transparent, transparent,
+    #FF6B6B, #FFB300, #00BCD4, #FF6B6B, transparent, transparent);
+  animation-duration: 6s;
+  padding: 2px;
+}
+
+/* ── Élite — glow coral exterior ── */
+.precio-card--elite {
+  box-shadow:
+    0 0 0 1px rgba(255,107,107,0.25),
+    0 0 50px rgba(255,107,107,0.10),
+    0 8px 40px rgba(0,0,0,0.50),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+}
+
+/* ── Profesional — ligeramente más grande ── */
+@media (min-width: 900px) {
+  .precio-card--destacada {
+    transform: scale(1.04);
+    z-index: 2;
+  }
+  .precio-card--destacada:hover { transform: scale(1.04) translateY(-6px); }
+}
+
+/* ── Badges ── */
+.precio-card__badge {
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  padding: 0.3rem 1.1rem; border-radius: 0 0 12px 12px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.precio-card__badge--popular {
+  background: var(--mostaza); color: var(--tinta);
+}
+
+.precio-card__badge--elite {
+  background: linear-gradient(135deg, var(--coral), var(--mostaza));
+  color: white;
+}
+
+/* ── Header ── */
+.precio-card__header { margin-bottom: 1.8rem; padding-top: 0.5rem; }
+
+.precio-card__nombre {
+  display: block;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,253,247,0.55); margin-bottom: 0.75rem;
+}
+
+.precio-card--esencial   .precio-card__nombre { color: var(--turquesa); }
+.precio-card--profesional .precio-card__nombre { color: var(--mostaza); }
+.precio-card--elite       .precio-card__nombre { color: var(--coral); }
+
+.precio-card__precio {
+  display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: 0.75rem;
+}
+
+.precio-card__monto {
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  color: var(--blanco-arena);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.precio-card__periodo {
+  font-size: 0.9rem; font-weight: 300;
+  color: rgba(255,253,247,0.5);
+}
+
+.precio-card__tagline {
+  font-size: 0.88rem; font-weight: 300; font-style: italic;
+  color: rgba(255,253,247,0.65); line-height: 1.4;
+}
+
+/* ── Lista de features ── */
+.precio-card__lista {
+  list-style: none; margin-bottom: 2rem;
+  display: flex; flex-direction: column; gap: 0.65rem;
+}
+
+.precio-card__lista li {
+  display: flex; align-items: baseline; gap: 0.55rem;
+  font-size: 0.86rem; font-weight: 300;
+  color: rgba(255,253,247,0.80); line-height: 1.45;
+}
+
+.precio-check {
+  font-size: 0.78rem; font-weight: 700; flex-shrink: 0;
+  width: 18px; height: 18px;
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+}
+
+.precio-check--turquesa { background: rgba(0,188,212,0.18); color: var(--turquesa); }
+.precio-check--mostaza  { background: rgba(255,179,0,0.18);  color: var(--mostaza); }
+.precio-check--coral    { background: rgba(255,107,107,0.18); color: var(--coral); }
+
+/* ── CTA ── */
+.precio-card__cta { margin-top: auto; }
+.precio-card__cta .metal-btn-wrap { width: 100%; }
+.precio-card__cta .metal-btn { width: 100%; justify-content: center; }
+
+/* ── Nota de transparencia ── */
+.precios-nota {
+  text-align: center; margin-top: 2.5rem;
+  font-size: 0.82rem; font-weight: 300;
+  color: rgba(255,253,247,0.45); line-height: 1.65;
+}
+
+.precios-nota__anual {
+  color: rgba(255,253,247,0.55);
+  font-style: italic;
+}
+
+/* ── Prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .seccion-precios .precio-card::after { animation: none; }
+  .seccion-precios .precio-card { transition: none; }
+}
