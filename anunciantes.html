@@ -111,67 +111,90 @@
         <div class="hp-dot hp-dot--7"></div>
       </div>
 
-      <div class="hero-contenido">
-        <p class="hero-pill fade-up" style="transition-delay:0s">Para empresas · Miami</p>
+      <!-- 2-column layout: texto izquierda / fotos derecha -->
+      <div class="hero-contenido hero-2col">
 
-        <!--
-          H1 con shutter-reveal: JS inyecta .sw por palabra.
-          aria-label garantiza accesibilidad.
-          hero-shutter--pending oculta el elemento hasta que JS lo construya.
-        -->
-        <h1 class="hero-titulo hero-shutter hero-shutter--pending"
-            id="heroShutter"
-            aria-label="Tu negocio frente a miles de aventureros">
-          Tu negocio frente a miles de aventureros
-        </h1>
+        <!-- ── Columna izquierda: contenido textual ── -->
+        <div class="hero-left">
+          <p class="hero-pill fade-up" style="transition-delay:0s">Para empresas · Miami</p>
 
-        <p class="hero-subtitulo fade-up" style="transition-delay:0.16s">
-          El directorio outdoor más completo de South Florida. Conectamos a turistas y residentes hispanohablantes con las mejores experiencias — y con las empresas que las hacen posible.
-        </p>
+          <!--
+            H1 con shutter-reveal: JS inyecta .sw por palabra.
+            aria-label garantiza accesibilidad.
+            hero-shutter--pending oculta el elemento hasta que JS lo construya.
+          -->
+          <h1 class="hero-titulo hero-shutter hero-shutter--pending"
+              id="heroShutter"
+              aria-label="Tu negocio frente a miles de aventureros">
+            Tu negocio frente a miles de aventureros
+          </h1>
 
-        <div class="hero-ctas fade-up" style="transition-delay:0.24s">
-          <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
-            <div class="metal-btn-inner"></div>
-            <button class="metal-btn" onclick="anScrollTo('precios')">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              <span>Ver planes y precios →</span>
-            </button>
+          <p class="hero-subtitulo fade-up" style="transition-delay:0.16s">
+            El directorio outdoor más completo de South Florida. Conectamos a turistas y residentes hispanohablantes con las mejores experiencias — y con las empresas que las hacen posible.
+          </p>
+
+          <div class="hero-ctas fade-up" style="transition-delay:0.24s">
+            <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
+              <div class="metal-btn-inner"></div>
+              <button class="metal-btn" onclick="anScrollTo('precios')">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span>Ver planes y precios →</span>
+              </button>
+            </div>
+            <div class="metal-btn-wrap" data-variant="ghost" data-size="lg">
+              <div class="metal-btn-inner"></div>
+              <button class="metal-btn" onclick="anScrollTo('como-funciona')">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span>¿Cómo funciona?</span>
+              </button>
+            </div>
           </div>
-          <div class="metal-btn-wrap" data-variant="ghost" data-size="lg">
-            <div class="metal-btn-inner"></div>
-            <button class="metal-btn" onclick="anScrollTo('como-funciona')">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              <span>¿Cómo funciona?</span>
+
+          <!-- Stats flotantes -->
+          <div class="hero-stats fade-up" style="transition-delay:0.32s" aria-label="Datos del directorio">
+            <div class="hero-stat">
+              <div class="hero-stat__numero">9</div>
+              <div class="hero-stat__label">destinos activos</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__numero">Miami</div>
+              <div class="hero-stat__label">cobertura</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__numero">ES/EN</div>
+              <div class="hero-stat__label">bilingüe</div>
+            </div>
+          </div>
+
+          <!-- Replay button -->
+          <div class="hero-replay fade-up" style="transition-delay:0.44s">
+            <button class="hero-replay-btn" id="heroReplayBtn"
+                    onclick="replayHeroShutter()"
+                    aria-label="Repetir animación del título">
+              <span class="hero-replay-icon" aria-hidden="true">↻</span>
+              repetir
             </button>
           </div>
         </div>
 
-        <!-- Stats flotantes -->
-        <div class="hero-stats fade-up" style="transition-delay:0.32s" aria-label="Datos del directorio">
-          <div class="hero-stat">
-            <div class="hero-stat__numero">9</div>
-            <div class="hero-stat__label">destinos activos</div>
+        <!-- ── Columna derecha: fotos apiladas con rotación ── -->
+        <div class="hero-right" aria-hidden="true">
+          <!-- Foto trasera — rotate(-6deg), entra desde la derecha -->
+          <div class="hero-img-card hero-img-card--back">
+            <img src="assets/images/hero/hero-09.jpg"
+                 alt="Kayak en Biscayne Bay, Miami"
+                 loading="eager" />
+            <div class="hero-img-card__overlay"></div>
           </div>
-          <div class="hero-stat">
-            <div class="hero-stat__numero">Miami</div>
-            <div class="hero-stat__label">cobertura</div>
+          <!-- Foto delantera — rotate(6deg), entra un poco después -->
+          <div class="hero-img-card hero-img-card--front">
+            <img src="assets/images/hero/hero-03.jpg"
+                 alt="Buceo en los arrecifes de Key Largo"
+                 loading="eager" />
+            <div class="hero-img-card__overlay"></div>
           </div>
-          <div class="hero-stat">
-            <div class="hero-stat__numero">ES/EN</div>
-            <div class="hero-stat__label">bilingüe</div>
-          </div>
-        </div>
-
-        <!-- Replay button — re-dispara la animación shutter -->
-        <div class="hero-replay fade-up" style="transition-delay:0.44s">
-          <button class="hero-replay-btn" id="heroReplayBtn"
-                  onclick="replayHeroShutter()"
-                  aria-label="Repetir animación del título">
-            <span class="hero-replay-icon" aria-hidden="true">↻</span>
-            repetir
-          </button>
         </div>
 
       </div>

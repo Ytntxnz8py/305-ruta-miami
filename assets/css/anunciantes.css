@@ -429,6 +429,132 @@ p  { font-weight: 300; }
 /* Contenido del hero: z-index por encima del grid */
 .hero-contenido { z-index: 10; }
 
+/* ── 2-column split layout ── */
+.hero-2col {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1200px;
+  width: 100%;
+  /* override the default centered single-column */
+  text-align: left;
+}
+
+/* Left column */
+.hero-left {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+.hero-left .hero-pill       { margin-left: 0; margin-right: 0; }
+.hero-left .hero-subtitulo  { margin-left: 0; margin-right: 0; }
+.hero-left .hero-ctas       { justify-content: flex-start; }
+.hero-left .hero-stats      { justify-content: flex-start; gap: 0; }
+.hero-left .hero-replay     { justify-content: flex-start; }
+/* Shutter title: left-align word wrapping */
+.hero-left .hero-shutter    { justify-content: flex-start; text-align: left; }
+
+/* Right column — card scene */
+.hero-right {
+  flex: 0 0 50%;
+  max-width: 50%;
+  position: relative;
+  height: 440px;
+}
+
+/* ── Photo cards ── */
+.hero-img-card {
+  position: absolute;
+  width: 250px;
+  height: 360px;
+  top: 50%; left: 50%;
+  margin-left: -125px; /* center: -width/2 */
+  margin-top:  -180px; /* center: -height/2 */
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 4px 16px rgba(0,0,0,0.3);
+  will-change: transform;
+  cursor: pointer;
+}
+.hero-img-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.hero-img-card__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(7,30,43,0.55));
+  pointer-events: none;
+}
+
+/* Back card: rotated left, slides in from right */
+.hero-img-card--back {
+  transform: rotate(-6deg) translate(80px, 20px);
+  transition: transform 0.38s var(--ease), box-shadow 0.38s var(--ease);
+  animation: hc-in-back 0.9s cubic-bezier(0.16,1,0.3,1) 0.45s both;
+  z-index: 1;
+}
+/* Front card: rotated right, slides in slightly after */
+.hero-img-card--front {
+  transform: rotate(6deg) translate(-65px, -20px);
+  transition: transform 0.38s var(--ease), box-shadow 0.38s var(--ease);
+  animation: hc-in-front 0.9s cubic-bezier(0.16,1,0.3,1) 0.68s both;
+  z-index: 2;
+}
+
+@keyframes hc-in-back {
+  from { opacity: 0; transform: rotate(-6deg) translate(220px, 20px); }
+  to   { opacity: 1; transform: rotate(-6deg) translate(80px, 20px); }
+}
+@keyframes hc-in-front {
+  from { opacity: 0; transform: rotate(6deg) translate(100px, -20px); }
+  to   { opacity: 1; transform: rotate(6deg) translate(-65px, -20px); }
+}
+
+/* Hover: soften rotation, lift card */
+/* !important needed to override animation fill-mode on hover — documented override */
+.hero-img-card--back:hover {
+  transform: rotate(-2deg) translate(80px, 6px) scale(1.02) !important;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 4px 16px rgba(0,188,212,0.2);
+  z-index: 10;
+}
+.hero-img-card--front:hover {
+  transform: rotate(2deg) translate(-65px, -34px) scale(1.02) !important;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 4px 16px rgba(255,107,107,0.2);
+  z-index: 10;
+}
+
+/* Responsive — mobile: stack vertically, center text */
+@media (max-width: 900px) {
+  .hero-2col {
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem;
+  }
+  .hero-left {
+    flex: 0 0 100%; max-width: 100%;
+  }
+  .hero-left .hero-pill,
+  .hero-left .hero-subtitulo  { margin-left: auto; margin-right: auto; }
+  .hero-left .hero-ctas,
+  .hero-left .hero-stats,
+  .hero-left .hero-replay     { justify-content: center; }
+  .hero-left .hero-shutter    { justify-content: center; text-align: center; }
+  .hero-right {
+    flex: 0 0 100%; max-width: 100%; width: 100%;
+    height: 280px;
+  }
+  .hero-img-card { width: 175px; height: 245px; margin-left: -87px; margin-top: -122px; }
+}
+
+/* Reduced motion: skip entry animation, show cards immediately */
+@media (prefers-reduced-motion: reduce) {
+  .hero-img-card {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
 /* Oculto mientras JS construye la estructura */
 .hero-shutter--pending { opacity: 0; }
 

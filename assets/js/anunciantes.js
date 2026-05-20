@@ -608,6 +608,24 @@
     });
   }
 
+  /* ===== HERO CARDS — clean up entry animation so hover works ===== */
+  function initHeroCards() {
+    var cards = document.querySelectorAll('.hero-img-card');
+    if (!cards.length) return;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    /* After each card's entry animation finishes, remove animation so the
+       CSS :hover transition can take over without fighting fill-mode. */
+    cards.forEach(function (card) {
+      card.addEventListener('animationend', function onEnd() {
+        card.removeEventListener('animationend', onEnd);
+        card.style.animation = 'none';
+        card.style.opacity   = '1';
+      });
+    });
+  }
+
   /* ===== HERO PARALLAX — mouse-tracking depth layers ===== */
   function initHeroParallax() {
     var section = document.querySelector('.seccion-hero');
@@ -689,6 +707,7 @@
   /* ===== INIT ===== */
   document.addEventListener('DOMContentLoaded', function () {
     initHeroShutter();      /* shutter text — antes que fade-up para que no compita */
+    initHeroCards();
     initHeroParallax();
     initFloatingNav();
     initMetalButtons();
