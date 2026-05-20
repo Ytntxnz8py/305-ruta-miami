@@ -117,17 +117,26 @@
         <span></span><span></span><span></span>
       </button>
 
-      <!-- Dropdown (mobile / collapsed) -->
-      <ul class="fn__dropdown" id="fnDropdown" role="menu">
-        <li><a href="#inicio"          class="fn__dd-link" data-i18n="nav_inicio">Inicio</a></li>
-        <li><a href="#destinos"        class="fn__dd-link" data-i18n="nav_destinos">Destinos</a></li>
-        <li><a href="#mapa"            class="fn__dd-link" data-i18n="nav_mapa">Mapa</a></li>
-        <li><a href="#trabaja"         class="fn__dd-link" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
-        <li><div class="fn__dd-sep" role="separator"></div></li>
-        <li><a href="anunciantes.html" class="fn__dd-link fn__dd-link--cta" data-i18n="nav_empresas">Para empresas</a></li>
-      </ul>
-
     </nav>
+
+    <!-- Dropdown fuera de nav.fn para que overflow:hidden no lo corte -->
+    <ul class="fn__dropdown" id="fnDropdown" role="menu">
+      <li>
+        <button class="fn__dd-lang-btn" id="btnIdiomaDropdown" onclick="(function(){var b=document.getElementById('btnIdioma');if(b)b.click();document.getElementById('fnDropdown').classList.remove('is-open');document.querySelector('.fn__collapse-icon').setAttribute('aria-expanded','false');}())">
+          <span class="fn__dd-lang-icon">🌐</span>
+          <span class="lang-es fn__dd-lang-label">Traducir al inglés</span>
+          <span class="lang-en fn__dd-lang-label">Translate to Spanish</span>
+        </button>
+      </li>
+      <li><div class="fn__dd-sep" role="separator"></div></li>
+      <li><a href="#inicio"          class="fn__dd-link" data-i18n="nav_inicio">Inicio</a></li>
+      <li><a href="#destinos"        class="fn__dd-link" data-i18n="nav_destinos">Destinos</a></li>
+      <li><a href="#mapa"            class="fn__dd-link" data-i18n="nav_mapa">Mapa</a></li>
+      <li><a href="#trabaja"         class="fn__dd-link" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
+      <li><div class="fn__dd-sep" role="separator"></div></li>
+      <li><a href="anunciantes.html" class="fn__dd-link fn__dd-link--cta" data-i18n="nav_empresas">Para empresas</a></li>
+    </ul>
+
   </div>
 
   <main>

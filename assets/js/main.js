@@ -1914,10 +1914,39 @@ function initRoadmapTooltip() {
   }
 
   /* Registrar eventos en todos los milestones */
+  var isTouchMapa = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
   canvas.querySelectorAll('.rdm-milestone').forEach(function(m) {
     m.addEventListener('mouseenter', function(e) { mostrarTip(m, e); });
     m.addEventListener('mousemove',  moverTip);
     m.addEventListener('mouseleave', ocultarTip);
+
+    /* Móvil: tap activa la burbuja (.is-active) */
+    if (isTouchMapa) {
+      m.setAttribute('tabindex', '0');
+      m.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isAlreadyActive = m.classList.contains('is-active');
+        /* Cierra todos los otros */
+        canvas.querySelectorAll('.rdm-milestone.is-active').forEach(function(other) {
+          other.classList.remove('is-active');
+        });
+        if (!isAlreadyActive) {
+          m.classList.add('is-active');
+          mostrarTip(m, e);
+        } else {
+          ocultarTip();
+        }
+      });
+    }
+  });
+
+  /* Cierra burbujas al tocar fuera del mapa */
+  canvas.closest('.seccion-mapa, section') && canvas.closest('.seccion-mapa, section').addEventListener('click', function() {
+    canvas.querySelectorAll('.rdm-milestone.is-active').forEach(function(m) {
+      m.classList.remove('is-active');
+    });
+    ocultarTip();
   });
 
   /* Ocultar si la ventana pierde el foco */

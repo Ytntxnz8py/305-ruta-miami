@@ -4067,3 +4067,55 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   .fn { transition: none !important; }
   .fn__logo, .fn__dropdown { transition: none !important; }
 }
+
+/* ===================================================================
+   LANG TOGGLE — botón de idioma en el dropdown móvil
+================================================================= */
+.fn__dd-lang-btn {
+  display: flex; align-items: center; gap: 0.6rem;
+  width: 100%; padding: 0.68rem 1rem;
+  background: rgba(0,188,212,0.07);
+  border: 1px solid rgba(0,188,212,0.18);
+  border-radius: 12px; cursor: pointer;
+  font-family: var(--fuente-cuerpo, 'Inter', system-ui, sans-serif);
+  font-size: 0.9rem; font-weight: 600;
+  color: var(--turquesa-oscura, #00434F);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.fn__dd-lang-btn:hover { background: rgba(0,188,212,0.14); }
+.fn__dd-lang-icon { font-size: 1rem; line-height: 1; }
+.fn__dd-lang-label { line-height: 1; }
+
+/* ===================================================================
+   FADE BANDS — Ajustar a blanco-arena para consistencia visual
+================================================================= */
+.fade-mapa-trabaja {
+  background: linear-gradient(to bottom, var(--azul-cielo), var(--blanco-arena)) !important;
+}
+.fade-trabaja-foot {
+  background: linear-gradient(to bottom, var(--blanco-arena), var(--footer-ini)) !important;
+}
+
+/* ===================================================================
+   MAPA DE DESTINOS — reducir solapamiento de bubbles
+================================================================= */
+/* Desktop: mostrar bubble solo en hover del milestone */
+.rdm-bubble {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+/* Móvil: ocultar bubbles por defecto, mostrar solo al tocar */
+@media (max-width: 768px) {
+  .rdm-bubble {
+    opacity: 0;
+    transform: translateX(0) scale(0.85);
+    pointer-events: none;
+  }
+  .rdm-milestone.is-active .rdm-bubble {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+    z-index: 20;
+  }
+  /* Solo mostrar dots en móvil por defecto (más limpio) */
+  .rdm-dot { width: 9px; height: 9px; }
+}

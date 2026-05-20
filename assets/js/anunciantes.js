@@ -713,8 +713,66 @@
     }
   }
 
+  /* ===== IDIOMA ES / EN (anunciantes.html) ===== */
+  /* Versión liviana: no requiere i18n.js — solo toggle clase en <html> */
+  window.toggleIdiomaAn = function () {
+    var html    = document.documentElement;
+    var current = localStorage.getItem('em_idioma') || html.lang || 'es';
+    var next    = current === 'es' ? 'en' : 'es';
+
+    /* Toggle clase CSS */
+    html.classList.remove('lang-es', 'lang-en');
+    html.classList.add('lang-' + next);
+    html.lang = next;
+    localStorage.setItem('em_idioma', next);
+
+    /* Actualizar texto del botón de idioma desktop */
+    var btn = document.getElementById('btnIdioma');
+    if (btn) btn.textContent = next === 'es' ? 'ES' : 'EN';
+  };
+
+  /* Sincronizar botón desktop con idioma guardado */
+  function initIdiomaAn() {
+    var saved = localStorage.getItem('em_idioma') || 'es';
+    var html  = document.documentElement;
+    html.classList.remove('lang-es', 'lang-en');
+    html.classList.add('lang-' + saved);
+    html.lang = saved;
+    var btn = document.getElementById('btnIdioma');
+    if (btn) btn.textContent = saved === 'es' ? 'ES' : 'EN';
+  }
+
+  /* ===== CARRUSEL DE PRECIOS ===== */
+  function initPreciosCarousel() {
+    var scrollWrap = document.getElementById('preciosScrollWrap');
+    var prev       = document.getElementById('precCarPrev');
+    var next       = document.getElementById('precCarNext');
+    if (!scrollWrap || !prev || !next) return;
+
+    function cardWidth() {
+      var card = scrollWrap.querySelector('.precio-card');
+      if (!card) return 340;
+      return card.offsetWidth + 24; /* offsetWidth + gap(1.5rem≈24px) */
+    }
+
+    function updateBtns() {
+      prev.disabled = scrollWrap.scrollLeft <= 2;
+      next.disabled = scrollWrap.scrollLeft >= scrollWrap.scrollWidth - scrollWrap.clientWidth - 2;
+    }
+
+    prev.addEventListener('click', function () {
+      scrollWrap.scrollBy({ left: -cardWidth(), behavior: 'smooth' });
+    });
+    next.addEventListener('click', function () {
+      scrollWrap.scrollBy({ left:  cardWidth(), behavior: 'smooth' });
+    });
+    scrollWrap.addEventListener('scroll', updateBtns, { passive: true });
+    updateBtns();
+  }
+
   /* ===== INIT ===== */
   document.addEventListener('DOMContentLoaded', function () {
+    initIdiomaAn();
     initHeroShutter();      /* shutter text — antes que fade-up para que no compita */
     initHeroCards();
     initHeroParallax();
@@ -726,6 +784,7 @@
     initFolders();
     initParaQuien();
     initPricingToggle();
+    initPreciosCarousel();
     initAccordion();
     initTestimoniosScroll();
     initFormContacto();

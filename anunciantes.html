@@ -50,6 +50,9 @@
         <li><a href="#precios"            class="fn__link">Precios</a></li>
       </ul>
 
+      <!-- Botón idioma ES/EN -->
+      <button class="fn__lang" id="btnIdioma" aria-label="Cambiar idioma" onclick="toggleIdiomaAn()">ES</button>
+
       <!-- Ícono hamburguesa (collapsed + mobile) -->
       <button class="fn__collapse-icon" aria-label="Abrir menú" aria-expanded="false" style="margin-right:0">
         <span></span><span></span><span></span>
@@ -59,6 +62,14 @@
 
     <!-- Dropdown fuera de nav.fn para que overflow:hidden no lo corte -->
     <ul class="fn__dropdown" id="fnDropdown" role="menu">
+      <li>
+        <button class="fn__dd-lang-btn" id="btnIdiomaDropdown" onclick="toggleIdiomaAn();document.getElementById('fnDropdown').classList.remove('is-open');document.querySelector('.fn__collapse-icon').setAttribute('aria-expanded','false');">
+          <span class="fn__dd-lang-icon">🌐</span>
+          <span class="lang-es fn__dd-lang-label">Traducir al inglés</span>
+          <span class="lang-en fn__dd-lang-label">Translate to Spanish</span>
+        </button>
+      </li>
+      <li><div class="fn__dd-sep" role="separator"></div></li>
       <li><a href="index.html"              class="fn__dd-link fn__dd-link--back">Inicio</a></li>
       <li><div class="fn__dd-sep" role="separator"></div></li>
       <li><a href="index.html#destinos"     class="fn__dd-link">Destinos</a></li>
@@ -374,8 +385,12 @@
           </div>
         </div>
 
-        <!-- Contenedor de cards -->
-        <div class="precios-grid-wrap fade-up" style="transition-delay:0.12s">
+        <!-- Contenedor de cards — carrusel -->
+        <div class="precios-carousel fade-up" style="transition-delay:0.12s">
+          <button class="precios-car-btn precios-car-btn--prev" id="precCarPrev" aria-label="Plan anterior">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="precios-grid-wrap" id="preciosScrollWrap">
           <div class="precios-grid">
 
             <!-- Card Básico (light) -->
@@ -479,12 +494,17 @@
             </div>
 
           </div><!-- /precios-grid -->
+          </div><!-- /precios-grid-wrap -->
 
-          <!-- Nota plan anual (visible solo en modo anual) -->
-          <p class="precio-anual-nota" id="precioAnualNota" style="display:none" aria-live="polite">
-            * Facturado en un solo pago anual: $768/año (Plan Básico) · $960/año (Plan Premium).
-          </p>
-        </div><!-- /precios-grid-wrap -->
+          <button class="precios-car-btn precios-car-btn--next" id="precCarNext" aria-label="Plan siguiente">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div><!-- /precios-carousel -->
+
+        <!-- Nota plan anual (visible solo en modo anual) -->
+        <p class="precio-anual-nota" id="precioAnualNota" style="display:none" aria-live="polite">
+          * Facturado en un solo pago anual: $768/año (Plan Básico) · $960/año (Plan Premium).
+        </p>
 
         <p class="precio-nota fade-up">
           Los precios son en USD, sin contrato de permanencia. Cancela en cualquier momento con 7 días de anticipación.
@@ -683,8 +703,15 @@
                 <img src="assets/images/istockphoto-1984030596-612x612.jpg"
                      alt="Actividades outdoor en Miami — kayak, senderismo y buceo"
                      class="pq-img">
-                <div class="pq-img-overlay" aria-hidden="true">
-                  <a href="#precios" class="pq-img-cta">Ver planes →</a>
+                <div class="pq-img-overlay">
+                  <div class="metal-btn-wrap pq-img-metal-btn" data-variant="coral">
+                    <div class="metal-btn-inner"></div>
+                    <a href="#precios" class="metal-btn" onclick="event.preventDefault();anScrollTo('precios')">
+                      <div class="metal-btn-shine"></div>
+                      <div class="metal-btn-hover-glow"></div>
+                      <span>Ver planes →</span>
+                    </a>
+                  </div>
                 </div>
               </div>
               <div class="pq-img-circle pq-img-circle--1" aria-hidden="true"></div>
