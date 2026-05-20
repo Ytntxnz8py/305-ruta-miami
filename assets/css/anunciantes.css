@@ -477,23 +477,66 @@ p  { font-weight: 300; }
   background: var(--blanco-arena);
   padding: 5rem 1.5rem;
 }
+
+/* Grid de 4 tarjetas */
 .numeros-grid {
   display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem; max-width: 1000px; margin: 0 auto 3rem;
-  text-align: center;
+  gap: 1.25rem; max-width: 1040px; margin: 0 auto 3rem;
 }
-.numero-item { padding: 1.5rem 1rem; }
-.numero-icono { font-size: 2rem; margin-bottom: 0.75rem; }
+
+/* Tarjeta base */
+.numero-card {
+  position: relative;
+  background: #fff;
+  border-radius: var(--r);
+  padding: 2.25rem 1.5rem 1.75rem;
+  border: 1px solid rgba(26, 42, 53, 0.06);
+  box-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.045),
+    0 1px 4px rgba(0, 0, 0, 0.03);
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+}
+.numero-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.09),
+    0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Barra de acento de color en la parte superior */
+.numero-card__bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+}
+.numero-card[data-color="turquesa"] .numero-card__bar { background: var(--turquesa); }
+.numero-card[data-color="coral"]    .numero-card__bar { background: var(--coral); }
+.numero-card[data-color="mostaza"]  .numero-card__bar { background: var(--mostaza); }
+.numero-card[data-color="verde"]    .numero-card__bar { background: #26a69a; }
+
+/* Sombra de color sutil en hover según variante */
+.numero-card[data-color="turquesa"]:hover { box-shadow: var(--sombra-turquesa), 0 2px 8px rgba(0,0,0,0.04); }
+.numero-card[data-color="coral"]:hover    { box-shadow: var(--sombra-coral),    0 2px 8px rgba(0,0,0,0.04); }
+.numero-card[data-color="mostaza"]:hover  { box-shadow: var(--sombra-mostaza),  0 2px 8px rgba(0,0,0,0.04); }
+.numero-card[data-color="verde"]:hover    { box-shadow: 0 12px 32px -12px rgba(38,166,154,0.32), 0 2px 8px rgba(0,0,0,0.04); }
+
+/* Contenido interno */
+.numero-icono { font-size: 2rem; margin-bottom: 1rem; display: block; line-height: 1; }
 .numero-valor {
   font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-size: clamp(2.5rem, 5vw, 3.8rem); color: var(--tinta); line-height: 1;
+  font-size: clamp(2.8rem, 5vw, 4rem); color: var(--tinta); line-height: 1;
+  margin-bottom: 0.65rem;
 }
-.numero-label { font-size: 0.88rem; color: rgba(26,42,53,0.58); font-weight: 300; margin-top: 0.5rem; }
+.numero-label {
+  font-size: 0.84rem; color: rgba(26, 42, 53, 0.50);
+  font-weight: 400; letter-spacing: 0.01em;
+}
 
+/* Banner de confianza */
 .trust-banner {
   max-width: 880px; margin: 0 auto;
-  background: rgba(0,188,212,0.05);
-  border: 1px solid rgba(0,188,212,0.15);
+  background: rgba(0, 188, 212, 0.05);
+  border: 1px solid rgba(0, 188, 212, 0.15);
   border-radius: var(--r); padding: 1.25rem 2rem;
   display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; align-items: center;
 }
