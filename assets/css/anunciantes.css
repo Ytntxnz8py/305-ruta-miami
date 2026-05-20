@@ -311,6 +311,159 @@ p  { font-weight: 300; }
 @media (prefers-reduced-motion: reduce) { .scroll-hint__line { animation: none; opacity: 0.4; } }
 
 /* ======================================================
+   HERO: SHUTTER TEXT REVEAL
+   Porta el componente HeroText React → vanilla ES5
+====================================================== */
+
+/* Grid de fondo sutil */
+.hero-grid {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    linear-gradient(to right,  rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:
+    clamp(28px, 5vw, 60px) clamp(28px, 5vw, 60px);
+}
+
+/* Corner accents */
+.hero-corner {
+  position: absolute; width: 44px; height: 44px; z-index: 2;
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.hero-corner--tl { top: 5.5rem;  left: 1.75rem;  border-right: none; border-bottom: none; }
+.hero-corner--br { bottom: 4rem; right: 1.75rem;  border-left: none;  border-top: none;   }
+
+/* Contenido del hero: z-index por encima del grid */
+.hero-contenido { z-index: 10; }
+
+/* Oculto mientras JS construye la estructura */
+.hero-shutter--pending { opacity: 0; }
+
+/* Wrapper: flex para que las palabras mantengan su ancho natural */
+.hero-shutter {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.1em 0.3em;
+  margin-bottom: 1.5rem;
+  /* sin transition-delay de fade-up — la animación la maneja JS */
+}
+
+/* Una palabra */
+.sw {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: inherit;
+}
+
+/* Texto principal — empieza invisible, JS lo anima */
+.sw__main {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(10px);
+  will-change: opacity, filter;
+}
+.hero-shutter.is-animating .sw__main {
+  animation: sw-blur-in 0.8s ease forwards;
+  animation-delay: calc(var(--sw-d, 0s) + 0.3s);
+}
+
+/* Slices (capas de color que barren el carácter) */
+.sw__slice {
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 10;
+  opacity: 0;
+  /* font heredado del padre — garantiza overlay perfecto */
+  font-family: inherit; font-size: inherit; font-weight: inherit;
+  font-style: inherit; line-height: inherit; letter-spacing: inherit;
+  display: inline-block; white-space: nowrap;
+  will-change: transform, opacity;
+}
+
+/* Top (0–35%): turquesa, sweep izq → der */
+.sw__slice--top {
+  color: var(--turquesa);
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+/* Mid (35–65%): blanco semi, sweep der → izq */
+.sw__slice--mid {
+  color: rgba(255,255,255,0.88);
+  clip-path: polygon(0 35%, 100% 35%, 100% 65%, 0 65%);
+}
+/* Bot (65–100%): coral, sweep izq → der */
+.sw__slice--bot {
+  color: var(--coral);
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+.hero-shutter.is-animating .sw__slice--top {
+  animation: sw-sweep-lr 0.7s ease-in-out forwards;
+  animation-delay: var(--sw-d, 0s);
+}
+.hero-shutter.is-animating .sw__slice--mid {
+  animation: sw-sweep-rl 0.7s ease-in-out forwards;
+  animation-delay: calc(var(--sw-d, 0s) + 0.1s);
+}
+.hero-shutter.is-animating .sw__slice--bot {
+  animation: sw-sweep-lr 0.7s ease-in-out forwards;
+  animation-delay: calc(var(--sw-d, 0s) + 0.2s);
+}
+
+/* Keyframes */
+@keyframes sw-blur-in {
+  from { opacity: 0; filter: blur(10px); }
+  to   { opacity: 1; filter: blur(0px);  }
+}
+@keyframes sw-sweep-lr {
+  0%   { transform: translateX(-110%); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateX(110%);  opacity: 0; }
+}
+@keyframes sw-sweep-rl {
+  0%   { transform: translateX(110%);  opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateX(-110%); opacity: 0; }
+}
+
+/* Reduced motion: solo fade, sin slice sweep */
+@media (prefers-reduced-motion: reduce) {
+  .hero-shutter.is-animating .sw__main {
+    animation: sw-simple-fade 0.6s ease forwards;
+    animation-delay: var(--sw-d, 0s);
+    filter: none !important;
+  }
+  .hero-shutter.is-animating .sw__slice { display: none !important; }
+  @keyframes sw-simple-fade { from { opacity: 0; } to { opacity: 1; } }
+}
+
+/* Replay button */
+.hero-replay { display: flex; justify-content: center; margin-top: 2.25rem; }
+.hero-replay-btn {
+  background: none; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: var(--sans); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: 0.5rem 0.8rem; border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease),
+              background 0.2s var(--ease);
+}
+.hero-replay-btn:hover {
+  color: rgba(255,255,255,0.75);
+  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.05);
+}
+.hero-replay-icon {
+  display: inline-block;
+  transition: transform 0.4s var(--ease);
+  font-style: normal;
+}
+.hero-replay-btn:hover .hero-replay-icon { transform: rotate(180deg); }
+
+/* ======================================================
    SECCIÓN 2: NÚMEROS
 ====================================================== */
 .seccion-numeros {

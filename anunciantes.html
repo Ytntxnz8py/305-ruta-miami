@@ -55,17 +55,31 @@
   <main>
 
     <!-- ===================================================
-         SECCIÓN 1: HERO
+         SECCIÓN 1: HERO — shutter text reveal
     =================================================== -->
     <section class="seccion-hero" id="hero-anunciantes" aria-label="Bienvenida para anunciantes">
 
       <!-- Aurora gradient mesh animado -->
       <div class="hero-aurora" aria-hidden="true"></div>
 
+      <!-- Grid de fondo sutil (dots/lines overlay) -->
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <!-- Corner accents decorativos -->
+      <div class="hero-corner hero-corner--tl" aria-hidden="true"></div>
+      <div class="hero-corner hero-corner--br" aria-hidden="true"></div>
+
       <div class="hero-contenido">
         <p class="hero-pill fade-up" style="transition-delay:0s">Para empresas · Miami</p>
 
-        <h1 class="hero-titulo fade-up" style="transition-delay:0.08s">
+        <!--
+          H1 con shutter-reveal: JS inyecta .sw por palabra.
+          aria-label garantiza accesibilidad.
+          hero-shutter--pending oculta el elemento hasta que JS lo construya.
+        -->
+        <h1 class="hero-titulo hero-shutter hero-shutter--pending"
+            id="heroShutter"
+            aria-label="Tu negocio frente a miles de aventureros">
           Tu negocio frente a miles de aventureros
         </h1>
 
@@ -74,7 +88,6 @@
         </p>
 
         <div class="hero-ctas fade-up" style="transition-delay:0.24s">
-          <!-- CTA primario -->
           <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
             <div class="metal-btn-inner"></div>
             <button class="metal-btn" onclick="anScrollTo('precios')">
@@ -83,7 +96,6 @@
               <span>Ver planes y precios →</span>
             </button>
           </div>
-          <!-- CTA secundario -->
           <div class="metal-btn-wrap" data-variant="ghost" data-size="lg">
             <div class="metal-btn-inner"></div>
             <button class="metal-btn" onclick="anScrollTo('como-funciona')">
@@ -109,6 +121,17 @@
             <div class="hero-stat__label">bilingüe</div>
           </div>
         </div>
+
+        <!-- Replay button — re-dispara la animación shutter -->
+        <div class="hero-replay fade-up" style="transition-delay:0.44s">
+          <button class="hero-replay-btn" id="heroReplayBtn"
+                  onclick="replayHeroShutter()"
+                  aria-label="Repetir animación del título">
+            <span class="hero-replay-icon" aria-hidden="true">↻</span>
+            repetir
+          </button>
+        </div>
+
       </div>
 
       <!-- Scroll hint -->

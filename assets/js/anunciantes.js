@@ -308,6 +308,53 @@
     });
   }
 
+  /* ===== HERO SHUTTER TEXT ===== */
+  /*
+   * Porta el efecto HeroText React → vanilla ES5.
+   * Divide el H1 en palabras, cada una con 3 capas de clip-path
+   * que barren la tipografía (top/mid/bot) mientras el texto
+   * principal hace blur-fade-in. Stagger por palabra via CSS var(--sw-d).
+   */
+  function initHeroShutter() {
+    var el = document.getElementById('heroShutter');
+    if (!el) return;
+
+    var words = [
+      'Tu','negocio','frente','a','miles','de','aventureros'
+    ];
+
+    /* Construye el HTML de las palabras con slices */
+    function buildHTML() {
+      return words.map(function (word, i) {
+        var delay = (i * 0.13).toFixed(2) + 's';
+        return (
+          '<span class="sw" style="--sw-d:' + delay + '" aria-hidden="true">' +
+            '<span class="sw__main">' + word + '</span>' +
+            '<span class="sw__slice sw__slice--top">' + word + '</span>' +
+            '<span class="sw__slice sw__slice--mid">' + word + '</span>' +
+            '<span class="sw__slice sw__slice--bot">' + word + '</span>' +
+          '</span>'
+        );
+      }).join(' ');
+    }
+
+    /* Inyecta el HTML, quita el estado pending y dispara */
+    el.innerHTML = buildHTML();
+    el.classList.remove('hero-shutter--pending');
+
+    function play() {
+      el.classList.remove('is-animating');
+      /* fuerza reflow para que el navegador reinicie las animations */
+      void el.offsetWidth;
+      el.classList.add('is-animating');
+    }
+
+    play();
+
+    /* Expuesto globalmente para el botón onclick en HTML */
+    window.replayHeroShutter = play;
+  }
+
   /* ===== SMOOTH SCROLL para anclas internas ===== */
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(function (a) {
@@ -330,6 +377,7 @@
 
   /* ===== INIT ===== */
   document.addEventListener('DOMContentLoaded', function () {
+    initHeroShutter();      /* shutter text — antes que fade-up para que no compita */
     initNavbarScroll();
     initHamburger();
     initMetalButtons();
