@@ -1,6 +1,6 @@
 # Explora Miami — Guía completa del proyecto
 
-> **Fecha de última actualización:** 19 mayo 2026
+> **Fecha de última actualización:** 20 mayo 2026
 > Documento diseñado para que cualquier instancia de Claude retome el proyecto desde cero sin perder contexto.
 
 ---
@@ -155,11 +155,11 @@ Botón en el header llama `cambiarIdioma()` en `i18n.js` → guarda en localStor
 ### ✅ Sitio público (index.html)
 
 #### Hero — Foto dominante Miami (estado actual)
-- **Foto local AVIF** `photo-1595323397978-65433d24fc23.avif` — Miami skyline al atardecer con palmeras, opacidad 1%
-- **Overlay gradiente** `165deg` oscuro (15%→84%) para legibilidad sobre foto
+- **Foto local AVIF** `photo-1595323397978-65433d24fc23.avif` — Miami skyline al atardecer; fondo directo en `.hero-arc` (NO en `.hero-bg`) — arquitectura corregida en commit `ad0d934`
+- **Overlay gradiente** `165deg` oscuro (22%→90%) para legibilidad sobre foto
 - **Fondo base** `#05131e` mientras carga la imagen
-- **Cormorant Garamond weight 300 italic** — tipografía ultra-fina de lujo para el título
 - **Eyebrow decorativo** `— South Florida —` con líneas horizontales (1px, 44px) a ambos lados del texto
+- **TÍTULO: SpinningText SVG** (commit `7db83fa`) — texto "EXPLORA MIAMI ✦ SOUTH FLORIDA ✦" girando en círculo continuo sobre un `<path>` circular SVG de radio 25 en viewBox 100×100. Gira a 12s/vuelta con `@keyframes hero-spin-anim`. Ver sección 21 para detalle técnico completo.
 - **Tags organizados** en fila horizontal con glassmorphism: ✨ Aventuras · 🌊 Playas · ☀️ Sol todo el año · 🌿 Naturaleza · 🐠 Arrecifes
 - **Tagline** blanco trazo fino (weight 300, letter-spacing 0.06em)
 - **2 CTAs glass** — Ver destinos / Ver mapa
@@ -175,13 +175,16 @@ Botón en el header llama `cambiarIdioma()` en `i18n.js` → guarda en localStor
 #### Roadmap Animado de Destinos (reemplaza mapa + globo desde commit 50bcb08)
 - **SVG path animado por scroll** — `strokeDashoffset` se reduce según posición vertical del canvas en viewport. Gradiente mostaza→coral→coral
 - **9 destinos principales** (rdm-milestone--tierra/mar) — dot de 14px, anillo pulsante, bubble glassmorphism
-- **20 lugares icónicos de ref** (rdm-milestone--ref) — dot de 8px mostaza, sin anillo, bubble pequeño
-- **IntersectionObserver stagger** — 80ms entre cada milestone; tierra/mar primero (idx 0-8), ref después (idx 9-28)
-- **Tooltip flotante** `initRoadmapTooltip()` — tarjeta `position: fixed` con descripción ~30 palabras por cada uno de los 29 puntos, aparece en mouseenter y desaparece en mouseleave
+- **15 lugares icónicos de ref** (rdm-milestone--ref) — dot de 8px coral, sin anillo, bubble pequeño. Reducidos de 20→15 en commit `93e414d` eliminando los 5 más solapados; reposicionados con separación mínima de 8%
+- **IntersectionObserver stagger** — 80ms entre cada milestone; tierra/mar primero (idx 0-8), ref después (idx 9-23)
+- **Tooltip flotante** `initRoadmapTooltip()` — tarjeta `position: fixed` con descripción ~30 palabras, aparece en mouseenter y desaparece en mouseleave
   - Barra acento coral→mostaza
   - Nombre extraído del atributo `title` (antes de ` — `)
   - Clampeado al viewport (no se sale de pantalla)
   - Oculto en táctil (`@media hover: none`)
+- **Cursor** — `cursor: pointer` (antes era `cursor: help` que mostraba ícono ❓ del navegador)
+- **Dots con doble anillo** — `box-shadow: 0 0 0 3px white, 0 0 0 5.5px rgba(0,0,0,0.22)` para contraste sobre fondo arena
+- **Bubbles (etiquetas)** — fondo `rgba(255,255,255,0.96)` con borde sutil, `font-weight: 600`
 - **Leyenda** — tierra / mar / lugares icónicos / ruta del viajero
 
 #### Otras secciones
@@ -550,7 +553,29 @@ El código GA4 está en `index.html` con el ID `G-7HMBMBQNQZ`. Verificar:
 
 ---
 
-## 17. Roadmap — milestones geográficos (referencia de posicionamiento)
+## 17. Errores técnicos documentados (para no repetir)
+
+### ❌ `filter` + `background-clip: text` en el mismo elemento
+**Síntoma:** El texto desaparece completamente.
+**Causa:** `filter: drop-shadow()` aplicado al mismo elemento que `background-clip: text` abre un nuevo contexto de composición en Chrome y Safari. El navegador rasteriza el elemento ANTES de aplicar el clip, resultando en texto invisible.
+**Solución:** Nunca usar `filter` y `background-clip: text` en el mismo elemento. Usar un wrapper externo para el `filter` o usar `text-shadow` clásico (pero incompatible con clip-text). La solución adoptada fue reemplazar el clip-text por el SpinningText SVG.
+
+### ❌ `opacity < 1` en elemento `position: absolute` con `overflow: hidden` en el padre
+**Síntoma:** La imagen de fondo del hero no se ve aunque esté declarada.
+**Causa:** `opacity` crea nuevo contexto de composición. El navegador compone `.hero-bg` (con la foto) ANTES de aplicarlo al padre, y si el padre tiene `overflow: hidden`, la foto queda fuera del stacking context visible.
+**Solución adoptada (commit `ad0d934`):** Mover `background-image` directamente al elemento `.hero-arc` usando multi-layer CSS (`linear-gradient, url(foto)`). El `.hero-bg` se oculta con `display: none !important`.
+
+### ❌ `initShutter()` en JS sobreescribe el HTML estático del título
+**Síntoma:** La `<h1>` con contenido estático (palabras, SVG) queda en blanco.
+**Causa:** `initShutter()` hace `titulo.innerHTML = ''` y reconstruye el título como letras individuales animadas.
+**Solución:** Guard al inicio de `initShutter()`:
+```javascript
+if (titulo.querySelector('svg') || titulo.textContent.trim() !== '') return;
+```
+
+---
+
+## 18. Roadmap — milestones geográficos (referencia de posicionamiento)
 
 ### Fórmula de coordenadas a posición CSS
 ```
@@ -573,46 +598,150 @@ left% = (lon + 81.12) / 1.26 * 100
 | 7 | Everglades National Park | 76 | 17 | tierra | ✓ |
 | 8 | John Pennekamp | 86 | 52 | mar | ✓ |
 
-### 20 lugares icónicos de referencia (rdm-milestone--ref, mostaza)
+### 15 lugares icónicos de referencia — estado actual (commit `93e414d`)
+> Eliminados: Bayfront Park (idx 11), Hialeah (20), Palmetto Bay (25), Hard Rock (26), Opa-locka (28) — demasiado solapados.
 
-| idx | Lugar | top% | left% |
-|---|---|---|---|
-| 9 | South Beach / Ocean Drive | 27 | 79 |
-| 10 | Wynwood Walls | 25 | 73 |
-| 11 | Bayfront Park | 28 | 74 |
-| 12 | Vizcaya Museum & Gardens | 31 | 72 |
-| 13 | Coconut Grove | 32 | 70 |
-| 14 | Venetian Pool | 33 | 68 |
-| 15 | Little Havana / Calle Ocho | 29 | 70 |
-| 16 | Fairchild Tropical Garden | 38 | 67 |
-| 17 | Zoo Miami | 44 | 57 |
-| 18 | Key Biscayne | 36 | 76 |
-| 19 | Design District | 23 | 73 |
-| 20 | Hialeah | 18 | 65 |
-| 21 | Aventura | 9 | 78 |
-| 22 | Deering Estate | 44 | 63 |
-| 23 | Homestead | 57 | 51 |
-| 24 | Flamingo (Everglades) | 91 | 15 |
-| 25 | Palmetto Bay | 43 | 62 |
-| 26 | Hard Rock Stadium | 9 | 70 |
-| 27 | Miami Seaquarium | 32 | 76 |
-| 28 | Opa-locka | 15 | 69 |
+| idx HTML | Lugar | top% | left% | Separación mínima |
+|---|---|---|---|---|
+| 9 | Aventura | 7 | 80 | ✓ |
+| 10 | Design District | 18 | 76 | ✓ |
+| 11 | Wynwood Walls | 22 | 69 | ✓ |
+| 12 | South Beach / Ocean Drive | 26 | 84 | ✓ |
+| 13 | Little Havana / Calle Ocho | 27 | 63 | ✓ |
+| 14 | Coconut Grove | 33 | 70 | ✓ |
+| 15 | Miami Seaquarium | 34 | 83 | ✓ |
+| 16 | Venetian Pool | 38 | 62 | ✓ |
+| 17 | Vizcaya Museum & Gardens | 40 | 74 | ✓ |
+| 18 | Key Biscayne | 44 | 82 | ✓ |
+| 19 | Fairchild Tropical Garden | 44 | 68 | ✓ |
+| 20 | Zoo Miami | 48 | 54 | ✓ |
+| 21 | Deering Estate | 51 | 61 | ✓ |
+| 22 | Homestead | 61 | 47 | ✓ |
+| 23 | Flamingo (Everglades) | 91 | 15 | ✓ |
 
 ### CSS de los tipos de milestone
 ```css
-/* Primario tierra: coral, anillo pulsante */
+/* Primario tierra: coral, anillo pulsante, doble anillo contraste */
 .rdm-milestone--tierra .rdm-dot { background: var(--coral); }
+.rdm-milestone--tierra .rdm-dot,
+.rdm-milestone--mar    .rdm-dot {
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.95),
+    0 0 0 5.5px rgba(0,0,0,0.22),
+    0 4px 16px rgba(0,0,0,0.28);
+}
 /* Primario mar: turquesa, anillo pulsante */
 .rdm-milestone--mar .rdm-dot { background: var(--turquesa); }
-/* Referencia: mostaza, sin anillo, dot 8px */
+/* Referencia: coral (cambiado de mostaza), sin anillo, dot 8px, doble anillo */
 .rdm-milestone--ref { width: 8px !important; }
 .rdm-milestone--ref .rdm-ring { display: none !important; }
-.rdm-milestone--ref .rdm-dot { background: var(--mostaza) !important; }
+.rdm-milestone--ref .rdm-dot {
+  background: var(--coral) !important;
+  box-shadow:
+    0 0 0 2.5px rgba(255,255,255,0.97),
+    0 0 0 4.5px rgba(0,0,0,0.20),
+    0 3px 10px rgba(255,100,80,0.35) !important;
+}
+/* Bubbles — alta visibilidad sobre fondo arena */
+.rdm-bubble {
+  background: rgba(255,255,255,0.96) !important;
+  color: var(--texto-oscuro) !important;
+  border: 1px solid rgba(0,0,0,0.10) !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.14) !important;
+  font-weight: 600 !important;
+}
 ```
 
 ---
 
-## 18. Objetivo del negocio y plan de monetización  
+## 19. SpinningText SVG — documentación técnica completa
+
+### Origen
+Port del componente React `SpinningText` (MagicUI) a vanilla HTML/CSS.
+
+### Problema que reemplaza
+El efecto anterior (`background-clip: text` con foto de arrecife turquesa) no funcionaba porque `filter: drop-shadow()` aplicado al mismo `<h1>` cancelaba el clip en Chrome/Safari.
+
+### Estructura HTML
+```html
+<div class="hero-spin-wrapper" id="heroTitulo"
+     role="heading" aria-level="1" aria-label="Explora Miami">
+  <svg viewBox="0 0 100 100" class="hero-spin-svg"
+       aria-hidden="true" focusable="false"
+       xmlns="http://www.w3.org/2000/svg">
+    <g class="hero-spin-group">
+      <!-- Ruta circular: centro (50,50), radio 25 -->
+      <path id="heroSpinPath"
+            d="M 50,50 m -25,0 a 25,25 0 1,1 50,0 a 25,25 0 1,1 -50,0"
+            fill="none"/>
+      <!-- Texto sigue la ruta circular -->
+      <text class="hero-spin-text">
+        <textPath href="#heroSpinPath" startOffset="0%">
+          EXPLORA MIAMI ✦ SOUTH FLORIDA ✦ EXPLORA MIAMI ✦ SOUTH FLORIDA ✦
+        </textPath>
+      </text>
+    </g>
+    <!-- Punto decorativo en el centro -->
+    <circle cx="50" cy="50" r="1.8" class="hero-spin-center"/>
+  </svg>
+</div>
+```
+
+### CSS clave
+```css
+@keyframes hero-spin-anim {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.hero-spin-wrapper {
+  width: 210px; height: 210px;
+  margin: 0 auto 0.5rem;
+}
+
+/* CRÍTICO: transform-origin debe ser el centro del viewBox (50px 50px),
+   NO el default CSS 50% 50% — en SVG el default es 0 0 */
+.hero-spin-group {
+  transform-origin: 50px 50px !important;
+  animation: hero-spin-anim 12s linear infinite !important;
+}
+
+.hero-spin-text {
+  font-size: 4.2px;           /* unidades del viewBox, no px reales */
+  fill: rgba(255,255,255,0.88);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Reducción de movimiento — en lugar de parar, frena a 60s */
+@media (prefers-reduced-motion: reduce) {
+  .hero-spin-group { animation-duration: 60s !important; }
+}
+```
+
+### Equivalencias React → Vanilla
+
+| React prop | Vanilla |
+|---|---|
+| `radius={25}` | `r="25"` en el path SVG |
+| `speed={12}` | `animation-duration: 12s` |
+| `direction="normal"` | `animation-direction: normal` (default) |
+| `textClassName="text-[4px]"` | `font-size: 4.2px` |
+| `className="origin-center animate-spin"` | `transform-origin: 50px 50px` + `@keyframes` |
+| `xlinkHref` | `href` (estándar moderno, xlinkHref deprecado) |
+| `fill-muted-foreground` | `fill: rgba(255,255,255,0.88)` |
+| `tracking-widest` | `letter-spacing: 0.04em` |
+
+### Guard JS en initShutter
+```javascript
+// En initHeroTrail() → initShutter IIFE:
+if (titulo.querySelector('svg') || titulo.textContent.trim() !== '') return;
+// Detecta el SVG hijo y evita sobreescribir el SpinningText
+```
+
+---
+
+## 20. Objetivo del negocio y plan de monetización  
 
 ### Modelo de ingresos
 
@@ -680,3 +809,8 @@ git pull --rebase origin main && git push origin main
 | 19 mayo 2026 | `50bcb08` | **Sección mapa → AnimatedRoadmap** — SVG path scroll-animated, 9 milestones geográficos, IntersectionObserver stagger, paleta coral/turquesa/mostaza |
 | 19 mayo 2026 | `fe4f88c` | **Hero foto dominante + 20 landmarks icónicos** — Cormorant Garamond 300 italic, eyebrow decorativo, hero-tags glassmorphism, 20 rdm-milestone--ref con posición lat/lng real |
 | 19 mayo 2026 | `ebd99d6` | **Hero foto local AVIF 1% + Tooltip roadmap** — `initRoadmapTooltip()`, 29 data-desc, tarjeta glassmorphism fixed que sigue al cursor |
+| 20 mayo 2026 | `ad0d934` | **Fix hero foto invisible** — bug root cause: `opacity` en `.hero-bg` crea stacking context que hace invisible la foto. Solución: `background-image` directo en `.hero-arc`, `.hero-bg { display:none }` |
+| 20 mayo 2026 | `c11f3db` | CLAUDE.md actualizado con documentación completa de la sesión |
+| 20 mayo 2026 | `93e414d` | **Roadmap deoverlap + cursor fix + contraste dots/bubbles** — 20→15 ref-milestones, reposicionados, `cursor:pointer`, doble anillo box-shadow, bubbles sólidas |
+| 20 mayo 2026 | `14f9f31` | Intento clip-text con hero-01.jpg (arrecife turquesa) — no funciona por conflicto `filter`+`background-clip:text` en Chrome/Safari |
+| 20 mayo 2026 | `7db83fa` | **SpinningText SVG** — port React MagicUI → vanilla. Título "Explora Miami" reemplazado por texto circular giratorio en `<textPath>` SVG, 12s/vuelta. Ver sección 19 para documentación técnica completa. |
