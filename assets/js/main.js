@@ -857,14 +857,18 @@ function cerrarModal() {
       }
     });
 
-    /* Botón hamburguesa → dropdown (mobile / collapsed) */
+    /* Botón hamburguesa → en móvil abre dropdown; en desktop colapsado expande la píldora */
     if (colBtn) {
       colBtn.addEventListener('click', function (e) {
         e.stopPropagation();
-        if (drop) {
-          var open = drop.classList.toggle('is-open');
-          colBtn.setAttribute('aria-expanded', String(open));
-        } else if (!isExpanded && !isMobile) {
+        if (isMobile) {
+          /* Móvil: toggle del dropdown */
+          if (drop) {
+            var open = drop.classList.toggle('is-open');
+            colBtn.setAttribute('aria-expanded', String(open));
+          }
+        } else {
+          /* Desktop colapsado: expandir la píldora */
           expand();
         }
       });

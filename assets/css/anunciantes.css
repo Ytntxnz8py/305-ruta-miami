@@ -240,15 +240,16 @@ p  { font-weight: 300; }
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   padding: 9rem 1.5rem 7rem; overflow: hidden;
-  background: linear-gradient(135deg, var(--ocean-ini) 0%, var(--ocean-mid) 50%, var(--ocean-fin) 100%);
+  /* Fondo blanco arena — contraste con las secciones oscuras que siguen */
+  background: var(--blanco-arena);
 }
 .hero-aurora {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  /* Solo manchas de color suaves — sin la base oscura del océano */
   background:
-    radial-gradient(ellipse 80% 60% at var(--ax) var(--ay), rgba(0,188,212,0.35), transparent 60%),
-    radial-gradient(ellipse 60% 80% at var(--bx) var(--by), rgba(255,107,107,0.25), transparent 60%),
-    radial-gradient(ellipse 70% 50% at var(--cx) var(--cy), rgba(255,179,0,0.18), transparent 55%),
-    linear-gradient(135deg, var(--ocean-ini) 0%, var(--ocean-mid) 50%, var(--ocean-fin) 100%);
+    radial-gradient(ellipse 80% 60% at var(--ax) var(--ay), rgba(0,188,212,0.10), transparent 60%),
+    radial-gradient(ellipse 60% 80% at var(--bx) var(--by), rgba(255,107,107,0.07), transparent 60%),
+    radial-gradient(ellipse 70% 50% at var(--cx) var(--cy), rgba(255,179,0,0.06), transparent 55%);
   animation: aurora-drift 18s ease-in-out infinite alternate,
              aurora-breathe 7s ease-in-out infinite alternate;
 }
@@ -261,24 +262,30 @@ p  { font-weight: 300; }
 .hero-pill {
   display: inline-flex; align-items: center; gap: 0.6rem;
   padding: 0.45rem 1.25rem;
-  background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border); border-radius: 50px;
-  font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.85);
+  background: rgba(0, 188, 212, 0.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 188, 212, 0.22); border-radius: 50px;
+  font-size: 0.78rem; font-weight: 600; color: var(--turquesa-oscuro);
   letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.75rem;
 }
 .hero-pill::before { content: '◆'; font-size: 0.45rem; color: var(--turquesa); }
 
 .hero-titulo {
-  font-size: clamp(2.8rem, 7vw, 5.5rem); color: #fff;
+  font-size: clamp(2.8rem, 7vw, 5.5rem); color: var(--tinta);
   margin-bottom: 1.5rem;
-  text-shadow: 0 2px 40px rgba(0,0,0,0.3);
 }
 .hero-subtitulo {
-  font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.72);
+  font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(26, 42, 53, 0.62);
   max-width: 560px; margin: 0 auto 2.75rem; line-height: 1.75;
 }
 .hero-ctas {
   display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem;
+}
+/* Botón ghost adaptado para fondo claro */
+.seccion-hero [data-variant="ghost"]              { background: rgba(26, 42, 53, 0.07); }
+.seccion-hero [data-variant="ghost"] .metal-btn-inner { background: rgba(26, 42, 53, 0.03); }
+.seccion-hero [data-variant="ghost"] .metal-btn   {
+  background: transparent; color: var(--tinta);
+  border: 1.5px solid rgba(26, 42, 53, 0.20);
 }
 .hero-stats {
   display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
@@ -286,20 +293,20 @@ p  { font-weight: 300; }
 .hero-stat { text-align: center; }
 .hero-stat__numero {
   font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-size: clamp(2.2rem, 5vw, 3rem); color: #fff; line-height: 1;
+  font-size: clamp(2.2rem, 5vw, 3rem); color: var(--tinta); line-height: 1;
 }
 .hero-stat__label {
-  font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.55); margin-top: 0.3rem;
+  font-size: 0.78rem; font-weight: 300; color: rgba(26, 42, 53, 0.48); margin-top: 0.3rem;
 }
 
 .scroll-hint {
   position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  color: rgba(255,255,255,0.35); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(26, 42, 53, 0.28); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
 }
 .scroll-hint__line {
   width: 1px; height: 44px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  background: linear-gradient(to bottom, rgba(0, 188, 212, 0.45), transparent);
   animation: scroll-drop 1.9s ease-in-out infinite;
 }
 @keyframes scroll-drop {
@@ -315,12 +322,12 @@ p  { font-weight: 300; }
    Porta el componente HeroText React → vanilla ES5
 ====================================================== */
 
-/* Grid de fondo sutil */
+/* Grid de fondo sutil — tono turquesa muy suave para fondo claro */
 .hero-grid {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background-image:
-    linear-gradient(to right,  rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(to right,  rgba(0,188,212,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,188,212,0.06) 1px, transparent 1px);
   background-size:
     clamp(28px, 5vw, 60px) clamp(28px, 5vw, 60px);
 }
@@ -328,7 +335,7 @@ p  { font-weight: 300; }
 /* Corner accents */
 .hero-corner {
   position: absolute; width: 44px; height: 44px; z-index: 2;
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(0, 188, 212, 0.22);
 }
 .hero-corner--tl { top: 5.5rem;  left: 1.75rem;  border-right: none; border-bottom: none; }
 .hero-corner--br { bottom: 4rem; right: 1.75rem;  border-left: none;  border-top: none;   }
