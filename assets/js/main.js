@@ -1740,7 +1740,7 @@ function initRoadmap() {
       if (!entry.isIntersecting) return;
       var el    = entry.target;
       var idx   = parseInt(el.dataset.idx || '0', 10);
-      var delay = reducedMotion ? 0 : idx * 160;   /* 160ms entre cada marcador */
+      var delay = reducedMotion ? 0 : idx * 80;    /* 80ms entre cada marcador */
       setTimeout(function() { el.classList.add('visible'); }, delay);
       io.unobserve(el);
     });

@@ -454,16 +454,16 @@ html.lang-es .lang-en { display: none; }
   .hfa-item { animation: none !important; opacity: 0.65 !important; }
 }
 
-/* ===== HERO — Imagen de fondo subacuática ===== */
+/* ===== HERO — Foto icónica Miami (Unsplash, uso libre) ===== */
 .hero-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url('../images/hero-bg.png');
+  background-image: url('https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=1920&q=85&auto=format&fit=crop');
   background-size: cover;
-  background-position: center 30%;
+  background-position: center 45%;
   background-repeat: no-repeat;
-  opacity: 0.08;        /* muy sutil — textura suave */
+  opacity: 0.72;
   pointer-events: none;
 }
 
@@ -2705,4 +2705,196 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 @media (prefers-reduced-motion: reduce) {
   .rdm-ring      { animation: none !important; opacity: 0 !important; }
   .rdm-milestone { transition: none !important; }
+}
+
+/* ============================================================
+   HERO FOTO DOMINANTE v2 — Miami Iconic Photo
+   Cormorant Garamond ultra-thin · photo-first · glassmorphism
+   ============================================================ */
+
+/* Base oscuro para que la foto resalte antes de cargar */
+.hero-arc {
+  background: #05131e !important;
+}
+
+/* Overlay oscuro para legibilidad del texto sobre la foto */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    165deg,
+    rgba(5,19,30,0.15) 0%,
+    rgba(5,19,30,0.04) 28%,
+    rgba(5,19,30,0.50) 68%,
+    rgba(5,19,30,0.84) 100%
+  );
+  pointer-events: none;
+}
+
+/* Contenido: sobre foto + overlay */
+.hero-arc__contenido {
+  position: relative;
+  z-index: 2;
+}
+
+/* Scroll indicator: legible sobre foto oscurecida */
+.hero-arc__scroll {
+  position: relative;
+  z-index: 2;
+}
+.hero-arc__scroll-texto {
+  color: rgba(255,255,255,0.50) !important;
+}
+.hero-arc__scroll-linea {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.40), transparent) !important;
+}
+
+/* ── Título: Cormorant Garamond ultra-fino en blanco ── */
+.hero-arc__titulo {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: #fff !important;
+  text-shadow: 0 2px 32px rgba(0,0,0,0.38) !important;
+  letter-spacing: 0.04em !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* Cada letra (shutter) hereda el blanco */
+.hero-arc__titulo .shutter-capa {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* ── Tagline: trazo fino blanco ── */
+.hero-arc__tagline {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: rgba(255,255,255,0.85) !important;
+  color: rgba(255,255,255,0.85) !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.06em !important;
+  font-size: clamp(0.92rem, 1.4vw, 1.12rem) !important;
+}
+
+/* ── Etiqueta "Miami · South Florida": glassmorphism ── */
+.hero-arc__etiqueta {
+  color: rgba(255,255,255,0.78) !important;
+  border-color: rgba(255,255,255,0.24) !important;
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.18em !important;
+  display: none; /* eyebrow replaces this label */
+}
+
+/* ── Eyebrow: — South Florida — ── */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.hero-eyebrow__linea {
+  display: block;
+  flex: 0 0 44px;
+  height: 1px;
+  background: rgba(255,255,255,0.36);
+}
+.hero-eyebrow__text {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.80rem;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.60);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Tags organizados en fila ── */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.4rem 0 2.2rem;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 0.30rem 0.82rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.86);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.20s ease, border-color 0.20s ease;
+  cursor: default;
+}
+.hero-tag:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.40);
+}
+
+@media (max-width: 480px) {
+  .hero-eyebrow { margin-bottom: 0.9rem; }
+  .hero-eyebrow__linea { flex: 0 0 28px; }
+  .hero-tags { gap: 0.38rem; margin: 1rem 0 1.6rem; }
+  .hero-tag { font-size: 0.65rem; padding: 0.24rem 0.62rem; }
+}
+
+/* ============================================================
+   ROADMAP — Ref landmarks (lugares icónicos secundarios)
+   Dot mostaza pequeño, sin anillo pulsante
+   ============================================================ */
+
+.rdm-milestone--ref {
+  width: 8px !important;
+  height: 8px !important;
+  z-index: 3;
+}
+.rdm-milestone--ref .rdm-ring {
+  display: none !important;
+}
+.rdm-milestone--ref .rdm-dot {
+  background: var(--mostaza) !important;
+  box-shadow: 0 0 0 1.5px rgba(255,179,0,0.55), 0 2px 7px rgba(255,179,0,0.30) !important;
+  border-width: 1.5px !important;
+  border-color: rgba(255,255,255,0.90) !important;
+}
+.rdm-milestone--ref .rdm-bubble {
+  font-size: 0.60rem !important;
+  padding: 0.15rem 0.48rem !important;
+  font-weight: 500 !important;
+  opacity: 0.92;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07) !important;
+}
+
+/* Leyenda: punto mostaza para lugares icónicos */
+.rdm-leyenda-dot--ref {
+  background: var(--mostaza) !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+@media (max-width: 560px) {
+  .rdm-milestone--ref {
+    width: 6px !important;
+    height: 6px !important;
+  }
+  .rdm-milestone--ref .rdm-bubble {
+    font-size: 0.55rem !important;
+    padding: 0.12rem 0.38rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .rdm-milestone--ref .rdm-bubble { display: none !important; }
 }
