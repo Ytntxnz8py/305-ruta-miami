@@ -608,6 +608,44 @@
     });
   }
 
+  /* ===== PARA QUIÉN — blob parallax + underline trigger ===== */
+  function initParaQuien() {
+    var section  = document.getElementById('para-quien');
+    if (!section) return;
+    var underline = section.querySelector('.pq-underline');
+    var blob1     = section.querySelector('.pq-blob--1');
+    var blob2     = section.querySelector('.pq-blob--2');
+
+    /* Underline: IntersectionObserver → add/remove .pq-underline--on */
+    if (underline) {
+      var ulIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            underline.classList.add('pq-underline--on');
+          } else {
+            underline.classList.remove('pq-underline--on');
+          }
+        });
+      }, { threshold: 0.3 });
+      ulIO.observe(section);
+    }
+
+    /* Blobs: scroll-based translateY parallax (soft, reduced-motion safe) */
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced && (blob1 || blob2)) {
+      function onParaScroll() {
+        var scrollTop     = window.pageYOffset;
+        var sectionTop    = section.offsetTop;
+        var sectionHeight = section.offsetHeight;
+        var progress      = (scrollTop - sectionTop) / sectionHeight;
+        if (blob1) blob1.style.transform = 'translateY(' + (-progress * 50) + 'px)';
+        if (blob2) blob2.style.transform = 'translateY(' + (progress  * 50) + 'px)';
+      }
+      window.addEventListener('scroll', onParaScroll, { passive: true });
+      onParaScroll();
+    }
+  }
+
   /* ===== INIT ===== */
   document.addEventListener('DOMContentLoaded', function () {
     initHeroShutter();      /* shutter text — antes que fade-up para que no compita */
@@ -617,6 +655,7 @@
     initCounters();
     initCardTilts();
     initFolders();
+    initParaQuien();
     initPricingToggle();
     initAccordion();
     initTestimoniosScroll();

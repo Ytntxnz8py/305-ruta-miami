@@ -1071,32 +1071,201 @@ p  { font-weight: 300; }
 }
 
 /* ======================================================
-   SECCIÓN 6: PARA QUIÉN
+   SECCIÓN 6: PARA QUIÉN — AboutUs 3-col grid layout
+   Inspirado en AboutUsSection (React) → vanilla ES5 + CSS
 ====================================================== */
+
 .seccion-para-quien {
-  background: linear-gradient(180deg, var(--azul-cielo) 0%, var(--verde-tropical) 100%);
-  padding: 6rem 1.5rem;
+  background: var(--blanco-arena);
+  padding: 6rem 1.5rem 7rem;
+  position: relative;
+  overflow: hidden;
 }
-.para-quien-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem; max-width: 1000px; margin: 0 auto 2rem;
+
+/* ─── Decorative blobs (scroll-parallax via JS) ─── */
+.pq-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(72px); pointer-events: none;
+  will-change: transform;
 }
-.tipo-card {
-  background: #fff; border-radius: var(--r); padding: 1.75rem 1.5rem;
-  box-shadow: var(--sombra-turquesa);
-  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+.pq-blob--1 { width: 280px; height: 280px; top: 60px; left: 40px; background: rgba(0,188,212,0.06); }
+.pq-blob--2 { width: 340px; height: 340px; bottom: 60px; right: 40px; background: rgba(255,107,107,0.05); }
+
+/* ─── Floating dots (CSS-only bob) ─── */
+.pq-dot {
+  position: absolute; border-radius: 50%; pointer-events: none;
 }
-.tipo-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -10px rgba(0,188,212,0.22);
+.pq-dot--1 {
+  width: 14px; height: 14px; top: 40%; left: 20%;
+  background: rgba(0,188,212,0.28);
+  animation: pq-bob 3s ease-in-out infinite;
 }
-.tipo-emoji { font-size: 2.25rem; display: block; margin-bottom: 0.7rem; }
-.tipo-nombre { font-family: var(--serif); font-style: italic; font-size: 1.05rem; margin-bottom: 0.3rem; color: var(--tinta); }
-.tipo-desc { font-size: 0.8rem; font-weight: 300; color: rgba(26,42,53,0.58); }
-.para-quien-nota {
-  text-align: center; font-style: italic; font-weight: 300;
-  color: rgba(26,42,53,0.52); font-size: 0.875rem;
-  max-width: 580px; margin: 0 auto;
+.pq-dot--2 {
+  width: 20px; height: 20px; bottom: 28%; right: 20%;
+  background: rgba(255,107,107,0.22);
+  animation: pq-bob 4s ease-in-out infinite 1s;
+}
+@keyframes pq-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(-16px); opacity: 1; }
+}
+
+/* ─── Container ─── */
+.pq-wrap { position: relative; z-index: 2; }
+
+/* ─── Header ─── */
+.pq-header {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  margin-bottom: 0.5rem;
+}
+.pq-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--sans); font-size: 0.76rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--turquesa); margin-bottom: 0.85rem;
+}
+.pq-title {
+  font-family: var(--serif); font-style: italic; font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3.2rem); color: var(--tinta);
+  letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 1rem;
+}
+/* Animated underline — width triggered by JS when in view */
+.pq-underline {
+  height: 3px; border-radius: 2px;
+  background: var(--turquesa);
+  width: 0;
+  transition: width 1s var(--ease);
+}
+.pq-underline.pq-underline--on { width: 96px; }
+
+/* ─── Main 3-column grid ─── */
+.pq-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px 1fr;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  align-items: center;
+}
+
+/* ─── Service columns ─── */
+.pq-col { display: flex; flex-direction: column; gap: 2.75rem; }
+
+/* ─── Service item ─── */
+.pq-service {
+  display: flex; flex-direction: column;
+  transition: transform 0.22s var(--ease);
+}
+.pq-service:hover { transform: translateY(-5px); }
+
+.pq-service__head {
+  display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.55rem;
+}
+.pq-service__icon-wrap {
+  position: relative; flex-shrink: 0;
+  width: 48px; height: 48px;
+  background: rgba(0,188,212,0.09); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.28s var(--ease);
+}
+.pq-service:hover .pq-service__icon-wrap { background: rgba(0,188,212,0.18); }
+.pq-service__emoji { font-size: 1.5rem; line-height: 1; }
+.pq-service__badge {
+  position: absolute; top: -4px; right: -4px;
+  font-size: 0.6rem; color: rgba(0,188,212,0.5); line-height: 1;
+  transition: color 0.28s var(--ease);
+}
+.pq-service:hover .pq-service__badge { color: var(--turquesa); }
+.pq-service__title {
+  font-family: var(--serif); font-style: italic; font-size: 1.08rem;
+  font-weight: 600; color: var(--tinta); line-height: 1.2;
+  transition: color 0.25s var(--ease);
+}
+.pq-service:hover .pq-service__title { color: var(--turquesa); }
+.pq-service__desc {
+  font-size: 0.82rem; font-weight: 300;
+  color: rgba(26,42,53,0.62); line-height: 1.6;
+  padding-left: calc(48px + 0.85rem);
+}
+.pq-service__more {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  font-size: 0.72rem; font-weight: 500; color: var(--turquesa);
+  padding-left: calc(48px + 0.85rem); margin-top: 0.3rem;
+  opacity: 0; transition: opacity 0.25s var(--ease);
+}
+.pq-service:hover .pq-service__more { opacity: 1; }
+
+/* ─── Center image ─── */
+.pq-center { display: flex; justify-content: center; align-items: center; }
+.pq-img-scene { position: relative; width: 100%; max-width: 250px; }
+
+.pq-img-border {
+  position: absolute; inset: 0;
+  border: 3px solid rgba(0,188,212,0.32); border-radius: var(--r);
+  transform: translate(-10px, -10px); z-index: 0;
+}
+.pq-img-wrap {
+  position: relative; border-radius: var(--r); overflow: hidden; z-index: 2;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.16), 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.4s var(--ease);
+}
+.pq-img-wrap:hover { transform: scale(1.025); }
+.pq-img { width: 100%; display: block; object-fit: cover; aspect-ratio: 3/4; }
+.pq-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(7,30,43,0.55), transparent 50%);
+  display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1rem;
+}
+.pq-img-cta {
+  background: rgba(255,255,255,0.92); color: var(--tinta);
+  padding: 0.42rem 1.1rem; border-radius: 999px;
+  font-size: 0.78rem; font-weight: 500; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.pq-img-cta:hover { background: #fff; transform: scale(1.04); }
+
+.pq-img-circle {
+  position: absolute; border-radius: 50%; z-index: 1; pointer-events: none;
+}
+.pq-img-circle--1 { width: 56px; height: 56px; background: rgba(0,188,212,0.10); top: -14px; right: -28px; }
+.pq-img-circle--2 { width: 72px; height: 72px; background: rgba(255,107,107,0.10); bottom: -20px; left: -36px; }
+
+/* ─── CTA banner ─── */
+.pq-cta {
+  margin-top: 4.5rem;
+  background: var(--azul-profundo); color: var(--blanco-arena);
+  border-radius: var(--r-lg); padding: 2.25rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; max-width: 1100px; margin-left: auto; margin-right: auto;
+}
+.pq-cta__title {
+  font-family: var(--serif); font-style: italic; font-size: 1.3rem;
+  font-weight: 400; color: var(--blanco-arena); margin-bottom: 0.35rem;
+}
+.pq-cta__sub { font-size: 0.85rem; font-weight: 300; color: rgba(255,253,247,0.70); }
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .pq-dot { animation: none !important; }
+  .pq-underline { transition: none !important; }
+}
+
+/* ─── Tablet ─── */
+@media (max-width: 900px) {
+  .pq-grid { grid-template-columns: 1fr 220px 1fr; gap: 2rem; }
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 680px) {
+  .pq-grid { grid-template-columns: 1fr; gap: 0; }
+  .pq-center { order: -1; margin-bottom: 2.5rem; }
+  .pq-col { gap: 2rem; margin-bottom: 2rem; }
+  .pq-img-scene { max-width: 220px; }
+  .pq-img { aspect-ratio: 4/3; }
+  .pq-service__desc, .pq-service__more { padding-left: 0; }
+  .pq-cta { flex-direction: column; text-align: center; padding: 1.75rem 1.5rem; }
 }
 
 /* ======================================================
