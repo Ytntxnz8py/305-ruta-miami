@@ -56,14 +56,17 @@
 /* ===== RESET ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+/* overflow-x en <html> (no en body) — la spec CSS propaga overflow de html
+   al viewport sin crear un scroll-container adicional, preservando sticky */
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 
 body {
   font-family: var(--fuente-cuerpo);
   background-color: var(--blanco-arena);
   color: var(--texto-oscuro);
   line-height: 1.65;
-  overflow-x: hidden;
+  /* overflow-x: hidden removido — estaba en body y convertía overflow-y:visible
+     en overflow-y:auto, haciendo de body un scroll-container que rompía sticky */
 }
 
 img  { display: block; max-width: 100%; }
