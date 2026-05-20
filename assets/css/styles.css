@@ -3322,3 +3322,143 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   height: 36px;
   padding: 0 1.1rem;
 }
+
+/* ============================================================
+   SHINE BORDER — Port de ShineBorder (React / MagicUI)
+   Borde de luz giratoria animada — animated radial-gradient mask
+   Aplica a: tarjetas de destino + panel del modal
+   ============================================================ */
+
+/* Keyframe principal: mueve el radial-gradient en 300%×300% */
+@keyframes shine-pulse {
+  0%   { background-position: 0%   0%;   }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0%   0%;   }
+}
+
+/* ── TARJETAS DE DESTINO — usa ::after (::before ocupado por sheen) ── */
+.destino-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  /* Ancho del borde = padding del pseudo-elemento */
+  padding: 1px;
+
+  /* Gradiente radial que barre el borde — colores Miami */
+  background-image: radial-gradient(
+    transparent, transparent,
+    #FF6B6B, #00BCD4, #FFB300,
+    transparent, transparent
+  );
+  background-size: 300% 300%;
+
+  /* Máscara: solo muestra la zona del padding (el "borde") */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  will-change: background-position;
+  animation: shine-pulse 10s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── PANEL DEL MODAL — restructurar para overflow correcto ── */
+/* El panel pasa a flex-column; solo .modal-cuerpo hace scroll */
+.modal-panel {
+  overflow: hidden !important;   /* ::before necesita clip limpio */
+  display: flex !important;
+  flex-direction: column !important;
+}
+.modal-cuerpo {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  min-height: 0 !important;     /* crítico para flex + overflow */
+}
+.modal-galeria {
+  flex-shrink: 0 !important;
+}
+
+/* ShineBorder en el modal: ::before libre tras quitar overflow-y del panel */
+.modal-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+
+  /* Coral + turquesa + mostaza — más intensos para el modal */
+  background-image: radial-gradient(
+    transparent, transparent,
+    rgba(255,107,107,0.95),
+    rgba(0,188,212,0.95),
+    rgba(255,179,0,0.90),
+    transparent, transparent
+  );
+  background-size: 300% 300%;
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  will-change: background-position;
+  animation: shine-pulse 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Tooltip del roadmap — borde shine sutil (::before libre) */
+.rdm-tooltip {
+  position: fixed !important;  /* ya lo tiene */
+}
+.rdm-tooltip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+
+  background-image: radial-gradient(
+    transparent, transparent,
+    rgba(255,107,107,0.70),
+    rgba(0,188,212,0.70),
+    transparent, transparent
+  );
+  background-size: 300% 300%;
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  will-change: background-position;
+  animation: shine-pulse 12s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Reducción de movimiento: congelar en posición inicial */
+@media (prefers-reduced-motion: reduce) {
+  .destino-card::after,
+  .modal-panel::before,
+  .rdm-tooltip::before {
+    animation: none !important;
+    background-position: 50% 50% !important;
+  }
+}
