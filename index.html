@@ -68,13 +68,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin="anonymous"
-  />
   <link rel="stylesheet" href="assets/css/styles.css" />
 
   <!-- Google Analytics 4 — reemplaza G-7HMBMBQNQZ con tu Measurement ID real -->
@@ -245,69 +238,165 @@
     <!-- Fusión visual: Destinos (dark ocean) → Mapa (azul cielo) -->
     <div class="fade-band fade-dest-mapa" aria-hidden="true"></div>
 
-    <!-- ===== MAPA INTERACTIVO ===== -->
-    <section class="seccion-mapa" id="mapa">
-      <div class="seccion-mapa__contenedor">
+    <!-- ===== ROADMAP ANIMADO DE DESTINOS ===== -->
+    <section class="seccion-roadmap" id="mapa">
+      <div class="rdm-contenedor">
 
         <!-- Encabezado -->
-        <div class="seccion-mapa__encabezado">
-          <h2 class="seccion-titulo fade-up"
-              data-i18n="mapa_titulo">
-            Mapa de Destinos
-          </h2>
-          <p class="seccion-subtitulo"
-             data-i18n="mapa_sub">
+        <div class="rdm-encabezado">
+          <h2 class="seccion-titulo fade-up" data-i18n="mapa_titulo">Mapa de Destinos</h2>
+          <p class="rdm-subtitulo" data-i18n="mapa_sub">
             Descubre experiencias outdoor en Miami y South Florida
           </p>
         </div>
 
-        <!-- Grid principal: globo + mapa -->
-        <div class="mapa-grid">
+        <!-- Canvas del roadmap — path SVG + marcadores -->
+        <div class="rdm-canvas" id="rdmCanvas"
+             role="img" aria-label="Mapa visual de los 9 destinos outdoor en Miami y South Florida">
 
-          <!-- COLUMNA IZQUIERDA: Globo 3D -->
-          <div class="mapa-globo-wrap">
-            <div class="mapa-globo-header">
-              <span class="mapa-globo-label"
-                    data-i18n="mapa_globo_label">
-                Miami · South Florida
-              </span>
-            </div>
-            <canvas id="globoCanvas"
-                    class="mapa-globo-canvas"
-                    aria-label="Globo interactivo centrado en Miami"
-                    role="img">
-            </canvas>
-            <!-- Referencias de lugares — generadas por JS -->
-            <div class="mapa-referencias" id="mapaReferencias"></div>
+          <!-- SVG: camino animado + geografía estilizada -->
+          <svg class="rdm-svg" viewBox="0 0 800 500"
+               preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="rdmPathGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#FFB300"/>
+                <stop offset="50%"  stop-color="#FF8C42"/>
+                <stop offset="100%" stop-color="#FF6B6B"/>
+              </linearGradient>
+              <filter id="rdmGlow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Agua Atlántico / Biscayne Bay — sugerencia geográfica -->
+            <path d="M 800,0 Q 790,60 800,130 Q 808,210 800,300 Q 792,380 770,460 Q 755,490 740,500 L 800,500 Z"
+                  fill="rgba(0,188,212,0.07)" />
+            <!-- Biscayne Bay (forma ovalada) -->
+            <ellipse cx="690" cy="235" rx="48" ry="75" fill="rgba(0,188,212,0.08)"/>
+            <!-- Everglades hint -->
+            <ellipse cx="185" cy="400" rx="140" ry="58" fill="rgba(76,175,80,0.07)"/>
+            <!-- Línea de costa sugerida -->
+            <path d="M 730,50 Q 760,150 755,250 Q 745,340 720,430"
+                  fill="none" stroke="rgba(0,188,212,0.14)" stroke-width="1.5"/>
+
+            <!-- El camino animado por scroll -->
+            <path id="rdmPath"
+              d="M 616,60
+                 C 558,72 504,85 512,100
+                 C 542,118 660,152 640,186
+                 C 636,202 622,218 616,230
+                 C 633,246 690,257 680,270
+                 C 660,279 566,281 528,287
+                 C 512,297 494,316 480,335
+                 C 388,360 232,372 136,380
+                 C 228,394 350,414 416,430"
+              fill="none"
+              stroke="url(#rdmPathGrad)"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              filter="url(#rdmGlow)"/>
+          </svg>
+
+          <!-- ─── 9 Destinos ──────────────────────────────── -->
+
+          <!-- 1. Oleta River State Park -->
+          <div class="rdm-milestone rdm-milestone--tierra" style="top:12%;left:77%" data-idx="0"
+               title="Oleta River State Park — Kayak · Mountain Bike">
+            <span class="rdm-ring" aria-hidden="true"></span>
+            <span class="rdm-dot"  aria-hidden="true"></span>
+            <span class="rdm-bubble rdm-bubble--left">🚵 Oleta River</span>
           </div>
 
-          <!-- COLUMNA DERECHA: Mapa Leaflet -->
-          <div class="mapa-leaflet-wrap">
-            <div id="mapaLeaflet"
-                 class="mapa-leaflet"
-                 aria-label="Mapa interactivo de destinos en Miami">
-            </div>
-            <!-- Leyenda -->
-            <div class="mapa-leyenda">
-              <div class="mapa-leyenda-item">
-                <span class="mapa-leyenda-dot mapa-leyenda-dot--tierra"></span>
-                <span class="lang-es">Tierra</span>
-                <span class="lang-en">Land</span>
-              </div>
-              <div class="mapa-leyenda-item">
-                <span class="mapa-leyenda-dot mapa-leyenda-dot--mar"></span>
-                <span class="lang-es">Mar</span>
-                <span class="lang-en">Sea</span>
-              </div>
-              <div class="mapa-leyenda-item">
-                <span class="mapa-leyenda-dot mapa-leyenda-dot--ref"></span>
-                <span class="lang-es">Referencias</span>
-                <span class="lang-en">References</span>
-              </div>
-            </div>
+          <!-- 2. Arch Creek Park -->
+          <div class="rdm-milestone rdm-milestone--tierra" style="top:20%;left:64%" data-idx="1"
+               title="Arch Creek Park — Senderismo · Arqueología">
+            <span class="rdm-ring" aria-hidden="true"></span>
+            <span class="rdm-dot"  aria-hidden="true"></span>
+            <span class="rdm-bubble rdm-bubble--left">🌳 Arch Creek</span>
           </div>
 
-        </div><!-- /mapa-grid -->
+          <!-- 3. Virginia Key Beach Park -->
+          <div class="rdm-milestone rdm-milestone--mar" style="top:37%;left:80%" data-idx="2"
+               title="Virginia Key Beach Park — Paddle Board · Natación">
+            <span class="rdm-ring" aria-hidden="true"></span>
+            <span class="rdm-dot"  aria-hidden="true"></span>
+            <span class="rdm-bubble rdm-bubble--left">🏖️ Virginia Key</span>
+          </div>
+
+          <!-- 4. Crandon Park -->
+          <div class="rdm-milestone rdm-milestone--mar" style="top:46%;left:77%" data-idx="3"
+               title="Crandon Park — Playa · Kayak">
+            <span class="rdm-ring" aria-hidden="true"></span>
+            <span class="rdm-dot"  aria-hidden="true"></span>
+            <span class="rdm-bubble rdm-bubble--left">🌊 Crandon Park</span>
+          </div>
+
+          <!-- 5. Bill Baggs Cape Florida -->
+          <div class="rdm-milestone rdm-milestone--mar" style="top:54%;left:85%" data-idx="4"
+               title="Bill Baggs Cape Florida — Playa · Ciclismo">
+            <span class="rdm-ring" aria-hidden="true"></span>
+            <span class="rdm-dot"  aria-hidden="true"></span>
+            <span class="rdm-bubble rdm-bubble--left">⛵ Bill Baggs</span>
+          </div>
+
+          <!-- 6. Matheson Hammock Park -->
+          <div class="rdm-milestone rdm-milestone--mar" style="top:57%;left:66%" data-idx="5"
+               title="Matheson Hammock Park — Playa · Snorkeling">
+            <span class="rdm-ring" aria-hidden="true"></span>
+            <span class="rdm-dot"  aria-hidden="true"></span>
+            <span class="rdm-bubble rdm-bubble--left">🐟 Matheson</span>
+          </div>
+
+          <!-- 7. Biscayne National Park -->
+          <div class="rdm-milestone rdm-milestone--mar" style="top:67%;left:60%" data-idx="6"
+               title="Biscayne National Park — Kayak · Snorkeling">
+            <span class="rdm-ring" aria-hidden="true"></span>
+            <span class="rdm-dot"  aria-hidden="true"></span>
+            <span class="rdm-bubble rdm-bubble--left">🤿 Biscayne NP</span>
+          </div>
+
+          <!-- 8. Everglades National Park -->
+          <div class="rdm-milestone rdm-milestone--tierra" style="top:76%;left:17%" data-idx="7"
+               title="Everglades National Park — Senderismo · Kayak · Wildlife">
+            <span class="rdm-ring" aria-hidden="true"></span>
+            <span class="rdm-dot"  aria-hidden="true"></span>
+            <span class="rdm-bubble rdm-bubble--right">🐊 Everglades NP</span>
+          </div>
+
+          <!-- 9. John Pennekamp Coral Reef -->
+          <div class="rdm-milestone rdm-milestone--mar" style="top:86%;left:52%" data-idx="8"
+               title="John Pennekamp Coral Reef — Buceo · Snorkeling">
+            <span class="rdm-ring" aria-hidden="true"></span>
+            <span class="rdm-dot"  aria-hidden="true"></span>
+            <span class="rdm-bubble rdm-bubble--right">🪸 John Pennekamp</span>
+          </div>
+
+        </div><!-- /rdm-canvas -->
+
+        <!-- Leyenda -->
+        <div class="rdm-leyenda" aria-label="Leyenda del mapa">
+          <div class="rdm-leyenda-item">
+            <span class="rdm-leyenda-dot rdm-leyenda-dot--tierra"></span>
+            <span class="lang-es">Tierra</span>
+            <span class="lang-en">Land</span>
+          </div>
+          <div class="rdm-leyenda-item">
+            <span class="rdm-leyenda-dot rdm-leyenda-dot--mar"></span>
+            <span class="lang-es">Mar</span>
+            <span class="lang-en">Sea</span>
+          </div>
+          <div class="rdm-leyenda-item">
+            <span class="rdm-ruta-linea" aria-hidden="true"></span>
+            <span class="lang-es">Ruta del viajero</span>
+            <span class="lang-en">Traveler's route</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -515,15 +604,7 @@
     </div><!-- /modal-panel -->
   </div><!-- /destinoModal -->
 
-  <!-- Scripts: i18n primero, luego main, luego animaciones -->
-  <!-- cobe.js — globo 3D interactivo -->
-  <script src="https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/cobe.umd.js"></script>
-  <!-- Leaflet JS -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin="anonymous">
-  </script>
+  <!-- Scripts -->
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/analytics.js"></script>

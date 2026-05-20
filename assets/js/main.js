@@ -1697,6 +1697,58 @@ function initMapaLeaflet() {
   ioMapa.observe(contenedorMapa);
 }
 
+/* ===== ANIMATED ROADMAP ===== */
+/*
+ * Port vanilla JS del componente AnimatedRoadmap (React + framer-motion).
+ * – scroll → stroke-dashoffset anima el camino SVG (reemplaza useScroll/useTransform)
+ * – IntersectionObserver → milestone .visible (reemplaza motion whileInView)
+ */
+function initRoadmap() {
+  var canvas = document.getElementById('rdmCanvas');
+  var path   = document.getElementById('rdmPath');
+  if (!canvas || !path) return;
+
+  /* ── Animar el camino según el scroll ── */
+  var pathLen    = path.getTotalLength();
+  var rafPending = false;
+
+  path.style.strokeDasharray  = pathLen;
+  path.style.strokeDashoffset = pathLen;  /* empieza invisible */
+
+  function updatePath() {
+    var rect   = canvas.getBoundingClientRect();
+    var winH   = window.innerHeight;
+    /* Progress: 0 = canvas entra al viewport; 1 = canvas sale por arriba */
+    var raw    = (winH - rect.top) / (winH + rect.height);
+    /* Remap: animación activa entre 12% y 80% del recorrido scroll */
+    var mapped = Math.max(0, Math.min(1, (raw - 0.12) / (0.80 - 0.12)));
+    path.style.strokeDashoffset = pathLen * (1 - mapped);
+    rafPending = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!rafPending) { rafPending = true; requestAnimationFrame(updatePath); }
+  }, { passive: true });
+  updatePath();   /* estado inicial */
+
+  /* ── Milestones: entrada escalonada ── */
+  var milestones    = canvas.querySelectorAll('.rdm-milestone');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var el    = entry.target;
+      var idx   = parseInt(el.dataset.idx || '0', 10);
+      var delay = reducedMotion ? 0 : idx * 160;   /* 160ms entre cada marcador */
+      setTimeout(function() { el.classList.add('visible'); }, delay);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  milestones.forEach(function(m) { io.observe(m); });
+}
+
 /* ===== INICIALIZACIÓN ===== */
 document.addEventListener('DOMContentLoaded', function () {
   leerConfigSitio();
@@ -1704,11 +1756,7 @@ document.addEventListener('DOMContentLoaded', function () {
   renderDestinos();
   initScrollAnimation();
   initHeroTrail();
-  initGlobo();
-  initReferenciasGlobo();
-  if (document.readyState === 'complete') {
-    initMapaLeaflet();
-  } else {
-    window.addEventListener('load', initMapaLeaflet);
-  }
+  initRoadmap();
+  /* initGlobo / initMapaLeaflet / initReferenciasGlobo eliminados —
+     la sección mapa fue reemplazada por el roadmap animado */
 });
