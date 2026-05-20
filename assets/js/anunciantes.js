@@ -345,6 +345,15 @@
       });
     });
 
+    /* Floating label para selects — añade .has-value cuando hay opción elegida */
+    form.querySelectorAll('select').forEach(function (sel) {
+      function actualizarSelect() {
+        sel.classList.toggle('has-value', sel.value !== '');
+      }
+      sel.addEventListener('change', actualizarSelect);
+      actualizarSelect();
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var allValid = true;

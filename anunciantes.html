@@ -742,7 +742,7 @@
           </div>
           <div class="metal-btn-wrap" data-variant="turquesa">
             <div class="metal-btn-inner"></div>
-            <button class="metal-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
+            <button class="metal-btn" onclick="anScrollTo('contacto-empresas')">
               <div class="metal-btn-shine"></div>
               <div class="metal-btn-hover-glow"></div>
               <span>Contáctanos →</span>
@@ -1023,90 +1023,163 @@
     </section>
 
     <!-- ===================================================
-         SECCIÓN 9: CTA FINAL + FORMULARIO
+         SECCIÓN 9: FORMULARIO DE CONTACTO
     =================================================== -->
-    <section class="seccion-cta" id="contacto-empresas" aria-label="Formulario de contacto para empresas">
+    <section class="seccion-contacto an-section" id="contacto-empresas" aria-label="Formulario de contacto para empresas">
 
       <div class="an-container">
 
-        <div class="cta-encabezado fade-up">
-          <span class="an-eyebrow" style="color: rgba(255,255,255,0.55)">Empieza hoy</span>
-          <h2 class="cta-titulo">¿Listo para dar el paso?</h2>
-          <p class="cta-sub">Cuéntanos sobre tu negocio y te respondemos en menos de 24 horas.</p>
+        <!-- Encabezado -->
+        <div class="contacto-encabezado fade-up">
+          <span class="an-eyebrow">Empieza hoy</span>
+          <h2 class="contacto-titulo">¿Listo para dar el paso?</h2>
+          <p class="contacto-sub">Cuéntanos sobre tu negocio y te respondemos en menos de 24 horas.</p>
         </div>
 
-        <div class="form-empresas-wrap">
+        <!-- Layout: aside + formulario -->
+        <div class="contacto-layout">
 
-          <form id="formEmpresas" class="form-empresas fade-up" style="transition-delay:0.12s" novalidate aria-label="Formulario de contacto para anunciantes">
+          <!-- Sidebar de beneficios -->
+          <aside class="contacto-aside fade-up" style="transition-delay:0.1s" aria-label="Por qué anunciarse en Explora Miami">
 
-            <div class="form-row">
-              <div class="form-grupo">
-                <label for="fNombre">Nombre completo *</label>
-                <input id="fNombre" name="nombre" type="text" placeholder="Tu nombre" required autocomplete="name" />
-                <span class="form-error-msg">Ingresa tu nombre</span>
-              </div>
-              <div class="form-grupo">
-                <label for="fEmpresa">Nombre del negocio *</label>
-                <input id="fEmpresa" name="empresa" type="text" placeholder="Tu empresa" required autocomplete="organization" />
-                <span class="form-error-msg">Ingresa el nombre de tu negocio</span>
+            <div class="contacto-benefit">
+              <div class="contacto-benefit__icon" aria-hidden="true">⚡</div>
+              <div class="contacto-benefit__body">
+                <strong>Respuesta en 24 horas</strong>
+                <p>Te contactamos directamente — sin esperas.</p>
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-grupo">
-                <label for="fEmail">Email *</label>
-                <input id="fEmail" name="email" type="email" placeholder="tu@email.com" required autocomplete="email" />
-                <span class="form-error-msg">Ingresa un email válido</span>
-              </div>
-              <div class="form-grupo">
-                <label for="fTel">Teléfono / WhatsApp</label>
-                <input id="fTel" name="tel" type="tel" placeholder="+1 (305) 000-0000" autocomplete="tel" />
+            <div class="contacto-benefit">
+              <div class="contacto-benefit__icon" aria-hidden="true">🗓️</div>
+              <div class="contacto-benefit__body">
+                <strong>Listing activo en 48 horas</strong>
+                <p>Tu negocio visible frente a miles de usuarios.</p>
               </div>
             </div>
 
-            <div class="form-grupo">
-              <label for="fTipo">Tipo de negocio *</label>
-              <select id="fTipo" name="tipo" required>
-                <option value="">Selecciona una opción</option>
-                <option value="buceo">Escuela de buceo / snorkel</option>
-                <option value="kayak">Kayak y paddle board</option>
-                <option value="bici">Bici y mountain bike</option>
-                <option value="camping">Camping y senderismo</option>
-                <option value="tours">Tours de naturaleza / ecoturismo</option>
-                <option value="playa">Playa y deportes acuáticos</option>
-                <option value="otro">Otro negocio outdoor</option>
-              </select>
-              <span class="form-error-msg">Selecciona una opción</span>
+            <div class="contacto-benefit">
+              <div class="contacto-benefit__icon" aria-hidden="true">💬</div>
+              <div class="contacto-benefit__body">
+                <strong>Soporte en español</strong>
+                <p>Atención real, sin bots, con personas de tu comunidad.</p>
+              </div>
             </div>
 
-            <div class="form-grupo">
-              <label for="fMensaje">Cuéntanos sobre tu negocio</label>
-              <textarea id="fMensaje" name="mensaje" placeholder="Ubicación, servicios que ofreces, cualquier pregunta..."></textarea>
+            <div class="contacto-benefit">
+              <div class="contacto-benefit__icon" aria-hidden="true">🔓</div>
+              <div class="contacto-benefit__body">
+                <strong>Sin contratos ni permanencia</strong>
+                <p>Cancela cuando quieras con 7 días de anticipación.</p>
+              </div>
             </div>
 
-            <div class="metal-btn-wrap" data-variant="turquesa" data-size="full">
-              <div class="metal-btn-inner"></div>
-              <button type="submit" class="metal-btn">
-                <div class="metal-btn-shine"></div>
-                <div class="metal-btn-hover-glow"></div>
-                <span>Enviar mensaje →</span>
-              </button>
-            </div>
+            <div class="contacto-aside__divider" aria-hidden="true"></div>
 
-            <p class="form-legal">
-              Al enviar este formulario, tu información se guarda localmente para que nuestro equipo pueda contactarte. No compartimos tus datos con terceros.
+            <p class="contacto-aside__nota">
+              ¿Prefieres escribirnos directamente?<br />
+              <a href="mailto:hola@exploramiami.com" class="contacto-aside__email">hola@exploramiami.com</a>
             </p>
 
-          </form>
+          </aside><!-- /.contacto-aside -->
 
-          <!-- Mensaje de éxito (oculto hasta envío) -->
-          <div id="formEmpresasExito" class="form-exito" style="display:none" role="status">
-            <div class="form-exito__check" aria-hidden="true">✓</div>
-            <h3 class="form-exito__titulo">¡Mensaje enviado!</h3>
-            <p class="form-exito__texto">Nos pondremos en contacto contigo en menos de 24 horas. Revisa tu email — también te mandamos una confirmación.</p>
-          </div>
+          <!-- Columna del formulario -->
+          <div class="contacto-form-col fade-up" style="transition-delay:0.2s">
 
-        </div>
+            <form id="formEmpresas" class="form-moderno" novalidate aria-label="Formulario de contacto para anunciantes">
+
+              <!-- Sección 1: Tu información -->
+              <div class="fm-seccion">
+                <div class="fm-seccion__header">
+                  <span class="fm-seccion__num" aria-hidden="true">1</span>
+                  <span class="fm-seccion__titulo">Tu información</span>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-campo">
+                    <input id="fNombre" name="nombre" type="text" placeholder=" " required autocomplete="name" />
+                    <label for="fNombre" class="fc-label">Nombre completo <em class="fc-req">*</em></label>
+                    <span class="form-error-msg">Ingresa tu nombre</span>
+                  </div>
+                  <div class="form-campo">
+                    <input id="fEmpresa" name="empresa" type="text" placeholder=" " required autocomplete="organization" />
+                    <label for="fEmpresa" class="fc-label">Nombre del negocio <em class="fc-req">*</em></label>
+                    <span class="form-error-msg">Ingresa el nombre de tu negocio</span>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-campo">
+                    <input id="fEmail" name="email" type="email" placeholder=" " required autocomplete="email" />
+                    <label for="fEmail" class="fc-label">Email <em class="fc-req">*</em></label>
+                    <span class="form-error-msg">Ingresa un email válido</span>
+                  </div>
+                  <div class="form-campo">
+                    <input id="fTel" name="tel" type="tel" placeholder=" " autocomplete="tel" />
+                    <label for="fTel" class="fc-label">Teléfono / WhatsApp</label>
+                  </div>
+                </div>
+              </div><!-- /.fm-seccion -->
+
+              <!-- Sección 2: Tu negocio -->
+              <div class="fm-seccion fm-seccion--last">
+                <div class="fm-seccion__header">
+                  <span class="fm-seccion__num fm-seccion__num--2" aria-hidden="true">2</span>
+                  <span class="fm-seccion__titulo">Tu negocio</span>
+                </div>
+
+                <div class="form-campo form-campo--select">
+                  <select id="fTipo" name="tipo" required>
+                    <option value="" disabled selected></option>
+                    <option value="buceo">🤿 Escuela de buceo / snorkel</option>
+                    <option value="kayak">🚣 Kayak y paddle board</option>
+                    <option value="bici">🚴 Bici y mountain bike</option>
+                    <option value="camping">🏕️ Camping y senderismo</option>
+                    <option value="tours">🐬 Tours de naturaleza / ecoturismo</option>
+                    <option value="playa">🏄 Playa y deportes acuáticos</option>
+                    <option value="otro">✨ Otro negocio outdoor</option>
+                  </select>
+                  <label for="fTipo" class="fc-label">Tipo de negocio <em class="fc-req">*</em></label>
+                  <span class="fc-chevron" aria-hidden="true">
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span class="form-error-msg">Selecciona una opción</span>
+                </div>
+
+                <div class="form-campo form-campo--textarea">
+                  <textarea id="fMensaje" name="mensaje" placeholder=" " rows="4"></textarea>
+                  <label for="fMensaje" class="fc-label">Cuéntanos sobre tu negocio</label>
+                </div>
+              </div><!-- /.fm-seccion -->
+
+              <!-- Enviar -->
+              <div class="metal-btn-wrap" data-variant="turquesa" data-size="full">
+                <div class="metal-btn-inner"></div>
+                <button type="submit" class="metal-btn">
+                  <div class="metal-btn-shine"></div>
+                  <div class="metal-btn-hover-glow"></div>
+                  <span>Enviar mensaje →</span>
+                </button>
+              </div>
+
+              <p class="form-legal">
+                Al enviar, tu información se guarda localmente para que nuestro equipo pueda contactarte.
+                No compartimos tus datos con terceros.
+              </p>
+
+            </form>
+
+            <!-- Estado de éxito (oculto hasta envío) -->
+            <div id="formEmpresasExito" class="form-exito" style="display:none" role="status">
+              <div class="form-exito__check" aria-hidden="true">✓</div>
+              <h3 class="form-exito__titulo">¡Mensaje enviado!</h3>
+              <p class="form-exito__texto">Nos pondremos en contacto contigo en menos de 24 horas. Revisa tu email — también te mandamos una confirmación.</p>
+            </div>
+
+          </div><!-- /.contacto-form-col -->
+
+        </div><!-- /.contacto-layout -->
+
       </div>
     </section>
 
