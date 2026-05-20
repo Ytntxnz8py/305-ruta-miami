@@ -3311,3 +3311,14 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 
 /* Filtros: alinear metal wrappers en flex */
 .filtros { display: flex; gap: 0.55rem; flex-wrap: wrap; align-items: center; justify-content: center; }
+
+/* Botón "Ver destino" en cards de destinos */
+.destino-card__btn-wrap {
+  margin-top: auto;
+  align-self: flex-start;
+}
+.destino-card__btn-wrap .metal-btn {
+  font-size: 0.80rem;
+  height: 36px;
+  padding: 0 1.1rem;
+}

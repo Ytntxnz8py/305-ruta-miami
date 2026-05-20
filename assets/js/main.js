@@ -555,16 +555,22 @@ function renderDestinos(filtro) {
             '<span class="destino-card__meta-item"><span class="meta-icono">💲</span>' + d.precio + '</span>' +
             '<span class="destino-card__meta-item"><span class="meta-icono">⏰</span>' + d.horarios + '</span>' +
           '</div>' +
-          '<button class="btn btn--primario destino-card__btn" onclick="event.stopPropagation(); registrarClic(' + d.id + '); abrirModal(' + d.id + ');">' +
-            '<span class="lang-es">Ver destino</span>' +
-            '<span class="lang-en">View destination</span>' +
-          '</button>' +
+          '<div class="metal-btn-wrap destino-card__btn-wrap" data-variant="coral" data-size="sm">' +
+            '<div class="metal-btn-inner"></div>' +
+            '<button class="metal-btn destino-card__btn" onclick="event.stopPropagation(); registrarClic(' + d.id + '); abrirModal(' + d.id + ');">' +
+              '<div class="metal-btn-shine"></div>' +
+              '<div class="metal-btn-hover-glow"></div>' +
+              '<span class="lang-es">Ver destino</span>' +
+              '<span class="lang-en">View destination</span>' +
+            '</button>' +
+          '</div>' +
         '</div>' +
       '</article>'
     );
   }).join('');
 
   initScrollAnimation();
+  initMetalButtons(grid);   /* Metal press/hover en botones "Ver destino" */
 
   /* Activa tilt 3D en cada card renderizada */
   grid.querySelectorAll('.destino-card').forEach(function (card) {
