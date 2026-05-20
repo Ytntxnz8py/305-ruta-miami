@@ -376,9 +376,11 @@ html.lang-es .lang-en { display: none; }
 }
 @keyframes shutter-up { to { transform: translateY(0); } }
 
-/* Tagline */
+/* Tagline — Miami style: fino, naranja/mostaza, cursiva */
 .hero-arc__tagline {
-  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-family: var(--fuente-titulo);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
   font-weight: 300;
   max-width: 560px;
   margin: 0 auto 2.4rem;
@@ -461,7 +463,7 @@ html.lang-es .lang-en { display: none; }
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
-  opacity: 0.16;        /* sutil — preserva el tema blanco arena */
+  opacity: 0.08;        /* muy sutil — textura suave */
   pointer-events: none;
 }
 
@@ -2402,8 +2404,93 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 /* --- Fade bands: no necesarias con un solo color de fondo --- */
 .fade-band { height: 0 !important; overflow: hidden !important; }
 
-/* --- Sección mapa: fondo claro ya configurado, ajuste del globo --- */
-.mapa-globo-wrap { box-shadow: 0 8px 32px rgba(0,0,0,0.08) !important; }
+/* ============================================================
+   DISEÑO MIAMI — Subtítulos finos, naranja/mostaza + Mapa v3
+   ============================================================ */
+
+/* --- Hero: tagline Miami — gradiente naranja→mostaza --- */
+.hero-arc__tagline {
+  background: linear-gradient(100deg, var(--coral) 0%, var(--mostaza) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  max-width: 460px !important;
+  margin-bottom: 2rem !important;
+}
+
+/* --- Hero: etiqueta "Miami · South Florida" — acento mostaza --- */
+.hero-arc__etiqueta {
+  color: var(--mostaza) !important;
+  border-color: rgba(255, 179, 0, 0.30) !important;
+  background: rgba(255, 179, 0, 0.06) !important;
+  font-weight: 500 !important;
+}
+
+/* --- Frases ambient: naranja cálido en vez de texto-suave --- */
+.hfa-item { color: var(--coral) !important; }
+@keyframes hfa-aparece {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  100% { opacity: 0.60; transform: translateX(-50%) translateY(0); }
+}
+
+/* --- Título hero: un pelo más cercano al tagline --- */
+.hero-arc__titulo { margin-bottom: 0.9rem !important; }
+
+/* --- Sección Mapa: grid — Leaflet más ancho que el globo --- */
+.mapa-grid {
+  grid-template-columns: 1fr 1.55fr !important;  /* globo pequeño | leaflet grande */
+  gap: 2.5rem !important;
+  align-items: center !important;
+}
+@media (max-width: 900px) {
+  .mapa-grid { grid-template-columns: 1fr !important; }
+}
+
+/* --- Globo: sin sombras, fondo limpio y fluido --- */
+.mapa-globo-wrap {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0.5rem !important;
+}
+
+/* --- Globo: canvas más pequeño y circular limpio --- */
+.mapa-globo-canvas {
+  border-radius: 50% !important;
+  box-shadow: none !important;
+}
+
+/* --- Globo label: fino, naranja/mostaza --- */
+.mapa-globo-label {
+  font-family: var(--fuente-titulo) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.18em !important;
+  background: linear-gradient(90deg, var(--coral), var(--mostaza));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Chips de referencia: limpios, sin exceso --- */
+.mapa-referencias { margin-top: 1rem !important; }
+
+/* --- Sección mapa: título y subtítulo legibles --- */
+.seccion-mapa .seccion-titulo {
+  color: var(--texto-oscuro) !important;
+  text-shadow: none !important;
+}
+.seccion-mapa .seccion-subtitulo {
+  font-family: var(--fuente-titulo) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  font-size: clamp(1rem, 1.6vw, 1.2rem) !important;
+  background: linear-gradient(100deg, var(--coral), var(--mostaza));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 /* --- Trabaja con nosotros: texto visible en claro --- */
 .seccion-trabaja .seccion-titulo,

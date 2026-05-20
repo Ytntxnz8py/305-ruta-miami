@@ -1312,41 +1312,44 @@ function initGlobo() {
   var isPaused     = false;
   var phi          = 0;
 
-  /* Crear el globo con cobe.js — Miami como hub de vuelos */
+  /* Crear el globo con cobe.js — GlobeStickers world cities */
   var globo = createGlobe(canvas, {
     devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
     width:            canvas.offsetWidth  * 2,
     height:           canvas.offsetWidth  * 2,
     phi:              0,
     theta:            0.2,
-    /* Apariencia — globo blanco punteado */
-    dark:             0.05,
+    /* Apariencia — globo blanco puro, sin oscuridad */
+    dark:             0,
     diffuse:          1.5,
     mapSamples:       16000,
     mapBrightness:    8,
-    /* Colores */
-    baseColor:        [0.98, 0.98, 1.0],
-    markerColor:      [0.30, 0.55, 0.95],
+    /* Colores — coral/mostaza sobre blanco */
+    baseColor:        [1.0,  1.0,  1.0 ],
+    markerColor:      [1.0,  0.70, 0.0 ],   /* mostaza #FFB300 */
     glowColor:        [0.94, 0.93, 0.91],
-    /* Marcadores: Miami (grande) + ciudades origen */
+    /* 16 ciudades del mundo — decorativas */
     markers: [
-      { location: [ 25.76, -80.19], size: 0.08 },   /* Miami — hub principal */
-      { location: [ 40.71, -74.01], size: 0.04 },   /* Nueva York */
-      { location: [ 51.51,  -0.13], size: 0.04 },   /* Londres */
-      { location: [-23.55, -46.63], size: 0.04 },   /* São Paulo */
-      { location: [ 19.43, -99.13], size: 0.04 },   /* Ciudad de México */
-      { location: [ 48.86,   2.35], size: 0.04 },   /* París */
-      { location: [ 43.65, -79.38], size: 0.03 }    /* Toronto */
+      { location: [ 25.76, -80.19], size: 0.07 },  /* Miami — destino */
+      { location: [ 48.86,   2.35], size: 0.03 },  /* París */
+      { location: [ 35.68, 139.65], size: 0.03 },  /* Tokyo */
+      { location: [ 40.71, -74.01], size: 0.03 },  /* Nueva York */
+      { location: [-22.91, -43.17], size: 0.03 },  /* Río de Janeiro */
+      { location: [-33.87, 151.21], size: 0.03 },  /* Sydney */
+      { location: [ 30.04,  31.24], size: 0.03 },  /* El Cairo */
+      { location: [ 41.90,  12.50], size: 0.03 },  /* Roma */
+      { location: [ 19.43, -99.13], size: 0.03 },  /* Ciudad de México */
+      { location: [ 28.61,  77.21], size: 0.03 },  /* Nueva Delhi */
+      { location: [ 64.15, -21.94], size: 0.03 },  /* Reykjavik */
+      { location: [ 51.51,  -0.13], size: 0.03 },  /* Londres */
+      { location: [ 21.31,-157.86], size: 0.03 },  /* Hawái */
+      { location: [ 52.37,   4.90], size: 0.03 },  /* Ámsterdam */
+      { location: [ 39.90, 116.40], size: 0.03 },  /* Pekín */
+      { location: [ 55.75,  37.62], size: 0.03 },  /* Moscú */
+      { location: [ 37.57, 126.98], size: 0.03 }   /* Seúl */
     ],
-    /* Arcos: rutas de vuelo hacia Miami */
-    arcs: [
-      { startLat:  40.71, startLng: -74.01, endLat:  25.76, endLng: -80.19, arcAlt: 0.20, color: [0.35, 0.60, 1.0] },
-      { startLat:  51.51, startLng:  -0.13, endLat:  25.76, endLng: -80.19, arcAlt: 0.42, color: [0.35, 0.60, 1.0] },
-      { startLat: -23.55, startLng: -46.63, endLat:  25.76, endLng: -80.19, arcAlt: 0.35, color: [0.35, 0.60, 1.0] },
-      { startLat:  19.43, startLng: -99.13, endLat:  25.76, endLng: -80.19, arcAlt: 0.22, color: [0.35, 0.60, 1.0] },
-      { startLat:  48.86, startLng:   2.35, endLat:  25.76, endLng: -80.19, arcAlt: 0.40, color: [0.35, 0.60, 1.0] },
-      { startLat:  43.65, startLng: -79.38, endLat:  25.76, endLng: -80.19, arcAlt: 0.18, color: [0.35, 0.60, 1.0] }
-    ],
+    /* Sin arcos — limpio y fluido */
+    arcs:             [],
     opacity:          0.7,
     /* Callback de animación */
     onRender: function(state) {
