@@ -123,87 +123,38 @@
 
   <main>
 
-    <!-- ===== NUEVO HERO: Foto Dominante Miami ===== -->
-    <section class="hero-arc" id="inicio" aria-label="Hero principal">
+    <!-- ===== HERO: ScrollExpandMedia — efecto de expansión con scroll ===== -->
+    <section class="sem-section" id="inicio" aria-label="Hero principal">
 
-      <!-- Foto icónica Miami — uso libre (Unsplash License) -->
-      <div class="hero-bg" aria-hidden="true"></div>
-
-      <!-- Trail de imágenes — generado por JS al mover el mouse -->
+      <!-- Cursor trail — generado por JS al mover el mouse -->
       <div class="hero-trail" id="heroTrail" aria-hidden="true"></div>
 
-      <!-- Contenido central -->
-      <div class="hero-arc__contenido">
+      <!-- Fondo foto Miami — se desvanece al expandir -->
+      <div class="sem-bg" aria-hidden="true"></div>
 
-        <!-- Eyebrow decorativo: — South Florida — -->
-        <div class="hero-eyebrow" aria-hidden="true">
-          <span class="hero-eyebrow__linea"></span>
-          <span class="hero-eyebrow__text">South Florida</span>
-          <span class="hero-eyebrow__linea"></span>
-        </div>
-
-        <!-- SpinningText: texto circular giratorio — port de React a vanilla SVG -->
-        <div class="hero-spin-wrapper" id="heroTitulo"
-             role="heading" aria-level="1" aria-label="Explora Miami">
-          <svg viewBox="0 0 100 100"
-               class="hero-spin-svg"
-               aria-hidden="true"
-               focusable="false"
-               xmlns="http://www.w3.org/2000/svg">
-            <g class="hero-spin-group">
-              <path id="heroSpinPath"
-                    d="M 50,50 m -25,0 a 25,25 0 1,1 50,0 a 25,25 0 1,1 -50,0"
-                    fill="none"/>
-              <text class="hero-spin-text">
-                <textPath href="#heroSpinPath" startOffset="0%">
-                  EXPLORA MIAMI ✦ SOUTH FLORIDA ✦ EXPLORA MIAMI ✦ SOUTH FLORIDA ✦
-                </textPath>
-              </text>
-            </g>
-            <!-- Centro decorativo -->
-            <circle cx="50" cy="50" r="1.8" class="hero-spin-center" aria-hidden="true"/>
-          </svg>
-        </div>
-
-        <p class="hero-arc__tagline" data-i18n="hero_tagline">
-          Tu próxima aventura empieza aquí
-        </p>
-
-        <!-- Tags organizados: reemplazan las frases flotantes -->
-        <div class="hero-tags" aria-hidden="true">
-          <span class="hero-tag">✨ Aventuras</span>
-          <span class="hero-tag">🌊 Playas</span>
-          <span class="hero-tag">☀️ Sol todo el año</span>
-          <span class="hero-tag">🌿 Naturaleza</span>
-          <span class="hero-tag">🐠 Arrecifes</span>
-        </div>
-
-        <div class="hero-arc__botones">
-          <!-- Metal coral: Ver destinos -->
-          <div class="metal-btn-wrap" data-variant="coral" data-size="lg">
-            <div class="metal-btn-inner"></div>
-            <a href="#destinos" class="metal-btn" data-i18n="hero_btn_destinos">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              Ver destinos
-            </a>
-          </div>
-          <!-- Metal turquesa: Ver mapa -->
-          <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
-            <div class="metal-btn-inner"></div>
-            <a href="#mapa" class="metal-btn" data-i18n="hero_btn_mapa">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              Ver mapa
-            </a>
-          </div>
-        </div>
+      <!-- Título partido: "Explora" ← y "Miami" → se separan con el scroll -->
+      <div class="sem-title-wrap" id="semTitle"
+           role="heading" aria-level="1" aria-label="Explora Miami">
+        <span class="sem-title-word sem-title-left"  aria-hidden="true">Explora</span>
+        <span class="sem-title-word sem-title-right" aria-hidden="true">Miami</span>
       </div>
 
-      <!-- Indicador de scroll -->
-      <div class="hero-arc__scroll" aria-hidden="true">
-        <span class="hero-arc__scroll-texto" data-i18n="hero_scroll">Desliza</span>
-        <div class="hero-arc__scroll-linea"></div>
+      <!-- Tarjeta de medios — se expande con el scroll -->
+      <div class="sem-media-wrap" id="semMediaWrap">
+        <img class="sem-media"
+             src="assets/images/hero/hero-04.jpg"
+             alt="Atardecer en el waterfront de Miami" />
+
+        <!-- Contenido visible tras expansión completa -->
+        <div class="sem-content" id="semContent" aria-hidden="true">
+          <div class="hero-tags">
+            <span class="hero-tag">✨ Aventuras</span>
+            <span class="hero-tag">🌊 Playas</span>
+            <span class="hero-tag">☀️ Sol todo el año</span>
+            <span class="hero-tag">🌿 Naturaleza</span>
+            <span class="hero-tag">🐠 Arrecifes</span>
+          </div>
+        </div>
       </div>
 
     </section>
