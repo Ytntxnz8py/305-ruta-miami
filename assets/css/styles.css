@@ -3468,9 +3468,16 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
    El hero se convierte en una tarjeta que se expande con el scroll
    ============================================================ */
 
-/* Sección contenedora — ocupa toda la pantalla, sin desbordamiento */
-.sem-section {
+/* Wrapper: reserva 200vh de espacio de scroll para el efecto sticky */
+.sem-wrapper {
+  height: 200vh;
   position: relative;
+}
+
+/* Sección: sticky — se queda pegada al top mientras el wrapper pasa */
+.sem-section {
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 100vh;
   overflow: hidden;

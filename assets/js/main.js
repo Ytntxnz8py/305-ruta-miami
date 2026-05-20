@@ -1833,31 +1833,47 @@ function initRoadmapTooltip() {
 }
 
 /* ===== SCROLL EXPAND MEDIA — port vanilla de React ScrollExpandMedia ===== */
+/*
+ * Mecanismo: position:sticky + scroll natural del navegador.
+ * .sem-wrapper tiene height:200vh → la sección sticky ocupa 100vh →
+ * la tarjeta se expande mientras el usuario scrollea los primeros 100vh.
+ * Sin interceptar eventos, sin body overflow, sin layout shift.
+ */
 function initScrollExpandMedia() {
+  var wrapper   = document.querySelector('.sem-wrapper');
   var section   = document.getElementById('inicio');
   var mediawrap = document.getElementById('semMediaWrap');
   var titleWrap = document.getElementById('semTitle');
   var content   = document.getElementById('semContent');
   var bg        = section ? section.querySelector('.sem-bg') : null;
 
-  if (!section || !mediawrap || !titleWrap) return;
+  if (!section || !mediawrap || !titleWrap || !wrapper) return;
 
-  var scrollProgress     = 0;
   var mediaFullyExpanded = false;
   var ticking            = false;
 
-  /* Dimensiones responsive — recalculadas al montar */
-  var vw      = window.innerWidth;
-  var vh      = window.innerHeight;
-  var mobile  = vw < 640;
-  var initW   = mobile ? 200 : 300;
-  var initH   = mobile ? 280 : 400;
-  var maxW    = mobile ? vw  : Math.min(vw - 40, 1550);
-  var maxH    = mobile ? vh  : Math.min(vh, 800);
+  /* Dimensiones responsive */
+  var vw     = window.innerWidth;
+  var vh     = window.innerHeight;
+  var mobile = vw < 640;
+  var initW  = mobile ? 200 : 300;
+  var initH  = mobile ? 280 : 400;
+  var maxW   = mobile ? vw  : Math.min(vw - 40, 1550);
+  var maxH   = mobile ? vh  : Math.min(vh, 800);
 
-  /* Render del estado visual según scrollProgress (0–1) */
+  /* Progreso 0–1 basado en la posición de scroll real.
+   * wrapper.offsetTop ≈ 0 (primer elemento de <main>).
+   * Rango de scroll = vh (200vh wrapper - 100vh sección = 100vh útil).  */
+  function getProgress() {
+    var scrollTop    = window.scrollY || window.pageYOffset;
+    var wrapperTop   = wrapper.offsetTop;
+    var scrollRange  = vh; /* 100vh = espacio de expansión */
+    return Math.max(0, Math.min(1, (scrollTop - wrapperTop) / scrollRange));
+  }
+
+  /* Render del estado visual según progress (0–1) */
   function updateUI() {
-    var p = scrollProgress;
+    var p = getProgress();
 
     /* Tamaño de la tarjeta */
     var w = initW + p * (maxW - initW);
@@ -1869,82 +1885,43 @@ function initScrollExpandMedia() {
     /* Fondo: opacity 1 → 0 */
     if (bg) bg.style.opacity = String(Math.max(0, 1 - p));
 
-    /* Título: "Explora" se va a la izquierda, "Miami" a la derecha */
+    /* Título: "Explora" ← , "Miami" → */
     var words = titleWrap.querySelectorAll('.sem-title-word');
     if (words.length >= 2) {
       words[0].style.transform = 'translateX(' + (-vw * 1.5 * p) + 'px)';
       words[1].style.transform = 'translateX(' + ( vw * 1.5 * p) + 'px)';
     }
 
-    /* Tags: aparecen solo al expandir completamente */
+    /* Tags: visibles solo al expandir completamente */
     if (p >= 1 && !mediaFullyExpanded) {
       mediaFullyExpanded = true;
       if (content) {
         content.classList.add('sem-content--visible');
         content.removeAttribute('aria-hidden');
       }
-      /* Liberar scroll de página */
-      document.body.style.overflow = '';
     } else if (p < 0.98 && mediaFullyExpanded) {
       mediaFullyExpanded = false;
       if (content) {
         content.classList.remove('sem-content--visible');
         content.setAttribute('aria-hidden', 'true');
       }
-      /* Re-bloquear scroll de página */
-      document.body.style.overflow = 'hidden';
     }
   }
 
-  /* Bloquear scroll de página hasta que la tarjeta esté completamente expandida */
-  document.body.style.overflow = 'hidden';
-
-  /* ── Wheel ── */
-  function onWheel(e) {
-    /* Si ya expandida y el usuario scrollea hacia abajo → liberar paso */
-    if (mediaFullyExpanded && e.deltaY > 0) return;
-    /* Al inicio, scroll hacia arriba no hace nada */
-    if (scrollProgress <= 0 && e.deltaY < 0) return;
-
-    e.preventDefault();
-    scrollProgress = Math.max(0, Math.min(1, scrollProgress + e.deltaY * 0.0009));
-
+  /* Scroll del navegador — sin interceptar, solo leer posición */
+  function onScroll() {
     if (!ticking) {
       ticking = true;
       requestAnimationFrame(function () { updateUI(); ticking = false; });
     }
   }
 
-  /* ── Touch ── */
-  var touchY = 0;
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  function onTouchStart(e) {
-    touchY = e.touches[0].clientY;
-  }
-
-  function onTouchMove(e) {
-    if (mediaFullyExpanded) return;
-    e.preventDefault();
-    var delta  = touchY - e.touches[0].clientY;
-    touchY     = e.touches[0].clientY;
-    /* Hacia atrás (arrastre hacia abajo): factor más rápido para poder retroceder */
-    var factor = delta > 0 ? 0.005 : 0.008;
-    scrollProgress = Math.max(0, Math.min(1, scrollProgress + delta * factor));
-
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(function () { updateUI(); ticking = false; });
-    }
-  }
-
-  section.addEventListener('wheel',      onWheel,      { passive: false });
-  section.addEventListener('touchstart', onTouchStart, { passive: true  });
-  section.addEventListener('touchmove',  onTouchMove,  { passive: false });
-
-  /* Recalcular dimensiones al redimensionar ventana */
+  /* Recalcular dimensiones al redimensionar */
   window.addEventListener('resize', function () {
-    vw   = window.innerWidth;
-    vh   = window.innerHeight;
+    vw     = window.innerWidth;
+    vh     = window.innerHeight;
     mobile = vw < 640;
     initW  = mobile ? 200 : 300;
     initH  = mobile ? 280 : 400;
