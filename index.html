@@ -182,27 +182,42 @@
         <div class="seccion-intro__video-overlay"></div>
       </div>
 
-      <div class="seccion-intro__contenedor">
+      <!-- Layout 2 columnas: texto (izq) + shuffle grid (der) -->
+      <div class="seccion-intro__contenedor si-layout">
 
-        <h2 class="seccion-intro__titulo fade-up" data-i18n="intro_titulo">¿Por qué Explora Miami?</h2>
-        <p class="seccion-intro__subtitulo" data-i18n="intro_sub">La guía definitiva para aventureros en South Florida</p>
+        <!-- Columna izquierda: texto -->
+        <div class="si-col-texto fade-up">
+          <span class="si-eyebrow">South Florida</span>
+          <h2 class="seccion-intro__titulo" data-i18n="intro_titulo">¿Por qué Explora Miami?</h2>
+          <p class="si-desc" data-i18n="intro_sub">La guía definitiva para aventureros en South Florida</p>
+          <div class="si-features">
+            <div class="si-feature">
+              <span class="si-feature__ico">🌊</span>
+              <div>
+                <strong class="si-feature__titulo" data-i18n="intro_c1_titulo">Destinos Verificados</strong>
+                <p class="si-feature__texto" data-i18n="intro_c1_texto">6 experiencias curadas en los mejores rincones de Miami y sus alrededores.</p>
+              </div>
+            </div>
+            <div class="si-feature">
+              <span class="si-feature__ico">🗺️</span>
+              <div>
+                <strong class="si-feature__titulo" data-i18n="intro_c2_titulo">Guías Locales</strong>
+                <p class="si-feature__texto" data-i18n="intro_c2_texto">Expertos que conocen cada sendero, bahía y arrecife del sur de Florida.</p>
+              </div>
+            </div>
+            <div class="si-feature">
+              <span class="si-feature__ico">🌿</span>
+              <div>
+                <strong class="si-feature__titulo" data-i18n="intro_c3_titulo">Naturaleza Pura</strong>
+                <p class="si-feature__texto" data-i18n="intro_c3_texto">Desde los Everglades hasta South Beach — aventura en cada destino.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div class="seccion-intro__grid">
-          <div class="intro-card fade-up">
-            <div class="intro-card__icono">🌊</div>
-            <h3 class="intro-card__titulo" data-i18n="intro_c1_titulo">Destinos Verificados</h3>
-            <p class="intro-card__texto" data-i18n="intro_c1_texto">6 experiencias curadas en los mejores rincones de Miami y sus alrededores.</p>
-          </div>
-          <div class="intro-card fade-up" style="transition-delay:0.12s">
-            <div class="intro-card__icono">🗺️</div>
-            <h3 class="intro-card__titulo" data-i18n="intro_c2_titulo">Guías Locales</h3>
-            <p class="intro-card__texto" data-i18n="intro_c2_texto">Expertos que conocen cada sendero, bahía y arrecife del sur de Florida.</p>
-          </div>
-          <div class="intro-card fade-up" style="transition-delay:0.24s">
-            <div class="intro-card__icono">🌿</div>
-            <h3 class="intro-card__titulo" data-i18n="intro_c3_titulo">Naturaleza Pura</h3>
-            <p class="intro-card__texto" data-i18n="intro_c3_texto">Desde los Everglades hasta South Beach — aventura en cada destino.</p>
-          </div>
+        <!-- Columna derecha: 12 tarjetas mini que se barajan con el scroll -->
+        <div class="si-col-grid fade-up" style="transition-delay:0.18s">
+          <div class="shuffle-grid" id="shuffleGrid" aria-label="Destinos Miami" role="list"></div>
         </div>
 
       </div>

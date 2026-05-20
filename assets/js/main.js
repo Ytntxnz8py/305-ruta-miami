@@ -1832,6 +1832,141 @@ function initRoadmapTooltip() {
   });
 }
 
+/* ===== SHUFFLE GRID — port vanilla de React ShuffleHero ===== */
+/*
+ * 12 tarjetas mini (9 destinos + 3 bonus) en una grilla 4×3.
+ * Se barajan con animación FLIP (First–Last–Invert–Play) al hacer scroll
+ * mientras la sección está en el viewport.
+ */
+function initShuffleGrid() {
+  var container = document.getElementById('shuffleGrid');
+  var section   = document.getElementById('nosotros');
+  if (!container || !section) return;
+
+  /* ── Datos: 9 destinos reales + 3 imágenes bonus = 12 tarjetas ── */
+  var cardData = [
+    { id:'d1', es:'Everglades',     en:'Everglades',    foto: DESTINOS_DEFAULT[0] ? DESTINOS_DEFAULT[0].foto : '', tipo:'tierra' },
+    { id:'d2', es:'John Pennekamp', en:'John Pennekamp',foto: DESTINOS_DEFAULT[1] ? DESTINOS_DEFAULT[1].foto : '', tipo:'mar' },
+    { id:'d3', es:'Biscayne NP',    en:'Biscayne NP',   foto: DESTINOS_DEFAULT[2] ? DESTINOS_DEFAULT[2].foto : '', tipo:'mar' },
+    { id:'d4', es:'Bill Baggs',     en:'Bill Baggs',    foto: DESTINOS_DEFAULT[3] ? DESTINOS_DEFAULT[3].foto : '', tipo:'mar' },
+    { id:'d5', es:'Oleta River',    en:'Oleta River',   foto: DESTINOS_DEFAULT[4] ? DESTINOS_DEFAULT[4].foto : '', tipo:'tierra' },
+    { id:'d6', es:'Virginia Key',   en:'Virginia Key',  foto: DESTINOS_DEFAULT[5] ? DESTINOS_DEFAULT[5].foto : '', tipo:'mar' },
+    { id:'d7', es:'Matheson',       en:'Matheson',      foto: DESTINOS_DEFAULT[6] ? DESTINOS_DEFAULT[6].foto : '', tipo:'mar' },
+    { id:'d8', es:'Crandon Park',   en:'Crandon Park',  foto: DESTINOS_DEFAULT[7] ? DESTINOS_DEFAULT[7].foto : '', tipo:'mar' },
+    { id:'d9', es:'Arch Creek',     en:'Arch Creek',    foto: DESTINOS_DEFAULT[8] ? DESTINOS_DEFAULT[8].foto : '', tipo:'tierra' },
+    { id:'b1', es:'Bahía Miami',    en:'Miami Bay',     foto:'assets/images/hero/hero-02.jpg', tipo:'mar' },
+    { id:'b2', es:'Arrecifes',      en:'Coral Reefs',   foto:'assets/images/hero/hero-01.jpg', tipo:'mar' },
+    { id:'b3', es:'Atardecer',      en:'Sunset',        foto:'assets/images/hero/hero-03.jpg', tipo:'tierra' }
+  ];
+
+  var BADGE = { tierra: '🏔️', mar: '🌊' };
+
+  /* Fisher-Yates in-place */
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  /* Crea un nodo DOM de tarjeta */
+  function makeCard(d) {
+    var el = document.createElement('div');
+    el.className      = 'shuffle-card';
+    el.dataset.cardId = d.id;
+    el.setAttribute('role', 'listitem');
+    el.innerHTML =
+      '<img class="shuffle-card__img" src="' + d.foto + '" alt="" loading="lazy">' +
+      '<div class="shuffle-card__foot">' +
+        '<span class="shuffle-card__name lang-es">' + d.es + '</span>' +
+        '<span class="shuffle-card__name lang-en">' + d.en + '</span>' +
+        '<span class="shuffle-card__badge" aria-hidden="true">' + (BADGE[d.tipo] || '') + '</span>' +
+      '</div>';
+    return el;
+  }
+
+  /* Render inicial barajado */
+  shuffle(cardData).forEach(function(d) { container.appendChild(makeCard(d)); });
+
+  /* ── FLIP shuffle (First–Last–Invert–Play) ── */
+  var animating = false;
+
+  function doShuffle() {
+    if (animating) return;
+    animating = true;
+
+    var cards = Array.from(container.querySelectorAll('.shuffle-card'));
+
+    /* FIRST: capturar posición actual de cada tarjeta */
+    var before = new Map();
+    cards.forEach(function(c) {
+      var r = c.getBoundingClientRect();
+      before.set(c, { x: r.left, y: r.top });
+    });
+
+    /* Barajar el orden en el DOM */
+    shuffle(cards).forEach(function(c) { container.appendChild(c); });
+
+    /* LAST + INVERT: leer nueva posición y aplicar transform inverso */
+    requestAnimationFrame(function() {
+      cards.forEach(function(c) {
+        var f = before.get(c);
+        var l = c.getBoundingClientRect();
+        var dx = f.x - l.left;
+        var dy = f.y - l.top;
+        /* Aplicar sin transición para posicionar en "old pos" */
+        c.style.transition = 'none';
+        c.style.transform  = 'translate(' + dx + 'px,' + dy + 'px)';
+      });
+
+      /* PLAY: quitar transform con transición → animación de posición */
+      requestAnimationFrame(function() {
+        cards.forEach(function(c) {
+          c.style.transition = 'transform 0.85s cubic-bezier(0.34,1.28,0.64,1)';
+          c.style.transform  = '';
+        });
+        /* Liberar bloqueo al terminar la transición más larga */
+        setTimeout(function() { animating = false; }, 900);
+      });
+    });
+  }
+
+  /* ── Trigger: shuffle al entrar al viewport + en cada ~180px de scroll ── */
+  var inView       = false;
+  var lastScrollY  = window.scrollY;
+  var accumulated  = 0;
+  var SCROLL_TRIG  = 180; /* px acumulados para disparar un shuffle */
+  var firstSeen    = false;
+
+  var io = new IntersectionObserver(function(entries) {
+    inView = entries[0].isIntersecting;
+    if (inView) {
+      lastScrollY = window.scrollY;
+      accumulated  = 0;
+      /* Primer shuffle al entrar al viewport */
+      if (!firstSeen) {
+        firstSeen = true;
+        setTimeout(doShuffle, 450);
+      }
+    }
+  }, { threshold: 0.22 });
+
+  io.observe(section);
+
+  window.addEventListener('scroll', function() {
+    if (!inView) return;
+    var delta = Math.abs(window.scrollY - lastScrollY);
+    lastScrollY = window.scrollY;
+    accumulated += delta;
+    if (accumulated >= SCROLL_TRIG) {
+      accumulated = 0;
+      doShuffle();
+    }
+  }, { passive: true });
+}
+
 /* ===== SCROLL EXPAND MEDIA — port vanilla de React ScrollExpandMedia ===== */
 /*
  * Mecanismo: position:sticky + scroll natural del navegador.
@@ -1968,6 +2103,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initScrollAnimation();
   initScrollExpandMedia();   /* hero ScrollExpandMedia — debe ir antes del trail */
   initHeroTrail();           /* cursor trail — opera sobre #inicio/#heroTrail */
+  initShuffleGrid();         /* intro shuffle grid 4×3 — barajado con scroll */
   initRoadmap();
   initRoadmapTooltip();
   initMetalButtons();

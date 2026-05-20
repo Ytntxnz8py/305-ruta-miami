@@ -3467,6 +3467,204 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
+   INTRO SECTION — ShuffleHero 2-col layout
+   Texto izquierda · Grid 4×3 de tarjetas mini barajables (derecha)
+   ============================================================ */
+
+/* Contenedor: 2 columnas con alineación centrada */
+.seccion-intro__contenedor.si-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  max-width: var(--max);
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* ── Columna izquierda ── */
+.si-col-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Eyebrow pill "South Florida" */
+.si-eyebrow {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--turquesa);
+  padding: 0.28rem 0.82rem;
+  border: 1px solid rgba(0,188,212,0.32);
+  border-radius: 999px;
+  background: rgba(0,188,212,0.08);
+}
+
+/* Override centrado del título en este contexto */
+.si-layout .seccion-intro__titulo {
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.si-desc {
+  font-size: 0.97rem;
+  color: var(--texto-medio);
+  line-height: 1.68;
+  margin: 0;
+  text-shadow: 0 1px 10px rgba(255,253,247,0.8);
+}
+
+/* Lista de features */
+.si-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+.si-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.78rem;
+}
+
+.si-feature__ico {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.08rem;
+}
+
+.si-feature__titulo {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--texto-oscuro);
+  display: block;
+  margin-bottom: 0.14rem;
+}
+
+.si-feature__texto {
+  font-size: 0.82rem;
+  color: var(--texto-medio);
+  line-height: 1.55;
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(255,253,247,0.7);
+}
+
+/* ── Columna derecha: grid de tarjetas ── */
+.si-col-grid {
+  position: relative;
+}
+
+/* Grid 4 columnas × 3 filas */
+.shuffle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 7px;
+  height: 430px;
+}
+
+/* Tarjeta mini */
+.shuffle-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(0,188,212,0.10);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.14),
+    0 0 0 1px rgba(255,255,255,0.18);
+  cursor: pointer;
+  will-change: transform;
+}
+
+.shuffle-card:hover {
+  box-shadow:
+    0 8px 28px rgba(0,0,0,0.22),
+    0 0 0 1.5px rgba(0,188,212,0.45);
+  z-index: 2;
+}
+
+/* Foto a pantalla completa */
+.shuffle-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform 0.4s ease;
+}
+
+.shuffle-card:hover .shuffle-card__img {
+  transform: scale(1.06);
+}
+
+/* Footer con gradiente + nombre + badge tipo */
+.shuffle-card__foot {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(5,19,30,0.82) 0%, transparent 100%);
+  padding: 1.4rem 0.4rem 0.35rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.18rem;
+}
+
+.shuffle-card__name {
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  flex: 1;
+}
+
+.shuffle-card__badge {
+  font-size: 0.55rem;
+  flex-shrink: 0;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .seccion-intro__contenedor.si-layout {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+    text-align: center;
+  }
+  .si-eyebrow { align-self: center; }
+  .si-layout .seccion-intro__titulo { text-align: center; }
+  .si-feature { text-align: left; }
+  .shuffle-grid { height: 300px; gap: 5px; }
+}
+
+@media (max-width: 480px) {
+  .shuffle-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    height: 320px;
+    gap: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shuffle-card, .shuffle-card__img { will-change: auto; transition: none !important; }
+}
+
+/* ============================================================
    SCROLL EXPAND MEDIA — port vanilla del componente React
    El hero se convierte en una tarjeta que se expande con el scroll
    ============================================================ */
