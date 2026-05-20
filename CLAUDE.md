@@ -1,6 +1,6 @@
 # Explora Miami — Guía completa del proyecto
 
-> **Fecha de última actualización:** 18 mayo 2026
+> **Fecha de última actualización:** 19 mayo 2026
 > Documento diseñado para que cualquier instancia de Claude retome el proyecto desde cero sin perder contexto.
 
 ---
@@ -32,22 +32,26 @@ Directorio bilingüe (ES/EN) de experiencias outdoor en Miami con panel de admin
 
 ```
 explora-miami/
-├── index.html              ← sitio público bilingüe (447 líneas)
+├── index.html              ← sitio público bilingüe (776 líneas)
 ├── admin.html              ← panel de administración privado
 ├── CLAUDE.md               ← este archivo
 ├── skills-lock.json        ← registro de skills instaladas
 ├── assets/
 │   ├── css/
-│   │   ├── styles.css      ← estilos del sitio público (1,700+ líneas)
+│   │   ├── styles.css      ← estilos del sitio público (2,970+ líneas)
 │   │   └── admin.css       ← estilos del panel admin
 │   ├── js/
-│   │   ├── main.js         ← lógica pública + datos de destinos (~900 líneas)
+│   │   ├── main.js         ← lógica pública + datos de destinos (1,823 líneas)
 │   │   ├── admin.js        ← lógica del panel admin
 │   │   ├── i18n.js         ← sistema de traducción ES/EN
 │   │   └── analytics.js    ← eventos GA4 custom
 │   ├── images/
+│   │   ├── hero-bg.png                           ← ElevenLabs AI imagen (respaldo)
+│   │   ├── photo-1595323397978-65433d24fc23.avif ← Foto hero actual (Miami skyline, uso libre)
+│   │   ├── hero/                                 ← subcarpeta con hero-01..15.jpg + avif
+│   │   └── istockphoto-*.jpg                     ← fotos de destinos
 │   └── videos/
-│       └── *.mp4           ← video del hero
+│       └── hero-tierra.mp4.mp4                   ← video de fondo sección intro
 └── .agents/
     └── skills/
         ├── emil-design-eng/    ← emilkowalski/skill
@@ -61,11 +65,12 @@ explora-miami/
 ## 4. Stack técnico
 
 - **HTML / CSS / JS puro** — sin frameworks, sin librerías externas
-- **Mobile-first** — breakpoints: 640px y 768px
-- **Fuentes**: Playfair Display italic (títulos) + Inter (cuerpo) vía Google Fonts
+- **Mobile-first** — breakpoints: 560px y 768px
+- **Fuentes** (Google Fonts): Cormorant Garamond (hero, ultra-thin italic) + Playfair Display (subtítulos) + Inter (cuerpo)
 - **Comentarios** en español
 - Sin transpilación, sin build step — desplegable directamente en GitHub Pages
 - Variables ES5 (`var`) — sin ES6 modules para máxima compatibilidad
+- **Imagen formats**: AVIF nativa (photo-1595323397978-65433d24fc23.avif) para hero
 
 ---
 
@@ -148,22 +153,43 @@ Botón en el header llama `cambiarIdioma()` en `i18n.js` → guarda en localStor
 ## 8. Estado actual del sitio — funcionalidades implementadas
 
 ### ✅ Sitio público (index.html)
-- **Hero cinematográfico** con video de fondo, overlay gradiente, etiqueta cristalina, título en Playfair Display italic, tagline, 2 CTAs glass, scroll indicator animado, parallax en el fondo
-- **Hero orbs** — 3 luces flotantes animadas (turquesa/coral/mostaza) con `@keyframes orbs-drift`
-- **Sección intro** — 3 cards con identidad de color por posición (turquesa, mostaza, coral) con `border-top` acento
-- **Sección destinos** — dark ocean background (`#071e2b → #0a2d3f → #051822`) con filtros por tipo (Todos / Tierra / Mar) y grid de 9 destinos
-- **Glassmorphism cards** — `backdrop-filter: blur(22px)`, glass border, sheen diagonal, sombras en capas
-- **Animación cinética de entrada** — columna izquierda gira desde la izquierda, central cae desde arriba, derecha gira desde la derecha (inspirado en ScrollTiltedGrid)
-- **Grid escalonado** — columna central con `margin-top: 3rem` en desktop
-- **Mouse 3D tilt** — `perspective(1000px) rotateY/rotateX` en mousemove, reset suave en mouseleave
-- **Modal a pantalla completa** — galería de 4 fotos con prev/next y thumbnails, descripción larga, datos prácticos, reseñas de visitantes, botones Google Maps / Apple Maps / Sitio web / Reseñas, mapa embed
-- **Sección mapa** — iframe de Google Maps + 6 chips de marcadores de destinos destacados
-- **Sección "Trabaja con nosotros"** — beneficios con iconos gradiente, formulario de contacto de 6 campos, mensaje de éxito
-- **Footer** — gradiente azul oscuro, logo, navegación, lista de destinos, íconos sociales, copyright, enlace al admin
-- **Bilingüe completo** — ES / EN con toggle en navbar
-- **SEO completo** — meta description, Open Graph, Twitter Card, Schema.org JSON-LD (WebSite, Organization, ItemList)
-- **Canonical URL** definida
-- **prefers-reduced-motion** — desactiva todas las animaciones 3D y de entrada
+
+#### Hero — Foto dominante Miami (estado actual)
+- **Foto local AVIF** `photo-1595323397978-65433d24fc23.avif` — Miami skyline al atardecer con palmeras, opacidad 1%
+- **Overlay gradiente** `165deg` oscuro (15%→84%) para legibilidad sobre foto
+- **Fondo base** `#05131e` mientras carga la imagen
+- **Cormorant Garamond weight 300 italic** — tipografía ultra-fina de lujo para el título
+- **Eyebrow decorativo** `— South Florida —` con líneas horizontales (1px, 44px) a ambos lados del texto
+- **Tags organizados** en fila horizontal con glassmorphism: ✨ Aventuras · 🌊 Playas · ☀️ Sol todo el año · 🌿 Naturaleza · 🐠 Arrecifes
+- **Tagline** blanco trazo fino (weight 300, letter-spacing 0.06em)
+- **2 CTAs glass** — Ver destinos / Ver mapa
+- **Hero trail** — rastro de imágenes al mover el mouse (JS: `initHeroTrail`)
+- **Scroll indicator** animado (flecha + línea)
+
+#### Secciones
+- **Intro** — 3 cards con video de fondo, identidad de color por posición
+- **Destinos** — dark ocean bg (`#071e2b`) con filtros Tierra/Mar y grid de 9 destinos
+- **Glassmorphism cards** — `backdrop-filter: blur(22px)`, mouse 3D tilt
+- **Modal a pantalla completa** — galería 4 fotos, descripción larga, reseñas, mapas, botones
+
+#### Roadmap Animado de Destinos (reemplaza mapa + globo desde commit 50bcb08)
+- **SVG path animado por scroll** — `strokeDashoffset` se reduce según posición vertical del canvas en viewport. Gradiente mostaza→coral→coral
+- **9 destinos principales** (rdm-milestone--tierra/mar) — dot de 14px, anillo pulsante, bubble glassmorphism
+- **20 lugares icónicos de ref** (rdm-milestone--ref) — dot de 8px mostaza, sin anillo, bubble pequeño
+- **IntersectionObserver stagger** — 80ms entre cada milestone; tierra/mar primero (idx 0-8), ref después (idx 9-28)
+- **Tooltip flotante** `initRoadmapTooltip()` — tarjeta `position: fixed` con descripción ~30 palabras por cada uno de los 29 puntos, aparece en mouseenter y desaparece en mouseleave
+  - Barra acento coral→mostaza
+  - Nombre extraído del atributo `title` (antes de ` — `)
+  - Clampeado al viewport (no se sale de pantalla)
+  - Oculto en táctil (`@media hover: none`)
+- **Leyenda** — tierra / mar / lugares icónicos / ruta del viajero
+
+#### Otras secciones
+- **"Trabaja con nosotros"** — formulario de 6 campos, validación, mensaje de éxito
+- **Footer** — gradiente azul oscuro, logo, navegación, íconos sociales
+- **Bilingüe** ES/EN — toggle en navbar, `data-i18n` + `.lang-es/.lang-en`
+- **SEO** — meta, OG, Twitter Card, Schema JSON-LD, canonical
+- **prefers-reduced-motion** — desactiva todas las animaciones
 
 ### ✅ Panel admin (admin.html)
 - Login con contraseña (`miami2026`) — sesión en sessionStorage
@@ -237,7 +263,7 @@ Todos los eventos usan la función wrapper `trackEvent(nombre, params)` que sile
 
 ## 11. Diseño — historial completo de passes CSS
 
-`styles.css` tiene tres grandes bloques acumulativos. **No eliminar ninguno** — cada uno corrige o extiende al anterior.
+`styles.css` tiene **cinco grandes bloques acumulativos**. **No eliminar ninguno** — cada uno corrige o extiende al anterior.
 
 ### Pass 1: Impeccable Audit (blockers + improvements)
 Aplicado vía auditoría de `/impeccable`. Fixes:
@@ -326,15 +352,96 @@ function bindCardTilt(card) {
 
 ---
 
-## 12. Flujo JS — main.js
+### Pass 4: Landing Blanco Arena + Diseño Miami (commits 8d6ebbd → cce15cf)
+
+**Objetivo:** Unificar toda la página en `var(--blanco-arena)` #FFFDF7. Corregir errores de visibilidad de cards. Añadir identidad Miami a etiquetas y subtítulos.
+
+```css
+/* Todas las secciones en blanco arena */
+.seccion-intro, .seccion-destinos, .seccion-mapa, .seccion-trabaja {
+  background: var(--blanco-arena) !important;
+}
+/* Cards blancas limpias */
+.destino-card { background: #ffffff !important; }
+/* Corrección clase: .destino-card__desc (no __descripcion) */
+.destino-card__desc { color: var(--texto-medio) !important; }
+/* Hero tagline — gradiente naranja→mostaza */
+.hero-arc__tagline {
+  background: linear-gradient(100deg, var(--coral) 0%, var(--mostaza) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+/* Etiqueta — acento mostaza */
+.hero-arc__etiqueta { color: var(--mostaza) !important; }
+/* Frases ambient — coral */
+.hfa-item { color: var(--coral) !important; }
+/* Fade bands desactivadas (color uniforme) */
+.fade-band { height: 0 !important; overflow: hidden !important; }
+```
+
+**Correcciones de bugs:**
+- `destino-card__descripcion` → `destino-card__desc` (nombre real de clase)
+- Globe cobe.js invisible: fondo azul cielo para contraste (primer intento)
+- Globe cobe.js invisible root cause: `canvas.offsetWidth = 0` en DOMContentLoaded → ResizeObserver pattern
+
+### Pass 5: AnimatedRoadmap + Hero Foto Dominante + Tooltip (commits 50bcb08 → ebd99d6)
+
+**Objetivo:** Reemplazar globo 3D + mapa Leaflet por roadmap animado geográfico. Rediseño del hero con foto dominante. Tooltips interactivos en el mapa.
+
+**5a — AnimatedRoadmap** (commit 50bcb08):
+```css
+.seccion-roadmap { background: var(--blanco-arena) !important; }
+.rdm-canvas { aspect-ratio: 8 / 5; border-radius: 28px; /* fondo canvas geográfico */ }
+.rdm-milestone { width: 14px; height: 14px; opacity: 0; scale: 0.3; transition: opacity + scale cubic-bezier; }
+.rdm-milestone.visible { opacity: 1; scale: 1; }
+.rdm-ring { animation: rdm-ring-pulse 2.6s ease-out infinite; }
+.rdm-bubble { backdrop-filter: blur(10px); border-radius: 999px; }
+```
+
+**5b — Hero Foto Dominante** (commit fe4f88c):
+- Foto Unsplash icónica Miami → luego reemplazada por local avif
+- Cormorant Garamond weight 300 italic
+- Eyebrow `— South Florida —` con líneas decorativas
+- Hero-tags en fila (glassmorphism pills)
+- Tagline blanco trazo fino (cancelar gradiente anterior con `!important`)
+- Overlay oscuro `::after` sobre `.hero-bg` para legibilidad
+- 20 `rdm-milestone--ref` (dots mostaza 8px, sin anillo, bubble pequeño)
+```css
+.hero-arc__titulo { font-family: 'Cormorant Garamond' ... font-weight: 300 !important; color: #fff !important; }
+.hero-arc__tagline { background: none !important; -webkit-text-fill-color: rgba(255,255,255,0.85) !important; }
+.hero-eyebrow { display: flex; align-items: center; gap: 1rem; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+.hero-tag { backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.22); }
+.rdm-milestone--ref { width: 8px !important; } /* sin anillo, dot mostaza */
+```
+
+**5c — Tooltip Roadmap** (commit ebd99d6):
+- Foto hero: local AVIF opacity 0.01
+- `initRoadmapTooltip()` — `position: fixed`, sigue al cursor, clampeado al viewport
+- 29 `data-desc` attributes en todos los milestones (~30 palabras c/u)
+```css
+.rdm-tooltip { position: fixed; z-index: 9999; backdrop-filter: blur(16px);
+  border-radius: 16px; opacity: 0; transform: translateY(8px) scale(0.96); }
+.rdm-tooltip--visible { opacity: 1; transform: translateY(0) scale(1); }
+.rdm-tooltip__barra { background: linear-gradient(90deg, var(--coral), var(--mostaza)); }
+@media (hover: none) { .rdm-tooltip { display: none !important; } }
+```
+
+---
+
+## 12. Flujo JS — main.js (estado actual)
 
 ```
 DOMContentLoaded
+  → leerConfigSitio()          — lee configuración del sitio desde localStorage
   → registrarVisita()          — guarda visita de hoy en em_visitas
   → renderDestinos()           — lee em_destinos, filtra por tipo, genera HTML de cards
       → initScrollAnimation()  — IntersectionObserver threshold 0.10, añade .visible
       → bindCardTilt(card)     — 3D mouse tilt en cada card
   → initScrollAnimation()      — segunda llamada para elementos estáticos fade-up
+  → initHeroTrail()            — rastro de imágenes al mover el mouse en el hero
+  → initRoadmap()              — SVG path scroll-animation + IntersectionObserver milestones
+  → initRoadmapTooltip()       — tarjeta flotante hover en cada milestone
+  [initGlobo / initMapaLeaflet ELIMINADOS — sección mapa reemplazada por roadmap]
 ```
 
 **Función `renderDestinos(filtro)`:**
@@ -349,13 +456,33 @@ DOMContentLoaded
 - Puebla galería, badges, nombre, descripciones, datos prácticos, reseñas, mapa, botones de acción
 - Activa el modal con `classList.add('activo')`
 
-**Parallax hero:**
+**initRoadmap()** (AnimatedRoadmap port, main.js línea ~1706):
 ```javascript
-// IIFE en DOMContentLoaded
-window.addEventListener('scroll', function() {
-  heroFondo.style.transform = 'translateY(' + (scrollY * 0.28) + 'px)';
-}, { passive: true });
+// 1. getTotalLength() → strokeDasharray/Dashoffset → scroll listener RAF
+// 2. IntersectionObserver: threshold 0.15, 80ms stagger por data-idx
+// milestones: .rdm-milestone[data-idx] — idx 0-8 = principales, 9-28 = ref
+function initRoadmap() {
+  var path = document.getElementById('rdmPath');
+  var pathLen = path.getTotalLength();
+  path.style.strokeDasharray = pathLen;
+  path.style.strokeDashoffset = pathLen;
+  // scroll: (winH - rect.top) / (winH + rect.height) → mapped a [0.12, 0.80]
+  // io.observe todos los .rdm-milestone; delay = idx * 80ms
+}
 ```
+
+**initRoadmapTooltip()** (main.js línea ~1751):
+```javascript
+function initRoadmapTooltip() {
+  // Crea div.rdm-tooltip en document.body (position: fixed)
+  // mouseenter: muestra tooltip con m.title + m.dataset.desc
+  // mousemove: reposiciona clampeado a viewport (x+18 o x-tw-18 si se sale)
+  // mouseleave: oculta tooltip (remove rdm-tooltip--visible)
+  // visibilitychange: oculta si document.hidden
+}
+```
+
+**Parallax hero (removido):** El hero ya no usa video — usa foto AVIF estática. El parallax original fue sustituido por el overlay oscuro `::after`.
 
 ---
 
@@ -403,25 +530,89 @@ El código GA4 está en `index.html` con el ID `G-7HMBMBQNQZ`. Verificar:
 ## 16. Próximos pasos pendientes
 
 ### Alta prioridad
-- [ ] **Verificar GA4** — confirmar que `G-7HMBMBQNQZ` es el ID real de la propiedad, o crear propiedad nueva y actualizar
-- [ ] **Dominio propio** — comprar en Namecheap, configurar CNAME en GitHub Pages, actualizar canonical y OG URLs en `index.html`
-- [ ] **Panel admin con métricas reales** — actualmente las visitas se siembran con datos demo. Integrar con GA4 Reporting API o Data API para datos reales
+- [ ] **Verificar GA4** — confirmar que `G-7HMBMBQNQZ` es el ID real, o crear propiedad nueva y reemplazar en `index.html` (3 ocurrencias)
+- [ ] **Dominio propio** — comprar en Namecheap, CNAME en GitHub Pages, actualizar canonical y OG URLs
+- [ ] **Opacidad hero foto** — actualmente en 1% (casi invisible). El usuario puede querer ajustar este valor para que la foto sea más visible. Cambiar en `.hero-bg { opacity: X; }` en el bloque "HERO FOTO DOMINANTE v2" al final de `styles.css`
+- [ ] **Panel admin con métricas reales** — visitas actuales son datos demo. Integrar GA4 Reporting API
 
 ### Media prioridad
-- [ ] **Monetización listings** — crear página/sección para que empresas contraten listing. Formulario de alta con campos: nombre empresa, actividad, precio, descripción, fotos, datos de contacto
-- [ ] **Afiliados Amazon** — agregar sección "Equipamiento recomendado" con enlaces de afiliado a kayaks, snorkels, mochilas, etc.
-- [ ] **Imágenes propias** — reemplazar fotos de Unsplash por fotos reales de los destinos (Unsplash OK para MVP, no ideal para SEO)
-- [ ] **Más destinos** — ampliar de 9 a 15–20 destinos. Usar la misma estructura de objeto en `DESTINOS_DEFAULT`
+- [ ] **Monetización listings** — formulario de alta para empresas locales
+- [ ] **Afiliados Amazon** — sección "Equipamiento recomendado"
+- [ ] **Imágenes propias** — reemplazar fotos de Wikipedia/iStock por fotos reales
+- [ ] **Más destinos** — ampliar de 9 a 15–20. Usar la misma estructura de objeto en `DESTINOS_DEFAULT`
+- [ ] **Tooltip táctil** — adaptar tooltip del roadmap para dispositivos táctiles (tap en lugar de hover)
 
 ### Baja prioridad
 - [ ] **Blog/contenido** — artículos de SEO sobre actividades outdoor en Miami
-- [ ] **Mapa interactivo** — reemplazar iframe de Google Maps por Leaflet.js con marcadores custom para todos los destinos
 - [ ] **Filtros avanzados** — por dificultad, precio, distancia desde Miami, mejor época
 - [ ] **Compartir destinos** — botones de share por destino (WhatsApp, X, Instagram)
+- [ ] **Clickear milestone → abrir modal** del destino (actualmente solo muestra tooltip)
 
 ---
 
-## 17. Objetivo del negocio y plan de monetización
+## 17. Roadmap — milestones geográficos (referencia de posicionamiento)
+
+### Fórmula de coordenadas a posición CSS
+```
+Bounds del mapa: 26.05°N → 25.05°N (top: 0%→100%), -81.12°W → -79.86°W (left: 0%→100%)
+top%  = (26.05 - lat) * 100
+left% = (lon + 81.12) / 1.26 * 100
+```
+
+### 9 destinos principales (rdm-milestone--tierra / --mar)
+
+| idx | Lugar | top% | left% | tipo | data-desc |
+|---|---|---|---|---|---|
+| 0 | Oleta River SP | 12 | 77 | tierra | ✓ |
+| 1 | Arch Creek Park | 20 | 64 | tierra | ✓ |
+| 2 | Virginia Key Beach | 37 | 80 | mar | ✓ |
+| 3 | Crandon Park | 46 | 77 | mar | ✓ |
+| 4 | Bill Baggs Cape Florida | 54 | 85 | mar | ✓ |
+| 5 | Matheson Hammock | 57 | 66 | mar | ✓ |
+| 6 | Biscayne National Park | 67 | 60 | mar | ✓ |
+| 7 | Everglades National Park | 76 | 17 | tierra | ✓ |
+| 8 | John Pennekamp | 86 | 52 | mar | ✓ |
+
+### 20 lugares icónicos de referencia (rdm-milestone--ref, mostaza)
+
+| idx | Lugar | top% | left% |
+|---|---|---|---|
+| 9 | South Beach / Ocean Drive | 27 | 79 |
+| 10 | Wynwood Walls | 25 | 73 |
+| 11 | Bayfront Park | 28 | 74 |
+| 12 | Vizcaya Museum & Gardens | 31 | 72 |
+| 13 | Coconut Grove | 32 | 70 |
+| 14 | Venetian Pool | 33 | 68 |
+| 15 | Little Havana / Calle Ocho | 29 | 70 |
+| 16 | Fairchild Tropical Garden | 38 | 67 |
+| 17 | Zoo Miami | 44 | 57 |
+| 18 | Key Biscayne | 36 | 76 |
+| 19 | Design District | 23 | 73 |
+| 20 | Hialeah | 18 | 65 |
+| 21 | Aventura | 9 | 78 |
+| 22 | Deering Estate | 44 | 63 |
+| 23 | Homestead | 57 | 51 |
+| 24 | Flamingo (Everglades) | 91 | 15 |
+| 25 | Palmetto Bay | 43 | 62 |
+| 26 | Hard Rock Stadium | 9 | 70 |
+| 27 | Miami Seaquarium | 32 | 76 |
+| 28 | Opa-locka | 15 | 69 |
+
+### CSS de los tipos de milestone
+```css
+/* Primario tierra: coral, anillo pulsante */
+.rdm-milestone--tierra .rdm-dot { background: var(--coral); }
+/* Primario mar: turquesa, anillo pulsante */
+.rdm-milestone--mar .rdm-dot { background: var(--turquesa); }
+/* Referencia: mostaza, sin anillo, dot 8px */
+.rdm-milestone--ref { width: 8px !important; }
+.rdm-milestone--ref .rdm-ring { display: none !important; }
+.rdm-milestone--ref .rdm-dot { background: var(--mostaza) !important; }
+```
+
+---
+
+## 18. Objetivo del negocio y plan de monetización  
 
 ### Modelo de ingresos
 
@@ -472,12 +663,20 @@ git pull --rebase origin main && git push origin main
 
 ## 20. Historial de cambios principales (cronológico)
 
-| Fecha | Cambio |
-|---|---|
-| — | Creación inicial del proyecto — 6 destinos, estructura básica |
-| — | Ampliación a 9 destinos reales verificados con galería, reseñas y datos completos |
-| — | Implementación GA4 con eventos custom en `analytics.js` |
-| — | Impeccable audit — fixes WCAG AA en contraste, motion, line-height |
-| — | taste-skill soft — tipografía, jerarquía visual, identidad de color por sección |
-| — | Instalación de `nextlevelbuilder/ui-ux-pro-max-skill` y revisión de seguridad |
-| 18 mayo 2026 | **Premium 3D redesign** — dark ocean section, glassmorphism cards, hero orbs, animaciones cinéticas de entrada por columna, grid escalonado, mouse tilt 3D |
+| Fecha | Commit | Cambio |
+|---|---|---|
+| — | — | Creación inicial — 6 destinos, estructura básica |
+| — | — | Ampliación a 9 destinos reales con galería, reseñas y datos completos |
+| — | — | GA4 con eventos custom en `analytics.js` |
+| — | — | Impeccable audit — fixes WCAG AA en contraste, motion, line-height |
+| — | — | taste-skill soft — tipografía, jerarquía visual, identidad de color |
+| — | — | Instalación skills + revisión de seguridad |
+| 18 mayo 2026 | `1c53ab4` | **Premium 3D redesign** — dark ocean, glassmorphism cards, hero orbs, animaciones cinéticas, grid escalonado, mouse tilt 3D |
+| 18 mayo 2026 | `8d6ebbd` | Hero ImageTrail + landing blanco arena + globo rutas Miami |
+| 18 mayo 2026 | `cce15cf` | Imagen de fondo hero-bg.png (ElevenLabs) insertada en CSS |
+| 18 mayo 2026 | `a5423ec` | GlobeStickers vanilla JS port + hero Miami style + mapa grid rediseñado |
+| 18 mayo 2026 | `ae9c3ac` | Fix globo invisible — fondo azul cielo + dark 0.12 (fix contraste) |
+| 18 mayo 2026 | `6d77eb5` | Fix globo root cause — ResizeObserver pattern (canvas.offsetWidth=0 bug) |
+| 19 mayo 2026 | `50bcb08` | **Sección mapa → AnimatedRoadmap** — SVG path scroll-animated, 9 milestones geográficos, IntersectionObserver stagger, paleta coral/turquesa/mostaza |
+| 19 mayo 2026 | `fe4f88c` | **Hero foto dominante + 20 landmarks icónicos** — Cormorant Garamond 300 italic, eyebrow decorativo, hero-tags glassmorphism, 20 rdm-milestone--ref con posición lat/lng real |
+| 19 mayo 2026 | `ebd99d6` | **Hero foto local AVIF 1% + Tooltip roadmap** — `initRoadmapTooltip()`, 29 data-desc, tarjeta glassmorphism fixed que sigue al cursor |
