@@ -663,10 +663,70 @@ html.lang-es .lang-en { display: none; }
 .filtros__btn:hover          { border-color: var(--turquesa); color: var(--turquesa); transform: translateY(-2px); }
 .filtros__btn--activo        { background-color: var(--turquesa); border-color: var(--turquesa); color: #fff; }
 
-/* Grid */
-.destinos-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-@media (min-width: 620px)  { .destinos-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .destinos-grid { grid-template-columns: repeat(3, 1fr); } }
+/* ── Carrusel de destinos ── */
+.destinos-carousel-wrap {
+  position: relative;
+}
+
+/* Flechas prev / next */
+.destinos-carousel__btn {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 253, 247, 0.95);
+  border: 1px solid rgba(0, 188, 212, 0.22);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--tinta);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+.destinos-carousel__btn:hover {
+  background: #fff;
+  box-shadow: 0 6px 26px rgba(0, 188, 212, 0.22);
+  transform: translateY(-50%) scale(1.1);
+}
+.destinos-carousel__btn:disabled {
+  opacity: 0.30;
+  cursor: default;
+  pointer-events: none;
+}
+.destinos-carousel__btn--prev { left: -22px; }
+.destinos-carousel__btn--next { right: -22px; }
+@media (max-width: 860px) {
+  .destinos-carousel__btn--prev { left: 4px; }
+  .destinos-carousel__btn--next { right: 4px; }
+}
+
+/* Contenedor de tarjetas — scroll horizontal con snap */
+.destinos-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 2rem;
+  padding-bottom: 0.75rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  /* Scrollbar sutil, turquesa */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 188, 212, 0.30) transparent;
+}
+.destinos-grid::-webkit-scrollbar        { height: 4px; }
+.destinos-grid::-webkit-scrollbar-track  { background: transparent; }
+.destinos-grid::-webkit-scrollbar-thumb  {
+  background: rgba(0, 188, 212, 0.30);
+  border-radius: 2px;
+}
+
+/* Cada tarjeta — ancho fijo para el carrusel */
+.destinos-grid .destino-card {
+  flex: 0 0 clamp(260px, 78vw, 320px);
+  scroll-snap-align: start;
+}
 
 /* Tarjetas de destino */
 .destino-card {

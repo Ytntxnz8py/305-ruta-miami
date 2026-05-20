@@ -934,6 +934,10 @@ document.addEventListener('DOMContentLoaded', function () {
       var activeWrap = btn.closest('.metal-btn-wrap');
       if (activeWrap) activeWrap.classList.add('is-active');
       renderDestinos(filtroActivo);
+      /* Reset scroll del carrusel al cambiar filtro */
+      var grid = document.getElementById('destinosGrid');
+      if (grid) { grid.scrollLeft = 0; }
+      initDestCarousel();
     });
   });
 });
@@ -2186,10 +2190,43 @@ function initMetalButtons(root) {
   });
 }
 
+/* ===== CARRUSEL DE DESTINOS ===== */
+function initDestCarousel() {
+  var grid = document.getElementById('destinosGrid');
+  var prev = document.getElementById('destCarouselPrev');
+  var next = document.getElementById('destCarouselNext');
+  if (!grid || !prev || !next) return;
+
+  /* Ancho de desplazamiento: primera card + gap */
+  function stepWidth() {
+    var card = grid.querySelector('.destino-card');
+    if (!card) return 340;
+    return card.offsetWidth + 32; /* 2rem gap */
+  }
+
+  function updateBtns() {
+    var atStart = grid.scrollLeft <= 2;
+    var atEnd   = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 2;
+    prev.disabled = atStart;
+    next.disabled = atEnd;
+  }
+
+  prev.addEventListener('click', function () {
+    grid.scrollBy({ left: -stepWidth(), behavior: 'smooth' });
+  });
+  next.addEventListener('click', function () {
+    grid.scrollBy({ left: stepWidth(), behavior: 'smooth' });
+  });
+
+  grid.addEventListener('scroll', updateBtns, { passive: true });
+  updateBtns();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   leerConfigSitio();
   registrarVisita();
   renderDestinos();
+  initDestCarousel();
   initScrollAnimation();
   initScrollExpandMedia();   /* hero ScrollExpandMedia — debe ir antes del trail */
   initHeroTrail();           /* cursor trail — opera sobre #inicio/#heroTrail */

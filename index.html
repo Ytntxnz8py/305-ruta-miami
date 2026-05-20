@@ -272,8 +272,24 @@
           </div>
         </div>
 
-        <!-- Grid inyectado por main.js -->
-        <div class="destinos-grid" id="destinosGrid" aria-live="polite"></div>
+        <!-- Carrusel de destinos -->
+        <div class="destinos-carousel-wrap">
+          <button class="destinos-carousel__btn destinos-carousel__btn--prev"
+                  id="destCarouselPrev" aria-label="Destinos anteriores" type="button">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="destinos-grid" id="destinosGrid" aria-live="polite"></div>
+          <button class="destinos-carousel__btn destinos-carousel__btn--next"
+                  id="destCarouselNext" aria-label="Destinos siguientes" type="button">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
 
       </div>
     </section>

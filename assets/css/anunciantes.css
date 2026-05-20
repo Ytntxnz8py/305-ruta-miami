@@ -2288,3 +2288,87 @@ p  { font-weight: 300; }
   .form-campo.has-error textarea { animation: none; }
   .fc-label { transition: none; }
 }
+
+/* ===================================================================
+   HERO — FONDO BLANCO ARENA
+   Override del fondo oscuro original. Solo colores: todo lo demás
+   (tipografía, tamaños, layout, animaciones) permanece intacto.
+================================================================= */
+.seccion-hero {
+  background: var(--blanco-arena) !important;
+}
+
+/* Parallax orbs: más suaves sobre fondo claro */
+.hp-orb--turquesa { opacity: 0.55 !important; }
+.hp-orb--coral    { opacity: 0.45 !important; }
+.hp-orb--mostaza  { opacity: 0.38 !important; }
+
+/* Texto que era blanco → tinta oscura */
+.hero-titulo      { color: var(--tinta) !important; }
+.hero-subtitulo   { color: rgba(26, 42, 53, 0.62) !important; }
+.hero-stat__numero { color: var(--tinta) !important; }
+.hero-stat__label  { color: rgba(26, 42, 53, 0.52) !important; }
+.hero-stat + .hero-stat::before { background: rgba(26, 42, 53, 0.14) !important; }
+
+/* Pill — texto turquesa oscuro para contraste en fondo claro */
+.hero-pill {
+  color: var(--turquesa-oscuro) !important;
+  background: rgba(0, 188, 212, 0.10) !important;
+}
+
+/* Scroll hint — visible en fondo claro */
+.scroll-hint { color: rgba(26, 42, 53, 0.38) !important; }
+
+/* Botón Ghost adaptado para fondo claro */
+.seccion-hero [data-variant="ghost"] {
+  background: rgba(26, 42, 53, 0.06) !important;
+}
+.seccion-hero [data-variant="ghost"] .metal-btn-inner {
+  background: rgba(26, 42, 53, 0.05) !important;
+}
+.seccion-hero [data-variant="ghost"] .metal-btn {
+  background: rgba(26, 42, 53, 0.07) !important;
+  color: var(--tinta) !important;
+  border: 1.5px solid rgba(26, 42, 53, 0.2) !important;
+}
+
+/* Aurora más suave sobre blanco-arena */
+.hero-aurora {
+  opacity: 0.55 !important;
+}
+
+/* ── Mobile: hero no cortado ── */
+@media (max-width: 600px) {
+  .seccion-hero {
+    min-height: auto !important;
+    padding: 6rem 1.25rem 4rem !important;
+  }
+  /* Tarjetas fotográficas: reduce translate para evitar clipping */
+  .hero-img-card--back  {
+    transform: rotate(-4deg) translate(50px, 16px) !important;
+  }
+  .hero-img-card--front {
+    transform: rotate(4deg) translate(-45px, -16px) !important;
+  }
+  .hero-img-card--back:hover {
+    transform: rotate(-1deg) translate(50px, 4px) scale(1.02) !important;
+  }
+  .hero-img-card--front:hover {
+    transform: rotate(1deg) translate(-45px, -28px) scale(1.02) !important;
+  }
+  /* Animaciones de entrada ajustadas al nuevo translate */
+  @keyframes hc-in-back-sm {
+    from { opacity: 0; transform: rotate(-4deg) translate(160px, 16px); }
+    to   { opacity: 1; transform: rotate(-4deg) translate(50px, 16px); }
+  }
+  @keyframes hc-in-front-sm {
+    from { opacity: 0; transform: rotate(4deg) translate(120px, -16px); }
+    to   { opacity: 1; transform: rotate(4deg) translate(-45px, -16px); }
+  }
+  .hero-img-card--back  { animation-name: hc-in-back-sm !important; }
+  .hero-img-card--front { animation-name: hc-in-front-sm !important; }
+}
+
+/* ── Mobile: floating nav — el dropdown se posiciona bien ── */
+/* (el HTML fue restructurado: dropdown ahora es hijo de .fn-wrap, no de .fn) */
+/* .fn-wrap es position:fixed → .fn__dropdown se posiciona relativo a él */
