@@ -1749,6 +1749,66 @@ function initRoadmap() {
   milestones.forEach(function(m) { io.observe(m); });
 }
 
+/* ===== TOOLTIP DEL ROADMAP — tarjeta flotante al pasar el cursor ===== */
+function initRoadmapTooltip() {
+  var canvas = document.getElementById('rdmCanvas');
+  if (!canvas) return;
+
+  /* Crear el elemento tooltip una sola vez y adjuntarlo al body
+     para usar position: fixed sin restricciones de overflow */
+  var tip = document.createElement('div');
+  tip.className = 'rdm-tooltip';
+  tip.setAttribute('aria-hidden', 'true');
+  tip.innerHTML =
+    '<div class="rdm-tooltip__barra"></div>' +
+    '<div class="rdm-tooltip__nombre"></div>' +
+    '<p class="rdm-tooltip__desc"></p>';
+  document.body.appendChild(tip);
+
+  var tipNombre = tip.querySelector('.rdm-tooltip__nombre');
+  var tipDesc   = tip.querySelector('.rdm-tooltip__desc');
+
+  /* Posiciona el tooltip cerca del cursor, clampeado al viewport */
+  function moverTip(e) {
+    var x  = e.clientX + 18;
+    var y  = e.clientY - 14;
+    var tw = tip.offsetWidth  || 236;
+    var th = tip.offsetHeight || 100;
+    if (x + tw > window.innerWidth  - 14) x = e.clientX - tw - 18;
+    if (y + th > window.innerHeight - 14) y = e.clientY - th - 8;
+    if (y < 8) y = e.clientY + 20;
+    tip.style.left = x + 'px';
+    tip.style.top  = y + 'px';
+  }
+
+  function mostrarTip(m, e) {
+    var desc   = m.dataset.desc || '';
+    if (!desc) return;
+    /* Nombre: extraer antes del " — " del atributo title */
+    var titulo = (m.getAttribute('title') || '').split('—')[0].trim();
+    tipNombre.textContent = titulo;
+    tipDesc.textContent   = desc;
+    tip.classList.add('rdm-tooltip--visible');
+    moverTip(e);
+  }
+
+  function ocultarTip() {
+    tip.classList.remove('rdm-tooltip--visible');
+  }
+
+  /* Registrar eventos en todos los milestones */
+  canvas.querySelectorAll('.rdm-milestone').forEach(function(m) {
+    m.addEventListener('mouseenter', function(e) { mostrarTip(m, e); });
+    m.addEventListener('mousemove',  moverTip);
+    m.addEventListener('mouseleave', ocultarTip);
+  });
+
+  /* Ocultar si la ventana pierde el foco */
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) ocultarTip();
+  });
+}
+
 /* ===== INICIALIZACIÓN ===== */
 document.addEventListener('DOMContentLoaded', function () {
   leerConfigSitio();
@@ -1757,6 +1817,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initScrollAnimation();
   initHeroTrail();
   initRoadmap();
+  initRoadmapTooltip();
   /* initGlobo / initMapaLeaflet / initReferenciasGlobo eliminados —
      la sección mapa fue reemplazada por el roadmap animado */
 });
