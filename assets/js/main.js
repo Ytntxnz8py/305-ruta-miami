@@ -1319,15 +1319,15 @@ function initGlobo() {
     height:           canvas.offsetWidth  * 2,
     phi:              0,
     theta:            0.2,
-    /* Apariencia — globo blanco puro, sin oscuridad */
-    dark:             0,
+    /* Apariencia — globo blanco con océano levemente más oscuro para contraste */
+    dark:             0.12,   /* 0 → invisible sobre fondo claro; 0.12 → continentes visibles */
     diffuse:          1.5,
     mapSamples:       16000,
     mapBrightness:    8,
-    /* Colores — coral/mostaza sobre blanco */
+    /* Colores — blanco puro con marcadores mostaza */
     baseColor:        [1.0,  1.0,  1.0 ],
     markerColor:      [1.0,  0.70, 0.0 ],   /* mostaza #FFB300 */
-    glowColor:        [0.94, 0.93, 0.91],
+    glowColor:        [0.75, 0.88, 0.98],   /* halo azul cielo — combina con el fondo */
     /* 16 ciudades del mundo — decorativas */
     markers: [
       { location: [ 25.76, -80.19], size: 0.07 },  /* Miami — destino */

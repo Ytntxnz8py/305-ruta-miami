@@ -2446,15 +2446,16 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   .mapa-grid { grid-template-columns: 1fr !important; }
 }
 
-/* --- Globo: sin sombras, fondo limpio y fluido --- */
+/* --- Globo: fondo azul cielo para contrastar el globo blanco, sin sombras --- */
 .mapa-globo-wrap {
-  background: transparent !important;
+  background: linear-gradient(145deg, #b8d8ee 0%, #cce0f4 40%, #dde9f8 100%) !important;
   border: none !important;
   box-shadow: none !important;
-  padding: 0.5rem !important;
+  border-radius: 24px !important;
+  padding: 1.4rem !important;
 }
 
-/* --- Globo: canvas más pequeño y circular limpio --- */
+/* --- Globo: canvas circular, sin sombra --- */
 .mapa-globo-canvas {
   border-radius: 50% !important;
   box-shadow: none !important;
