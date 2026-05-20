@@ -675,21 +675,30 @@ function abrirModal(idDestino) {
   var rUrl    = d.resenas_url     || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(nombre));
   var wUrl    = d.web_oficial     || '#';
 
+  /* Función auxiliar para generar un metal-btn-wrap con <a> */
+  function metalLink(href, variant, trackCall, label) {
+    return '<div class="metal-btn-wrap" data-variant="' + variant + '" data-size="sm">' +
+      '<div class="metal-btn-inner"></div>' +
+      '<a href="' + href + '" target="_blank" rel="noopener" class="metal-btn modal-accion-btn"' +
+         (trackCall ? ' onclick="' + trackCall + '"' : '') + '>' +
+        '<div class="metal-btn-shine"></div>' +
+        '<div class="metal-btn-hover-glow"></div>' +
+        label +
+      '</a>' +
+    '</div>';
+  }
+  var nombreEsc = nombre.replace(/'/g, "&#39;");
   document.getElementById('modalAcciones').innerHTML =
-    '<a href="' + gUrl + '" target="_blank" rel="noopener" class="modal-accion-btn modal-accion-btn--google" ' +
-       'onclick="if(typeof trackMapsClick===\'function\')trackMapsClick(\'' + nombre.replace(/'/g,"&#39;") + '\')">' +
-       (esEs ? 'Google Maps' : 'Google Maps') +
-    '</a>' +
-    '<a href="' + aUrl + '" target="_blank" rel="noopener" class="modal-accion-btn modal-accion-btn--apple" ' +
-       'onclick="if(typeof trackAppleMapsClick===\'function\')trackAppleMapsClick(\'' + nombre.replace(/'/g,"&#39;") + '\')">' +
-       (esEs ? 'Apple Maps' : 'Apple Maps') +
-    '</a>' +
-    '<a href="' + rUrl + '" target="_blank" rel="noopener" class="modal-accion-btn modal-accion-btn--resenas" ' +
-       'onclick="if(typeof trackReviewsClick===\'function\')trackReviewsClick(\'' + nombre.replace(/'/g,"&#39;") + '\')">' +
-       (esEs ? 'Ver reseñas reales' : 'See real reviews') +
-    '</a>' +
-    (wUrl !== '#' ? '<a href="' + wUrl + '" target="_blank" rel="noopener" class="modal-accion-btn modal-accion-btn--web">' +
-       (esEs ? 'Sitio oficial' : 'Official site') + '</a>' : '');
+    metalLink(gUrl, 'default', 'if(typeof trackMapsClick===\'function\')trackMapsClick(\'' + nombreEsc + '\')',
+              '📍 Google Maps') +
+    metalLink(aUrl, 'default', 'if(typeof trackAppleMapsClick===\'function\')trackAppleMapsClick(\'' + nombreEsc + '\')',
+              '🍎 Apple Maps') +
+    metalLink(rUrl, 'gold',    'if(typeof trackReviewsClick===\'function\')trackReviewsClick(\'' + nombreEsc + '\')',
+              '⭐ ' + (esEs ? 'Ver reseñas' : 'Reviews')) +
+    (wUrl !== '#' ? metalLink(wUrl, 'turquesa', '',
+              '🔗 ' + (esEs ? 'Sitio oficial' : 'Official site')) : '');
+  /* Inicializar metal buttons del modal */
+  initMetalButtons(document.getElementById('modalAcciones'));
 
   /* 6. Cómo llegar */
   var llegarEl = document.getElementById('modalLlegar');
@@ -818,10 +827,16 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.filtros__btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       filtroActivo = btn.dataset.filtro;
+      /* Quitar activo de todos los botones y sus wrappers */
       document.querySelectorAll('.filtros__btn').forEach(function (b) {
         b.classList.remove('filtros__btn--activo');
+        var wrap = b.closest('.metal-btn-wrap');
+        if (wrap) wrap.classList.remove('is-active');
       });
+      /* Activar el botón pulsado y su wrapper */
       btn.classList.add('filtros__btn--activo');
+      var activeWrap = btn.closest('.metal-btn-wrap');
+      if (activeWrap) activeWrap.classList.add('is-active');
       renderDestinos(filtroActivo);
     });
   });
@@ -1812,6 +1827,32 @@ function initRoadmapTooltip() {
 }
 
 /* ===== INICIALIZACIÓN ===== */
+/* ===== METAL BUTTONS — Estados press/hover (port React MetalButton) ===== */
+function initMetalButtons(root) {
+  var scope = root || document;
+  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+  scope.querySelectorAll('.metal-btn-wrap').forEach(function(wrap) {
+    /* Evitar doble-binding */
+    if (wrap.dataset.metalInit) return;
+    wrap.dataset.metalInit = '1';
+
+    var btn = wrap.querySelector('.metal-btn');
+    if (!btn) return;
+
+    function setPressed(v)  { wrap.classList.toggle('is-pressed', v); }
+    function setHovered(v)  { if (!isTouchDevice) wrap.classList.toggle('is-hovered', v); }
+
+    btn.addEventListener('mousedown',   function() { setPressed(true);  });
+    btn.addEventListener('mouseup',     function() { setPressed(false); });
+    btn.addEventListener('mouseleave',  function() { setPressed(false); setHovered(false); });
+    btn.addEventListener('mouseenter',  function() { setHovered(true);  });
+    btn.addEventListener('touchstart',  function() { setPressed(true);  }, { passive: true });
+    btn.addEventListener('touchend',    function() { setPressed(false); });
+    btn.addEventListener('touchcancel', function() { setPressed(false); });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   leerConfigSitio();
   registrarVisita();
@@ -1820,6 +1861,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initHeroTrail();
   initRoadmap();
   initRoadmapTooltip();
+  initMetalButtons();
   /* initGlobo / initMapaLeaflet / initReferenciasGlobo eliminados —
      la sección mapa fue reemplazada por el roadmap animado */
 });

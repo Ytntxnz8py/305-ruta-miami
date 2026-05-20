@@ -3049,3 +3049,265 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   box-shadow: 0 2px 10px rgba(0,0,0,0.14) !important;
   font-weight: 600 !important;
 }
+
+/* ============================================================
+   METAL BUTTONS — Port del componente MetalButton (React)
+   Gradientes metálicos + estados press/hover + variantes Miami
+   ============================================================ */
+
+/* ── WRAPPER — padding 1.25px actúa como border gradiente ── */
+.metal-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  border-radius: 8px;
+  padding: 1.25px;
+  vertical-align: middle;
+  will-change: transform;
+  transform-origin: center center;
+  transition: all 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+  background: linear-gradient(to bottom, #111111, #A0A0A0);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+}
+
+/* ── INNER RING — anillo interior a 1px del borde ── */
+.metal-btn-inner {
+  position: absolute;
+  inset: 1px;
+  border-radius: 7px;
+  pointer-events: none;
+  will-change: filter;
+  transition: filter 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+  background: linear-gradient(to bottom, #FAFAFA, #3E3E3E, #E5E5E5);
+}
+
+/* ── SUPERFICIE del botón / enlace ── */
+.metal-btn {
+  position: relative;
+  z-index: 10;
+  margin: 1px;
+  border-radius: 6px;
+  display: inline-flex;
+  height: 44px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  gap: 0.5rem;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  will-change: transform, filter;
+  transform-origin: center center;
+  transition: all 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+  -webkit-font-smoothing: antialiased;
+  background: linear-gradient(to bottom, #B9B9B9, #969696);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgb(80 80 80);
+}
+.metal-btn:focus-visible { outline: 2px solid var(--turquesa); outline-offset: 3px; }
+
+/* ── SHINE — destelllo blanco al presionar ── */
+.metal-btn-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 300ms;
+  background: linear-gradient(to right, transparent, rgba(245,245,245,0.55), transparent);
+}
+
+/* ── HOVER GLOW — gradiente suave al hovear ── */
+.metal-btn-hover-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to top, transparent, rgba(255,255,255,0.08));
+  opacity: 0;
+  transition: opacity 300ms;
+  z-index: 15;
+}
+
+/* ── ESTADOS ─────────────────────────── */
+.metal-btn-wrap.is-pressed {
+  transform: translateY(2.5px) scale(0.99) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15) !important;
+}
+.metal-btn-wrap.is-pressed .metal-btn         { transform: scale(0.97); }
+.metal-btn-wrap.is-pressed .metal-btn-shine   { opacity: 0.22; }
+
+.metal-btn-wrap.is-hovered                    { box-shadow: 0 4px 12px rgba(0,0,0,0.14) !important; }
+.metal-btn-wrap.is-hovered .metal-btn-inner   { filter: brightness(1.05); }
+.metal-btn-wrap.is-hovered .metal-btn         { filter: brightness(1.03); }
+.metal-btn-wrap.is-hovered .metal-btn-hover-glow { opacity: 1; }
+
+/* ── VARIANTE CORAL (Ver destinos, Enviar mensaje) ── */
+.metal-btn-wrap[data-variant="coral"] {
+  background: linear-gradient(to bottom, #5A0000, #FF9090);
+  box-shadow: 0 3px 10px rgba(192,57,43,0.22);
+}
+.metal-btn-wrap[data-variant="coral"].is-hovered {
+  box-shadow: 0 5px 16px rgba(192,57,43,0.36) !important;
+}
+.metal-btn-wrap[data-variant="coral"] .metal-btn-inner {
+  background: linear-gradient(to bottom, #FFD0D0, #8B1A1A, #FFE5E5);
+}
+.metal-btn-wrap[data-variant="coral"] .metal-btn {
+  background: linear-gradient(to bottom, #FF7A7A, #C0392B);
+  text-shadow: 0 -1px 0 rgb(100 0 0);
+  color: #fff;
+}
+
+/* ── VARIANTE TURQUESA (Ver mapa, Filtro Mar) ── */
+.metal-btn-wrap[data-variant="turquesa"] {
+  background: linear-gradient(to bottom, #003840, #70D8E0);
+  box-shadow: 0 3px 10px rgba(0,150,180,0.22);
+}
+.metal-btn-wrap[data-variant="turquesa"].is-hovered {
+  box-shadow: 0 5px 16px rgba(0,150,180,0.36) !important;
+}
+.metal-btn-wrap[data-variant="turquesa"] .metal-btn-inner {
+  background: linear-gradient(to bottom, #C0F4F8, #005F6B, #B0EEF5);
+}
+.metal-btn-wrap[data-variant="turquesa"] .metal-btn {
+  background: linear-gradient(to bottom, #30CCE0, #0097A7);
+  text-shadow: 0 -1px 0 rgb(0 60 80);
+  color: #fff;
+}
+
+/* ── VARIANTE TIERRA (Filtro Tierra) ── */
+.metal-btn-wrap[data-variant="tierra"] {
+  background: linear-gradient(to bottom, #1A3A00, #88C066);
+  box-shadow: 0 3px 10px rgba(70,120,30,0.20);
+}
+.metal-btn-wrap[data-variant="tierra"].is-hovered {
+  box-shadow: 0 5px 16px rgba(70,120,30,0.34) !important;
+}
+.metal-btn-wrap[data-variant="tierra"] .metal-btn-inner {
+  background: linear-gradient(to bottom, #D8F0C0, #2D5A00, #D0EAB8);
+}
+.metal-btn-wrap[data-variant="tierra"] .metal-btn {
+  background: linear-gradient(to bottom, #78B844, #4A7A22);
+  text-shadow: 0 -1px 0 rgb(20 50 0);
+  color: #fff;
+}
+
+/* ── VARIANTE GOLD (Reseñas) ── */
+.metal-btn-wrap[data-variant="gold"] {
+  background: linear-gradient(to bottom, #917100, #EAD98F);
+  box-shadow: 0 3px 10px rgba(145,113,0,0.22);
+}
+.metal-btn-wrap[data-variant="gold"].is-hovered {
+  box-shadow: 0 5px 16px rgba(145,113,0,0.36) !important;
+}
+.metal-btn-wrap[data-variant="gold"] .metal-btn-inner {
+  background: linear-gradient(to bottom, #FFFDDD, #856807, #FFF1B3);
+}
+.metal-btn-wrap[data-variant="gold"] .metal-btn {
+  background: linear-gradient(to bottom, #FFEBA1, #9B873F);
+  text-shadow: 0 -1px 0 rgb(120 90 0);
+  color: #1a0f00;
+}
+
+/* ── VARIANTE ICON (Cerrar modal ✕, Idioma) ── */
+.metal-btn-wrap[data-variant="icon"] {
+  background: linear-gradient(to bottom, #222, #888);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+.metal-btn-wrap[data-variant="icon"] .metal-btn-inner {
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #F0F0F0, #404040, #E0E0E0);
+}
+.metal-btn-wrap[data-variant="icon"] .metal-btn {
+  border-radius: 50% !important;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: linear-gradient(to bottom, #B0B0B0, #808080);
+  color: #fff;
+  font-size: 0.95rem;
+  text-shadow: 0 -1px 0 rgb(60 60 60);
+}
+
+/* ── ESTADO ACTIVO (filtro seleccionado) ── */
+.metal-btn-wrap.is-active {
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.85), 0 4px 14px rgba(0,0,0,0.22) !important;
+}
+.metal-btn-wrap.is-active .metal-btn { filter: brightness(1.08); }
+
+/* ── TAMAÑOS ── */
+.metal-btn-wrap[data-size="sm"] .metal-btn {
+  height: 36px;
+  padding: 0.3rem 1rem;
+  font-size: 0.80rem;
+}
+.metal-btn-wrap[data-size="lg"] .metal-btn {
+  height: 52px;
+  padding: 0.65rem 2rem;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+.metal-btn-wrap[data-size="full"] {
+  width: 100%;
+}
+.metal-btn-wrap[data-size="full"] .metal-btn {
+  width: 100%;
+}
+
+/* ── IDIOMA HEADER — compact pill ── */
+.metal-btn-wrap.header-lang-wrap {
+  border-radius: 999px;
+}
+.metal-btn-wrap.header-lang-wrap .metal-btn-inner {
+  border-radius: 999px;
+}
+.metal-btn-wrap.header-lang-wrap .metal-btn {
+  border-radius: 999px;
+  height: 30px;
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* ── BOTONES DEL MODAL (acciones) ── */
+.modal-acciones { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.2rem 0; }
+.modal-acciones .metal-btn-wrap { flex: 1 1 auto; min-width: 120px; }
+.modal-acciones .metal-btn { width: 100%; font-size: 0.78rem; height: 38px; }
+
+/* ── MÓVIL ── */
+@media (max-width: 480px) {
+  .metal-btn { height: 40px; padding: 0.42rem 1.1rem; font-size: 0.82rem; }
+  .metal-btn-wrap[data-size="lg"] .metal-btn { height: 46px; padding: 0.5rem 1.4rem; font-size: 0.92rem; }
+}
+
+/* ── REDUCCIÓN DE MOVIMIENTO ── */
+@media (prefers-reduced-motion: reduce) {
+  .metal-btn-wrap,
+  .metal-btn,
+  .metal-btn-inner,
+  .metal-btn-shine,
+  .metal-btn-hover-glow { transition: none !important; }
+}
+
+/* Posicionar el wrapper del botón cerrar en el modal */
+.modal-cerrar-wrap {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  z-index: 10 !important;
+}
+
+/* Filtros: alinear metal wrappers en flex */
+.filtros { display: flex; gap: 0.55rem; flex-wrap: wrap; align-items: center; justify-content: center; }
