@@ -2750,21 +2750,54 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   background: linear-gradient(to bottom, rgba(255,255,255,0.40), transparent) !important;
 }
 
-/* ── Título: Cormorant Garamond ultra-fino en blanco ── */
+/* ============================================================
+   TÍTULO HERO — Foto recortada a través de las letras
+   La imagen de Miami se ve dentro de "Explora Miami"
+   background-clip:text + paneo continuo suave
+   ============================================================ */
+@keyframes titulo-paneo {
+  0%   { background-position: 0%   60%; }
+  50%  { background-position: 100% 40%; }
+  100% { background-position: 0%   60%; }
+}
+
+@keyframes hero-word-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
 .hero-arc__titulo {
   font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif !important;
   font-weight: 300 !important;
   font-style: italic !important;
-  color: #fff !important;
-  text-shadow: 0 2px 32px rgba(0,0,0,0.38) !important;
   letter-spacing: 0.04em !important;
-  -webkit-text-fill-color: #fff !important;
+
+  /* Foto de Miami recortada dentro del texto */
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+
+  background-image: url('../images/photo-1595323397978-65433d24fc23.avif') !important;
+  background-size: 220% auto !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+
+  /* Paneo lento de la imagen a través de las letras */
+  animation: titulo-paneo 10s ease-in-out infinite !important;
 }
 
-/* Cada letra (shutter) hereda el blanco */
+/* Palabras estáticas — entrada suave desde abajo */
+.hero-t-word {
+  display: inline-block;
+  animation: hero-word-in 0.9s cubic-bezier(0.2, 0, 0, 1) both;
+}
+.hero-t-word:first-child { animation-delay: 0.10s; }
+.hero-t-word:last-child  { animation-delay: 0.32s; }
+
+/* Si el shutter JS se activa, misma transparencia */
 .hero-arc__titulo .shutter-capa {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
 }
 
 /* ── Tagline: trazo fino blanco ── */
@@ -2904,8 +2937,8 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
    Glassmorphism · coral/mostaza accent · 16s cubic-bezier
    ============================================================ */
 
-/* Los milestones son interactivos */
-.rdm-milestone { cursor: help !important; }
+/* Los milestones son interactivos — sin ícono ? del navegador */
+.rdm-milestone { cursor: pointer !important; }
 
 /* Tarjeta tooltip (fixed, creada por JS) */
 .rdm-tooltip {
@@ -2967,4 +3000,36 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 /* Ocultar en pantallas táctiles — tooltip no aplica */
 @media (hover: none) {
   .rdm-tooltip { display: none !important; }
+}
+
+/* ============================================================
+   ROADMAP — Contraste de puntos y etiquetas sobre fondo arena
+   ============================================================ */
+
+/* Dots primarios (tierra + mar): anillo blanco + sombra oscura */
+.rdm-milestone--tierra .rdm-dot,
+.rdm-milestone--mar    .rdm-dot {
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.95),
+    0 0 0 5.5px rgba(0,0,0,0.22),
+    0 4px 16px rgba(0,0,0,0.28) !important;
+}
+
+/* Dots de referencia: mostaza con doble anillo */
+.rdm-milestone--ref .rdm-dot {
+  background: var(--coral) !important;
+  box-shadow:
+    0 0 0 2.5px rgba(255,255,255,0.97),
+    0 0 0 4.5px rgba(0,0,0,0.20),
+    0 3px 10px rgba(255,100,80,0.35) !important;
+  border-color: transparent !important;
+}
+
+/* Etiquetas (bubble) con fondo sólido y contraste mejorado */
+.rdm-bubble {
+  background: rgba(255,255,255,0.96) !important;
+  color: var(--texto-oscuro) !important;
+  border: 1px solid rgba(0,0,0,0.10) !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.14) !important;
+  font-weight: 600 !important;
 }

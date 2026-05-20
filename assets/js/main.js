@@ -956,10 +956,12 @@ function initHeroTrail() {
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Shutter en el título */
+  /* Shutter en el título — sólo si el título está vacío */
   (function initShutter() {
     var titulo = document.getElementById('heroTitulo');
     if (!titulo) return;
+    /* Si el HTML estático ya tiene contenido, no sobreescribir */
+    if (titulo.textContent.trim() !== '') return;
     titulo.innerHTML = '';
     titulo.setAttribute('aria-label', 'EXPLORA MIAMI');
     'EXPLORA MIAMI'.split('').forEach(function(c, i) {
