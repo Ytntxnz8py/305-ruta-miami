@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Explora Miami · Guías y Consejos Outdoor</title>
+  <meta name="description" content="Guías prácticas sobre kayak, buceo, senderismo y aventuras outdoor en Miami y South Florida. Escritas por locales, para viajeros." />
+  <link rel="canonical" href="https://ytntxnz8py.github.io/mi-tienda/blog.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://ytntxnz8py.github.io/mi-tienda/blog.html" />
+  <meta property="og:title"       content="Blog — Explora Miami" />
+  <meta property="og:description" content="Guías prácticas de aventuras outdoor en Miami." />
+  <meta property="og:image"       content="https://ytntxnz8py.github.io/mi-tienda/assets/images/hero/hero-04.jpg" />
+
+  <!-- Schema.org Blog -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog de Explora Miami",
+    "url": "https://ytntxnz8py.github.io/mi-tienda/blog.html",
+    "description": "Guías y consejos outdoor en Miami y South Florida",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Explora Miami",
+      "url": "https://ytntxnz8py.github.io/mi-tienda/"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/blog.css" />
+  <link rel="stylesheet" href="assets/css/circle-menu.css" />
+
+  <!-- Aplica idioma antes del render para evitar flash -->
+  <script>
+    document.documentElement.classList.add('lang-' + (localStorage.getItem('em_idioma') || 'es'));
+  </script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <div class="fn-wrap" role="banner">
+    <nav class="fn" id="floatingNav" aria-label="Navegación principal">
+
+      <a href="index.html" class="fn__logo" aria-label="Explora Miami — ir al inicio">
+        <span class="fn__logo-explora">Explora</span><span class="fn__logo-miami">Miami</span>
+      </a>
+
+      <div class="fn__divider" aria-hidden="true"></div>
+
+      <ul class="fn__links">
+        <li><a href="index.html"            class="fn__link">Inicio</a></li>
+        <li><a href="index.html#destinos"   class="fn__link">Destinos</a></li>
+        <li><a href="index.html#mapa"       class="fn__link">Mapa</a></li>
+        <li><a href="blog.html"             class="fn__link fn__link--activo">Blog</a></li>
+        <li><a href="anunciantes.html"      class="fn__link fn__link--cta">Para empresas</a></li>
+      </ul>
+
+      <button class="fn__lang" id="btnIdioma" aria-label="Cambiar idioma">ES</button>
+
+      <button class="fn__collapse-icon" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+    </nav>
+
+    <ul class="fn__dropdown" id="fnDropdown" role="menu">
+      <li>
+        <button class="fn__dd-lang-btn" id="btnIdiomaDropdown"
+          onclick="(function(){var b=document.getElementById('btnIdioma');if(b)b.click();document.getElementById('fnDropdown').classList.remove('is-open');document.querySelector('.fn__collapse-icon').setAttribute('aria-expanded','false');}())">
+          <span class="fn__dd-lang-icon">🌐</span>
+          <span class="lang-es fn__dd-lang-label">Traducir al inglés</span>
+          <span class="lang-en fn__dd-lang-label">Translate to Spanish</span>
+        </button>
+      </li>
+      <li><div class="fn__dd-sep" role="separator"></div></li>
+      <li><a href="index.html"           class="fn__dd-link">Inicio</a></li>
+      <li><a href="index.html#destinos"  class="fn__dd-link">Destinos</a></li>
+      <li><a href="index.html#mapa"      class="fn__dd-link">Mapa</a></li>
+      <li><a href="blog.html"            class="fn__dd-link fn__dd-link--activo">Blog</a></li>
+      <li><div class="fn__dd-sep" role="separator"></div></li>
+      <li><a href="anunciantes.html"     class="fn__dd-link fn__dd-link--cta">Para empresas</a></li>
+    </ul>
+  </div>
+
+  <main>
+
+    <!-- ===== HERO DEL BLOG ===== -->
+    <section class="blog-hero" id="blog-hero">
+      <div class="blog-hero__inner">
+
+        <span class="blog-hero__eyebrow fade-up">
+          <span class="lang-es">Guías · Consejos · Aventuras</span>
+          <span class="lang-en">Guides · Tips · Adventures</span>
+        </span>
+
+        <h1 class="blog-hero__titulo fade-up" style="transition-delay:0.08s">
+          <span class="lang-es">Todo lo que necesitas saber para explorar Miami</span>
+          <span class="lang-en">Everything you need to know to explore Miami</span>
+        </h1>
+
+        <div class="blog-hero__linea fade-up" style="transition-delay:0.14s" aria-hidden="true">
+          <span class="l-coral"></span>
+          <span class="l-turquesa"></span>
+          <span class="l-mostaza"></span>
+        </div>
+
+        <p class="blog-hero__sub fade-up" style="transition-delay:0.20s">
+          <span class="lang-es">Guías escritas por locales. Sin relleno, sin patrocinios disfrazados. Solo información real para que tu próxima aventura salga perfecta.</span>
+          <span class="lang-en">Guides written by locals. No filler, no disguised sponsorships. Just real information to make your next adventure perfect.</span>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ===== ARTÍCULO DESTACADO ===== -->
+    <section class="seccion-destacado" id="articulo-destacado">
+      <div class="seccion-destacado__inner">
+
+        <div class="articulo-destacado fade-up">
+
+          <!-- Columna imagen -->
+          <a href="blog/kayak-miami-principiantes.html" class="articulo-destacado__img-wrap" tabindex="-1" aria-hidden="true">
+            <img src="assets/images/hero/hero-04.jpg"
+                 alt="Kayak en Miami — manglares de Oleta River"
+                 class="articulo-destacado__img"
+                 loading="eager" />
+            <div class="articulo-destacado__overlay"></div>
+            <span class="articulo-destacado__badge">
+              <span class="lang-es">🌊 Agua</span>
+              <span class="lang-en">🌊 Water</span>
+            </span>
+          </a>
+
+          <!-- Columna contenido -->
+          <div class="articulo-destacado__body">
+            <span class="articulo-destacado__label">
+              <span class="lang-es">ARTÍCULO DESTACADO</span>
+              <span class="lang-en">FEATURED ARTICLE</span>
+            </span>
+
+            <h2 class="articulo-destacado__titulo">
+              <span class="lang-es">Kayak en Miami para principiantes: todo lo que necesitas saber</span>
+              <span class="lang-en">Kayaking in Miami for beginners: everything you need to know</span>
+            </h2>
+
+            <p class="articulo-destacado__extracto">
+              <span class="lang-es">Desde Oleta River hasta Biscayne Bay — los mejores spots, qué llevar y cómo reservar tu primera salida en kayak en Miami.</span>
+              <span class="lang-en">From Oleta River to Biscayne Bay — the best spots, what to bring and how to book your first kayaking trip in Miami.</span>
+            </p>
+
+            <p class="articulo-destacado__meta">
+              📅 <span class="lang-es">Mayo 2026</span><span class="lang-en">May 2026</span>
+              · ⏱ <span class="lang-es">8 min lectura</span><span class="lang-en">8 min read</span>
+            </p>
+
+            <a href="blog/kayak-miami-principiantes.html" class="articulo-destacado__link">
+              <span class="lang-es">Leer artículo</span>
+              <span class="lang-en">Read article</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GRID DE ARTÍCULOS ===== -->
+    <section class="seccion-grid" id="articulos-grid">
+      <div class="seccion-grid__inner">
+
+        <h2 class="seccion-grid__titulo fade-up">
+          <span class="lang-es">Más artículos</span>
+          <span class="lang-en">More articles</span>
+        </h2>
+
+        <div class="blog-grid">
+
+          <!-- Card: Buceo Key Largo -->
+          <a href="blog/buceo-key-largo-guia.html" class="blog-card shine-card fade-up" style="transition-delay:0.06s">
+            <div class="blog-card__img-wrap">
+              <img src="assets/images/hero/hero-07.jpg"
+                   alt="Buceo en Key Largo — arrecife de coral"
+                   class="blog-card__img" loading="lazy" />
+              <span class="blog-card__badge blog-card__badge--mar">
+                <span class="lang-es">🤿 Mar</span>
+                <span class="lang-en">🤿 Sea</span>
+              </span>
+            </div>
+            <div class="blog-card__body">
+              <p class="blog-card__meta">
+                <span class="lang-es">Mayo 2026 · 10 min</span>
+                <span class="lang-en">May 2026 · 10 min</span>
+              </p>
+              <h3 class="blog-card__titulo">
+                <span class="lang-es">Buceo en Key Largo: guía completa 2026</span>
+                <span class="lang-en">Diving in Key Largo: complete guide 2026</span>
+              </h3>
+              <p class="blog-card__extracto">
+                <span class="lang-es">John Pennekamp Coral Reef State Park es el primer parque marino de EE.UU. Te explicamos cómo llegar, qué ver y los mejores operadores de buceo.</span>
+                <span class="lang-en">John Pennekamp Coral Reef State Park is the first marine park in the USA. We explain how to get there, what to see and the best dive operators.</span>
+              </p>
+              <span class="blog-card__link">
+                <span class="lang-es">Leer artículo</span>
+                <span class="lang-en">Read article</span>
+                →
+              </span>
+            </div>
+          </a>
+
+          <!-- Card: Everglades en un día -->
+          <a href="blog/everglades-un-dia.html" class="blog-card shine-card fade-up" style="transition-delay:0.12s">
+            <div class="blog-card__img-wrap">
+              <img src="assets/images/hero/hero-01.jpg"
+                   alt="Everglades — sawgrass y fauna silvestre"
+                   class="blog-card__img" loading="lazy" />
+              <span class="blog-card__badge blog-card__badge--tierra">
+                <span class="lang-es">🏔️ Tierra</span>
+                <span class="lang-en">🏔️ Land</span>
+              </span>
+            </div>
+            <div class="blog-card__body">
+              <p class="blog-card__meta">
+                <span class="lang-es">Mayo 2026 · 7 min</span>
+                <span class="lang-en">May 2026 · 7 min</span>
+              </p>
+              <h3 class="blog-card__titulo">
+                <span class="lang-es">Qué ver en los Everglades en un día</span>
+                <span class="lang-en">What to see in the Everglades in one day</span>
+              </h3>
+              <p class="blog-card__extracto">
+                <span class="lang-es">A solo una hora de Miami, los Everglades son el ecosistema más grande de EE.UU. Esta guía te dice exactamente a dónde ir y cuándo para aprovecharlo al máximo.</span>
+                <span class="lang-en">Just an hour from Miami, the Everglades are the largest ecosystem in the USA. This guide tells you exactly where to go and when to make the most of it.</span>
+              </p>
+              <span class="blog-card__link">
+                <span class="lang-es">Leer artículo</span>
+                <span class="lang-en">Read article</span>
+                →
+              </span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA PARA EMPRESAS ===== -->
+    <section class="blog-cta-empresas" id="blog-cta-empresas">
+      <div class="blog-cta-empresas__inner fade-up">
+
+        <span class="blog-cta-empresas__eyebrow">
+          <span class="lang-es">¿Tienes un negocio outdoor en Miami?</span>
+          <span class="lang-en">Do you have an outdoor business in Miami?</span>
+        </span>
+
+        <h2 class="blog-cta-empresas__titulo">
+          <span class="lang-es">Tu empresa frente a miles de aventureros</span>
+          <span class="lang-en">Your business in front of thousands of adventurers</span>
+        </h2>
+
+        <p class="blog-cta-empresas__sub">
+          <span class="lang-es">Las personas que leen este blog están buscando exactamente lo que tú ofreces. Ponles tu negocio enfrente.</span>
+          <span class="lang-en">The people reading this blog are looking for exactly what you offer. Put your business in front of them.</span>
+        </p>
+
+        <div class="metal-btn-wrap" data-variant="turquesa" data-size="md">
+          <div class="metal-btn-inner"></div>
+          <a href="anunciantes.html#precios" class="metal-btn" style="text-decoration:none">
+            <div class="metal-btn-shine"></div>
+            <div class="metal-btn-hover-glow"></div>
+            <span class="lang-es">Ver planes y precios →</span>
+            <span class="lang-en">See plans and pricing →</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="contacto">
+    <div class="footer__contenedor">
+
+      <div class="footer__marca">
+        <a href="index.html" class="footer__logo">
+          <span class="footer__logo-explora">Explora</span><span class="footer__logo-miami">Miami</span>
+        </a>
+        <p class="footer__tagline">
+          <span class="lang-es">Tu próxima aventura empieza aquí</span>
+          <span class="lang-en">Your next adventure starts here</span>
+        </p>
+        <div class="footer__sociales">
+          <a href="#" class="footer__social" aria-label="Instagram">📸</a>
+          <a href="#" class="footer__social" aria-label="Facebook">👍</a>
+          <a href="#" class="footer__social" aria-label="TikTok">🎵</a>
+        </div>
+      </div>
+
+      <nav class="footer__nav" aria-label="Pie de página">
+        <h4 class="footer__subtitulo">
+          <span class="lang-es">Navegación</span>
+          <span class="lang-en">Navigation</span>
+        </h4>
+        <ul class="footer__lista">
+          <li><a href="index.html"           class="footer__enlace">Inicio</a></li>
+          <li><a href="index.html#destinos"  class="footer__enlace">Destinos</a></li>
+          <li><a href="index.html#mapa"      class="footer__enlace">Mapa</a></li>
+          <li><a href="blog.html"            class="footer__enlace">Blog</a></li>
+          <li><a href="anunciantes.html"     class="footer__enlace">
+            <span class="lang-es">Para empresas</span>
+            <span class="lang-en">For businesses</span>
+          </a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__destinos-lista">
+        <h4 class="footer__subtitulo">
+          <span class="lang-es">Destinos</span>
+          <span class="lang-en">Destinations</span>
+        </h4>
+        <ul class="footer__lista">
+          <li><span class="footer__enlace lang-es">Everglades — Senderismo</span><span class="footer__enlace lang-en">Everglades — Hiking</span></li>
+          <li><span class="footer__enlace lang-es">Key Largo — Buceo</span><span class="footer__enlace lang-en">Key Largo — Diving</span></li>
+          <li><span class="footer__enlace">Biscayne Bay — Kayak</span></li>
+          <li><span class="footer__enlace lang-es">Bill Baggs — Playa</span><span class="footer__enlace lang-en">Bill Baggs — Beach</span></li>
+          <li><span class="footer__enlace">Oleta River — Mountain Bike</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__inferior">
+      <span>© 2026 Explora Miami. <span class="lang-es">Todos los derechos reservados.</span><span class="lang-en">All rights reserved.</span></span>
+      <a href="admin.html" class="footer__enlace" style="font-size:0.78rem;opacity:0.4">Admin</a>
+    </div>
+  </footer>
+
+  <!-- Menú circular flotante -->
+  <div id="cm-blog" class="cm-wrap" aria-label="Navegación rápida"></div>
+
+  <script src="assets/js/blog.js"></script>
+  <script src="assets/js/circle-menu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      initCircleMenu('cm-blog', [
+        { icon: '🏠', label: 'Inicio',    href: 'index.html' },
+        { icon: '🌊', label: 'Kayak',     href: 'blog/kayak-miami-principiantes.html' },
+        { icon: '🤿', label: 'Buceo',     href: 'blog/buceo-key-largo-guia.html' },
+        { icon: '🏔️', label: 'Everglades',href: 'blog/everglades-un-dia.html' },
+        { icon: '🏢', label: 'Empresas',  href: 'anunciantes.html' }
+      ]);
+    });
+  </script>
+
+</body>
+</html>

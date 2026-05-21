@@ -13,6 +13,7 @@ var TEXTOS = {
     nav_destinos: 'Destinos',
     nav_mapa:     'Mapa',
     nav_trabaja:  'Trabaja con nosotros',
+    nav_blog:     'Blog',
     nav_empresas: 'Para empresas',
 
     /* Hero */
@@ -82,6 +83,7 @@ var TEXTOS = {
     nav_destinos: 'Destinations',
     nav_mapa:     'Map',
     nav_trabaja:  'Work with us',
+    nav_blog:     'Blog',
     nav_empresas: 'For businesses',
 
     /* Hero */
