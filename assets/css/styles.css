@@ -976,12 +976,7 @@ html.lang-es .lang-en { display: none; }
 
 /* ===== SECCIÓN TRABAJA CON NOSOTROS ===== */
 .seccion-trabaja {
-  background: linear-gradient(155deg,
-    rgba(227, 244, 255, 0.50) 0%,
-    var(--blanco-arena) 40%,
-    rgba(232, 245, 233, 0.55) 75%,
-    rgba(255, 243, 240, 0.35) 100%
-  );
+  background: var(--blanco-arena);
   padding: var(--seccion-py) 1.5rem;
 }
 
