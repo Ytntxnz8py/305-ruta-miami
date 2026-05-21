@@ -2930,3 +2930,62 @@ p  { font-weight: 300; }
   .seccion-precios .precio-card__badge { transform: none; }
   .seccion-precios .precio-card::before { transform: none; }
 }
+
+/* ===================================================================
+   BUG FIX 1 — fn-wrap: no debe aparecer en desktop
+   En anunciantes.html el .header cubre la navegación desktop.
+   El .fn-wrap es solo para móvil.
+================================================================= */
+@media (min-width: 768px) {
+  .fn-wrap { display: none !important; }
+}
+
+/* ===================================================================
+   BUG FIX 2 — Shutter hero: título aparece 4 veces
+   .sw__main necesita z-index positivo para no quedar bajo los slices
+   .sw__slice cambia a display:flex para alinearse correctamente
+   sobre el texto sin crear flujo adicional visible
+================================================================= */
+.sw__main {
+  position: relative;
+  z-index: 1;
+}
+.sw__slice {
+  display: flex;
+  align-items: center;
+}
+
+/* ===================================================================
+   BUG FIX 3 — Hero móvil: altura fija no se adapta (rango 601-767px)
+   Los breakpoints <600px ya tienen fix anterior.
+   Aquí cubrimos el rango intermedio y los teléfonos muy pequeños.
+================================================================= */
+@media (max-width: 767px) {
+  #hero-anunciantes {
+    min-height: auto !important;
+    padding-top: 7rem !important;
+  }
+  .hero-titulo {
+    font-size: clamp(1.9rem, 7vw, 2.6rem) !important;
+    line-height: 1.15 !important;
+  }
+}
+
+@media (max-width: 390px) {
+  #hero-anunciantes {
+    padding: 6rem 1rem 4rem !important;
+  }
+  .hero-titulo {
+    font-size: clamp(1.7rem, 8vw, 2.2rem) !important;
+  }
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-ctas .metal-btn-wrap,
+  .hero-ctas .metal-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-aurora { opacity: 0.40 !important; }
+}

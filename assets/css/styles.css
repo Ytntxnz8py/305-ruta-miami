@@ -4119,3 +4119,62 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   /* Solo mostrar dots en móvil por defecto (más limpio) */
   .rdm-dot { width: 9px; height: 9px; }
 }
+
+/* ===================================================================
+   BUG FIX — fn-wrap: hamburguesa flotante no debe aparecer en desktop
+   Confirmado en auditoría: posición fixed 48×56px en viewport ≥768px
+=================================================================== */
+@media (min-width: 768px) {
+  /* En desktop la pill nav se muestra completa — el icono ☰ es móvil-only */
+  .fn-wrap {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) {
+  /* En móvil: visible como hamburguesa */
+  .fn-wrap {
+    display: block;
+  }
+}
+
+/* ===================================================================
+   BUG FIX — ShuffleGrid: imágenes cortadas en móvil (Bug 4)
+=================================================================== */
+@media (max-width: 640px) {
+  .shuffle-grid {
+    height: 280px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+    gap: 5px !important;
+  }
+  .shuffle-card {
+    border-radius: 10px;
+  }
+}
+
+/* Cards de destino — imagen no se corta en ningún tamaño */
+.destino-card__foto,
+.destino-card__imagen,
+.destino-media img,
+.destino-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Contenedor de imagen: aspect-ratio fijo para evitar recorte */
+.destino-media,
+.destino-card__foto-wrap {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .destino-media,
+  .destino-card__foto-wrap {
+    aspect-ratio: 16 / 9;
+  }
+}
