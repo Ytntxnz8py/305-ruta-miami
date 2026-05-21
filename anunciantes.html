@@ -86,7 +86,6 @@
 
   <link rel="stylesheet" href="assets/css/anunciantes.css" />
   <link rel="stylesheet" href="assets/css/liquid-btn.css" />
-  <link rel="stylesheet" href="assets/css/circle-menu.css" />
   <link rel="stylesheet" href="assets/css/navbar.css" />
 
   <!-- Aplica idioma guardado (compatibilidad con visitas desde index.html) -->
@@ -1371,19 +1370,5 @@
   <script src="assets/js/anunciantes.js"></script>
   <script src="assets/js/navbar.js"></script>
 
-  <!-- Menú circular flotante -->
-  <div id="cm-anunciantes" class="cm-wrap" aria-label="Navegación rápida"></div>
-  <script src="assets/js/circle-menu.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      initCircleMenu('cm-anunciantes', [
-        { icon: '💰', label: 'Planes',       href: '#precios' },
-        { icon: '❓', label: 'Cómo funciona', href: '#como-funciona' },
-        { icon: '🎯', label: 'Para quién',   href: '#para-quien' },
-        { icon: '✉️', label: 'Contacto',     href: '#contacto-empresas' },
-        { icon: '🏠', label: 'Inicio',       href: 'index.html' }
-      ]);
-    });
-  </script>
 </body>
 </html>
