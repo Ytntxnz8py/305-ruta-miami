@@ -145,6 +145,27 @@
     });
   }
 
+  /* ─── 9. cambiarIdioma global (compatibilidad con navbar universal) ─── */
+  function cambiarIdioma() {
+    var actual = localStorage.getItem('em_idioma') || 'es';
+    var nuevo  = actual === 'es' ? 'en' : 'es';
+    localStorage.setItem('em_idioma', nuevo);
+    var html = document.documentElement;
+    html.classList.remove('lang-es', 'lang-en');
+    html.classList.add('lang-' + nuevo);
+    html.lang = nuevo;
+    var langBtn = document.getElementById('emNavLang');
+    if (langBtn) langBtn.textContent = nuevo === 'es' ? 'EN' : 'ES';
+    var drawerBtns = document.querySelectorAll('.em-nav__drawer-lang button, .em-drawer__lang-btn');
+    for (var i = 0; i < drawerBtns.length; i++) {
+      var btn = drawerBtns[i];
+      if (btn.dataset && btn.dataset.lang) {
+        btn.classList.toggle('active', btn.dataset.lang === nuevo);
+      }
+    }
+  }
+  window.cambiarIdioma = cambiarIdioma;
+
   /* ─── Init ─── */
   document.addEventListener('DOMContentLoaded', function () {
     initScrollAnimation();
