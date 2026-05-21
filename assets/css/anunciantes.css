@@ -2816,7 +2816,7 @@ p  { font-weight: 300; }
    ============================================ */
 .resenas-section {
   padding: 5rem 1.5rem 6rem;
-  background: linear-gradient(180deg, var(--blanco-arena) 0%, #f8f3e8 100%);
+  background: var(--blanco-arena);
 }
 .resenas-container {
   max-width: 1080px;
@@ -3070,7 +3070,7 @@ p  { font-weight: 300; }
 ====================================================== */
 .orbital-section {
   padding: 5rem 1.5rem 5.5rem;
-  background: linear-gradient(180deg, var(--blanco-arena) 0%, #f8efe2 100%);
+  background: var(--blanco-arena);
   position: relative;
   overflow: hidden;
 }
