@@ -227,10 +227,6 @@
           <!-- Stats flotantes -->
           <div class="hero-stats fade-up" style="transition-delay:0.32s" aria-label="Datos del directorio">
             <div class="hero-stat">
-              <div class="hero-stat__numero">9</div>
-              <div class="hero-stat__label"><span class="lang-es">destinos activos</span><span class="lang-en">active destinations</span></div>
-            </div>
-            <div class="hero-stat">
               <div class="hero-stat__numero">Miami</div>
               <div class="hero-stat__label"><span class="lang-es">cobertura</span><span class="lang-en">coverage</span></div>
             </div>
@@ -895,212 +891,107 @@
     </section>
 
     <!-- ===================================================
-         SECCIÓN 7: TESTIMONIOS — columnas con scroll infinito
-         PLACEHOLDER: reemplazar con testimonios reales cuando estén disponibles
+         SECCIÓN 7: RESEÑAS REALES — escritas por la comunidad
     =================================================== -->
-    <section class="seccion-testimonios an-section" id="testimonios" aria-label="Testimonios de anunciantes">
-      <div class="an-container">
+    <section class="resenas-section an-section" id="resenas" aria-labelledby="resenas-titulo">
+      <div class="resenas-container">
 
-        <div class="an-section-header fade-up">
-          <span class="an-eyebrow"><span class="lang-es">Lo que dicen nuestros anunciantes</span><span class="lang-en">What our advertisers say</span></span>
-          <h2><span class="lang-es">Resultados reales</span><span class="lang-en">Real results</span></h2>
+        <header class="resenas-header fade-up">
+          <p class="resenas-eyebrow">
+            <span class="lang-es">Comunidad</span>
+            <span class="lang-en">Community</span>
+          </p>
+          <h2 id="resenas-titulo" class="resenas-titulo">
+            <span class="lang-es">Reseñas de quienes ya nos eligieron</span>
+            <span class="lang-en">Reviews from those who chose us</span>
+          </h2>
+          <p class="resenas-sub">
+            <span class="lang-es">Comparte tu experiencia o lee historias reales de la comunidad.</span>
+            <span class="lang-en">Share your experience or read real stories from the community.</span>
+          </p>
+        </header>
+
+        <!-- Lista de reseñas existentes -->
+        <div class="resenas-grid" id="resenasGrid"></div>
+
+        <!-- Estado vacío cuando no hay reseñas todavía -->
+        <div class="resenas-empty" id="resenasEmpty">
+          <p>
+            <span class="lang-es">Aún no hay reseñas. Sé el primero en compartir tu experiencia.</span>
+            <span class="lang-en">No reviews yet. Be the first to share your experience.</span>
+          </p>
         </div>
 
-        <!-- Disclaimer FTC: testimonios ilustrativos -->
-        <div class="testimonios-disclaimer" role="note" aria-label="Aviso sobre los testimonios">
-          <span class="testimonios-disclaimer__icon" aria-hidden="true">⚠️</span>
-          <div class="testimonios-disclaimer__texto">
-            <p class="lang-es">
-              <strong>Aviso:</strong> Los testimonios que se muestran a continuación son
-              ejemplos ilustrativos compuestos a partir de comentarios reales de socios y
-              casos de uso esperados. No representan necesariamente clientes individuales.
-              Los resultados pueden variar.
+        <!-- Formulario para nueva reseña -->
+        <div class="resenas-form-card fade-up">
+          <h3 class="resenas-form-titulo">
+            <span class="lang-es">Deja tu reseña</span>
+            <span class="lang-en">Leave your review</span>
+          </h3>
+          <form id="resenaForm" class="resenas-form" novalidate>
+            <div class="resenas-field">
+              <label for="resenaNombre">
+                <span class="lang-es">Nombre</span>
+                <span class="lang-en">Name</span>
+              </label>
+              <input type="text" id="resenaNombre" name="nombre" required maxlength="60" autocomplete="name">
+            </div>
+
+            <div class="resenas-field">
+              <label for="resenaEmpresa">
+                <span class="lang-es">Empresa o ciudad (opcional)</span>
+                <span class="lang-en">Business or city (optional)</span>
+              </label>
+              <input type="text" id="resenaEmpresa" name="empresa" maxlength="80">
+            </div>
+
+            <div class="resenas-field">
+              <label>
+                <span class="lang-es">Tu valoración</span>
+                <span class="lang-en">Your rating</span>
+              </label>
+              <div class="resenas-stars" role="radiogroup" aria-label="Rating">
+                <button type="button" class="resenas-star" data-value="1" aria-label="1 estrella">★</button>
+                <button type="button" class="resenas-star" data-value="2" aria-label="2 estrellas">★</button>
+                <button type="button" class="resenas-star" data-value="3" aria-label="3 estrellas">★</button>
+                <button type="button" class="resenas-star" data-value="4" aria-label="4 estrellas">★</button>
+                <button type="button" class="resenas-star" data-value="5" aria-label="5 estrellas">★</button>
+                <input type="hidden" id="resenaRating" name="rating" value="5">
+              </div>
+            </div>
+
+            <div class="resenas-field">
+              <label for="resenaTexto">
+                <span class="lang-es">Tu reseña</span>
+                <span class="lang-en">Your review</span>
+              </label>
+              <textarea id="resenaTexto" name="texto" required minlength="20" maxlength="500" rows="4"></textarea>
+              <p class="resenas-help">
+                <span class="lang-es">Entre 20 y 500 caracteres.</span>
+                <span class="lang-en">Between 20 and 500 characters.</span>
+              </p>
+            </div>
+
+            <button type="submit" class="resenas-submit">
+              <span class="lang-es">Publicar reseña</span>
+              <span class="lang-en">Publish review</span>
+            </button>
+
+            <p class="resenas-legal">
+              <span class="lang-es">Al enviar aceptas que tu reseña sea visible públicamente. No se publica tu email.</span>
+              <span class="lang-en">By submitting you agree your review will be publicly visible. Your email is not published.</span>
             </p>
-            <p class="lang-en">
-              <strong>Notice:</strong> The testimonials shown below are illustrative
-              examples composed from real partner feedback and expected use cases. They
-              do not necessarily represent individual customers. Results may vary.
+          </form>
+
+          <!-- Mensaje de éxito tras enviar -->
+          <div class="resenas-exito" id="resenaExito" hidden>
+            <p>
+              <span class="lang-es">¡Gracias! Tu reseña fue publicada.</span>
+              <span class="lang-en">Thank you! Your review has been published.</span>
             </p>
           </div>
         </div>
 
-        <div class="testimonios-cols">
-
-          <!-- ── Columna 1 · velocidad 14s ── -->
-          <div class="testimonios-col testimonios-col--1" aria-label="Testimonios (carrusel automático)">
-            <div class="testimonios-track">
-
-              <!-- testimonio 1 -->
-              <div class="testimonio-card shine-card">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #00434F);" aria-hidden="true">C</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Carlos M.</div>
-                    <div class="testimonio-empresa">Diver's Paradise · Key Largo</div>
-                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.</span><span class="lang-en">In the first month we had 3 new bookings that came directly from the directory. Worth every penny.</span></p>
-                <span class="testimonio-tipo"><span class="lang-es">Escuela de buceo</span><span class="lang-en">Diving school</span></span>
-              </div>
-
-              <!-- testimonio 2 -->
-              <div class="testimonio-card shine-card">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FFB300, #f57f17);" aria-hidden="true">M</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Miguel A.</div>
-                    <div class="testimonio-empresa">Miami Bike Trails</div>
-                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">Nuestros clientes nos dijeron que nos encontraron en Explora Miami. Es exactamente el público que buscábamos.</span><span class="lang-en">Our customers told us they found us on Explora Miami. It's exactly the audience we were looking for.</span></p>
-                <span class="testimonio-tipo"><span class="lang-es">Bici y mountain bike</span><span class="lang-en">Cycling and mountain bike</span></span>
-              </div>
-
-              <!-- testimonio 3 -->
-              <div class="testimonio-card shine-card">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00434F, #071e2b);" aria-hidden="true">L</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Laura S.</div>
-                    <div class="testimonio-empresa">Oleta Kayak Rental</div>
-                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">El proceso fue rapidísimo — en menos de 48 horas ya estábamos publicados y empezando a recibir consultas.</span><span class="lang-en">The process was lightning fast — in under 48 hours we were already live and starting to receive inquiries.</span></p>
-                <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
-              </div>
-
-              <!-- duplicados para loop seamless (ocultos de accesibilidad) -->
-              <div class="testimonio-card shine-card" aria-hidden="true">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #00434F);" aria-hidden="true">C</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Carlos M.</div>
-                    <div class="testimonio-empresa">Diver's Paradise · Key Largo</div>
-                    <div class="testimonio-estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.</span><span class="lang-en">In the first month we had 3 new bookings that came directly from the directory. Worth every penny.</span></p>
-                <span class="testimonio-tipo"><span class="lang-es">Escuela de buceo</span><span class="lang-en">Diving school</span></span>
-              </div>
-              <div class="testimonio-card shine-card" aria-hidden="true">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FFB300, #f57f17);" aria-hidden="true">M</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Miguel A.</div>
-                    <div class="testimonio-empresa">Miami Bike Trails</div>
-                    <div class="testimonio-estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">Nuestros clientes nos dijeron que nos encontraron en Explora Miami. Es exactamente el público que buscábamos.</span><span class="lang-en">Our customers told us they found us on Explora Miami. It's exactly the audience we were looking for.</span></p>
-                <span class="testimonio-tipo"><span class="lang-es">Bici y mountain bike</span><span class="lang-en">Cycling and mountain bike</span></span>
-              </div>
-              <div class="testimonio-card shine-card" aria-hidden="true">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00434F, #071e2b);" aria-hidden="true">L</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Laura S.</div>
-                    <div class="testimonio-empresa">Oleta Kayak Rental</div>
-                    <div class="testimonio-estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">El proceso fue rapidísimo — en menos de 48 horas ya estábamos publicados y empezando a recibir consultas.</span><span class="lang-en">The process was lightning fast — in under 48 hours we were already live and starting to receive inquiries.</span></p>
-                <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
-              </div>
-
-            </div><!-- /testimonios-track -->
-          </div><!-- /col-1 -->
-
-          <!-- ── Columna 2 · velocidad 20s · offset -7s ── -->
-          <div class="testimonios-col testimonios-col--2" aria-label="Más testimonios (carrusel automático)">
-            <div class="testimonios-track">
-
-              <!-- testimonio 4 -->
-              <div class="testimonio-card shine-card">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FF6B6B, #B83E3E);" aria-hidden="true">A</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Ana R.</div>
-                    <div class="testimonio-empresa">Biscayne Kayak Tours</div>
-                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.</span><span class="lang-en">What we value most is that visitors arrive with intent — they're not random tourists, they're people searching for kayak.</span></p>
-                <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
-              </div>
-
-              <!-- testimonio 5 -->
-              <div class="testimonio-card shine-card">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #0a2d3f, #071e2b);" aria-hidden="true">R</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Roberto C.</div>
-                    <div class="testimonio-empresa">Everglades Eco Tours</div>
-                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">Por fin un directorio que entiende al turista hispanohablante. Nuestra tasa de conversión es muy superior a otros canales.</span><span class="lang-en">Finally a directory that understands the Spanish-speaking tourist. Our conversion rate is much higher than other channels.</span></p>
-                <span class="testimonio-tipo"><span class="lang-es">Tours de naturaleza</span><span class="lang-en">Nature tours</span></span>
-              </div>
-
-              <!-- testimonio 6 -->
-              <div class="testimonio-card shine-card">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #0097a7);" aria-hidden="true">P</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Patricia V.</div>
-                    <div class="testimonio-empresa">South Beach Surf School</div>
-                    <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">Cancelar es fácil pero no hemos necesitado hacerlo. El retorno se ve desde el primer mes y el soporte en español es clave.</span><span class="lang-en">Cancelling is easy but we haven't needed to. The return is visible from the first month and Spanish-speaking support is key.</span></p>
-                <span class="testimonio-tipo"><span class="lang-es">Playa y deportes acuáticos</span><span class="lang-en">Beach and water sports</span></span>
-              </div>
-
-              <!-- duplicados para loop seamless -->
-              <div class="testimonio-card shine-card" aria-hidden="true">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #FF6B6B, #B83E3E);" aria-hidden="true">A</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Ana R.</div>
-                    <div class="testimonio-empresa">Biscayne Kayak Tours</div>
-                    <div class="testimonio-estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.</span><span class="lang-en">What we value most is that visitors arrive with intent — they're not random tourists, they're people searching for kayak.</span></p>
-                <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
-              </div>
-              <div class="testimonio-card shine-card" aria-hidden="true">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #0a2d3f, #071e2b);" aria-hidden="true">R</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Roberto C.</div>
-                    <div class="testimonio-empresa">Everglades Eco Tours</div>
-                    <div class="testimonio-estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">Por fin un directorio que entiende al turista hispanohablante. Nuestra tasa de conversión es muy superior a otros canales.</span><span class="lang-en">Finally a directory that understands the Spanish-speaking tourist. Our conversion rate is much higher than other channels.</span></p>
-                <span class="testimonio-tipo"><span class="lang-es">Tours de naturaleza</span><span class="lang-en">Nature tours</span></span>
-              </div>
-              <div class="testimonio-card shine-card" aria-hidden="true">
-                <div class="testimonio-header">
-                  <div class="testimonio-avatar" style="background: linear-gradient(135deg, #00BCD4, #0097a7);" aria-hidden="true">P</div>
-                  <div class="testimonio-info">
-                    <div class="testimonio-nombre">Patricia V.</div>
-                    <div class="testimonio-empresa">South Beach Surf School</div>
-                    <div class="testimonio-estrellas">★★★★★</div>
-                  </div>
-                </div>
-                <p class="testimonio-quote"><span class="lang-es">Cancelar es fácil pero no hemos necesitado hacerlo. El retorno se ve desde el primer mes y el soporte en español es clave.</span><span class="lang-en">Cancelling is easy but we haven't needed to. The return is visible from the first month and Spanish-speaking support is key.</span></p>
-                <span class="testimonio-tipo"><span class="lang-es">Playa y deportes acuáticos</span><span class="lang-en">Beach and water sports</span></span>
-              </div>
-
-            </div><!-- /testimonios-track -->
-          </div><!-- /col-2 -->
-
-        </div><!-- /testimonios-cols -->
       </div>
     </section>
 

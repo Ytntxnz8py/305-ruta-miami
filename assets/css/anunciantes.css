@@ -1503,103 +1503,6 @@ p  { font-weight: 300; }
 }
 
 /* ======================================================
-   SECCIÓN 7: TESTIMONIOS — columnas de scroll infinito
-   Porta React TestimonialsColumn → vanilla ES5 / CSS puro
-====================================================== */
-.seccion-testimonios { background: var(--blanco-arena); padding: 6rem 1.5rem; }
-
-/* Grid de 2 columnas */
-.testimonios-cols {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 1.5rem; max-width: 900px; margin: 0 auto;
-}
-
-/* Ventana de cada columna: altura fija + overflow oculto + fade top/bottom */
-.testimonios-col {
-  height: clamp(480px, 62vh, 660px);
-  overflow: hidden;
-  position: relative;
-  /* Fade masks para que las tarjetas entren y salgan suavemente */
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0px,
-    rgba(0,0,0,0.7) 56px,
-    black 120px,
-    black calc(100% - 120px),
-    rgba(0,0,0,0.7) calc(100% - 56px),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0px,
-    rgba(0,0,0,0.7) 56px,
-    black 120px,
-    black calc(100% - 120px),
-    rgba(0,0,0,0.7) calc(100% - 56px),
-    transparent 100%
-  );
-}
-
-/* Track: flex vertical; contiene las tarjetas × 2 para loop seamless */
-.testimonios-track {
-  display: flex; flex-direction: column; gap: 1rem;
-  animation: test-scroll linear infinite;
-  will-change: transform;
-}
-/* Col 1 más rápida, col 2 más lenta con offset para que no arranquen iguales */
-.testimonios-col--1 .testimonios-track { animation-duration: 14s; }
-.testimonios-col--2 .testimonios-track { animation-duration: 20s; animation-delay: -7s; }
-
-/* Pausa en hover (o focus de teclado) — JS también lo refuerza */
-.testimonios-col:hover .testimonios-track,
-.testimonios-col:focus-within .testimonios-track { animation-play-state: paused; }
-
-/* Keyframe: de 0 → -50% (la segunda mitad del track es el duplicado) */
-@keyframes test-scroll {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-
-/* Tarjeta individual */
-.testimonio-card {
-  background: #fff; border-radius: var(--r); padding: 1.75rem;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-  position: relative; flex-shrink: 0;
-}
-.testimonio-card.shine-card::after { opacity: 0.4; }
-.testimonio-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.1rem; }
-.testimonio-avatar {
-  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: #fff;
-}
-.testimonio-nombre { font-weight: 600; font-size: 0.9rem; color: var(--tinta); }
-.testimonio-empresa { font-size: 0.75rem; font-weight: 300; color: rgba(26,42,53,0.58); margin-top: 0.1rem; }
-.testimonio-estrellas { color: var(--mostaza); font-size: 0.8rem; letter-spacing: 0.05em; margin-top: 0.25rem; }
-.testimonio-quote {
-  font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-size: 0.97rem; color: var(--tinta); line-height: 1.65; margin-bottom: 1.1rem;
-}
-.testimonio-quote::before { content: '\201C'; }
-.testimonio-quote::after  { content: '\201D'; }
-.testimonio-tipo {
-  display: inline-block; font-size: 0.68rem; font-weight: 600;
-  color: var(--turquesa); background: rgba(0,188,212,0.07);
-  border: 1px solid rgba(0,188,212,0.16); border-radius: 50px; padding: 0.18rem 0.6rem;
-}
-
-/* Reduced motion: pausa completa + muestra sólo tarjetas únicas en lista estática */
-@media (prefers-reduced-motion: reduce) {
-  .testimonios-track { animation: none !important; }
-  .testimonios-col {
-    height: auto; overflow: visible;
-    -webkit-mask-image: none; mask-image: none;
-  }
-  /* Ocultar los duplicados marcados con aria-hidden */
-  .testimonio-card[aria-hidden="true"] { display: none; }
-}
-
-/* ======================================================
    SECCIÓN 8: FAQ — card-style + clip-path spring reveal
 ====================================================== */
 .seccion-faq { background: var(--blanco-arena); padding: 5rem 1.5rem 6rem; }
@@ -1785,10 +1688,6 @@ p  { font-weight: 300; }
   .precio-card--dark,
   .precio-card--dark:hover { transform: translateY(-2px) !important; }
   .para-quien-grid { grid-template-columns: repeat(2, 1fr); }
-  /* Testimonios: en tablet/móvil mostrar sólo la primera columna */
-  .testimonios-cols   { grid-template-columns: 1fr; }
-  .testimonios-col--2 { display: none; }
-  .testimonios-col    { height: clamp(360px, 52vh, 480px); }
   .numeros-grid  { grid-template-columns: repeat(2, 1fr); }
   .steps-container { grid-template-columns: 1fr; gap: 0; }
   .step-connector  { display: none; }
@@ -2990,29 +2889,256 @@ p  { font-weight: 300; }
   .hero-aurora { opacity: 0.40 !important; }
 }
 
-/* ===== Disclaimer FTC sobre testimonios ===== */
-.testimonios-disclaimer {
-  display: flex;
-  gap: 0.9rem;
-  align-items: flex-start;
-  max-width: 880px;
-  margin: 1.2rem auto 2rem;
-  padding: 1rem 1.25rem;
-  background: rgba(255, 179, 0, 0.10);
-  border: 1px solid rgba(255, 179, 0, 0.30);
-  border-radius: 14px;
-  color: #5a4a10;
-  font-size: 0.92rem;
-  line-height: 1.55;
+
+/* ============================================
+   SECCIÓN RESEÑAS REALES — bg neutro con detalles de marca
+   ============================================ */
+.resenas-section {
+  padding: 5rem 1.5rem 6rem;
+  background: linear-gradient(180deg, var(--blanco-arena) 0%, #f8f3e8 100%);
 }
-.testimonios-disclaimer__icon {
-  font-size: 1.4rem;
+.resenas-container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.resenas-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.resenas-eyebrow {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--turquesa);
+  margin-bottom: 0.65rem;
+}
+.resenas-titulo {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
   line-height: 1.2;
-  flex-shrink: 0;
+  color: var(--tinta);
+  margin-bottom: 0.75rem;
 }
-.testimonios-disclaimer__texto p {
+.resenas-sub {
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: rgba(26,42,53,0.65);
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid de reseñas existentes */
+.resenas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+.resena-card {
+  background: #fff;
+  border: 1px solid rgba(0, 188, 212, 0.12);
+  border-radius: 14px;
+  padding: 1.5rem 1.4rem 1.4rem;
+  box-shadow: 0 1px 0 rgba(0,188,212,0.04), 0 6px 24px -12px rgba(26,42,53,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.resena-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(0,188,212,0.06), 0 12px 30px -12px rgba(26,42,53,0.12);
+}
+.resena-rating {
+  display: flex;
+  gap: 0.1rem;
+  color: var(--mostaza);
+  font-size: 0.95rem;
+}
+.resena-rating .star-empty { color: rgba(0,0,0,0.12); }
+.resena-texto {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--tinta);
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.resena-autor {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: rgba(26,42,53,0.65);
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(26,42,53,0.08);
+}
+.resena-autor strong {
+  font-weight: 600;
+  color: var(--tinta);
+}
+.resena-fecha {
+  display: block;
+  font-size: 0.72rem;
+  color: rgba(26,42,53,0.45);
+  margin-top: 0.2rem;
+}
+
+/* Estado vacío */
+.resenas-empty {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  border: 1px dashed rgba(0, 188, 212, 0.3);
+  border-radius: 14px;
+  margin-bottom: 3rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: rgba(26,42,53,0.65);
+  font-style: italic;
+}
+
+/* Formulario */
+.resenas-form-card {
+  background: #fff;
+  border: 1px solid rgba(0, 188, 212, 0.15);
+  border-radius: 16px;
+  padding: 2.2rem clamp(1.25rem, 3vw, 2.2rem);
+  max-width: 640px;
+  margin: 0 auto;
+  box-shadow: 0 1px 0 rgba(0,188,212,0.05), 0 12px 40px -16px rgba(26,42,53,0.1);
+}
+.resenas-form-titulo {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--tinta);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.resenas-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.resenas-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.resenas-field label {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--tinta);
+  letter-spacing: 0.02em;
+}
+.resenas-field input,
+.resenas-field textarea {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(26,42,53,0.15);
+  border-radius: 10px;
+  background: var(--blanco-arena);
+  color: var(--tinta);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+.resenas-field input:focus,
+.resenas-field textarea:focus {
+  outline: none;
+  border-color: var(--turquesa);
+  box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.15);
+}
+.resenas-help {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  color: rgba(26,42,53,0.5);
   margin: 0;
 }
-.testimonios-disclaimer__texto p + p {
-  margin-top: 0.4rem;
+
+/* Estrellas — radio group */
+.resenas-stars {
+  display: flex;
+  gap: 0.15rem;
+  font-size: 1.6rem;
+}
+.resenas-star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.15rem 0.2rem;
+  color: rgba(26,42,53,0.18);
+  transition: color 0.15s ease, transform 0.15s ease;
+  line-height: 1;
+}
+.resenas-star:hover,
+.resenas-star.active {
+  color: var(--mostaza);
+}
+.resenas-star:hover { transform: scale(1.1); }
+.resenas-star:focus-visible {
+  outline: 2px solid var(--turquesa);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Botón enviar */
+.resenas-submit {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--coral), var(--turquesa));
+  color: #fff;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s;
+  margin-top: 0.5rem;
+}
+.resenas-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -8px rgba(0, 188, 212, 0.4);
+}
+.resenas-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+.resenas-legal {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  color: rgba(26,42,53,0.5);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Mensaje de éxito */
+.resenas-exito {
+  text-align: center;
+  padding: 1.25rem;
+  background: rgba(0, 188, 212, 0.08);
+  border: 1px solid rgba(0, 188, 212, 0.3);
+  border-radius: 12px;
+  color: var(--turquesa-oscuro);
+  font-family: var(--sans);
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .resenas-section { padding: 3.5rem 1rem 4.5rem; }
+  .resenas-form-card { padding: 1.75rem 1.25rem; }
+  .resenas-stars { font-size: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resena-card,
+  .resenas-submit,
+  .resenas-star { transition: none !important; }
 }

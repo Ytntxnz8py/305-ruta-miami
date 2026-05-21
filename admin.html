@@ -128,6 +128,11 @@
           <span class="sidebar__label">Mensajes</span>
           <span class="sidebar__badge sidebar__badge--coral" id="sidebarBadgeMensajes" style="display:none">0</span>
         </button>
+        <button class="sidebar__item" data-tab="resenas">
+          <span class="sidebar__icon">⭐</span>
+          <span class="sidebar__label">Reseñas</span>
+          <span class="sidebar__badge" id="sidebarBadgeResenas" style="display:none">0</span>
+        </button>
         <button class="sidebar__item" data-tab="config">
           <span class="sidebar__icon">⚙️</span>
           <span class="sidebar__label">Configuración</span>
@@ -360,6 +365,23 @@
           </div>
         </div>
 
+      </section>
+
+      <!-- ===== TAB: RESEÑAS PÚBLICAS ===== -->
+      <section class="tab-panel" id="tab-resenas" style="display:none">
+        <div class="panel-card">
+          <div class="panel-card__header">
+            <h3 class="panel-card__titulo">
+              Reseñas públicas
+              <span id="badgeResenas" class="badge-mensajes" style="display:none">0</span>
+            </h3>
+            <button class="admin-btn" id="btnLimpiarResenas" style="background:#fee; color:#a00; border:1px solid #fcc;">🗑 Borrar todas</button>
+          </div>
+          <p style="font-size:0.85rem; color:#666; margin:0.5rem 0 1rem;">Reseñas enviadas por usuarios en <code>anunciantes.html</code> (localStorage: <code>em_resenas_publicas</code>).</p>
+          <div id="adminResenasLista" style="display:flex; flex-direction:column; gap:0.75rem;">
+            <p class="tabla-vacia">Cargando reseñas…</p>
+          </div>
+        </div>
       </section>
 
       <!-- ===== TAB: CONFIGURACIÓN ===== -->
@@ -595,6 +617,107 @@
 
   <script src="assets/js/admin.js"></script>
   <script src="assets/js/navbar.js"></script>
+
+  <!-- Moderación de reseñas públicas (localStorage.em_resenas_publicas) -->
+  <script>
+  (function() {
+    'use strict';
+    var KEY = 'em_resenas_publicas';
+
+    function escapeHTML(s) {
+      return String(s).replace(/[&<>"']/g, function(c) {
+        return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+      });
+    }
+
+    function obtener() {
+      try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
+      catch(e) { return []; }
+    }
+    function guardar(lista) {
+      try { localStorage.setItem(KEY, JSON.stringify(lista)); } catch(e) {}
+    }
+
+    function fmtFecha(iso) {
+      try { return new Date(iso).toLocaleString('es-ES'); }
+      catch(e) { return ''; }
+    }
+
+    function render() {
+      var cont = document.getElementById('adminResenasLista');
+      var badge = document.getElementById('badgeResenas');
+      var sideBadge = document.getElementById('sidebarBadgeResenas');
+      if (!cont) return;
+      var lista = obtener();
+
+      if (badge) {
+        if (lista.length > 0) { badge.style.display = ''; badge.textContent = lista.length; }
+        else { badge.style.display = 'none'; }
+      }
+      if (sideBadge) {
+        if (lista.length > 0) { sideBadge.style.display = ''; sideBadge.textContent = lista.length; }
+        else { sideBadge.style.display = 'none'; }
+      }
+
+      if (lista.length === 0) {
+        cont.innerHTML = '<p class="tabla-vacia">No hay reseñas publicadas todavía.</p>';
+        return;
+      }
+
+      var html = '';
+      for (var i = 0; i < lista.length; i++) {
+        var r = lista[i];
+        var stars = '';
+        for (var k = 1; k <= 5; k++) stars += (k <= r.rating ? '★' : '☆');
+        html += '<div style="background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:1rem 1.25rem; display:flex; gap:1rem; align-items:flex-start;">' +
+          '<div style="flex:1; min-width:0;">' +
+            '<div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; margin-bottom:0.4rem;">' +
+              '<strong>' + escapeHTML(r.nombre || '—') + '</strong>' +
+              (r.empresa ? '<span style="color:#666; font-size:0.85rem;">' + escapeHTML(r.empresa) + '</span>' : '') +
+              '<span style="color:#FFB300; letter-spacing:0.05em;">' + stars + '</span>' +
+              '<span style="color:#999; font-size:0.75rem; margin-left:auto;">' + escapeHTML(fmtFecha(r.fecha)) + '</span>' +
+            '</div>' +
+            '<p style="margin:0; font-size:0.92rem; line-height:1.5; color:#222; white-space:pre-wrap; word-wrap:break-word;">' + escapeHTML(r.texto || '') + '</p>' +
+          '</div>' +
+          '<button class="admin-btn" data-resena-idx="' + i + '" style="background:#fee; color:#a00; border:1px solid #fcc; flex-shrink:0;">Eliminar</button>' +
+        '</div>';
+      }
+      cont.innerHTML = html;
+
+      var btns = cont.querySelectorAll('[data-resena-idx]');
+      for (var b = 0; b < btns.length; b++) {
+        btns[b].addEventListener('click', function() {
+          var idx = parseInt(this.getAttribute('data-resena-idx'), 10);
+          if (!confirm('¿Eliminar esta reseña? No se puede deshacer.')) return;
+          var arr = obtener();
+          arr.splice(idx, 1);
+          guardar(arr);
+          render();
+        });
+      }
+    }
+
+    var btnLimpiar = document.getElementById('btnLimpiarResenas');
+    if (btnLimpiar) {
+      btnLimpiar.addEventListener('click', function() {
+        if (!confirm('¿Borrar TODAS las reseñas? No se puede deshacer.')) return;
+        guardar([]);
+        render();
+      });
+    }
+
+    /* Re-render cuando el tab se activa */
+    var tabBtn = document.querySelector('[data-tab="resenas"]');
+    if (tabBtn) tabBtn.addEventListener('click', function() { setTimeout(render, 50); });
+
+    /* Render inicial para el badge */
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', render);
+    } else {
+      render();
+    }
+  })();
+  </script>
 
 </body>
 </html>
