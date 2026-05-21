@@ -406,12 +406,24 @@
     var el = document.getElementById('heroShutter');
     if (!el) return;
 
-    var words = [
-      'Tu','negocio','frente','a','miles','de','aventureros'
-    ];
+    /* Lee palabras según idioma activo (clase en <html> o localStorage) */
+    function getWords() {
+      var lang = 'es';
+      if (document.documentElement.classList.contains('lang-en')) {
+        lang = 'en';
+      } else if (typeof IDIOMA_ACTUAL !== 'undefined') {
+        lang = IDIOMA_ACTUAL;
+      } else if (localStorage.getItem('em_idioma') === 'en') {
+        lang = 'en';
+      }
+      var attr = el.getAttribute('data-words-' + lang) || el.getAttribute('data-words-es') || '';
+      if (attr) return attr.split('|');
+      /* Fallback: divide el texto plano original por espacios */
+      return (el.textContent || '').trim().split(/\s+/);
+    }
 
     /* Construye el HTML de las palabras con slices */
-    function buildHTML() {
+    function buildHTML(words) {
       return words.map(function (word, i) {
         var delay = (i * 0.13).toFixed(2) + 's';
         return (
@@ -425,11 +437,20 @@
       }).join(' ');
     }
 
-    /* Inyecta el HTML, quita el estado pending y dispara */
-    el.innerHTML = buildHTML();
-    el.classList.remove('hero-shutter--pending');
+    /* Actualiza aria-label según el idioma */
+    function syncAria(words) {
+      el.setAttribute('aria-label', words.join(' '));
+    }
+
+    function render() {
+      var w = getWords();
+      el.innerHTML = buildHTML(w);
+      syncAria(w);
+      el.classList.remove('hero-shutter--pending');
+    }
 
     function play() {
+      render();
       el.classList.remove('is-animating');
       /* fuerza reflow para que el navegador reinicie las animations */
       void el.offsetWidth;
@@ -437,6 +458,12 @@
     }
 
     play();
+
+    /* Re-renderiza al cambiar idioma — observa la clase de <html> */
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(function () { play(); });
+      mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    }
 
     /* Expuesto globalmente para el botón onclick en HTML */
     window.replayHeroShutter = play;

@@ -91,7 +91,11 @@
 
   <!-- Aplica idioma guardado (compatibilidad con visitas desde index.html) -->
   <script>
-    document.documentElement.lang = localStorage.getItem('em_idioma') || 'es';
+    (function () {
+      var lang = localStorage.getItem('em_idioma') || 'es';
+      document.documentElement.lang = lang;
+      document.documentElement.classList.add('lang-' + lang);
+    })();
   </script>
 </head>
 <body>
@@ -102,16 +106,16 @@
       <span class="em-nav__logo-e">Explora</span><span class="em-nav__logo-m">Miami</span>
     </a>
     <ul class="em-nav__links">
-      <li><a class="em-nav__link" href="index.html">Inicio</a></li>
-      <li><a class="em-nav__link" href="index.html#destinos">Destinos</a></li>
-      <li><a class="em-nav__link" href="index.html#mapa">Mapa</a></li>
+      <li><a class="em-nav__link" href="index.html"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a></li>
+      <li><a class="em-nav__link" href="index.html#destinos"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a></li>
+      <li><a class="em-nav__link" href="index.html#mapa"><span class="lang-es">Mapa</span><span class="lang-en">Map</span></a></li>
       <li><a class="em-nav__link" href="blog.html">Blog</a></li>
       <li><span class="em-nav__sep" aria-hidden="true"></span></li>
-      <li><a class="em-nav__link" href="anunciantes.html#precios">Planes</a></li>
-      <li><a class="em-nav__link" href="privacidad.html">Privacidad</a></li>
-      <li><a class="em-nav__link" href="terminos.html">Términos</a></li>
+      <li><a class="em-nav__link" href="anunciantes.html#precios"><span class="lang-es">Planes</span><span class="lang-en">Plans</span></a></li>
+      <li><a class="em-nav__link" href="privacidad.html"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a></li>
+      <li><a class="em-nav__link" href="terminos.html"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a></li>
     </ul>
-    <a class="em-nav__cta" href="anunciantes.html">Para empresas</a>
+    <a class="em-nav__cta" href="anunciantes.html"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a>
     <button class="em-nav__lang" type="button" aria-label="Cambiar idioma">EN</button>
     <button class="em-nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -119,15 +123,15 @@
   </nav>
   <div class="em-drawer__backdrop" aria-hidden="true"></div>
   <aside class="em-drawer" aria-label="Menú móvil">
-    <a class="em-drawer__link" href="index.html"><span class="em-drawer__emoji">🏠</span>Inicio</a>
-    <a class="em-drawer__link" href="index.html#destinos"><span class="em-drawer__emoji">📍</span>Destinos</a>
-    <a class="em-drawer__link" href="index.html#mapa"><span class="em-drawer__emoji">🗺️</span>Mapa</a>
+    <a class="em-drawer__link" href="index.html"><span class="em-drawer__emoji">🏠</span><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+    <a class="em-drawer__link" href="index.html#destinos"><span class="em-drawer__emoji">📍</span><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a>
+    <a class="em-drawer__link" href="index.html#mapa"><span class="em-drawer__emoji">🗺️</span><span class="lang-es">Mapa</span><span class="lang-en">Map</span></a>
     <a class="em-drawer__link" href="blog.html"><span class="em-drawer__emoji">📖</span>Blog</a>
     <hr class="em-drawer__sep"/>
-    <a class="em-drawer__link" href="anunciantes.html#precios"><span class="em-drawer__emoji">💼</span>Planes</a>
-    <a class="em-drawer__link" href="privacidad.html"><span class="em-drawer__emoji">🔒</span>Privacidad</a>
-    <a class="em-drawer__link" href="terminos.html"><span class="em-drawer__emoji">📄</span>Términos</a>
-    <a class="em-drawer__cta" href="anunciantes.html">Para empresas →</a>
+    <a class="em-drawer__link" href="anunciantes.html#precios"><span class="em-drawer__emoji">💼</span><span class="lang-es">Planes</span><span class="lang-en">Plans</span></a>
+    <a class="em-drawer__link" href="privacidad.html"><span class="em-drawer__emoji">🔒</span><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
+    <a class="em-drawer__link" href="terminos.html"><span class="em-drawer__emoji">📄</span><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
+    <a class="em-drawer__cta" href="anunciantes.html"><span class="lang-es">Para empresas →</span><span class="lang-en">For businesses →</span></a>
     <div class="em-drawer__lang">
       <button class="em-drawer__lang-btn" type="button" data-lang="es">ES</button>
       <button class="em-drawer__lang-btn" type="button" data-lang="en">EN</button>
@@ -181,21 +185,25 @@
 
         <!-- ── Columna izquierda: contenido textual ── -->
         <div class="hero-left">
-          <p class="hero-pill fade-up" style="transition-delay:0s">Para empresas · Miami</p>
+          <p class="hero-pill fade-up" style="transition-delay:0s"><span class="lang-es">Para empresas · Miami</span><span class="lang-en">For businesses · Miami</span></p>
 
           <!--
             H1 con shutter-reveal: JS inyecta .sw por palabra.
             aria-label garantiza accesibilidad.
             hero-shutter--pending oculta el elemento hasta que JS lo construya.
+            data-words-es / data-words-en alimentan el shutter por idioma.
           -->
           <h1 class="hero-titulo hero-shutter hero-shutter--pending"
               id="heroShutter"
-              aria-label="Tu negocio frente a miles de aventureros">
+              aria-label="Tu negocio frente a miles de aventureros"
+              data-words-es="Tu|negocio|frente|a|miles|de|aventureros"
+              data-words-en="Your|business|in|front|of|thousands|of|adventurers">
             Tu negocio frente a miles de aventureros
           </h1>
 
           <p class="hero-subtitulo fade-up" style="transition-delay:0.16s">
-            El directorio outdoor más completo de South Florida. Conectamos a turistas y residentes hispanohablantes con las mejores experiencias — y con las empresas que las hacen posible.
+            <span class="lang-es">El directorio outdoor más completo de South Florida. Conectamos a turistas y residentes hispanohablantes con las mejores experiencias — y con las empresas que las hacen posible.</span>
+            <span class="lang-en">The most complete outdoor directory in South Florida. We connect Spanish-speaking tourists and residents with the best experiences — and with the businesses that make them happen.</span>
           </p>
 
           <div class="hero-ctas fade-up" style="transition-delay:0.24s">
@@ -204,7 +212,7 @@
               <button class="metal-btn" onclick="anScrollTo('precios')">
                 <div class="metal-btn-shine"></div>
                 <div class="metal-btn-hover-glow"></div>
-                <span>Ver planes y precios →</span>
+                <span class="lang-es">Ver planes y precios →</span><span class="lang-en">See plans and pricing →</span>
               </button>
             </div>
             <div class="metal-btn-wrap" data-variant="ghost" data-size="lg">
@@ -212,7 +220,7 @@
               <button class="metal-btn" onclick="anScrollTo('como-funciona')">
                 <div class="metal-btn-shine"></div>
                 <div class="metal-btn-hover-glow"></div>
-                <span>¿Cómo funciona?</span>
+                <span class="lang-es">¿Cómo funciona?</span><span class="lang-en">How does it work?</span>
               </button>
             </div>
           </div>
@@ -221,15 +229,15 @@
           <div class="hero-stats fade-up" style="transition-delay:0.32s" aria-label="Datos del directorio">
             <div class="hero-stat">
               <div class="hero-stat__numero">9</div>
-              <div class="hero-stat__label">destinos activos</div>
+              <div class="hero-stat__label"><span class="lang-es">destinos activos</span><span class="lang-en">active destinations</span></div>
             </div>
             <div class="hero-stat">
               <div class="hero-stat__numero">Miami</div>
-              <div class="hero-stat__label">cobertura</div>
+              <div class="hero-stat__label"><span class="lang-es">cobertura</span><span class="lang-en">coverage</span></div>
             </div>
             <div class="hero-stat">
               <div class="hero-stat__numero">ES/EN</div>
-              <div class="hero-stat__label">bilingüe</div>
+              <div class="hero-stat__label"><span class="lang-es">bilingüe</span><span class="lang-en">bilingual</span></div>
             </div>
           </div>
 
@@ -239,7 +247,7 @@
                     onclick="replayHeroShutter()"
                     aria-label="Repetir animación del título">
               <span class="hero-replay-icon" aria-hidden="true">↻</span>
-              repetir
+              <span class="lang-es">repetir</span><span class="lang-en">replay</span>
             </button>
           </div>
         </div>
@@ -328,15 +336,15 @@
       <div class="an-container">
 
         <div class="an-section-header fade-up">
-          <span class="an-eyebrow">Tu presencia online</span>
-          <h2>Lo que obtienes con tu listing</h2>
+          <span class="an-eyebrow"><span class="lang-es">Tu presencia online</span><span class="lang-en">Your online presence</span></span>
+          <h2><span class="lang-es">Lo que obtienes con tu listing</span><span class="lang-en">What you get with your listing</span></h2>
         </div>
 
         <div class="incluye-grid">
 
           <!-- Mockup 3D -->
           <div class="mockup-col fade-up">
-            <p class="mockup-label" aria-label="Vista previa">Así verán tu negocio miles de usuarios</p>
+            <p class="mockup-label" aria-label="Vista previa"><span class="lang-es">Así verán tu negocio miles de usuarios</span><span class="lang-en">This is how thousands of users will see your business</span></p>
             <div class="mockup-scene" role="img" aria-label="Vista previa de cómo se verá tu listing en Explora Miami">
               <div class="mockup-card">
 
@@ -347,14 +355,14 @@
                     alt="Biscayne Kayak Tours — ejemplo de listing"
                     loading="lazy"
                   />
-                  <span class="mockup-badge" aria-hidden="true">🌊 Mar</span>
+                  <span class="mockup-badge" aria-hidden="true"><span class="lang-es">🌊 Mar</span><span class="lang-en">🌊 Sea</span></span>
                 </div>
 
                 <div class="mockup-info">
                   <h3 class="mockup-nombre">Biscayne Kayak Tours</h3>
-                  <p class="mockup-desc">Tours de kayak en Biscayne Bay — avistamiento de fauna marina, manglares y atardeceres únicos en South Florida.</p>
+                  <p class="mockup-desc"><span class="lang-es">Tours de kayak en Biscayne Bay — avistamiento de fauna marina, manglares y atardeceres únicos en South Florida.</span><span class="lang-en">Kayak tours in Biscayne Bay — marine wildlife sightings, mangroves and unique South Florida sunsets.</span></p>
                   <div class="mockup-meta">
-                    <span class="mockup-meta-item"><span aria-hidden="true">💲</span> Desde $65/tour</span>
+                    <span class="mockup-meta-item"><span aria-hidden="true">💲</span> <span class="lang-es">Desde $65/tour</span><span class="lang-en">From $65/tour</span></span>
                     <span class="mockup-meta-item"><span aria-hidden="true">⏰</span> 8am – 5pm</span>
                   </div>
                   <!-- MetalButton demo -->
@@ -363,7 +371,7 @@
                     <button class="metal-btn" tabindex="-1">
                       <div class="metal-btn-shine"></div>
                       <div class="metal-btn-hover-glow"></div>
-                      <span>Ver destino</span>
+                      <span class="lang-es">Ver destino</span><span class="lang-en">View destination</span>
                     </button>
                   </div>
                 </div>
@@ -374,34 +382,34 @@
 
           <!-- Lista de features -->
           <div class="features-col fade-up" style="transition-delay:0.12s">
-            <span class="an-eyebrow">Incluido en todos los planes</span>
-            <h2>Visibilidad completa para tu negocio</h2>
-            <p class="features-lead">Cada listing está diseñado para convertir — información clara, fotos reales y botones de acción directa.</p>
+            <span class="an-eyebrow"><span class="lang-es">Incluido en todos los planes</span><span class="lang-en">Included in every plan</span></span>
+            <h2><span class="lang-es">Visibilidad completa para tu negocio</span><span class="lang-en">Full visibility for your business</span></h2>
+            <p class="features-lead"><span class="lang-es">Cada listing está diseñado para convertir — información clara, fotos reales y botones de acción directa.</span><span class="lang-en">Every listing is designed to convert — clear information, real photos and direct-action buttons.</span></p>
 
             <ul class="features-list">
               <li class="feature-item" style="transition-delay:0s">
                 <div class="feature-icon" aria-hidden="true">📋</div>
-                <span class="feature-text"><strong>Card en el grid principal</strong> de destinos, visible en la página de inicio</span>
+                <span class="feature-text"><span class="lang-es"><strong>Card en el grid principal</strong> de destinos, visible en la página de inicio</span><span class="lang-en"><strong>Card in the main destinations grid</strong>, visible on the home page</span></span>
               </li>
               <li class="feature-item" style="transition-delay:0.08s">
                 <div class="feature-icon" aria-hidden="true">🖼️</div>
-                <span class="feature-text"><strong>Página de detalle</strong> con galería de hasta 4 fotos</span>
+                <span class="feature-text"><span class="lang-es"><strong>Página de detalle</strong> con galería de hasta 4 fotos</span><span class="lang-en"><strong>Detail page</strong> with a gallery of up to 4 photos</span></span>
               </li>
               <li class="feature-item" style="transition-delay:0.16s">
                 <div class="feature-icon" aria-hidden="true">🌐</div>
-                <span class="feature-text"><strong>Descripción completa en español e inglés</strong> (ES + EN)</span>
+                <span class="feature-text"><span class="lang-es"><strong>Descripción completa en español e inglés</strong> (ES + EN)</span><span class="lang-en"><strong>Full description in Spanish and English</strong> (ES + EN)</span></span>
               </li>
               <li class="feature-item" style="transition-delay:0.24s">
                 <div class="feature-icon" aria-hidden="true">📞</div>
-                <span class="feature-text"><strong>Datos prácticos:</strong> precio, horarios, teléfono y web oficial</span>
+                <span class="feature-text"><span class="lang-es"><strong>Datos prácticos:</strong> precio, horarios, teléfono y web oficial</span><span class="lang-en"><strong>Practical info:</strong> price, hours, phone and official website</span></span>
               </li>
               <li class="feature-item" style="transition-delay:0.32s">
                 <div class="feature-icon" aria-hidden="true">🗺️</div>
-                <span class="feature-text"><strong>Botones directos:</strong> Google Maps, Apple Maps y reseñas</span>
+                <span class="feature-text"><span class="lang-es"><strong>Botones directos:</strong> Google Maps, Apple Maps y reseñas</span><span class="lang-en"><strong>Direct buttons:</strong> Google Maps, Apple Maps and reviews</span></span>
               </li>
               <li class="feature-item" style="transition-delay:0.40s">
                 <div class="feature-icon" aria-hidden="true">📊</div>
-                <span class="feature-text"><strong>Métricas de clics mensuales</strong> en tu panel de anunciante</span>
+                <span class="feature-text"><span class="lang-es"><strong>Métricas de clics mensuales</strong> en tu panel de anunciante</span><span class="lang-en"><strong>Monthly click metrics</strong> in your advertiser dashboard</span></span>
               </li>
             </ul>
           </div>
@@ -626,8 +634,8 @@
       <div class="an-container">
 
         <div class="an-section-header fade-up">
-          <span class="an-eyebrow">Proceso simple</span>
-          <h2>En 3 pasos, tu negocio visible</h2>
+          <span class="an-eyebrow"><span class="lang-es">Proceso simple</span><span class="lang-en">Simple process</span></span>
+          <h2><span class="lang-es">En 3 pasos, tu negocio visible</span><span class="lang-en">In 3 steps, your business is live</span></h2>
         </div>
 
         <div class="cf-grid">
@@ -644,8 +652,8 @@
             <div class="cf-folder__card" aria-hidden="true">
               <span class="cf-card__number">01</span>
               <span class="cf-card__icon">📝</span>
-              <h3 class="cf-card__title">Contáctanos</h3>
-              <p class="cf-card__desc">Llena el formulario o escríbenos por WhatsApp. Te respondemos en menos de 24 horas.</p>
+              <h3 class="cf-card__title"><span class="lang-es">Contáctanos</span><span class="lang-en">Contact us</span></h3>
+              <p class="cf-card__desc"><span class="lang-es">Llena el formulario o escríbenos por WhatsApp. Te respondemos en menos de 24 horas.</span><span class="lang-en">Fill out the form or message us on WhatsApp. We reply within 24 hours.</span></p>
             </div>
 
             <!-- 3D folder body -->
@@ -657,10 +665,10 @@
             </div>
 
             <div class="cf-folder__label">
-              <span class="cf-folder__step-num">Paso 1</span>
-              <strong class="cf-folder__step-title">Contáctanos</strong>
+              <span class="cf-folder__step-num"><span class="lang-es">Paso 1</span><span class="lang-en">Step 1</span></span>
+              <strong class="cf-folder__step-title"><span class="lang-es">Contáctanos</span><span class="lang-en">Contact us</span></strong>
             </div>
-            <p class="cf-folder__hint" aria-hidden="true">Pasa el cursor ↑</p>
+            <p class="cf-folder__hint" aria-hidden="true"><span class="lang-es">Pasa el cursor ↑</span><span class="lang-en">Hover ↑</span></p>
           </div>
 
           <!-- Connector -->
@@ -680,8 +688,8 @@
             <div class="cf-folder__card" aria-hidden="true">
               <span class="cf-card__number">02</span>
               <span class="cf-card__icon">🎨</span>
-              <h3 class="cf-card__title">Creamos tu listing</h3>
-              <p class="cf-card__desc">Nuestro equipo diseña tu card con tus fotos, descripción y datos. Activo en 48 horas.</p>
+              <h3 class="cf-card__title"><span class="lang-es">Creamos tu listing</span><span class="lang-en">We build your listing</span></h3>
+              <p class="cf-card__desc"><span class="lang-es">Nuestro equipo diseña tu card con tus fotos, descripción y datos. Activo en 48 horas.</span><span class="lang-en">Our team designs your card with your photos, description and data. Live within 48 hours.</span></p>
             </div>
 
             <div class="cf-folder__scene" aria-hidden="true">
@@ -692,10 +700,10 @@
             </div>
 
             <div class="cf-folder__label">
-              <span class="cf-folder__step-num">Paso 2</span>
-              <strong class="cf-folder__step-title">Creamos tu listing</strong>
+              <span class="cf-folder__step-num"><span class="lang-es">Paso 2</span><span class="lang-en">Step 2</span></span>
+              <strong class="cf-folder__step-title"><span class="lang-es">Creamos tu listing</span><span class="lang-en">We build your listing</span></strong>
             </div>
-            <p class="cf-folder__hint" aria-hidden="true">Pasa el cursor ↑</p>
+            <p class="cf-folder__hint" aria-hidden="true"><span class="lang-es">Pasa el cursor ↑</span><span class="lang-en">Hover ↑</span></p>
           </div>
 
           <!-- Connector -->
@@ -715,8 +723,8 @@
             <div class="cf-folder__card" aria-hidden="true">
               <span class="cf-card__number">03</span>
               <span class="cf-card__icon">🚀</span>
-              <h3 class="cf-card__title">Empieza a recibir clientes</h3>
-              <p class="cf-card__desc">Tu negocio aparece frente a turistas y residentes que buscan experiencias outdoor en Miami.</p>
+              <h3 class="cf-card__title"><span class="lang-es">Empieza a recibir clientes</span><span class="lang-en">Start getting customers</span></h3>
+              <p class="cf-card__desc"><span class="lang-es">Tu negocio aparece frente a turistas y residentes que buscan experiencias outdoor en Miami.</span><span class="lang-en">Your business appears in front of tourists and residents searching for outdoor experiences in Miami.</span></p>
             </div>
 
             <div class="cf-folder__scene" aria-hidden="true">
@@ -727,10 +735,10 @@
             </div>
 
             <div class="cf-folder__label">
-              <span class="cf-folder__step-num">Paso 3</span>
-              <strong class="cf-folder__step-title">Empieza a recibir clientes</strong>
+              <span class="cf-folder__step-num"><span class="lang-es">Paso 3</span><span class="lang-en">Step 3</span></span>
+              <strong class="cf-folder__step-title"><span class="lang-es">Empieza a recibir clientes</span><span class="lang-en">Start getting customers</span></strong>
             </div>
-            <p class="cf-folder__hint" aria-hidden="true">Pasa el cursor ↑</p>
+            <p class="cf-folder__hint" aria-hidden="true"><span class="lang-es">Pasa el cursor ↑</span><span class="lang-en">Hover ↑</span></p>
           </div>
 
         </div><!-- /.cf-grid -->
@@ -752,7 +760,7 @@
 
         <!-- Header -->
         <header class="pq-header fade-up">
-          <span class="pq-eyebrow" aria-hidden="true">⚡ Negocios outdoor en Miami</span>
+          <span class="pq-eyebrow" aria-hidden="true"><span class="lang-es">⚡ Negocios outdoor en Miami</span><span class="lang-en">⚡ Outdoor businesses in Miami</span></span>
           <h2 class="pq-title"><span class="lang-es">¿Tu negocio encaja aquí?</span><span class="lang-en">Does your business fit here?</span></h2>
           <div class="pq-underline" aria-hidden="true"></div>
         </header>
@@ -769,9 +777,9 @@
                   <span class="pq-service__emoji" aria-hidden="true">🤿</span>
                   <span class="pq-service__badge" aria-hidden="true">✦</span>
                 </div>
-                <h3 class="pq-service__title">Escuelas de buceo</h3>
+                <h3 class="pq-service__title"><span class="lang-es">Escuelas de buceo</span><span class="lang-en">Diving schools</span></h3>
               </div>
-              <p class="pq-service__desc">Key Largo, Biscayne Bay y arrecifes de coral</p>
+              <p class="pq-service__desc"><span class="lang-es">Key Largo, Biscayne Bay y arrecifes de coral</span><span class="lang-en">Key Largo, Biscayne Bay and coral reefs</span></p>
               <span class="pq-service__more" aria-hidden="true"><span class="lang-es">Ver planes →</span><span class="lang-en">See plans →</span></span>
             </div>
 
@@ -781,9 +789,9 @@
                   <span class="pq-service__emoji" aria-hidden="true">🚣</span>
                   <span class="pq-service__badge" aria-hidden="true">✦</span>
                 </div>
-                <h3 class="pq-service__title">Kayak y paddle board</h3>
+                <h3 class="pq-service__title"><span class="lang-es">Kayak y paddle board</span><span class="lang-en">Kayak and paddle board</span></h3>
               </div>
-              <p class="pq-service__desc">Tours, rentals y clases en aguas de South Florida</p>
+              <p class="pq-service__desc"><span class="lang-es">Tours, rentals y clases en aguas de South Florida</span><span class="lang-en">Tours, rentals and lessons in South Florida waters</span></p>
               <span class="pq-service__more" aria-hidden="true"><span class="lang-es">Ver planes →</span><span class="lang-en">See plans →</span></span>
             </div>
 
@@ -793,9 +801,9 @@
                   <span class="pq-service__emoji" aria-hidden="true">🚴</span>
                   <span class="pq-service__badge" aria-hidden="true">✦</span>
                 </div>
-                <h3 class="pq-service__title">Bici y mountain bike</h3>
+                <h3 class="pq-service__title"><span class="lang-es">Bici y mountain bike</span><span class="lang-en">Cycling and mountain bike</span></h3>
               </div>
-              <p class="pq-service__desc">Oleta River State Park, Bill Baggs y más</p>
+              <p class="pq-service__desc"><span class="lang-es">Oleta River State Park, Bill Baggs y más</span><span class="lang-en">Oleta River State Park, Bill Baggs and more</span></p>
               <span class="pq-service__more" aria-hidden="true"><span class="lang-es">Ver planes →</span><span class="lang-en">See plans →</span></span>
             </div>
 
@@ -834,9 +842,9 @@
                   <span class="pq-service__emoji" aria-hidden="true">🏕️</span>
                   <span class="pq-service__badge" aria-hidden="true">✦</span>
                 </div>
-                <h3 class="pq-service__title">Camping y senderismo</h3>
+                <h3 class="pq-service__title"><span class="lang-es">Camping y senderismo</span><span class="lang-en">Camping and hiking</span></h3>
               </div>
-              <p class="pq-service__desc">Everglades, Arch Creek y parques naturales</p>
+              <p class="pq-service__desc"><span class="lang-es">Everglades, Arch Creek y parques naturales</span><span class="lang-en">Everglades, Arch Creek and nature parks</span></p>
               <span class="pq-service__more" aria-hidden="true"><span class="lang-es">Ver planes →</span><span class="lang-en">See plans →</span></span>
             </div>
 
@@ -846,9 +854,9 @@
                   <span class="pq-service__emoji" aria-hidden="true">🐬</span>
                   <span class="pq-service__badge" aria-hidden="true">✦</span>
                 </div>
-                <h3 class="pq-service__title">Tours de naturaleza</h3>
+                <h3 class="pq-service__title"><span class="lang-es">Tours de naturaleza</span><span class="lang-en">Nature tours</span></h3>
               </div>
-              <p class="pq-service__desc">Wildlife, fotografía y ecoturismo en Miami</p>
+              <p class="pq-service__desc"><span class="lang-es">Wildlife, fotografía y ecoturismo en Miami</span><span class="lang-en">Wildlife, photography and ecotourism in Miami</span></p>
               <span class="pq-service__more" aria-hidden="true"><span class="lang-es">Ver planes →</span><span class="lang-en">See plans →</span></span>
             </div>
 
@@ -858,9 +866,9 @@
                   <span class="pq-service__emoji" aria-hidden="true">🏄</span>
                   <span class="pq-service__badge" aria-hidden="true">✦</span>
                 </div>
-                <h3 class="pq-service__title">Playa y deportes acuáticos</h3>
+                <h3 class="pq-service__title"><span class="lang-es">Playa y deportes acuáticos</span><span class="lang-en">Beach and water sports</span></h3>
               </div>
-              <p class="pq-service__desc">Surf, snorkel, natación y más</p>
+              <p class="pq-service__desc"><span class="lang-es">Surf, snorkel, natación y más</span><span class="lang-en">Surf, snorkel, swimming and more</span></p>
               <span class="pq-service__more" aria-hidden="true"><span class="lang-es">Ver planes →</span><span class="lang-en">See plans →</span></span>
             </div>
 
@@ -895,8 +903,8 @@
       <div class="an-container">
 
         <div class="an-section-header fade-up">
-          <span class="an-eyebrow">Lo que dicen nuestros anunciantes</span>
-          <h2>Resultados reales</h2>
+          <span class="an-eyebrow"><span class="lang-es">Lo que dicen nuestros anunciantes</span><span class="lang-en">What our advertisers say</span></span>
+          <h2><span class="lang-es">Resultados reales</span><span class="lang-en">Real results</span></h2>
         </div>
 
         <!-- Disclaimer FTC: testimonios ilustrativos -->
@@ -933,8 +941,8 @@
                     <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.</p>
-                <span class="testimonio-tipo">Escuela de buceo</span>
+                <p class="testimonio-quote"><span class="lang-es">En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.</span><span class="lang-en">In the first month we had 3 new bookings that came directly from the directory. Worth every penny.</span></p>
+                <span class="testimonio-tipo"><span class="lang-es">Escuela de buceo</span><span class="lang-en">Diving school</span></span>
               </div>
 
               <!-- testimonio 2 -->
@@ -947,8 +955,8 @@
                     <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">Nuestros clientes nos dijeron que nos encontraron en Explora Miami. Es exactamente el público que buscábamos.</p>
-                <span class="testimonio-tipo">Bici y mountain bike</span>
+                <p class="testimonio-quote"><span class="lang-es">Nuestros clientes nos dijeron que nos encontraron en Explora Miami. Es exactamente el público que buscábamos.</span><span class="lang-en">Our customers told us they found us on Explora Miami. It's exactly the audience we were looking for.</span></p>
+                <span class="testimonio-tipo"><span class="lang-es">Bici y mountain bike</span><span class="lang-en">Cycling and mountain bike</span></span>
               </div>
 
               <!-- testimonio 3 -->
@@ -961,7 +969,7 @@
                     <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">El proceso fue rapidísimo — en menos de 48 horas ya estábamos publicados y empezando a recibir consultas.</p>
+                <p class="testimonio-quote"><span class="lang-es">El proceso fue rapidísimo — en menos de 48 horas ya estábamos publicados y empezando a recibir consultas.</span><span class="lang-en">The process was lightning fast — in under 48 hours we were already live and starting to receive inquiries.</span></p>
                 <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
               </div>
 
@@ -975,8 +983,8 @@
                     <div class="testimonio-estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.</p>
-                <span class="testimonio-tipo">Escuela de buceo</span>
+                <p class="testimonio-quote"><span class="lang-es">En el primer mes tuvimos 3 reservas nuevas que vinieron directamente del directorio. Vale cada centavo.</span><span class="lang-en">In the first month we had 3 new bookings that came directly from the directory. Worth every penny.</span></p>
+                <span class="testimonio-tipo"><span class="lang-es">Escuela de buceo</span><span class="lang-en">Diving school</span></span>
               </div>
               <div class="testimonio-card shine-card" aria-hidden="true">
                 <div class="testimonio-header">
@@ -987,8 +995,8 @@
                     <div class="testimonio-estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">Nuestros clientes nos dijeron que nos encontraron en Explora Miami. Es exactamente el público que buscábamos.</p>
-                <span class="testimonio-tipo">Bici y mountain bike</span>
+                <p class="testimonio-quote"><span class="lang-es">Nuestros clientes nos dijeron que nos encontraron en Explora Miami. Es exactamente el público que buscábamos.</span><span class="lang-en">Our customers told us they found us on Explora Miami. It's exactly the audience we were looking for.</span></p>
+                <span class="testimonio-tipo"><span class="lang-es">Bici y mountain bike</span><span class="lang-en">Cycling and mountain bike</span></span>
               </div>
               <div class="testimonio-card shine-card" aria-hidden="true">
                 <div class="testimonio-header">
@@ -999,7 +1007,7 @@
                     <div class="testimonio-estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">El proceso fue rapidísimo — en menos de 48 horas ya estábamos publicados y empezando a recibir consultas.</p>
+                <p class="testimonio-quote"><span class="lang-es">El proceso fue rapidísimo — en menos de 48 horas ya estábamos publicados y empezando a recibir consultas.</span><span class="lang-en">The process was lightning fast — in under 48 hours we were already live and starting to receive inquiries.</span></p>
                 <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
               </div>
 
@@ -1020,7 +1028,7 @@
                     <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.</p>
+                <p class="testimonio-quote"><span class="lang-es">Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.</span><span class="lang-en">What we value most is that visitors arrive with intent — they're not random tourists, they're people searching for kayak.</span></p>
                 <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
               </div>
 
@@ -1034,8 +1042,8 @@
                     <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">Por fin un directorio que entiende al turista hispanohablante. Nuestra tasa de conversión es muy superior a otros canales.</p>
-                <span class="testimonio-tipo">Tours de naturaleza</span>
+                <p class="testimonio-quote"><span class="lang-es">Por fin un directorio que entiende al turista hispanohablante. Nuestra tasa de conversión es muy superior a otros canales.</span><span class="lang-en">Finally a directory that understands the Spanish-speaking tourist. Our conversion rate is much higher than other channels.</span></p>
+                <span class="testimonio-tipo"><span class="lang-es">Tours de naturaleza</span><span class="lang-en">Nature tours</span></span>
               </div>
 
               <!-- testimonio 6 -->
@@ -1048,8 +1056,8 @@
                     <div class="testimonio-estrellas" aria-label="5 estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">Cancelar es fácil pero no hemos necesitado hacerlo. El retorno se ve desde el primer mes y el soporte en español es clave.</p>
-                <span class="testimonio-tipo">Playa y deportes acuáticos</span>
+                <p class="testimonio-quote"><span class="lang-es">Cancelar es fácil pero no hemos necesitado hacerlo. El retorno se ve desde el primer mes y el soporte en español es clave.</span><span class="lang-en">Cancelling is easy but we haven't needed to. The return is visible from the first month and Spanish-speaking support is key.</span></p>
+                <span class="testimonio-tipo"><span class="lang-es">Playa y deportes acuáticos</span><span class="lang-en">Beach and water sports</span></span>
               </div>
 
               <!-- duplicados para loop seamless -->
@@ -1062,7 +1070,7 @@
                     <div class="testimonio-estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.</p>
+                <p class="testimonio-quote"><span class="lang-es">Lo que más valoramos es que el público ya llega con intención — no son turistas aleatorios, son personas que buscan kayak.</span><span class="lang-en">What we value most is that visitors arrive with intent — they're not random tourists, they're people searching for kayak.</span></p>
                 <span class="testimonio-tipo">Kayak &amp; Paddle Board</span>
               </div>
               <div class="testimonio-card shine-card" aria-hidden="true">
@@ -1074,8 +1082,8 @@
                     <div class="testimonio-estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">Por fin un directorio que entiende al turista hispanohablante. Nuestra tasa de conversión es muy superior a otros canales.</p>
-                <span class="testimonio-tipo">Tours de naturaleza</span>
+                <p class="testimonio-quote"><span class="lang-es">Por fin un directorio que entiende al turista hispanohablante. Nuestra tasa de conversión es muy superior a otros canales.</span><span class="lang-en">Finally a directory that understands the Spanish-speaking tourist. Our conversion rate is much higher than other channels.</span></p>
+                <span class="testimonio-tipo"><span class="lang-es">Tours de naturaleza</span><span class="lang-en">Nature tours</span></span>
               </div>
               <div class="testimonio-card shine-card" aria-hidden="true">
                 <div class="testimonio-header">
@@ -1086,8 +1094,8 @@
                     <div class="testimonio-estrellas">★★★★★</div>
                   </div>
                 </div>
-                <p class="testimonio-quote">Cancelar es fácil pero no hemos necesitado hacerlo. El retorno se ve desde el primer mes y el soporte en español es clave.</p>
-                <span class="testimonio-tipo">Playa y deportes acuáticos</span>
+                <p class="testimonio-quote"><span class="lang-es">Cancelar es fácil pero no hemos necesitado hacerlo. El retorno se ve desde el primer mes y el soporte en español es clave.</span><span class="lang-en">Cancelling is easy but we haven't needed to. The return is visible from the first month and Spanish-speaking support is key.</span></p>
+                <span class="testimonio-tipo"><span class="lang-es">Playa y deportes acuáticos</span><span class="lang-en">Beach and water sports</span></span>
               </div>
 
             </div><!-- /testimonios-track -->
@@ -1104,68 +1112,73 @@
       <div class="an-container">
 
         <div class="an-section-header fade-up">
-          <span class="an-eyebrow">Respuestas rápidas</span>
-          <h2>Preguntas frecuentes</h2>
+          <span class="an-eyebrow"><span class="lang-es">Respuestas rápidas</span><span class="lang-en">Quick answers</span></span>
+          <h2><span class="lang-es">Preguntas frecuentes</span><span class="lang-en">Frequently asked questions</span></h2>
         </div>
 
         <div class="faq-list fade-up">
 
           <div class="faq-item">
             <button class="faq-trigger" aria-controls="faq-r1" aria-expanded="false">
-              <span class="faq-pregunta">¿Cuántos visitantes tiene el sitio?</span>
+              <span class="faq-pregunta"><span class="lang-es">¿Cuántos visitantes tiene el sitio?</span><span class="lang-en">How many visitors does the site have?</span></span>
               <span class="faq-chevron" aria-hidden="true">▾</span>
             </button>
             <div class="faq-respuesta-wrap" id="faq-r1">
               <div class="faq-respuesta">
-                Explora Miami está en fase de crecimiento activo. Publicamos nuestras métricas reales en el panel de administración — cada anunciante tiene acceso a sus clics e impresiones mensuales. Preferimos transparencia a números inflados.
+                <span class="lang-es">Explora Miami está en fase de crecimiento activo. Publicamos nuestras métricas reales en el panel de administración — cada anunciante tiene acceso a sus clics e impresiones mensuales. Preferimos transparencia a números inflados.</span>
+                <span class="lang-en">Explora Miami is in active growth. We publish real metrics in the admin panel — every advertiser has access to their monthly clicks and impressions. We prefer transparency over inflated numbers.</span>
               </div>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-trigger" aria-controls="faq-r2" aria-expanded="false">
-              <span class="faq-pregunta">¿Puedo cancelar en cualquier momento?</span>
+              <span class="faq-pregunta"><span class="lang-es">¿Puedo cancelar en cualquier momento?</span><span class="lang-en">Can I cancel at any time?</span></span>
               <span class="faq-chevron" aria-hidden="true">▾</span>
             </button>
             <div class="faq-respuesta-wrap" id="faq-r2">
               <div class="faq-respuesta">
-                Sí, sin penalizaciones. Solo necesitamos 7 días de anticipación antes del siguiente ciclo de facturación. Tu listing permanece activo hasta el último día pagado.
+                <span class="lang-es">Sí, sin penalizaciones. Solo necesitamos 7 días de anticipación antes del siguiente ciclo de facturación. Tu listing permanece activo hasta el último día pagado.</span>
+                <span class="lang-en">Yes, with no penalties. We only need 7 days' notice before the next billing cycle. Your listing stays active until the last paid day.</span>
               </div>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-trigger" aria-controls="faq-r3" aria-expanded="false">
-              <span class="faq-pregunta">¿Cuánto tiempo tarda en estar activo mi listing?</span>
+              <span class="faq-pregunta"><span class="lang-es">¿Cuánto tiempo tarda en estar activo mi listing?</span><span class="lang-en">How long until my listing is live?</span></span>
               <span class="faq-chevron" aria-hidden="true">▾</span>
             </button>
             <div class="faq-respuesta-wrap" id="faq-r3">
               <div class="faq-respuesta">
-                Máximo 48 horas desde que confirmamos el pago y recibimos tus fotos y datos. Nuestro equipo se encarga de todo el diseño y la publicación — tú solo nos envías la información.
+                <span class="lang-es">Máximo 48 horas desde que confirmamos el pago y recibimos tus fotos y datos. Nuestro equipo se encarga de todo el diseño y la publicación — tú solo nos envías la información.</span>
+                <span class="lang-en">A maximum of 48 hours from when we confirm payment and receive your photos and data. Our team handles all the design and publishing — you just send us the information.</span>
               </div>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-trigger" aria-controls="faq-r4" aria-expanded="false">
-              <span class="faq-pregunta">¿Necesito tener una página web propia?</span>
+              <span class="faq-pregunta"><span class="lang-es">¿Necesito tener una página web propia?</span><span class="lang-en">Do I need to have my own website?</span></span>
               <span class="faq-chevron" aria-hidden="true">▾</span>
             </button>
             <div class="faq-respuesta-wrap" id="faq-r4">
               <div class="faq-respuesta">
-                No. Tu listing en Explora Miami funciona como tu presencia digital principal: incluye toda la información que un cliente necesita para contactarte o reservar. Si ya tienes web, la enlazamos directamente.
+                <span class="lang-es">No. Tu listing en Explora Miami funciona como tu presencia digital principal: incluye toda la información que un cliente necesita para contactarte o reservar. Si ya tienes web, la enlazamos directamente.</span>
+                <span class="lang-en">No. Your Explora Miami listing works as your main digital presence: it includes all the information a customer needs to contact or book. If you already have a website, we link to it directly.</span>
               </div>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-trigger" aria-controls="faq-r5" aria-expanded="false">
-              <span class="faq-pregunta">¿Cómo funciona el pago?</span>
+              <span class="faq-pregunta"><span class="lang-es">¿Cómo funciona el pago?</span><span class="lang-en">How does payment work?</span></span>
               <span class="faq-chevron" aria-hidden="true">▾</span>
             </button>
             <div class="faq-respuesta-wrap" id="faq-r5">
               <div class="faq-respuesta">
-                El pago es mensual y se procesa el mismo día de cada mes. Aceptamos Zelle, Venmo y transferencia bancaria. Al confirmar el pago, activamos tu listing en las siguientes 48 horas.
+                <span class="lang-es">El pago es mensual y se procesa el mismo día de cada mes. Aceptamos Zelle, Venmo y transferencia bancaria. Al confirmar el pago, activamos tu listing en las siguientes 48 horas.</span>
+                <span class="lang-en">Payment is monthly and is processed on the same day each month. We accept Zelle, Venmo and bank transfer. Once payment is confirmed, we activate your listing within the next 48 hours.</span>
               </div>
             </div>
           </div>
@@ -1183,7 +1196,7 @@
 
         <!-- Encabezado -->
         <div class="contacto-encabezado fade-up">
-          <span class="an-eyebrow">Empieza hoy</span>
+          <span class="an-eyebrow"><span class="lang-es">Empieza hoy</span><span class="lang-en">Start today</span></span>
           <h2 class="contacto-titulo"><span class="lang-es">¿Listo para dar el paso?</span><span class="lang-en">Ready to take the leap?</span></h2>
           <p class="contacto-sub"><span class="lang-es">Cuéntanos sobre tu negocio y te respondemos en menos de 24 horas.</span><span class="lang-en">Tell us about your business and we'll reply within 24 hours.</span></p>
         </div>
@@ -1197,39 +1210,39 @@
             <div class="contacto-benefit">
               <div class="contacto-benefit__icon" aria-hidden="true">⚡</div>
               <div class="contacto-benefit__body">
-                <strong>Respuesta en 24 horas</strong>
-                <p>Te contactamos directamente — sin esperas.</p>
+                <strong><span class="lang-es">Respuesta en 24 horas</span><span class="lang-en">Reply within 24 hours</span></strong>
+                <p><span class="lang-es">Te contactamos directamente — sin esperas.</span><span class="lang-en">We contact you directly — no waiting.</span></p>
               </div>
             </div>
 
             <div class="contacto-benefit">
               <div class="contacto-benefit__icon" aria-hidden="true">🗓️</div>
               <div class="contacto-benefit__body">
-                <strong>Listing activo en 48 horas</strong>
-                <p>Tu negocio visible frente a miles de usuarios.</p>
+                <strong><span class="lang-es">Listing activo en 48 horas</span><span class="lang-en">Listing live in 48 hours</span></strong>
+                <p><span class="lang-es">Tu negocio visible frente a miles de usuarios.</span><span class="lang-en">Your business in front of thousands of users.</span></p>
               </div>
             </div>
 
             <div class="contacto-benefit">
               <div class="contacto-benefit__icon" aria-hidden="true">💬</div>
               <div class="contacto-benefit__body">
-                <strong>Soporte en español</strong>
-                <p>Atención real, sin bots, con personas de tu comunidad.</p>
+                <strong><span class="lang-es">Soporte en español</span><span class="lang-en">Spanish-speaking support</span></strong>
+                <p><span class="lang-es">Atención real, sin bots, con personas de tu comunidad.</span><span class="lang-en">Real support, no bots, with people from your community.</span></p>
               </div>
             </div>
 
             <div class="contacto-benefit">
               <div class="contacto-benefit__icon" aria-hidden="true">🔓</div>
               <div class="contacto-benefit__body">
-                <strong>Sin contratos ni permanencia</strong>
-                <p>Cancela cuando quieras con 7 días de anticipación.</p>
+                <strong><span class="lang-es">Sin contratos ni permanencia</span><span class="lang-en">No contracts, no lock-in</span></strong>
+                <p><span class="lang-es">Cancela cuando quieras con 7 días de anticipación.</span><span class="lang-en">Cancel anytime with 7 days' notice.</span></p>
               </div>
             </div>
 
             <div class="contacto-aside__divider" aria-hidden="true"></div>
 
             <p class="contacto-aside__nota">
-              ¿Prefieres escribirnos directamente?<br />
+              <span class="lang-es">¿Prefieres escribirnos directamente?</span><span class="lang-en">Prefer to email us directly?</span><br />
               <a href="mailto:hola@exploramiami.com" class="contacto-aside__email">hola@exploramiami.com</a>
             </p>
 
@@ -1244,19 +1257,19 @@
               <div class="fm-seccion">
                 <div class="fm-seccion__header">
                   <span class="fm-seccion__num" aria-hidden="true">1</span>
-                  <span class="fm-seccion__titulo">Tu información</span>
+                  <span class="fm-seccion__titulo"><span class="lang-es">Tu información</span><span class="lang-en">Your information</span></span>
                 </div>
 
                 <div class="form-row">
                   <div class="form-campo">
                     <input id="fNombre" name="nombre" type="text" placeholder=" " required autocomplete="name" />
-                    <label for="fNombre" class="fc-label">Nombre completo <em class="fc-req">*</em></label>
-                    <span class="form-error-msg">Ingresa tu nombre</span>
+                    <label for="fNombre" class="fc-label"><span class="lang-es">Nombre completo</span><span class="lang-en">Full name</span> <em class="fc-req">*</em></label>
+                    <span class="form-error-msg"><span class="lang-es">Ingresa tu nombre</span><span class="lang-en">Enter your name</span></span>
                   </div>
                   <div class="form-campo">
                     <input id="fEmpresa" name="empresa" type="text" placeholder=" " required autocomplete="organization" />
-                    <label for="fEmpresa" class="fc-label">Nombre del negocio <em class="fc-req">*</em></label>
-                    <span class="form-error-msg">Ingresa el nombre de tu negocio</span>
+                    <label for="fEmpresa" class="fc-label"><span class="lang-es">Nombre del negocio</span><span class="lang-en">Business name</span> <em class="fc-req">*</em></label>
+                    <span class="form-error-msg"><span class="lang-es">Ingresa el nombre de tu negocio</span><span class="lang-en">Enter your business name</span></span>
                   </div>
                 </div>
 
@@ -1264,11 +1277,11 @@
                   <div class="form-campo">
                     <input id="fEmail" name="email" type="email" placeholder=" " required autocomplete="email" />
                     <label for="fEmail" class="fc-label">Email <em class="fc-req">*</em></label>
-                    <span class="form-error-msg">Ingresa un email válido</span>
+                    <span class="form-error-msg"><span class="lang-es">Ingresa un email válido</span><span class="lang-en">Enter a valid email</span></span>
                   </div>
                   <div class="form-campo">
                     <input id="fTel" name="tel" type="tel" placeholder=" " autocomplete="tel" />
-                    <label for="fTel" class="fc-label">Teléfono / WhatsApp</label>
+                    <label for="fTel" class="fc-label"><span class="lang-es">Teléfono / WhatsApp</span><span class="lang-en">Phone / WhatsApp</span></label>
                   </div>
                 </div>
               </div><!-- /.fm-seccion -->
@@ -1277,30 +1290,30 @@
               <div class="fm-seccion fm-seccion--last">
                 <div class="fm-seccion__header">
                   <span class="fm-seccion__num fm-seccion__num--2" aria-hidden="true">2</span>
-                  <span class="fm-seccion__titulo">Tu negocio</span>
+                  <span class="fm-seccion__titulo"><span class="lang-es">Tu negocio</span><span class="lang-en">Your business</span></span>
                 </div>
 
                 <div class="form-campo form-campo--select">
                   <select id="fTipo" name="tipo" required>
                     <option value="" disabled selected></option>
-                    <option value="buceo">🤿 Escuela de buceo / snorkel</option>
-                    <option value="kayak">🚣 Kayak y paddle board</option>
-                    <option value="bici">🚴 Bici y mountain bike</option>
-                    <option value="camping">🏕️ Camping y senderismo</option>
-                    <option value="tours">🐬 Tours de naturaleza / ecoturismo</option>
-                    <option value="playa">🏄 Playa y deportes acuáticos</option>
-                    <option value="otro">✨ Otro negocio outdoor</option>
+                    <option value="buceo" data-i18n-es="🤿 Escuela de buceo / snorkel" data-i18n-en="🤿 Diving / snorkel school">🤿 Escuela de buceo / snorkel</option>
+                    <option value="kayak" data-i18n-es="🚣 Kayak y paddle board" data-i18n-en="🚣 Kayak and paddle board">🚣 Kayak y paddle board</option>
+                    <option value="bici" data-i18n-es="🚴 Bici y mountain bike" data-i18n-en="🚴 Cycling and mountain bike">🚴 Bici y mountain bike</option>
+                    <option value="camping" data-i18n-es="🏕️ Camping y senderismo" data-i18n-en="🏕️ Camping and hiking">🏕️ Camping y senderismo</option>
+                    <option value="tours" data-i18n-es="🐬 Tours de naturaleza / ecoturismo" data-i18n-en="🐬 Nature tours / ecotourism">🐬 Tours de naturaleza / ecoturismo</option>
+                    <option value="playa" data-i18n-es="🏄 Playa y deportes acuáticos" data-i18n-en="🏄 Beach and water sports">🏄 Playa y deportes acuáticos</option>
+                    <option value="otro" data-i18n-es="✨ Otro negocio outdoor" data-i18n-en="✨ Other outdoor business">✨ Otro negocio outdoor</option>
                   </select>
-                  <label for="fTipo" class="fc-label">Tipo de negocio <em class="fc-req">*</em></label>
+                  <label for="fTipo" class="fc-label"><span class="lang-es">Tipo de negocio</span><span class="lang-en">Business type</span> <em class="fc-req">*</em></label>
                   <span class="fc-chevron" aria-hidden="true">
                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </span>
-                  <span class="form-error-msg">Selecciona una opción</span>
+                  <span class="form-error-msg"><span class="lang-es">Selecciona una opción</span><span class="lang-en">Select an option</span></span>
                 </div>
 
                 <div class="form-campo form-campo--textarea">
                   <textarea id="fMensaje" name="mensaje" placeholder=" " rows="4"></textarea>
-                  <label for="fMensaje" class="fc-label">Cuéntanos sobre tu negocio</label>
+                  <label for="fMensaje" class="fc-label"><span class="lang-es">Cuéntanos sobre tu negocio</span><span class="lang-en">Tell us about your business</span></label>
                 </div>
               </div><!-- /.fm-seccion -->
 
@@ -1315,8 +1328,8 @@
               </div>
 
               <p class="form-legal">
-                Al enviar, tu información se guarda localmente para que nuestro equipo pueda contactarte.
-                No compartimos tus datos con terceros.
+                <span class="lang-es">Al enviar, tu información se guarda localmente para que nuestro equipo pueda contactarte. No compartimos tus datos con terceros.</span>
+                <span class="lang-en">When you submit, your information is saved locally so our team can contact you. We don't share your data with third parties.</span>
               </p>
 
             </form>
@@ -1324,8 +1337,8 @@
             <!-- Estado de éxito (oculto hasta envío) -->
             <div id="formEmpresasExito" class="form-exito" style="display:none" role="status">
               <div class="form-exito__check" aria-hidden="true">✓</div>
-              <h3 class="form-exito__titulo">¡Mensaje enviado!</h3>
-              <p class="form-exito__texto">Nos pondremos en contacto contigo en menos de 24 horas. Revisa tu email — también te mandamos una confirmación.</p>
+              <h3 class="form-exito__titulo"><span class="lang-es">¡Mensaje enviado!</span><span class="lang-en">Message sent!</span></h3>
+              <p class="form-exito__texto"><span class="lang-es">Nos pondremos en contacto contigo en menos de 24 horas. Revisa tu email — también te mandamos una confirmación.</span><span class="lang-en">We'll be in touch within 24 hours. Check your email — we also sent a confirmation.</span></p>
             </div>
 
           </div><!-- /.contacto-form-col -->
@@ -1343,17 +1356,18 @@
       <span class="an-footer__logo-explora">Explora</span><span class="an-footer__logo-miami">Miami</span>
     </a>
     <nav class="an-footer__links" aria-label="Links del footer">
-      <a href="index.html"               class="an-footer__link">← Inicio</a>
-      <a href="index.html#destinos"      class="an-footer__link">Destinos</a>
-      <a href="index.html#mapa"          class="an-footer__link">Mapa</a>
-      <a href="index.html#trabaja"       class="an-footer__link">Trabaja con nosotros</a>
-      <a href="blog.html"               class="an-footer__link">Blog</a>
-      <a href="#hero-anunciantes"        class="an-footer__link">Para empresas</a>
+      <a href="index.html"               class="an-footer__link">← <span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+      <a href="index.html#destinos"      class="an-footer__link"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a>
+      <a href="index.html#mapa"          class="an-footer__link"><span class="lang-es">Mapa</span><span class="lang-en">Map</span></a>
+      <a href="index.html#trabaja"       class="an-footer__link"><span class="lang-es">Trabaja con nosotros</span><span class="lang-en">Work with us</span></a>
+      <a href="blog.html"                class="an-footer__link">Blog</a>
+      <a href="#hero-anunciantes"        class="an-footer__link"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a>
       <a href="#faq"                     class="an-footer__link">FAQ</a>
     </nav>
-    <p class="an-footer__copy">© 2026 Explora Miami. Todos los derechos reservados.</p>
+    <p class="an-footer__copy">© 2026 Explora Miami. <span class="lang-es">Todos los derechos reservados.</span><span class="lang-en">All rights reserved.</span></p>
   </footer>
 
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/anunciantes.js"></script>
   <script src="assets/js/navbar.js"></script>
 

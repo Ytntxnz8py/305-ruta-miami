@@ -26,11 +26,12 @@ var DESTINOS_DEFAULT = [
     ],
     lat: 25.2866, lng: -80.8987,
     dificultad_es: 'Fácil — Moderado', dificultad_en: 'Easy — Moderate', dificultad_clase: 'facil',
-    precio: '$35 / vehículo (7 días)', horarios: '24h (Shark Valley: 8am–6pm)',
+    precio: '$35 / vehículo (7 días)', precio_en: '$35 / vehicle (7 days)',
+    horarios: '24h (Shark Valley: 8am–6pm)', horarios_en: '24h (Shark Valley: 8am–6pm)',
     tipo: 'tierra', tipo_es: 'Senderismo · Kayak', tipo_en: 'Hiking · Kayak',
     telefono: '(305) 242-7700',
     web_oficial: 'https://www.nps.gov/ever/',
-    mejor_epoca: 'Nov–Abr (temporada seca)',
+    mejor_epoca: 'Nov–Abr (temporada seca)', mejor_epoca_en: 'Nov–Apr (dry season)',
     google_maps_url: 'https://maps.google.com/maps?q=25.2866,-80.8987',
     apple_maps_url: 'https://maps.apple.com/?q=Everglades+National+Park&ll=25.2866,-80.8987',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g294467-d143673-Reviews-Everglades_National_Park-Florida.html',
@@ -75,11 +76,12 @@ var DESTINOS_DEFAULT = [
     ],
     lat: 25.1288, lng: -80.4072,
     dificultad_es: 'Fácil — Moderado', dificultad_en: 'Easy — Moderate', dificultad_clase: 'facil',
-    precio: '$8 / persona + tours desde $32', horarios: '8am–sunset',
+    precio: '$8 / persona + tours desde $32', precio_en: '$8 / person + tours from $32',
+    horarios: '8am–sunset', horarios_en: '8am–sunset',
     tipo: 'mar', tipo_es: 'Buceo · Snorkeling', tipo_en: 'Diving · Snorkeling',
     telefono: '(305) 451-6300',
     web_oficial: 'https://www.floridastateparks.org/parks-and-trails/john-pennekamp-coral-reef-state-park',
-    mejor_epoca: 'Mar–Jun (visibilidad máxima)',
+    mejor_epoca: 'Mar–Jun (visibilidad máxima)', mejor_epoca_en: 'Mar–Jun (peak visibility)',
     google_maps_url: 'https://maps.google.com/maps?q=25.1288,-80.4072',
     apple_maps_url: 'https://maps.apple.com/?q=John+Pennekamp+Coral+Reef+State+Park&ll=25.1288,-80.4072',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34275-d143712-Reviews-John_Pennekamp_Coral_Reef_State_Park-Key_Largo_Florida_Keys_Florida.html',
@@ -124,11 +126,12 @@ var DESTINOS_DEFAULT = [
     ],
     lat: 25.4729, lng: -80.3340,
     dificultad_es: 'Fácil — Moderado', dificultad_en: 'Easy — Moderate', dificultad_clase: 'facil',
-    precio: 'Entrada gratis · Tours: $45–$65', horarios: '7am–5:30pm (Visitor Center)',
+    precio: 'Entrada gratis · Tours: $45–$65', precio_en: 'Free entry · Tours: $45–$65',
+    horarios: '7am–5:30pm (Visitor Center)', horarios_en: '7am–5:30pm (Visitor Center)',
     tipo: 'mar', tipo_es: 'Kayak · Snorkeling · Buceo', tipo_en: 'Kayak · Snorkeling · Diving',
     telefono: '(305) 230-1144',
     web_oficial: 'https://www.nps.gov/bisc/',
-    mejor_epoca: 'Nov–Abr (aguas más tranquilas)',
+    mejor_epoca: 'Nov–Abr (aguas más tranquilas)', mejor_epoca_en: 'Nov–Apr (calmer waters)',
     google_maps_url: 'https://maps.google.com/maps?q=25.4729,-80.3340',
     apple_maps_url: 'https://maps.apple.com/?q=Biscayne+National+Park&ll=25.4729,-80.3340',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34262-d143693-Reviews-Biscayne_National_Park-Homestead_Florida.html',
@@ -173,11 +176,12 @@ var DESTINOS_DEFAULT = [
     ],
     lat: 25.6671, lng: -80.1584,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
-    precio: '$8 / vehículo (hasta 8 pers)', horarios: '8am–sunset',
+    precio: '$8 / vehículo (hasta 8 pers)', precio_en: '$8 / vehicle (up to 8 people)',
+    horarios: '8am–sunset', horarios_en: '8am–sunset',
     tipo: 'mar', tipo_es: 'Playa · Ciclismo · Snorkeling', tipo_en: 'Beach · Cycling · Snorkeling',
     telefono: '(305) 361-5811',
     web_oficial: 'https://www.floridastateparks.org/parks-and-trails/bill-baggs-cape-florida-state-park',
-    mejor_epoca: 'Oct–May (temporada baja y aguas tranquilas)',
+    mejor_epoca: 'Oct–May (temporada baja y aguas tranquilas)', mejor_epoca_en: 'Oct–May (off-season, calm waters)',
     google_maps_url: 'https://maps.google.com/maps?q=25.6671,-80.1584',
     apple_maps_url: 'https://maps.apple.com/?q=Bill+Baggs+Cape+Florida+State+Park&ll=25.6671,-80.1584',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34438-d143731-Reviews-Bill_Baggs_Cape_Florida_State_Park-Key_Biscayne_Florida.html',
@@ -222,11 +226,12 @@ var DESTINOS_DEFAULT = [
     ],
     lat: 25.9103, lng: -80.1390,
     dificultad_es: 'Fácil — Difícil (según actividad)', dificultad_en: 'Easy — Difficult (by activity)', dificultad_clase: 'moderado',
-    precio: '$6 / vehículo', horarios: '8am–sunset',
+    precio: '$6 / vehículo', precio_en: '$6 / vehicle',
+    horarios: '8am–sunset', horarios_en: '8am–sunset',
     tipo: 'tierra', tipo_es: 'Kayak · Mountain Bike', tipo_en: 'Kayak · Mountain Bike',
     telefono: '(305) 919-1846',
     web_oficial: 'https://www.floridastateparks.org/parks-and-trails/oleta-river-state-park',
-    mejor_epoca: 'Oct–Abr (temperaturas más frescas)',
+    mejor_epoca: 'Oct–Abr (temperaturas más frescas)', mejor_epoca_en: 'Oct–Apr (cooler temperatures)',
     google_maps_url: 'https://maps.google.com/maps?q=25.9103,-80.1390',
     apple_maps_url: 'https://maps.apple.com/?q=Oleta+River+State+Park&ll=25.9103,-80.1390',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34429-d548213-Reviews-Oleta_River_State_Park-North_Miami_Beach_Florida.html',
@@ -269,11 +274,12 @@ var DESTINOS_DEFAULT = [
     ],
     lat: 25.7355, lng: -80.1573,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
-    precio: '$8 / vehículo', horarios: '7am–7pm (8pm jun–ago)',
+    precio: '$8 / vehículo', precio_en: '$8 / vehicle',
+    horarios: '7am–7pm (8pm jun–ago)', horarios_en: '7am–7pm (8pm Jun–Aug)',
     tipo: 'mar', tipo_es: 'Paddle Board · Kayak · Playa', tipo_en: 'Paddle Board · Kayak · Beach',
     telefono: '(305) 960-4600',
     web_oficial: 'https://www.virginiakeybeachpark.net/',
-    mejor_epoca: 'Nov–May (temporada baja)',
+    mejor_epoca: 'Nov–May (temporada baja)', mejor_epoca_en: 'Nov–May (off-season)',
     google_maps_url: 'https://maps.google.com/maps?q=25.7355,-80.1573',
     apple_maps_url: 'https://maps.apple.com/?q=Virginia+Key+Beach+Park&ll=25.7355,-80.1573',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34438-d8728698-Reviews-Virginia_Key_Beach_Park-Key_Biscayne_Florida.html',
@@ -316,11 +322,12 @@ var DESTINOS_DEFAULT = [
     ],
     lat: 25.6680, lng: -80.2747,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
-    precio: '$8 / vehículo', horarios: 'Sunrise–sunset',
+    precio: '$8 / vehículo', precio_en: '$8 / vehicle',
+    horarios: 'Sunrise–sunset', horarios_en: 'Sunrise–sunset',
     tipo: 'mar', tipo_es: 'Playa · Snorkeling · Kayak', tipo_en: 'Beach · Snorkeling · Kayak',
     telefono: '(305) 665-5475',
     web_oficial: 'https://www.miamidade.gov/parks/matheson-hammock.asp',
-    mejor_epoca: 'Nov–May (menor afluencia)',
+    mejor_epoca: 'Nov–May (menor afluencia)', mejor_epoca_en: 'Nov–May (fewer crowds)',
     google_maps_url: 'https://maps.google.com/maps?q=25.6680,-80.2747',
     apple_maps_url: 'https://maps.apple.com/?q=Matheson+Hammock+Park&ll=25.6680,-80.2747',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34425-d8728345-Reviews-Matheson_Hammock_Park-Coral_Gables_Florida.html',
@@ -364,11 +371,12 @@ var DESTINOS_DEFAULT = [
     ],
     lat: 25.7024, lng: -80.1556,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
-    precio: '$8 / vehículo', horarios: '8am–sunset',
+    precio: '$8 / vehículo', precio_en: '$8 / vehicle',
+    horarios: '8am–sunset', horarios_en: '8am–sunset',
     tipo: 'mar', tipo_es: 'Playa · Kayak · Naturaleza', tipo_en: 'Beach · Kayak · Nature',
     telefono: '(305) 361-5421',
     web_oficial: 'https://www.miamidade.gov/parks/crandon.asp',
-    mejor_epoca: 'Nov–May (temporada alta en aguas)',
+    mejor_epoca: 'Nov–May (temporada alta en aguas)', mejor_epoca_en: 'Nov–May (peak water conditions)',
     google_maps_url: 'https://maps.google.com/maps?q=25.7024,-80.1556',
     apple_maps_url: 'https://maps.apple.com/?q=Crandon+Park&ll=25.7024,-80.1556',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34438-d258126-Reviews-Crandon_Park-Key_Biscayne_Florida.html',
@@ -413,11 +421,12 @@ var DESTINOS_DEFAULT = [
     ],
     lat: 25.8955, lng: -80.1678,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
-    precio: 'Gratis (donaciones bienvenidas)', horarios: '9am–5pm (Mar–Dom)',
+    precio: 'Gratis (donaciones bienvenidas)', precio_en: 'Free (donations welcome)',
+    horarios: '9am–5pm (Mar–Dom)', horarios_en: '9am–5pm (Tue–Sun)',
     tipo: 'tierra', tipo_es: 'Senderismo · Arqueología', tipo_en: 'Hiking · Archaeology',
     telefono: '(305) 944-6111',
     web_oficial: 'https://www.miamidade.gov/parks/arch-creek.asp',
-    mejor_epoca: 'Oct–Abr (aves migratorias en temporada)',
+    mejor_epoca: 'Oct–Abr (aves migratorias en temporada)', mejor_epoca_en: 'Oct–Apr (migratory bird season)',
     google_maps_url: 'https://maps.google.com/maps?q=25.8955,-80.1678',
     apple_maps_url: 'https://maps.apple.com/?q=Arch+Creek+Park&ll=25.8955,-80.1678',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34429-d550295-Reviews-Arch_Creek_Park-North_Miami_Beach_Florida.html',
@@ -446,7 +455,7 @@ var DESTINOS_DEFAULT = [
 ];
 
 /* Versión de los datos — incrementar cada vez que cambie DESTINOS_DEFAULT */
-var DESTINOS_VERSION = 3;
+var DESTINOS_VERSION = 4;
 
 /* Obtiene destinos de localStorage; migra automáticamente si la versión es antigua */
 function obtenerDestinos() {
@@ -524,12 +533,14 @@ function renderDestinos(filtro) {
     return d.activo && (filtro === 'todos' || d.tipo === filtro);
   });
 
+  var langCur = (typeof IDIOMA_ACTUAL !== 'undefined') ? IDIOMA_ACTUAL : 'es';
+  var ariaPref = (langCur === 'en') ? 'View details of ' : 'Ver detalles de ';
   grid.innerHTML = lista.map(function (d, i) {
     var delay = (i % 3) * 0.12;
     return (
       '<article class="destino-card fade-up" data-tipo="' + d.tipo + '" style="transition-delay:' + delay + 's" ' +
                'onclick="registrarClic(' + d.id + '); abrirModal(' + d.id + ');" role="button" tabindex="0" ' +
-               'aria-label="Ver detalles de ' + d.nombre_es + '" ' +
+               'aria-label="' + ariaPref + (langCur === 'en' ? d.nombre_en : d.nombre_es) + '" ' +
                'onkeydown="if(event.key===\'Enter\'||event.key===\' \'){registrarClic(' + d.id + ');abrirModal(' + d.id + ')}">' +
         '<div class="destino-card__img-cont">' +
           '<img src="' + d.foto + '" alt="' + d.nombre_es + '" class="destino-card__img" loading="lazy" />' +
@@ -552,8 +563,14 @@ function renderDestinos(filtro) {
             '<span class="lang-en">' + d.descripcion_en + '</span>' +
           '</p>' +
           '<div class="destino-card__meta">' +
-            '<span class="destino-card__meta-item"><span class="meta-icono">💲</span>' + d.precio + '</span>' +
-            '<span class="destino-card__meta-item"><span class="meta-icono">⏰</span>' + d.horarios + '</span>' +
+            '<span class="destino-card__meta-item"><span class="meta-icono">💲</span>' +
+              '<span class="lang-es">' + d.precio + '</span>' +
+              '<span class="lang-en">' + (d.precio_en || d.precio) + '</span>' +
+            '</span>' +
+            '<span class="destino-card__meta-item"><span class="meta-icono">⏰</span>' +
+              '<span class="lang-es">' + d.horarios + '</span>' +
+              '<span class="lang-en">' + (d.horarios_en || d.horarios) + '</span>' +
+            '</span>' +
           '</div>' +
           '<div class="metal-btn-wrap destino-card__btn-wrap" data-variant="coral" data-size="sm">' +
             '<div class="metal-btn-inner"></div>' +
@@ -614,7 +631,8 @@ function abrirModal(idDestino) {
   var dDef = DESTINOS_DEFAULT.find(function (x) { return x.id === idDestino; });
   if (dDef) {
     ['galeria','descripcion_larga_es','descripcion_larga_en','como_llegar_es','como_llegar_en',
-     'resenas','telefono','web_oficial','mejor_epoca','google_maps_url','apple_maps_url','resenas_url'].forEach(function (k) {
+     'resenas','telefono','web_oficial','mejor_epoca','mejor_epoca_en','precio_en','horarios_en',
+     'google_maps_url','apple_maps_url','resenas_url'].forEach(function (k) {
       d[k] = d[k] || dDef[k];
     });
   }
@@ -657,22 +675,25 @@ function abrirModal(idDestino) {
   document.getElementById('modalBadges').innerHTML =
     '<span class="modal-badge modal-badge--' + d.tipo + '">' + tipoLabel + '</span>' +
     '<span class="modal-badge modal-badge--dif modal-badge--' + d.dificultad_clase + '">' + difLabel + '</span>' +
-    (d.mejor_epoca ? '<span class="modal-badge modal-badge--epoca">' + (esEs ? 'Mejor época: ' : 'Best time: ') + d.mejor_epoca + '</span>' : '');
+    (d.mejor_epoca ? '<span class="modal-badge modal-badge--epoca">' + (esEs ? 'Mejor época: ' : 'Best time: ') + (esEs ? d.mejor_epoca : (d.mejor_epoca_en || d.mejor_epoca)) + '</span>' : '');
 
   /* 4. Datos prácticos */
+  var precioVal      = esEs ? d.precio       : (d.precio_en       || d.precio);
+  var horariosVal    = esEs ? d.horarios     : (d.horarios_en     || d.horarios);
+  var mejorEpocaVal  = esEs ? d.mejor_epoca  : (d.mejor_epoca_en  || d.mejor_epoca);
   document.getElementById('modalDatosGrid').innerHTML =
     '<div class="modal-dato"><span class="modal-dato__icono">💲</span>' +
-      '<div><strong>' + (esEs ? 'Precio' : 'Price') + '</strong><span>' + d.precio + '</span></div>' +
+      '<div><strong>' + (esEs ? 'Precio' : 'Price') + '</strong><span>' + precioVal + '</span></div>' +
     '</div>' +
     '<div class="modal-dato"><span class="modal-dato__icono">⏰</span>' +
-      '<div><strong>' + (esEs ? 'Horarios' : 'Hours') + '</strong><span>' + d.horarios + '</span></div>' +
+      '<div><strong>' + (esEs ? 'Horarios' : 'Hours') + '</strong><span>' + horariosVal + '</span></div>' +
     '</div>' +
     '<div class="modal-dato"><span class="modal-dato__icono">📞</span>' +
       '<div><strong>' + (esEs ? 'Teléfono' : 'Phone') + '</strong>' +
       (d.telefono ? '<a href="tel:' + d.telefono.replace(/\s/g,'') + '">' + d.telefono + '</a>' : '<span>—</span>') + '</div>' +
     '</div>' +
     '<div class="modal-dato"><span class="modal-dato__icono">🗓️</span>' +
-      '<div><strong>' + (esEs ? 'Mejor época' : 'Best time') + '</strong><span>' + (d.mejor_epoca || '—') + '</span></div>' +
+      '<div><strong>' + (esEs ? 'Mejor época' : 'Best time') + '</strong><span>' + (mejorEpocaVal || '—') + '</span></div>' +
     '</div>';
 
   /* 5. Botones de acción */
@@ -1201,10 +1222,14 @@ function initRoadmapTooltip() {
   }
 
   function mostrarTip(m, e) {
-    var desc   = m.dataset.desc || '';
+    /* Selecciona descripción y título según el idioma activo */
+    var idiomaCur = (typeof IDIOMA_ACTUAL !== 'undefined') ? IDIOMA_ACTUAL : 'es';
+    var esEn = (idiomaCur === 'en');
+    var desc = (esEn ? (m.dataset.descEn || m.dataset.desc) : m.dataset.desc) || '';
     if (!desc) return;
-    /* Nombre: extraer antes del " — " del atributo title */
-    var titulo = (m.getAttribute('title') || '').split('—')[0].trim();
+    var tituloRaw = esEn ? (m.getAttribute('data-title-en') || m.getAttribute('title') || '') : (m.getAttribute('title') || '');
+    /* Nombre: extraer antes del " — " */
+    var titulo = tituloRaw.split('—')[0].trim();
     tipNombre.textContent = titulo;
     tipDesc.textContent   = desc;
     tip.classList.add('rdm-tooltip--visible');

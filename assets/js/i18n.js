@@ -182,6 +182,13 @@ function aplicarIdioma(lang) {
     var key = opt.dataset.i18n;
     if (t[key] !== undefined) opt.textContent = t[key];
   });
+
+  /* Texto directo en cualquier elemento con data-i18n-es / data-i18n-en
+     (útil para <option> y otros elementos que no aceptan spans hijos) */
+  document.querySelectorAll('[data-i18n-es][data-i18n-en]').forEach(function (el) {
+    var val = el.getAttribute('data-i18n-' + lang);
+    if (val) el.textContent = val;
+  });
 }
 
 /* ===== CAMBIA EL IDIOMA ===== */
