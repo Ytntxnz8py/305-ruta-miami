@@ -4,6 +4,15 @@
    Funciona en todas las páginas. Drawer móvil bajo 900px.
    ============================================================ */
 
+/* ---------- Sistema bilingüe global ----------
+   navbar.css se carga en TODAS las páginas, por eso las reglas
+   .lang-* viven aquí (antes vivían solo en styles.css y el blog
+   no las recibía, mostrando ES y EN simultáneamente). */
+html.lang-es .lang-en { display: none !important; }
+html.lang-en .lang-es { display: none !important; }
+/* Antes de que el JS aplique la clase, ocultar EN por defecto para evitar flash */
+html:not(.lang-es):not(.lang-en) .lang-en { display: none; }
+
 /* Reserva espacio superior para que el contenido no quede tapado */
 html { overflow-x: hidden; }
 
