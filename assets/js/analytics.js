@@ -111,28 +111,7 @@ function trackReviewsClick(nombreDestino) {
 /* ===== FORMULARIO DE CONTACTO ===== */
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* Primera interacción con el formulario (clic en cualquier campo) */
-  var form       = document.getElementById('formTrabaja');
-  var trackeado  = false;
-  if (form) {
-    form.addEventListener('focusin', function () {
-      if (!trackeado) {
-        trackeado = true;
-        trackEvent('contact_form_click', {
-          event_category: 'Formulario',
-          event_label:    'Trabaja con nosotros — primer clic'
-        });
-      }
-    });
-
-    /* Envío exitoso del formulario */
-    form.addEventListener('submit', function () {
-      trackEvent('contact_form_submit', {
-        event_category: 'Formulario',
-        event_label:    'Trabaja con nosotros — enviado'
-      });
-    });
-  }
+  /* Form 'formTrabaja' eliminado: el formulario actual vive en anunciantes.html */
 
   /* Cambio de idioma ES ↔ EN */
   var btnIdioma = document.getElementById('btnIdioma');

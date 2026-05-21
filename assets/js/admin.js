@@ -862,7 +862,8 @@ function cargarMensajes() {
   var contenedor = document.getElementById('bandejaMensajes');
   if (!contenedor) return;
 
-  var lista = obtenerContactos().slice().reverse(); /* más recientes primero */
+  /* obtenerContactos ya devuelve ordenado descendente (recientes primero) */
+  var lista = obtenerContactos();
 
   /* Actualizar badge */
   var badge = document.getElementById('badgeMensajes');
@@ -888,6 +889,14 @@ function cargarMensajes() {
     var inicial  = (c.nombre || '?')[0].toUpperCase();
     var color    = colores[idx % colores.length];
 
+    /* Badge según origen del formulario */
+    var origenBadge = '';
+    if (c._origen === 'formulario-empresas') {
+      origenBadge = '<span class="mensaje-badge mensaje-badge--empresa" style="background:#00BCD4;color:#fff">Empresa</span>';
+    } else {
+      origenBadge = '<span class="mensaje-badge mensaje-badge--publico" style="background:#9aa3ad;color:#fff">Público</span>';
+    }
+
     return (
       '<div class="mensaje-card">' +
         '<div class="mensaje-avatar" style="background:' + color + '">' + inicial + '</div>' +
@@ -895,6 +904,7 @@ function cargarMensajes() {
           '<div class="mensaje-meta">' +
             '<strong class="mensaje-nombre">' + esc(c.nombre || '—') + '</strong>' +
             '<span class="mensaje-empresa">' + esc(c.empresa || '—') + '</span>' +
+            origenBadge +
             '<span class="mensaje-badge">' + esc(servicio) + '</span>' +
             '<span class="mensaje-fecha">' + fecha + '</span>' +
           '</div>' +
@@ -997,8 +1007,37 @@ function obtenerDestinosAdmin() {
 }
 
 function obtenerContactos() {
-  try { return JSON.parse(localStorage.getItem('em_contactos')) || []; }
-  catch (e) { return []; }
+  /* Lee dos fuentes:
+     - em_contactos          → formulario público histórico
+     - em_contactos_empresas → formulario actual de anunciantes.html
+     Unifica con _origen y ordena por fecha descendente (recientes primero). */
+  var publico = [];
+  var empresas = [];
+  try { publico  = JSON.parse(localStorage.getItem('em_contactos'))          || []; } catch (e) {}
+  try { empresas = JSON.parse(localStorage.getItem('em_contactos_empresas')) || []; } catch (e) {}
+
+  var pub = publico.map(function (c) {
+    var copia = {};
+    for (var k in c) { if (c.hasOwnProperty(k)) copia[k] = c[k]; }
+    copia._origen = 'formulario-publico';
+    return copia;
+  });
+  var emp = empresas.map(function (c) {
+    var copia = {};
+    for (var k in c) { if (c.hasOwnProperty(k)) copia[k] = c[k]; }
+    copia._origen = 'formulario-empresas';
+    return copia;
+  });
+
+  var unificada = pub.concat(emp);
+  unificada.sort(function (a, b) {
+    var fa = a.fecha || '';
+    var fb = b.fecha || '';
+    if (fa < fb) return 1;
+    if (fa > fb) return -1;
+    return 0;
+  });
+  return unificada;
 }
 
 function guardarDestinos(destinos) {

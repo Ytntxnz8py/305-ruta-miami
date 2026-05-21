@@ -1,3 +1,8 @@
+/* Claves gestionadas por el admin (assets/js/admin.js)
+   No eliminar aunque no aparezcan en HTML directamente:
+   hero_titulo, hero_tagline, hero_btn_destinos, hero_btn_mapa,
+   hero_scroll, form_*, trabaja_* */
+
 /* =========================================
    EXPLORA MIAMI — i18n.js
    Sistema de internacionalización ES / EN

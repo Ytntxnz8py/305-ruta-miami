@@ -4,16 +4,80 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anúnciate en Explora Miami — Para Empresas Outdoor en South Florida</title>
-  <meta name="description" content="Conecta tu negocio outdoor con miles de turistas y residentes en Miami. Listing en el directorio bilingüe más completo de South Florida. Desde $80/mes." />
+  <meta name="description" content="Anúnciate en el directorio outdoor de Miami para hispanohablantes. Planes desde $149/mes. Sin contratos. Listing activo en 48h. Escuelas de buceo, kayak, tours y más." />
   <meta name="robots" content="index, follow" />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://ytntxnz8py.github.io/mi-tienda/anunciantes.html" />
   <meta property="og:title"       content="Anúnciate en Explora Miami — Directorio Outdoor" />
-  <meta property="og:description" content="Tu negocio frente a miles de aventureros. Listing en el directorio bilingüe de South Florida desde $80/mes." />
+  <meta property="og:description" content="Tu negocio frente a miles de aventureros en Miami. Planes desde $149/mes. Sin contratos. Activo en 48h." />
   <meta property="og:image"       content="https://ytntxnz8py.github.io/mi-tienda/assets/images/istockphoto-155372056-612x612.jpg" />
   <meta property="og:locale"      content="es_US" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ytntxnz8py.github.io/mi-tienda/anunciantes.html" />
+
+  <!-- Schema.org Service (3 offers: $149 / $249 / $399) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Listing en el directorio Explora Miami",
+    "serviceType": "Listing en directorio outdoor",
+    "provider": {
+      "@type": "Organization",
+      "name": "Explora Miami",
+      "url": "https://ytntxnz8py.github.io/mi-tienda/"
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "Miami, South Florida"
+    },
+    "description": "Listing bilingüe (ES/EN) en el directorio Explora Miami para negocios outdoor: escuelas de buceo, tours en kayak, paddle board, ciclismo, senderismo y más.",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Plan Básico",
+        "price": "149",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "149",
+          "priceCurrency": "USD",
+          "unitText": "MONTH"
+        },
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "name": "Plan Pro",
+        "price": "249",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "249",
+          "priceCurrency": "USD",
+          "unitText": "MONTH"
+        },
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "name": "Plan Premium",
+        "price": "399",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "399",
+          "priceCurrency": "USD",
+          "unitText": "MONTH"
+        },
+        "availability": "https://schema.org/InStock"
+      }
+    ]
+  }
+  </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,6 +87,7 @@
   <link rel="stylesheet" href="assets/css/anunciantes.css" />
   <link rel="stylesheet" href="assets/css/liquid-btn.css" />
   <link rel="stylesheet" href="assets/css/circle-menu.css" />
+  <link rel="stylesheet" href="assets/css/navbar.css" />
 
   <!-- Aplica idioma guardado (compatibilidad con visitas desde index.html) -->
   <script>
@@ -31,59 +96,43 @@
 </head>
 <body>
 
-  <!-- ===== FLOATING PILL NAV ===== -->
-  <div class="fn-wrap" role="banner">
-    <nav class="fn" id="floatingNav" aria-label="Navegación principal">
-
-      <!-- Logo -->
-      <a href="index.html" class="fn__logo" aria-label="Explora Miami — ir al inicio">
-        <span class="fn__logo-explora">Explora</span><span class="fn__logo-miami">Miami</span>
-      </a>
-
-      <!-- Separador visual -->
-      <div class="fn__divider" aria-hidden="true"></div>
-
-      <!-- Links desktop -->
-      <ul class="fn__links">
-        <li><a href="index.html"          class="fn__link fn__link--back">Inicio</a></li>
-        <li><a href="index.html#destinos" class="fn__link">Destinos</a></li>
-        <li><a href="blog.html"           class="fn__link">Blog</a></li>
-        <li><a href="#hero-anunciantes"   class="fn__link fn__link--active" aria-current="page">Para empresas</a></li>
-        <li><a href="#precios"            class="fn__link">Precios</a></li>
-      </ul>
-
-      <!-- Botón idioma ES/EN -->
-      <button class="fn__lang" id="btnIdioma" aria-label="Cambiar idioma" onclick="toggleIdiomaAn()">ES</button>
-
-      <!-- Ícono hamburguesa (collapsed + mobile) -->
-      <button class="fn__collapse-icon" aria-label="Abrir menú" aria-expanded="false" style="margin-right:0">
-        <span></span><span></span><span></span>
-      </button>
-
-    </nav>
-
-    <!-- Dropdown fuera de nav.fn para que overflow:hidden no lo corte -->
-    <ul class="fn__dropdown" id="fnDropdown" role="menu">
-      <li>
-        <button class="fn__dd-lang-btn" id="btnIdiomaDropdown" onclick="toggleIdiomaAn();document.getElementById('fnDropdown').classList.remove('is-open');document.querySelector('.fn__collapse-icon').setAttribute('aria-expanded','false');">
-          <span class="fn__dd-lang-icon">🌐</span>
-          <span class="lang-es fn__dd-lang-label">Traducir al inglés</span>
-          <span class="lang-en fn__dd-lang-label">Translate to Spanish</span>
-        </button>
-      </li>
-      <li><div class="fn__dd-sep" role="separator"></div></li>
-      <li><a href="index.html"              class="fn__dd-link fn__dd-link--back">Inicio</a></li>
-      <li><div class="fn__dd-sep" role="separator"></div></li>
-      <li><a href="index.html#destinos"     class="fn__dd-link">Destinos</a></li>
-      <li><a href="index.html#mapa"         class="fn__dd-link">Mapa</a></li>
-      <li><a href="blog.html"               class="fn__dd-link">Blog</a></li>
-      <li><div class="fn__dd-sep" role="separator"></div></li>
-      <li><a href="#hero-anunciantes"       class="fn__dd-link fn__dd-link--active" aria-current="page">Para empresas</a></li>
-      <li><a href="#precios"                class="fn__dd-link">Ver precios</a></li>
-      <li><a href="#contacto-empresas"      class="fn__dd-link">Contacto</a></li>
+  <!-- ===== NAVBAR UNIVERSAL ===== -->
+  <nav class="em-nav" aria-label="Navegación principal">
+    <a class="em-nav__logo" href="index.html" aria-label="Explora Miami — Inicio">
+      <span class="em-nav__logo-e">Explora</span><span class="em-nav__logo-m">Miami</span>
+    </a>
+    <ul class="em-nav__links">
+      <li><a class="em-nav__link" href="index.html">Inicio</a></li>
+      <li><a class="em-nav__link" href="index.html#destinos">Destinos</a></li>
+      <li><a class="em-nav__link" href="index.html#mapa">Mapa</a></li>
+      <li><a class="em-nav__link" href="blog.html">Blog</a></li>
+      <li><span class="em-nav__sep" aria-hidden="true"></span></li>
+      <li><a class="em-nav__link" href="anunciantes.html#precios">Planes</a></li>
+      <li><a class="em-nav__link" href="privacidad.html">Privacidad</a></li>
+      <li><a class="em-nav__link" href="terminos.html">Términos</a></li>
     </ul>
-
-  </div>
+    <a class="em-nav__cta" href="anunciantes.html">Para empresas</a>
+    <button class="em-nav__lang" type="button" aria-label="Cambiar idioma">EN</button>
+    <button class="em-nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="em-drawer__backdrop" aria-hidden="true"></div>
+  <aside class="em-drawer" aria-label="Menú móvil">
+    <a class="em-drawer__link" href="index.html"><span class="em-drawer__emoji">🏠</span>Inicio</a>
+    <a class="em-drawer__link" href="index.html#destinos"><span class="em-drawer__emoji">📍</span>Destinos</a>
+    <a class="em-drawer__link" href="index.html#mapa"><span class="em-drawer__emoji">🗺️</span>Mapa</a>
+    <a class="em-drawer__link" href="blog.html"><span class="em-drawer__emoji">📖</span>Blog</a>
+    <hr class="em-drawer__sep"/>
+    <a class="em-drawer__link" href="anunciantes.html#precios"><span class="em-drawer__emoji">💼</span>Planes</a>
+    <a class="em-drawer__link" href="privacidad.html"><span class="em-drawer__emoji">🔒</span>Privacidad</a>
+    <a class="em-drawer__link" href="terminos.html"><span class="em-drawer__emoji">📄</span>Términos</a>
+    <a class="em-drawer__cta" href="anunciantes.html">Para empresas →</a>
+    <div class="em-drawer__lang">
+      <button class="em-drawer__lang-btn" type="button" data-lang="es">ES</button>
+      <button class="em-drawer__lang-btn" type="button" data-lang="en">EN</button>
+    </div>
+  </aside>
 
   <main>
 
@@ -850,6 +899,24 @@
           <h2>Resultados reales</h2>
         </div>
 
+        <!-- Disclaimer FTC: testimonios ilustrativos -->
+        <div class="testimonios-disclaimer" role="note" aria-label="Aviso sobre los testimonios">
+          <span class="testimonios-disclaimer__icon" aria-hidden="true">⚠️</span>
+          <div class="testimonios-disclaimer__texto">
+            <p class="lang-es">
+              <strong>Aviso:</strong> Los testimonios que se muestran a continuación son
+              ejemplos ilustrativos compuestos a partir de comentarios reales de socios y
+              casos de uso esperados. No representan necesariamente clientes individuales.
+              Los resultados pueden variar.
+            </p>
+            <p class="lang-en">
+              <strong>Notice:</strong> The testimonials shown below are illustrative
+              examples composed from real partner feedback and expected use cases. They
+              do not necessarily represent individual customers. Results may vary.
+            </p>
+          </div>
+        </div>
+
         <div class="testimonios-cols">
 
           <!-- ── Columna 1 · velocidad 14s ── -->
@@ -1288,6 +1355,7 @@
   </footer>
 
   <script src="assets/js/anunciantes.js"></script>
+  <script src="assets/js/navbar.js"></script>
 
   <!-- Menú circular flotante -->
   <div id="cm-anunciantes" class="cm-wrap" aria-label="Navegación rápida"></div>

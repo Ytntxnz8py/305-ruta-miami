@@ -1,0 +1,308 @@
+/* ============================================================
+   NAVBAR UNIVERSAL — Explora Miami
+   Hide-on-scroll · siempre visible al volver hacia arriba
+   Funciona en todas las páginas. Drawer móvil bajo 900px.
+   ============================================================ */
+
+/* Reserva espacio superior para que el contenido no quede tapado */
+html { overflow-x: hidden; }
+
+.em-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem clamp(1rem, 4vw, 2.5rem);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transform: translateY(0);
+  transition: transform 0.32s ease, background 0.32s ease, box-shadow 0.32s ease;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Estado oculto al hacer scroll hacia abajo */
+.em-nav.is-hidden { transform: translateY(-110%); }
+
+/* Estado con sombra al hacer scroll */
+.em-nav.is-scrolled {
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+}
+
+/* Logo */
+.em-nav__logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15rem;
+  text-decoration: none;
+  font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0a3d4f;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.em-nav__logo-e { color: #0a3d4f; }
+.em-nav__logo-m { color: #00BCD4; font-style: italic; }
+
+/* Links desktop */
+.em-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.em-nav__link {
+  display: inline-block;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #1a2b3c;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
+}
+.em-nav__link:hover { background: rgba(0, 188, 212, 0.10); color: #00BCD4; }
+.em-nav__link.is-active { background: rgba(0, 188, 212, 0.16); color: #0a3d4f; font-weight: 600; }
+
+.em-nav__sep {
+  width: 1px;
+  height: 22px;
+  background: rgba(0, 0, 0, 0.10);
+  margin: 0 0.2rem;
+}
+
+/* CTA "Para empresas" */
+.em-nav__cta {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  background: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 100%);
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+.em-nav__cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(255, 107, 107, 0.38);
+}
+
+/* Botón idioma */
+.em-nav__lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 36px;
+  padding: 0 0.7rem;
+  background: rgba(0, 188, 212, 0.10);
+  color: #0a3d4f;
+  border: 1px solid rgba(0, 188, 212, 0.25);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.em-nav__lang:hover { background: #00BCD4; color: #fff; }
+
+/* Hamburguesa (oculta en desktop) */
+.em-nav__burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+}
+.em-nav__burger span {
+  display: block;
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  height: 2px;
+  background: #0a3d4f;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
+}
+.em-nav__burger span:nth-child(1) { top: 13px; }
+.em-nav__burger span:nth-child(2) { top: 19px; }
+.em-nav__burger span:nth-child(3) { top: 25px; }
+.em-nav__burger[aria-expanded="true"] span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+.em-nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.em-nav__burger[aria-expanded="true"] span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
+/* ============================================================
+   DRAWER MÓVIL
+   ============================================================ */
+.em-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(88vw, 360px);
+  background: #fff;
+  z-index: 9100;
+  transform: translateX(100%);
+  transition: transform 0.34s cubic-bezier(0.5, 0.05, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 5.5rem 1.4rem 2rem;
+  overflow-y: auto;
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.18);
+}
+.em-drawer.is-open { transform: translateX(0); }
+
+.em-drawer__backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.42);
+  z-index: 9050;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.em-drawer__backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.em-drawer__link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #1a2b3c;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: color 0.18s ease, padding 0.18s ease;
+}
+.em-drawer__link:hover { color: #00BCD4; padding-left: 0.95rem; }
+.em-drawer__link.is-active { color: #00BCD4; font-weight: 700; }
+.em-drawer__emoji { font-size: 1.25rem; width: 1.6rem; text-align: center; }
+
+.em-drawer__sep {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  margin: 0.6rem 0;
+  border: 0;
+}
+
+.em-drawer__cta {
+  display: block;
+  text-align: center;
+  margin-top: 1.2rem;
+  padding: 0.95rem 1.2rem;
+  background: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 22px rgba(255, 107, 107, 0.30);
+}
+
+.em-drawer__lang {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+}
+.em-drawer__lang-btn {
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+  background: rgba(0, 188, 212, 0.08);
+  color: #0a3d4f;
+  border: 1px solid rgba(0, 188, 212, 0.22);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+.em-drawer__lang-btn.is-active {
+  background: #00BCD4;
+  color: #fff;
+  border-color: #00BCD4;
+}
+
+/* ============================================================
+   VARIANTE DARK-HERO — para páginas con hero oscuro
+   ============================================================ */
+.em-nav.em-nav--dark-hero {
+  background: rgba(10, 30, 40, 0.42);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+.em-nav.em-nav--dark-hero .em-nav__logo-e { color: #fff; }
+.em-nav.em-nav--dark-hero .em-nav__logo-m { color: #5fe1f0; }
+.em-nav.em-nav--dark-hero .em-nav__link { color: rgba(255, 255, 255, 0.92); }
+.em-nav.em-nav--dark-hero .em-nav__link:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.em-nav.em-nav--dark-hero .em-nav__link.is-active { background: rgba(255, 255, 255, 0.18); color: #fff; }
+.em-nav.em-nav--dark-hero .em-nav__sep { background: rgba(255, 255, 255, 0.18); }
+.em-nav.em-nav--dark-hero .em-nav__lang { background: rgba(255, 255, 255, 0.12); color: #fff; border-color: rgba(255, 255, 255, 0.25); }
+.em-nav.em-nav--dark-hero .em-nav__burger { border-color: rgba(255, 255, 255, 0.25); }
+.em-nav.em-nav--dark-hero .em-nav__burger span { background: #fff; }
+
+/* Cuando hace scroll, vuelve a la versión clara aunque empezó oscuro */
+.em-nav.em-nav--dark-hero.is-scrolled {
+  background: rgba(255, 255, 255, 0.96);
+}
+.em-nav.em-nav--dark-hero.is-scrolled .em-nav__logo-e { color: #0a3d4f; }
+.em-nav.em-nav--dark-hero.is-scrolled .em-nav__logo-m { color: #00BCD4; }
+.em-nav.em-nav--dark-hero.is-scrolled .em-nav__link { color: #1a2b3c; }
+.em-nav.em-nav--dark-hero.is-scrolled .em-nav__sep { background: rgba(0, 0, 0, 0.10); }
+.em-nav.em-nav--dark-hero.is-scrolled .em-nav__lang { background: rgba(0, 188, 212, 0.10); color: #0a3d4f; border-color: rgba(0, 188, 212, 0.25); }
+.em-nav.em-nav--dark-hero.is-scrolled .em-nav__burger { border-color: rgba(0, 0, 0, 0.10); }
+.em-nav.em-nav--dark-hero.is-scrolled .em-nav__burger span { background: #0a3d4f; }
+
+/* ============================================================
+   RESPETO A prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .em-nav,
+  .em-drawer,
+  .em-drawer__backdrop,
+  .em-nav__burger span,
+  .em-nav__link,
+  .em-nav__cta {
+    transition: none !important;
+  }
+  .em-nav.is-hidden { transform: translateY(-110%); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .em-nav__links,
+  .em-nav__cta,
+  .em-nav__sep { display: none; }
+  .em-nav__burger { display: inline-block; }
+  .em-nav__lang { display: none; }
+}
+
+@media (min-width: 901px) {
+  .em-drawer,
+  .em-drawer__backdrop { display: none !important; }
+}

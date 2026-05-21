@@ -2989,3 +2989,30 @@ p  { font-weight: 300; }
   }
   .hero-aurora { opacity: 0.40 !important; }
 }
+
+/* ===== Disclaimer FTC sobre testimonios ===== */
+.testimonios-disclaimer {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  max-width: 880px;
+  margin: 1.2rem auto 2rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 179, 0, 0.10);
+  border: 1px solid rgba(255, 179, 0, 0.30);
+  border-radius: 14px;
+  color: #5a4a10;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.testimonios-disclaimer__icon {
+  font-size: 1.4rem;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+.testimonios-disclaimer__texto p {
+  margin: 0;
+}
+.testimonios-disclaimer__texto p + p {
+  margin-top: 0.4rem;
+}

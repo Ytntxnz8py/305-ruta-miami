@@ -71,9 +71,10 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/liquid-btn.css" />
   <link rel="stylesheet" href="assets/css/circle-menu.css" />
+  <link rel="stylesheet" href="assets/css/navbar.css" />
 
-  <!-- Google Analytics 4 — reemplaza G-7HMBMBQNQZ con tu Measurement ID real -->
-  <!-- Obtén tu ID en: analytics.google.com → Administrar → Flujos de datos -->
+  <!-- ⚠️ REEMPLAZAR: Cambiar G-7HMBMBQNQZ por el Measurement ID real -->
+  <!-- Obtener en: analytics.google.com → Administrar → Flujos de datos -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7HMBMBQNQZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -89,58 +90,46 @@
 </head>
 <body>
 
-  <!-- ===== FLOATING PILL NAV ===== -->
-  <div class="fn-wrap" role="banner">
-    <nav class="fn" id="floatingNav" aria-label="Navegación principal">
+  <!-- H1 oculto para SEO (el hero visual no usa h1 textual) -->
+  <h1 class="visually-hidden">Explora Miami — Directorio de Experiencias Outdoor en South Florida</h1>
 
-      <!-- Logo -->
-      <a href="#inicio" class="fn__logo" aria-label="Explora Miami — ir al inicio">
-        <span class="fn__logo-explora">Explora</span><span class="fn__logo-miami">Miami</span>
-      </a>
-
-      <!-- Separador visual -->
-      <div class="fn__divider" aria-hidden="true"></div>
-
-      <!-- Links desktop -->
-      <ul class="fn__links">
-        <li><a href="#inicio"          class="fn__link" data-i18n="nav_inicio">Inicio</a></li>
-        <li><a href="#destinos"        class="fn__link" data-i18n="nav_destinos">Destinos</a></li>
-        <li><a href="#mapa"            class="fn__link" data-i18n="nav_mapa">Mapa</a></li>
-        <li><a href="#trabaja"         class="fn__link" data-i18n="nav_trabaja">Trabaja</a></li>
-        <li><a href="blog.html"        class="fn__link" data-i18n="nav_blog">Blog</a></li>
-        <li><a href="anunciantes.html" class="fn__link fn__link--cta" data-i18n="nav_empresas">Para empresas</a></li>
-      </ul>
-
-      <!-- Botón idioma ES/EN -->
-      <button class="fn__lang" id="btnIdioma" aria-label="Cambiar idioma">ES</button>
-
-      <!-- Ícono hamburguesa (collapsed + mobile) -->
-      <button class="fn__collapse-icon" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-
-    </nav>
-
-    <!-- Dropdown fuera de nav.fn para que overflow:hidden no lo corte -->
-    <ul class="fn__dropdown" id="fnDropdown" role="menu">
-      <li>
-        <button class="fn__dd-lang-btn" id="btnIdiomaDropdown" onclick="(function(){var b=document.getElementById('btnIdioma');if(b)b.click();document.getElementById('fnDropdown').classList.remove('is-open');document.querySelector('.fn__collapse-icon').setAttribute('aria-expanded','false');}())">
-          <span class="fn__dd-lang-icon">🌐</span>
-          <span class="lang-es fn__dd-lang-label">Traducir al inglés</span>
-          <span class="lang-en fn__dd-lang-label">Translate to Spanish</span>
-        </button>
-      </li>
-      <li><div class="fn__dd-sep" role="separator"></div></li>
-      <li><a href="#inicio"          class="fn__dd-link" data-i18n="nav_inicio">Inicio</a></li>
-      <li><a href="#destinos"        class="fn__dd-link" data-i18n="nav_destinos">Destinos</a></li>
-      <li><a href="#mapa"            class="fn__dd-link" data-i18n="nav_mapa">Mapa</a></li>
-      <li><a href="#trabaja"         class="fn__dd-link" data-i18n="nav_trabaja">Trabaja con nosotros</a></li>
-      <li><a href="blog.html"        class="fn__dd-link" data-i18n="nav_blog">Blog</a></li>
-      <li><div class="fn__dd-sep" role="separator"></div></li>
-      <li><a href="anunciantes.html" class="fn__dd-link fn__dd-link--cta" data-i18n="nav_empresas">Para empresas</a></li>
+  <!-- ===== NAVBAR UNIVERSAL ===== -->
+  <nav class="em-nav" aria-label="Navegación principal">
+    <a class="em-nav__logo" href="index.html" aria-label="Explora Miami — Inicio">
+      <span class="em-nav__logo-e">Explora</span><span class="em-nav__logo-m">Miami</span>
+    </a>
+    <ul class="em-nav__links">
+      <li><a class="em-nav__link" href="index.html">Inicio</a></li>
+      <li><a class="em-nav__link" href="index.html#destinos">Destinos</a></li>
+      <li><a class="em-nav__link" href="index.html#mapa">Mapa</a></li>
+      <li><a class="em-nav__link" href="blog.html">Blog</a></li>
+      <li><span class="em-nav__sep" aria-hidden="true"></span></li>
+      <li><a class="em-nav__link" href="anunciantes.html#precios">Planes</a></li>
+      <li><a class="em-nav__link" href="privacidad.html">Privacidad</a></li>
+      <li><a class="em-nav__link" href="terminos.html">Términos</a></li>
     </ul>
-
-  </div>
+    <a class="em-nav__cta" href="anunciantes.html">Para empresas</a>
+    <button class="em-nav__lang" type="button" aria-label="Cambiar idioma">EN</button>
+    <button class="em-nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="em-drawer__backdrop" aria-hidden="true"></div>
+  <aside class="em-drawer" aria-label="Menú móvil">
+    <a class="em-drawer__link" href="index.html"><span class="em-drawer__emoji">🏠</span>Inicio</a>
+    <a class="em-drawer__link" href="index.html#destinos"><span class="em-drawer__emoji">📍</span>Destinos</a>
+    <a class="em-drawer__link" href="index.html#mapa"><span class="em-drawer__emoji">🗺️</span>Mapa</a>
+    <a class="em-drawer__link" href="blog.html"><span class="em-drawer__emoji">📖</span>Blog</a>
+    <hr class="em-drawer__sep"/>
+    <a class="em-drawer__link" href="anunciantes.html#precios"><span class="em-drawer__emoji">💼</span>Planes</a>
+    <a class="em-drawer__link" href="privacidad.html"><span class="em-drawer__emoji">🔒</span>Privacidad</a>
+    <a class="em-drawer__link" href="terminos.html"><span class="em-drawer__emoji">📄</span>Términos</a>
+    <a class="em-drawer__cta" href="anunciantes.html">Para empresas →</a>
+    <div class="em-drawer__lang">
+      <button class="em-drawer__lang-btn" type="button" data-lang="es">ES</button>
+      <button class="em-drawer__lang-btn" type="button" data-lang="en">EN</button>
+    </div>
+  </aside>
 
   <main>
 
@@ -755,7 +744,7 @@
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/analytics.js"></script>
-  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/navbar.js"></script>
 
   <!-- Menú circular flotante -->
   <div id="cm-index" class="cm-wrap" aria-label="Navegación rápida"></div>

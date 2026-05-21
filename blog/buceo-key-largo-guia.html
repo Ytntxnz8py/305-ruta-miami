@@ -63,6 +63,7 @@
 
   <link rel="stylesheet" href="../assets/css/blog.css" />
   <link rel="stylesheet" href="../assets/css/circle-menu.css" />
+  <link rel="stylesheet" href="../assets/css/navbar.css" />
 
   <script>
     document.documentElement.classList.add('lang-' + (localStorage.getItem('em_idioma') || 'es'));
@@ -75,50 +76,43 @@
     <div class="reading-progress" id="readingProgress"></div>
   </div>
 
-  <!-- ===== NAVBAR ===== -->
-  <div class="fn-wrap" role="banner">
-    <nav class="fn" id="floatingNav" aria-label="Navegación principal">
-
-      <a href="../index.html" class="fn__logo" aria-label="Explora Miami — ir al inicio">
-        <span class="fn__logo-explora">Explora</span><span class="fn__logo-miami">Miami</span>
-      </a>
-
-      <div class="fn__divider" aria-hidden="true"></div>
-
-      <ul class="fn__links">
-        <li><a href="../index.html"           class="fn__link">Inicio</a></li>
-        <li><a href="../index.html#destinos"  class="fn__link">Destinos</a></li>
-        <li><a href="../index.html#mapa"      class="fn__link">Mapa</a></li>
-        <li><a href="../blog.html"            class="fn__link fn__link--activo">Blog</a></li>
-        <li><a href="../anunciantes.html"     class="fn__link fn__link--cta">Para empresas</a></li>
-      </ul>
-
-      <button class="fn__lang" id="btnIdioma" aria-label="Cambiar idioma">ES</button>
-
-      <button class="fn__collapse-icon" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-
-    </nav>
-
-    <ul class="fn__dropdown" id="fnDropdown" role="menu">
-      <li>
-        <button class="fn__dd-lang-btn" id="btnIdiomaDropdown"
-          onclick="(function(){var b=document.getElementById('btnIdioma');if(b)b.click();document.getElementById('fnDropdown').classList.remove('is-open');document.querySelector('.fn__collapse-icon').setAttribute('aria-expanded','false');}())">
-          <span class="fn__dd-lang-icon">🌐</span>
-          <span class="lang-es fn__dd-lang-label">Traducir al inglés</span>
-          <span class="lang-en fn__dd-lang-label">Translate to Spanish</span>
-        </button>
-      </li>
-      <li><div class="fn__dd-sep" role="separator"></div></li>
-      <li><a href="../index.html"          class="fn__dd-link">Inicio</a></li>
-      <li><a href="../index.html#destinos" class="fn__dd-link">Destinos</a></li>
-      <li><a href="../index.html#mapa"     class="fn__dd-link">Mapa</a></li>
-      <li><a href="../blog.html"           class="fn__dd-link fn__dd-link--activo">Blog</a></li>
-      <li><div class="fn__dd-sep" role="separator"></div></li>
-      <li><a href="../anunciantes.html"    class="fn__dd-link fn__dd-link--cta">Para empresas</a></li>
+  <!-- ===== NAVBAR UNIVERSAL ===== -->
+  <nav class="em-nav" aria-label="Navegación principal">
+    <a class="em-nav__logo" href="../index.html" aria-label="Explora Miami — Inicio">
+      <span class="em-nav__logo-e">Explora</span><span class="em-nav__logo-m">Miami</span>
+    </a>
+    <ul class="em-nav__links">
+      <li><a class="em-nav__link" href="../index.html">Inicio</a></li>
+      <li><a class="em-nav__link" href="../index.html#destinos">Destinos</a></li>
+      <li><a class="em-nav__link" href="../index.html#mapa">Mapa</a></li>
+      <li><a class="em-nav__link" href="../blog.html">Blog</a></li>
+      <li><span class="em-nav__sep" aria-hidden="true"></span></li>
+      <li><a class="em-nav__link" href="../anunciantes.html#precios">Planes</a></li>
+      <li><a class="em-nav__link" href="../privacidad.html">Privacidad</a></li>
+      <li><a class="em-nav__link" href="../terminos.html">Términos</a></li>
     </ul>
-  </div>
+    <a class="em-nav__cta" href="../anunciantes.html">Para empresas</a>
+    <button class="em-nav__lang" type="button" aria-label="Cambiar idioma">EN</button>
+    <button class="em-nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="em-drawer__backdrop" aria-hidden="true"></div>
+  <aside class="em-drawer" aria-label="Menú móvil">
+    <a class="em-drawer__link" href="../index.html"><span class="em-drawer__emoji">🏠</span>Inicio</a>
+    <a class="em-drawer__link" href="../index.html#destinos"><span class="em-drawer__emoji">📍</span>Destinos</a>
+    <a class="em-drawer__link" href="../index.html#mapa"><span class="em-drawer__emoji">🗺️</span>Mapa</a>
+    <a class="em-drawer__link" href="../blog.html"><span class="em-drawer__emoji">📖</span>Blog</a>
+    <hr class="em-drawer__sep"/>
+    <a class="em-drawer__link" href="../anunciantes.html#precios"><span class="em-drawer__emoji">💼</span>Planes</a>
+    <a class="em-drawer__link" href="../privacidad.html"><span class="em-drawer__emoji">🔒</span>Privacidad</a>
+    <a class="em-drawer__link" href="../terminos.html"><span class="em-drawer__emoji">📄</span>Términos</a>
+    <a class="em-drawer__cta" href="../anunciantes.html">Para empresas →</a>
+    <div class="em-drawer__lang">
+      <button class="em-drawer__lang-btn" type="button" data-lang="es">ES</button>
+      <button class="em-drawer__lang-btn" type="button" data-lang="en">EN</button>
+    </div>
+  </aside>
 
   <main>
 
@@ -248,10 +242,10 @@
         </h3>
 
         <p class="lang-es fade-up">
-          El parque cubre 70 millas náuticas cuadradas de arrecife y contiene más de 600 especies de peces y 40 tipos de coral. Los sitios más populares dentro del parque son Molasses Reef (para intermedio), French Reef y el famoso Cristo del Abismo — una estatua de bronce a 8 metros de profundidad que es uno de los sitios de buceo con snorkel más fotografiados del mundo.
+          El parque cubre 70 millas náuticas cuadradas de arrecife y contiene más de 600 especies de peces y 40 tipos de coral. Los sitios más populares dentro del parque son Molasses Reef (para intermedio), French Reef y el famoso Cristo del Abismo — una estatua de bronce a aproximadamente 7,6 m (25 ft) de profundidad que es uno de los sitios de buceo con snorkel más fotografiados del mundo.
         </p>
         <p class="lang-en fade-up">
-          The park covers 70 square nautical miles of reef and contains more than 600 fish species and 40 coral types. The most popular sites within the park are Molasses Reef (for intermediate divers), French Reef, and the famous Christ of the Abyss — a bronze statue at 8 meters depth that is one of the world's most photographed snorkeling/dive sites.
+          The park covers 70 square nautical miles of reef and contains more than 600 fish species and 40 coral types. The most popular sites within the park are Molasses Reef (for intermediate divers), French Reef, and the famous Christ of the Abyss — a bronze statue at approximately 7.6 m (25 ft) depth that is one of the world's most photographed snorkeling/dive sites.
         </p>
 
         <h3 class="fade-up">
@@ -453,8 +447,8 @@
             <div>
               <strong class="lang-es">No bucees si vuelas en 18 horas</strong>
               <strong class="lang-en">Don't dive if flying within 18 hours</strong>
-              <p class="lang-es">El nitrógeno disuelto en sangre durante el buceo puede causar mal de descompresión en altitud. La regla DAN es: mínimo 18 horas entre tu última inmersión y el despegue.</p>
-              <p class="lang-en">Nitrogen dissolved in your blood during diving can cause decompression sickness at altitude. The DAN rule is: minimum 18 hours between your last dive and takeoff.</p>
+              <p class="lang-es">El nitrógeno disuelto en sangre durante el buceo puede causar mal de descompresión en altitud. Recomendación oficial DAN: mínimo 12 horas para una inmersión simple, 18 horas para inmersiones repetitivas o con descompresión.</p>
+              <p class="lang-en">Nitrogen dissolved in your blood during diving can cause decompression sickness at altitude. Official DAN recommendation: minimum 12 hours for a single dive, 18 hours for repetitive or decompression dives.</p>
             </div>
           </li>
           <li>
@@ -471,7 +465,7 @@
             <div>
               <strong class="lang-es">Nada de alcohol 8 horas antes</strong>
               <strong class="lang-en">No alcohol 8 hours before</strong>
-              <p class="lang-es">El alcohol deshidrata y afecta el equilibrio bajo el agua. Si bebiste la noche anterior, hidrátaté bien antes de entrar al mar.</p>
+              <p class="lang-es">El alcohol deshidrata y afecta el equilibrio bajo el agua. Si bebiste la noche anterior, hidrátate bien antes de entrar al mar.</p>
               <p class="lang-en">Alcohol dehydrates and affects balance underwater. If you drank the night before, make sure to hydrate well before entering the water.</p>
             </div>
           </li>
@@ -651,6 +645,7 @@
 
   <script src="../assets/js/blog.js"></script>
   <script src="../assets/js/circle-menu.js"></script>
+  <script src="../assets/js/navbar.js"></script>
   <script>
     initCircleMenu('cm-buceo', [
       { icon: '📖', label: 'Blog',     href: '../blog.html' },
