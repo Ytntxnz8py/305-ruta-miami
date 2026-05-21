@@ -25,6 +25,7 @@
   <script src="assets/js/admin-config.js"></script>
 
   <link rel="stylesheet" href="assets/css/admin.css" />
+  <link rel="stylesheet" href="assets/css/circle-menu.css" />
 </head>
 <body>
 
@@ -553,5 +554,37 @@
   <div id="toast" class="toast"></div>
 
   <script src="assets/js/admin.js"></script>
+
+  <!-- Menú circular flotante (dentro de #dashboard para ocultarse antes del login) -->
+  <div id="cm-admin" class="cm-wrap" aria-label="Navegación del panel" style="display:none"></div>
+  <script src="assets/js/circle-menu.js"></script>
+  <script>
+    /* El menú admin se inicializa solo después del login (cargarTab disponible) */
+    document.addEventListener('DOMContentLoaded', function () {
+      /* Espera a que el dashboard sea visible para mostrar el menú */
+      var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          if (m.target.id === 'dashboard' && m.target.style.display !== 'none') {
+            var cmAdmin = document.getElementById('cm-admin');
+            if (cmAdmin && !cmAdmin.dataset.cmInit) {
+              cmAdmin.dataset.cmInit = '1';
+              cmAdmin.style.display = '';
+              initCircleMenu('cm-admin', [
+                { icon: '📊', label: 'Dashboard', onclick: "cargarTab('dashboard')" },
+                { icon: '📍', label: 'Destinos',  onclick: "cargarTab('destinos')"  },
+                { icon: '✏️', label: 'Editor',    onclick: "cargarTab('editor')"    },
+                { icon: '✉️', label: 'Mensajes',  onclick: "cargarTab('mensajes')"  },
+                { icon: '⚙️', label: 'Config',    onclick: "cargarTab('config')"    }
+              ]);
+            }
+          }
+        });
+      });
+      var dashboard = document.getElementById('dashboard');
+      if (dashboard) {
+        observer.observe(dashboard, { attributes: true, attributeFilter: ['style'] });
+      }
+    });
+  </script>
 </body>
 </html>
