@@ -144,47 +144,6 @@
     document.querySelectorAll('.fade-up').forEach(function (el) { io.observe(el); });
   }
 
-  /* ===== COUNTERS ===== */
-  function initCounters() {
-    var items = document.querySelectorAll('[data-count]');
-    if (!items.length) return;
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        io.unobserve(entry.target);
-
-        var el      = entry.target;
-        var target  = parseFloat(el.dataset.count);
-        var suffix  = el.dataset.suffix  || '';
-        var prefix  = el.dataset.prefix  || '';
-        var isFloat = el.dataset.count.indexOf('.') !== -1;
-
-        if (reduced) {
-          el.textContent = prefix + (isFloat ? target.toFixed(1) : Math.round(target)) + suffix;
-          return;
-        }
-
-        var dur   = 1600;
-        var start = null;
-
-        function tick(now) {
-          if (!start) start = now;
-          var elapsed  = now - start;
-          var progress = Math.min(elapsed / dur, 1);
-          var eased    = 1 - Math.pow(1 - progress, 3); /* ease-out cubic */
-          var value    = target * eased;
-          el.textContent = prefix + (isFloat ? value.toFixed(1) : Math.round(value)) + suffix;
-          if (progress < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      });
-    }, { threshold: 0.5 });
-
-    items.forEach(function (el) { io.observe(el); });
-  }
-
   /* ===== 3D CARD TILT ===== */
   function bindTilt(el, maxTilt) {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -824,7 +783,6 @@
     initFloatingNav();
     initMetalButtons();
     initScrollAnimation();
-    initCounters();
     initCardTilts();
     initFolders();
     initParaQuien();
@@ -991,6 +949,323 @@
     renderLista();
     initEstrellas();
     initFormulario();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+/* ============================================
+   LÍNEA DE TIEMPO ORBITAL — Para empresas
+   IIFE vanilla ES5
+   ============================================ */
+(function initOrbital() {
+  'use strict';
+
+  var RADIUS = 200;
+  var RADIUS_MOBILE = 130;
+  var ROTATION_STEP = 0.3;
+  var ROTATION_INTERVAL = 50;
+
+  var stage = null;
+  var nodes = [];          // refs DOM { id, el }
+  var rotationAngle = 0;
+  var autoRotate = true;
+  var rotationTimer = null;
+  var activeId = null;
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Data: 6 nodos bilingües — sin compromisos numéricos */
+  var DATA = [
+    {
+      id: 1, icon: '📍',
+      title_es: 'Cobertura local', title_en: 'Local coverage',
+      date_es: 'Activo', date_en: 'Active',
+      content_es: 'Presencia en Miami y South Florida con foco hispano-bilingüe.',
+      content_en: 'Presence across Miami and South Florida with a Spanish-bilingual focus.',
+      status: 'completed', energy: 92, related: [2, 4]
+    },
+    {
+      id: 2, icon: '🌎',
+      title_es: 'Audiencia activa', title_en: 'Active audience',
+      date_es: 'En crecimiento', date_en: 'Growing',
+      content_es: 'Aventureros buscando experiencias outdoor en español e inglés.',
+      content_en: 'Adventurers seeking outdoor experiences in Spanish and English.',
+      status: 'in-progress', energy: 78, related: [1, 4]
+    },
+    {
+      id: 3, icon: '⚡',
+      title_es: 'Listing rápido', title_en: 'Fast listing',
+      date_es: '48 horas', date_en: '48 hours',
+      content_es: 'Tu negocio visible en 48 horas. Sin contratos ni permanencia.',
+      content_en: 'Your business visible in 48 hours. No contracts, no lock-in.',
+      status: 'completed', energy: 88, related: [5, 6]
+    },
+    {
+      id: 4, icon: '🌐',
+      title_es: 'Bilingüe ES/EN', title_en: 'ES/EN bilingual',
+      date_es: 'Nativo', date_en: 'Native',
+      content_es: 'Tu mensaje llega a turistas e hispanohablantes locales por igual.',
+      content_en: 'Your message reaches tourists and local Spanish speakers alike.',
+      status: 'completed', energy: 85, related: [1, 2]
+    },
+    {
+      id: 5, icon: '📊',
+      title_es: 'Métricas claras', title_en: 'Clear metrics',
+      date_es: 'Mensual', date_en: 'Monthly',
+      content_es: 'Reporte mensual de clics, vistas y conversiones por destino.',
+      content_en: 'Monthly report of clicks, views, and conversions by destination.',
+      status: 'in-progress', energy: 72, related: [3, 6]
+    },
+    {
+      id: 6, icon: '💬',
+      title_es: 'Soporte real', title_en: 'Real support',
+      date_es: 'Humano', date_en: 'Human',
+      content_es: 'Asistencia en español por personas reales. Sin bots ni colas.',
+      content_en: 'Spanish-language assistance by real people. No bots, no queues.',
+      status: 'completed', energy: 90, related: [3, 5]
+    }
+  ];
+
+  function getRadius() {
+    return window.innerWidth < 480 ? 100 : (window.innerWidth < 768 ? RADIUS_MOBILE : RADIUS);
+  }
+
+  function calculatePosition(index, total) {
+    var angle = ((index / total) * 360 + rotationAngle) % 360;
+    var radian = (angle * Math.PI) / 180;
+    var r = getRadius();
+    var x = r * Math.cos(radian);
+    var y = r * Math.sin(radian);
+    var zIndex = Math.round(100 + 50 * Math.cos(radian));
+    var opacity = Math.max(0.45, Math.min(1, 0.45 + 0.55 * ((1 + Math.sin(radian)) / 2)));
+    return { x: x, y: y, zIndex: zIndex, opacity: opacity };
+  }
+
+  function getItem(id) {
+    for (var i = 0; i < DATA.length; i++) if (DATA[i].id === id) return DATA[i];
+    return null;
+  }
+
+  function renderStage() {
+    stage = document.getElementById('orbitalStage');
+    if (!stage) return;
+
+    var html = '';
+    html += '<div class="orbital-core" aria-hidden="true"><span class="orbital-core__inner"></span></div>';
+    html += '<div class="orbital-ring" aria-hidden="true"></div>';
+    for (var i = 0; i < DATA.length; i++) {
+      var item = DATA[i];
+      html += '<button type="button" class="orbital-node" data-id="' + item.id + '" aria-label="' + item.title_es + '">';
+      html += '<span class="orbital-node__dot" aria-hidden="true">' + item.icon + '</span>';
+      html += '<span class="orbital-node__label">';
+      html +=   '<span class="lang-es">' + item.title_es + '</span>';
+      html +=   '<span class="lang-en">' + item.title_en + '</span>';
+      html += '</span>';
+      html += '</button>';
+    }
+    stage.innerHTML = html;
+
+    nodes = [];
+    var nodeEls = stage.querySelectorAll('.orbital-node');
+    for (var k = 0; k < nodeEls.length; k++) {
+      (function (el) {
+        var id = parseInt(el.getAttribute('data-id'), 10);
+        nodes.push({ id: id, el: el });
+        el.addEventListener('click', function (e) {
+          e.stopPropagation();
+          toggleNode(id);
+        });
+      })(nodeEls[k]);
+    }
+
+    /* Click en fondo cierra la card */
+    stage.addEventListener('click', function (e) {
+      if (e.target === stage) closeAll();
+    });
+
+    updatePositions();
+  }
+
+  function updatePositions() {
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      var pos = calculatePosition(i, nodes.length);
+      var isExpanded = (n.id === activeId);
+      n.el.style.transform = 'translate(' + pos.x + 'px, ' + pos.y + 'px)';
+      n.el.style.zIndex = isExpanded ? 300 : pos.zIndex;
+      n.el.style.opacity = isExpanded ? 1 : pos.opacity;
+    }
+  }
+
+  function toggleNode(id) {
+    if (activeId === id) {
+      closeAll();
+      return;
+    }
+    activeId = id;
+    autoRotate = false;
+    stopRotation();
+
+    /* Centra el nodo activo en la parte superior (270deg) */
+    var idx = -1;
+    for (var i = 0; i < DATA.length; i++) {
+      if (DATA[i].id === id) { idx = i; break; }
+    }
+    if (idx >= 0) {
+      var targetAngle = (idx / DATA.length) * 360;
+      rotationAngle = 270 - targetAngle;
+    }
+
+    refreshClasses();
+    updatePositions();
+    renderCard(id);
+  }
+
+  function closeAll() {
+    activeId = null;
+    autoRotate = true;
+    removeCard();
+    refreshClasses();
+    if (!prefersReducedMotion) startRotation();
+  }
+
+  function refreshClasses() {
+    var related = activeId ? (getItem(activeId).related || []) : [];
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      var isExp = (n.id === activeId);
+      var isRel = (related.indexOf(n.id) >= 0);
+      if (isExp) n.el.classList.add('orbital-node--expanded');
+      else n.el.classList.remove('orbital-node--expanded');
+      if (isRel) n.el.classList.add('orbital-node--related');
+      else n.el.classList.remove('orbital-node--related');
+    }
+  }
+
+  function renderCard(id) {
+    removeCard();
+    var item = getItem(id);
+    if (!item) return;
+    var nodeEntry = null;
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i].id === id) { nodeEntry = nodes[i]; break; }
+    }
+    if (!nodeEntry) return;
+
+    var statusLabels = {
+      'completed':   { es: 'Activo', en: 'Active' },
+      'in-progress': { es: 'En progreso', en: 'In progress' },
+      'pending':     { es: 'Próximamente', en: 'Coming soon' }
+    };
+    var statusLabel = statusLabels[item.status];
+
+    var card = document.createElement('div');
+    card.className = 'orbital-card';
+
+    var html = '';
+    html += '<div class="orbital-card__head">';
+    html +=   '<span class="orbital-card__badge orbital-card__badge--' + item.status + '">';
+    html +=     '<span class="lang-es">' + statusLabel.es + '</span>';
+    html +=     '<span class="lang-en">' + statusLabel.en + '</span>';
+    html +=   '</span>';
+    html +=   '<span class="orbital-card__date">';
+    html +=     '<span class="lang-es">' + item.date_es + '</span>';
+    html +=     '<span class="lang-en">' + item.date_en + '</span>';
+    html +=   '</span>';
+    html += '</div>';
+    html += '<h3 class="orbital-card__title">';
+    html +=   '<span class="lang-es">' + item.title_es + '</span>';
+    html +=   '<span class="lang-en">' + item.title_en + '</span>';
+    html += '</h3>';
+    html += '<p class="orbital-card__content">';
+    html +=   '<span class="lang-es">' + item.content_es + '</span>';
+    html +=   '<span class="lang-en">' + item.content_en + '</span>';
+    html += '</p>';
+    html += '<div class="orbital-card__divider"></div>';
+    html += '<div class="orbital-card__energy">';
+    html +=   '<span><span class="lang-es">Impacto</span><span class="lang-en">Impact</span></span>';
+    html +=   '<span>' + item.energy + '%</span>';
+    html += '</div>';
+    html += '<div class="orbital-card__bar"><div class="orbital-card__bar-fill" style="width:' + item.energy + '%"></div></div>';
+
+    if (item.related && item.related.length) {
+      html += '<div class="orbital-card__divider"></div>';
+      html += '<p class="orbital-card__related-title">';
+      html +=   '<span class="lang-es">Conectado con</span>';
+      html +=   '<span class="lang-en">Connected with</span>';
+      html += '</p>';
+      html += '<div class="orbital-card__related">';
+      for (var r = 0; r < item.related.length; r++) {
+        var rid = item.related[r];
+        var ri = getItem(rid);
+        if (!ri) continue;
+        html += '<button type="button" class="orbital-card__related-btn" data-goto="' + rid + '">';
+        html +=   '<span class="lang-es">' + ri.title_es + ' →</span>';
+        html +=   '<span class="lang-en">' + ri.title_en + ' →</span>';
+        html += '</button>';
+      }
+      html += '</div>';
+    }
+
+    card.innerHTML = html;
+    nodeEntry.el.appendChild(card);
+
+    /* Bloquea propagación al stage para que no cierre al clickear dentro */
+    card.addEventListener('click', function (e) { e.stopPropagation(); });
+
+    var btns = card.querySelectorAll('.orbital-card__related-btn');
+    for (var b = 0; b < btns.length; b++) {
+      (function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          toggleNode(parseInt(btn.getAttribute('data-goto'), 10));
+        });
+      })(btns[b]);
+    }
+  }
+
+  function removeCard() {
+    if (!stage) return;
+    var existing = stage.querySelector('.orbital-card');
+    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+  }
+
+  function startRotation() {
+    if (rotationTimer) return;
+    rotationTimer = setInterval(function () {
+      if (!autoRotate) return;
+      rotationAngle = (rotationAngle + ROTATION_STEP) % 360;
+      updatePositions();
+    }, ROTATION_INTERVAL);
+  }
+  function stopRotation() {
+    if (rotationTimer) { clearInterval(rotationTimer); rotationTimer = null; }
+  }
+
+  function onResize() { updatePositions(); }
+
+  function init() {
+    if (!document.getElementById('orbitalStage')) return;
+    renderStage();
+    if (!prefersReducedMotion) startRotation();
+    window.addEventListener('resize', onResize);
+
+    /* Pausa cuando la sección no está visible */
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          var en = entries[i];
+          if (en.isIntersecting && autoRotate && !prefersReducedMotion) startRotation();
+          else stopRotation();
+        }
+      }, { threshold: 0.15 });
+      var section = document.getElementById('orbital-valores');
+      if (section) io.observe(section);
+    }
   }
 
   if (document.readyState === 'loading') {
