@@ -85,33 +85,66 @@
 
   <main>
 
-    <!-- ===== HERO DEL BLOG ===== -->
-    <section class="blog-hero" id="blog-hero">
+    <!-- ===== HERO DEL BLOG — esfera 3D interactiva ===== -->
+    <section class="blog-hero" id="blogHero" aria-labelledby="blogHeroTitulo">
       <div class="blog-hero__inner">
 
-        <span class="blog-hero__eyebrow fade-up">
-          <span class="lang-es">Guías · Consejos · Aventuras</span>
-          <span class="lang-en">Guides · Tips · Adventures</span>
-        </span>
+        <div class="blog-hero__text">
 
-        <h1 class="blog-hero__titulo fade-up" style="transition-delay:0.08s">
-          <span class="lang-es">Todo lo que necesitas saber para explorar Miami</span>
-          <span class="lang-en">Everything you need to know to explore Miami</span>
-        </h1>
+          <p class="blog-hero__eyebrow fade-up">
+            <span class="lang-es">Guías · Consejos · Aventuras</span>
+            <span class="lang-en">Guides · Tips · Adventures</span>
+          </p>
 
-        <div class="blog-hero__linea fade-up" style="transition-delay:0.14s" aria-hidden="true">
-          <span class="l-coral"></span>
-          <span class="l-turquesa"></span>
-          <span class="l-mostaza"></span>
+          <h1 id="blogHeroTitulo" class="blog-hero__titulo fade-up" style="transition-delay:0.08s">
+            <span class="lang-es">Todo lo que necesitas saber para explorar Miami</span>
+            <span class="lang-en">Everything you need to know to explore Miami</span>
+          </h1>
+
+          <div class="blog-hero__linea fade-up" style="transition-delay:0.14s" aria-hidden="true">
+            <span class="l-coral"></span>
+            <span class="l-turquesa"></span>
+            <span class="l-mostaza"></span>
+          </div>
+
+          <p class="blog-hero__sub fade-up" style="transition-delay:0.20s">
+            <span class="lang-es">Guías escritas por locales. Sin relleno, sin patrocinios disfrazados. Solo información real para que tu próxima aventura salga perfecta.</span>
+            <span class="lang-en">Guides written by locals. No filler, no disguised sponsorships. Just real information to make your next adventure perfect.</span>
+          </p>
+
+          <a href="#articulos-grid" class="blog-hero__cta fade-up" style="transition-delay:0.26s">
+            <span class="lang-es">Explorar artículos →</span>
+            <span class="lang-en">Browse articles →</span>
+          </a>
+
         </div>
 
-        <p class="blog-hero__sub fade-up" style="transition-delay:0.20s">
-          <span class="lang-es">Guías escritas por locales. Sin relleno, sin patrocinios disfrazados. Solo información real para que tu próxima aventura salga perfecta.</span>
-          <span class="lang-en">Guides written by locals. No filler, no disguised sponsorships. Just real information to make your next adventure perfect.</span>
-        </p>
+        <div class="blog-hero__sphere-wrap fade-up" style="transition-delay:0.10s">
+          <div id="sphereContainer" class="sphere-container" role="region" aria-label="Galería interactiva 3D">
+            <div class="sphere-stage"></div>
+          </div>
+          <p class="sphere-hint">
+            <span class="lang-es">Arrastra para rotar · Clic para ampliar</span>
+            <span class="lang-en">Drag to rotate · Click to enlarge</span>
+          </p>
+        </div>
 
       </div>
     </section>
+
+    <!-- ===== MODAL DE IMAGEN (esfera) ===== -->
+    <div class="sphere-modal" id="sphereModal" aria-hidden="true" role="dialog">
+      <div class="sphere-modal__card" role="document">
+        <div class="sphere-modal__media">
+          <img class="sphere-modal__img" alt="">
+          <button class="sphere-modal__close" type="button" aria-label="Cerrar">×</button>
+        </div>
+        <div class="sphere-modal__body">
+          <h3 class="sphere-modal__title"></h3>
+          <p class="sphere-modal__desc"></p>
+        </div>
+      </div>
+    </div>
 
     <!-- ===== ARTÍCULO DESTACADO ===== -->
     <section class="seccion-destacado" id="articulo-destacado">
@@ -339,6 +372,7 @@
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/blog.js"></script>
   <script src="assets/js/navbar.js"></script>
+  <script src="assets/js/sphere-hero.js"></script>
 
 </body>
 </html>
