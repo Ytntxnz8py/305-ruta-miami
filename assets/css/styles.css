@@ -521,82 +521,63 @@ html.lang-es .lang-en { display: none; }
 
 /* ===== SECCIÓN INTRO ===== */
 .seccion-intro {
-  position: relative;
-  overflow: hidden;
   background: var(--blanco-arena);
   padding: var(--seccion-py) 1.5rem;
 }
 
-/* ---- Video de fondo ---- */
-.seccion-intro__video-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
+/* ---- Animación: título "¿Por qué Explora Miami?" ---- */
+@keyframes tituloSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-22px);
+    letter-spacing: 0.04em;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    letter-spacing: normal;
+  }
 }
 
-.seccion-intro__video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1.05);
+/* Línea gradiente que crece bajo el título */
+@keyframes tituloLineaReveal {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
-.seccion-intro__video-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(255, 253, 247, 0.85) 0%,
-      rgba(255, 253, 247, 0.55) 30%,
-      rgba(255, 253, 247, 0.55) 70%,
-      rgba(255, 253, 247, 0.90) 100%
-    );
+.si-col-texto.visible .seccion-intro__titulo {
+  animation: tituloSlideIn 0.75s cubic-bezier(0.2, 0, 0, 1) 0.12s both;
 }
 
-/* Contenido encima del video */
-.seccion-intro__contenedor {
+/* Línea decorativa bajo el título */
+.si-layout .seccion-intro__titulo {
   position: relative;
-  z-index: 1;
+  padding-bottom: 0.55rem;
+}
+.si-layout .seccion-intro__titulo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 64px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--coral), var(--turquesa));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: none;
+}
+.si-col-texto.visible .seccion-intro__titulo::after {
+  animation: tituloLineaReveal 0.6s cubic-bezier(0.2, 0, 0, 1) 0.6s both;
 }
 
-/* Cards con fondo sólido y sombra sobre el video */
-.intro-card {
-  background: rgba(255, 253, 247, 0.92) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.12),
-    0 2px 8px  rgba(0, 0, 0, 0.08) !important;
-}
-
-/* Título y subtítulo legibles sobre video */
-.seccion-intro__titulo,
-.seccion-intro__subtitulo {
-  text-shadow: 0 1px 12px rgba(255, 253, 247, 0.9);
-}
-
-/* Reduced motion — ocultar video */
+/* Reduced motion — sin animación */
 @media (prefers-reduced-motion: reduce) {
-  .seccion-intro__video { display: none; }
-}
-
-/* Mobile — overlay más denso */
-@media (max-width: 768px) {
-  .seccion-intro__video { object-position: center center; }
-  .seccion-intro__video-overlay {
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(255, 253, 247, 0.88) 0%,
-        rgba(255, 253, 247, 0.65) 30%,
-        rgba(255, 253, 247, 0.65) 70%,
-        rgba(255, 253, 247, 0.92) 100%
-      );
+  .si-col-texto.visible .seccion-intro__titulo,
+  .si-col-texto.visible .seccion-intro__titulo::after {
+    animation: none;
+    transform: none;
+    opacity: 1;
   }
 }
 
@@ -1005,7 +986,32 @@ html.lang-es .lang-en { display: none; }
   font-size: 0.82rem; font-weight: 600; color: var(--turquesa-oscuro, #00434F);
   background: rgba(0,188,212,0.07); border: 1px solid rgba(0,188,212,0.15);
   border-radius: 50px; padding: 0.3rem 0.85rem;
+  cursor: default;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  display: inline-flex; align-items: center; gap: 0.28rem;
 }
+
+/* Efecto vibración al hover */
+@keyframes pillWiggle {
+  0%   { transform: rotate(0deg) scale(1); }
+  12%  { transform: rotate(-4deg) scale(1.06) translateY(-2px); }
+  28%  { transform: rotate(3deg) scale(1.08) translateY(-3px); }
+  44%  { transform: rotate(-2.5deg) scale(1.05) translateY(-1px); }
+  60%  { transform: rotate(1.5deg) scale(1.03); }
+  76%  { transform: rotate(-1deg) scale(1.01); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.trabaja-teaser__pill:hover {
+  background: rgba(0,188,212,0.14);
+  border-color: rgba(0,188,212,0.35);
+  animation: pillWiggle 0.52s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trabaja-teaser__pill:hover { animation: none; transform: none; }
+}
+
 .trabaja-teaser__cta { display: flex; justify-content: center; }
 /* Hace que el <a> funcione igual que <button> dentro del metal-btn-wrap */
 .trabaja-teaser__cta .metal-btn {
