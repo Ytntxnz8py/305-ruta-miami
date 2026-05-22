@@ -1,0 +1,204 @@
+/* ============================================
+   METAL BUTTON — Sistema universal
+   Explora Miami · Componente compartido
+   Cargado en TODAS las páginas del proyecto
+   ============================================ */
+
+/* Wrapper externo — el "marco metálico" */
+.metal-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  border-radius: 8px;
+  padding: 1.25px;
+  background: linear-gradient(to bottom, #111111, #A0A0A0);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 90ms cubic-bezier(0.2,0,0,1),
+              opacity 200ms;
+}
+.metal-btn-wrap:hover { opacity: 0.92; }
+
+/* Capa interior de sombra */
+.metal-btn-inner {
+  position: absolute;
+  inset: 1px;
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+
+/* Botón real */
+.metal-btn {
+  position: relative;
+  z-index: 10;
+  margin: 1px;
+  height: 44px;
+  min-height: 44px;
+  border-radius: 6px;
+  padding: 0 1.4rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 90ms cubic-bezier(0.2,0,0,1);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Brillo superior */
+.metal-btn-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.18) 0%,
+    rgba(255,255,255,0.04) 45%,
+    transparent 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Glow en hover */
+.metal-btn-hover-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: opacity 200ms cubic-bezier(0.2,0,0,1);
+}
+
+/* ── ESTADOS INTERACTIVOS ── */
+.metal-btn-wrap.is-pressed {
+  transform: translateY(2.5px) scale(0.99) !important;
+}
+.metal-btn-wrap.is-hovered .metal-btn-hover-glow {
+  opacity: 1;
+}
+
+/* ── VARIANTES DE COLOR ── */
+
+/* Turquesa — acciones principales */
+.metal-btn-wrap[data-variant="turquesa"] {
+  background: linear-gradient(to bottom, #003840, #70D8E0);
+}
+.metal-btn-wrap[data-variant="turquesa"] .metal-btn {
+  background: linear-gradient(135deg, #00BCD4 0%, #0097a7 100%);
+  color: white;
+}
+.metal-btn-wrap[data-variant="turquesa"] .metal-btn-hover-glow {
+  background: radial-gradient(circle at 50% 0%,
+    rgba(0,220,240,0.4), transparent 70%);
+}
+
+/* Coral — acciones de contacto / urgencia */
+.metal-btn-wrap[data-variant="coral"] {
+  background: linear-gradient(to bottom, #5A0000, #FF9090);
+}
+.metal-btn-wrap[data-variant="coral"] .metal-btn {
+  background: linear-gradient(135deg, #FF6B6B 0%, #c0392b 100%);
+  color: white;
+}
+.metal-btn-wrap[data-variant="coral"] .metal-btn-hover-glow {
+  background: radial-gradient(circle at 50% 0%,
+    rgba(255,150,150,0.4), transparent 70%);
+}
+
+/* Gold — planes premium */
+.metal-btn-wrap[data-variant="gold"] {
+  background: linear-gradient(to bottom, #5A3A00, #FFD070);
+}
+.metal-btn-wrap[data-variant="gold"] .metal-btn {
+  background: linear-gradient(135deg, #FFB300 0%, #e65100 100%);
+  color: #1a2a35;
+}
+.metal-btn-wrap[data-variant="gold"] .metal-btn-hover-glow {
+  background: radial-gradient(circle at 50% 0%,
+    rgba(255,210,80,0.4), transparent 70%);
+}
+
+/* Tierra — destinos naturaleza */
+.metal-btn-wrap[data-variant="tierra"] {
+  background: linear-gradient(to bottom, #2D3A00, #A8D060);
+}
+.metal-btn-wrap[data-variant="tierra"] .metal-btn {
+  background: linear-gradient(135deg, #7CB342 0%, #558b2f 100%);
+  color: white;
+}
+.metal-btn-wrap[data-variant="tierra"] .metal-btn-hover-glow {
+  background: radial-gradient(circle at 50% 0%,
+    rgba(168,208,96,0.4), transparent 70%);
+}
+
+/* Ghost — botones secundarios sobre fondos oscuros */
+.metal-btn-wrap[data-variant="ghost"] {
+  background: linear-gradient(to bottom,
+    rgba(255,253,247,0.3), rgba(255,253,247,0.1));
+}
+.metal-btn-wrap[data-variant="ghost"] .metal-btn {
+  background: rgba(255, 253, 247, 0.08);
+  color: #FFFDF7;
+  border: 1px solid rgba(255,253,247,0.2);
+}
+.metal-btn-wrap[data-variant="ghost"] .metal-btn-hover-glow {
+  background: radial-gradient(circle at 50% 0%,
+    rgba(255,253,247,0.15), transparent 70%);
+}
+
+/* Dark — sobre fondos claros, acción neutra */
+.metal-btn-wrap[data-variant="dark"] {
+  background: linear-gradient(to bottom, #000000, #555555);
+}
+.metal-btn-wrap[data-variant="dark"] .metal-btn {
+  background: linear-gradient(135deg, #1a2a35 0%, #071e2b 100%);
+  color: #FFFDF7;
+}
+.metal-btn-wrap[data-variant="dark"] .metal-btn-hover-glow {
+  background: radial-gradient(circle at 50% 0%,
+    rgba(255,253,247,0.12), transparent 70%);
+}
+
+/* ── TAMAÑOS ── */
+.metal-btn-wrap[data-size="sm"] .metal-btn {
+  height: 36px;
+  min-height: 36px;
+  padding: 0 1rem;
+  font-size: 0.82rem;
+}
+.metal-btn-wrap[data-size="lg"] .metal-btn {
+  height: 52px;
+  min-height: 52px;
+  padding: 0 2rem;
+  font-size: 1rem;
+}
+.metal-btn-wrap[data-size="full"] {
+  width: 100%;
+}
+.metal-btn-wrap[data-size="full"] .metal-btn {
+  width: 100%;
+}
+
+/* ── ACCESIBILIDAD ── */
+.metal-btn:focus-visible {
+  outline: 3px solid #00BCD4;
+  outline-offset: 2px;
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .metal-btn-wrap,
+  .metal-btn,
+  .metal-btn-hover-glow {
+    transition: none !important;
+    animation: none !important;
+  }
+}

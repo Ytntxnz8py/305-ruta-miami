@@ -1143,6 +1143,343 @@ body {
 }
 
 /* ============================================
+   ACTIVIDADES DISPONIBLES
+   ============================================ */
+.destino-actividades {
+  padding: 5rem 1.5rem;
+  background: linear-gradient(180deg,
+    var(--blanco-arena) 0%,
+    rgba(232,245,233,0.4) 100%);
+}
+.destino-actividades__contenedor {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.destino-actividades__contenedor h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--tinta);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.actividades-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+}
+@media (max-width: 900px) {
+  .actividades-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .actividades-grid { grid-template-columns: 1fr; }
+}
+.actividad-card {
+  background: white;
+  border-radius: var(--r);
+  padding: 1.5rem 1.3rem;
+  box-shadow: 0 2px 16px -6px rgba(26,42,53,0.08);
+  transition: transform var(--dur) var(--ease);
+}
+.actividad-card:hover { transform: translateY(-3px); }
+.actividad-card__icono {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.actividad-card__titulo {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--tinta);
+  margin-bottom: 0.75rem;
+}
+.actividad-card__lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.actividad-card__lista li {
+  font-size: 0.84rem;
+  font-weight: 300;
+  color: var(--texto-medio);
+  line-height: 1.45;
+  padding-left: 0.8rem;
+  position: relative;
+}
+.actividad-card__lista li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--turquesa);
+  font-weight: 700;
+}
+
+/* ============================================
+   CÓMO PREPARARTE
+   ============================================ */
+.destino-prep {
+  padding: 5rem 1.5rem;
+  background: var(--blanco-arena);
+}
+.destino-prep__contenedor {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.destino-prep__contenedor h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--tinta);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.prep-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+@media (max-width: 768px) {
+  .prep-grid { grid-template-columns: 1fr; }
+}
+.prep-card {
+  background: white;
+  border-radius: var(--r);
+  padding: 1.5rem;
+  box-shadow: 0 2px 16px -6px rgba(26,42,53,0.08);
+}
+.prep-card--warning {
+  border-left: 3px solid var(--mostaza);
+  background: linear-gradient(135deg, rgba(255,179,0,0.04), white);
+}
+.prep-card h3 {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--tinta);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.prep-card__icono { font-size: 1.2rem; }
+.prep-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.prep-card li {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--texto-medio);
+  line-height: 1.5;
+}
+.prep-temporadas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.prep-temporada {
+  padding: 0.75rem;
+  border-radius: var(--r-sm, 8px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.prep-temporada--buena {
+  background: rgba(76,175,80,0.08);
+  border: 1px solid rgba(76,175,80,0.2);
+}
+.prep-temporada--regular {
+  background: rgba(255,179,0,0.08);
+  border: 1px solid rgba(255,179,0,0.2);
+}
+.prep-temporada__label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--tinta);
+}
+.prep-temporada__desc {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--texto-medio);
+  line-height: 1.5;
+}
+
+/* ============================================
+   RATING DE INTERNET
+   ============================================ */
+.destino-rating {
+  padding: 5rem 1.5rem;
+  background: var(--blanco-arena);
+}
+.destino-rating__contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.destino-rating__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.destino-rating__header h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--tinta);
+  margin-bottom: 0.5rem;
+}
+.destino-rating__sub {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--texto-medio);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid de 4 cards */
+.rating-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 768px) {
+  .rating-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .rating-grid { grid-template-columns: 1fr; }
+}
+
+/* Card base */
+.rating-card {
+  background: white;
+  border-radius: var(--r);
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+  box-shadow: 0 4px 20px -8px rgba(26,42,53,0.10);
+  transition: transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+.rating-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -10px rgba(26,42,53,0.15);
+}
+
+/* Card destacada (Google) */
+.rating-card--featured {
+  border: 2px solid rgba(0,188,212,0.2);
+  background: linear-gradient(135deg, rgba(0,188,212,0.04), white);
+}
+
+/* Logo de plataforma */
+.rating-card__logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.25rem;
+}
+.rating-card__platform-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #4285F4;
+  color: white;
+  font-weight: 800;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rating-card__platform-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+/* Score numérico */
+.rating-card__score {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 2.8rem;
+  color: var(--tinta);
+  line-height: 1;
+  font-weight: 400;
+}
+
+/* Estrellas con fill */
+.rating-card__stars {
+  position: relative;
+  font-size: 1rem;
+  color: #e0e0e0;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+.rating-card__stars::before { content: '★★★★★'; }
+.stars-filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #FFB300;
+}
+.stars-filled::before { content: '★★★★★'; }
+
+/* Número de reseñas */
+.rating-card__count {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--texto-suave);
+}
+
+/* Link */
+.rating-card__link {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--turquesa);
+  text-decoration: none;
+  margin-top: auto;
+  transition: opacity var(--dur);
+}
+.rating-card__link:hover { opacity: 0.7; }
+
+/* Card UNESCO */
+.rating-card--nps .rating-card__badge-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--tinta);
+  line-height: 1.3;
+  text-align: center;
+}
+.rating-card--nps .rating-card__year {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+}
+
+/* Nota */
+.rating-nota {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+  opacity: 0.6;
+}
+
+/* ============================================
    PREFERS REDUCED MOTION — desactivar todo
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -1163,4 +1500,6 @@ body {
   .quiz-btn-siguiente:hover { transform: none; }
   .reading-progress { transition: none; }
   .quiz-progreso__barra { transition: none; }
+  .actividad-card:hover { transform: none; }
+  .rating-card:hover { transform: none; box-shadow: none; }
 }

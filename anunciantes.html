@@ -87,6 +87,7 @@
   <link rel="stylesheet" href="assets/css/anunciantes.css" />
   <link rel="stylesheet" href="assets/css/liquid-btn.css" />
   <link rel="stylesheet" href="assets/css/navbar.css" />
+  <link rel="stylesheet" href="assets/css/metal-button.css" />
 
   <!-- Aplica idioma guardado (compatibilidad con visitas desde index.html) -->
   <script>
@@ -944,10 +945,15 @@
               </p>
             </div>
 
-            <button type="submit" class="resenas-submit">
-              <span class="lang-es">Publicar reseña</span>
-              <span class="lang-en">Publish review</span>
-            </button>
+            <div class="metal-btn-wrap" data-variant="turquesa" data-size="full">
+              <div class="metal-btn-inner"></div>
+              <button type="submit" class="metal-btn resenas-submit">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span class="lang-es">Publicar reseña →</span>
+                <span class="lang-en">Publish review →</span>
+              </button>
+            </div>
 
             <p class="resenas-legal">
               <span class="lang-es">Al enviar aceptas que tu reseña sea visible públicamente. No se publica tu email.</span>
@@ -1232,6 +1238,7 @@
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/anunciantes.js"></script>
   <script src="assets/js/navbar.js"></script>
+  <script src="assets/js/metal-button.js"></script>
 
 </body>
 </html>
