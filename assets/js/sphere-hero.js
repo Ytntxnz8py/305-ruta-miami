@@ -110,7 +110,225 @@
       alt_en: 'Outdoor adventure in Miami',
       title_es: 'Aventura', title_en: 'Adventure',
       desc_es: 'Outdoor todo el año bajo el sol.',
-      desc_en: 'Year-round outdoor under the sun.' }
+      desc_en: 'Year-round outdoor under the sun.' },
+
+    /* === Lugares reales de Miami (Unsplash/Pexels) === */
+    { src: 'assets/images/miami/miami-south-beach.jpg',
+      alt_es: 'South Beach con palmeras y arena blanca',
+      alt_en: 'South Beach with palm trees and white sand',
+      title_es: 'South Beach', title_en: 'South Beach',
+      desc_es: 'La playa más icónica de Miami Beach.',
+      desc_en: 'Miami Beach’s most iconic stretch of sand.' },
+
+    { src: 'assets/images/miami/miami-ocean-drive.jpg',
+      alt_es: 'Ocean Drive con su arquitectura Art Deco',
+      alt_en: 'Ocean Drive and its Art Deco architecture',
+      title_es: 'Ocean Drive', title_en: 'Ocean Drive',
+      desc_es: 'El corazón Art Deco de South Beach.',
+      desc_en: 'The Art Deco heart of South Beach.' },
+
+    { src: 'assets/images/miami/miami-art-deco.jpg',
+      alt_es: 'Fachada Art Deco en Miami Beach',
+      alt_en: 'Art Deco facade in Miami Beach',
+      title_es: 'Art Deco', title_en: 'Art Deco',
+      desc_es: 'Distrito histórico Art Deco protegido.',
+      desc_en: 'Protected historic Art Deco district.' },
+
+    { src: 'assets/images/miami/miami-wynwood-walls.jpg',
+      alt_es: 'Murales callejeros en Wynwood Walls',
+      alt_en: 'Street murals at Wynwood Walls',
+      title_es: 'Wynwood Walls', title_en: 'Wynwood Walls',
+      desc_es: 'Museo al aire libre de arte urbano.',
+      desc_en: 'Open-air museum of urban art.' },
+
+    { src: 'assets/images/miami/miami-little-havana.jpg',
+      alt_es: 'Calle Ocho en Little Havana',
+      alt_en: 'Calle Ocho in Little Havana',
+      title_es: 'Little Havana', title_en: 'Little Havana',
+      desc_es: 'Cultura cubana viva en la Calle Ocho.',
+      desc_en: 'Living Cuban culture on Calle Ocho.' },
+
+    { src: 'assets/images/miami/miami-vizcaya.jpg',
+      alt_es: 'Jardines del Vizcaya Museum',
+      alt_en: 'Gardens of Vizcaya Museum',
+      title_es: 'Vizcaya', title_en: 'Vizcaya',
+      desc_es: 'Villa italiana del siglo XX junto al mar.',
+      desc_en: 'Early 20th-century Italian villa by the bay.' },
+
+    { src: 'assets/images/miami/miami-lincoln-road.jpg',
+      alt_es: 'Lincoln Road, paseo peatonal',
+      alt_en: 'Lincoln Road pedestrian mall',
+      title_es: 'Lincoln Road', title_en: 'Lincoln Road',
+      desc_es: 'Paseo peatonal con tiendas y cafés.',
+      desc_en: 'Pedestrian mall with shops and cafés.' },
+
+    { src: 'assets/images/miami/miami-brickell-skyline.jpg',
+      alt_es: 'Skyline de Brickell sobre la bahía',
+      alt_en: 'Brickell skyline over the bay',
+      title_es: 'Brickell', title_en: 'Brickell',
+      desc_es: 'El distrito financiero de Miami.',
+      desc_en: 'Miami’s financial district.' },
+
+    { src: 'assets/images/miami/miami-brickell-night.jpg',
+      alt_es: 'Brickell de noche',
+      alt_en: 'Brickell at night',
+      title_es: 'Brickell de noche', title_en: 'Brickell at night',
+      desc_es: 'Rascacielos iluminados sobre la bahía.',
+      desc_en: 'Illuminated towers over the bay.' },
+
+    { src: 'assets/images/miami/miami-downtown.jpg',
+      alt_es: 'Downtown Miami',
+      alt_en: 'Downtown Miami',
+      title_es: 'Downtown', title_en: 'Downtown',
+      desc_es: 'El centro vibrante de la ciudad.',
+      desc_en: 'The vibrant heart of the city.' },
+
+    { src: 'assets/images/miami/miami-downtown-miami.jpg',
+      alt_es: 'Vista de Downtown Miami',
+      alt_en: 'View of Downtown Miami',
+      title_es: 'Centro', title_en: 'City center',
+      desc_es: 'Torres modernas en el corazón urbano.',
+      desc_en: 'Modern towers in the urban core.' },
+
+    { src: 'assets/images/miami/miami-night-skyline.jpg',
+      alt_es: 'Skyline de Miami iluminado',
+      alt_en: 'Miami skyline lit up',
+      title_es: 'Skyline nocturno', title_en: 'Night skyline',
+      desc_es: 'La ciudad encendida tras el atardecer.',
+      desc_en: 'The city lit up after sunset.' },
+
+    { src: 'assets/images/miami/miami-skyline.jpg',
+      alt_es: 'Panorámica del skyline de Miami',
+      alt_en: 'Panoramic Miami skyline',
+      title_es: 'Panorámica', title_en: 'Panorama',
+      desc_es: 'Vista amplia de los rascacielos de Miami.',
+      desc_en: 'Wide view of Miami’s towers.' },
+
+    { src: 'assets/images/miami/miami-bayside-marketplace.jpg',
+      alt_es: 'Bayside Marketplace junto a la bahía',
+      alt_en: 'Bayside Marketplace by the bay',
+      title_es: 'Bayside', title_en: 'Bayside',
+      desc_es: 'Mercado al aire libre frente a la bahía.',
+      desc_en: 'Open-air market on the bayfront.' },
+
+    { src: 'assets/images/miami/miami-bayfront-park.jpg',
+      alt_es: 'Bayfront Park en el centro de Miami',
+      alt_en: 'Bayfront Park in downtown Miami',
+      title_es: 'Bayfront Park', title_en: 'Bayfront Park',
+      desc_es: 'Parque urbano frente al océano.',
+      desc_en: 'Urban park on the waterfront.' },
+
+    { src: 'assets/images/miami/miami-key-biscayne.jpg',
+      alt_es: 'Playa de Key Biscayne',
+      alt_en: 'Key Biscayne beach',
+      title_es: 'Key Biscayne', title_en: 'Key Biscayne',
+      desc_es: 'Isla con playas tranquilas y faro histórico.',
+      desc_en: 'Island with calm beaches and historic lighthouse.' },
+
+    { src: 'assets/images/miami/miami-haulover-park.jpg',
+      alt_es: 'Haulover Park y costa',
+      alt_en: 'Haulover Park and shoreline',
+      title_es: 'Haulover Park', title_en: 'Haulover Park',
+      desc_es: 'Playa amplia al norte de Miami Beach.',
+      desc_en: 'Wide beach north of Miami Beach.' },
+
+    { src: 'assets/images/miami/miami-coastline.jpg',
+      alt_es: 'Costa de Miami desde el aire',
+      alt_en: 'Miami coastline from above',
+      title_es: 'Costa aérea', title_en: 'Aerial coast',
+      desc_es: 'La costa miamense desde el aire.',
+      desc_en: 'Miami’s coastline from above.' },
+
+    { src: 'assets/images/miami/miami-beach-aerial.jpg',
+      alt_es: 'Vista aérea de Miami Beach',
+      alt_en: 'Aerial view of Miami Beach',
+      title_es: 'Miami Beach aéreo', title_en: 'Miami Beach aerial',
+      desc_es: 'Miami Beach desde lo alto.',
+      desc_en: 'Miami Beach from up high.' },
+
+    { src: 'assets/images/miami/miami-south-pointe.jpg',
+      alt_es: 'South Pointe Park, Miami Beach',
+      alt_en: 'South Pointe Park, Miami Beach',
+      title_es: 'South Pointe', title_en: 'South Pointe',
+      desc_es: 'Punta sur de Miami Beach con vista al canal.',
+      desc_en: 'Southern tip of Miami Beach with channel views.' },
+
+    { src: 'assets/images/miami/miami-south-beach-tower.jpg',
+      alt_es: 'Torre de salvavidas en South Beach',
+      alt_en: 'Lifeguard tower at South Beach',
+      title_es: 'Torre de salvavidas', title_en: 'Lifeguard tower',
+      desc_es: 'Torres de colores, símbolo de South Beach.',
+      desc_en: 'Colorful towers, the symbol of South Beach.' },
+
+    { src: 'assets/images/miami/miami-ocean-drive-deco.jpg',
+      alt_es: 'Hoteles Art Deco en Ocean Drive',
+      alt_en: 'Art Deco hotels on Ocean Drive',
+      title_es: 'Deco Ocean Drive', title_en: 'Deco Ocean Drive',
+      desc_es: 'Hoteles pastel del distrito Art Deco.',
+      desc_en: 'Pastel hotels of the Art Deco district.' },
+
+    { src: 'assets/images/miami/miami-coconut-grove.jpg',
+      alt_es: 'Coconut Grove y su vegetación',
+      alt_en: 'Coconut Grove and its greenery',
+      title_es: 'Coconut Grove', title_en: 'Coconut Grove',
+      desc_es: 'Barrio bohemio frente a la bahía.',
+      desc_en: 'Bohemian neighborhood on the bay.' },
+
+    { src: 'assets/images/miami/miami-venetian-pool.jpg',
+      alt_es: 'Venetian Pool en Coral Gables',
+      alt_en: 'Venetian Pool in Coral Gables',
+      title_es: 'Venetian Pool', title_en: 'Venetian Pool',
+      desc_es: 'Piscina histórica tallada en coral.',
+      desc_en: 'Historic pool carved from coral rock.' },
+
+    { src: 'assets/images/miami/miami-fairchild-garden.jpg',
+      alt_es: 'Fairchild Tropical Botanic Garden',
+      alt_en: 'Fairchild Tropical Botanic Garden',
+      title_es: 'Fairchild Garden', title_en: 'Fairchild Garden',
+      desc_es: 'Jardín botánico tropical en Coral Gables.',
+      desc_en: 'Tropical botanic garden in Coral Gables.' },
+
+    { src: 'assets/images/miami/miami-pamm-museum.jpg',
+      alt_es: 'Pérez Art Museum Miami (PAMM)',
+      alt_en: 'Pérez Art Museum Miami (PAMM)',
+      title_es: 'PAMM', title_en: 'PAMM',
+      desc_es: 'Museo de arte contemporáneo frente a la bahía.',
+      desc_en: 'Contemporary art museum on the bay.' },
+
+    { src: 'assets/images/miami/miami-marine-stadium.jpg',
+      alt_es: 'Miami Marine Stadium en Virginia Key',
+      alt_en: 'Miami Marine Stadium on Virginia Key',
+      title_es: 'Marine Stadium', title_en: 'Marine Stadium',
+      desc_es: 'Icónico estadio acuático modernista.',
+      desc_en: 'Iconic modernist waterfront stadium.' },
+
+    { src: 'assets/images/miami/miami-pier.jpg',
+      alt_es: 'Muelle en la costa de Miami',
+      alt_en: 'Pier on the Miami coast',
+      title_es: 'Muelle', title_en: 'Pier',
+      desc_es: 'Muelle de pesca sobre el océano.',
+      desc_en: 'Fishing pier over the ocean.' },
+
+    { src: 'assets/images/miami/miami-beach-palms.jpg',
+      alt_es: 'Palmeras junto a la playa',
+      alt_en: 'Palm trees by the beach',
+      title_es: 'Palmeras', title_en: 'Palms',
+      desc_es: 'Hileras de palmeras frente al mar.',
+      desc_en: 'Rows of palms facing the sea.' },
+
+    { src: 'assets/images/miami/miami-pexels-beach.jpg',
+      alt_es: 'Arena y olas en Miami Beach',
+      alt_en: 'Sand and waves at Miami Beach',
+      title_es: 'Olas', title_en: 'Waves',
+      desc_es: 'Olas tibias del Atlántico.',
+      desc_en: 'Warm Atlantic waves.' },
+
+    { src: 'assets/images/miami/miami-pexels-ocean.jpg',
+      alt_es: 'Océano frente a Miami',
+      alt_en: 'Ocean off Miami',
+      title_es: 'Atlántico', title_en: 'Atlantic',
+      desc_es: 'Aguas azules del Atlántico tropical.',
+      desc_en: 'Blue tropical Atlantic waters.' }
   ];
 
   /* === CONSTANTES === */
@@ -213,18 +431,31 @@
   }
 
   /* === CREACIÓN DE NODOS DOM === */
+  /* En móvil reducimos el número de nodos para evitar lag */
+  var MAX_NODES_MOBILE = 18;
+  function getActiveImages() {
+    var isMobile = window.innerWidth < 900;
+    if (isMobile && IMAGES.length > MAX_NODES_MOBILE) {
+      return IMAGES.slice(0, MAX_NODES_MOBILE);
+    }
+    return IMAGES;
+  }
+  var activeImages = IMAGES;
+
   function buildNodes() {
     stage.innerHTML = '';
     imageNodes = [];
-    for (var i = 0; i < IMAGES.length; i++) {
-      var img = IMAGES[i];
+    activeImages = getActiveImages();
+    for (var i = 0; i < activeImages.length; i++) {
+      var img = activeImages[i];
       var node = document.createElement('div');
       node.className = 'sphere-node';
       node.setAttribute('data-idx', i);
       var imgEl = document.createElement('img');
       imgEl.src = img.src;
       imgEl.alt = img.alt_es;
-      imgEl.loading = i < 4 ? 'eager' : 'lazy';
+      imgEl.loading = i < 5 ? 'eager' : 'lazy';
+      imgEl.decoding = 'async';
       imgEl.draggable = false;
       node.appendChild(imgEl);
       node.addEventListener('click', onImageClick);
@@ -317,7 +548,7 @@
     // Si la esfera está rotando con velocidad, ignoramos el click
     if (Math.abs(velocity.x) > 0.5 || Math.abs(velocity.y) > 0.5) return;
     var idx = parseInt(e.currentTarget.getAttribute('data-idx'), 10);
-    openModal(IMAGES[idx]);
+    openModal(activeImages[idx]);
   }
   function openModal(data) {
     var modal = document.getElementById('sphereModal');
@@ -351,7 +582,7 @@
       container.style.width = actualContainerSize + 'px';
       container.style.height = actualContainerSize + 'px';
     }
-    spherePositions = generateFibonacciPositions(IMAGES.length);
+    spherePositions = generateFibonacciPositions(activeImages.length);
     applyPositions();
   }
 
@@ -362,8 +593,8 @@
     stage = container.querySelector('.sphere-stage');
     if (!stage) return;
 
-    handleResize();
     buildNodes();
+    handleResize();
     updateAltLanguage();
 
     // Eventos drag (mouse)

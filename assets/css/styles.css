@@ -2212,15 +2212,13 @@ h2.h2-reveal:not(.seccion-titulo).visible::after { width: 56px; }
 }
 .mapa-marcador.visible { opacity: 1; transform: translateY(0); }
 
-/* TRABAJA: fondo de puntos CSS animados */
-.seccion-trabaja { position: relative; overflow: hidden; }
+/* TRABAJA: fondo plano blanco arena (sin puntos) */
+.seccion-trabaja { position: relative; overflow: hidden; background: var(--blanco-arena); }
 .seccion-trabaja::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(0,188,212,0.20) 1.5px, transparent 1.5px);
-  background-size: 28px 28px;
-  animation: dots-pulse 6s ease-in-out infinite alternate;
+  background: var(--blanco-arena);
   pointer-events: none;
   z-index: 0;
 }

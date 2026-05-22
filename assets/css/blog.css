@@ -316,12 +316,11 @@ a.footer__enlace:hover { color: var(--blanco-arena); }
 @media (max-width: 640px) {
   .blog-hero { padding: 2.5rem 1.25rem 2rem; }
 }
-/* Puntos decorativos de fondo */
+/* Fondo plano blanco arena (sin puntos) */
 .blog-hero::before {
   content: '';
   position: absolute; inset: 0;
-  background-image: radial-gradient(circle, rgba(0,188,212,0.12) 1.5px, transparent 1.5px);
-  background-size: 32px 32px;
+  background: var(--blanco-arena);
   pointer-events: none;
 }
 .blog-hero__inner {
@@ -860,11 +859,10 @@ a.footer__enlace:hover { color: var(--blanco-arena); }
   position: relative;
 }
 .blog-hero::before {
-  /* Mantenemos puntos decorativos suaves */
+  /* Fondo plano blanco arena (sin puntos) */
   content: '';
   position: absolute; inset: 0;
-  background-image: radial-gradient(circle, rgba(0,188,212,0.10) 1.5px, transparent 1.5px);
-  background-size: 32px 32px;
+  background: var(--blanco-arena);
   pointer-events: none;
 }
 .blog-hero__inner {
@@ -980,6 +978,7 @@ a.footer__enlace:hover { color: var(--blanco-arena); }
   cursor: pointer;
   background: var(--blanco-arena);
   pointer-events: auto;
+  will-change: transform, opacity;
 }
 .sphere-node:hover {
   transform: translate(-50%, -50%) scale(1.08);
