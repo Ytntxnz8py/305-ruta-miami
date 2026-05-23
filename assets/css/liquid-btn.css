@@ -1,58 +1,48 @@
 /* =========================================
    EXPLORA MIAMI — liquid-btn.css
-   Efecto oficial: Hardware Button
-   Inspirado en el componente Uiverse (botón físico):
-   · Esquina biselada (clip-path)
-   · LED pulsante en la esquina
-   · Brillo de superficie (::before)
-   · Liquid sweep en el background
-   TEST ACTIVO: solo .em-nav__cta ("Para empresas")
+   Hardware Button — efecto oficial
+   TEST: solo .em-nav__cta ("Para empresas")
+   Todos los valores llevan !important porque
+   navbar.css carga después y pisaría los estilos.
    ES5 / sin frameworks / GitHub Pages
 ========================================= */
 
-/* ─── Keyframe: sweep del gradiente ─── */
+/* ─── Sweep del gradiente ─── */
 @keyframes liq-sweep {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ─── Keyframe: LED pulsa suavemente ─── */
+/* ─── LED pulsa ─── */
 @keyframes led-pulse {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 0 0 4px #7fffd4, 0 0 10px rgba(127, 255, 212, 0.7);
-  }
-  50% {
-    opacity: 0.45;
-    box-shadow: 0 0 2px #7fffd4, 0 0 4px rgba(127, 255, 212, 0.3);
-  }
+  0%, 100% { opacity: 1;    box-shadow: 0 0 5px #7fffd4, 0 0 12px rgba(127,255,212,0.7); }
+  50%       { opacity: 0.4; box-shadow: 0 0 2px #7fffd4, 0 0 4px  rgba(127,255,212,0.3); }
 }
 
 
 /* =====================================================
-   HARDWARE BUTTON — "Para empresas" navbar CTA
+   "Para empresas" — botón hardware
    ===================================================== */
 .em-nav__cta {
-  /* layout */
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.52rem 1.5rem 0.52rem 1rem;
-  white-space: nowrap;
-  text-decoration: none;
+  position:        relative          !important;
+  display:         inline-flex       !important;
+  align-items:     center            !important;
+  padding:         0.52rem 1.6rem 0.52rem 1rem !important;
+  white-space:     nowrap            !important;
+  text-decoration: none              !important;
+  overflow:        hidden            !important;
+  isolation:       isolate           !important;
 
-  /* forma — esquina biselada top-left y bottom-right */
-  border-radius: 6px;
+  /* esquinas biseladas — top-left y bottom-right */
+  border-radius: 6px !important;
   clip-path: polygon(
     9px 0%, 100% 0%,
     100% calc(100% - 9px), calc(100% - 9px) 100%,
     0% 100%, 0% 9px
-  );
-  overflow: hidden;
-  isolation: isolate;
+  ) !important;
 
-  /* liquid sweep — gradiente idéntico al login-btn */
+  /* liquid sweep — gradiente del login-btn */
   background: linear-gradient(
     -45deg,
     rgba(0,  188, 212, 0.92),
@@ -67,87 +57,75 @@
   animation: liq-sweep 5s ease infinite;
 
   /* tipografía */
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #fff !important;
+  font-size:      0.82rem  !important;
+  font-weight:    700      !important;
+  letter-spacing: 0.06em   !important;
+  text-transform: uppercase !important;
+  color:          #fff     !important;
 
-  /* borde y sombra tipo hardware */
-  border: 1px solid rgba(0, 220, 240, 0.35) !important;
+  /* borde + sombra hardware */
+  border: 1px solid rgba(0, 220, 240, 0.40) !important;
   box-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.45),
-    0 6px 20px rgba(0, 188, 212, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.18) !important;
-
-  transition: transform 0.18s ease, box-shadow 0.18s ease,
-              animation-duration 0s;
+    0 1px 0 rgba(0,0,0,0.45),
+    0 6px 20px rgba(0,188,212,0.30),
+    inset 0  1px 0 rgba(255,255,255,0.16),
+    inset 0 -1px 0 rgba(0,0,0,0.18) !important;
 }
 
-/* ── Brillo de superficie (top) ─────────────────────── */
-/* Simula reflexión de luz en material físico */
+/* Brillo de superficie */
 .em-nav__cta::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
     168deg,
-    rgba(255, 255, 255, 0.20) 0%,
-    rgba(255, 255, 255, 0.06) 45%,
+    rgba(255,255,255,0.20) 0%,
+    rgba(255,255,255,0.06) 45%,
     transparent 65%
   );
   pointer-events: none;
   z-index: 0;
-  border-radius: inherit;
 }
 
-/* ── LED pulsante — esquina superior derecha ─────────── */
-/* Punto de luz que indica estado activo */
+/* LED pulsante — esquina superior derecha */
 .em-nav__cta::after {
   content: '';
   position: absolute;
-  top: 5px;
-  right: 8px;
-  width: 5px;
-  height: 5px;
+  top: 5px; right: 8px;
+  width: 5px; height: 5px;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 35%, #afffee, #00ffcc);
-  box-shadow: 0 0 4px #7fffd4, 0 0 10px rgba(127, 255, 212, 0.7);
+  box-shadow: 0 0 5px #7fffd4, 0 0 12px rgba(127,255,212,0.7);
   animation: led-pulse 2.5s ease-in-out infinite;
   pointer-events: none;
   z-index: 2;
 }
 
-/* ── Texto por encima de los pseudo-elementos ─────────── */
+/* Texto por encima del brillo */
 .em-nav__cta .lang-es,
 .em-nav__cta .lang-en {
   position: relative;
   z-index: 1;
 }
 
-/* ── Hover: sombra más intensa + sweep más rápido ──────── */
+/* Hover */
 .em-nav__cta:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.45),
-    0 12px 32px rgba(0, 188, 212, 0.48),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.18) !important;
+  transform: translateY(-1px) !important;
   animation-duration: 2s;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.45),
+    0 12px 32px rgba(0,188,212,0.50),
+    inset 0  1px 0 rgba(255,255,255,0.16),
+    inset 0 -1px 0 rgba(0,0,0,0.18) !important;
 }
 
-/* ── Press ─────────────────────────────────────────────── */
+/* Press */
 .em-nav__cta:active {
-  transform: translateY(1px);
+  transform: translateY(1px) !important;
 }
 
-/* ─── Accesibilidad: prefers-reduced-motion ─── */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .em-nav__cta {
-    animation: none !important;
-  }
-  .em-nav__cta::after {
-    animation: none !important;
-  }
+  .em-nav__cta        { animation: none !important; }
+  .em-nav__cta::after { animation: none !important; }
 }
