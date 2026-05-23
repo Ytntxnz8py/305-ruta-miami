@@ -58,6 +58,7 @@
   <!-- Hojas de estilo -->
   <link rel="stylesheet" href="../assets/css/navbar.css" />
   <link rel="stylesheet" href="../assets/css/destino.css" />
+  <link rel="stylesheet" href="../assets/css/radial-gallery.css" />
   <link rel="stylesheet" href="../assets/css/metal-button.css" />
   <link rel="stylesheet" href="../assets/css/liquid-btn.css" />
 
@@ -294,68 +295,74 @@
     </section>
 
 
-    <!-- ===== SECCIÓN 3 — GALERÍA INTERACTIVA ===== -->
+    <!-- ===== SECCIÓN 3 — GALERÍA RADIAL ===== -->
     <section class="destino-galeria" id="galeria">
 
-      <div class="destino-galeria__header fade-up">
-        <h2 class="lang-es">Galería</h2>
-        <h2 class="lang-en">Gallery</h2>
-      </div>
+      <!-- Galería radial — posicionada y animada por radial-gallery.js -->
+      <div class="radial-gallery" id="galeriaRadial">
 
-      <div class="destino-galeria__grid" role="list">
-
-        <!-- Grande (span 2 filas) -->
-        <div class="galeria-item galeria-item--grande" data-index="0"
-             role="listitem" tabindex="0"
-             aria-label="Abrir foto: Playa de Virginia Key Beach Park">
-          <img src="../assets/images/hero/hero-01.jpg"
-               alt="Playa de Virginia Key Beach Park"
-               loading="lazy" />
-          <div class="galeria-item__overlay">
-            <span class="lang-es">Playa histórica</span>
-            <span class="lang-en">Historic beach</span>
-          </div>
+        <div class="radial-gallery__header fade-up">
+          <h2 class="lang-es">Galería</h2>
+          <h2 class="lang-en">Gallery</h2>
         </div>
 
-        <div class="galeria-item" data-index="1"
-             role="listitem" tabindex="0"
-             aria-label="Abrir foto: Costa y manglar en Virginia Key">
-          <img src="../assets/images/hero/hero-14.jpg"
-               alt="Costa y manglar en Virginia Key"
-               loading="lazy" />
-          <div class="galeria-item__overlay">
-            <span class="lang-es">Costa natural</span>
-            <span class="lang-en">Natural coastline</span>
-          </div>
+        <div class="radial-gallery__stage" id="galeriaStage">
+          <ul class="radial-gallery__wheel" id="galeriaWheel">
+
+            <li class="radial-gallery__spoke" data-index="0">
+              <div class="galeria-item radial-gallery__card"
+                   role="button" tabindex="0"
+                   aria-label="Abrir foto: Playa histórica">
+                <img src="../assets/images/hero/hero-01.jpg" alt="Playa de Virginia Key Beach Park" loading="lazy" />
+                <div class="galeria-item__overlay">
+                  <span class="lang-es">Playa histórica</span>
+                  <span class="lang-en">Historic beach</span>
+                </div>
+              </div>
+            </li>
+
+            <li class="radial-gallery__spoke" data-index="1">
+              <div class="galeria-item radial-gallery__card"
+                   role="button" tabindex="0"
+                   aria-label="Abrir foto: Costa natural">
+                <img src="../assets/images/hero/hero-14.jpg" alt="Costa y manglar en Virginia Key" loading="lazy" />
+                <div class="galeria-item__overlay">
+                  <span class="lang-es">Costa natural</span>
+                  <span class="lang-en">Natural coastline</span>
+                </div>
+              </div>
+            </li>
+
+            <li class="radial-gallery__spoke" data-index="2">
+              <div class="galeria-item radial-gallery__card"
+                   role="button" tabindex="0"
+                   aria-label="Abrir foto: Kayak en la bahía">
+                <img src="../assets/images/hero/hero-15.jpg" alt="Kayak en Virginia Key" loading="lazy" />
+                <div class="galeria-item__overlay">
+                  <span class="lang-es">Kayak en la bahía</span>
+                  <span class="lang-en">Bay kayaking</span>
+                </div>
+              </div>
+            </li>
+
+            <li class="radial-gallery__spoke" data-index="3">
+              <div class="galeria-item radial-gallery__card"
+                   role="button" tabindex="0"
+                   aria-label="Abrir foto: Amanecer">
+                <img src="../assets/images/hero/hero-01.jpg" alt="Amanecer en la playa de Virginia Key" loading="lazy" />
+                <div class="galeria-item__overlay">
+                  <span class="lang-es">Amanecer</span>
+                  <span class="lang-en">Sunrise</span>
+                </div>
+              </div>
+            </li>
+
+          </ul>
         </div>
 
-        <div class="galeria-item" data-index="2"
-             role="listitem" tabindex="0"
-             aria-label="Abrir foto: Kayak en Virginia Key">
-          <img src="../assets/images/hero/hero-15.jpg"
-               alt="Kayak en Virginia Key"
-               loading="lazy" />
-          <div class="galeria-item__overlay">
-            <span class="lang-es">Kayak en la bahía</span>
-            <span class="lang-en">Bay kayaking</span>
-          </div>
-        </div>
+      </div><!-- /radial-gallery -->
 
-        <div class="galeria-item" data-index="3"
-             role="listitem" tabindex="0"
-             aria-label="Abrir foto: Amanecer en la playa de Virginia Key">
-          <img src="../assets/images/hero/hero-01.jpg"
-               alt="Amanecer en la playa de Virginia Key"
-               loading="lazy" />
-          <div class="galeria-item__overlay">
-            <span class="lang-es">Amanecer</span>
-            <span class="lang-en">Sunrise</span>
-          </div>
-        </div>
-
-      </div><!-- /grid -->
-
-      <!-- Lightbox (oculto por defecto) -->
+      <!-- Lightbox (sin cambios) -->
       <div class="galeria-lightbox" id="galeriaLightbox"
            role="dialog" aria-modal="true"
            aria-label="Galería de fotos ampliada"
@@ -1109,6 +1116,9 @@
   <script src="../assets/js/navbar.js"></script>
   <script src="../assets/js/metal-button.js"></script>
   <script src="../assets/js/liquid-tilt.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../assets/js/radial-gallery.js"></script>
 
 </body>
 </html>
