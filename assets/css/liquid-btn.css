@@ -1,12 +1,16 @@
 /* =========================================
    EXPLORA MIAMI — liquid-btn.css
-   Réplica exacta del .login-btn del admin panel
-   adaptada al navbar (tamaño y contexto distintos).
+   FIX: NO usar background shorthand con !important
+   porque fija background-position !important también
+   y eso bloquea la animación (cascade: !important > animation).
+   Solución: usar background-image !important separado,
+   dejando background-position sin !important para que
+   la animación lo pueda controlar.
    TEST: solo .em-nav__cta ("Para empresas")
    ES5 / sin frameworks / GitHub Pages
 ========================================= */
 
-/* ─── Keyframe idéntico al admin.css ─── */
+/* ─── Sweep: mueve background-position ─── */
 @keyframes liq-sweep {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -16,23 +20,22 @@
 
 /* =====================================================
    "Para empresas" — réplica del login-btn
-   Diferencias del original:
-   · Más chico (navbar, no card full-width)
-   · Glow más intenso para compensar el fondo claro
    ===================================================== */
 .em-nav__cta {
-  /* PASTILLA — igual que login-btn (border-radius: 50px) */
-  border-radius:   50px            !important;
-  padding:         0.52rem 1.4rem  !important;
-  display:         inline-flex     !important;
-  align-items:     center          !important;
-  white-space:     nowrap          !important;
-  text-decoration: none            !important;
-  position:        relative        !important;
-  overflow:        hidden          !important;
+  display:         inline-flex    !important;
+  align-items:     center         !important;
+  position:        relative       !important;
+  padding:         0.52rem 1.4rem !important;
+  border-radius:   50px           !important;
+  white-space:     nowrap         !important;
+  text-decoration: none           !important;
+  overflow:        visible        !important;
+  isolation:       isolate        !important;
 
-  /* Gradiente animado — copia exacta del login-btn */
-  background: linear-gradient(
+  /* ── CLAVE: background-image !important, NO el shorthand ──
+     El shorthand fijaría background-position con !important
+     y bloquearía la animación del sweep. */
+  background-image: linear-gradient(
     -45deg,
     rgba(0,  188, 212, 0.92),
     rgba(7,   30,  43, 0.88),
@@ -42,21 +45,24 @@
     rgba(0,  220, 240, 0.90),
     rgba(7,   46,  63, 0.85)
   ) !important;
-  background-size: 300% 300% !important;
+  background-size:  300% 300%   !important;
+  background-color: transparent !important;
+  /* background-position: sin !important — la animación lo controla */
+
+  /* Sweep */
   animation: liq-sweep 5s ease infinite;
 
   /* Vidrio — igual que login-btn */
-  backdrop-filter: blur(8px)          !important;
-  -webkit-backdrop-filter: blur(8px)  !important;
+  backdrop-filter:         blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 
-  /* Borde turquesa — igual que login-btn */
-  border: 1px solid rgba(0, 188, 212, 0.45) !important;
+  /* Borde */
+  border: 1px solid rgba(0, 188, 212, 0.55) !important;
 
-  /* Sombra: glow externo + highlight interno — igual que login-btn
-     (glow más fuerte que el original para compensar fondo claro) */
+  /* Sombra: glow turquesa + highlight interno */
   box-shadow:
-    0 4px 20px rgba(0, 188, 212, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+    0 4px 22px rgba(0, 188, 212, 0.60),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
 
   /* Tipografía */
   font-size:   0.88rem !important;
@@ -66,16 +72,37 @@
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-/* Hover — igual que login-btn */
+/* ── Sombra oscura detrás del botón ──────────────────────
+   Crea un halo oscuro alrededor para simular el fondo
+   negro del panel admin y que el turquesa brille igual. */
+.em-nav__cta::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 60px;
+  background: rgba(7, 30, 43, 0.28);
+  filter: blur(16px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Texto por encima */
+.em-nav__cta .lang-es,
+.em-nav__cta .lang-en {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover */
 .em-nav__cta:hover {
-  transform: translateY(-2px)  !important;
+  transform: translateY(-2px) !important;
   animation-duration: 2s;
   box-shadow:
-    0 8px 32px rgba(0, 188, 212, 0.70),
+    0 8px 32px rgba(0, 188, 212, 0.75),
     inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
 }
 
-/* Press — igual que login-btn :active */
+/* Press */
 .em-nav__cta:active {
   transform: translateY(0) !important;
 }
