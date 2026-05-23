@@ -35,6 +35,7 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=25.2866,-80.8987',
     apple_maps_url: 'https://maps.apple.com/?q=Everglades+National+Park&ll=25.2866,-80.8987',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g294467-d143673-Reviews-Everglades_National_Park-Florida.html',
+    rating: 4.8, /* Google Maps — mayo 2026 */
     activo: true,
     resenas: [
       {
@@ -85,6 +86,7 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=25.1288,-80.4072',
     apple_maps_url: 'https://maps.apple.com/?q=John+Pennekamp+Coral+Reef+State+Park&ll=25.1288,-80.4072',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34275-d143712-Reviews-John_Pennekamp_Coral_Reef_State_Park-Key_Largo_Florida_Keys_Florida.html',
+    rating: 4.7, /* Google Maps — mayo 2026 */
     activo: true,
     resenas: [
       {
@@ -135,6 +137,7 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=25.4729,-80.3340',
     apple_maps_url: 'https://maps.apple.com/?q=Biscayne+National+Park&ll=25.4729,-80.3340',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34262-d143693-Reviews-Biscayne_National_Park-Homestead_Florida.html',
+    rating: 4.7, /* Google Maps — mayo 2026 */
     activo: true,
     resenas: [
       {
@@ -185,6 +188,7 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=25.6671,-80.1584',
     apple_maps_url: 'https://maps.apple.com/?q=Bill+Baggs+Cape+Florida+State+Park&ll=25.6671,-80.1584',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34438-d143731-Reviews-Bill_Baggs_Cape_Florida_State_Park-Key_Biscayne_Florida.html',
+    rating: 4.8, /* Google Maps — mayo 2026 */
     activo: true,
     resenas: [
       {
@@ -235,6 +239,7 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=25.9103,-80.1390',
     apple_maps_url: 'https://maps.apple.com/?q=Oleta+River+State+Park&ll=25.9103,-80.1390',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34429-d548213-Reviews-Oleta_River_State_Park-North_Miami_Beach_Florida.html',
+    rating: 4.6, /* Google Maps — mayo 2026 */
     activo: true,
     resenas: [
       {
@@ -283,6 +288,7 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=25.7355,-80.1573',
     apple_maps_url: 'https://maps.apple.com/?q=Virginia+Key+Beach+Park&ll=25.7355,-80.1573',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34438-d8728698-Reviews-Virginia_Key_Beach_Park-Key_Biscayne_Florida.html',
+    rating: 4.5, /* Google Maps — mayo 2026 */
     activo: true,
     resenas: [
       {
@@ -331,6 +337,7 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=25.6680,-80.2747',
     apple_maps_url: 'https://maps.apple.com/?q=Matheson+Hammock+Park&ll=25.6680,-80.2747',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34425-d8728345-Reviews-Matheson_Hammock_Park-Coral_Gables_Florida.html',
+    rating: 4.5, /* Google Maps — mayo 2026 */
     activo: true,
     resenas: [
       {
@@ -380,6 +387,7 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=25.7024,-80.1556',
     apple_maps_url: 'https://maps.apple.com/?q=Crandon+Park&ll=25.7024,-80.1556',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34438-d258126-Reviews-Crandon_Park-Key_Biscayne_Florida.html',
+    rating: 4.7, /* Google Maps — mayo 2026 */
     activo: true,
     resenas: [
       {
@@ -430,6 +438,7 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=25.8955,-80.1678',
     apple_maps_url: 'https://maps.apple.com/?q=Arch+Creek+Park&ll=25.8955,-80.1678',
     resenas_url: 'https://www.tripadvisor.com/Attraction_Review-g34429-d550295-Reviews-Arch_Creek_Park-North_Miami_Beach_Florida.html',
+    rating: 4.6, /* Google Maps — mayo 2026 */
     activo: true,
     resenas: [
       {
@@ -455,7 +464,7 @@ var DESTINOS_DEFAULT = [
 ];
 
 /* Versión de los datos — incrementar cada vez que cambie DESTINOS_DEFAULT */
-var DESTINOS_VERSION = 4;
+var DESTINOS_VERSION = 5;
 
 /* Mapa de IDs de destino → rutas de páginas HTML reales */
 var DESTINO_URLS = {
@@ -534,6 +543,14 @@ function bindCardTilt(card) {
   });
 }
 
+/* ===== HELPER: genera n emojis de estrella según calificación ===== */
+function generarEstrellas(rating) {
+  var n = Math.round(rating || 0);
+  var s = '';
+  for (var i = 0; i < n; i++) { s += '⭐'; }
+  return s;
+}
+
 /* ===== RENDER DE TARJETAS DE DESTINO ===== */
 var filtroActivo = 'todos';
 
@@ -570,46 +587,56 @@ function renderDestinos(filtro) {
           '<span class="lang-es">Ver destino</span>' +
           '<span class="lang-en">View destination</span>' +
         '</button>';
+    /* Estrellas Google Maps */
+    var estrellas = generarEstrellas(d.rating || 4.5);
+    var ratingNum = d.rating ? String(d.rating) : '';
+
     return (
-      '<article class="destino-card fade-up" data-tipo="' + d.tipo + '" style="transition-delay:' + delay + 's" ' +
-               cardClick + ' role="button" tabindex="0" ' +
-               'aria-label="' + ariaPref + (langCur === 'en' ? d.nombre_en : d.nombre_es) + '">' +
-        '<div class="destino-card__img-cont">' +
-          '<img src="' + d.foto + '" alt="' + d.nombre_es + '" class="destino-card__img" loading="lazy" />' +
-          '<span class="destino-card__badge destino-card__badge--tipo destino-card__badge--' + d.tipo + '">' +
-            '<span class="lang-es">' + d.tipo_es + '</span>' +
-            '<span class="lang-en">' + d.tipo_en + '</span>' +
-          '</span>' +
-          '<span class="destino-card__badge destino-card__badge--dif destino-card__badge--' + d.dificultad_clase + '">' +
-            '<span class="lang-es">' + d.dificultad_es + '</span>' +
-            '<span class="lang-en">' + d.dificultad_en + '</span>' +
-          '</span>' +
-        '</div>' +
-        '<div class="destino-card__info">' +
-          '<h3 class="destino-card__nombre">' +
-            '<span class="lang-es">' + d.nombre_es + '</span>' +
-            '<span class="lang-en">' + d.nombre_en + '</span>' +
-          '</h3>' +
-          '<p class="destino-card__desc">' +
-            '<span class="lang-es">' + d.descripcion_es + '</span>' +
-            '<span class="lang-en">' + d.descripcion_en + '</span>' +
-          '</p>' +
-          '<div class="destino-card__meta">' +
-            '<span class="destino-card__meta-item"><span class="meta-icono">💲</span>' +
-              '<span class="lang-es">' + d.precio + '</span>' +
-              '<span class="lang-en">' + (d.precio_en || d.precio) + '</span>' +
+      /* Wrapper de borde gradiente — contiene la tarjeta */
+      '<div class="destino-card-wrap fade-up" style="transition-delay:' + delay + 's">' +
+        '<article class="destino-card" data-tipo="' + d.tipo + '" ' +
+                 cardClick + ' role="button" tabindex="0" ' +
+                 'aria-label="' + ariaPref + (langCur === 'en' ? d.nombre_en : d.nombre_es) + '">' +
+          '<div class="destino-card__img-cont">' +
+            '<img src="' + d.foto + '" alt="' + d.nombre_es + '" class="destino-card__img" loading="lazy" />' +
+            '<span class="destino-card__badge destino-card__badge--tipo destino-card__badge--' + d.tipo + '">' +
+              '<span class="lang-es">' + d.tipo_es + '</span>' +
+              '<span class="lang-en">' + d.tipo_en + '</span>' +
             '</span>' +
-            '<span class="destino-card__meta-item"><span class="meta-icono">⏰</span>' +
-              '<span class="lang-es">' + d.horarios + '</span>' +
-              '<span class="lang-en">' + (d.horarios_en || d.horarios) + '</span>' +
-            '</span>' +
+            /* Calificación Google — reemplaza el badge de dificultad */
+            (ratingNum
+              ? '<span class="destino-card__rating" aria-label="Calificacion Google ' + ratingNum + '">' +
+                  '<span class="destino-card__stars" aria-hidden="true">' + estrellas + '</span>' +
+                  '<span>' + ratingNum + '</span>' +
+                '</span>'
+              : '') +
           '</div>' +
-          '<div class="metal-btn-wrap destino-card__btn-wrap" data-variant="coral" data-size="sm">' +
-            '<div class="metal-btn-inner"></div>' +
-            btnHtml +
+          '<div class="destino-card__info">' +
+            '<h3 class="destino-card__nombre">' +
+              '<span class="lang-es">' + d.nombre_es + '</span>' +
+              '<span class="lang-en">' + d.nombre_en + '</span>' +
+            '</h3>' +
+            '<p class="destino-card__desc">' +
+              '<span class="lang-es">' + d.descripcion_es + '</span>' +
+              '<span class="lang-en">' + d.descripcion_en + '</span>' +
+            '</p>' +
+            '<div class="destino-card__meta">' +
+              '<span class="destino-card__meta-item"><span class="meta-icono">💲</span>' +
+                '<span class="lang-es">' + d.precio + '</span>' +
+                '<span class="lang-en">' + (d.precio_en || d.precio) + '</span>' +
+              '</span>' +
+              '<span class="destino-card__meta-item"><span class="meta-icono">⏰</span>' +
+                '<span class="lang-es">' + d.horarios + '</span>' +
+                '<span class="lang-en">' + (d.horarios_en || d.horarios) + '</span>' +
+              '</span>' +
+            '</div>' +
+            '<div class="metal-btn-wrap destino-card__btn-wrap" data-variant="coral" data-size="sm">' +
+              '<div class="metal-btn-inner"></div>' +
+              btnHtml +
+            '</div>' +
           '</div>' +
-        '</div>' +
-      '</article>'
+        '</article>' +
+      '</div>'
     );
   }).join('');
 

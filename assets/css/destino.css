@@ -824,7 +824,11 @@ body {
   .destino-resenas__grid { grid-template-columns: 1fr; }
 }
 .resena-card {
-  background: white;
+  /* Borde gradiente coral→turquesa via padding-box/border-box */
+  background:
+    linear-gradient(145deg, #fff, #fffdf7) padding-box,
+    linear-gradient(163deg, #FF6B6B 0%, #00BCD4 100%) border-box;
+  border: 2px solid transparent;
   border-radius: var(--r);
   padding: 1.5rem;
   box-shadow: 0 4px 20px -8px rgba(26,42,53,0.10);

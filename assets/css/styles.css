@@ -683,10 +683,12 @@ html.lang-es .lang-en { display: none; }
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  gap: 2rem;
-  padding-bottom: 0.75rem;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem 1.25rem; /* padding lateral para que no se corten bordes ni sombras */
   scroll-snap-type: x mandatory;
+  scroll-padding-left: 1.5rem;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;           /* solo scroll horizontal en táctil */
   scroll-behavior: smooth;
   /* Scrollbar sutil, turquesa */
   scrollbar-width: thin;
@@ -699,10 +701,30 @@ html.lang-es .lang-en { display: none; }
   border-radius: 2px;
 }
 
-/* Cada tarjeta — ancho fijo para el carrusel */
-.destinos-grid .destino-card {
-  flex: 0 0 clamp(260px, 78vw, 320px);
+/* Espacio al final del carrusel (cross-browser trailing padding) */
+.destinos-grid::after {
+  content: '';
+  flex: 0 0 0.5rem;
+}
+
+/* Wrapper de borde gradiente — tiene el ancho del carrusel */
+.destino-card-wrap {
+  flex: 0 0 clamp(195px, 52vw, 215px);
   scroll-snap-align: start;
+  background: linear-gradient(163deg, var(--coral, #FF6B6B) 0%, var(--turquesa, #00BCD4) 100%);
+  border-radius: 22px;
+  padding: 2px;
+  transition: box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .destino-card-wrap:hover {
+    box-shadow: 0 0 28px 2px rgba(0, 188, 212, 0.32);
+  }
+}
+
+/* Cada tarjeta dentro del wrapper — ocupa todo el ancho */
+.destinos-grid .destino-card {
+  width: 100%;
 }
 
 /* Tarjetas de destino */
@@ -711,14 +733,15 @@ html.lang-es .lang-en { display: none; }
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--sombra-suave);
-  border: 1px solid rgba(0, 188, 212, 0.08);
+  border: none; /* borde reemplazado por el wrapper con gradiente */
   transition: opacity 0.35s ease, transform 0.38s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.38s cubic-bezier(0.2, 0, 0, 1); /* opacity era 0.65s — demasiado lenta */
 }
-.destino-card[data-tipo="mar"]:hover    { transform: translateY(-7px); box-shadow: var(--sombra-hover); }   /* era -10px */
-.destino-card[data-tipo="tierra"]:hover { transform: translateY(-7px); box-shadow: var(--sombra-tierra); } /* era -10px */
+/* Hover: solo sombra interior — translateY eliminado para no interferir con scroll horizontal */
+.destino-card[data-tipo="mar"]:hover    { box-shadow: var(--sombra-hover); }
+.destino-card[data-tipo="tierra"]:hover { box-shadow: var(--sombra-tierra); }
 
 /* Imagen */
-.destino-card__img-cont { position: relative; height: 220px; overflow: hidden; }
+.destino-card__img-cont { position: relative; height: 155px; overflow: hidden; }
 .destino-card__img      { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .destino-card:hover .destino-card__img { transform: scale(1.06); }
 
@@ -732,8 +755,8 @@ html.lang-es .lang-en { display: none; }
   padding: 0.28rem 0.78rem;
   border-radius: 50px;
 }
-.destino-card__badge--tipo { left: 1rem; }
-.destino-card__badge--dif  { right: 1rem; background: rgba(255,255,255,0.93); }
+.destino-card__badge--tipo { left: 0.6rem; }
+.destino-card__badge--dif  { display: none; } /* eliminado — reemplazado por calificación estrellas */
 
 .destino-card__badge--mar    { background-color: var(--turquesa); color: #fff; }
 .destino-card__badge--tierra { background-color: var(--verde-tierra); color: #fff; }
@@ -741,19 +764,40 @@ html.lang-es .lang-en { display: none; }
 .destino-card__badge--moderado { color: #A04800; }                 /* era #F57C00 — 2.57:1 ✗ → 5.8:1 ✓ */
 .destino-card__badge--dificil  { color: var(--coral-oscura); }    /* era #FF6B6B — 2.64:1 ✗ → 5.15:1 ✓ */
 
-/* Info */
-.destino-card__info { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; } /* era 0.7rem — número sucio */
+/* Calificación Google — esquina superior derecha de la imagen */
+.destino-card__rating {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: rgba(7, 30, 43, 0.76);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  z-index: 2;
+}
+.destino-card__stars { font-size: 0.65rem; letter-spacing: -0.5px; }
+
+/* Info — más compacta para tarjetas pequeñas */
+.destino-card__info { padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
 
 .destino-card__nombre {
   font-family: var(--fuente-titulo);
   font-style: italic;
   font-weight: 400;
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: var(--texto-oscuro);
   line-height: 1.25;
 }
 
-.destino-card__desc { font-size: 0.9rem; color: var(--texto-medio); line-height: 1.65; flex: 1; }
+.destino-card__desc { font-size: 0.82rem; color: var(--texto-medio); line-height: 1.6; flex: 1; }
 
 .destino-card__meta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.2rem; }
 
@@ -1432,10 +1476,13 @@ html.lang-es .lang-en { display: none; }
 }
 
 .modal-resena {
-  background: linear-gradient(145deg, #fff, var(--blanco-arena));
+  /* Borde gradiente coral→turquesa via padding-box/border-box */
+  background:
+    linear-gradient(145deg, #fff, var(--blanco-arena)) padding-box,
+    linear-gradient(163deg, var(--coral, #FF6B6B) 0%, var(--turquesa, #00BCD4) 100%) border-box;
+  border: 2px solid transparent;
   border-radius: 16px;
   padding: 1.25rem 1.5rem;
-  border: 1px solid rgba(0,188,212,0.10);
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
 }
 
@@ -2030,7 +2077,7 @@ html.lang-es .lang-en { display: none; }
 
 /* --- ANIMACIÓN CINEMATIC DE ENTRADA --- */
 /* Override del fade-up genérico para cards de destino */
-#destinosGrid .destino-card.fade-up {
+#destinosGrid .destino-card-wrap.fade-up {
   opacity: 0;
   transform: translateY(55px) rotateX(14deg);
   transform-origin: center bottom;
@@ -2038,33 +2085,31 @@ html.lang-es .lang-en { display: none; }
               transform 0.80s cubic-bezier(0.2, 0, 0, 1);
 }
 
-#destinosGrid .destino-card.fade-up.visible {
+#destinosGrid .destino-card-wrap.fade-up.visible {
   opacity: 1;
   transform: translateY(0) rotateX(0deg);
 }
 
-/* Columna izquierda: entra girando desde la izquierda */
+/* Entrada escalonada: izquierda / centro / derecha */
 @media (min-width: 768px) {
-  #destinosGrid .destino-card:nth-child(3n+1).fade-up {
+  #destinosGrid .destino-card-wrap:nth-child(3n+1).fade-up {
     transform: translateY(40px) rotateX(8deg) rotateY(-10deg);
   }
-  #destinosGrid .destino-card:nth-child(3n+1).fade-up.visible {
+  #destinosGrid .destino-card-wrap:nth-child(3n+1).fade-up.visible {
     transform: translateY(0) rotateX(0deg) rotateY(0deg);
   }
 
-  /* Columna central: cae desde arriba con más profundidad */
-  #destinosGrid .destino-card:nth-child(3n+2).fade-up {
+  #destinosGrid .destino-card-wrap:nth-child(3n+2).fade-up {
     transform: translateY(80px) rotateX(18deg);
   }
-  #destinosGrid .destino-card:nth-child(3n+2).fade-up.visible {
+  #destinosGrid .destino-card-wrap:nth-child(3n+2).fade-up.visible {
     transform: translateY(0) rotateX(0deg);
   }
 
-  /* Columna derecha: entra girando desde la derecha */
-  #destinosGrid .destino-card:nth-child(3n+3).fade-up {
+  #destinosGrid .destino-card-wrap:nth-child(3n+3).fade-up {
     transform: translateY(40px) rotateX(8deg) rotateY(10deg);
   }
-  #destinosGrid .destino-card:nth-child(3n+3).fade-up.visible {
+  #destinosGrid .destino-card-wrap:nth-child(3n+3).fade-up.visible {
     transform: translateY(0) rotateX(0deg) rotateY(0deg);
   }
 }
@@ -2076,7 +2121,7 @@ html.lang-es .lang-en { display: none; }
     0 24px 64px rgba(0, 0, 0, 0.55),
     0 8px 24px rgba(0, 188, 212, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
-  transition: box-shadow 0.15s ease, border-color 0.25s ease !important;
+  transition: box-shadow 0.15s ease !important;
 }
 
 /* Transición suave al abandonar la card (reset del tilt) */
@@ -2084,21 +2129,20 @@ html.lang-es .lang-en { display: none; }
   transition:
     opacity   0.80s cubic-bezier(0.2, 0, 0, 1),
     transform 0.55s cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 0.45s cubic-bezier(0.2, 0, 0, 1),
-    border-color 0.25s ease !important;
+    box-shadow 0.45s cubic-bezier(0.2, 0, 0, 1) !important;
 }
 
 /* --- REDUCED MOTION: desactiva animaciones 3D --- */
 @media (prefers-reduced-motion: reduce) {
-  #destinosGrid .destino-card.fade-up,
-  #destinosGrid .destino-card:nth-child(3n+1).fade-up,
-  #destinosGrid .destino-card:nth-child(3n+2).fade-up,
-  #destinosGrid .destino-card:nth-child(3n+3).fade-up {
+  #destinosGrid .destino-card-wrap.fade-up,
+  #destinosGrid .destino-card-wrap:nth-child(3n+1).fade-up,
+  #destinosGrid .destino-card-wrap:nth-child(3n+2).fade-up,
+  #destinosGrid .destino-card-wrap:nth-child(3n+3).fade-up {
     transform: translateY(20px) !important;
     opacity: 0;
   }
 
-  #destinosGrid .destino-card.fade-up.visible {
+  #destinosGrid .destino-card-wrap.fade-up.visible {
     transform: none !important;
     opacity: 1;
   }
@@ -2111,7 +2155,7 @@ html.lang-es .lang-en { display: none; }
 
 /* Sin escalonado cuando el usuario prefiere movimiento reducido */
 @media (prefers-reduced-motion: reduce) and (min-width: 768px) {
-  #destinosGrid .destino-card:nth-child(3n+2) { margin-top: 0 !important; }
+  #destinosGrid .destino-card-wrap:nth-child(3n+2) { margin-top: 0 !important; }
 }
 
 /* ================================================================

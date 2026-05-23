@@ -1905,12 +1905,14 @@ p  { font-weight: 300; }
 
 /* ── Columna del formulario ── */
 .contacto-form-col {
-  background: #fff;
+  /* Borde gradiente coral→turquesa */
+  background:
+    linear-gradient(145deg, #fff, #fffdf7) padding-box,
+    linear-gradient(163deg, #FF6B6B 0%, #00BCD4 100%) border-box;
+  border: 2px solid transparent;
   border-radius: var(--r-lg);
   padding: 2.5rem;
-  box-shadow:
-    0 4px 32px rgba(0,0,0,0.07),
-    0 0 0 1.5px rgba(0,188,212,0.13);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.07);
 }
 
 /* ── Secciones dentro del formulario (1 / 2) ── */
@@ -2972,8 +2974,11 @@ p  { font-weight: 300; }
 
 /* Formulario */
 .resenas-form-card {
-  background: #fff;
-  border: 1px solid rgba(0, 188, 212, 0.15);
+  /* Borde gradiente coral→turquesa */
+  background:
+    linear-gradient(145deg, #fff, #fffdf7) padding-box,
+    linear-gradient(163deg, #FF6B6B 0%, #00BCD4 100%) border-box;
+  border: 2px solid transparent;
   border-radius: 16px;
   padding: 2.2rem clamp(1.25rem, 3vw, 2.2rem);
   max-width: 640px;
