@@ -714,6 +714,7 @@ html.lang-es .lang-en { display: none; }
   background: linear-gradient(163deg, var(--coral, #FF6B6B) 0%, var(--turquesa, #00BCD4) 100%);
   border-radius: 26px;
   padding: 2px;
+  overflow: hidden; /* evita que contenido interior escape el borde gradiente */
   transition: box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1),
               transform 0.3s cubic-bezier(0.2, 0, 0, 1);
 }
@@ -864,10 +865,18 @@ html.lang-es .lang-en { display: none; }
   justify-content: space-between;
   flex: 1;
   gap: 0;
+  min-height: 0;   /* permite que los hijos flex se encojan */
+  overflow: hidden; /* captura cualquier desbordamiento residual */
 }
 
 /* Sección superior: título + descripción */
-.destino-card__info-top { display: flex; flex-direction: column; gap: 0.6rem; }
+.destino-card__info-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-height: 0;
+  overflow: hidden;
+}
 
 .destino-card__nombre {
   font-family: var(--fuente-titulo);
@@ -880,22 +889,23 @@ html.lang-es .lang-en { display: none; }
 }
 .destino-card:hover .destino-card__nombre { color: var(--turquesa, #00BCD4); }
 
-/* Descripción con recorte de 3 líneas */
+/* Descripción con recorte de 2 líneas — 3 líneas desbordaba con títulos de 2 líneas */
 .destino-card__desc {
   font-size: 0.875rem;
   color: var(--texto-medio);
   line-height: 1.65;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 /* Barra inferior — separador + precio + horarios */
+/* margin-top eliminado: justify-content:space-between ya distribuye el espacio */
 .destino-card__meta-bar {
   border-top: 1px solid rgba(0, 188, 212, 0.14);
-  padding-top: 0.875rem;
-  margin-top: 0.875rem;
+  padding-top: 0.75rem;
+  flex-shrink: 0; /* la barra siempre visible, nunca se encoge */
 }
 
 .destino-card__meta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.2rem; }
