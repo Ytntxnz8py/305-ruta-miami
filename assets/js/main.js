@@ -457,6 +457,19 @@ var DESTINOS_DEFAULT = [
 /* Versión de los datos — incrementar cada vez que cambie DESTINOS_DEFAULT */
 var DESTINOS_VERSION = 4;
 
+/* Mapa de IDs de destino → rutas de páginas HTML reales */
+var DESTINO_URLS = {
+  1: 'destinos/everglades.html',
+  2: 'destinos/john-pennekamp.html',
+  3: 'destinos/biscayne.html',
+  4: 'destinos/bill-baggs.html',
+  5: 'destinos/oleta-river.html',
+  6: 'destinos/virginia-key.html',
+  7: 'destinos/matheson-hammock.html',
+  8: 'destinos/crandon-park.html',
+  9: 'destinos/arch-creek.html'
+};
+
 /* Obtiene destinos de localStorage; migra automáticamente si la versión es antigua */
 function obtenerDestinos() {
   try {
@@ -537,11 +550,30 @@ function renderDestinos(filtro) {
   var ariaPref = (langCur === 'en') ? 'View details of ' : 'Ver detalles de ';
   grid.innerHTML = lista.map(function (d, i) {
     var delay = (i % 3) * 0.12;
+    /* Si existe página real, usarla; si no, abrir modal legacy */
+    var url = DESTINO_URLS[d.id] || '';
+    var cardClick = url
+      ? 'onclick="registrarClic(' + d.id + '); window.location.href=\'' + url + '\';"' +
+        ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){registrarClic(' + d.id + ');window.location.href=\'' + url + '\'}"'
+      : 'onclick="registrarClic(' + d.id + '); abrirModal(' + d.id + ');"' +
+        ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){registrarClic(' + d.id + ');abrirModal(' + d.id + ')}"';
+    var btnHtml = url
+      ? '<a href="' + url + '" class="metal-btn destino-card__btn" onclick="event.stopPropagation(); registrarClic(' + d.id + ');">' +
+          '<div class="metal-btn-shine"></div>' +
+          '<div class="metal-btn-hover-glow"></div>' +
+          '<span class="lang-es">Ver destino →</span>' +
+          '<span class="lang-en">View destination →</span>' +
+        '</a>'
+      : '<button class="metal-btn destino-card__btn" onclick="event.stopPropagation(); registrarClic(' + d.id + '); abrirModal(' + d.id + ');">' +
+          '<div class="metal-btn-shine"></div>' +
+          '<div class="metal-btn-hover-glow"></div>' +
+          '<span class="lang-es">Ver destino</span>' +
+          '<span class="lang-en">View destination</span>' +
+        '</button>';
     return (
       '<article class="destino-card fade-up" data-tipo="' + d.tipo + '" style="transition-delay:' + delay + 's" ' +
-               'onclick="registrarClic(' + d.id + '); abrirModal(' + d.id + ');" role="button" tabindex="0" ' +
-               'aria-label="' + ariaPref + (langCur === 'en' ? d.nombre_en : d.nombre_es) + '" ' +
-               'onkeydown="if(event.key===\'Enter\'||event.key===\' \'){registrarClic(' + d.id + ');abrirModal(' + d.id + ')}">' +
+               cardClick + ' role="button" tabindex="0" ' +
+               'aria-label="' + ariaPref + (langCur === 'en' ? d.nombre_en : d.nombre_es) + '">' +
         '<div class="destino-card__img-cont">' +
           '<img src="' + d.foto + '" alt="' + d.nombre_es + '" class="destino-card__img" loading="lazy" />' +
           '<span class="destino-card__badge destino-card__badge--tipo destino-card__badge--' + d.tipo + '">' +
@@ -574,12 +606,7 @@ function renderDestinos(filtro) {
           '</div>' +
           '<div class="metal-btn-wrap destino-card__btn-wrap" data-variant="coral" data-size="sm">' +
             '<div class="metal-btn-inner"></div>' +
-            '<button class="metal-btn destino-card__btn" onclick="event.stopPropagation(); registrarClic(' + d.id + '); abrirModal(' + d.id + ');">' +
-              '<div class="metal-btn-shine"></div>' +
-              '<div class="metal-btn-hover-glow"></div>' +
-              '<span class="lang-es">Ver destino</span>' +
-              '<span class="lang-en">View destination</span>' +
-            '</button>' +
+            btnHtml +
           '</div>' +
         '</div>' +
       '</article>'

@@ -171,8 +171,9 @@
 
   /* ── 7. Quiz interactivo ── */
 
-  /* Datos del quiz — 5 preguntas reales sobre los Everglades */
-  var QUIZ_DATA = [
+  /* Datos del quiz — usa datos específicos de la página si están disponibles,
+     sino usa las 5 preguntas de los Everglades como fallback */
+  var QUIZ_DATA = window.DESTINO_QUIZ || [
     {
       pregunta_es: '¿Qué animal NO vive en los Everglades?',
       pregunta_en: 'Which animal does NOT live in the Everglades?',
