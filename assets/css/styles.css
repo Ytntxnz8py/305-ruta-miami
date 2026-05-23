@@ -645,61 +645,23 @@ html.lang-es .lang-en { display: none; }
   position: relative;
 }
 
-/* Flechas prev / next */
-.destinos-carousel__btn {
-  position: absolute;
-  top: 45%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  background: rgba(255, 253, 247, 0.95);
-  border: 1px solid rgba(0, 188, 212, 0.22);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  color: var(--tinta);
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
-}
-.destinos-carousel__btn:hover {
-  background: #fff;
-  box-shadow: 0 6px 26px rgba(0, 188, 212, 0.22);
-  transform: translateY(-50%) scale(1.1);
-}
-.destinos-carousel__btn:disabled {
-  opacity: 0.30;
-  cursor: default;
-  pointer-events: none;
-}
-.destinos-carousel__btn--prev { left: -22px; }
-.destinos-carousel__btn--next { right: -22px; }
-@media (max-width: 860px) {
-  .destinos-carousel__btn--prev { left: 4px; }
-  .destinos-carousel__btn--next { right: 4px; }
-}
-
 /* Contenedor de tarjetas — scroll horizontal con snap */
 .destinos-grid {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
   gap: 1.25rem;
-  padding: 1rem 1.5rem 1.25rem; /* padding lateral para que no se corten bordes ni sombras */
+  padding: 0.25rem 1.5rem 1rem; /* padding mínimo — sin espacio vertical extra */
   scroll-snap-type: x mandatory;
   scroll-padding-left: 1.5rem;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;           /* solo scroll horizontal en táctil */
+  touch-action: pan-x;
   scroll-behavior: smooth;
-  /* Scrollbar sutil, turquesa */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 188, 212, 0.30) transparent;
+  /* Ocultar scrollbar completamente — la navegación la hacen los dots */
+  scrollbar-width: none;
+  overflow-y: visible;
 }
-.destinos-grid::-webkit-scrollbar        { height: 4px; }
-.destinos-grid::-webkit-scrollbar-track  { background: transparent; }
-.destinos-grid::-webkit-scrollbar-thumb  {
-  background: rgba(0, 188, 212, 0.30);
-  border-radius: 2px;
-}
+.destinos-grid::-webkit-scrollbar { display: none; }
 
 /* Espacio al final del carrusel (cross-browser trailing padding) */
 .destinos-grid::after {
@@ -707,21 +669,56 @@ html.lang-es .lang-en { display: none; }
   flex: 0 0 0.5rem;
 }
 
-/* Wrapper de borde gradiente — tiene el ancho del carrusel */
+/* Indicadores de posición (dots) */
+.destinos-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 1.1rem 0 0.25rem;
+}
+
+.destinos-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 253, 247, 0.28);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background 0.28s ease,
+              width 0.28s cubic-bezier(0.2, 0, 0, 1),
+              border-radius 0.28s ease;
+}
+
+.destinos-dot--activo {
+  background: var(--turquesa, #00BCD4);
+  width: 22px;
+  border-radius: 4px;
+}
+
+.destinos-dot:hover:not(.destinos-dot--activo) {
+  background: rgba(255, 253, 247, 0.58);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .destinos-dot { transition: none; }
+}
+
+/* Wrapper de borde gradiente */
 .destino-card-wrap {
   flex: 0 0 clamp(280px, 78vw, 320px);
   scroll-snap-align: start;
   background: linear-gradient(163deg, var(--coral, #FF6B6B) 0%, var(--turquesa, #00BCD4) 100%);
   border-radius: 26px;
   padding: 2px;
-  overflow: hidden; /* evita que contenido interior escape el borde gradiente */
-  transition: box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1),
-              transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+  /* Sin overflow:hidden — permite que sombras sean visibles */
+  transition: box-shadow 0.35s cubic-bezier(0.2, 0, 0, 1);
 }
 @media (prefers-reduced-motion: no-preference) {
   .destino-card-wrap:hover {
-    box-shadow: 0 0 32px 4px rgba(0, 188, 212, 0.28);
-    transform: translateY(-10px);
+    box-shadow: 0 0 38px 6px rgba(0, 188, 212, 0.35);
   }
 }
 

@@ -363,51 +363,6 @@
 }
 
 
-/* ============================================================
-   6. CARRUSEL — flechas prev / next
-   TURQUESA: navegación, moverse entre opciones.
-   Botones circulares — border-radius: 50% se mantiene.
-   Sin tilt 3D: usan translateY(-50%) de posicionamiento absoluto.
-   ============================================================ */
-.destinos-carousel__btn {
-  isolation: isolate !important;
-  background-image: linear-gradient(
-    -45deg,
-    rgba(0,  188, 212, 0.92),
-    rgba(7,   30,  43, 0.88),
-    rgba(0,  140, 180, 0.90),
-    rgba(255, 179,   0, 0.52),
-    rgba(0,   67,  79, 0.82),
-    rgba(0,  220, 240, 0.90),
-    rgba(7,   46,  63, 0.85)
-  ) !important;
-  background-size:  300% 300%   !important;
-  background-color: transparent !important;
-  animation: liq-sweep 5s ease infinite;
-  color: #fff !important;
-  border: 1px solid rgba(0, 188, 212, 0.50) !important;
-  box-shadow: 0 4px 18px rgba(0, 188, 212, 0.45),
-              inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
-}
-
-.destinos-carousel__btn::before {
-  content: '';
-  position: absolute;
-  inset: -10px;
-  border-radius: 50%;
-  background: rgba(7, 30, 43, 0.22);
-  filter: blur(14px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-.destinos-carousel__btn:hover {
-  animation-duration: 2s;
-  transform: translateY(-50%) scale(1.1) !important;
-  box-shadow: 0 8px 28px rgba(0, 188, 212, 0.65),
-              inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
-}
-
 
 /* ============================================================
    7. OVERLAY CARD — botón "Ver destino"
@@ -477,7 +432,6 @@
   .blog-hero__cta,
   .quiz-btn-siguiente,
   .quiz-btn-reiniciar,
-  .destinos-carousel__btn,
   .destino-card__overlay-btn,
   .precios-toggle__btn--activo {
     animation: none !important;

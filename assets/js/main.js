@@ -1619,36 +1619,82 @@ function initMetalButtons(root) {
   });
 }
 
-/* ===== CARRUSEL DE DESTINOS ===== */
+/* ===== CARRUSEL DE DESTINOS — navegación por dots ===== */
+
+/* Variable de módulo: guarda el listener de scroll para poder quitarlo al reiniciar */
+var _destScrollHandler = null;
+
 function initDestCarousel() {
-  var grid = document.getElementById('destinosGrid');
-  var prev = document.getElementById('destCarouselPrev');
-  var next = document.getElementById('destCarouselNext');
-  if (!grid || !prev || !next) return;
+  var grid     = document.getElementById('destinosGrid');
+  var dotsWrap = document.getElementById('destinosDots');
+  if (!grid) return;
 
-  /* Ancho de desplazamiento: primera card + gap */
-  function stepWidth() {
-    var card = grid.querySelector('.destino-card');
-    if (!card) return 340;
-    return card.offsetWidth + 32; /* 2rem gap */
+  /* Quitar listener anterior si existía (al cambiar filtro se reinicia) */
+  if (_destScrollHandler) {
+    grid.removeEventListener('scroll', _destScrollHandler);
+    _destScrollHandler = null;
   }
 
-  function updateBtns() {
-    var atStart = grid.scrollLeft <= 2;
-    var atEnd   = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 2;
-    prev.disabled = atStart;
-    next.disabled = atEnd;
+  /* ── Construye los dots según las cards presentes ── */
+  function buildDots() {
+    if (!dotsWrap) return;
+    var cards = grid.querySelectorAll('.destino-card-wrap');
+    dotsWrap.innerHTML = '';
+    Array.prototype.forEach.call(cards, function(card, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'destinos-dot' + (i === 0 ? ' destinos-dot--activo' : '');
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Destino ' + (i + 1) + ' de ' + cards.length);
+      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      /* Guardar referencia a la card en closure */
+      (function(c) {
+        dot.addEventListener('click', function() {
+          /* getBoundingClientRect da la posición visual actual (incluye scroll actual) */
+          var gridRect = grid.getBoundingClientRect();
+          var cardRect = c.getBoundingClientRect();
+          /* Offset relativo a la vista del grid, descontando el padding izquierdo */
+          var offset = cardRect.left - gridRect.left - 24; /* 24 = scroll-padding */
+          grid.scrollBy({ left: offset, behavior: 'smooth' });
+        });
+      })(card);
+      dotsWrap.appendChild(dot);
+    });
   }
 
-  prev.addEventListener('click', function () {
-    grid.scrollBy({ left: -stepWidth(), behavior: 'smooth' });
-  });
-  next.addEventListener('click', function () {
-    grid.scrollBy({ left: stepWidth(), behavior: 'smooth' });
-  });
+  /* ── Actualiza el dot activo al scrollear ── */
+  function updateDots() {
+    if (!dotsWrap) return;
+    var cards = grid.querySelectorAll('.destino-card-wrap');
+    var dots  = dotsWrap.querySelectorAll('.destinos-dot');
+    if (!cards.length || !dots.length) return;
 
-  grid.addEventListener('scroll', updateBtns, { passive: true });
-  updateBtns();
+    /* El dot activo es la card cuyo centro esté más cercano al centro del grid */
+    var gridRect    = grid.getBoundingClientRect();
+    var gridCenter  = gridRect.left + gridRect.width / 2;
+    var closestIdx  = 0;
+    var closestDist = Infinity;
+
+    Array.prototype.forEach.call(cards, function(card, i) {
+      var r    = card.getBoundingClientRect();
+      var dist = Math.abs((r.left + r.width / 2) - gridCenter);
+      if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+    });
+
+    Array.prototype.forEach.call(dots, function(dot, i) {
+      if (i === closestIdx) {
+        dot.classList.add('destinos-dot--activo');
+        dot.setAttribute('aria-selected', 'true');
+      } else {
+        dot.classList.remove('destinos-dot--activo');
+        dot.setAttribute('aria-selected', 'false');
+      }
+    });
+  }
+
+  _destScrollHandler = updateDots;
+  grid.addEventListener('scroll', updateDots, { passive: true });
+  buildDots();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
