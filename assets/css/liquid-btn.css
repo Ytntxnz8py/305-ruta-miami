@@ -1,7 +1,7 @@
 /* =========================================
    EXPLORA MIAMI — liquid-btn.css
-   Liquid sweep gradient — todos los MetalButtons
-   Compartido por index.html y anunciantes.html
+   Liquid sweep gradient — efecto oficial de TODOS los botones
+   Cargado en TODAS las páginas del proyecto
    ES5 / sin frameworks / GitHub Pages
    No modifica ningún archivo existente
 ========================================= */
@@ -105,5 +105,152 @@
 @media (prefers-reduced-motion: reduce) {
   .metal-btn-hover-glow {
     animation: none;
+  }
+}
+
+
+/* ==============================================
+   BOTONES INDEPENDIENTES — fuera del MetalButton
+   Cada uno lleva el sweep directo en su background
+   ============================================== */
+
+/* ──────────────────────────────────────────
+   CTA NAVBAR — "Para empresas"
+   Coral vivo + naranja + coral oscuro
+   Siempre animado, se acelera al hover
+   ────────────────────────────────────────── */
+.em-nav__cta {
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 107, 107, 0.96),
+    rgba(184,  62,  62, 0.75),
+    rgba(255, 140,   0, 0.88),
+    rgba(255, 179,   0, 0.65),
+    rgba(184,  62,  62, 0.80),
+    rgba(255,  80,  80, 0.94),
+    rgba(255, 140,  60, 0.86)
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: liq-sweep 6s ease infinite;
+}
+.em-nav__cta:hover {
+  animation-duration: 2s;
+}
+
+/* ──────────────────────────────────────────
+   QUIZ — botón "Siguiente pregunta"
+   Turquesa + azul marino + destello mostaza
+   ────────────────────────────────────────── */
+.quiz-btn-siguiente {
+  background: linear-gradient(
+    -45deg,
+    rgba(0,  230, 255, 0.92),
+    rgba(7,   30,  43, 0.75),
+    rgba(0,  188, 212, 0.94),
+    rgba(0,   67,  79, 0.82),
+    rgba(255, 179,   0, 0.44),
+    rgba(0,  140, 180, 0.90),
+    rgba(0,  210, 240, 0.92)
+  );
+  background-size: 300% 300%;
+  animation: liq-sweep 7s ease infinite;
+}
+.quiz-btn-siguiente:hover {
+  animation-duration: 2.5s;
+}
+
+/* ──────────────────────────────────────────
+   QUIZ — botón "Reiniciar quiz"
+   Aurora sutil: coral + turquesa + mostaza
+   Transparente, solo barre colores tenues
+   ────────────────────────────────────────── */
+.quiz-btn-reiniciar {
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 107, 107, 0.07),
+    rgba(0,   188, 212, 0.06),
+    rgba(255, 179,   0, 0.05),
+    rgba(0,   210, 240, 0.06),
+    rgba(255, 107, 107, 0.07),
+    rgba(0,   188, 212, 0.05)
+  );
+  background-size: 300% 300%;
+  animation: liq-sweep 11s ease infinite;
+}
+.quiz-btn-reiniciar:hover {
+  animation-duration: 4s;
+}
+
+/* ──────────────────────────────────────────
+   CARRUSEL — flechas prev / next
+   Perla luminosa con toque turquesa
+   Círculos blancos con aurora tenue
+   ────────────────────────────────────────── */
+.destinos-carousel__btn {
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 253, 247, 0.97),
+    rgba(0,   188, 212, 0.07),
+    rgba(255, 253, 247, 0.94),
+    rgba(255, 107, 107, 0.04),
+    rgba(0,   188, 212, 0.09),
+    rgba(255, 253, 247, 0.97)
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: liq-sweep 13s ease infinite;
+}
+.destinos-carousel__btn:hover {
+  animation-duration: 5s;
+}
+
+/* ──────────────────────────────────────────
+   OVERLAY CARD — botón "Ver destino"
+   Blanco perla con aurora suave interior
+   Aparece encima de la imagen al hover
+   ────────────────────────────────────────── */
+.destino-card__overlay-btn {
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 253, 247, 0.97),
+    rgba(0,   188, 212, 0.09),
+    rgba(255, 253, 247, 0.95),
+    rgba(255, 179,   0, 0.06),
+    rgba(0,   188, 212, 0.11),
+    rgba(255, 253, 247, 0.97)
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: liq-sweep 9s ease infinite;
+}
+
+/* ──────────────────────────────────────────
+   TOGGLE PRECIOS — pestaña activa
+   Aurora espectral muy sutil sobre oscuro
+   ────────────────────────────────────────── */
+.precios-toggle__btn--activo {
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 253, 247, 0.15),
+    rgba(0,   188, 212, 0.11),
+    rgba(255, 253, 247, 0.11),
+    rgba(255, 179,   0, 0.08),
+    rgba(255, 253, 247, 0.15),
+    rgba(0,   188, 212, 0.09)
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: liq-sweep 10s ease infinite;
+}
+.precios-toggle__btn--activo:hover {
+  animation-duration: 3.5s;
+}
+
+/* ─── Accesibilidad global: reduced-motion para todos ─── */
+@media (prefers-reduced-motion: reduce) {
+  .em-nav__cta,
+  .quiz-btn-siguiente,
+  .quiz-btn-reiniciar,
+  .destinos-carousel__btn,
+  .destino-card__overlay-btn,
+  .precios-toggle__btn--activo {
+    animation: none !important;
   }
 }
