@@ -1,31 +1,32 @@
 /* =========================================
    EXPLORA MIAMI — liquid-btn.css
-   Liquid sweep gradient — efecto oficial ÚNICO
-   Mismo gradiente que .login-btn del admin panel:
-   turquesa → azul profundo → mostaza → cyan oscuro
-   Cargado en TODAS las páginas del proyecto
+   Efecto oficial: Liquid Gradient Sweep
+   Idéntico al .login-btn del panel admin.
+   Se aplica DIRECTO al fondo del botón visible
+   (no en la capa glow que requiere hover).
+   Cargado en TODAS las páginas del proyecto.
    ES5 / sin frameworks / GitHub Pages
 ========================================= */
 
-/* ─── Keyframe idéntico al de admin.css (liq-sweep-admin) ─── */
+/* ─── Keyframe — barre background-position 0→100→0 ─── */
 @keyframes liq-sweep {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ─── Gradiente universal — copiado EXACTO del .login-btn ─── */
+/* ─── Gradiente universal — copiado exacto del .login-btn ─── */
 /* turquesa 0.92 → azul profundo 0.88 → azul marino 0.90
    → mostaza 0.52 → turquesa oscuro 0.82 → cyan 0.90 → azul oscuro 0.85 */
 
-/* ============================================
-   METAL BUTTONS — capa de hover (glow layer)
-   Aparece con opacity:1 al hover via JS is-hovered
-   Todas las variantes usan el mismo gradiente
-   ============================================ */
 
-/* Base: activa el keyframe en la glow-layer */
-.metal-btn-hover-glow {
+/* =====================================================
+   METAL BUTTONS — se aplica al botón visible (.metal-btn)
+   NO a la glow-layer (que es opacity:0 hasta hover).
+   !important garantiza que gana sobre metal-button.css
+   que carga después y tiene igual especificidad.
+   ===================================================== */
+.metal-btn-wrap[data-variant] .metal-btn {
   background: linear-gradient(
     -45deg,
     rgba(0,  188, 212, 0.92),
@@ -35,40 +36,25 @@
     rgba(0,   67,  79, 0.82),
     rgba(0,  220, 240, 0.90),
     rgba(7,   46,  63, 0.85)
-  );
-  background-size: 300% 300%;
-  animation: liq-sweep 8s ease infinite;
+  ) !important;
+  background-size: 300% 300% !important;
+  animation: liq-sweep 5s ease infinite;
+  color: #fff !important;
 }
 
-/* Todas las variantes usan el mismo gradiente — no hay excepciones */
-[data-variant="turquesa"] .metal-btn-hover-glow,
-[data-variant="coral"]    .metal-btn-hover-glow,
-[data-variant="gold"]     .metal-btn-hover-glow,
-[data-variant="ghost"]    .metal-btn-hover-glow,
-[data-variant="tierra"]   .metal-btn-hover-glow,
-[data-variant="dark"]     .metal-btn-hover-glow {
-  background: linear-gradient(
-    -45deg,
-    rgba(0,  188, 212, 0.92),
-    rgba(7,   30,  43, 0.88),
-    rgba(0,  140, 180, 0.90),
-    rgba(255, 179,   0, 0.52),
-    rgba(0,   67,  79, 0.82),
-    rgba(0,  220, 240, 0.90),
-    rgba(7,   46,  63, 0.85)
-  );
-  background-size: 300% 300%;
+/* Hover JS (clase .is-hovered añadida por metal-button.js): acelera */
+.metal-btn-wrap.is-hovered .metal-btn {
+  animation-duration: 2s;
 }
 
-/* Hover JS: acelera el sweep 8s → 2.5s */
-.metal-btn-wrap.is-hovered .metal-btn-hover-glow {
-  animation-duration: 2.5s;
-}
+/* Press JS (clase .is-pressed): ya maneja transform en metal-button.css */
 
-/* ============================================
+
+/* =====================================================
    CTA NAVBAR — "Para empresas"
-   Siempre animado (como login-btn)
-   ============================================ */
+   navbar.css carga después pero sin !important,
+   por lo que !important aquí garantiza visibilidad.
+   ===================================================== */
 .em-nav__cta {
   background: linear-gradient(
     -45deg,
@@ -82,14 +68,16 @@
   ) !important;
   background-size: 300% 300% !important;
   animation: liq-sweep 5s ease infinite;
+  color: #fff !important;
 }
 .em-nav__cta:hover {
   animation-duration: 2s;
 }
 
-/* ============================================
+
+/* =====================================================
    QUIZ — botón "Siguiente pregunta"
-   ============================================ */
+   ===================================================== */
 .quiz-btn-siguiente {
   background: linear-gradient(
     -45deg,
@@ -100,30 +88,32 @@
     rgba(0,   67,  79, 0.82),
     rgba(0,  220, 240, 0.90),
     rgba(7,   46,  63, 0.85)
-  );
-  background-size: 300% 300%;
+  ) !important;
+  background-size: 300% 300% !important;
   animation: liq-sweep 5s ease infinite;
+  color: #fff !important;
 }
 .quiz-btn-siguiente:hover {
   animation-duration: 2s;
 }
 
-/* ============================================
+
+/* =====================================================
    QUIZ — botón "Reiniciar quiz"
-   Mismos colores, opacidad reducida por ser acción secundaria
-   ============================================ */
+   Mismos colores, opacidad reducida (acción secundaria)
+   ===================================================== */
 .quiz-btn-reiniciar {
   background: linear-gradient(
     -45deg,
-    rgba(0,  188, 212, 0.55),
-    rgba(7,   30,  43, 0.50),
-    rgba(0,  140, 180, 0.52),
-    rgba(255, 179,   0, 0.28),
-    rgba(0,   67,  79, 0.45),
-    rgba(0,  220, 240, 0.52),
-    rgba(7,   46,  63, 0.48)
-  );
-  background-size: 300% 300%;
+    rgba(0,  188, 212, 0.60),
+    rgba(7,   30,  43, 0.55),
+    rgba(0,  140, 180, 0.58),
+    rgba(255, 179,   0, 0.30),
+    rgba(0,   67,  79, 0.50),
+    rgba(0,  220, 240, 0.58),
+    rgba(7,   46,  63, 0.52)
+  ) !important;
+  background-size: 300% 300% !important;
   animation: liq-sweep 7s ease infinite;
   color: #fff !important;
   border-color: rgba(0, 188, 212, 0.35) !important;
@@ -132,9 +122,11 @@
   animation-duration: 2.5s;
 }
 
-/* ============================================
+
+/* =====================================================
    CARRUSEL — flechas prev / next
-   ============================================ */
+   styles.css carga antes, no interfiere con !important
+   ===================================================== */
 .destinos-carousel__btn {
   background: linear-gradient(
     -45deg,
@@ -147,7 +139,7 @@
     rgba(7,   46,  63, 0.85)
   ) !important;
   background-size: 300% 300% !important;
-  animation: liq-sweep 7s ease infinite;
+  animation: liq-sweep 6s ease infinite;
   color: #fff !important;
   border-color: rgba(0, 188, 212, 0.40) !important;
 }
@@ -155,9 +147,11 @@
   animation-duration: 2.5s;
 }
 
-/* ============================================
+
+/* =====================================================
    OVERLAY CARD — botón "Ver destino"
-   ============================================ */
+   Aparece sobre la imagen al hover en desktop
+   ===================================================== */
 .destino-card__overlay-btn {
   background: linear-gradient(
     -45deg,
@@ -170,29 +164,30 @@
     rgba(7,   46,  63, 0.85)
   ) !important;
   background-size: 300% 300% !important;
-  animation: liq-sweep 6s ease infinite;
+  animation: liq-sweep 5s ease infinite;
   color: #fff !important;
 }
 .destino-card__overlay-btn:hover {
   animation-duration: 2s;
 }
 
-/* ============================================
+
+/* =====================================================
    TOGGLE PRECIOS — pestaña activa
-   ============================================ */
+   ===================================================== */
 .precios-toggle__btn--activo {
   background: linear-gradient(
     -45deg,
-    rgba(0,  188, 212, 0.75),
-    rgba(7,   30,  43, 0.70),
-    rgba(0,  140, 180, 0.72),
-    rgba(255, 179,   0, 0.38),
-    rgba(0,   67,  79, 0.65),
-    rgba(0,  220, 240, 0.72),
-    rgba(7,   46,  63, 0.68)
+    rgba(0,  188, 212, 0.80),
+    rgba(7,   30,  43, 0.75),
+    rgba(0,  140, 180, 0.78),
+    rgba(255, 179,   0, 0.42),
+    rgba(0,   67,  79, 0.68),
+    rgba(0,  220, 240, 0.78),
+    rgba(7,   46,  63, 0.72)
   ) !important;
   background-size: 300% 300% !important;
-  animation: liq-sweep 6s ease infinite;
+  animation: liq-sweep 5s ease infinite;
   color: #fff !important;
   border-color: rgba(0, 188, 212, 0.45) !important;
 }
@@ -200,9 +195,10 @@
   animation-duration: 2s;
 }
 
-/* ─── Accesibilidad global: respeta prefers-reduced-motion ─── */
+
+/* ─── Accesibilidad: prefers-reduced-motion ─── */
 @media (prefers-reduced-motion: reduce) {
-  .metal-btn-hover-glow,
+  .metal-btn-wrap[data-variant] .metal-btn,
   .em-nav__cta,
   .quiz-btn-siguiente,
   .quiz-btn-reiniciar,
