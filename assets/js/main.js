@@ -591,50 +591,69 @@ function renderDestinos(filtro) {
     var estrellas = generarEstrellas(d.rating || 4.5);
     var ratingNum = d.rating ? String(d.rating) : '';
 
+    /* Botón del overlay de imagen (hover) */
+    var overlayBtn = url
+      ? '<a href="' + url + '" class="destino-card__overlay-btn" onclick="event.stopPropagation(); registrarClic(' + d.id + ');">' +
+          '<span class="lang-es">Ver destino →</span>' +
+          '<span class="lang-en">View destination →</span>' +
+        '</a>'
+      : '<button class="destino-card__overlay-btn" onclick="event.stopPropagation(); registrarClic(' + d.id + '); abrirModal(' + d.id + ');">' +
+          '<span class="lang-es">Ver destino →</span>' +
+          '<span class="lang-en">View destination →</span>' +
+        '</button>';
+
     return (
       /* Wrapper de borde gradiente — contiene la tarjeta */
       '<div class="destino-card-wrap fade-up" style="transition-delay:' + delay + 's">' +
         '<article class="destino-card" data-tipo="' + d.tipo + '" ' +
                  cardClick + ' role="button" tabindex="0" ' +
                  'aria-label="' + ariaPref + (langCur === 'en' ? d.nombre_en : d.nombre_es) + '">' +
+
+          /* ── Imagen con overlay de hover ── */
           '<div class="destino-card__img-cont">' +
             '<img src="' + d.foto + '" alt="' + d.nombre_es + '" class="destino-card__img" loading="lazy" />' +
             '<span class="destino-card__badge destino-card__badge--tipo destino-card__badge--' + d.tipo + '">' +
               '<span class="lang-es">' + d.tipo_es + '</span>' +
               '<span class="lang-en">' + d.tipo_en + '</span>' +
             '</span>' +
-            /* Calificación Google — reemplaza el badge de dificultad */
             (ratingNum
               ? '<span class="destino-card__rating" aria-label="Calificacion Google ' + ratingNum + '">' +
                   '<span class="destino-card__stars" aria-hidden="true">' + estrellas + '</span>' +
                   '<span>' + ratingNum + '</span>' +
                 '</span>'
               : '') +
+            /* Overlay semitransparente con botón centrado (visible al hacer hover) */
+            '<div class="destino-card__img-overlay" aria-hidden="true">' +
+              overlayBtn +
+            '</div>' +
           '</div>' +
+
+          /* ── Contenido: título/desc arriba, meta abajo ── */
           '<div class="destino-card__info">' +
-            '<h3 class="destino-card__nombre">' +
-              '<span class="lang-es">' + d.nombre_es + '</span>' +
-              '<span class="lang-en">' + d.nombre_en + '</span>' +
-            '</h3>' +
-            '<p class="destino-card__desc">' +
-              '<span class="lang-es">' + d.descripcion_es + '</span>' +
-              '<span class="lang-en">' + d.descripcion_en + '</span>' +
-            '</p>' +
-            '<div class="destino-card__meta">' +
-              '<span class="destino-card__meta-item"><span class="meta-icono">💲</span>' +
-                '<span class="lang-es">' + d.precio + '</span>' +
-                '<span class="lang-en">' + (d.precio_en || d.precio) + '</span>' +
-              '</span>' +
-              '<span class="destino-card__meta-item"><span class="meta-icono">⏰</span>' +
-                '<span class="lang-es">' + d.horarios + '</span>' +
-                '<span class="lang-en">' + (d.horarios_en || d.horarios) + '</span>' +
-              '</span>' +
+            '<div class="destino-card__info-top">' +
+              '<h3 class="destino-card__nombre">' +
+                '<span class="lang-es">' + d.nombre_es + '</span>' +
+                '<span class="lang-en">' + d.nombre_en + '</span>' +
+              '</h3>' +
+              '<p class="destino-card__desc">' +
+                '<span class="lang-es">' + d.descripcion_es + '</span>' +
+                '<span class="lang-en">' + d.descripcion_en + '</span>' +
+              '</p>' +
             '</div>' +
-            '<div class="metal-btn-wrap destino-card__btn-wrap" data-variant="coral" data-size="sm">' +
-              '<div class="metal-btn-inner"></div>' +
-              btnHtml +
+            '<div class="destino-card__meta-bar">' +
+              '<div class="destino-card__meta">' +
+                '<span class="destino-card__meta-item"><span class="meta-icono">💲</span>' +
+                  '<span class="lang-es">' + d.precio + '</span>' +
+                  '<span class="lang-en">' + (d.precio_en || d.precio) + '</span>' +
+                '</span>' +
+                '<span class="destino-card__meta-item"><span class="meta-icono">⏰</span>' +
+                  '<span class="lang-es">' + d.horarios + '</span>' +
+                  '<span class="lang-en">' + (d.horarios_en || d.horarios) + '</span>' +
+                '</span>' +
+              '</div>' +
             '</div>' +
           '</div>' +
+
         '</article>' +
       '</div>'
     );

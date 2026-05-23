@@ -709,16 +709,18 @@ html.lang-es .lang-en { display: none; }
 
 /* Wrapper de borde gradiente — tiene el ancho del carrusel */
 .destino-card-wrap {
-  flex: 0 0 clamp(195px, 52vw, 215px);
+  flex: 0 0 clamp(280px, 78vw, 320px);
   scroll-snap-align: start;
   background: linear-gradient(163deg, var(--coral, #FF6B6B) 0%, var(--turquesa, #00BCD4) 100%);
-  border-radius: 22px;
+  border-radius: 26px;
   padding: 2px;
-  transition: box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1);
+  transition: box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1),
+              transform 0.3s cubic-bezier(0.2, 0, 0, 1);
 }
 @media (prefers-reduced-motion: no-preference) {
   .destino-card-wrap:hover {
-    box-shadow: 0 0 28px 2px rgba(0, 188, 212, 0.32);
+    box-shadow: 0 0 32px 4px rgba(0, 188, 212, 0.28);
+    transform: translateY(-10px);
   }
 }
 
@@ -730,32 +732,101 @@ html.lang-es .lang-en { display: none; }
 /* Tarjetas de destino */
 .destino-card {
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: 24px; /* rounded-3xl equivalente */
   overflow: hidden;
-  box-shadow: var(--sombra-suave);
   border: none; /* borde reemplazado por el wrapper con gradiente */
-  transition: opacity 0.35s ease, transform 0.38s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.38s cubic-bezier(0.2, 0, 0, 1); /* opacity era 0.65s — demasiado lenta */
+  height: 420px;       /* altura fija como en el diseño de referencia */
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.38s cubic-bezier(0.2, 0, 0, 1);
 }
-/* Hover: solo sombra interior — translateY eliminado para no interferir con scroll horizontal */
 .destino-card[data-tipo="mar"]:hover    { box-shadow: var(--sombra-hover); }
 .destino-card[data-tipo="tierra"]:hover { box-shadow: var(--sombra-tierra); }
 
 /* Imagen */
-.destino-card__img-cont { position: relative; height: 155px; overflow: hidden; }
-.destino-card__img      { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.destino-card:hover .destino-card__img { transform: scale(1.06); }
+.destino-card__img-cont {
+  position: relative;
+  height: 192px; /* h-48 del diseño de referencia */
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.destino-card__img      { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.destino-card:hover .destino-card__img { transform: scale(1.10); }
+
+/* Gradiente oscuro desde abajo (como el diseño de referencia) */
+.destino-card__img-cont::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(7, 30, 43, 0.85) 0%,
+    rgba(7, 30, 43, 0.12) 45%,
+    transparent 70%
+  );
+  opacity: 0.65;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+.destino-card:hover .destino-card__img-cont::after { opacity: 0.40; }
+
+/* Overlay de hover — aparece centrado sobre la imagen al pasar el ratón */
+.destino-card__img-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+.destino-card:hover .destino-card__img-overlay { opacity: 1; }
+
+/* En táctil no hay hover — el card entero es clickeable */
+@media (hover: none) { .destino-card__img-overlay { display: none; } }
+
+/* Botón de acción dentro del overlay */
+.destino-card__overlay-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--tinta, #1a2a35);
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.55rem 1.35rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .destino-card__overlay-btn:hover { transform: scale(1.05); background: #fff; }
+  .destino-card__overlay-btn:active { transform: scale(0.96); }
+}
 
 /* Badges */
 .destino-card__badge {
   position: absolute;
-  top: 1rem;
+  top: 0.85rem;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   padding: 0.28rem 0.78rem;
   border-radius: 50px;
+  z-index: 2; /* sobre el gradiente, bajo el overlay de hover */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
-.destino-card__badge--tipo { left: 0.6rem; }
+.destino-card__badge--tipo { left: 0.85rem; }
 .destino-card__badge--dif  { display: none; } /* eliminado — reemplazado por calificación estrellas */
 
 .destino-card__badge--mar    { background-color: var(--turquesa); color: #fff; }
@@ -767,37 +838,65 @@ html.lang-es .lang-en { display: none; }
 /* Calificación Google — esquina superior derecha de la imagen */
 .destino-card__rating {
   position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  background: rgba(7, 30, 43, 0.76);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  top: 0.85rem;
+  right: 0.85rem;
+  background: rgba(7, 30, 43, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #fff;
   font-family: var(--fuente-cuerpo);
   font-size: 0.72rem;
   font-weight: 700;
-  padding: 0.2rem 0.55rem;
+  padding: 0.25rem 0.6rem;
   border-radius: 50px;
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  z-index: 2;
+  z-index: 2; /* sobre el gradiente, bajo el overlay de hover */
 }
 .destino-card__stars { font-size: 0.65rem; letter-spacing: -0.5px; }
 
-/* Info — más compacta para tarjetas pequeñas */
-.destino-card__info { padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+/* Info — flex-col con espacio distribuido como en el diseño de referencia */
+.destino-card__info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  gap: 0;
+}
+
+/* Sección superior: título + descripción */
+.destino-card__info-top { display: flex; flex-direction: column; gap: 0.6rem; }
 
 .destino-card__nombre {
   font-family: var(--fuente-titulo);
   font-style: italic;
-  font-weight: 400;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
   color: var(--texto-oscuro);
   line-height: 1.25;
+  transition: color 0.2s ease;
+}
+.destino-card:hover .destino-card__nombre { color: var(--turquesa, #00BCD4); }
+
+/* Descripción con recorte de 3 líneas */
+.destino-card__desc {
+  font-size: 0.875rem;
+  color: var(--texto-medio);
+  line-height: 1.65;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.destino-card__desc { font-size: 0.82rem; color: var(--texto-medio); line-height: 1.6; flex: 1; }
+/* Barra inferior — separador + precio + horarios */
+.destino-card__meta-bar {
+  border-top: 1px solid rgba(0, 188, 212, 0.14);
+  padding-top: 0.875rem;
+  margin-top: 0.875rem;
+}
 
 .destino-card__meta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.2rem; }
 
