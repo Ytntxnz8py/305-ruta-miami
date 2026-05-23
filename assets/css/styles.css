@@ -836,10 +836,11 @@ html.lang-es .lang-en { display: none; }
 .destino-card__badge--moderado { color: #A04800; }                 /* era #F57C00 — 2.57:1 ✗ → 5.8:1 ✓ */
 .destino-card__badge--dificil  { color: var(--coral-oscura); }    /* era #FF6B6B — 2.64:1 ✗ → 5.15:1 ✓ */
 
-/* Calificación Google — esquina superior derecha de la imagen */
+/* Calificación Google — esquina inferior derecha de la imagen
+   (abajo para no chocar con el badge de tipo que está arriba a la izquierda) */
 .destino-card__rating {
   position: absolute;
-  top: 0.85rem;
+  bottom: 0.75rem;
   right: 0.85rem;
   background: rgba(7, 30, 43, 0.72);
   backdrop-filter: blur(8px);
