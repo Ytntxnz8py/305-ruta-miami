@@ -628,7 +628,7 @@ html.lang-es .lang-en { display: none; }
 .filtros__btn {
   padding: 0.5rem 1.4rem;
   border: 2px solid var(--borde);
-  border-radius: var(--radio-btn);
+  border-radius: 999px;
   background-color: #fff;
   color: var(--texto-medio);
   font-family: var(--fuente-cuerpo);

@@ -606,7 +606,7 @@ body {
   background: var(--turquesa);
   color: white;
   border: none;
-  border-radius: var(--r-sm);
+  border-radius: 999px;
   font-family: var(--sans);
   font-weight: 600;
   font-size: 0.9rem;
@@ -658,7 +658,7 @@ body {
 .quiz-btn-reiniciar {
   padding: 0.75rem 1.5rem;
   border: 1.5px solid rgba(26,42,53,0.15);
-  border-radius: var(--r-sm);
+  border-radius: 999px;
   background: transparent;
   font-family: var(--sans);
   font-weight: 600;
