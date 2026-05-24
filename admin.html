@@ -7,16 +7,8 @@
   <!-- Evita que Google indexe el panel de administración -->
   <meta name="robots" content="noindex, nofollow" />
 
-  <!-- Google Analytics 4 -->
-  <!-- ⚠️ REEMPLAZAR: Cambiar G-7HMBMBQNQZ por el Measurement ID real -->
-  <!-- Obtener en: analytics.google.com → Administrar → Flujos de datos -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7HMBMBQNQZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7HMBMBQNQZ');
-  </script>
+  <!-- Google Analytics 4 — excluido del panel admin para no inflar métricas internas -->
+  <!-- GA4 se omite intencionalmente en admin.html -->
 
   <!-- Google Fonts: Playfair Display + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -141,7 +133,7 @@
 
       <!-- Footer del sidebar -->
       <div class="sidebar__footer">
-        <a href="index.html" target="_blank" class="sidebar__link-sitio">
+        <a href="index.html" target="_blank" rel="noopener noreferrer" class="sidebar__link-sitio">
           <span>↗</span> Ver sitio
         </a>
         <button id="btnLogout" class="sidebar__logout">Cerrar sesión</button>

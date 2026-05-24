@@ -357,19 +357,19 @@
 
     if (pct === 1) {
       emoji = '🏆';
-      titulo = idioma === 'es' ? '¡Experto de los Everglades!' : 'Everglades Expert!';
+      titulo = idioma === 'es' ? '¡Experto local!' : 'Local Expert!';
       desc = idioma === 'es'
-        ? 'Conoces los Everglades mejor que la mayoría de los guías. ¡Estás listo para ir!'
-        : 'You know the Everglades better than most guides. You\'re ready to go!';
+        ? 'Conoces este destino mejor que la mayoría de los visitantes. ¡Estás listo para ir!'
+        : 'You know this destination better than most visitors. You\'re ready to go!';
     } else if (pct >= 0.6) {
       emoji = '🌿';
       titulo = idioma === 'es' ? '¡Buen conocimiento!' : 'Good knowledge!';
       desc = idioma === 'es'
-        ? 'Sabes bastante sobre los Everglades. Un poco más de investigación y estarás listo.'
-        : 'You know quite a bit about the Everglades. A little more research and you\'ll be ready.';
+        ? 'Sabes bastante sobre este destino. Un poco más de investigación y estarás listo.'
+        : 'You know quite a bit about this destination. A little more research and you\'ll be ready.';
     } else {
-      emoji = '🐊';
-      titulo = idioma === 'es' ? 'El caimán te ganó esta vez.' : 'The alligator got you this time.';
+      emoji = '🗺️';
+      titulo = idioma === 'es' ? '¡Hay mucho por descubrir!' : 'So much to discover!';
       desc = idioma === 'es'
         ? 'No importa — visítalo y aprenderás todo en persona. Es la mejor forma.'
         : 'No worries — visit in person and you\'ll learn everything firsthand. That\'s the best way.';

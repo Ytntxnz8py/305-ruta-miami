@@ -1,5 +1,16 @@
 # ===== PRIVADO: NUNCA subir a GitHub =====
 _privado/
+
+# Carpetas originales de fotos (fuentes crudas — ya organizadas en assets/images/destinos/)
+Arch Creek Park/
+Bill Baggs Cape Florida State Park/
+Biscayne National Park/
+Crandon Park/
+Everglades National Park/
+John Pennekamp Coral Reef State Park/
+Matheson Hammock Park/
+Oleta River State Park/
+Virginia Key Beach Park/
 *.json
 !package.json
 !skills-lock.json

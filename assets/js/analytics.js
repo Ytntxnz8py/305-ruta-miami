@@ -113,17 +113,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* Form 'formTrabaja' eliminado: el formulario actual vive en anunciantes.html */
 
-  /* Cambio de idioma ES ↔ EN */
-  var btnIdioma = document.getElementById('btnIdioma');
-  if (btnIdioma) {
-    btnIdioma.addEventListener('click', function () {
+  /* Cambio de idioma ES ↔ EN — selector actual: .em-nav__lang */
+  var btnsIdioma = document.querySelectorAll('.em-nav__lang, .em-drawer__lang-btn');
+  btnsIdioma.forEach(function (btn) {
+    btn.addEventListener('click', function () {
       var idiomaDestino = document.documentElement.classList.contains('lang-en') ? 'es' : 'en';
       trackEvent('language_change', {
         event_category: 'UX',
         event_label:    'Cambio a ' + idiomaDestino.toUpperCase()
       });
     });
-  }
+  });
 
   /* Botones de filtro de destinos */
   document.querySelectorAll('.filtros__btn').forEach(function (btn) {
