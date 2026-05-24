@@ -1717,9 +1717,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* ============================================================
-   DESTINO_URLS — mapa slug → URL de la página de destino
+   QUIZ_DEST_URLS — mapa nombre → URL, exclusivo del quiz
+   (No tocar DESTINO_URLS de arriba que usa IDs numéricos para las cards)
    ============================================================ */
-var DESTINO_URLS = {
+var QUIZ_DEST_URLS = {
   'Everglades National Park':              'destinos/everglades.html',
   'John Pennekamp Coral Reef State Park':  'destinos/john-pennekamp.html',
   'Biscayne National Park':                'destinos/biscayne.html',
@@ -1899,7 +1900,7 @@ function initQuizAventurero() {
     if (dest) {
       dest.innerHTML = '';
       Array.prototype.forEach.call(resultado.destinos, function (nombreDestino) {
-        var url  = DESTINO_URLS[nombreDestino] || '#destinos';
+        var url  = QUIZ_DEST_URLS[nombreDestino] || '#destinos';
         var chip = document.createElement('a');
         chip.className = 'quiz-dest-chip';
         chip.href      = url;
