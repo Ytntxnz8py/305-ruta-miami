@@ -1709,7 +1709,284 @@ document.addEventListener('DOMContentLoaded', function () {
   initRoadmap();
   initRoadmapTooltip();
   initMetalButtons();
+  initHeroSocialProof();     /* contador de visitantes en el hero */
+  initQuizAventurero();      /* quiz de 3 pasos */
+  initNewsletter();          /* formulario de newsletter */
   /* initGlobo / initMapaLeaflet / initReferenciasGlobo eliminados —
      la sección mapa fue reemplazada por el roadmap animado */
 });
+
+/* ============================================================
+   DESTINO_URLS — mapa slug → URL de la página de destino
+   ============================================================ */
+var DESTINO_URLS = {
+  'Everglades National Park':              'destinos/everglades.html',
+  'John Pennekamp Coral Reef State Park':  'destinos/john-pennekamp.html',
+  'Biscayne National Park':                'destinos/biscayne.html',
+  'Bill Baggs Cape Florida State Park':    'destinos/bill-baggs.html',
+  'Oleta River State Park':               'destinos/oleta-river.html',
+  'Virginia Key Beach Park':              'destinos/virginia-key.html',
+  'Matheson Hammock Park':                'destinos/matheson-hammock.html',
+  'Crandon Park':                         'destinos/crandon-park.html',
+  'Arch Creek Park':                      'destinos/arch-creek.html'
+};
+
+/* ============================================================
+   HERO SOCIAL PROOF — contador de visitantes activos
+   Lee localStorage.em_visitas (escrito por registrarVisita)
+   Muestra como mínimo 847 para credibilidad social
+   ============================================================ */
+function initHeroSocialProof() {
+  var el = document.getElementById('heroVisitCount');
+  if (!el) return;
+
+  var base    = 847;
+  var visitas = parseInt(localStorage.getItem('em_visitas'), 10) || 0;
+  var total   = Math.max(base, base + visitas);
+
+  /* Animación de conteo rápida (500ms) */
+  var duracion  = 800;
+  var inicio    = Date.now();
+  var inicioNum = Math.max(0, total - 120);
+
+  function animar() {
+    var progreso = Math.min(1, (Date.now() - inicio) / duracion);
+    var ease     = 1 - Math.pow(1 - progreso, 3); /* ease-out cubic */
+    var valor    = Math.round(inicioNum + (total - inicioNum) * ease);
+    el.textContent = valor.toLocaleString();
+    if (progreso < 1) {
+      requestAnimationFrame(animar);
+    }
+  }
+
+  /* Solo anima si el hero ya está visible (tras la expansión) */
+  var semContent = document.getElementById('semContent');
+  if (semContent && window.IntersectionObserver) {
+    var obs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        animar();
+        obs.disconnect();
+      }
+    }, { threshold: 0.5 });
+    obs.observe(semContent);
+  } else {
+    el.textContent = total.toLocaleString();
+  }
+}
+
+/* ============================================================
+   QUIZ AVENTURERO — 3 pasos, 4 opciones cada uno
+   Resultado: tipo + 3 destinos recomendados con links
+   ============================================================ */
+function initQuizAventurero() {
+  var panel  = document.getElementById('quizPanel');
+  var barra  = document.getElementById('quizBarra');
+  var label  = document.getElementById('quizPasoLabel');
+  var reset  = document.getElementById('quizReset');
+  if (!panel) return;
+
+  var votos = []; /* votos[0..2] = valor de cada paso */
+
+  /* Datos de resultado por tipo */
+  var TIPOS = {
+    mar: {
+      ico:  '🌊',
+      tipo_es: 'Explorador del mar',
+      tipo_en: 'Ocean Explorer',
+      desc_es: 'El agua es tu elemento. Te atraen los arrecifes de coral, el kayak entre manglares y el horizonte infinito.',
+      desc_en: 'Water is your element. Coral reefs, kayaking through mangroves and the endless horizon call to you.',
+      destinos: ['John Pennekamp Coral Reef State Park', 'Biscayne National Park', 'Virginia Key Beach Park']
+    },
+    tierra: {
+      ico:  '🌿',
+      tipo_es: 'Guardián de la selva',
+      tipo_en: 'Jungle Guardian',
+      desc_es: 'Los manglares y la selva subtropical son tu territorio. Prefieres el sendero al asfalto y el silencio a la multitud.',
+      desc_en: 'Mangroves and subtropical jungle are your territory. You prefer the trail to pavement and silence to crowds.',
+      destinos: ['Everglades National Park', 'Oleta River State Park', 'Arch Creek Park']
+    },
+    ciudad: {
+      ico:  '🌆',
+      tipo_es: 'Aventurero urbano',
+      tipo_en: 'Urban Adventurer',
+      desc_es: 'Miami te tiene todo. Buscas experiencias intensas sin alejarte de la comodidad y la energía de la ciudad.',
+      desc_en: 'Miami has it all for you. You seek intense experiences without straying from comfort and city energy.',
+      destinos: ['Virginia Key Beach Park', 'Crandon Park', 'Matheson Hammock Park']
+    },
+    aventura: {
+      ico:  '⚡',
+      tipo_es: 'Espíritu libre',
+      tipo_en: 'Free Spirit',
+      desc_es: 'No te conformas con lo ordinario. Buscas la adrenalina, el amanecer en el horizonte y los destinos sin multitudes.',
+      desc_en: 'You refuse the ordinary. You seek adrenaline, sunrise on the horizon and destinations without crowds.',
+      destinos: ['Everglades National Park', 'John Pennekamp Coral Reef State Park', 'Bill Baggs Cape Florida State Park']
+    }
+  };
+
+  /* Textos de paso */
+  var PASO_LABELS = [
+    { es: 'Pregunta 1 de 3', en: 'Question 1 of 3' },
+    { es: 'Pregunta 2 de 3', en: 'Question 2 of 3' },
+    { es: 'Pregunta 3 de 3', en: 'Question 3 of 3' },
+    { es: 'Tu resultado',     en: 'Your result' }
+  ];
+
+  function idiomaActual() {
+    return document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+  }
+
+  function mostrarPaso(n) {
+    /* Ocultar todos los pasos */
+    var pasos = panel.querySelectorAll('.quiz-paso');
+    Array.prototype.forEach.call(pasos, function (p) {
+      p.classList.add('quiz-paso--oculto');
+    });
+
+    /* Mostrar el paso n (índice 1-based: 1, 2, 3, resultado=4) */
+    var idPaso = (n <= 3) ? ('quizPaso' + n) : 'quizResultado';
+    var elPaso = document.getElementById(idPaso);
+    if (elPaso) {
+      elPaso.classList.remove('quiz-paso--oculto');
+    }
+
+    /* Actualizar barra */
+    if (barra) {
+      barra.style.width = Math.round((n / 3) * 100) + '%';
+    }
+
+    /* Actualizar label */
+    if (label) {
+      var idx  = Math.min(n - 1, 3);
+      var lang = idiomaActual();
+      label.innerHTML = '<span class="lang-es">' + PASO_LABELS[idx].es + '</span>'
+                      + '<span class="lang-en">' + PASO_LABELS[idx].en + '</span>';
+    }
+  }
+
+  function calcularResultado() {
+    /* Contar votos por tipo */
+    var conteo = { mar: 0, tierra: 0, ciudad: 0, aventura: 0 };
+    Array.prototype.forEach.call(votos, function (v) {
+      if (conteo.hasOwnProperty(v)) conteo[v]++;
+    });
+
+    /* Tipo ganador (desempate: mar > tierra > ciudad > aventura) */
+    var ganador = 'mar';
+    var maxVotos = -1;
+    var orden = ['mar', 'tierra', 'ciudad', 'aventura'];
+    Array.prototype.forEach.call(orden, function (tipo) {
+      if (conteo[tipo] > maxVotos) {
+        maxVotos = conteo[tipo];
+        ganador  = tipo;
+      }
+    });
+
+    return TIPOS[ganador];
+  }
+
+  function mostrarResultado(resultado) {
+    var lang = idiomaActual();
+
+    var ico  = document.getElementById('quizResultIco');
+    var tipo = document.getElementById('quizResultTipo');
+    var desc = document.getElementById('quizResultDesc');
+    var dest = document.getElementById('quizResultDestinos');
+
+    if (ico)  ico.textContent  = resultado.ico;
+    if (tipo) tipo.textContent = resultado['tipo_' + lang];
+    if (desc) desc.textContent = resultado['desc_' + lang];
+
+    if (dest) {
+      dest.innerHTML = '';
+      Array.prototype.forEach.call(resultado.destinos, function (nombreDestino) {
+        var url  = DESTINO_URLS[nombreDestino] || '#destinos';
+        var chip = document.createElement('a');
+        chip.className = 'quiz-dest-chip';
+        chip.href      = url;
+        chip.innerHTML = '📍 ' + nombreDestino;
+        dest.appendChild(chip);
+      });
+    }
+
+    mostrarPaso(4);
+  }
+
+  /* Delegación de eventos en el panel */
+  panel.addEventListener('click', function (e) {
+    var btn = e.target.closest('.quiz-opcion');
+    if (!btn) return;
+
+    var paso  = parseInt(btn.dataset.paso, 10);
+    var valor = btn.dataset.valor;
+    votos[paso - 1] = valor;
+
+    if (paso < 3) {
+      mostrarPaso(paso + 1);
+    } else {
+      /* Último paso: calcular y mostrar resultado */
+      var resultado = calcularResultado();
+      mostrarResultado(resultado);
+    }
+  });
+
+  /* Reset */
+  if (reset) {
+    reset.addEventListener('click', function () {
+      votos = [];
+      mostrarPaso(1);
+    });
+  }
+
+  /* Inicializar en paso 1 */
+  mostrarPaso(1);
+}
+
+/* ============================================================
+   NEWSLETTER — validación y guardado en localStorage
+   ============================================================ */
+function initNewsletter() {
+  var form    = document.getElementById('newsletterForm');
+  var input   = document.getElementById('newsletterEmail');
+  var exito   = document.getElementById('newsletterExito');
+  if (!form || !input || !exito) return;
+
+  /* Si ya se suscribió antes, mostrar éxito directamente */
+  if (localStorage.getItem('em_newsletter')) {
+    form.classList.add('quiz-paso--oculto');
+    exito.classList.remove('quiz-paso--oculto');
+    return;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = input.value.trim();
+
+    /* Validar formato básico */
+    var reEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!reEmail.test(email)) {
+      input.focus();
+      input.style.boxShadow = 'inset 0 0 0 2px rgba(255,107,107,0.6)';
+      setTimeout(function () {
+        input.style.boxShadow = '';
+      }, 1500);
+      return;
+    }
+
+    /* Guardar en localStorage (no se envía a ningún servidor) */
+    localStorage.setItem('em_newsletter', email);
+    localStorage.setItem('em_newsletter_fecha', new Date().toISOString());
+
+    /* Transición a estado de éxito */
+    form.classList.add('quiz-paso--oculto');
+    exito.classList.remove('quiz-paso--oculto');
+
+    /* Evento GA4 */
+    if (typeof trackEvent === 'function') {
+      trackEvent('newsletter_signup', {
+        event_category: 'Newsletter',
+        event_label: 'index'
+      });
+    }
+  });
+}
 

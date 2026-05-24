@@ -167,6 +167,15 @@
             <span class="hero-tag"><span class="lang-es">🌿 Naturaleza</span><span class="lang-en">🌿 Nature</span></span>
             <span class="hero-tag"><span class="lang-es">🐠 Arrecifes</span><span class="lang-en">🐠 Reefs</span></span>
           </div>
+          <!-- Contador de visitantes activos — actualizado por JS -->
+          <div class="hero-social-proof" id="heroSocialProof">
+            <span class="hero-sp-dot" aria-hidden="true"></span>
+            <strong class="hero-sp-count" id="heroVisitCount">847</strong>
+            <span class="hero-sp-text">
+              <span class="lang-es">aventureros este mes</span>
+              <span class="lang-en">adventurers this month</span>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -175,6 +184,170 @@
 
     <!-- Fusión visual: Hero (oscuro) → Intro (blanco arena) -->
     <div class="fade-band fade-hero-intro" aria-hidden="true"></div>
+
+    <!-- ===== QUIZ AVENTURERO ===== -->
+    <section class="seccion-quiz" id="quiz-aventurero" aria-label="Quiz del aventurero">
+      <div class="quiz-contenedor">
+
+        <!-- Encabezado -->
+        <div class="quiz-encabezado fade-up">
+          <span class="quiz-eyebrow">
+            <span class="lang-es">🧭 Test rápido</span>
+            <span class="lang-en">🧭 Quick test</span>
+          </span>
+          <h2 class="quiz-titulo">
+            <span class="lang-es">¿Qué aventurero eres?</span>
+            <span class="lang-en">What kind of adventurer are you?</span>
+          </h2>
+          <p class="quiz-subtitulo">
+            <span class="lang-es">3 preguntas para encontrar tu destino perfecto en Miami</span>
+            <span class="lang-en">3 questions to find your perfect Miami destination</span>
+          </p>
+        </div>
+
+        <!-- Barra de progreso -->
+        <div class="quiz-progreso fade-up" style="transition-delay:0.08s" aria-hidden="true">
+          <div class="quiz-progreso-barra" id="quizBarra" style="width:33%"></div>
+        </div>
+        <p class="quiz-paso-label" id="quizPasoLabel" aria-live="polite">
+          <span class="lang-es">Pregunta 1 de 3</span>
+          <span class="lang-en">Question 1 of 3</span>
+        </p>
+
+        <!-- Panel de preguntas -->
+        <div class="quiz-panel" id="quizPanel" aria-live="polite">
+
+          <!-- Paso 1: Ambiente ideal -->
+          <div class="quiz-paso" id="quizPaso1">
+            <p class="quiz-pregunta">
+              <span class="lang-es">¿Cuál es tu ambiente ideal?</span>
+              <span class="lang-en">What's your ideal environment?</span>
+            </p>
+            <div class="quiz-opciones">
+              <button class="quiz-opcion" type="button" data-paso="1" data-valor="mar">
+                <span class="quiz-opcion__ico">🌊</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">Agua y arrecifes</span>
+                  <span class="lang-en">Water and reefs</span>
+                </span>
+              </button>
+              <button class="quiz-opcion" type="button" data-paso="1" data-valor="tierra">
+                <span class="quiz-opcion__ico">🌿</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">Selva y manglares</span>
+                  <span class="lang-en">Jungle and mangroves</span>
+                </span>
+              </button>
+              <button class="quiz-opcion" type="button" data-paso="1" data-valor="ciudad">
+                <span class="quiz-opcion__ico">🌆</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">Ciudad y cultura</span>
+                  <span class="lang-en">City and culture</span>
+                </span>
+              </button>
+              <button class="quiz-opcion" type="button" data-paso="1" data-valor="aventura">
+                <span class="quiz-opcion__ico">⚡</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">Emoción pura</span>
+                  <span class="lang-en">Pure thrill</span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Paso 2: Con quién -->
+          <div class="quiz-paso quiz-paso--oculto" id="quizPaso2">
+            <p class="quiz-pregunta">
+              <span class="lang-es">¿Con quién exploras?</span>
+              <span class="lang-en">Who do you explore with?</span>
+            </p>
+            <div class="quiz-opciones">
+              <button class="quiz-opcion" type="button" data-paso="2" data-valor="mar">
+                <span class="quiz-opcion__ico">👤</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">Solo/a</span>
+                  <span class="lang-en">Solo</span>
+                </span>
+              </button>
+              <button class="quiz-opcion" type="button" data-paso="2" data-valor="tierra">
+                <span class="quiz-opcion__ico">👫</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">En pareja</span>
+                  <span class="lang-en">With partner</span>
+                </span>
+              </button>
+              <button class="quiz-opcion" type="button" data-paso="2" data-valor="aventura">
+                <span class="quiz-opcion__ico">👨‍👩‍👧‍👦</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">En familia</span>
+                  <span class="lang-en">With family</span>
+                </span>
+              </button>
+              <button class="quiz-opcion" type="button" data-paso="2" data-valor="ciudad">
+                <span class="quiz-opcion__ico">🤝</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">Con amigos</span>
+                  <span class="lang-en">With friends</span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Paso 3: Tiempo disponible -->
+          <div class="quiz-paso quiz-paso--oculto" id="quizPaso3">
+            <p class="quiz-pregunta">
+              <span class="lang-es">¿Cuánto tiempo tienes?</span>
+              <span class="lang-en">How much time do you have?</span>
+            </p>
+            <div class="quiz-opciones">
+              <button class="quiz-opcion" type="button" data-paso="3" data-valor="ciudad">
+                <span class="quiz-opcion__ico">⏱️</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">2-3 horas</span>
+                  <span class="lang-en">2-3 hours</span>
+                </span>
+              </button>
+              <button class="quiz-opcion" type="button" data-paso="3" data-valor="mar">
+                <span class="quiz-opcion__ico">🌅</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">Medio día</span>
+                  <span class="lang-en">Half a day</span>
+                </span>
+              </button>
+              <button class="quiz-opcion" type="button" data-paso="3" data-valor="tierra">
+                <span class="quiz-opcion__ico">☀️</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">Día completo</span>
+                  <span class="lang-en">Full day</span>
+                </span>
+              </button>
+              <button class="quiz-opcion" type="button" data-paso="3" data-valor="aventura">
+                <span class="quiz-opcion__ico">🏕️</span>
+                <span class="quiz-opcion__texto">
+                  <span class="lang-es">Fin de semana</span>
+                  <span class="lang-en">Weekend</span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Resultado -->
+          <div class="quiz-paso quiz-paso--oculto quiz-resultado" id="quizResultado">
+            <div class="quiz-resultado__icono" id="quizResultIco" aria-hidden="true">🌊</div>
+            <h3 class="quiz-resultado__tipo" id="quizResultTipo"></h3>
+            <p class="quiz-resultado__desc" id="quizResultDesc"></p>
+            <div class="quiz-resultado__destinos" id="quizResultDestinos"></div>
+            <!-- Botón resetear -->
+            <button class="quiz-reset" id="quizReset" type="button">
+              <span class="lang-es">← Volver a empezar</span>
+              <span class="lang-en">← Start over</span>
+            </button>
+          </div>
+
+        </div><!-- /quiz-panel -->
+
+      </div>
+    </section>
 
     <!-- ===== INTRO: 3 highlights ===== -->
     <section class="seccion-intro" id="nosotros">
@@ -216,6 +389,82 @@
         <div class="si-col-grid fade-up" style="transition-delay:0.18s">
           <div class="shuffle-grid" id="shuffleGrid" aria-label="Destinos Miami" role="list"></div>
         </div>
+
+      </div>
+    </section>
+
+    <!-- ===== POR QUÉ MIAMI — 6 stats ===== -->
+    <section class="seccion-stats" id="por-que-miami" aria-label="Por qué Miami">
+      <div class="stats-contenedor">
+
+        <div class="stats-encabezado fade-up">
+          <span class="stats-eyebrow">
+            <span class="lang-es">Miami en números</span>
+            <span class="lang-en">Miami by the numbers</span>
+          </span>
+          <h2 class="stats-titulo">
+            <span class="lang-es">¿Por qué Miami outdoor?</span>
+            <span class="lang-en">Why Miami outdoors?</span>
+          </h2>
+        </div>
+
+        <div class="stats-grid">
+
+          <div class="stat-card fade-up" style="transition-delay:0.06s">
+            <div class="stat-card__num">365</div>
+            <div class="stat-card__label">
+              <span class="lang-es">días de sol al año</span>
+              <span class="lang-en">sunny days a year</span>
+            </div>
+            <div class="stat-card__icon" aria-hidden="true">☀️</div>
+          </div>
+
+          <div class="stat-card fade-up" style="transition-delay:0.12s">
+            <div class="stat-card__num">9</div>
+            <div class="stat-card__label">
+              <span class="lang-es">destinos verificados</span>
+              <span class="lang-en">verified destinations</span>
+            </div>
+            <div class="stat-card__icon" aria-hidden="true">📍</div>
+          </div>
+
+          <div class="stat-card fade-up" style="transition-delay:0.18s">
+            <div class="stat-card__num">1h</div>
+            <div class="stat-card__label">
+              <span class="lang-es">al destino más lejano</span>
+              <span class="lang-en">to the farthest destination</span>
+            </div>
+            <div class="stat-card__icon" aria-hidden="true">🚗</div>
+          </div>
+
+          <div class="stat-card fade-up" style="transition-delay:0.24s">
+            <div class="stat-card__num">4.7</div>
+            <div class="stat-card__label">
+              <span class="lang-es">valoración promedio</span>
+              <span class="lang-en">average rating</span>
+            </div>
+            <div class="stat-card__icon" aria-hidden="true">⭐</div>
+          </div>
+
+          <div class="stat-card fade-up" style="transition-delay:0.30s">
+            <div class="stat-card__num">$0</div>
+            <div class="stat-card__label">
+              <span class="lang-es">entrada en 2 parques</span>
+              <span class="lang-en">admission in 2 parks</span>
+            </div>
+            <div class="stat-card__icon" aria-hidden="true">🎟️</div>
+          </div>
+
+          <div class="stat-card fade-up" style="transition-delay:0.36s">
+            <div class="stat-card__num">ES/EN</div>
+            <div class="stat-card__label">
+              <span class="lang-es">guía completamente bilingüe</span>
+              <span class="lang-en">fully bilingual guide</span>
+            </div>
+            <div class="stat-card__icon" aria-hidden="true">🌐</div>
+          </div>
+
+        </div><!-- /stats-grid -->
 
       </div>
     </section>
@@ -600,6 +849,62 @@
             <span class="lang-es">Ruta del viajero</span>
             <span class="lang-en">Traveler's route</span>
           </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="seccion-newsletter" id="newsletter" aria-label="Newsletter">
+      <div class="newsletter-contenedor">
+
+        <div class="newsletter-texto fade-up">
+          <span class="newsletter-eyebrow" aria-hidden="true">📬</span>
+          <h2 class="newsletter-titulo">
+            <span class="lang-es">Aventuras en tu bandeja de entrada</span>
+            <span class="lang-en">Adventures in your inbox</span>
+          </h2>
+          <p class="newsletter-sub">
+            <span class="lang-es">Guías exclusivas, rutas secretas y ofertas locales. Sin spam, solo la mejor Miami outdoor.</span>
+            <span class="lang-en">Exclusive guides, hidden routes and local deals. No spam, just the best Miami outdoors.</span>
+          </p>
+        </div>
+
+        <!-- Formulario activo -->
+        <form class="newsletter-form fade-up" id="newsletterForm" style="transition-delay:0.12s"
+              novalidate autocomplete="off" aria-label="Formulario newsletter">
+          <div class="newsletter-input-wrap">
+            <input class="newsletter-input" id="newsletterEmail" type="email"
+                   autocomplete="email" required
+                   placeholder="tu@email.com" aria-label="Tu correo electrónico" />
+            <div class="metal-btn-wrap newsletter-btn-wrap" data-variant="turquesa" data-size="md">
+              <div class="metal-btn-inner"></div>
+              <button class="metal-btn newsletter-submit" type="submit">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span class="lang-es">Suscribirme →</span>
+                <span class="lang-en">Subscribe →</span>
+              </button>
+            </div>
+          </div>
+          <p class="newsletter-disclaimer">
+            <span class="lang-es">Sin spam. Cancela cuando quieras.</span>
+            <span class="lang-en">No spam. Cancel anytime.</span>
+          </p>
+        </form>
+
+        <!-- Estado de éxito (oculto por JS) -->
+        <div class="newsletter-exito fade-up quiz-paso--oculto" id="newsletterExito"
+             style="transition-delay:0.12s" aria-live="polite">
+          <span class="newsletter-exito__ico" aria-hidden="true">🎉</span>
+          <strong class="newsletter-exito__titulo">
+            <span class="lang-es">¡Ya eres parte del clan!</span>
+            <span class="lang-en">You're part of the crew!</span>
+          </strong>
+          <p class="newsletter-exito__sub">
+            <span class="lang-es">Pronto recibirás las mejores aventuras de Miami.</span>
+            <span class="lang-en">You'll soon receive the best Miami adventures.</span>
+          </p>
         </div>
 
       </div>
