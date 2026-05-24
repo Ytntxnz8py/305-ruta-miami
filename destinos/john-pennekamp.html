@@ -17,7 +17,7 @@
   <meta property="og:url"         content="https://ytntxnz8py.github.io/mi-tienda/destinos/john-pennekamp.html" />
   <meta property="og:title"       content="John Pennekamp Coral Reef State Park — Guía Completa | Explora Miami" />
   <meta property="og:description" content="El único arrecife de coral vivo en los EE.UU. continentales. Buceo, snorkel y paseos en glassbottom desde Key Largo. A 90 minutos de Miami." />
-  <meta property="og:image"       content="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=85&auto=format&fit=crop" />
+  <meta property="og:image"       content="../assets/images/destinos/john-pennekamp/hero.jpg" />
   <meta property="og:locale"      content="es_US" />
   <meta name="twitter:card"       content="summary_large_image" />
 
@@ -82,7 +82,7 @@
   <!-- Hojas de estilo -->
   <link rel="stylesheet" href="../assets/css/navbar.css" />
   <link rel="stylesheet" href="../assets/css/destino.css" />
-  <link rel="stylesheet" href="../assets/css/radial-gallery.css" />
+  <link rel="stylesheet" href="../assets/css/selector-gallery.css" />
   <link rel="stylesheet" href="../assets/css/metal-button.css" />
   <link rel="stylesheet" href="../assets/css/liquid-btn.css" />
 
@@ -206,7 +206,7 @@
 
       <div class="destino-hero__bg">
         <img
-          src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=85&auto=format&fit=crop"
+          src="../assets/images/destinos/john-pennekamp/hero.jpg"
           alt="Arrecife de coral vivo en John Pennekamp Coral Reef State Park, Key Largo"
           width="1920" height="1080"
           fetchpriority="high"
@@ -316,72 +316,113 @@
     </section>
 
 
-    <!-- ===== SECCIÓN 3 — GALERÍA RADIAL ===== -->
+    <!-- ===== SECCIÓN 3 — GALERÍA SELECTOR ===== -->
     <section class="destino-galeria" id="galeria">
 
-      <!-- Galería radial — posicionada y animada por radial-gallery.js -->
-      <div class="radial-gallery" id="galeriaRadial">
+      <div class="selector-gallery" id="selectorGallery">
 
-        <div class="radial-gallery__header fade-up">
+        <div class="selector-gallery__header fade-up">
           <h2 class="lang-es">Galería</h2>
           <h2 class="lang-en">Gallery</h2>
         </div>
 
-        <div class="radial-gallery__stage" id="galeriaStage">
-          <ul class="radial-gallery__wheel" id="galeriaWheel">
+        <div class="sg-track" id="sgTrack">
 
-            <li class="radial-gallery__spoke" data-index="0">
-              <div class="galeria-item radial-gallery__card"
-                   role="button" tabindex="0"
-                   aria-label="Abrir foto: Arrecife vivo">
-                <img src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=900&q=80&auto=format&fit=crop" alt="Buceador explorando el arrecife en John Pennekamp" loading="lazy" width="900" height="675" />
-                <div class="galeria-item__overlay">
+          <div class="sg-option" data-index="0" role="button" tabindex="0"
+               aria-label="Arrecife vivo">
+            <img class="sg-option__img" src="../assets/images/destinos/john-pennekamp/gallery-1.jpg" alt="Buceador explorando el arrecife en John Pennekamp"
+                 loading="lazy" width="900" height="675" />
+            <div class="sg-option__shadow" aria-hidden="true"></div>
+            <button class="sg-option__zoom" type="button" tabindex="-1"
+                    aria-label="Ver foto a tamaño completo">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M1 1h4M1 1v4M13 1h-4M13 1v4M1 13h4M1 13v-4M13 13h-4M13 13v-4"/>
+              </svg>
+            </button>
+            <div class="sg-option__label" aria-hidden="true">
+              <div class="sg-option__icon">📸</div>
+              <div class="sg-option__info">
+                <div class="sg-option__title">
                   <span class="lang-es">Arrecife vivo</span>
                   <span class="lang-en">Living reef</span>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
 
-            <li class="radial-gallery__spoke" data-index="1">
-              <div class="galeria-item radial-gallery__card"
-                   role="button" tabindex="0"
-                   aria-label="Abrir foto: Peces tropicales">
-                <img src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=900&q=80&auto=format&fit=crop" alt="Peces tropicales en el arrecife de coral de Key Largo" loading="lazy" width="900" height="675" />
-                <div class="galeria-item__overlay">
+          <div class="sg-option" data-index="1" role="button" tabindex="0"
+               aria-label="Peces tropicales">
+            <img class="sg-option__img" src="../assets/images/destinos/john-pennekamp/gallery-2.jpg" alt="Peces tropicales en el arrecife de coral de Key Largo"
+                 loading="lazy" width="900" height="675" />
+            <div class="sg-option__shadow" aria-hidden="true"></div>
+            <button class="sg-option__zoom" type="button" tabindex="-1"
+                    aria-label="Ver foto a tamaño completo">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M1 1h4M1 1v4M13 1h-4M13 1v4M1 13h4M1 13v-4M13 13h-4M13 13v-4"/>
+              </svg>
+            </button>
+            <div class="sg-option__label" aria-hidden="true">
+              <div class="sg-option__icon">🌿</div>
+              <div class="sg-option__info">
+                <div class="sg-option__title">
                   <span class="lang-es">Peces tropicales</span>
                   <span class="lang-en">Tropical fish</span>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
 
-            <li class="radial-gallery__spoke" data-index="2">
-              <div class="galeria-item radial-gallery__card"
-                   role="button" tabindex="0"
-                   aria-label="Abrir foto: Vista panorámica">
-                <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=900&q=80&auto=format&fit=crop" alt="Snorkel en aguas cristalinas de los Florida Keys" loading="lazy" width="900" height="675" />
-                <div class="galeria-item__overlay">
+          <div class="sg-option" data-index="2" role="button" tabindex="0"
+               aria-label="Vista panorámica">
+            <img class="sg-option__img" src="../assets/images/destinos/john-pennekamp/gallery-3.jpg" alt="Snorkel en aguas cristalinas de los Florida Keys"
+                 loading="lazy" width="900" height="675" />
+            <div class="sg-option__shadow" aria-hidden="true"></div>
+            <button class="sg-option__zoom" type="button" tabindex="-1"
+                    aria-label="Ver foto a tamaño completo">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M1 1h4M1 1v4M13 1h-4M13 1v4M1 13h4M1 13v-4M13 13h-4M13 13v-4"/>
+              </svg>
+            </button>
+            <div class="sg-option__label" aria-hidden="true">
+              <div class="sg-option__icon">🌊</div>
+              <div class="sg-option__info">
+                <div class="sg-option__title">
                   <span class="lang-es">Vista panorámica</span>
                   <span class="lang-en">Panoramic view</span>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
 
-            <li class="radial-gallery__spoke" data-index="3">
-              <div class="galeria-item radial-gallery__card"
-                   role="button" tabindex="0"
-                   aria-label="Abrir foto: Snorkel en el arrecife">
-                <img src="https://images.unsplash.com/photo-1484291470158-b8f8d608850d?w=900&q=80&auto=format&fit=crop" alt="Manglar en la costa de John Pennekamp State Park" loading="lazy" width="900" height="675" />
-                <div class="galeria-item__overlay">
+          <div class="sg-option" data-index="3" role="button" tabindex="0"
+               aria-label="Snorkel en el arrecife">
+            <img class="sg-option__img" src="../assets/images/destinos/john-pennekamp/gallery-4.jpg" alt="Manglar en la costa de John Pennekamp State Park"
+                 loading="lazy" width="900" height="675" />
+            <div class="sg-option__shadow" aria-hidden="true"></div>
+            <button class="sg-option__zoom" type="button" tabindex="-1"
+                    aria-label="Ver foto a tamaño completo">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M1 1h4M1 1v4M13 1h-4M13 1v4M1 13h4M1 13v-4M13 13h-4M13 13v-4"/>
+              </svg>
+            </button>
+            <div class="sg-option__label" aria-hidden="true">
+              <div class="sg-option__icon">🥾</div>
+              <div class="sg-option__info">
+                <div class="sg-option__title">
                   <span class="lang-es">Snorkel en el arrecife</span>
                   <span class="lang-en">Snorkeling the reef</span>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
 
-          </ul>
         </div>
 
-      </div><!-- /radial-gallery -->
+      </div><!-- /selector-gallery -->
 
       <!-- Lightbox (sin cambios) -->
       <div class="galeria-lightbox" id="galeriaLightbox"
@@ -1021,7 +1062,7 @@
           <!-- Biscayne National Park -->
           <a href="biscayne.html" class="rel-card fade-up">
             <div class="rel-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=75&auto=format&fit=crop"
+              <img src="../assets/images/destinos/biscayne/hero.jpg"
                    alt="Biscayne National Park"
                    loading="lazy" width="600" height="450" />
             </div>
@@ -1036,7 +1077,7 @@
           <!-- Everglades National Park -->
           <a href="everglades.html" class="rel-card fade-up" style="transition-delay:0.1s">
             <div class="rel-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75&auto=format&fit=crop"
+              <img src="../assets/images/destinos/everglades/hero.jpg"
                    alt="Everglades National Park"
                    loading="lazy" width="600" height="450" />
             </div>
@@ -1051,7 +1092,7 @@
           <!-- Bill Baggs Cape Florida SP -->
           <a href="bill-baggs.html" class="rel-card fade-up" style="transition-delay:0.2s">
             <div class="rel-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=75&auto=format&fit=crop"
+              <img src="../assets/images/destinos/bill-baggs/hero.jpg"
                    alt="Virginia Key Beach Park"
                    loading="lazy" width="600" height="450" />
             </div>
@@ -1136,9 +1177,7 @@
   <script src="../assets/js/navbar.js"></script>
   <script src="../assets/js/metal-button.js"></script>
   <script src="../assets/js/liquid-tilt.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="../assets/js/radial-gallery.js"></script>
+  <script src="../assets/js/selector-gallery.js"></script>
 
 </body>
 </html>

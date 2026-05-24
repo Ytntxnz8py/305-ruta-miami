@@ -17,7 +17,7 @@
   <meta property="og:url"         content="https://ytntxnz8py.github.io/mi-tienda/destinos/virginia-key.html" />
   <meta property="og:title"       content="Virginia Key Beach Park — Historia y Naturaleza | Explora Miami" />
   <meta property="og:description" content="La playa histórica de la segregación que renació como paraíso natural. 15 minutos de Miami." />
-  <meta property="og:image"       content="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=1200&q=85&auto=format&fit=crop" />
+  <meta property="og:image"       content="../assets/images/destinos/virginia-key/hero.jpg" />
   <meta property="og:locale"      content="es_US" />
   <meta name="twitter:card"       content="summary_large_image" />
 
@@ -58,7 +58,7 @@
   <!-- Hojas de estilo -->
   <link rel="stylesheet" href="../assets/css/navbar.css" />
   <link rel="stylesheet" href="../assets/css/destino.css" />
-  <link rel="stylesheet" href="../assets/css/radial-gallery.css" />
+  <link rel="stylesheet" href="../assets/css/selector-gallery.css" />
   <link rel="stylesheet" href="../assets/css/metal-button.css" />
   <link rel="stylesheet" href="../assets/css/liquid-btn.css" />
 
@@ -182,7 +182,7 @@
 
       <div class="destino-hero__bg">
         <img
-          src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=1920&q=85&auto=format&fit=crop"
+          src="../assets/images/destinos/virginia-key/hero.jpg"
           alt="Playa de Virginia Key con palmeras y vista a Miami"
           width="1920" height="1080"
           fetchpriority="high"
@@ -296,72 +296,113 @@
     </section>
 
 
-    <!-- ===== SECCIÓN 3 — GALERÍA RADIAL ===== -->
+    <!-- ===== SECCIÓN 3 — GALERÍA SELECTOR ===== -->
     <section class="destino-galeria" id="galeria">
 
-      <!-- Galería radial — posicionada y animada por radial-gallery.js -->
-      <div class="radial-gallery" id="galeriaRadial">
+      <div class="selector-gallery" id="selectorGallery">
 
-        <div class="radial-gallery__header fade-up">
+        <div class="selector-gallery__header fade-up">
           <h2 class="lang-es">Galería</h2>
           <h2 class="lang-en">Gallery</h2>
         </div>
 
-        <div class="radial-gallery__stage" id="galeriaStage">
-          <ul class="radial-gallery__wheel" id="galeriaWheel">
+        <div class="sg-track" id="sgTrack">
 
-            <li class="radial-gallery__spoke" data-index="0">
-              <div class="galeria-item radial-gallery__card"
-                   role="button" tabindex="0"
-                   aria-label="Abrir foto: Playa histórica">
-                <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=80&auto=format&fit=crop" alt="Aguas calmas de la bahía en Virginia Key" loading="lazy" width="900" height="675" />
-                <div class="galeria-item__overlay">
+          <div class="sg-option" data-index="0" role="button" tabindex="0"
+               aria-label="Playa histórica">
+            <img class="sg-option__img" src="../assets/images/destinos/virginia-key/gallery-1.jpg" alt="Aguas calmas de la bahía en Virginia Key"
+                 loading="lazy" width="900" height="675" />
+            <div class="sg-option__shadow" aria-hidden="true"></div>
+            <button class="sg-option__zoom" type="button" tabindex="-1"
+                    aria-label="Ver foto a tamaño completo">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M1 1h4M1 1v4M13 1h-4M13 1v4M1 13h4M1 13v-4M13 13h-4M13 13v-4"/>
+              </svg>
+            </button>
+            <div class="sg-option__label" aria-hidden="true">
+              <div class="sg-option__icon">📸</div>
+              <div class="sg-option__info">
+                <div class="sg-option__title">
                   <span class="lang-es">Playa histórica</span>
                   <span class="lang-en">Historic beach</span>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
 
-            <li class="radial-gallery__spoke" data-index="1">
-              <div class="galeria-item radial-gallery__card"
-                   role="button" tabindex="0"
-                   aria-label="Abrir foto: Costa natural">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format&fit=crop" alt="Playa histórica de Virginia Key, Miami" loading="lazy" width="900" height="675" />
-                <div class="galeria-item__overlay">
+          <div class="sg-option" data-index="1" role="button" tabindex="0"
+               aria-label="Costa natural">
+            <img class="sg-option__img" src="../assets/images/destinos/virginia-key/gallery-2.jpg" alt="Playa histórica de Virginia Key, Miami"
+                 loading="lazy" width="900" height="675" />
+            <div class="sg-option__shadow" aria-hidden="true"></div>
+            <button class="sg-option__zoom" type="button" tabindex="-1"
+                    aria-label="Ver foto a tamaño completo">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M1 1h4M1 1v4M13 1h-4M13 1v4M1 13h4M1 13v-4M13 13h-4M13 13v-4"/>
+              </svg>
+            </button>
+            <div class="sg-option__label" aria-hidden="true">
+              <div class="sg-option__icon">🌿</div>
+              <div class="sg-option__info">
+                <div class="sg-option__title">
                   <span class="lang-es">Costa natural</span>
                   <span class="lang-en">Natural coastline</span>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
 
-            <li class="radial-gallery__spoke" data-index="2">
-              <div class="galeria-item radial-gallery__card"
-                   role="button" tabindex="0"
-                   aria-label="Abrir foto: Kayak en la bahía">
-                <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=900&q=80&auto=format&fit=crop" alt="Vista de Biscayne Bay desde Virginia Key" loading="lazy" width="900" height="675" />
-                <div class="galeria-item__overlay">
+          <div class="sg-option" data-index="2" role="button" tabindex="0"
+               aria-label="Kayak en la bahía">
+            <img class="sg-option__img" src="../assets/images/destinos/virginia-key/gallery-3.jpg" alt="Vista de Biscayne Bay desde Virginia Key"
+                 loading="lazy" width="900" height="675" />
+            <div class="sg-option__shadow" aria-hidden="true"></div>
+            <button class="sg-option__zoom" type="button" tabindex="-1"
+                    aria-label="Ver foto a tamaño completo">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M1 1h4M1 1v4M13 1h-4M13 1v4M1 13h4M1 13v-4M13 13h-4M13 13v-4"/>
+              </svg>
+            </button>
+            <div class="sg-option__label" aria-hidden="true">
+              <div class="sg-option__icon">🌊</div>
+              <div class="sg-option__info">
+                <div class="sg-option__title">
                   <span class="lang-es">Kayak en la bahía</span>
                   <span class="lang-en">Bay kayaking</span>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
 
-            <li class="radial-gallery__spoke" data-index="3">
-              <div class="galeria-item radial-gallery__card"
-                   role="button" tabindex="0"
-                   aria-label="Abrir foto: Amanecer">
-                <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=900&q=80&auto=format&fit=crop" alt="Palmeras en la costa de Virginia Key Beach" loading="lazy" width="900" height="675" />
-                <div class="galeria-item__overlay">
+          <div class="sg-option" data-index="3" role="button" tabindex="0"
+               aria-label="Amanecer">
+            <img class="sg-option__img" src="../assets/images/destinos/virginia-key/gallery-4.jpg" alt="Palmeras en la costa de Virginia Key Beach"
+                 loading="lazy" width="900" height="675" />
+            <div class="sg-option__shadow" aria-hidden="true"></div>
+            <button class="sg-option__zoom" type="button" tabindex="-1"
+                    aria-label="Ver foto a tamaño completo">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M1 1h4M1 1v4M13 1h-4M13 1v4M1 13h4M1 13v-4M13 13h-4M13 13v-4"/>
+              </svg>
+            </button>
+            <div class="sg-option__label" aria-hidden="true">
+              <div class="sg-option__icon">🥾</div>
+              <div class="sg-option__info">
+                <div class="sg-option__title">
                   <span class="lang-es">Amanecer</span>
                   <span class="lang-en">Sunrise</span>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
 
-          </ul>
         </div>
 
-      </div><!-- /radial-gallery -->
+      </div><!-- /selector-gallery -->
 
       <!-- Lightbox (sin cambios) -->
       <div class="galeria-lightbox" id="galeriaLightbox"
@@ -1002,7 +1043,7 @@
           <!-- Bill Baggs -->
           <a href="bill-baggs.html" class="rel-card fade-up">
             <div class="rel-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=75&auto=format&fit=crop"
+              <img src="../assets/images/destinos/bill-baggs/hero.jpg"
                    alt="Crandon Park"
                    loading="lazy" width="600" height="450" />
             </div>
@@ -1017,7 +1058,7 @@
           <!-- Crandon Park -->
           <a href="crandon-park.html" class="rel-card fade-up" style="transition-delay:0.1s">
             <div class="rel-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=75&auto=format&fit=crop"
+              <img src="../assets/images/destinos/crandon-park/hero.jpg"
                    alt="Bill Baggs Cape Florida"
                    loading="lazy" width="600" height="450" />
             </div>
@@ -1032,7 +1073,7 @@
           <!-- Matheson Hammock -->
           <a href="matheson-hammock.html" class="rel-card fade-up" style="transition-delay:0.2s">
             <div class="rel-card__img-wrap">
-              <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=75&auto=format&fit=crop"
+              <img src="../assets/images/destinos/matheson-hammock/hero.jpg"
                    alt="Matheson Hammock Park"
                    loading="lazy" width="600" height="450" />
             </div>
@@ -1117,9 +1158,7 @@
   <script src="../assets/js/navbar.js"></script>
   <script src="../assets/js/metal-button.js"></script>
   <script src="../assets/js/liquid-tilt.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="../assets/js/radial-gallery.js"></script>
+  <script src="../assets/js/selector-gallery.js"></script>
 
 </body>
 </html>
