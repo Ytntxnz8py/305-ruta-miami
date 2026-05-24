@@ -32,5 +32,10 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Herramientas de desarrollo local (no van a GitHub Pages)
+.claude/
+*.bat
+*.cmd
+
 # Node (por si acaso)
 node_modules/

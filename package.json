@@ -1,0 +1,10 @@
+{
+  "name": "explora-miami",
+  "version": "1.0.0",
+  "description": "Directorio de experiencias outdoor en Miami — sitio estático HTML/CSS/JS",
+  "scripts": {
+    "start": "node .claude/server.js",
+    "dev": "node .claude/server.js"
+  },
+  "private": true
+}
