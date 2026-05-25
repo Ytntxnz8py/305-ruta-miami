@@ -2373,7 +2373,7 @@ p  { font-weight: 300; }
 
 /* ── 1. Sección — fondo claro ── */
 .seccion-precios {
-  padding: 7rem 1.5rem 8rem;
+  padding: 4.5rem 1.5rem 5.5rem;
   background: var(--blanco-arena, #FFFDF7);
   position: relative;
   overflow: hidden;
@@ -2387,7 +2387,7 @@ p  { font-weight: 300; }
   max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
 }
 
-.seccion-precios__encabezado { text-align: center; margin-bottom: 3rem; }
+.seccion-precios__encabezado { text-align: center; margin-bottom: 1.8rem; }
 
 .seccion-precios__eyebrow {
   display: inline-block;
@@ -2398,19 +2398,19 @@ p  { font-weight: 300; }
 
 .seccion-precios__titulo {
   font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15;
-  color: var(--tinta); margin-bottom: 0.75rem;
+  font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15;
+  color: var(--tinta); margin-bottom: 0.5rem;
 }
 
 .seccion-precios__sub {
-  font-size: 1rem; font-weight: 300; line-height: 1.6;
+  font-size: 0.9rem; font-weight: 300; line-height: 1.6;
   color: var(--texto-medio); max-width: 520px; margin: 0 auto;
 }
 
 /* ── 3. Toggle mensual/anual ── */
 .precios-toggle {
   display: flex; justify-content: center; gap: 0.5rem;
-  margin-bottom: 3.5rem;
+  margin-bottom: 2rem;
 }
 
 .precios-toggle__btn {
@@ -2440,7 +2440,7 @@ p  { font-weight: 300; }
 .seccion-precios .precios-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1.1rem;
   align-items: center;
 }
 
@@ -2459,7 +2459,7 @@ p  { font-weight: 300; }
   flex-direction: column;
 }
 
-/* ── 6. Card base — glass-light, sin hover translateY ── */
+/* ── 6. Card base — glass-light compacta, sin hover translateY ── */
 .seccion-precios .precio-card {
   background: linear-gradient(135deg,
     rgba(255,255,255,0.72),
@@ -2467,8 +2467,8 @@ p  { font-weight: 300; }
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
   border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 1.25rem;
-  padding: 2.2rem 1.8rem 2.4rem;
+  border-radius: 1rem;
+  padding: 1.4rem 1.4rem 1.6rem;
   position: relative;
   overflow: hidden;
   transform-style: flat;
@@ -2489,17 +2489,17 @@ p  { font-weight: 300; }
 /* Sin hover translateY — cards estáticas */
 .seccion-precios .precio-card:hover { transform: none; }
 
-/* ── 7. Nombre del plan — extralight sans ── */
+/* ── 7. Nombre del plan — extralight sans compacto ── */
 .precio-card__nombre {
   display: block;
   font-family: var(--sans);
   font-style: normal;
   font-weight: 200;
-  font-size: clamp(1.6rem, 2.5vw, 2rem);
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
   letter-spacing: -0.01em;
   line-height: 1.1;
   text-transform: none;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.25rem;
   color: var(--tinta);
 }
 
@@ -2517,20 +2517,20 @@ p  { font-weight: 300; }
   font-family: var(--sans);
   font-style: normal;
   font-weight: 200;
-  font-size: clamp(2.2rem, 3.5vw, 2.8rem);
+  font-size: clamp(1.65rem, 2.4vw, 2rem);
   letter-spacing: -0.03em;
   color: var(--tinta);
   transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 .precio-card__periodo {
-  font-size: 0.88rem; font-weight: 300;
+  font-size: 0.8rem; font-weight: 300;
   color: var(--texto-medio);
 }
 
 .precio-card__tagline {
-  font-size: 0.88rem; font-weight: 300; font-style: normal;
-  color: var(--texto-suave); line-height: 1.5; margin-top: 0.5rem;
+  font-size: 0.78rem; font-weight: 300; font-style: normal;
+  color: var(--texto-suave); line-height: 1.4; margin-top: 0.3rem;
 }
 
 /* ── 9. Divisor degradado — tonos oscuros ── */
@@ -2542,35 +2542,35 @@ p  { font-weight: 300; }
     rgba(26,42,53,0.18) 50%,
     rgba(26,42,53,0.10) 80%,
     transparent 100%);
-  margin: 1.3rem 0 1.1rem;
+  margin: 0.75rem 0 0.65rem;
   flex-shrink: 0;
 }
 
 /* ── 10. Lista de features ── */
 .precio-card__lista {
   list-style: none;
-  margin-bottom: 1.8rem;
-  display: flex; flex-direction: column; gap: 0.58rem;
+  margin-bottom: 1.2rem;
+  display: flex; flex-direction: column; gap: 0.36rem;
   flex: 1;
 }
 
 .precio-card__lista li {
-  display: flex; align-items: center; gap: 0.52rem;
-  font-size: 0.875rem; font-weight: 300;
-  color: var(--texto-medio); line-height: 1.45;
+  display: flex; align-items: center; gap: 0.42rem;
+  font-size: 0.78rem; font-weight: 300;
+  color: var(--texto-medio); line-height: 1.4;
 }
 
 /* ── 11. SVG check icon — todos turquesa, sin animación ── */
 .precio-check {
   flex-shrink: 0;
-  width: 16px; height: 16px;
+  width: 13px; height: 13px;
   display: inline-flex; align-items: center; justify-content: center;
   background: none;
   border-radius: 0;
   color: var(--turquesa);
 }
 
-.precio-check svg { width: 16px; height: 16px; }
+.precio-check svg { width: 13px; height: 13px; }
 
 /* Todos turquesa */
 .precio-check--turquesa,
@@ -2583,11 +2583,11 @@ p  { font-weight: 300; }
 /* ── 12. Badge ── */
 .precio-card__badge {
   position: absolute;
-  top: -1px; right: 1.1rem; left: auto;
+  top: -1px; right: 1rem; left: auto;
   transform: none;
-  padding: 0.28rem 0.9rem;
-  border-radius: 0 0 10px 10px;
-  font-size: 0.69rem; font-weight: 700;
+  padding: 0.2rem 0.7rem;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.62rem; font-weight: 700;
   letter-spacing: 0.08em; text-transform: uppercase;
   white-space: nowrap;
 }
@@ -2600,7 +2600,7 @@ p  { font-weight: 300; }
   background: var(--coral); color: #fff;
 }
 
-/* ── 13. Destacada — ring cyan estático, scale 1.05, hover sin cambio ── */
+/* ── 13. Destacada — ring cyan estático, scale 1.03, hover sin cambio ── */
 @media (min-width: 900px) {
   .precio-card--destacada {
     background: linear-gradient(135deg,
@@ -2611,12 +2611,12 @@ p  { font-weight: 300; }
       0 2px 8px rgba(26,42,53,0.08),
       0 12px 40px rgba(26,42,53,0.08),
       0 0 0 2px rgba(0,188,212,0.15);
-    transform: scale(1.05);
+    transform: scale(1.03);
     z-index: 2;
   }
   /* Hover no cambia el scale — card estática */
   .precio-card--destacada:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 }
 
@@ -2632,74 +2632,13 @@ p  { font-weight: 300; }
 
 .precio-card__header {
   margin-bottom: 0;
-  padding-top: 0.3rem;
+  padding-top: 0.2rem;
 }
 
-/* ── 15. CTA — ripple button ── */
+/* ── 15. CTA — MetalButton oficial ancho completo ── */
 .precio-card__cta { margin-top: auto; }
-
-.pc-cta-btn {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding: 0.78rem 1.5rem;
-  border-radius: 0.75rem;
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  cursor: pointer;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  transition: opacity 0.2s cubic-bezier(0.2,0,0,1),
-              transform 0.15s cubic-bezier(0.2,0,0,1);
-}
-
-.pc-cta-btn:active { transform: scale(0.98); }
-
-/* Variante secundaria — sutil turquesa */
-.pc-cta-btn--secondary {
-  background: rgba(0,188,212,0.10);
-  border: 1px solid rgba(0,188,212,0.25);
-  color: var(--tinta);
-}
-.pc-cta-btn--secondary:hover { background: rgba(0,188,212,0.16); }
-
-/* Variante primaria — turquesa sólido */
-.pc-cta-btn--primary {
-  background: var(--turquesa);
-  color: #fff;
-}
-.pc-cta-btn--primary:hover { opacity: 0.88; }
-
-/* Variante coral para Élite */
-.pc-cta-btn--coral {
-  background: var(--coral);
-  color: #fff;
-}
-.pc-cta-btn--coral:hover { opacity: 0.88; }
-
-/* Ripple element */
-.pc-ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  background: rgba(255,255,255,0.35);
-  animation: pcRippleAnim 0.55s cubic-bezier(0.2,0,0,1) forwards;
-  pointer-events: none;
-}
-
-@keyframes pcRippleAnim {
-  to { transform: scale(4); opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pc-ripple { animation: none; opacity: 0; }
-  .pc-cta-btn { transition: none; }
-}
+.precio-card__cta .metal-btn-wrap { width: 100%; }
+.precio-card__cta .metal-btn { width: 100%; justify-content: center; }
 
 /* ── 16. Nota de transparencia ── */
 .precios-nota {
@@ -2716,12 +2655,13 @@ p  { font-weight: 300; }
 /* ── 17. Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .seccion-precios .precio-card { transition: none; }
-  .precio-card--destacada { transform: scale(1.05) !important; }
+  .precio-card--destacada { transform: scale(1.03) !important; }
 }
 
 /* ── 18. Mobile — sin scale en destacada ── */
 @media (max-width: 900px) {
   .pc-wrap { perspective: none; }
+  .seccion-precios { padding: 3rem 1rem 3.5rem; }
   .seccion-precios .precio-card--destacada { transform: none; }
   .seccion-precios .precio-card--destacada:hover { transform: none; }
 }
