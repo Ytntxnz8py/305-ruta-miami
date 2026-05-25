@@ -1274,3 +1274,212 @@
     init();
   }
 })();
+
+/* ============================================================
+   PRECIOS — Canvas WebGL shader + ripple buttons
+   Portado de React ShaderCanvas a ES5 vanilla JS
+   ============================================================ */
+(function () {
+  'use strict';
+
+  /* ── Vertex shader — quad de pantalla completa ── */
+  var VERT_SRC = [
+    'attribute vec2 a_position;',
+    'void main() {',
+    '  gl_Position = vec4(a_position, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  /* ── Fragment shader — círculos concéntricos con variación senoidal ── */
+  var FRAG_SRC = [
+    'precision mediump float;',
+    'uniform float iTime;',
+    'uniform vec2  iResolution;',
+    'uniform vec3  uBackgroundColor;',
+    '',
+    'float variation(vec2 v1, vec2 v2, float strength, float speed) {',
+    '  return sin(',
+    '    dot(normalize(v1 - v2), vec2(0.5, 1.2)) * strength + iTime * speed',
+    '  ) / 100.0;',
+    '}',
+    '',
+    'vec4 paintCircle(vec2 uv, vec2 center, float rad, float width) {',
+    '  vec2  diff   = center - uv;',
+    '  float len    = length(diff);',
+    '  len += variation(diff, vec2(0.0), 0.5, 1.6);',
+    '  len -= variation(diff, vec2(0.0), 0.5, 1.2);',
+    '  float circle = smoothstep(rad - width, rad, len)',
+    '               - smoothstep(rad, rad + width, len);',
+    '  return vec4(circle);',
+    '}',
+    '',
+    'mat2 rotate2d(float angle) {',
+    '  return mat2(cos(angle), -sin(angle), sin(angle), cos(angle));',
+    '}',
+    '',
+    'void main() {',
+    '  vec2 uv     = gl_FragCoord.xy / iResolution.xy;',
+    '  uv.x       *= 1.5; uv.x -= 0.25;',
+    '  float mask  = 0.0;',
+    '  float radius = 0.35;',
+    '  vec2  center = vec2(0.5);',
+    '  mask += paintCircle(uv, center, radius,         0.035).r;',
+    '  mask += paintCircle(uv, center, radius - 0.018, 0.010).r;',
+    '  mask += paintCircle(uv, center, radius + 0.018, 0.005).r;',
+    '  vec2 v     = rotate2d(iTime) * uv;',
+    '  vec3 fg    = vec3(v.x, v.y, 0.7 - v.y * v.x);',
+    '  vec3 color = mix(uBackgroundColor, fg, mask);',
+    '  color = mix(color, vec3(1.0), paintCircle(uv, center, radius, 0.003).r);',
+    '  gl_FragColor = vec4(color, 1.0);',
+    '}'
+  ].join('\n');
+
+  /* ── Inicializar canvas WebGL ── */
+  function initShaderCanvas() {
+    var canvas = document.getElementById('preciosCanvas');
+    if (!canvas) { return; }
+
+    var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) {
+      /* Sin soporte WebGL — ocultar canvas y dejar fondo liso */
+      canvas.style.display = 'none';
+      return;
+    }
+
+    /* Compilar shader individual */
+    function compileShader(type, src) {
+      var sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+        gl.deleteShader(sh);
+        return null;
+      }
+      return sh;
+    }
+
+    var vert = compileShader(gl.VERTEX_SHADER,   VERT_SRC);
+    var frag = compileShader(gl.FRAGMENT_SHADER, FRAG_SRC);
+    if (!vert || !frag) { return; }
+
+    var prog = gl.createProgram();
+    gl.attachShader(prog, vert);
+    gl.attachShader(prog, frag);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { return; }
+    gl.useProgram(prog);
+
+    /* Quad de pantalla completa — 2 triángulos */
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,   1, -1,   -1,  1,
+       1, -1,   1,  1,   -1,  1
+    ]), gl.STATIC_DRAW);
+
+    var aPos = gl.getAttribLocation(prog, 'a_position');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+    var uTime       = gl.getUniformLocation(prog, 'iTime');
+    var uResolution = gl.getUniformLocation(prog, 'iResolution');
+    var uBgColor    = gl.getUniformLocation(prog, 'uBackgroundColor');
+
+    /* Color de fondo: --blanco-arena #FFFDF7 → RGB normalizado */
+    gl.uniform3f(uBgColor, 1.0, 0.992, 0.969);
+
+    /* Redimensionar canvas al tamaño de la sección padre */
+    function resize() {
+      var parent = canvas.parentElement;
+      if (!parent) { return; }
+      canvas.width  = Math.round(parent.offsetWidth)  || 800;
+      canvas.height = Math.round(parent.offsetHeight) || 600;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    /* Detectar preferencia de movimiento reducido */
+    var prefersReduced = !!(window.matchMedia &&
+                            window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    var start  = performance.now();
+    var rafId  = null;
+    var active = true;
+
+    function render() {
+      if (!active) { return; }
+      if (prefersReduced) {
+        /* Render único estático — patrón visible sin movimiento */
+        gl.uniform1f(uTime, 1.4);
+        gl.uniform2f(uResolution, canvas.width, canvas.height);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        return;
+      }
+      rafId = requestAnimationFrame(render);
+      var t = (performance.now() - start) * 0.001;
+      gl.uniform1f(uTime, t);
+      gl.uniform2f(uResolution, canvas.width, canvas.height);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    }
+
+    /* Pausar cuando la sección sale del viewport — ahorra GPU */
+    if ('IntersectionObserver' in window) {
+      var io2 = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            active = true;
+            if (!rafId && !prefersReduced) { render(); }
+          } else {
+            active = false;
+            if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+          }
+        });
+      }, { threshold: 0 });
+      io2.observe(canvas.parentElement);
+    }
+
+    /* Primer render */
+    render();
+  }
+
+  /* ── Ripple para .pc-cta-btn ── */
+  function initRippleButtons() {
+    var btns = document.querySelectorAll('.pc-cta-btn');
+    var i;
+    for (i = 0; i < btns.length; i++) {
+      (function (btn) {
+        btn.addEventListener('click', function (e) {
+          var rect   = btn.getBoundingClientRect();
+          var x      = e.clientX - rect.left;
+          var y      = e.clientY - rect.top;
+          var size   = Math.max(rect.width, rect.height) * 1.4;
+          var ripple = document.createElement('span');
+          ripple.className    = 'pc-ripple';
+          ripple.style.width  = size + 'px';
+          ripple.style.height = size + 'px';
+          ripple.style.left   = (x - size / 2) + 'px';
+          ripple.style.top    = (y - size / 2) + 'px';
+          btn.appendChild(ripple);
+          /* Limpiar elemento después de la animación */
+          setTimeout(function () {
+            if (ripple.parentNode) { ripple.parentNode.removeChild(ripple); }
+          }, 620);
+        });
+      }(btns[i]));
+    }
+  }
+
+  /* ── Inicialización ── */
+  function init() {
+    initShaderCanvas();
+    initRippleButtons();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+}());
