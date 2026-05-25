@@ -4,9 +4,10 @@
    Porta el efecto de cta-card.tsx a ES5 vanilla
    ============================================================ */
 
-/* ── Sección contenedora ── */
+/* ── Sección contenedora — fondo blanco arena ── */
 .seccion-cta-card {
   padding: 4.5rem 1.5rem;
+  background: var(--blanco-arena, #FFFDF7);
 }
 
 /* ── Card — estructura base ── */
@@ -63,15 +64,15 @@
       rgba(255, 179, 0, 0.06), transparent 55%);
 }
 
-/* ── Grid de dos columnas ── */
+/* ── Grid de dos columnas — altura reducida ── */
 .cta-card__inner {
   position: relative;
   z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 2.5rem;
-  padding: 3rem 3rem 3rem 3.5rem;
+  gap: 2rem;
+  padding: 2rem 2.5rem 2rem 2.8rem;
 }
 
 /* ── Columna izquierda — texto ── */
@@ -160,30 +161,47 @@
   align-items: stretch;
 }
 
+/* Combo pildora: input + botón forman una cápsula perfecta */
 .cta-card--newsletter .newsletter-input-wrap {
   width: 100%;
   max-width: none;
-  box-shadow: none;
-  border-radius: 10px;
+  box-shadow: 0 2px 18px rgba(5,24,34,0.22);
+  border-radius: 999px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,253,247,0.06);
 }
 
-/* Input oscuro en vez de crema — encaja en el fondo océano */
+/* Input oscuro — mitad izquierda de la pildora */
 .cta-card--newsletter .newsletter-input {
-  background: rgba(255, 253, 247, 0.08);
+  background: transparent;
   color: var(--blanco-arena, #FFFDF7);
   border: none;
-  border-radius: 9px 0 0 9px;
+  border-radius: 999px 0 0 999px;
+  padding-left: 1.4rem;
 }
 
 .cta-card--newsletter .newsletter-input::placeholder {
-  color: rgba(255, 253, 247, 0.36);
+  color: rgba(255, 253, 247, 0.38);
 }
 
 .cta-card--newsletter .newsletter-input:focus {
-  background: rgba(255, 253, 247, 0.12);
-  box-shadow: inset 0 0 0 1.5px rgba(0, 188, 212, 0.55);
+  background: rgba(255, 253, 247, 0.08);
+  box-shadow: none;
+  outline: none;
+}
+
+/* Botón — mitad derecha de la pildora */
+.cta-card--newsletter .newsletter-btn-wrap {
+  border-radius: 0 999px 999px 0 !important;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cta-card--newsletter .newsletter-submit {
+  border-radius: 0 999px 999px 0 !important;
+  padding-right: 1.4rem;
+  white-space: nowrap;
 }
 
 /* Disclaimer más tenue */
@@ -204,12 +222,12 @@
    RESPONSIVE — colapsa a columna única en móvil
    ════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .seccion-cta-card { padding: 2.5rem 1rem; }
+  .seccion-cta-card { padding: 2rem 1rem; }
 
   .cta-card__inner {
     grid-template-columns: 1fr;
-    padding: 2rem 1.5rem 2.2rem;
-    gap: 1.6rem;
+    padding: 1.6rem 1.4rem 1.8rem;
+    gap: 1.4rem;
   }
 
   .cta-card__action {
@@ -220,20 +238,23 @@
 
   .cta-card--newsletter .newsletter-input-wrap {
     flex-direction: column;
-    border-radius: 10px;
+    border-radius: 999px;
     overflow: visible;
     border: none;
     gap: 0.5rem;
+    background: transparent;
+    box-shadow: none;
   }
 
   .cta-card--newsletter .newsletter-input {
-    border-radius: 8px !important;
-    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 999px !important;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding-left: 1.4rem;
   }
 
   .cta-card--newsletter .newsletter-btn-wrap,
   .cta-card--newsletter .newsletter-submit {
-    border-radius: 8px !important;
+    border-radius: 999px !important;
     width: 100%;
   }
 }
