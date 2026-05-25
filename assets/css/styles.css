@@ -5212,6 +5212,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
+  width: 100%;              /* garantiza ancho completo en columna única  */
 }
 
 /* Emojis flotantes — posicionados por JS (proyección 3D→2D).
@@ -5244,10 +5245,17 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 #globoCanvas {
   width: 100%;
   max-width: 520px;
+  /* aspect-ratio garantiza que height = width aunque el atributo difiera */
+  aspect-ratio: 1 / 1;
   height: auto;
   display: block;
+  /* margin: auto centra horizontalmente en cualquier contexto flex/grid */
+  margin: 0 auto;
   cursor: grab;
   border-radius: 50%;
+  /* Previene que el browser capture el scroll vertical en lugar del
+     arrastre horizontal del globo; pointercancel maneja el resto */
+  touch-action: pan-y;
   /* Halo azul que hace visible el borde del globo blanco */
   filter: drop-shadow(0 0 56px rgba(30, 120, 220, 0.28))
           drop-shadow(0 0 20px rgba(30, 120, 220, 0.16))
@@ -5310,8 +5318,9 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
     font-size: 2.1rem;
   }
 
+  /* Canvas más grande en móvil — deja 2rem de margen a cada lado */
   #globoCanvas {
-    max-width: 290px;
+    max-width: min(320px, calc(100vw - 4rem));
   }
 
   .globo-stats {
@@ -5351,6 +5360,15 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   );
   margin-top: 3rem;
   padding: 0.6rem 0 0.2rem;
+  /* Evita selección de texto al arrastrar con el dedo */
+  -webkit-user-select: none;
+  user-select: none;
+  /* Captura arrastre horizontal; scroll vertical queda libre */
+  touch-action: pan-y;
+  cursor: grab;
+}
+.gm-wrap:active {
+  cursor: grabbing;
 }
 
 /* Banda interior con animación infinita */

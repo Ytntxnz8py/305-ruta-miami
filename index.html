@@ -960,21 +960,21 @@
     }
 
     /* ── Estado del globo ─────────────────────────────────────────────── */
-    const SPEED = 0.003;
+    const SPEED      = 0.004;   /* rotación auto — visible en móvil       */
     const THETA_BASE = 0.2;
 
-    let globe      = null;
-    let animId     = null;
-    let phi        = 0.5;
+    let globe       = null;
+    let animId      = null;
+    let phi         = 0.5;
     let pointerDown = null;
-    let dragPhi    = 0, dragTheta    = 0;
-    let phiOffset  = 0, thetaOffset  = 0;
-    let paused     = false;
+    let dragPhi     = 0, dragTheta   = 0;
+    let phiOffset   = 0, thetaOffset = 0;
+    let paused      = false;
+    let isDragging  = false;
 
     const prefersReduced = window.matchMedia(
       '(prefers-reduced-motion: reduce)').matches;
 
-    /* Referencias a los divs de emoji */
     const emojiDivs = Array.from(
       canvas.closest('.globo-canvas-wrap').querySelectorAll('.globo-emoji'));
 
@@ -997,7 +997,6 @@
     }
 
     /* ── Inicialización ──────────────────────────────────────────────── */
-    canvas.style.cursor     = 'grab';
     canvas.style.opacity    = '0';
     canvas.style.transition = 'opacity 1.2s ease';
 
@@ -1013,19 +1012,18 @@
         height: w * dpr,
         phi:    phi,
         theta:  THETA_BASE,
-        /* Globo blanco con puntitos azul-gris — dark:0 = modo claro */
         dark:          0,
         diffuse:       1.5,
         mapSamples:    16000,
         mapBrightness: 8,
-        baseColor:   [0.72, 0.82, 0.95],   /* azul claro — puntitos continentes */
-        glowColor:   [0.18, 0.60, 0.90],   /* halo azul que define el borde     */
-        markers:     []                     /* sin puntos naranjas               */
+        baseColor:   [0.72, 0.82, 0.95],
+        glowColor:   [0.18, 0.60, 0.90],
+        markers:     []
       });
 
       function animate() {
         if (!paused && !prefersReduced) phi += SPEED;
-        const curPhi   = phi   + phiOffset   + dragPhi;
+        const curPhi   = phi + phiOffset + dragPhi;
         const curTheta = THETA_BASE + thetaOffset + dragTheta;
         globe.update({ phi: curPhi, theta: curTheta });
         if (!prefersReduced) updateEmojis(curPhi, curTheta);
@@ -1036,29 +1034,47 @@
       setTimeout(function() { canvas.style.opacity = '1'; });
     }
 
-    /* ── Pointer events ─────────────────────────────────────────────── */
-    canvas.addEventListener('pointerdown', function(e) {
-      pointerDown = { x: e.clientX, y: e.clientY };
-      canvas.style.cursor = 'grabbing';
-      paused = true;
-      e.preventDefault();
-    });
-
-    window.addEventListener('pointermove', function(e) {
-      if (!pointerDown) return;
-      dragPhi   = (e.clientX - pointerDown.x) / 300;
-      dragTheta = (e.clientY - pointerDown.y) / 1000;
-    }, { passive: true });
-
-    window.addEventListener('pointerup', function() {
+    /* ── Función compartida: fin / cancelación de arrastre ───────────── */
+    function finalizarDrag() {
       if (!pointerDown) return;
       phiOffset   += dragPhi;
       thetaOffset += dragTheta;
       dragPhi = dragTheta = 0;
       pointerDown = null;
+      isDragging  = false;
       canvas.style.cursor = 'grab';
       paused = false;
+    }
+
+    /* ── Pointer events (ratón + toque unificados) ───────────────────── */
+    canvas.addEventListener('pointerdown', function(e) {
+      pointerDown = { x: e.clientX, y: e.clientY };
+      isDragging  = false;
+      /* No pausamos aún — esperamos movimiento real para no bloquear
+         un simple tap o el inicio de un scroll vertical en móvil */
+      e.preventDefault();
+    }, { passive: false });
+
+    window.addEventListener('pointermove', function(e) {
+      if (!pointerDown) return;
+      const dx = e.clientX - pointerDown.x;
+      const dy = e.clientY - pointerDown.y;
+      /* Activar drag solo cuando hay movimiento apreciable (≥ 5 px) */
+      if (!isDragging && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+        isDragging = true;
+        canvas.style.cursor = 'grabbing';
+        paused = true;
+      }
+      if (isDragging) {
+        const size = canvas.offsetWidth || 300;
+        dragPhi   =  dx / (size * 0.5);   /* ancho del canvas = 360°   */
+        dragTheta =  dy / (size * 1.8);   /* más suave en eje vertical */
+      }
     }, { passive: true });
+
+    /* pointercancel se dispara en móvil cuando el browser toma el scroll */
+    window.addEventListener('pointerup',     finalizarDrag, { passive: true });
+    window.addEventListener('pointercancel', finalizarDrag, { passive: true });
 
     /* ── Arrancar ────────────────────────────────────────────────────── */
     if (canvas.offsetWidth > 0) {
@@ -1296,6 +1312,77 @@
         cerrarTarjeta();
       }
     });
+
+    /* ── Arrastre táctil de la marquesina ───────────────────────────── */
+    var GM_DURATION = 40;    /* debe coincidir con gm-scroll 40s en CSS  */
+    var mDragging   = false;
+    var mStartX     = 0;
+    var mBaseX      = 0;
+    var mMoved      = false; /* distingue tap de swipe en las pildoras   */
+
+    /* Lee translateX computado en píxeles del elemento animado */
+    function getMarqueeX() {
+      var t = window.getComputedStyle(inner).transform;
+      if (!t || t === 'none') return 0;
+      var m = t.match(/matrix\([^)]+\)/);
+      if (!m) return 0;
+      var parts = m[0].replace('matrix(', '').replace(')', '').split(',');
+      return parseFloat(parts[4]) || 0;
+    }
+
+    /* Reanuda la animación CSS desde la posición actual — sin salto visual.
+       Usa animation-delay negativo para "saltar" al punto correcto del ciclo. */
+    function reanudarMarquesina(fromX) {
+      var singleW = inner.scrollWidth / 2;
+      if (singleW <= 0) {
+        inner.style.transform = '';
+        wrap.classList.remove('gm-wrap--paused');
+        return;
+      }
+      /* Normalizar: fromX es negativo (moviéndose a la izquierda).
+         absX = posición dentro del primer ciclo (0 → singleW) */
+      var absX  = Math.abs(fromX) % singleW;
+      var delay = -(absX / singleW * GM_DURATION);
+      inner.style.transform      = '';
+      inner.style.animationDelay = delay + 's';
+      wrap.classList.remove('gm-wrap--paused');
+    }
+
+    wrap.addEventListener('touchstart', function(e) {
+      /* No intervenir si la tarjeta está abierta */
+      if (overlay && !overlay.hasAttribute('hidden')) return;
+      if (e.touches.length !== 1) return;
+      mDragging = true;
+      mMoved    = false;
+      mStartX   = e.touches[0].clientX;
+      mBaseX    = getMarqueeX();
+      wrap.classList.add('gm-wrap--paused');
+      /* Fijar la posición actual como punto de partida del arrastre */
+      inner.style.transform = 'translateX(' + mBaseX + 'px)';
+    }, { passive: true });
+
+    wrap.addEventListener('touchmove', function(e) {
+      if (!mDragging || e.touches.length !== 1) return;
+      var dx = e.touches[0].clientX - mStartX;
+      if (Math.abs(dx) > 4) { mMoved = true; }
+      inner.style.transform = 'translateX(' + (mBaseX + dx) + 'px)';
+    }, { passive: true });
+
+    function finalizarMarquee() {
+      if (!mDragging) return;
+      mDragging = false;
+      /* Si fue un tap (sin movimiento) y la tarjeta está cerrada,
+         reanudar sin recalcular delay (posición no cambió) */
+      if (!mMoved) {
+        inner.style.transform = '';
+        wrap.classList.remove('gm-wrap--paused');
+        return;
+      }
+      reanudarMarquesina(getMarqueeX());
+    }
+
+    wrap.addEventListener('touchend',    finalizarMarquee, { passive: true });
+    wrap.addEventListener('touchcancel', finalizarMarquee, { passive: true });
 
   }());
   </script>
