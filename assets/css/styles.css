@@ -5119,7 +5119,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   position: relative;
 }
 
-/* Resplandor ambiental (turquesa muy suave sobre fondo claro) */
+/* Resplandores ambientales — turquesa (der) y coral (izq) sobre blanco arena */
 .seccion-globo::before {
   content: '';
   position: absolute;
@@ -5129,9 +5129,24 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   max-width: 680px;
   aspect-ratio: 1;
   background: radial-gradient(circle,
-    rgba(0, 188, 212, 0.05) 0%,
-    transparent 68%);
+    rgba(0, 188, 212, 0.09) 0%,
+    transparent 65%);
   pointer-events: none;
+}
+
+.seccion-globo::after {
+  content: '';
+  position: absolute;
+  bottom: 0%;
+  left: -5%;
+  width: 45%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  background: radial-gradient(circle,
+    rgba(255, 107, 107, 0.07) 0%,
+    transparent 65%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Contenedor interno: dos columnas */
@@ -5256,18 +5271,38 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   /* Previene que el browser capture el scroll vertical en lugar del
      arrastre horizontal del globo; pointercancel maneja el resto */
   touch-action: pan-y;
-  /* Halo azul que hace visible el borde del globo blanco */
-  filter: drop-shadow(0 0 56px rgba(30, 120, 220, 0.28))
-          drop-shadow(0 0 20px rgba(30, 120, 220, 0.16))
-          drop-shadow(0 8px 24px rgba(26, 42, 53, 0.08));
-  transition: filter 0.3s ease;
+  /* Aro luminico neon con colores de marca — turquesa + coral
+     border-radius:50% hace que box-shadow aparezca como anillo circular */
+  box-shadow:
+    0 0 0 2px rgba(0, 188, 212, 0.75),          /* anillo turquesa fino */
+    0 0 0 6px rgba(255, 107, 107, 0.22),         /* anillo coral exterior */
+    0 0 28px  8px rgba(0, 188, 212, 0.22),       /* corona neon turquesa */
+    0 0 64px 22px rgba(255, 107, 107, 0.10),     /* corona neon coral */
+    0 10px 48px  rgba(26, 42, 53, 0.07);         /* sombra base suave */
+  transition: box-shadow 0.32s cubic-bezier(0.2, 0, 0, 1);
+}
+
+#globoCanvas:hover {
+  box-shadow:
+    0 0 0 2px rgba(0, 188, 212, 0.88),
+    0 0 0 6px rgba(255, 107, 107, 0.28),
+    0 0 36px 12px rgba(0, 188, 212, 0.28),
+    0 0 80px 28px rgba(255, 107, 107, 0.13),
+    0 10px 56px  rgba(26, 42, 53, 0.09);
 }
 
 #globoCanvas:active {
   cursor: grabbing;
-  filter: drop-shadow(0 0 72px rgba(30, 120, 220, 0.36))
-          drop-shadow(0 0 28px rgba(30, 120, 220, 0.22))
-          drop-shadow(0 8px 32px rgba(26, 42, 53, 0.10));
+  box-shadow:
+    0 0 0 2px rgba(0, 188, 212, 0.95),
+    0 0 0 7px rgba(255, 107, 107, 0.32),
+    0 0 44px 14px rgba(0, 188, 212, 0.32),
+    0 0 96px 34px rgba(255, 107, 107, 0.16),
+    0 12px 64px  rgba(26, 42, 53, 0.10);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #globoCanvas { transition: none; }
 }
 
 .globo-hint {
