@@ -651,6 +651,14 @@
         </div>
 
       </div><!-- /globo-inner -->
+
+      <!-- ===== MARQUESINA DE DESTINOS — generada por JS ===== -->
+      <div class="gm-wrap" id="gmWrap" aria-hidden="true">
+        <div class="gm-inner" id="gmInner">
+          <!-- Las pildoras se inyectan desde el script ES5 -->
+        </div>
+      </div>
+
     </section>
 
 
@@ -869,6 +877,31 @@
     </div><!-- /modal-panel -->
   </div><!-- /destinoModal -->
 
+  <!-- ===== TARJETA LANDMARK (marquesina del globo) ===== -->
+  <div class="lm-overlay" id="lmOverlay" role="dialog" aria-modal="true"
+       aria-labelledby="lmNombre" hidden>
+    <div class="lm-card" id="lmCard">
+      <div class="lm-card__shine" aria-hidden="true"></div>
+      <button class="lm-card__close" id="lmClose" aria-label="Cerrar">&#x2715;</button>
+      <div class="lm-card__emoji" id="lmEmoji" aria-hidden="true"></div>
+      <h3 class="lm-card__nombre" id="lmNombre"></h3>
+      <p class="lm-card__addr" id="lmAddr"></p>
+      <p class="lm-card__desc" id="lmDesc"></p>
+      <div class="lm-card__btns">
+        <a class="lm-card__btn lm-card__btn--gmaps" id="lmGmaps"
+           target="_blank" rel="noopener noreferrer">
+          <span class="lang-es">Google Maps</span>
+          <span class="lang-en">Google Maps</span>
+        </a>
+        <a class="lm-card__btn lm-card__btn--apple" id="lmApple"
+           target="_blank" rel="noopener noreferrer">
+          <span class="lang-es">Apple Maps</span>
+          <span class="lang-en">Apple Maps</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
@@ -1043,6 +1076,228 @@
       if (animId) cancelAnimationFrame(animId);
       if (globe)  globe.destroy();
     });
+  </script>
+
+  <!-- ===== MARQUESINA LANDMARKS — ES5 ===== -->
+  <script>
+  /* global ES5 — sin arrow functions, sin template literals */
+  (function() {
+    'use strict';
+
+    /* ── Datos reales de 15 lugares icónicos de Miami ──────────────────── */
+    var LUGARES = [
+      {
+        nombre: 'Wynwood Walls',
+        emoji:  '🎨',
+        color:  'turquesa',
+        addr:   '2520 NW 2nd Ave, Miami, FL 33127',
+        desc:   'El museo de arte urbano más grande del mundo, donde artistas de talla mundial transforman paredes en lienzos monumentales. Wynwood Walls nació en 2009 y hoy reúne más de 50 murales en un barrio que vibra con galerías, restaurantes y boutiques únicas.',
+        gmaps:  'https://maps.google.com/?q=2520+NW+2nd+Ave,+Miami,+FL+33127',
+        apple:  'https://maps.apple.com/?q=Wynwood+Walls&address=2520+NW+2nd+Ave,+Miami,+FL+33127'
+      },
+      {
+        nombre: 'South Beach',
+        emoji:  '🌊',
+        color:  'mostaza',
+        addr:   'Ocean Dr, Miami Beach, FL 33139',
+        desc:   'El corazón de Miami Beach, donde el Art Decó de los años 30 se funde con el Atlántico. La avenida más fotogénica del mundo, con edificios de colores pastel, palmeras centenarias y la brisa inconfundible del océano que invita a quedarse eternamente.',
+        gmaps:  'https://maps.google.com/?q=Ocean+Drive,+Miami+Beach,+FL+33139',
+        apple:  'https://maps.apple.com/?q=Ocean+Drive&address=Ocean+Dr,+Miami+Beach,+FL+33139'
+      },
+      {
+        nombre: 'Little Havana',
+        emoji:  '🎺',
+        color:  'verde',
+        addr:   '1465 SW 8th St, Miami, FL 33135',
+        desc:   'El corazón cultural cubano de Miami, donde el aroma del café colado y los tabacos recién enrollados llenan el aire. Calle Ocho vibra con música en vivo, dominó en Máximo Gómez Park y una gastronomía que es puro Caribe en el corazón de Florida.',
+        gmaps:  'https://maps.google.com/?q=1465+SW+8th+St,+Miami,+FL+33135',
+        apple:  'https://maps.apple.com/?q=Little+Havana&address=1465+SW+8th+St,+Miami,+FL+33135'
+      },
+      {
+        nombre: 'Vizcaya Museum',
+        emoji:  '🏛️',
+        color:  'turquesa',
+        addr:   '3251 S Miami Ave, Miami, FL 33129',
+        desc:   'Una villa italiana del siglo XVI trasladada mágicamente a la bahía de Biscayne. Los jardines de Vizcaya, declarados Monumento Nacional, exhiben esculturas originales, fuentes barrocas y una arquitectura que no tiene igual en todo el sur de Florida.',
+        gmaps:  'https://maps.google.com/?q=3251+S+Miami+Ave,+Miami,+FL+33129',
+        apple:  'https://maps.apple.com/?q=Vizcaya+Museum&address=3251+S+Miami+Ave,+Miami,+FL+33129'
+      },
+      {
+        nombre: 'Venetian Pool',
+        emoji:  '🦲',
+        color:  'mostaza',
+        addr:   '2701 De Soto Blvd, Coral Gables, FL 33134',
+        desc:   'La piscina pública más hermosa de Estados Unidos, tallada en 1923 en roca coralina viva. Sus cascadas naturales, cuevas y arcos venecianos hacen de este lugar registrado en el Registro Nacional de Lugares Históricos un oasis único en el mundo.',
+        gmaps:  'https://maps.google.com/?q=2701+De+Soto+Blvd,+Coral+Gables,+FL+33134',
+        apple:  'https://maps.apple.com/?q=Venetian+Pool&address=2701+De+Soto+Blvd,+Coral+Gables,+FL+33134'
+      },
+      {
+        nombre: 'Fairchild Garden',
+        emoji:  '🌺',
+        color:  'verde',
+        addr:   '10901 Old Cutler Rd, Coral Gables, FL 33156',
+        desc:   'El jardín botánico tropical más grande de EE.UU., con 83 acres de palmas raras, helechos prehistóricos y orquídeas de colores imposibles. Un refugio de biodiversidad donde la ciencia y la belleza se entrelazan a cada paso del visitante.',
+        gmaps:  'https://maps.google.com/?q=10901+Old+Cutler+Rd,+Coral+Gables,+FL+33156',
+        apple:  'https://maps.apple.com/?q=Fairchild+Tropical+Botanic+Garden&address=10901+Old+Cutler+Rd,+Coral+Gables,+FL+33156'
+      },
+      {
+        nombre: 'Coconut Grove',
+        emoji:  '🥥',
+        color:  'turquesa',
+        addr:   '3015 Grand Ave, Coconut Grove, FL 33133',
+        desc:   'El barrio más antiguo de Miami, donde bohemia y elegancia conviven entre banyan trees centenarios. Sus calles adoquinadas esconden galerías de arte, terrazas con vista a la bahía y el ambiente más auténtico y relajado de toda la ciudad.',
+        gmaps:  'https://maps.google.com/?q=3015+Grand+Ave,+Coconut+Grove,+FL+33133',
+        apple:  'https://maps.apple.com/?q=Coconut+Grove&address=3015+Grand+Ave,+Coconut+Grove,+FL+33133'
+      },
+      {
+        nombre: 'Design District',
+        emoji:  '✨',
+        color:  'mostaza',
+        addr:   'NE 40th St & NE 2nd Ave, Miami, FL 33137',
+        desc:   'El epicentro del lujo y la creatividad en Miami, donde las grandes maisons de moda comparten manzana con instalaciones de arte site-specific. Un museo al aire libre que redefine constantemente los límites entre comercio y cultura de vanguardia.',
+        gmaps:  'https://maps.google.com/?q=NE+40th+St,+Miami+Design+District,+FL+33137',
+        apple:  'https://maps.apple.com/?q=Miami+Design+District&address=NE+40th+St,+Miami,+FL+33137'
+      },
+      {
+        nombre: 'Zoo Miami',
+        emoji:  '🦒',
+        color:  'verde',
+        addr:   '12400 SW 152nd St, Miami, FL 33177',
+        desc:   'El único zoo subtropical de los Estados Unidos continentales, con más de 3,000 animales de 500 especies en hábitats naturales réplica de África, Asia y Australia. Más de 280 acres de naturaleza auténtica en el sur de Miami para toda la familia.',
+        gmaps:  'https://maps.google.com/?q=12400+SW+152nd+St,+Miami,+FL+33177',
+        apple:  'https://maps.apple.com/?q=Zoo+Miami&address=12400+SW+152nd+St,+Miami,+FL+33177'
+      },
+      {
+        nombre: 'Deering Estate',
+        emoji:  '🦅',
+        color:  'turquesa',
+        addr:   '16701 SW 72nd Ave, Miami, FL 33157',
+        desc:   'Una de las propiedades históricas más intactas del sur de Florida, con dos mansiones de 1922 rodeadas de 444 acres de ecosistemas prístinos: bosque de pinos, manglar, bahía y vestigios arqueológicos de las culturas Tequesta de hace 10,000 años.',
+        gmaps:  'https://maps.google.com/?q=16701+SW+72nd+Ave,+Miami,+FL+33157',
+        apple:  'https://maps.apple.com/?q=Deering+Estate&address=16701+SW+72nd+Ave,+Miami,+FL+33157'
+      },
+      {
+        nombre: 'Key Biscayne',
+        emoji:  '🐚',
+        color:  'mostaza',
+        addr:   'Crandon Blvd, Key Biscayne, FL 33149',
+        desc:   'Una isla paraíso a 10 minutos del downtown de Miami, donde Bill Baggs Cape Florida State Park guarda el faro más antiguo del sur de Florida. Playas de arena blanca, kite surf, snorkel en arrecifes de coral y atardeceres que cortan la respiración.',
+        gmaps:  'https://maps.google.com/?q=Crandon+Blvd,+Key+Biscayne,+FL+33149',
+        apple:  'https://maps.apple.com/?q=Key+Biscayne&address=Crandon+Blvd,+Key+Biscayne,+FL+33149'
+      },
+      {
+        nombre: 'Aventura',
+        emoji:  '🛍️',
+        color:  'verde',
+        addr:   '19501 Biscayne Blvd, Aventura, FL 33180',
+        desc:   'El tercer centro comercial más grande de EE.UU. y un destino cultural por derecho propio, con instalaciones de arte permanentes, restaurantes de chefs galardonados y más de 300 tiendas. Un mundo completo a orillas de la Intercoastal Waterway.',
+        gmaps:  'https://maps.google.com/?q=19501+Biscayne+Blvd,+Aventura,+FL+33180',
+        apple:  'https://maps.apple.com/?q=Aventura+Mall&address=19501+Biscayne+Blvd,+Aventura,+FL+33180'
+      },
+      {
+        nombre: 'Homestead',
+        emoji:  '🌿',
+        color:  'turquesa',
+        addr:   'US-1, Homestead, FL 33030',
+        desc:   'La puerta de entrada al Everglades y Biscayne National Park. Este pequeño pueblo agricultor es el punto de partida ideal para explorar dos de los ecosistemas más únicos del planeta, con frutas exóticas en sus farm stands y el espíritu genuino de la Florida profunda.',
+        gmaps:  'https://maps.google.com/?q=US-1,+Homestead,+FL+33030',
+        apple:  'https://maps.apple.com/?q=Homestead,+FL&address=US-1,+Homestead,+FL+33030'
+      },
+      {
+        nombre: 'Flamingo',
+        emoji:  '🦩',
+        color:  'mostaza',
+        addr:   'Flamingo Visitor Center, Homestead, FL 33034',
+        desc:   'El punto más remoto y salvaje de los Everglades, donde manadas de manaíes nadan junto a los kayaks y las roseate spoonbills tiñen el horizonte de rosa. El mejor lugar del mundo para ver cocodrilos americanos en su hábitat natural al amanecer.',
+        gmaps:  'https://maps.google.com/?q=Flamingo+Visitor+Center,+Homestead,+FL+33034',
+        apple:  'https://maps.apple.com/?q=Flamingo+Visitor+Center&address=Flamingo,+Homestead,+FL+33034'
+      },
+      {
+        nombre: 'Miami Seaquarium',
+        emoji:  '🐬',
+        color:  'verde',
+        addr:   '4400 Rickenbacker Causeway, Miami, FL 33149',
+        desc:   'El acuario marino más antiguo de Florida, abierto desde 1955, en un enclave privilegiado de la bahía de Biscayne. Hogar de delfines, leones marinos, tiburones y tortugas marinas en rehabilitación, con vistas panorámicas al skyline de Miami.',
+        gmaps:  'https://maps.google.com/?q=4400+Rickenbacker+Causeway,+Miami,+FL+33149',
+        apple:  'https://maps.apple.com/?q=Miami+Seaquarium&address=4400+Rickenbacker+Causeway,+Miami,+FL+33149'
+      }
+    ];
+
+    /* ── Referencias DOM ──────────────────────────────────────────────── */
+    var wrap     = document.getElementById('gmWrap');
+    var inner    = document.getElementById('gmInner');
+    var overlay  = document.getElementById('lmOverlay');
+    var btnClose = document.getElementById('lmClose');
+    var elEmoji  = document.getElementById('lmEmoji');
+    var elNombre = document.getElementById('lmNombre');
+    var elAddr   = document.getElementById('lmAddr');
+    var elDesc   = document.getElementById('lmDesc');
+    var elGmaps  = document.getElementById('lmGmaps');
+    var elApple  = document.getElementById('lmApple');
+
+    if (!wrap || !inner || !overlay) { return; }
+
+    /* ── Crear pildora ────────────────────────────────────────────────── */
+    function crearPill(lugar) {
+      var btn = document.createElement('button');
+      btn.className = 'gm-pill gm-pill--' + lugar.color;
+      btn.type = 'button';
+      btn.setAttribute('aria-label', lugar.nombre);
+      var spanEmoji = document.createElement('span');
+      spanEmoji.className = 'gm-pill__emoji';
+      spanEmoji.textContent = lugar.emoji;
+      var spanNombre = document.createElement('span');
+      spanNombre.className = 'gm-pill__nombre';
+      spanNombre.textContent = lugar.nombre;
+      btn.appendChild(spanEmoji);
+      btn.appendChild(spanNombre);
+      btn.addEventListener('click', function() { abrirTarjeta(lugar); });
+      return btn;
+    }
+
+    /* Inyectar pildoras duplicadas para loop continuo */
+    LUGARES.forEach(function(l) { inner.appendChild(crearPill(l)); });
+    LUGARES.forEach(function(l) { inner.appendChild(crearPill(l)); });
+
+    /* ── Abrir tarjeta ────────────────────────────────────────────────── */
+    function abrirTarjeta(lugar) {
+      wrap.classList.add('gm-wrap--paused');
+      elEmoji.textContent  = lugar.emoji;
+      elNombre.textContent = lugar.nombre;
+      elAddr.textContent   = lugar.addr;
+      elDesc.textContent   = lugar.desc;
+      elGmaps.href = lugar.gmaps;
+      elApple.href = lugar.apple;
+      overlay.removeAttribute('hidden');
+      document.body.style.overflow = 'hidden';
+      if (btnClose) { btnClose.focus(); }
+    }
+
+    /* ── Cerrar tarjeta ───────────────────────────────────────────────── */
+    function cerrarTarjeta() {
+      overlay.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+      wrap.classList.remove('gm-wrap--paused');
+    }
+
+    if (btnClose) {
+      btnClose.addEventListener('click', cerrarTarjeta);
+    }
+
+    /* Clic en fondo oscuro cierra */
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) { cerrarTarjeta(); }
+    });
+
+    /* Tecla Escape cierra */
+    document.addEventListener('keydown', function(e) {
+      var key = e.key || e.keyCode;
+      if ((key === 'Escape' || key === 27) && !overlay.hasAttribute('hidden')) {
+        cerrarTarjeta();
+      }
+    });
+
+  }());
   </script>
 </body>
 </html>
