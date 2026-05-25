@@ -2084,21 +2084,19 @@ function initHeroCinematic() {
 
     /* Flujo de scan: puntos cercanos al progreso brillan */
     '  float flow    = 1.0 - smoothstep(0.0, 0.048, abs(uv.y - uProgress));',
-    '  float redDots = dotVal * flow;',
+    '  float redDots = dotVal * flow;', /* puntos activos (renombrar no es necesario: sigue siendo la intensidad) */
 
     /* Puntos ambientales muy sutiles (siempre visibles) */
     '  float ambient = dotVal * 0.06;',
 
-    /* Color: rojo puro en scan, gris ultra-sutil en reposo */
-    '  vec3 col = vec3(',
-    '    redDots + ambient * 0.22,',
-    '    ambient * 0.03,',
-    '    ambient * 0.03',
-    '  );',
+    /* Color coral de marca: #FF6B6B = vec3(1.0, 0.42, 0.42) */
+    '  vec3 coral = vec3(1.0, 0.42, 0.42);',
+    '  float intensity = redDots + ambient * 0.22;',
+    '  vec3 col = intensity * coral;',
 
-    /* Brillo de la línea de escaneo */
+    /* Brillo de la línea de escaneo — mismo coral de marca */
     '  float scanGlow = smoothstep(0.07, 0.0, abs(uv.y - uProgress)) * 0.28;',
-    '  col += vec3(scanGlow * 0.9, scanGlow * 0.04, scanGlow * 0.04);',
+    '  col += scanGlow * 0.9 * coral;',
 
     '  float a = min(1.0, redDots * 1.7 + ambient + scanGlow);',
     '  gl_FragColor = vec4(col, a);',
