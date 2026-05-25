@@ -4906,21 +4906,10 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   background: var(--ocean-ini, #071e2b);
 }
 
-/* Vignette radial: oscurece bordes para mejorar legibilidad del texto */
-.hero-px__radial {
-  position: absolute;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  background: radial-gradient(ellipse at center,
-    rgba(0,0,0,0) 55%, rgba(0,0,0,0.72) 100%);
-}
-
 /* Cada capa parallax: posición absoluta, JS sobreescribe el transform */
 .hero-px__layer {
   position: absolute;
   pointer-events: none;
-  /* Transición suave: 450ms igual que el componente de referencia */
   transition: transform 450ms cubic-bezier(0.2,0,0,1);
 }
 
@@ -4928,7 +4917,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   .hero-px__layer { transition: none; }
 }
 
-/* Imagen de fondo principal — más ancha que el viewport para poder panear */
+/* Imagen de fondo — más ancha que el viewport para poder panear */
 #hpxBg {
   top: 50%;
   left: 50%;
@@ -4946,35 +4935,19 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   object-position: center;
 }
 
-/* Capas de niebla oceánica — gradientes CSS que se mueven a velocidades distintas */
-.hero-px__mist {
-  width: 200vw;
-  height: 70vh;
-  border-radius: 50%;
-}
-
-/* Niebla superior: cyan sutil, movimiento medio */
-.hero-px__mist--top {
-  top: calc(50% - 100px);
-  left: 50%;
+/* Degradado mínimo solo en la franja inferior — mejora legibilidad del texto
+   sin oscurecer ni la foto ni los laterales */
+.hero-px__text-fade {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55%;
   z-index: 2;
-  background: radial-gradient(ellipse at center,
-    rgba(0, 188, 212, 0.10) 0%,
-    rgba(7, 30, 43, 0.38)   60%,
-    transparent             100%);
-  transform: translate(-50%, -50%);
-}
-
-/* Niebla inferior: azul oscuro, la más próxima → la más rápida */
-.hero-px__mist--bot {
-  top: calc(100% - 180px);
-  left: 50%;
-  z-index: 4;
-  background: radial-gradient(ellipse at center,
-    rgba(7, 30, 43, 0.72) 0%,
-    rgba(7, 30, 43, 0.45) 50%,
-    transparent           100%);
-  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(7, 30, 43, 0.65) 0%,
+    transparent           100%
+  );
 }
 
 /* Tags flotantes en la parte superior — fade-in CSS, posición fija */

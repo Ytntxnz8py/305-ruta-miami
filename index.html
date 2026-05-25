@@ -136,10 +136,7 @@
     <!-- ===== HERO PARALLAX — multicapa con profundidad 3D al mover el mouse ===== -->
     <section class="hero-parallax" id="inicio" aria-label="Hero principal">
 
-      <!-- Vignette radial: oscurece bordes para legibilidad (z-index alto, estático) -->
-      <div class="hero-px__radial" aria-hidden="true"></div>
-
-      <!-- Capa 1: imagen de fondo — más lenta = sensación de lejanía -->
+      <!-- Capa 1: imagen de fondo — se desplaza con el mouse (parallax lento) -->
       <div class="hero-px__layer" id="hpxBg"
            data-spx="0.03" data-spy="0.038" data-spz="0" data-rot="0"
            aria-hidden="true">
@@ -150,15 +147,8 @@
              fetchpriority="high" decoding="async" />
       </div>
 
-      <!-- Capa 2: niebla oceánica superior (CSS gradient, velocidad media) -->
-      <div class="hero-px__layer hero-px__mist hero-px__mist--top" id="hpxMistTop"
-           data-spx="0.16" data-spy="0.10" data-spz="0" data-rot="0"
-           aria-hidden="true"></div>
-
-      <!-- Capa 3: niebla de base — la más próxima, la más rápida -->
-      <div class="hero-px__layer hero-px__mist hero-px__mist--bot" id="hpxMistBot"
-           data-spx="0.25" data-spy="0.28" data-spz="0" data-rot="0"
-           aria-hidden="true"></div>
+      <!-- Degradado base solo para legibilidad del texto (inferior) -->
+      <div class="hero-px__text-fade" aria-hidden="true"></div>
 
       <!-- Tags flotantes en la parte superior (estáticos, solo fade-in) -->
       <div class="hero-px__tags" aria-hidden="true">
