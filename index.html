@@ -543,336 +543,68 @@
     <!-- Fusión visual: Destinos (dark ocean) → Mapa (azul cielo) -->
     <div class="fade-band fade-dest-mapa" aria-hidden="true"></div>
 
-    <!-- ===== ROADMAP ANIMADO DE DESTINOS ===== -->
-    <section class="seccion-roadmap" id="mapa">
-      <div class="rdm-contenedor">
+    <!-- ===== GLOBO COBE 3D ===== -->
+    <section class="seccion-globo" id="mapa" aria-labelledby="globo-titulo">
+      <div class="globo-inner">
 
-        <!-- Encabezado -->
-        <div class="rdm-encabezado">
-          <h2 class="seccion-titulo fade-up" data-i18n="mapa_titulo">Mapa de Destinos</h2>
-          <p class="rdm-subtitulo" data-i18n="mapa_sub">
-            Descubre experiencias outdoor en Miami y South Florida
+        <!-- Columna izquierda: texto y estadísticas -->
+        <div class="globo-texto fade-up">
+
+          <p class="globo-eyebrow">
+            <span class="lang-es">Miami · 25°N 80°W</span>
+            <span class="lang-en">Miami · 25°N 80°W</span>
+          </p>
+
+          <h2 class="seccion-titulo" id="globo-titulo">
+            <span class="lang-es">En el centro<br>del mundo</span>
+            <span class="lang-en">At the center<br>of the world</span>
+          </h2>
+
+          <p class="globo-desc">
+            <span class="lang-es">Miami es el punto donde el Atlántico se encuentra con el Caribe, la energía latina con el dinamismo norteamericano. El mejor punto de partida para explorar la naturaleza salvaje de Florida.</span>
+            <span class="lang-en">Miami is where the Atlantic meets the Caribbean, Latin energy meets American dynamism. The best starting point to explore Florida's wild nature.</span>
+          </p>
+
+          <!-- Estadísticas del ecosistema -->
+          <div class="globo-stats">
+            <div class="globo-stat">
+              <span class="globo-stat__num">9</span>
+              <span class="globo-stat__label">
+                <span class="lang-es">destinos outdoor</span>
+                <span class="lang-en">outdoor destinations</span>
+              </span>
+            </div>
+            <div class="globo-stat">
+              <span class="globo-stat__num">2</span>
+              <span class="globo-stat__label">
+                <span class="lang-es">parques nacionales</span>
+                <span class="lang-en">national parks</span>
+              </span>
+            </div>
+            <div class="globo-stat">
+              <span class="globo-stat__num">∞</span>
+              <span class="globo-stat__label">
+                <span class="lang-es">aventuras</span>
+                <span class="lang-en">adventures</span>
+              </span>
+            </div>
+          </div>
+
+        </div><!-- /globo-texto -->
+
+        <!-- Columna derecha: canvas del globo -->
+        <div class="globo-canvas-wrap">
+          <canvas id="globoCanvas" width="600" height="600"
+                  aria-label="Globo 3D interactivo — Miami marcada en coral"></canvas>
+          <p class="globo-hint" aria-hidden="true">
+            <span class="lang-es">Arrastra para girar</span>
+            <span class="lang-en">Drag to rotate</span>
           </p>
         </div>
 
-        <!-- Canvas del roadmap — path SVG + marcadores -->
-        <div class="rdm-canvas" id="rdmCanvas"
-             role="img" aria-label="Mapa visual de los 9 destinos outdoor en Miami y South Florida">
-
-          <!-- SVG: camino animado + geografía estilizada -->
-          <svg class="rdm-svg" viewBox="0 0 800 500"
-               preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="rdmPathGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%"   stop-color="#FFB300"/>
-                <stop offset="50%"  stop-color="#FF8C42"/>
-                <stop offset="100%" stop-color="#FF6B6B"/>
-              </linearGradient>
-              <filter id="rdmGlow" x="-30%" y="-30%" width="160%" height="160%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
-                <feMerge>
-                  <feMergeNode in="blur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-
-            <!-- Agua Atlántico / Biscayne Bay — sugerencia geográfica -->
-            <path d="M 800,0 Q 790,60 800,130 Q 808,210 800,300 Q 792,380 770,460 Q 755,490 740,500 L 800,500 Z"
-                  fill="rgba(0,188,212,0.07)" />
-            <!-- Biscayne Bay (forma ovalada) -->
-            <ellipse cx="690" cy="235" rx="48" ry="75" fill="rgba(0,188,212,0.08)"/>
-            <!-- Everglades hint -->
-            <ellipse cx="185" cy="400" rx="140" ry="58" fill="rgba(76,175,80,0.07)"/>
-            <!-- Línea de costa sugerida -->
-            <path d="M 730,50 Q 760,150 755,250 Q 745,340 720,430"
-                  fill="none" stroke="rgba(0,188,212,0.14)" stroke-width="1.5"/>
-
-            <!-- El camino animado por scroll -->
-            <path id="rdmPath"
-              d="M 616,60
-                 C 558,72 504,85 512,100
-                 C 542,118 660,152 640,186
-                 C 636,202 622,218 616,230
-                 C 633,246 690,257 680,270
-                 C 660,279 566,281 528,287
-                 C 512,297 494,316 480,335
-                 C 388,360 232,372 136,380
-                 C 228,394 350,414 416,430"
-              fill="none"
-              stroke="url(#rdmPathGrad)"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              filter="url(#rdmGlow)"/>
-          </svg>
-
-          <!-- ─── 9 Destinos ──────────────────────────────── -->
-
-          <!-- 1. Oleta River State Park -->
-          <div class="rdm-milestone rdm-milestone--tierra" style="top:12%;left:77%" data-idx="0"
-               title="Oleta River State Park — Kayak · Mountain Bike"
-               data-title-en="Oleta River State Park — Kayak · Mountain Bike"
-               data-desc="El parque costero más grande de Florida. Kayak, mountain bike y paddle board entre manglares vírgenes. Alquila equipos en el parque y descubre mil acres de naturaleza urbana."
-               data-desc-en="Florida's largest coastal park. Kayak, mountain bike and paddle board through pristine mangroves. Rent gear at the park and discover a thousand acres of urban nature.">
-            <span class="rdm-ring" aria-hidden="true"></span>
-            <span class="rdm-dot"  aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🚵 Oleta River</span>
-          </div>
-
-          <!-- 2. Arch Creek Park -->
-          <div class="rdm-milestone rdm-milestone--tierra" style="top:20%;left:64%" data-idx="1"
-               title="Arch Creek Park — Senderismo · Arqueología"
-               data-title-en="Arch Creek Park — Hiking · Archaeology"
-               data-desc="Reserva natural con un puente de roca caliza de 8,000 años. Senderos entre árboles centenarios y museo de historia Tequesta. Un secreto verde en pleno norte de Miami."
-               data-desc-en="Nature preserve with an 8,000-year-old limestone bridge. Trails through century-old trees and a Tequesta history museum. A green secret in the heart of north Miami.">
-            <span class="rdm-ring" aria-hidden="true"></span>
-            <span class="rdm-dot"  aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🌳 Arch Creek</span>
-          </div>
-
-          <!-- 3. Virginia Key Beach Park -->
-          <div class="rdm-milestone rdm-milestone--mar" style="top:37%;left:80%" data-idx="2"
-               title="Virginia Key Beach Park — Paddle Board · Natación"
-               data-title-en="Virginia Key Beach Park — Paddle Board · Swimming"
-               data-desc="Primera playa históricamente afroamericana de Miami. Aguas tranquilas, paddle board y kayak con vistas al skyline de la ciudad. Un oasis natural frente al downtown de Miami."
-               data-desc-en="Miami's first historically African American beach. Calm waters, paddle boarding and kayaking with skyline views. A natural oasis facing downtown Miami.">
-            <span class="rdm-ring" aria-hidden="true"></span>
-            <span class="rdm-dot"  aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🏖️ Virginia Key</span>
-          </div>
-
-          <!-- 4. Crandon Park -->
-          <div class="rdm-milestone rdm-milestone--mar" style="top:46%;left:77%" data-idx="3"
-               title="Crandon Park — Playa · Kayak"
-               data-title-en="Crandon Park — Beach · Kayak"
-               data-desc="Tres millas de playa virgen en Key Biscayne. Kayak entre islotes de manglares, canchas de tenis profesionales y atardeceres espectaculares sobre el Atlántico desde la arena blanca."
-               data-desc-en="Three miles of pristine beach on Key Biscayne. Kayak between mangrove islets, professional tennis courts and spectacular Atlantic sunsets from the white sand.">
-            <span class="rdm-ring" aria-hidden="true"></span>
-            <span class="rdm-dot"  aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🌊 Crandon Park</span>
-          </div>
-
-          <!-- 5. Bill Baggs Cape Florida -->
-          <div class="rdm-milestone rdm-milestone--mar" style="top:54%;left:85%" data-idx="4"
-               title="Bill Baggs Cape Florida — Playa · Ciclismo"
-               data-title-en="Bill Baggs Cape Florida — Beach · Cycling"
-               data-desc="El faro más antiguo de Florida preside este parque en Key Biscayne. Playa salvaje, ciclismo entre palmas y vistas a las Bahamas en los días despejados del año."
-               data-desc-en="Florida's oldest lighthouse presides over this Key Biscayne park. Wild beach, cycling among palms and views of the Bahamas on the clearest days of the year.">
-            <span class="rdm-ring" aria-hidden="true"></span>
-            <span class="rdm-dot"  aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">⛵ Bill Baggs</span>
-          </div>
-
-          <!-- 6. Matheson Hammock Park -->
-          <div class="rdm-milestone rdm-milestone--mar" style="top:57%;left:66%" data-idx="5"
-               title="Matheson Hammock Park — Playa · Snorkeling"
-               data-title-en="Matheson Hammock Park — Beach · Snorkeling"
-               data-desc="Atoll pool natural formada por la marea del Atlántico entre manglares centenarios. Snorkeling tranquilo, kayak al amanecer y fotografía de aves en un ambiente completamente sereno y mágico."
-               data-desc-en="Natural atoll pool shaped by Atlantic tides among century-old mangroves. Calm snorkeling, sunrise kayaking and bird photography in a completely serene and magical setting.">
-            <span class="rdm-ring" aria-hidden="true"></span>
-            <span class="rdm-dot"  aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🐟 Matheson</span>
-          </div>
-
-          <!-- 7. Biscayne National Park -->
-          <div class="rdm-milestone rdm-milestone--mar" style="top:67%;left:60%" data-idx="6"
-               title="Biscayne National Park — Kayak · Snorkeling"
-               data-title-en="Biscayne National Park — Kayak · Snorkeling"
-               data-desc="El 95% del parque es agua. Kayak entre cayos vírgenes, buceo en el mayor arrecife continental y campamento en islas sin carreteras ni turistas, solo naturaleza pura."
-               data-desc-en="95% of the park is water. Kayak among pristine cays, dive the largest mainland reef and camp on roadless islands without tourists — just pure nature.">
-            <span class="rdm-ring" aria-hidden="true"></span>
-            <span class="rdm-dot"  aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🤿 Biscayne NP</span>
-          </div>
-
-          <!-- 8. Everglades National Park -->
-          <div class="rdm-milestone rdm-milestone--tierra" style="top:76%;left:17%" data-idx="7"
-               title="Everglades National Park — Senderismo · Kayak · Wildlife"
-               data-title-en="Everglades National Park — Hiking · Kayak · Wildlife"
-               data-desc="El único pastizal subtropical del planeta, declarado Patrimonio UNESCO. Caimanes, manatíes y 350 especies de aves en el legendario río de hierba del sur de Florida."
-               data-desc-en="The planet's only subtropical grassland, a UNESCO World Heritage Site. Alligators, manatees and 350 bird species in south Florida's legendary river of grass.">
-            <span class="rdm-ring" aria-hidden="true"></span>
-            <span class="rdm-dot"  aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--right">🐊 Everglades NP</span>
-          </div>
-
-          <!-- 9. John Pennekamp Coral Reef -->
-          <div class="rdm-milestone rdm-milestone--mar" style="top:86%;left:52%" data-idx="8"
-               title="John Pennekamp Coral Reef — Buceo · Snorkeling"
-               data-title-en="John Pennekamp Coral Reef — Diving · Snorkeling"
-               data-desc="Primer parque marino protegido de EE.UU. Arrecifes de coral a 6 metros bajo aguas cristalinas. La famosa estatua submarina Cristo del Abismo es el símbolo del parque."
-               data-desc-en="The first protected marine park in the US. Coral reefs 6 meters below crystal-clear waters. The famous underwater Christ of the Abyss statue is the park's symbol.">
-            <span class="rdm-ring" aria-hidden="true"></span>
-            <span class="rdm-dot"  aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--right">🪸 John Pennekamp</span>
-          </div>
-
-          <!-- ─── 15 Lugares públicos icónicos de Miami (sin solapamientos) ─── -->
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:7%;left:80%" data-idx="9"
-               title="Aventura — North Miami Beach"
-               data-title-en="Aventura — North Miami Beach"
-               data-desc="Al norte de Miami con el quinto mall más grande de EE.UU. Playa en Sunny Isles, arte público en Founders Park y rascacielos de diseño frente al Atlántico."
-               data-desc-en="North of Miami, home to the fifth largest mall in the US. Sunny Isles beach, public art at Founders Park and designer skyscrapers facing the Atlantic.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🌆 Aventura</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:18%;left:76%" data-idx="10"
-               title="Design District — Arte y diseño"
-               data-title-en="Design District — Art and design"
-               data-desc="Triángulo del lujo y arte contemporáneo de Miami. Galerías de vanguardia, moda internacional de alta costura y murales callejeros en un barrio en constante evolución artística."
-               data-desc-en="Miami's triangle of luxury and contemporary art. Cutting-edge galleries, international haute couture and street murals in a neighborhood in constant artistic evolution.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🛍️ Design District</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:22%;left:69%" data-idx="11"
-               title="Wynwood Walls — Arte urbano"
-               data-title-en="Wynwood Walls — Street art"
-               data-desc="La galería de arte urbano más famosa del mundo. Cien murales gigantes de artistas internacionales transforman un antiguo distrito industrial en destino cultural y turístico de primer nivel."
-               data-desc-en="The world's most famous street art gallery. A hundred giant murals by international artists transform a former industrial district into a top cultural and tourist destination.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🎨 Wynwood</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:26%;left:84%" data-idx="12"
-               title="South Beach / Ocean Drive"
-               data-title-en="South Beach / Ocean Drive"
-               data-desc="El famoso barrio Art Deco de Ocean Drive con edificios de los años 30. Playas de arena blanca y la mayor concentración de arquitectura Art Deco del mundo."
-               data-desc-en="The famous Art Deco district of Ocean Drive with 1930s buildings. White-sand beaches and the world's largest concentration of Art Deco architecture.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🌴 South Beach</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:27%;left:63%" data-idx="13"
-               title="Little Havana / Calle Ocho — Cultura cubana"
-               data-title-en="Little Havana / Calle Ocho — Cuban culture"
-               data-desc="Corazón de la cultura cubana en EE.UU. Dominó en el Máximo Gómez Park, tabaco artesanal, música en vivo y el mejor café cubano en la legendaria Calle Ocho."
-               data-desc-en="The heart of Cuban culture in the US. Dominoes at Máximo Gómez Park, hand-rolled cigars, live music and the best Cuban coffee on legendary Calle Ocho.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🎵 Little Havana</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:33%;left:70%" data-idx="14"
-               title="Coconut Grove — Barrio histórico"
-               data-title-en="Coconut Grove — Historic neighborhood"
-               data-desc="El barrio más bohemio y antiguo de Miami. Cafés al aire libre, boutiques únicas y marina entre árboles tropicales. Ambiente de pueblo encantado dentro de la gran ciudad."
-               data-desc-en="Miami's most bohemian and oldest neighborhood. Open-air cafés, unique boutiques and a marina among tropical trees. A charming village atmosphere within the big city.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🌴 Coconut Grove</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:34%;left:83%" data-idx="15"
-               title="Miami Seaquarium — Acuario marino"
-               data-title-en="Miami Seaquarium — Marine aquarium"
-               data-desc="Parque marino histórico de Virginia Key con delfines, manatíes y tortugas marinas. Una de las instalaciones de conservación marina más importantes del sureste de los Estados Unidos."
-               data-desc-en="Historic marine park on Virginia Key with dolphins, manatees and sea turtles. One of the most important marine conservation facilities in the southeastern United States.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🐬 Seaquarium</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:38%;left:62%" data-idx="16"
-               title="Venetian Pool — Piscina histórica, Coral Gables"
-               data-title-en="Venetian Pool — Historic pool, Coral Gables"
-               data-desc="Piscina pública tallada en roca coral en 1923. Aguas de manantiales naturales, cascadas de piedra caliza y cuevas. La piscina histórica más bella del estado de Florida."
-               data-desc-en="Public pool carved into coral rock in 1923. Natural spring waters, limestone waterfalls and caves. The most beautiful historic pool in the state of Florida.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🏊 Venetian Pool</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:40%;left:74%" data-idx="17"
-               title="Vizcaya Museum &amp; Gardens"
-               data-title-en="Vizcaya Museum &amp; Gardens"
-               data-desc="Palacio italiano de 1916 rodeado de jardines europeos frente a la bahía. Deering lo construyó en 34 acres. Hoy uno de los museos más fotografiados de toda Miami."
-               data-desc-en="An Italian-style 1916 palace surrounded by European gardens on the bay. Deering built it on 34 acres. Today one of the most photographed museums in all of Miami.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🏛️ Vizcaya</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:44%;left:82%" data-idx="18"
-               title="Key Biscayne — Isla frente a Miami"
-               data-title-en="Key Biscayne — Island off Miami"
-               data-desc="Isla paradisíaca a diez minutos de Miami. Playas vírgenes, ciclismo entre palmas y vistas al skyline desde el faro histórico del cabo Florida construido en el año 1825."
-               data-desc-en="Paradise island ten minutes from Miami. Pristine beaches, cycling among palms and skyline views from the historic Cape Florida lighthouse built in 1825.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🏝️ Key Biscayne</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:44%;left:68%" data-idx="19"
-               title="Fairchild Tropical Botanic Garden"
-               data-title-en="Fairchild Tropical Botanic Garden"
-               data-desc="Jardín botánico tropical de 83 acres con la mayor colección de palmeras del mundo. Mariposas exóticas, plantas raras y un lago espejo entre helechos y árboles milenarios."
-               data-desc-en="An 83-acre tropical botanic garden with the world's largest palm collection. Exotic butterflies, rare plants and a mirror lake among ferns and ancient trees.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🌺 Fairchild</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:48%;left:54%" data-idx="20"
-               title="Zoo Miami"
-               data-title-en="Zoo Miami"
-               data-desc="El único zoológico subtropical de EE.UU. sin jaulas. Tres mil animales en hábitats abiertos de África, Asia y las Américas. El área asiática es una experiencia inmersiva única."
-               data-desc-en="The only cageless subtropical zoo in the US. Three thousand animals in open habitats from Africa, Asia and the Americas. The Asian area is a uniquely immersive experience.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🦁 Zoo Miami</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:51%;left:61%" data-idx="21"
-               title="Deering Estate — Reserva natural histórica"
-               data-title-en="Deering Estate — Historic nature preserve"
-               data-desc="Reserva natural histórica con casa de piedra de 1922 entre manglares. Kayak entre manatíes, sitios arqueológicos Tequesta y vistas sobre la bahía de Biscayne al atardecer."
-               data-desc-en="Historic nature preserve with a 1922 stone house among mangroves. Kayak with manatees, Tequesta archaeological sites and sunset views over Biscayne Bay.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--left">🌿 Deering Estate</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:61%;left:47%" data-idx="22"
-               title="Homestead — Portal al Sur"
-               data-title-en="Homestead — Gateway to the South"
-               data-desc="Puerta de entrada al sur de Florida y los Everglades. Centro agrícola con mercados de fruta tropical y a solo 45 minutos de los arrecifes de coral de Key Largo."
-               data-desc-en="Gateway to south Florida and the Everglades. Agricultural hub with tropical fruit markets, just 45 minutes from the Key Largo coral reefs.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--right">🌾 Homestead</span>
-          </div>
-
-          <div class="rdm-milestone rdm-milestone--ref" style="top:91%;left:15%" data-idx="23"
-               title="Flamingo — Corazón de los Everglades"
-               data-title-en="Flamingo — Heart of the Everglades"
-               data-desc="Puesto avanzado en el corazón de los Everglades. Donde termina la carretera comienza el río de hierba. Kayak entre cocodrilos, manatíes y miles de aves al amanecer."
-               data-desc-en="Outpost in the heart of the Everglades. Where the road ends, the river of grass begins. Kayak among crocodiles, manatees and thousands of birds at dawn.">
-            <span class="rdm-dot" aria-hidden="true"></span>
-            <span class="rdm-bubble rdm-bubble--right">🦩 Flamingo</span>
-          </div>
-
-        </div><!-- /rdm-canvas -->
-
-        <!-- Leyenda -->
-        <div class="rdm-leyenda" aria-label="Leyenda del mapa">
-          <div class="rdm-leyenda-item">
-            <span class="rdm-leyenda-dot rdm-leyenda-dot--tierra"></span>
-            <span class="lang-es">Tierra</span>
-            <span class="lang-en">Land</span>
-          </div>
-          <div class="rdm-leyenda-item">
-            <span class="rdm-leyenda-dot rdm-leyenda-dot--mar"></span>
-            <span class="lang-es">Mar</span>
-            <span class="lang-en">Sea</span>
-          </div>
-          <div class="rdm-leyenda-item">
-            <span class="rdm-leyenda-dot rdm-leyenda-dot--ref"></span>
-            <span class="lang-es">Lugares icónicos</span>
-            <span class="lang-en">Iconic spots</span>
-          </div>
-          <div class="rdm-leyenda-item">
-            <span class="rdm-ruta-linea" aria-hidden="true"></span>
-            <span class="lang-es">Ruta del viajero</span>
-            <span class="lang-en">Traveler's route</span>
-          </div>
-        </div>
-
-      </div>
+      </div><!-- /globo-inner -->
     </section>
+
 
     <!-- ===== NEWSLETTER ===== -->
     <section class="seccion-newsletter" id="newsletter" aria-label="Newsletter">
@@ -1097,6 +829,93 @@
   <script src="assets/js/metal-button.js"></script>
   <script src="assets/js/liquid-tilt.js"></script>
 
+
+  <!-- Cobe 3D Globe — cargado como módulo ES, separado del main.js ES5 -->
+  <script type="module">
+    import createGlobe from 'https://esm.sh/cobe';
+
+    var canvas = document.getElementById('globoCanvas');
+    if (canvas) {
+
+      /* Respeta prefers-reduced-motion */
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var phi = 0.5;
+      var pointerInteracting = null;
+      var pointerInteractionMovement = 0;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.style.cursor = 'grab';
+
+      canvas.addEventListener('pointerdown', function(e) {
+        pointerInteracting = e.clientX - pointerInteractionMovement;
+        canvas.style.cursor = 'grabbing';
+        e.preventDefault();
+      });
+
+      canvas.addEventListener('pointerup', function() {
+        pointerInteracting = null;
+        canvas.style.cursor = 'grab';
+      });
+
+      canvas.addEventListener('pointerout', function() {
+        pointerInteracting = null;
+      });
+
+      canvas.addEventListener('pointermove', function(e) {
+        if (pointerInteracting !== null) {
+          var delta = e.clientX - pointerInteracting;
+          pointerInteractionMovement = delta;
+        }
+      });
+
+      /* Calcula tamaño del canvas en píxeles CSS */
+      function getDisplaySize() {
+        return canvas.offsetWidth > 0 ? canvas.offsetWidth : 520;
+      }
+
+      var globe = createGlobe(canvas, {
+        devicePixelRatio: dpr,
+        width: 600 * dpr,
+        height: 600 * dpr,
+        phi: 0.5,
+        theta: 0.28,
+        dark: 1,
+        diffuse: 1.4,
+        mapSamples: 16000,
+        mapBrightness: 7,
+        baseColor: [0.04, 0.12, 0.19],
+        markerColor: [1.0, 0.42, 0.42],
+        glowColor: [0.0, 0.74, 0.83],
+        markers: [
+          { location: [25.77, -80.19], size: 0.12 },  /* Miami — principal */
+          { location: [19.43, -99.13], size: 0.05 },  /* Ciudad de Mexico */
+          { location: [4.71, -74.07],  size: 0.05 },  /* Bogota */
+          { location: [40.71, -74.01], size: 0.05 },  /* Nueva York */
+          { location: [51.51, -0.13],  size: 0.04 },  /* Londres */
+          { location: [-23.55, -46.63], size: 0.05 }, /* Sao Paulo */
+          { location: [18.47, -66.11], size: 0.05 }   /* San Juan PR */
+        ],
+        onRender: function(state) {
+          if (!pointerInteracting && !prefersReduced) {
+            phi += 0.004;
+          }
+          state.phi = phi + pointerInteractionMovement / 200;
+
+          /* Actualizar tamaño en resize */
+          var s = getDisplaySize() * dpr;
+          state.width = s;
+          state.height = s;
+        }
+      });
+
+      /* Liberar contexto WebGL al salir */
+      window.addEventListener('beforeunload', function() {
+        globe.destroy();
+      });
+
+    }
+  </script>
 </body>
 </html>
 <!-- deploy Tue May 19 18:25:32     2026 -->
