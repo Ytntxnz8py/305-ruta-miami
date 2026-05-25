@@ -830,91 +830,125 @@
   <script src="assets/js/liquid-tilt.js"></script>
 
 
-  <!-- Cobe 3D Globe — cargado como módulo ES, separado del main.js ES5 -->
+  <!-- Cobe 3D Globe — módulo ES independiente del main.js ES5 -->
   <script type="module">
     import createGlobe from 'https://esm.sh/cobe';
 
-    var canvas = document.getElementById('globoCanvas');
-    if (canvas) {
+    const canvas = document.getElementById('globoCanvas');
+    if (!canvas) return; /* canvas no encontrado, nada que hacer */
 
-      /* Respeta prefers-reduced-motion */
-      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    /* Respeta prefers-reduced-motion */
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const SPEED = 0.003;
 
-      var phi = 0.5;
-      var pointerInteracting = null;
-      var pointerInteractionMovement = 0;
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let globe    = null;
+    let animId   = null;
+    let phi      = 0.5;
 
-      canvas.style.cursor = 'grab';
+    /* --- Arrastre con puntero --- */
+    let pointerDown = null;
+    let dragPhi     = 0;
+    let dragTheta   = 0;
+    let phiOffset   = 0;
+    let thetaOffset = 0;
+    let paused      = false;
 
-      canvas.addEventListener('pointerdown', function(e) {
-        pointerInteracting = e.clientX - pointerInteractionMovement;
-        canvas.style.cursor = 'grabbing';
-        e.preventDefault();
-      });
+    canvas.style.cursor     = 'grab';
+    canvas.style.opacity    = '0';
+    canvas.style.transition = 'opacity 1.2s ease';
 
-      canvas.addEventListener('pointerup', function() {
-        pointerInteracting = null;
-        canvas.style.cursor = 'grab';
-      });
+    /* Inicializa el globo cuando el canvas tenga tamaño en pantalla */
+    function init() {
+      const w = canvas.offsetWidth;
+      if (w === 0 || globe) return;
 
-      canvas.addEventListener('pointerout', function() {
-        pointerInteracting = null;
-      });
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-      canvas.addEventListener('pointermove', function(e) {
-        if (pointerInteracting !== null) {
-          var delta = e.clientX - pointerInteracting;
-          pointerInteractionMovement = delta;
-        }
-      });
-
-      /* Calcula tamaño del canvas en píxeles CSS */
-      function getDisplaySize() {
-        return canvas.offsetWidth > 0 ? canvas.offsetWidth : 520;
-      }
-
-      var globe = createGlobe(canvas, {
+      globe = createGlobe(canvas, {
         devicePixelRatio: dpr,
-        width: 600 * dpr,
-        height: 600 * dpr,
-        phi: 0.5,
-        theta: 0.28,
-        dark: 1,
-        diffuse: 1.4,
-        mapSamples: 16000,
-        mapBrightness: 7,
-        baseColor: [0.04, 0.12, 0.19],
-        markerColor: [1.0, 0.42, 0.42],
-        glowColor: [0.0, 0.74, 0.83],
+        width:  w * dpr,
+        height: w * dpr,
+        phi:    0.5,
+        theta:  0.2,
+        /* Globo claro sobre fondo blanco-arena */
+        dark:          0,
+        diffuse:       1.5,
+        mapSamples:    16000,
+        mapBrightness: 8,
+        baseColor:   [0.98, 0.98, 1.00],   /* blanco azulado */
+        markerColor: [1.00, 0.42, 0.42],   /* coral #FF6B6B  */
+        glowColor:   [1.00, 0.99, 0.97],   /* blanco-arena   */
         markers: [
-          { location: [25.77, -80.19], size: 0.12 },  /* Miami — principal */
-          { location: [19.43, -99.13], size: 0.05 },  /* Ciudad de Mexico */
-          { location: [4.71, -74.07],  size: 0.05 },  /* Bogota */
-          { location: [40.71, -74.01], size: 0.05 },  /* Nueva York */
-          { location: [51.51, -0.13],  size: 0.04 },  /* Londres */
-          { location: [-23.55, -46.63], size: 0.05 }, /* Sao Paulo */
-          { location: [18.47, -66.11], size: 0.05 }   /* San Juan PR */
-        ],
-        onRender: function(state) {
-          if (!pointerInteracting && !prefersReduced) {
-            phi += 0.004;
-          }
-          state.phi = phi + pointerInteractionMovement / 200;
+          { location: [25.77, -80.19], size: 0.12 }, /* Miami — principal  */
+          { location: [19.43, -99.13], size: 0.05 }, /* Ciudad de Mexico   */
+          { location: [ 4.71, -74.07], size: 0.05 }, /* Bogota             */
+          { location: [40.71, -74.01], size: 0.05 }, /* Nueva York         */
+          { location: [51.51,  -0.13], size: 0.04 }, /* Londres            */
+          { location: [-23.55,-46.63], size: 0.05 }, /* Sao Paulo          */
+          { location: [18.47, -66.11], size: 0.05 }  /* San Juan PR        */
+        ]
+      });
 
-          /* Actualizar tamaño en resize */
-          var s = getDisplaySize() * dpr;
-          state.width = s;
-          state.height = s;
+      /* Bucle de animación — llama globe.update() cada frame */
+      function animate() {
+        if (!paused && !prefersReduced) phi += SPEED;
+        globe.update({
+          phi:   phi   + phiOffset   + dragPhi,
+          theta: 0.2   + thetaOffset + dragTheta
+        });
+        animId = requestAnimationFrame(animate);
+      }
+      animate();
+
+      /* Fade-in suave al iniciar */
+      setTimeout(function() { canvas.style.opacity = '1'; });
+    }
+
+    /* Pointer events — canvas */
+    canvas.addEventListener('pointerdown', function(e) {
+      pointerDown = { x: e.clientX, y: e.clientY };
+      canvas.style.cursor = 'grabbing';
+      paused = true;
+      e.preventDefault();
+    });
+
+    /* Pointermove y pointerup en window para no perder el drag */
+    window.addEventListener('pointermove', function(e) {
+      if (!pointerDown) return;
+      dragPhi   = (e.clientX - pointerDown.x) / 300;
+      dragTheta = (e.clientY - pointerDown.y) / 1000;
+    }, { passive: true });
+
+    window.addEventListener('pointerup', function() {
+      if (!pointerDown) return;
+      phiOffset   += dragPhi;
+      thetaOffset += dragTheta;
+      dragPhi   = 0;
+      dragTheta = 0;
+      pointerDown = null;
+      canvas.style.cursor = 'grab';
+      paused = false;
+    }, { passive: true });
+
+    /* Arrancar: si el canvas ya tiene tamaño, inicializar ahora;
+       si no (fuera del viewport), esperar con ResizeObserver */
+    if (canvas.offsetWidth > 0) {
+      init();
+    } else {
+      const ro = new ResizeObserver(function(entries) {
+        if (entries[0] && entries[0].contentRect.width > 0) {
+          ro.disconnect();
+          init();
         }
       });
-
-      /* Liberar contexto WebGL al salir */
-      window.addEventListener('beforeunload', function() {
-        globe.destroy();
-      });
-
+      ro.observe(canvas);
     }
+
+    /* Liberar contexto WebGL al salir de la página */
+    window.addEventListener('beforeunload', function() {
+      if (animId) cancelAnimationFrame(animId);
+      if (globe)  globe.destroy();
+    });
   </script>
 </body>
 </html>

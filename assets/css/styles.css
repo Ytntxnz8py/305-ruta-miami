@@ -2565,12 +2565,12 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   );
 }
 
-/* Destinos â†’ Mapa */
+/* Destinos → Globo */
 .fade-dest-mapa {
   background: linear-gradient(
     to bottom,
     var(--ocean-fin) 0%,
-    var(--azul-cielo-suave) 100%
+    var(--blanco-arena) 100%
   );
 }
 
@@ -5113,15 +5113,13 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
    ============================================================ */
 
 .seccion-globo {
-  background: linear-gradient(180deg,
-    var(--ocean-ini, #071e2b) 0%,
-    var(--ocean-mid, #0a2d3f) 100%);
+  background: var(--blanco-arena, #FFFDF7);
   padding: 7rem 1.5rem 6rem;
   overflow: hidden;
   position: relative;
 }
 
-/* Resplandor ambiental de fondo (turquesa difuso) */
+/* Resplandor ambiental (turquesa muy suave sobre fondo claro) */
 .seccion-globo::before {
   content: '';
   position: absolute;
@@ -5131,7 +5129,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   max-width: 680px;
   aspect-ratio: 1;
   background: radial-gradient(circle,
-    rgba(0, 188, 212, 0.07) 0%,
+    rgba(0, 188, 212, 0.05) 0%,
     transparent 68%);
   pointer-events: none;
 }
@@ -5159,7 +5157,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 .globo-texto .seccion-titulo {
-  color: var(--blanco-arena, #FFFDF7);
+  color: var(--tinta, #1a2a35);
   margin-bottom: 1.5rem;
   line-height: 1.18;
 }
@@ -5168,7 +5166,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   font-family: var(--sans, 'Inter', system-ui, sans-serif);
   font-size: 1.05rem;
   line-height: 1.72;
-  color: rgba(255, 253, 247, 0.68);
+  color: var(--texto-medio, #4a6070);
   margin: 0 0 2.8rem;
 }
 
@@ -5202,7 +5200,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   font-family: var(--sans, 'Inter', system-ui, sans-serif);
   font-size: 0.8rem;
   font-weight: 500;
-  color: rgba(255, 253, 247, 0.5);
+  color: var(--texto-suave, #4a6f82);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -5222,21 +5220,22 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   display: block;
   cursor: grab;
   border-radius: 50%;
-  filter: drop-shadow(0 0 48px rgba(0, 188, 212, 0.28))
-          drop-shadow(0 0 16px rgba(255, 107, 107, 0.12));
+  /* Sombra suave sobre fondo claro */
+  filter: drop-shadow(0 4px 32px rgba(0, 188, 212, 0.16))
+          drop-shadow(0 2px 12px rgba(26, 42, 53, 0.06));
   transition: filter 0.3s ease;
 }
 
 #globoCanvas:active {
   cursor: grabbing;
-  filter: drop-shadow(0 0 60px rgba(0, 188, 212, 0.38))
-          drop-shadow(0 0 20px rgba(255, 107, 107, 0.16));
+  filter: drop-shadow(0 4px 40px rgba(0, 188, 212, 0.24))
+          drop-shadow(0 2px 16px rgba(255, 107, 107, 0.10));
 }
 
 .globo-hint {
   font-family: var(--sans, 'Inter', system-ui, sans-serif);
   font-size: 0.76rem;
-  color: rgba(255, 253, 247, 0.32);
+  color: rgba(26, 42, 53, 0.35);
   letter-spacing: 0.05em;
   margin: 0;
   display: flex;
