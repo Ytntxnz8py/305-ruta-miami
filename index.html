@@ -73,6 +73,7 @@
   <link rel="stylesheet" href="assets/css/navbar.css" />
   <link rel="stylesheet" href="assets/css/metal-button.css" />
   <link rel="stylesheet" href="assets/css/footer.css" />
+  <link rel="stylesheet" href="assets/css/cta-card.css" />
 
   <!-- ⚠️ REEMPLAZAR: Cambiar G-7HMBMBQNQZ por el Measurement ID real -->
   <!-- Obtener en: analytics.google.com → Administrar → Flujos de datos -->
@@ -664,58 +665,69 @@
 
 
     <!-- ===== NEWSLETTER ===== -->
-    <section class="seccion-newsletter" id="newsletter" aria-label="Newsletter">
-      <div class="newsletter-contenedor">
+    <section class="seccion-cta-card seccion-newsletter" id="newsletter" aria-label="Newsletter">
+      <div class="cta-card cta-card--newsletter">
 
-        <div class="newsletter-texto fade-up">
-          <span class="newsletter-eyebrow" aria-hidden="true">📬</span>
-          <h2 class="newsletter-titulo">
-            <span class="lang-es">Aventuras en tu bandeja de entrada</span>
-            <span class="lang-en">Adventures in your inbox</span>
-          </h2>
-          <p class="newsletter-sub">
-            <span class="lang-es">Guías exclusivas, rutas secretas y ofertas locales. Sin spam, solo la mejor Miami outdoor.</span>
-            <span class="lang-en">Exclusive guides, hidden routes and local deals. No spam, just the best Miami outdoors.</span>
-          </p>
-        </div>
+        <!-- Luz ambiental de fondo -->
+        <div class="cta-card__glow" aria-hidden="true"></div>
 
-        <!-- Formulario activo -->
-        <form class="newsletter-form fade-up" id="newsletterForm" style="transition-delay:0.12s"
-              novalidate autocomplete="off" aria-label="Formulario newsletter">
-          <div class="newsletter-input-wrap">
-            <input class="newsletter-input" id="newsletterEmail" type="email"
-                   autocomplete="email" required
-                   placeholder="tu@email.com" aria-label="Tu correo electrónico" />
-            <div class="metal-btn-wrap newsletter-btn-wrap" data-variant="turquesa" data-size="md">
-              <div class="metal-btn-inner"></div>
-              <button class="metal-btn newsletter-submit" type="submit">
-                <div class="metal-btn-shine"></div>
-                <div class="metal-btn-hover-glow"></div>
-                <span class="lang-es">Suscribirme →</span>
-                <span class="lang-en">Subscribe →</span>
-              </button>
-            </div>
+        <div class="cta-card__inner">
+
+          <!-- Columna izquierda: mensaje -->
+          <div class="cta-card__text">
+            <span class="cta-card__eyebrow" aria-hidden="true">📬</span>
+            <h2 class="cta-card__titulo newsletter-titulo">
+              <span class="lang-es">Aventuras en tu bandeja de entrada</span>
+              <span class="lang-en">Adventures in your inbox</span>
+            </h2>
+            <p class="cta-card__desc newsletter-sub">
+              <span class="lang-es">Guías exclusivas, rutas secretas y ofertas locales. Sin spam, solo la mejor Miami outdoor.</span>
+              <span class="lang-en">Exclusive guides, hidden routes and local deals. No spam, just the best Miami outdoors.</span>
+            </p>
           </div>
-          <p class="newsletter-disclaimer">
-            <span class="lang-es">Sin spam. Cancela cuando quieras.</span>
-            <span class="lang-en">No spam. Cancel anytime.</span>
-          </p>
-        </form>
 
-        <!-- Estado de éxito (oculto por JS) -->
-        <div class="newsletter-exito fade-up quiz-paso--oculto" id="newsletterExito"
-             style="transition-delay:0.12s" aria-live="polite">
-          <span class="newsletter-exito__ico" aria-hidden="true">🎉</span>
-          <strong class="newsletter-exito__titulo">
-            <span class="lang-es">¡Ya eres parte del clan!</span>
-            <span class="lang-en">You're part of the crew!</span>
-          </strong>
-          <p class="newsletter-exito__sub">
-            <span class="lang-es">Pronto recibirás las mejores aventuras de Miami.</span>
-            <span class="lang-en">You'll soon receive the best Miami adventures.</span>
-          </p>
+          <!-- Columna derecha: formulario -->
+          <div class="cta-card__action">
+
+            <!-- Formulario activo -->
+            <form class="newsletter-form" id="newsletterForm"
+                  novalidate autocomplete="off" aria-label="Formulario newsletter">
+              <div class="newsletter-input-wrap">
+                <input class="newsletter-input" id="newsletterEmail" type="email"
+                       autocomplete="email" required
+                       placeholder="tu@email.com" aria-label="Tu correo electrónico" />
+                <div class="metal-btn-wrap newsletter-btn-wrap" data-variant="turquesa" data-size="md">
+                  <div class="metal-btn-inner"></div>
+                  <button class="metal-btn newsletter-submit" type="submit">
+                    <div class="metal-btn-shine"></div>
+                    <div class="metal-btn-hover-glow"></div>
+                    <span class="lang-es">Suscribirme →</span>
+                    <span class="lang-en">Subscribe →</span>
+                  </button>
+                </div>
+              </div>
+              <p class="newsletter-disclaimer">
+                <span class="lang-es">Sin spam. Cancela cuando quieras.</span>
+                <span class="lang-en">No spam. Cancel anytime.</span>
+              </p>
+            </form>
+
+            <!-- Estado de éxito (oculto por JS) -->
+            <div class="newsletter-exito quiz-paso--oculto" id="newsletterExito"
+                 aria-live="polite">
+              <span class="newsletter-exito__ico" aria-hidden="true">🎉</span>
+              <strong class="newsletter-exito__titulo">
+                <span class="lang-es">¡Ya eres parte del clan!</span>
+                <span class="lang-en">You're part of the crew!</span>
+              </strong>
+              <p class="newsletter-exito__sub">
+                <span class="lang-es">Pronto recibirás las mejores aventuras de Miami.</span>
+                <span class="lang-en">You'll soon receive the best Miami adventures.</span>
+              </p>
+            </div>
+
+          </div>
         </div>
-
       </div>
     </section>
 
@@ -1018,6 +1030,7 @@
   <script src="assets/js/navbar.js"></script>
   <script src="assets/js/metal-button.js"></script>
   <script src="assets/js/liquid-tilt.js"></script>
+  <script src="assets/js/cta-card.js"></script>
 
 
   <!-- Cobe 3D Globe — módulo ES independiente del main.js ES5 -->
