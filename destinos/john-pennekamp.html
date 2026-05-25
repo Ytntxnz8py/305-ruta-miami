@@ -85,6 +85,7 @@
   <link rel="stylesheet" href="../assets/css/selector-gallery.css" />
   <link rel="stylesheet" href="../assets/css/metal-button.css" />
   <link rel="stylesheet" href="../assets/css/liquid-btn.css" />
+  <link rel="stylesheet" href="../assets/css/cta-card.css" />
 
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7HMBMBQNQZ"></script>
@@ -1091,52 +1092,42 @@
 
 
     <!-- ===== SECCIÓN 7 — CTA ANUNCIANTES ===== -->
-    <section class="destino-cta-empresas" id="anunciate">
-      <div class="destino-cta-empresas__contenedor fade-up">
-
-        <span class="destino-cta-empresas__eyebrow">
-          🤿
-          <span class="lang-es">¿Tu negocio opera en los Florida Keys?</span>
-          <span class="lang-en">Does your business operate in the Florida Keys?</span>
-        </span>
-
-        <h2 class="destino-cta-empresas__titulo">
-          <span class="lang-es">Miles de buceadores visitan esta página cada mes</span>
-          <span class="lang-en">Thousands of divers visit this page every month</span>
-        </h2>
-
-        <p class="destino-cta-empresas__desc">
-          <span class="lang-es">
-            Alquiler de equipo, tours de buceo, glassbottom, guías de pesca — si tu negocio está en Key Largo, tus clientes ya están aquí buscándote.
-          </span>
-          <span class="lang-en">
-            Equipment rental, diving tours, glass-bottom, fishing guides — if your business is in Key Largo, your customers are already here.
-          </span>
-        </p>
-
-        <div class="destino-cta-empresas__acciones">
-          <div class="metal-btn-wrap" data-variant="turquesa" data-size="md">
-            <div class="metal-btn-inner"></div>
-            <a href="../anunciantes.html#precios" class="metal-btn">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              <span class="lang-es">Ver planes desde $149/mes →</span>
-              <span class="lang-en">See plans from $149/mo →</span>
-            </a>
+    <section class="seccion-cta-card" id="anunciate" aria-label="Anuncia tu negocio en Explora Miami">
+      <div class="cta-card cta-card--blog">
+        <div class="cta-card__glow" aria-hidden="true"></div>
+        <div class="cta-card__inner">
+          <div class="cta-card__text">
+            <span class="cta-card__eyebrow">
+              <span class="lang-es">🤿 ¿Tu negocio opera en los Florida Keys?</span>
+              <span class="lang-en">🤿 Does your business operate in the Florida Keys?</span>
+            </span>
+            <h2 class="cta-card__titulo">
+              <span class="lang-es">Miles de buceadores visitan esta página cada mes</span>
+              <span class="lang-en">Thousands of divers visit this page every month</span>
+            </h2>
+            <p class="cta-card__desc">
+              <span class="lang-es">Alquiler de equipo, tours de buceo, glassbottom, guías de pesca — si tu negocio está en Key Largo, tus clientes ya están aquí buscándote.</span>
+              <span class="lang-en">Equipment rental, diving tours, glass-bottom, fishing guides — if your business is in Key Largo, your customers are already here.</span>
+            </p>
           </div>
-          <div class="metal-btn-wrap" data-variant="ghost" data-size="md">
-            <div class="metal-btn-inner"></div>
-            <a href="../anunciantes.html" class="metal-btn">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              <span class="lang-es">¿Cómo funciona?</span>
-              <span class="lang-en">How does it work?</span>
-            </a>
+          <div class="cta-card__action">
+            <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
+              <div class="metal-btn-inner"></div>
+              <a href="../anunciantes.html#precios" class="metal-btn" style="text-decoration:none">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span class="lang-es">Ver planes y precios →</span>
+                <span class="lang-en">See plans and pricing →</span>
+              </a>
+            </div>
+            <p class="cta-card__meta">
+              <span class="lang-es">Desde $119/mes con el plan anual. Sin contratos, activo en 48h.</span>
+              <span class="lang-en">From $119/mo with annual plan. No contracts, live in 48h.</span>
+            </p>
           </div>
         </div>
-
       </div>
-    </section><!-- /cta empresas -->
+    </section>
 
 
     <!-- ===== SECCIÓN 8 — DESTINOS RELACIONADOS ===== -->
@@ -1269,6 +1260,7 @@
   <script src="../assets/js/metal-button.js"></script>
   <script src="../assets/js/liquid-tilt.js"></script>
   <script src="../assets/js/selector-gallery.js"></script>
+  <script src="../assets/js/cta-card.js"></script>
 
 </body>
 </html>
