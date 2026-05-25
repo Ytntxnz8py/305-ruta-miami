@@ -5248,16 +5248,18 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   display: block;
   cursor: grab;
   border-radius: 50%;
-  /* Glow turquesa visible sobre fondo claro */
-  filter: drop-shadow(0 0 40px rgba(0, 188, 212, 0.22))
-          drop-shadow(0 8px 24px rgba(26, 42, 53, 0.12));
+  /* Halo azul que hace visible el borde del globo blanco */
+  filter: drop-shadow(0 0 56px rgba(30, 120, 220, 0.28))
+          drop-shadow(0 0 20px rgba(30, 120, 220, 0.16))
+          drop-shadow(0 8px 24px rgba(26, 42, 53, 0.08));
   transition: filter 0.3s ease;
 }
 
 #globoCanvas:active {
   cursor: grabbing;
-  filter: drop-shadow(0 0 56px rgba(0, 188, 212, 0.32))
-          drop-shadow(0 8px 32px rgba(26, 42, 53, 0.16));
+  filter: drop-shadow(0 0 72px rgba(30, 120, 220, 0.36))
+          drop-shadow(0 0 28px rgba(30, 120, 220, 0.22))
+          drop-shadow(0 8px 32px rgba(26, 42, 53, 0.10));
 }
 
 .globo-hint {

@@ -618,13 +618,31 @@
 
           <!-- Emojis: posicionados por JS via proyección 3D→2D en el RAF loop.
                data-lat / data-lng son las coordenadas geográficas del punto. -->
+          <!-- América del Norte -->
           <div class="globo-emoji" data-lat="25.77"  data-lng="-80.19" aria-hidden="true">🌴</div>
           <div class="globo-emoji" data-lat="40.71"  data-lng="-74.01" aria-hidden="true">🗽</div>
+          <div class="globo-emoji" data-lat="34.05"  data-lng="-118.24" aria-hidden="true">🎬</div>
+          <div class="globo-emoji" data-lat="43.65"  data-lng="-79.38" aria-hidden="true">🍁</div>
+          <!-- México y Caribe -->
           <div class="globo-emoji" data-lat="19.43"  data-lng="-99.13" aria-hidden="true">🌮</div>
+          <div class="globo-emoji" data-lat="21.16"  data-lng="-86.85" aria-hidden="true">🏝️</div>
           <div class="globo-emoji" data-lat="18.47"  data-lng="-66.11" aria-hidden="true">🌊</div>
+          <!-- Suramérica -->
           <div class="globo-emoji" data-lat="4.71"   data-lng="-74.07" aria-hidden="true">🌺</div>
+          <div class="globo-emoji" data-lat="-22.91" data-lng="-43.17" aria-hidden="true">⚽</div>
           <div class="globo-emoji" data-lat="-23.55" data-lng="-46.63" aria-hidden="true">☀️</div>
+          <div class="globo-emoji" data-lat="-34.60" data-lng="-58.38" aria-hidden="true">🥩</div>
+          <!-- Europa -->
           <div class="globo-emoji" data-lat="51.51"  data-lng="-0.13"  aria-hidden="true">✈️</div>
+          <div class="globo-emoji" data-lat="48.86"  data-lng="2.35"   aria-hidden="true">🗼</div>
+          <div class="globo-emoji" data-lat="40.42"  data-lng="-3.70"  aria-hidden="true">💃</div>
+          <!-- África y Oriente Medio -->
+          <div class="globo-emoji" data-lat="-1.29"  data-lng="36.82"  aria-hidden="true">🦁</div>
+          <div class="globo-emoji" data-lat="25.20"  data-lng="55.27"  aria-hidden="true">🌙</div>
+          <!-- Asia y Oceanía -->
+          <div class="globo-emoji" data-lat="35.69"  data-lng="139.69" aria-hidden="true">🌸</div>
+          <div class="globo-emoji" data-lat="1.35"   data-lng="103.82" aria-hidden="true">🦁</div>
+          <div class="globo-emoji" data-lat="-33.87" data-lng="151.21" aria-hidden="true">🐨</div>
 
           <p class="globo-hint" aria-hidden="true">
             <span class="lang-es">Arrastra para girar</span>
@@ -962,22 +980,14 @@
         height: w * dpr,
         phi:    phi,
         theta:  THETA_BASE,
-        dark:          1,
-        diffuse:       1.2,
+        /* Globo blanco con puntitos azul-gris — dark:0 = modo claro */
+        dark:          0,
+        diffuse:       1.5,
         mapSamples:    16000,
-        mapBrightness: 6,
-        baseColor:   [0.04, 0.12, 0.19],   /* ocean-mid navy */
-        markerColor: [1.00, 0.42, 0.42],   /* coral #FF6B6B  */
-        glowColor:   [0.00, 0.74, 0.83],   /* turquesa       */
-        markers: [
-          { location: [25.77, -80.19], size: 0.08 }, /* Miami       */
-          { location: [40.71, -74.01], size: 0.04 }, /* Nueva York  */
-          { location: [19.43, -99.13], size: 0.04 }, /* Ciudad Mex  */
-          { location: [18.47, -66.11], size: 0.04 }, /* San Juan PR */
-          { location: [ 4.71, -74.07], size: 0.04 }, /* Bogota      */
-          { location: [-23.55,-46.63], size: 0.04 }, /* Sao Paulo   */
-          { location: [51.51,  -0.13], size: 0.03 }  /* Londres     */
-        ]
+        mapBrightness: 8,
+        baseColor:   [0.72, 0.82, 0.95],   /* azul claro — puntitos continentes */
+        glowColor:   [0.18, 0.60, 0.90],   /* halo azul que define el borde     */
+        markers:     []                     /* sin puntos naranjas               */
       });
 
       function animate() {
