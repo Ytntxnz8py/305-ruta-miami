@@ -616,30 +616,15 @@
           <canvas id="globoCanvas" width="600" height="600"
                   aria-label="Globo 3D interactivo — Miami marcada en coral"></canvas>
 
-          <!-- Emojis — CSS Anchor Positioning (Chrome 125+)
-               Cobe expone --cobe-{id} como anchor-name y
-               --cobe-visible-{id} como 0/1 según cara visible -->
-          <div class="globo-emoji"
-               style="position-anchor:--cobe-marker-miami;opacity:var(--cobe-visible-marker-miami,0)"
-               aria-hidden="true">🌴</div>
-          <div class="globo-emoji"
-               style="position-anchor:--cobe-marker-nyc;opacity:var(--cobe-visible-marker-nyc,0)"
-               aria-hidden="true">🗽</div>
-          <div class="globo-emoji"
-               style="position-anchor:--cobe-marker-cdmx;opacity:var(--cobe-visible-marker-cdmx,0)"
-               aria-hidden="true">🌮</div>
-          <div class="globo-emoji"
-               style="position-anchor:--cobe-marker-sanjuan;opacity:var(--cobe-visible-marker-sanjuan,0)"
-               aria-hidden="true">🌊</div>
-          <div class="globo-emoji"
-               style="position-anchor:--cobe-marker-bogota;opacity:var(--cobe-visible-marker-bogota,0)"
-               aria-hidden="true">🌺</div>
-          <div class="globo-emoji"
-               style="position-anchor:--cobe-marker-saopaulo;opacity:var(--cobe-visible-marker-saopaulo,0)"
-               aria-hidden="true">☀️</div>
-          <div class="globo-emoji"
-               style="position-anchor:--cobe-marker-london;opacity:var(--cobe-visible-marker-london,0)"
-               aria-hidden="true">✈️</div>
+          <!-- Emojis: posicionados por JS via proyección 3D→2D en el RAF loop.
+               data-lat / data-lng son las coordenadas geográficas del punto. -->
+          <div class="globo-emoji" data-lat="25.77"  data-lng="-80.19" aria-hidden="true">🌴</div>
+          <div class="globo-emoji" data-lat="40.71"  data-lng="-74.01" aria-hidden="true">🗽</div>
+          <div class="globo-emoji" data-lat="19.43"  data-lng="-99.13" aria-hidden="true">🌮</div>
+          <div class="globo-emoji" data-lat="18.47"  data-lng="-66.11" aria-hidden="true">🌊</div>
+          <div class="globo-emoji" data-lat="4.71"   data-lng="-74.07" aria-hidden="true">🌺</div>
+          <div class="globo-emoji" data-lat="-23.55" data-lng="-46.63" aria-hidden="true">☀️</div>
+          <div class="globo-emoji" data-lat="51.51"  data-lng="-0.13"  aria-hidden="true">✈️</div>
 
           <p class="globo-hint" aria-hidden="true">
             <span class="lang-es">Arrastra para girar</span>
@@ -880,29 +865,91 @@
     import createGlobe from 'https://esm.sh/cobe';
 
     const canvas = document.getElementById('globoCanvas');
-    if (!canvas) return; /* canvas no encontrado, nada que hacer */
+    if (!canvas) throw new Error('globoCanvas no encontrado');
 
-    /* Respeta prefers-reduced-motion */
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    /* ── Proyección 3D → 2D ─────────────────────────────────────────────
+       Convierte lat/lng geográficos + estado actual del globo (phi,theta)
+       a coordenadas de pantalla (x,y) relativas al canvas.
+
+       Sistema de coordenadas Cobe:
+         x = cos(lat) · cos(lng)   (+X = frente al espectador en phi=0)
+         y = sin(lat)              (+Y = polo norte)
+         z = cos(lat) · sin(lng)   (+Z = este en phi=0)
+
+       Rotación phi (eje Y): +phi trae longitudes occidentales al frente.
+       Rotación theta (eje X): inclina el globo hacia/lejos del espectador.
+       Proyección ortográfica: cámara mira desde +X. ──────────────────── */
+    function project(lat, lng, phi, theta, size) {
+      const latR = lat * Math.PI / 180;
+      const lngR = lng * Math.PI / 180;
+
+      /* Posición en esfera unitaria */
+      const px = Math.cos(latR) * Math.cos(lngR);
+      const py = Math.sin(latR);
+      const pz = Math.cos(latR) * Math.sin(lngR);
+
+      /* Rotación phi alrededor del eje Y */
+      const cp = Math.cos(phi), sp = Math.sin(phi);
+      const rx = cp * px - sp * pz;
+      const ry = py;
+      const rz = sp * px + cp * pz;
+
+      /* Rotación theta alrededor del eje X */
+      const ct = Math.cos(theta), st = Math.sin(theta);
+      const qx = rx;
+      const qy = ct * ry - st * rz;
+      const qz = st * ry + ct * rz;
+
+      /* Visibilidad: qx > 0 → cara frontal visible */
+      const r   = size / 2;
+      const sx  = size / 2 + qz * r;   /* +Z → derecha en pantalla */
+      const sy  = size / 2 - qy * r;   /* +Y → arriba en pantalla  */
+
+      return { x: sx, y: sy, visible: qx > 0.05 };
+    }
+
+    /* ── Estado del globo ─────────────────────────────────────────────── */
     const SPEED = 0.003;
+    const THETA_BASE = 0.2;
 
-    let globe    = null;
-    let animId   = null;
-    let phi      = 0.5;
-
-    /* --- Arrastre con puntero --- */
+    let globe      = null;
+    let animId     = null;
+    let phi        = 0.5;
     let pointerDown = null;
-    let dragPhi     = 0;
-    let dragTheta   = 0;
-    let phiOffset   = 0;
-    let thetaOffset = 0;
-    let paused      = false;
+    let dragPhi    = 0, dragTheta    = 0;
+    let phiOffset  = 0, thetaOffset  = 0;
+    let paused     = false;
 
+    const prefersReduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)').matches;
+
+    /* Referencias a los divs de emoji */
+    const emojiDivs = Array.from(
+      canvas.closest('.globo-canvas-wrap').querySelectorAll('.globo-emoji'));
+
+    /* ── Actualiza posición de cada emoji ────────────────────────────── */
+    function updateEmojis(curPhi, curTheta) {
+      const w = canvas.offsetWidth;
+      if (w === 0) return;
+      emojiDivs.forEach(function(el) {
+        const lat = parseFloat(el.dataset.lat);
+        const lng = parseFloat(el.dataset.lng);
+        const p   = project(lat, lng, curPhi, curTheta, w);
+        if (p.visible) {
+          el.style.opacity = '1';
+          el.style.left    = p.x + 'px';
+          el.style.top     = p.y + 'px';
+        } else {
+          el.style.opacity = '0';
+        }
+      });
+    }
+
+    /* ── Inicialización ──────────────────────────────────────────────── */
     canvas.style.cursor     = 'grab';
     canvas.style.opacity    = '0';
     canvas.style.transition = 'opacity 1.2s ease';
 
-    /* Inicializa el globo cuando el canvas tenga tamaño en pantalla */
     function init() {
       const w = canvas.offsetWidth;
       if (w === 0 || globe) return;
@@ -913,44 +960,40 @@
         devicePixelRatio: dpr,
         width:  w * dpr,
         height: w * dpr,
-        phi:    0.5,
-        theta:  0.2,
-        /* Globo oscuro (dark:1) — contrasta sobre fondo blanco-arena */
+        phi:    phi,
+        theta:  THETA_BASE,
         dark:          1,
         diffuse:       1.2,
         mapSamples:    16000,
         mapBrightness: 6,
-        baseColor:   [0.04, 0.12, 0.19],   /* ocean-mid navy   */
-        markerColor: [1.00, 0.42, 0.42],   /* coral #FF6B6B    */
-        glowColor:   [0.00, 0.74, 0.83],   /* turquesa         */
-        markerElevation: 0.012,             /* eleva los puntos */
+        baseColor:   [0.04, 0.12, 0.19],   /* ocean-mid navy */
+        markerColor: [1.00, 0.42, 0.42],   /* coral #FF6B6B  */
+        glowColor:   [0.00, 0.74, 0.83],   /* turquesa       */
         markers: [
-          { id: 'marker-miami',    location: [25.77, -80.19], size: 0.08 }, /* Miami       */
-          { id: 'marker-nyc',      location: [40.71, -74.01], size: 0.04 }, /* Nueva York  */
-          { id: 'marker-cdmx',     location: [19.43, -99.13], size: 0.04 }, /* Cdad Mexico */
-          { id: 'marker-sanjuan',  location: [18.47, -66.11], size: 0.04 }, /* San Juan PR */
-          { id: 'marker-bogota',   location: [ 4.71, -74.07], size: 0.04 }, /* Bogota      */
-          { id: 'marker-saopaulo', location: [-23.55,-46.63], size: 0.04 }, /* Sao Paulo   */
-          { id: 'marker-london',   location: [51.51,  -0.13], size: 0.03 }  /* Londres     */
+          { location: [25.77, -80.19], size: 0.08 }, /* Miami       */
+          { location: [40.71, -74.01], size: 0.04 }, /* Nueva York  */
+          { location: [19.43, -99.13], size: 0.04 }, /* Ciudad Mex  */
+          { location: [18.47, -66.11], size: 0.04 }, /* San Juan PR */
+          { location: [ 4.71, -74.07], size: 0.04 }, /* Bogota      */
+          { location: [-23.55,-46.63], size: 0.04 }, /* Sao Paulo   */
+          { location: [51.51,  -0.13], size: 0.03 }  /* Londres     */
         ]
       });
 
-      /* Bucle de animación — llama globe.update() cada frame */
       function animate() {
         if (!paused && !prefersReduced) phi += SPEED;
-        globe.update({
-          phi:   phi   + phiOffset   + dragPhi,
-          theta: 0.2   + thetaOffset + dragTheta
-        });
+        const curPhi   = phi   + phiOffset   + dragPhi;
+        const curTheta = THETA_BASE + thetaOffset + dragTheta;
+        globe.update({ phi: curPhi, theta: curTheta });
+        if (!prefersReduced) updateEmojis(curPhi, curTheta);
         animId = requestAnimationFrame(animate);
       }
       animate();
 
-      /* Fade-in suave al iniciar */
       setTimeout(function() { canvas.style.opacity = '1'; });
     }
 
-    /* Pointer events — canvas */
+    /* ── Pointer events ─────────────────────────────────────────────── */
     canvas.addEventListener('pointerdown', function(e) {
       pointerDown = { x: e.clientX, y: e.clientY };
       canvas.style.cursor = 'grabbing';
@@ -958,7 +1001,6 @@
       e.preventDefault();
     });
 
-    /* Pointermove y pointerup en window para no perder el drag */
     window.addEventListener('pointermove', function(e) {
       if (!pointerDown) return;
       dragPhi   = (e.clientX - pointerDown.x) / 300;
@@ -969,28 +1011,24 @@
       if (!pointerDown) return;
       phiOffset   += dragPhi;
       thetaOffset += dragTheta;
-      dragPhi   = 0;
-      dragTheta = 0;
+      dragPhi = dragTheta = 0;
       pointerDown = null;
       canvas.style.cursor = 'grab';
       paused = false;
     }, { passive: true });
 
-    /* Arrancar: si el canvas ya tiene tamaño, inicializar ahora;
-       si no (fuera del viewport), esperar con ResizeObserver */
+    /* ── Arrancar ────────────────────────────────────────────────────── */
     if (canvas.offsetWidth > 0) {
       init();
     } else {
       const ro = new ResizeObserver(function(entries) {
         if (entries[0] && entries[0].contentRect.width > 0) {
-          ro.disconnect();
-          init();
+          ro.disconnect(); init();
         }
       });
       ro.observe(canvas);
     }
 
-    /* Liberar contexto WebGL al salir de la página */
     window.addEventListener('beforeunload', function() {
       if (animId) cancelAnimationFrame(animId);
       if (globe)  globe.destroy();

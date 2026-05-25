@@ -5214,19 +5214,22 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   gap: 1.2rem;
 }
 
-/* Emojis flotantes — CSS Anchor Positioning (Chrome 125+)
-   position-anchor e opacity se ponen inline, el resto aquí */
+/* Emojis flotantes — posicionados por JS (proyección 3D→2D).
+   left/top y opacity se actualizan en el RAF loop;
+   translate centra el emoji sobre el punto del marcador. */
 .globo-emoji {
   position: absolute;
-  bottom: anchor(top);
-  left: anchor(center);
-  translate: -50% 0;
-  font-size: 1.6rem;
+  top: 0; left: 0;           /* punto base; JS sobreescribe ambos    */
+  translate: -50% -115%;     /* centra X, eleva Y sobre el marcador  */
+  font-size: 1.55rem;
+  line-height: 1;
   filter: url(#globo-sticker)
-          drop-shadow(0 2px 6px rgba(26, 42, 53, 0.25));
+          drop-shadow(0 2px 8px rgba(26, 42, 53, 0.3));
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  opacity: 0;                /* JS controla visibilidad              */
+  transition: opacity 0.25s ease;
   animation: globo-float 3s ease-in-out infinite;
+  will-change: left, top;
 }
 
 @keyframes globo-float {
