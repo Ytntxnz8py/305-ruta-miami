@@ -5003,7 +5003,8 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 /* Texto central: parallax propio — diferente al fondo */
 .hero-px__text {
   position: absolute;
-  top: calc(50% - 100px);
+  /* Centrado en el eje vertical — título largo de varias líneas + subtítulo + social proof */
+  top: 50%;
   left: 50%;
   z-index: 9;
   text-align: center;
@@ -5014,20 +5015,20 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.4rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-px__text { transition: none; }
 }
 
-/* H1: font-black, gran tamaño, line-height apretado como el componente de referencia */
+/* H1: centrado, line-height holgado para que las líneas no se pisen */
 .hero-px__title {
   font-family: var(--serif, 'Playfair Display', Georgia, serif);
-  font-size: clamp(2.2rem, 6vw, 4.8rem);
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
   font-weight: 900;
   color: #ffffff;
-  line-height: 1.05;
+  line-height: 1.18;
   text-shadow: 0 2px 32px rgba(7,30,43,0.7);
   margin: 0;
 }
@@ -5125,9 +5126,10 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   .hero-px__scroll-arrow { animation: none; }
 }
 
-/* Responsive */
+/* Responsive móvil */
 @media (max-width: 640px) {
-  .hero-px__tags   { top: 72px; }
+  .hero-px__tags       { top: 72px; }
   .hero-px__scroll-btn { bottom: 1.5rem; }
-  .hero-px__text   { top: 50%; }
+  /* En móvil el título ocupa más líneas — se centra con translate ya definido */
+  .hero-px__text { gap: 1rem; }
 }
