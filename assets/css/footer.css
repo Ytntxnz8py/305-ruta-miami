@@ -579,3 +579,42 @@
     font-size: clamp(1.8rem, 9vw, 3rem);
   }
 }
+
+/* ─────────────────────────────────────────────────
+   VARIANTE MINI — páginas de destino y artículos blog
+   30% más pequeño que --compact.
+   Combinar siempre con --compact: cf-footer--compact cf-footer--mini
+───────────────────────────────────────────────── */
+.cf-footer--mini .cf-main {
+  gap: 1rem;
+  padding: 3.2rem 1rem 1rem;
+}
+
+.cf-footer--mini .cf-headline {
+  font-size: clamp(1.4rem, 3.5vw, 2.8rem);
+}
+
+.cf-footer--mini .cf-bg-text {
+  font-size: clamp(3.5rem, 12.6vw, 11rem);
+}
+
+.cf-footer--mini .cf-marquee-wrap {
+  margin-top: 0.7rem;
+}
+
+@media (max-width: 768px) {
+  .cf-footer--mini .cf-main {
+    gap: 1rem;
+    padding: 2.8rem 0.85rem 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cf-footer--mini .cf-main {
+    gap: 0.85rem;
+    padding: 2.5rem 0.7rem 0.7rem;
+  }
+  .cf-footer--mini .cf-headline {
+    font-size: clamp(1.25rem, 6.3vw, 2.1rem);
+  }
+}
