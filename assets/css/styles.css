@@ -5207,10 +5207,35 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 
 /* ── Columna del globo ── */
 .globo-canvas-wrap {
+  position: relative;       /* contexto para emojis absolutos */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
+}
+
+/* Emojis flotantes — CSS Anchor Positioning (Chrome 125+)
+   position-anchor e opacity se ponen inline, el resto aquí */
+.globo-emoji {
+  position: absolute;
+  bottom: anchor(top);
+  left: anchor(center);
+  translate: -50% 0;
+  font-size: 1.6rem;
+  filter: url(#globo-sticker)
+          drop-shadow(0 2px 6px rgba(26, 42, 53, 0.25));
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  animation: globo-float 3s ease-in-out infinite;
+}
+
+@keyframes globo-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .globo-emoji { animation: none; }
 }
 
 #globoCanvas {
@@ -5220,16 +5245,16 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   display: block;
   cursor: grab;
   border-radius: 50%;
-  /* Sombra suave sobre fondo claro */
-  filter: drop-shadow(0 4px 32px rgba(0, 188, 212, 0.16))
-          drop-shadow(0 2px 12px rgba(26, 42, 53, 0.06));
+  /* Glow turquesa visible sobre fondo claro */
+  filter: drop-shadow(0 0 40px rgba(0, 188, 212, 0.22))
+          drop-shadow(0 8px 24px rgba(26, 42, 53, 0.12));
   transition: filter 0.3s ease;
 }
 
 #globoCanvas:active {
   cursor: grabbing;
-  filter: drop-shadow(0 4px 40px rgba(0, 188, 212, 0.24))
-          drop-shadow(0 2px 16px rgba(255, 107, 107, 0.10));
+  filter: drop-shadow(0 0 56px rgba(0, 188, 212, 0.32))
+          drop-shadow(0 8px 32px rgba(26, 42, 53, 0.16));
 }
 
 .globo-hint {

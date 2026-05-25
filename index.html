@@ -592,10 +592,55 @@
 
         </div><!-- /globo-texto -->
 
-        <!-- Columna derecha: canvas del globo -->
+        <!-- Columna derecha: canvas del globo + emojis flotantes -->
         <div class="globo-canvas-wrap">
+
+          <!-- Filtro SVG: contorno blanco estilo sticker para los emojis -->
+          <svg width="0" height="0" aria-hidden="true" focusable="false"
+               style="position:absolute;overflow:hidden">
+            <defs>
+              <filter id="globo-sticker">
+                <feMorphology in="SourceAlpha" result="dilated"
+                              operator="dilate" radius="2"/>
+                <feFlood flood-color="#ffffff" result="color"/>
+                <feComposite in="color" in2="dilated"
+                             operator="in" result="outline"/>
+                <feMerge>
+                  <feMergeNode in="outline"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+          </svg>
+
           <canvas id="globoCanvas" width="600" height="600"
                   aria-label="Globo 3D interactivo — Miami marcada en coral"></canvas>
+
+          <!-- Emojis — CSS Anchor Positioning (Chrome 125+)
+               Cobe expone --cobe-{id} como anchor-name y
+               --cobe-visible-{id} como 0/1 según cara visible -->
+          <div class="globo-emoji"
+               style="position-anchor:--cobe-marker-miami;opacity:var(--cobe-visible-marker-miami,0)"
+               aria-hidden="true">🌴</div>
+          <div class="globo-emoji"
+               style="position-anchor:--cobe-marker-nyc;opacity:var(--cobe-visible-marker-nyc,0)"
+               aria-hidden="true">🗽</div>
+          <div class="globo-emoji"
+               style="position-anchor:--cobe-marker-cdmx;opacity:var(--cobe-visible-marker-cdmx,0)"
+               aria-hidden="true">🌮</div>
+          <div class="globo-emoji"
+               style="position-anchor:--cobe-marker-sanjuan;opacity:var(--cobe-visible-marker-sanjuan,0)"
+               aria-hidden="true">🌊</div>
+          <div class="globo-emoji"
+               style="position-anchor:--cobe-marker-bogota;opacity:var(--cobe-visible-marker-bogota,0)"
+               aria-hidden="true">🌺</div>
+          <div class="globo-emoji"
+               style="position-anchor:--cobe-marker-saopaulo;opacity:var(--cobe-visible-marker-saopaulo,0)"
+               aria-hidden="true">☀️</div>
+          <div class="globo-emoji"
+               style="position-anchor:--cobe-marker-london;opacity:var(--cobe-visible-marker-london,0)"
+               aria-hidden="true">✈️</div>
+
           <p class="globo-hint" aria-hidden="true">
             <span class="lang-es">Arrastra para girar</span>
             <span class="lang-en">Drag to rotate</span>
@@ -870,22 +915,23 @@
         height: w * dpr,
         phi:    0.5,
         theta:  0.2,
-        /* Globo claro sobre fondo blanco-arena */
-        dark:          0,
-        diffuse:       1.5,
+        /* Globo oscuro (dark:1) — contrasta sobre fondo blanco-arena */
+        dark:          1,
+        diffuse:       1.2,
         mapSamples:    16000,
-        mapBrightness: 8,
-        baseColor:   [0.98, 0.98, 1.00],   /* blanco azulado */
-        markerColor: [1.00, 0.42, 0.42],   /* coral #FF6B6B  */
-        glowColor:   [1.00, 0.99, 0.97],   /* blanco-arena   */
+        mapBrightness: 6,
+        baseColor:   [0.04, 0.12, 0.19],   /* ocean-mid navy   */
+        markerColor: [1.00, 0.42, 0.42],   /* coral #FF6B6B    */
+        glowColor:   [0.00, 0.74, 0.83],   /* turquesa         */
+        markerElevation: 0.012,             /* eleva los puntos */
         markers: [
-          { location: [25.77, -80.19], size: 0.12 }, /* Miami — principal  */
-          { location: [19.43, -99.13], size: 0.05 }, /* Ciudad de Mexico   */
-          { location: [ 4.71, -74.07], size: 0.05 }, /* Bogota             */
-          { location: [40.71, -74.01], size: 0.05 }, /* Nueva York         */
-          { location: [51.51,  -0.13], size: 0.04 }, /* Londres            */
-          { location: [-23.55,-46.63], size: 0.05 }, /* Sao Paulo          */
-          { location: [18.47, -66.11], size: 0.05 }  /* San Juan PR        */
+          { id: 'marker-miami',    location: [25.77, -80.19], size: 0.08 }, /* Miami       */
+          { id: 'marker-nyc',      location: [40.71, -74.01], size: 0.04 }, /* Nueva York  */
+          { id: 'marker-cdmx',     location: [19.43, -99.13], size: 0.04 }, /* Cdad Mexico */
+          { id: 'marker-sanjuan',  location: [18.47, -66.11], size: 0.04 }, /* San Juan PR */
+          { id: 'marker-bogota',   location: [ 4.71, -74.07], size: 0.04 }, /* Bogota      */
+          { id: 'marker-saopaulo', location: [-23.55,-46.63], size: 0.04 }, /* Sao Paulo   */
+          { id: 'marker-london',   location: [51.51,  -0.13], size: 0.03 }  /* Londres     */
         ]
       });
 
