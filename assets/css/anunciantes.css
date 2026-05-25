@@ -2358,9 +2358,21 @@ p  { font-weight: 300; }
    SECCIÓN PRECIOS — 3 tiers (Esencial / Profesional / Élite)
    Reemplaza la sección de 2 cards anterior
    ============================================ */
+
+/* ============================================================
+   PRECIOS — glassmorphism fondo océano
+   Inspirado en ModernPricingCard: backdrop-blur, tipografía
+   extralight, divisor degradado, check SVG, ring en destacada.
+   Sin 3D, sin shine border animado.
+   ============================================================ */
+
+/* ── 1. Sección — fondo océano ── */
 .seccion-precios {
   padding: 7rem 1.5rem 8rem;
-  background: linear-gradient(160deg, var(--ocean-ini) 0%, var(--ocean-mid) 48%, #051822 100%);
+  background: linear-gradient(160deg,
+    var(--ocean-ini) 0%,
+    var(--ocean-mid) 48%,
+    #051822 100%);
   position: relative;
   overflow: hidden;
 }
@@ -2368,11 +2380,12 @@ p  { font-weight: 300; }
 .seccion-precios::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(60% 50% at 15% 50%, rgba(0,188,212,0.10), transparent 65%),
-    radial-gradient(50% 40% at 85% 50%, rgba(255,107,107,0.08), transparent 65%),
-    radial-gradient(40% 60% at 50% 100%, rgba(255,179,0,0.06), transparent 65%);
+    radial-gradient(60% 55% at 18% 50%, rgba(0,188,212,0.08), transparent 60%),
+    radial-gradient(50% 45% at 82% 45%, rgba(255,107,107,0.06), transparent 60%),
+    radial-gradient(35% 55% at 50% 95%, rgba(255,179,0,0.05), transparent 55%);
 }
 
+/* ── 2. Contenedor y encabezado ── */
 .seccion-precios__contenedor {
   max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
 }
@@ -2381,22 +2394,23 @@ p  { font-weight: 300; }
 
 .seccion-precios__eyebrow {
   display: inline-block;
-  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--turquesa); margin-bottom: 1rem;
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--turquesa); margin-bottom: 0.9rem;
 }
 
 .seccion-precios__titulo {
   font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15;
   color: var(--blanco-arena); margin-bottom: 0.75rem;
 }
 
 .seccion-precios__sub {
-  font-size: 1rem; font-weight: 300;
-  color: rgba(255,253,247,0.65); max-width: 520px; margin: 0 auto;
+  font-size: 1rem; font-weight: 300; line-height: 1.6;
+  color: rgba(255,253,247,0.60); max-width: 520px; margin: 0 auto;
 }
 
-/* ── Toggle mensual/anual ── */
+/* ── 3. Toggle mensual/anual ── */
 .precios-toggle {
   display: flex; justify-content: center; gap: 0.5rem;
   margin-bottom: 3.5rem;
@@ -2405,18 +2419,18 @@ p  { font-weight: 300; }
 .precios-toggle__btn {
   padding: 0.55rem 1.4rem; border-radius: 999px;
   font-size: 0.88rem; font-weight: 500;
-  color: rgba(255,253,247,0.6);
+  color: rgba(255,253,247,0.55);
   background: transparent;
   border: 1px solid rgba(255,253,247,0.15);
   cursor: pointer;
-  transition: all var(--dur) var(--ease);
+  transition: all 0.22s ease;
   display: flex; align-items: center; gap: 0.5rem;
 }
 
 .precios-toggle__btn--activo {
-  background: rgba(255,253,247,0.1);
+  background: rgba(255,253,247,0.10);
   color: var(--blanco-arena);
-  border-color: rgba(255,253,247,0.3);
+  border-color: rgba(255,253,247,0.30);
 }
 
 .precios-toggle__badge {
@@ -2425,92 +2439,177 @@ p  { font-weight: 300; }
   padding: 0.15rem 0.5rem; border-radius: 999px;
 }
 
-/* ── Grid 3 cards ── */
+/* ── 4. Grid ── */
 .seccion-precios .precios-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  align-items: start;
+  align-items: center;
 }
 
 @media (max-width: 900px) {
   .seccion-precios .precios-grid {
     grid-template-columns: 1fr;
-    max-width: 480px;
+    max-width: 440px;
     margin: 0 auto;
   }
 }
 
-/* ── Card base ── */
+/* ── 5. pc-wrap — limpio, sin perspectiva 3D ── */
+.pc-wrap {
+  perspective: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── 6. Card base — glassmorphism dark ── */
 .seccion-precios .precio-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(22px) saturate(180%);
-  -webkit-backdrop-filter: blur(22px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--r-lg);
-  padding: 2rem 1.8rem 2.2rem;
+  background: linear-gradient(to bottom right,
+    rgba(255,255,255,0.10),
+    rgba(255,255,255,0.05));
+  backdrop-filter: blur(14px) saturate(1.5);
+  -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 1rem;
+  padding: 2.2rem 1.8rem 2.4rem;
   position: relative;
   overflow: hidden;
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  transform-style: flat;
+  transform: none;
+  transition: transform 0.28s cubic-bezier(0.2,0,0,1),
+              box-shadow  0.28s cubic-bezier(0.2,0,0,1);
+  color: var(--blanco-arena);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 8px 32px rgba(5,24,34,0.42);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sin shine border animado */
+.seccion-precios .precio-card::after { display: none; }
+
+/* Sin capa de vidrio flotante en 3D */
+.seccion-precios .precio-card::before { display: none; }
+
+/* Hover: ascenso limpio sin rotación */
+.seccion-precios .precio-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 20px 56px rgba(5,24,34,0.54);
+}
+
+/* ── 7. Nombre del plan — extralight display ── */
+.precio-card__nombre {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-transform: none;
+  margin-bottom: 0.4rem;
   color: var(--blanco-arena);
 }
 
-.seccion-precios .precio-card:hover { transform: translateY(-6px); }
+/* Acento de color por tier */
+.precio-card--esencial   .precio-card__nombre { color: #6eddf5; }
+.precio-card--profesional .precio-card__nombre { color: #ffd060; }
+.precio-card--elite       .precio-card__nombre { color: #ff9c9c; }
 
-/* ── ShineBorder base ── */
-.seccion-precios .precio-card::after {
-  content: ''; position: absolute; inset: 0;
-  border-radius: inherit; padding: 1px;
-  background-size: 300% 300%;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor; mask-composite: exclude;
-  animation: shine-pulse 10s linear infinite;
-  pointer-events: none;
+/* ── 8. Precio extralight ── */
+.precio-card__precio {
+  display: flex; align-items: baseline; gap: 0.25rem; margin-bottom: 0;
 }
 
-/* ── ShineBorder por tier ── */
-.precio-card--esencial::after {
-  background-image: radial-gradient(transparent, transparent,
-    #00BCD4, #0097a7, #FFB300, transparent, transparent);
+.precio-card__monto {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2.2rem, 3.5vw, 2.8rem);
+  letter-spacing: -0.02em;
+  color: var(--blanco-arena);
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
-.precio-card--profesional::after {
-  background-image: radial-gradient(transparent, transparent,
-    #FFB300, #FF6B6B, #00BCD4, transparent, transparent);
-  animation-duration: 8s;
+.precio-card__periodo {
+  font-size: 0.88rem; font-weight: 300;
+  color: rgba(255,253,247,0.48);
 }
 
-.precio-card--elite::after {
-  background-image: radial-gradient(transparent, transparent,
-    #FF6B6B, #FFB300, #00BCD4, #FF6B6B, transparent, transparent);
-  animation-duration: 6s;
-  padding: 2px;
+.precio-card__tagline {
+  font-size: 0.88rem; font-weight: 300; font-style: italic;
+  color: rgba(255,253,247,0.58); line-height: 1.5; margin-top: 0.5rem;
 }
 
-/* ── Élite — glow coral exterior ── */
-.precio-card--elite {
-  box-shadow:
-    0 0 0 1px rgba(255,107,107,0.25),
-    0 0 50px rgba(255,107,107,0.10),
-    0 8px 40px rgba(0,0,0,0.50),
-    inset 0 1px 0 rgba(255,255,255,0.10);
+/* ── 9. Divisor degradado ── */
+.precio-divider {
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.14) 20%,
+    rgba(255,255,255,0.26) 50%,
+    rgba(255,255,255,0.14) 80%,
+    transparent 100%);
+  margin: 1.3rem 0 1.1rem;
+  flex-shrink: 0;
 }
 
-/* ── Profesional — ligeramente más grande ── */
-@media (min-width: 900px) {
-  .precio-card--destacada {
-    transform: scale(1.04);
-    z-index: 2;
-  }
-  .precio-card--destacada:hover { transform: scale(1.04) translateY(-6px); }
+/* ── 10. Lista de features ── */
+.precio-card__lista {
+  list-style: none;
+  margin-bottom: 1.8rem;
+  display: flex; flex-direction: column; gap: 0.58rem;
+  flex: 1;
 }
 
-/* ── Badges ── */
+.precio-card__lista li {
+  display: flex; align-items: center; gap: 0.52rem;
+  font-size: 0.875rem; font-weight: 300;
+  color: rgba(255,253,247,0.85); line-height: 1.45;
+}
+
+/* ── 11. SVG check icon ── */
+.precio-check {
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: none;
+  border-radius: 0;
+}
+
+.precio-check svg { width: 16px; height: 16px; }
+
+.precio-check--turquesa { color: var(--turquesa); }
+.precio-check--mostaza  { color: var(--mostaza); }
+.precio-check--coral    { color: var(--coral); }
+
+@keyframes checkPulse {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.28) rotate(-8deg); }
+  65%  { transform: scale(1.16) rotate(5deg); }
+  100% { transform: scale(1); }
+}
+
+.precio-card__lista li:hover .precio-check {
+  animation: checkPulse 0.38s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .precio-card__lista li:hover .precio-check { animation: none; }
+}
+
+/* ── 12. Badge ── */
 .precio-card__badge {
-  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-  padding: 0.3rem 1.1rem; border-radius: 0 0 12px 12px;
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  position: absolute;
+  top: -1px; right: 1.1rem; left: auto;
+  transform: none;
+  padding: 0.28rem 0.9rem;
+  border-radius: 0 0 10px 10px;
+  font-size: 0.69rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -2519,96 +2618,57 @@ p  { font-weight: 300; }
 }
 
 .precio-card__badge--elite {
-  background: linear-gradient(135deg, var(--coral), var(--mostaza));
-  color: white;
+  background: var(--coral); color: #fff;
 }
 
-/* ── Header ── */
-.precio-card__header { margin-bottom: 1.8rem; padding-top: 0.5rem; }
-
-.precio-card__nombre {
-  display: block;
-  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(255,253,247,0.55); margin-bottom: 0.75rem;
+/* ── 13. Destacada (Profesional) — ring + scale leve ── */
+@media (min-width: 900px) {
+  .precio-card--destacada {
+    background: linear-gradient(to bottom right,
+      rgba(255,255,255,0.16),
+      rgba(255,255,255,0.09));
+    border-color: rgba(0,188,212,0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.14),
+      0 8px 40px rgba(5,24,34,0.48),
+      0 0 0 2px rgba(0,188,212,0.18);
+    transform: scale(1.04);
+    z-index: 2;
+  }
+  .precio-card--destacada:hover {
+    transform: scale(1.04) translateY(-5px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.18),
+      0 24px 60px rgba(5,24,34,0.58),
+      0 0 0 2px rgba(0,188,212,0.28);
+  }
 }
 
-.precio-card--esencial   .precio-card__nombre { color: var(--turquesa); }
-.precio-card--profesional .precio-card__nombre { color: var(--mostaza); }
-.precio-card--elite       .precio-card__nombre { color: var(--coral); }
-
-.precio-card__precio {
-  display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: 0.75rem;
+/* ── 14. Header y contenido — reset 3D ── */
+.seccion-precios .precio-card__header,
+.seccion-precios .precio-card__lista,
+.seccion-precios .precio-card__cta,
+.seccion-precios .precio-card__badge {
+  position: relative;
+  transform: none;
+  transform-style: flat;
 }
 
-.precio-card__monto {
-  font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-size: clamp(2.4rem, 4vw, 3.2rem);
-  color: var(--blanco-arena);
-  transition: opacity 0.22s ease, transform 0.22s ease;
+.precio-card__header {
+  margin-bottom: 0;
+  padding-top: 0.3rem;
 }
 
-.precio-card__periodo {
-  font-size: 0.9rem; font-weight: 300;
-  color: rgba(255,253,247,0.5);
-}
-
-.precio-card__tagline {
-  font-size: 0.88rem; font-weight: 300; font-style: italic;
-  color: rgba(255,253,247,0.65); line-height: 1.4;
-}
-
-/* ── Lista de features ── */
-.precio-card__lista {
-  list-style: none; margin-bottom: 2rem;
-  display: flex; flex-direction: column; gap: 0.65rem;
-}
-
-.precio-card__lista li {
-  display: flex; align-items: baseline; gap: 0.55rem;
-  font-size: 0.86rem; font-weight: 300;
-  color: rgba(255,253,247,0.80); line-height: 1.45;
-  cursor: default;
-}
-
-.precio-check {
-  font-size: 0.78rem; font-weight: 700; flex-shrink: 0;
-  width: 18px; height: 18px;
-  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
-  transition: transform 0.15s;
-}
-
-.precio-check--turquesa { background: rgba(0,188,212,0.18); color: var(--turquesa); }
-.precio-check--mostaza  { background: rgba(255,179,0,0.18);  color: var(--mostaza); }
-.precio-check--coral    { background: rgba(255,107,107,0.18); color: var(--coral); }
-
-/* Vibración del check al hover sobre el <li> */
-@keyframes checkBounce {
-  0%   { transform: scale(1) rotate(0deg); }
-  20%  { transform: scale(1.35) rotate(-10deg); }
-  40%  { transform: scale(1.25) rotate(8deg); }
-  60%  { transform: scale(1.15) rotate(-5deg); }
-  80%  { transform: scale(1.05) rotate(2deg); }
-  100% { transform: scale(1) rotate(0deg); }
-}
-
-.precio-card__lista li:hover .precio-check {
-  animation: checkBounce 0.48s cubic-bezier(0.36, 0.07, 0.19, 0.97);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .precio-card__lista li:hover .precio-check { animation: none; transform: none; }
-}
-
-/* ── CTA ── */
+/* ── 15. CTA ── */
 .precio-card__cta { margin-top: auto; }
 .precio-card__cta .metal-btn-wrap { width: 100%; }
 .precio-card__cta .metal-btn { width: 100%; justify-content: center; }
 
-/* ── Nota de transparencia ── */
+/* ── 16. Nota de transparencia ── */
 .precios-nota {
   text-align: center; margin-top: 2.5rem;
   font-size: 0.82rem; font-weight: 300;
-  color: rgba(255,253,247,0.45); line-height: 1.65;
+  color: rgba(255,253,247,0.40); line-height: 1.65;
 }
 
 .precios-nota__anual {
@@ -2616,188 +2676,18 @@ p  { font-weight: 300; }
   font-style: italic;
 }
 
-/* ── Prefers-reduced-motion ── */
+/* ── 17. Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .seccion-precios .precio-card::after { animation: none; }
   .seccion-precios .precio-card { transition: none; }
+  .seccion-precios .precio-card:hover { transform: none; }
+  .precio-card--destacada { transform: scale(1.04) !important; }
 }
 
-/* ============================================
-   PRECIOS — Fondo blanco arena + efecto GlassCard 3D
-   (Override del bloque oscuro anterior)
-   ============================================ */
-
-/* 1. Cambio de fondo: azul marino → blanco arena */
-.seccion-precios {
-  background: var(--blanco-arena);
-}
-.seccion-precios::before {
-  display: none; /* ya no necesitamos las luces de ambiente dark */
-}
-
-/* 2. Colores de texto adaptados al fondo claro */
-.seccion-precios__titulo {
-  color: var(--tinta);
-}
-.seccion-precios__sub {
-  color: rgba(26,42,53,0.60);
-}
-.precios-toggle__btn {
-  color: rgba(26,42,53,0.58);
-  border-color: rgba(26,42,53,0.18);
-}
-.precios-toggle__btn--activo {
-  background: rgba(26,42,53,0.07);
-  color: var(--tinta);
-  border-color: rgba(26,42,53,0.28);
-}
-.precios-toggle__badge {
-  background: var(--turquesa);
-  color: #fff;
-}
-.precios-nota {
-  color: rgba(26,42,53,0.42);
-}
-.precios-nota__anual {
-  color: rgba(26,42,53,0.55);
-}
-
-/* 3. Wrapper de perspectiva — uno por card → vanishing point independiente */
-.pc-wrap {
-  perspective: 1000px;
-}
-
-/* 4. Cards: sólidas dark por tier (en lugar de glassmorphism transparente) */
-.seccion-precios .precio-card {
-  /* Fondo sólido — visible sobre blanco arena */
-  background: linear-gradient(145deg, #071e2b, #0c2638);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  /* 3D setup */
-  overflow: visible; /* preserve-3d requiere overflow visible */
-  transform-style: preserve-3d;
-  transform: none; /* reset */
-  transition: transform 0.5s cubic-bezier(0.2,0,0,1),
-              box-shadow 0.5s cubic-bezier(0.2,0,0,1);
-}
-
-/* Tint de color por tier — oscuro con acento de marca */
-.precio-card--esencial {
-  background: linear-gradient(145deg, #071e2b 0%, #003542 100%);
-}
-.precio-card--profesional {
-  background: linear-gradient(145deg, #1a1100 0%, #2b1c00 100%);
-}
-.precio-card--elite {
-  background: linear-gradient(145deg, #1a0404 0%, #2d0808 100%);
-}
-
-/* 5. Hover 3D — activado desde .pc-wrap:hover para que no haya conflicto */
-.pc-wrap:hover .precio-card {
-  transform: rotate3d(1, 1, 0, 20deg);
-  box-shadow:
-    rgba(0,0,0,0.28) 28px 48px 22px -38px,
-    rgba(0,0,0,0.10) 0px 22px 28px 0px;
-}
-
-/* Elite mantiene su glow coral en hover */
-.pc-wrap:hover .precio-card--elite {
-  box-shadow:
-    rgba(0,0,0,0.28) 28px 48px 22px -38px,
-    rgba(0,0,0,0.10) 0px 22px 28px 0px,
-    0 0 38px rgba(255,107,107,0.22);
-}
-
-/* Turquesa glow para Esencial */
-.pc-wrap:hover .precio-card--esencial {
-  box-shadow:
-    rgba(0,0,0,0.28) 28px 48px 22px -38px,
-    rgba(0,0,0,0.10) 0px 22px 28px 0px,
-    0 0 32px rgba(0,188,212,0.18);
-}
-
-/* Mostaza glow para Profesional */
-.pc-wrap:hover .precio-card--profesional {
-  box-shadow:
-    rgba(0,0,0,0.28) 28px 48px 22px -38px,
-    rgba(0,0,0,0.10) 0px 22px 28px 0px,
-    0 0 32px rgba(255,179,0,0.18);
-}
-
-/* Anular el :hover translateY del bloque base (el pc-wrap lo gestiona) */
-.seccion-precios .precio-card:hover {
-  transform: none;
-}
-
-/* 6. Capa interna de vidrio — flotando en Z+22px (el "glasspanel" del GlassCard) */
-.seccion-precios .precio-card::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border-radius: calc(var(--r-lg) - 8px);
-  border-bottom: 1px solid rgba(255,255,255,0.14);
-  border-left:   1px solid rgba(255,255,255,0.14);
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.16) 0%,
-    rgba(255,255,255,0.04) 100%);
-  transform: translate3d(0, 0, 22px);
-  transform-style: preserve-3d;
-  pointer-events: none;
-  transition: transform 0.5s cubic-bezier(0.2,0,0,1);
-}
-
-/* En hover, la capa de vidrio sube un poco más */
-.pc-wrap:hover .precio-card::before {
-  transform: translate3d(0, 0, 28px);
-}
-
-/* 7. Profesional: en lugar de scale(1.04) estático,
-      usamos sombra base más prominente para dar jerarquía */
-@media (min-width: 900px) {
-  .precio-card--destacada {
-    transform: none;
-    box-shadow:
-      0 0 0 2px rgba(255,179,0,0.25),
-      0 8px 40px rgba(0,0,0,0.30);
-  }
-  .precio-card--destacada:hover { transform: none; }
-  .pc-wrap:hover .precio-card--destacada {
-    transform: rotate3d(1, 1, 0, 20deg);
-  }
-}
-
-/* 8. Contenido de la card en Z elevado para estar sobre la capa de vidrio */
-.seccion-precios .precio-card__header,
-.seccion-precios .precio-card__lista,
-.seccion-precios .precio-card__cta,
-.seccion-precios .precio-card__badge {
-  position: relative;
-  transform: translate3d(0, 0, 30px);
-  transform-style: preserve-3d;
-}
-
-/* 9. Accesibilidad: sin 3D si el usuario prefiere movimiento reducido */
-@media (prefers-reduced-motion: reduce) {
-  .pc-wrap:hover .precio-card,
-  .pc-wrap:hover .precio-card--elite,
-  .pc-wrap:hover .precio-card--esencial,
-  .pc-wrap:hover .precio-card--profesional,
-  .pc-wrap:hover .precio-card--destacada { transform: none; box-shadow: none; }
-  .seccion-precios .precio-card::before { transform: none; transition: none; }
-  .seccion-precios .precio-card__header,
-  .seccion-precios .precio-card__lista,
-  .seccion-precios .precio-card__cta,
-  .seccion-precios .precio-card__badge { transform: none; }
-}
-
-/* 10. Mobile: perspectiva menos agresiva (táctil no tiene hover de todos modos) */
+/* ── 18. Mobile ── */
 @media (max-width: 900px) {
-  .pc-wrap { perspective: 800px; }
-  .seccion-precios .precio-card__header,
-  .seccion-precios .precio-card__lista,
-  .seccion-precios .precio-card__cta,
-  .seccion-precios .precio-card__badge { transform: none; }
-  .seccion-precios .precio-card::before { transform: none; }
+  .pc-wrap { perspective: none; }
+  .seccion-precios .precio-card--destacada { transform: none; }
+  .seccion-precios .precio-card--destacada:hover { transform: translateY(-5px); }
 }
 
 /* ===================================================================

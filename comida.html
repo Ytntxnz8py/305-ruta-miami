@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="assets/css/liquid-btn.css" />
   <link rel="stylesheet" href="assets/css/navbar.css" />
   <link rel="stylesheet" href="assets/css/metal-button.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
 
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7HMBMBQNQZ"></script>
@@ -147,22 +148,31 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer__superior">
+  <footer class="footer" id="contacto">
+    <div class="footer__contenedor">
       <div class="footer__marca">
-        <span class="footer__logo-e">Explora</span><span class="footer__logo-m">Miami</span>
+        <a href="index.html" class="footer__logo">
+          <span class="footer__logo-explora">Explora</span><span class="footer__logo-miami">Miami</span>
+        </a>
         <p class="footer__tagline">
-          <span class="lang-es">Tu guía de experiencias en Miami</span>
-          <span class="lang-en">Your Miami experience guide</span>
+          <span class="lang-es">Tu próxima aventura empieza aquí</span>
+          <span class="lang-en">Your next adventure starts here</span>
         </p>
       </div>
-      <nav class="footer__nav" aria-label="Pie de página">
+      <nav aria-label="Pie de página">
+        <h4 class="footer__subtitulo"><span class="lang-es">Navegación</span><span class="lang-en">Navigation</span></h4>
         <ul class="footer__lista">
           <li><a href="index.html" class="footer__enlace"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a></li>
+          <li><a href="index.html#destinos" class="footer__enlace"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a></li>
           <li><a href="aventura.html" class="footer__enlace"><span class="lang-es">Aventura</span><span class="lang-en">Adventure</span></a></li>
           <li><a href="comida.html" class="footer__enlace"><span class="lang-es">Comida</span><span class="lang-en">Food</span></a></li>
           <li><a href="blog.html" class="footer__enlace">Blog</a></li>
           <li><a href="anunciantes.html" class="footer__enlace"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Legal">
+        <h4 class="footer__subtitulo">Legal</h4>
+        <ul class="footer__lista">
           <li><a href="privacidad.html" class="footer__enlace"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a></li>
           <li><a href="terminos.html" class="footer__enlace"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a></li>
         </ul>

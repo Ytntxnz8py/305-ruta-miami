@@ -534,3 +534,48 @@
   .cf-copy    { justify-content: center; }
   .cf-marquee-wrap { margin-top: 1rem; }
 }
+
+/* ─────────────────────────────────────────────────
+   VARIANTE COMPACTA — páginas internas del ecosistema
+   Usa .cf-footer--compact junto con .cf-footer
+───────────────────────────────────────────────── */
+.cf-footer--compact {
+  min-height: auto;           /* no forzar pantalla completa */
+}
+
+.cf-footer--compact .cf-main {
+  gap: 1.5rem;
+  padding: 4.5rem 1.5rem 1.5rem;
+  justify-content: flex-start;
+}
+
+.cf-footer--compact .cf-headline {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.cf-footer--compact .cf-bg-text {
+  font-size: clamp(5rem, 18vw, 16rem);
+}
+
+/* Marquesina más cerca del borde en compact */
+.cf-footer--compact .cf-marquee-wrap {
+  margin-top: 1rem;
+}
+
+/* Responsive compact */
+@media (max-width: 768px) {
+  .cf-footer--compact .cf-main {
+    gap: 1.4rem;
+    padding: 4rem 1.2rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cf-footer--compact .cf-main {
+    gap: 1.2rem;
+    padding: 3.5rem 1rem 1rem;
+  }
+  .cf-footer--compact .cf-headline {
+    font-size: clamp(1.8rem, 9vw, 3rem);
+  }
+}
