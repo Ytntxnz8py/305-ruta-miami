@@ -65,6 +65,7 @@
   <link rel="stylesheet" href="../assets/css/navbar.css" />
   <link rel="stylesheet" href="../assets/css/metal-button.css" />
   <link rel="stylesheet" href="../assets/css/liquid-btn.css" />
+  <link rel="stylesheet" href="../assets/css/cta-card.css" />
 
   <script>
     document.documentElement.classList.add('lang-' + (localStorage.getItem('em_idioma') || 'es'));
@@ -599,28 +600,39 @@
     </section>
 
     <!-- ===== CTA FINAL — EMPRESAS ===== -->
-    <section class="articulo-cta-empresas">
-      <div class="articulo-cta-empresas__inner fade-up">
-        <span class="articulo-cta-empresas__eyebrow">
-          <span class="lang-es">¿Ofreces tours o actividades en los Everglades?</span>
-          <span class="lang-en">Do you offer tours or activities in the Everglades?</span>
-        </span>
-        <h2 class="articulo-cta-empresas__titulo">
-          <span class="lang-es">Aparece donde buscan tus clientes</span>
-          <span class="lang-en">Appear where your customers search</span>
-        </h2>
-        <p class="articulo-cta-empresas__sub">
-          <span class="lang-es">Miles de aventureros buscan actividades en South Florida cada mes. Ponemos tu negocio frente a ellos.</span>
-          <span class="lang-en">Thousands of adventurers search for activities in South Florida every month. We put your business in front of them.</span>
-        </p>
-        <div class="metal-btn-wrap" data-variant="turquesa" data-size="md">
-          <div class="metal-btn-inner"></div>
-          <a href="../anunciantes.html#precios" class="metal-btn">
-            <div class="metal-btn-shine"></div>
-            <div class="metal-btn-hover-glow"></div>
-            <span class="lang-es">Ver planes de visibilidad →</span>
-            <span class="lang-en">See visibility plans →</span>
-          </a>
+    <section class="seccion-cta-card" id="cta-empresas" aria-label="Anuncia tu negocio en Explora Miami">
+      <div class="cta-card cta-card--blog">
+        <div class="cta-card__glow" aria-hidden="true"></div>
+        <div class="cta-card__inner">
+          <div class="cta-card__text">
+            <span class="cta-card__eyebrow">
+              <span class="lang-es">¿Ofreces tours o actividades en los Everglades?</span>
+              <span class="lang-en">Do you offer tours or activities in the Everglades?</span>
+            </span>
+            <h2 class="cta-card__titulo">
+              <span class="lang-es">Tu empresa frente a miles de aventureros</span>
+              <span class="lang-en">Your business in front of thousands of adventurers</span>
+            </h2>
+            <p class="cta-card__desc">
+              <span class="lang-es">Las personas que leen este blog están buscando exactamente lo que tú ofreces. Ponles tu negocio enfrente.</span>
+              <span class="lang-en">The people reading this blog are looking for exactly what you offer. Put your business in front of them.</span>
+            </p>
+          </div>
+          <div class="cta-card__action">
+            <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
+              <div class="metal-btn-inner"></div>
+              <a href="../anunciantes.html#precios" class="metal-btn" style="text-decoration:none">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span class="lang-es">Ver planes y precios →</span>
+                <span class="lang-en">See plans and pricing →</span>
+              </a>
+            </div>
+            <p class="cta-card__meta">
+              <span class="lang-es">Desde $119/mes con el plan anual. Sin contratos, activo en 48h.</span>
+              <span class="lang-en">From $119/mo with annual plan. No contracts, live in 48h.</span>
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -667,6 +679,7 @@
   <script src="../assets/js/navbar.js"></script>
   <script src="../assets/js/metal-button.js"></script>
   <script src="../assets/js/liquid-tilt.js"></script>
+  <script src="../assets/js/cta-card.js"></script>
 
 </body>
 </html>
