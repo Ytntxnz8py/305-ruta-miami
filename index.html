@@ -133,54 +133,74 @@
 
   <main>
 
-    <!-- ===== HERO: ScrollExpandMedia — wrapper sticky (200vh) ===== -->
-    <div class="sem-wrapper">
-    <section class="sem-section" id="inicio" aria-label="Hero principal">
+    <!-- ===== HERO CINEMATIC — parallax + WebGL dots + scan line ===== -->
+    <section class="hero-cinematic" id="inicio" aria-label="Hero principal">
 
-      <!-- Cursor trail — generado por JS al mover el mouse -->
-      <div class="hero-trail" id="heroTrail" aria-hidden="true"></div>
-
-      <!-- Fondo foto Miami — se desvanece al expandir -->
-      <div class="sem-bg" aria-hidden="true"></div>
-
-      <!-- Título partido: "Explora" ← y "Miami" → se separan con el scroll -->
-      <div class="sem-title-wrap" id="semTitle"
-           role="heading" aria-level="1" aria-label="Explora Miami">
-        <span class="sem-title-word sem-title-left"  aria-hidden="true">Explora</span>
-        <span class="sem-title-word sem-title-right" aria-hidden="true">Miami</span>
-      </div>
-
-      <!-- Tarjeta de medios — se expande con el scroll -->
-      <div class="sem-media-wrap" id="semMediaWrap">
-        <img class="sem-media"
+      <!-- Imagen de fondo con parallax suave vía CSS transform -->
+      <div class="hero-cin__img-wrap" aria-hidden="true">
+        <img class="hero-cin__img" id="heroCinImg"
              src="assets/images/hero/hero-04.jpg"
-             alt="Atardecer en el waterfront de Miami"
+             alt="Miami — paisaje al atardecer"
              width="1920" height="1080"
              fetchpriority="high" decoding="async" />
-
-        <!-- Contenido visible tras expansión completa -->
-        <div class="sem-content" id="semContent" aria-hidden="true">
-          <div class="hero-tags">
-            <span class="hero-tag"><span class="lang-es">✨ Aventuras</span><span class="lang-en">✨ Adventures</span></span>
-            <span class="hero-tag"><span class="lang-es">🌊 Playas</span><span class="lang-en">🌊 Beaches</span></span>
-            <span class="hero-tag"><span class="lang-es">☀️ Sol todo el año</span><span class="lang-en">☀️ Year-round sun</span></span>
-            <span class="hero-tag"><span class="lang-es">🌿 Naturaleza</span><span class="lang-en">🌿 Nature</span></span>
-            <span class="hero-tag"><span class="lang-es">🐠 Arrecifes</span><span class="lang-en">🐠 Reefs</span></span>
-          </div>
-          <!-- Contador de visitantes activos — actualizado por JS -->
-          <div class="hero-social-proof" id="heroSocialProof">
-            <span class="hero-sp-dot" aria-hidden="true"></span>
-            <strong class="hero-sp-count" id="heroVisitCount">847</strong>
-            <span class="hero-sp-text">
-              <span class="lang-es">aventureros este mes</span>
-              <span class="lang-en">adventurers this month</span>
-            </span>
-          </div>
-        </div>
       </div>
 
+      <!-- Canvas WebGL: cuadrícula de puntos roja + línea de escaneo animada -->
+      <canvas class="hero-cin__canvas" id="heroCinCanvas" aria-hidden="true"></canvas>
+
+      <!-- Vignette: degrada los bordes para que el texto sea legible -->
+      <div class="hero-cin__vignette" aria-hidden="true"></div>
+
+      <!-- Tags flotantes en la parte superior -->
+      <div class="hero-cin__tags" aria-hidden="true">
+        <span class="hero-tag"><span class="lang-es">✨ Aventuras</span><span class="lang-en">✨ Adventures</span></span>
+        <span class="hero-tag"><span class="lang-es">🌊 Playas</span><span class="lang-en">🌊 Beaches</span></span>
+        <span class="hero-tag"><span class="lang-es">☀️ Sol todo el año</span><span class="lang-en">☀️ Year-round sun</span></span>
+        <span class="hero-tag"><span class="lang-es">🌿 Naturaleza</span><span class="lang-en">🌿 Nature</span></span>
+        <span class="hero-tag"><span class="lang-es">🐠 Arrecifes</span><span class="lang-en">🐠 Reefs</span></span>
+      </div>
+
+      <!-- Contenido central: título + subtítulo + social proof -->
+      <div class="hero-cin__content">
+
+        <!-- H1 real (texto inyectado por JS, palabra a palabra) -->
+        <h1 class="hero-cin__title" id="heroCinTitle"
+            aria-label="Descubre una de las ciudades más icónicas y emocionantes del mundo"></h1>
+
+        <!-- Subtítulo — animado por CSS tras el título -->
+        <p class="hero-cin__sub" id="heroCinSub">
+          <span class="lang-es">Bienvenido a la ciudad del sol, aguas turquesas y paisajes de ensueño</span>
+          <span class="lang-en">Welcome to the city of sun, turquoise waters and dreamlike landscapes</span>
+        </p>
+
+        <!-- Contador de visitantes -->
+        <div class="hero-social-proof" id="heroSocialProof">
+          <span class="hero-sp-dot" aria-hidden="true"></span>
+          <strong class="hero-sp-count" id="heroVisitCount">847</strong>
+          <span class="hero-sp-text">
+            <span class="lang-es">aventureros este mes</span>
+            <span class="lang-en">adventurers this month</span>
+          </span>
+        </div>
+
+      </div><!-- /hero-cin__content -->
+
+      <!-- Botón scroll al siguiente bloque -->
+      <button class="hero-cin__scroll-btn" id="heroCinScrollBtn" type="button"
+              aria-label="Explorar destinos">
+        <span class="hero-cin__scroll-label">
+          <span class="lang-es">Descubre Miami</span>
+          <span class="lang-en">Explore Miami</span>
+        </span>
+        <span class="hero-cin__scroll-arrow" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+            <path d="M11 5V17" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 12L11 17L16 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </button>
+
     </section>
-    </div><!-- /sem-wrapper -->
 
     <!-- Fusión visual: Hero (oscuro) → Intro (blanco arena) -->
     <div class="fade-band fade-hero-intro" aria-hidden="true"></div>

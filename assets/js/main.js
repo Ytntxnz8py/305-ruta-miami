@@ -1703,8 +1703,7 @@ document.addEventListener('DOMContentLoaded', function () {
   renderDestinos();
   initDestCarousel();
   initScrollAnimation();
-  initScrollExpandMedia();   /* hero ScrollExpandMedia — debe ir antes del trail */
-  initHeroTrail();           /* cursor trail — opera sobre #inicio/#heroTrail */
+  initHeroCinematic();       /* nuevo hero: parallax + WebGL dots + texto */
   initShuffleGrid();         /* intro shuffle grid 4×3 — barajado con scroll */
   initRoadmap();
   initRoadmapTooltip();
@@ -1712,8 +1711,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initHeroSocialProof();     /* contador de visitantes en el hero */
   initQuizAventurero();      /* quiz de 3 pasos */
   initNewsletter();          /* formulario de newsletter */
-  /* initGlobo / initMapaLeaflet / initReferenciasGlobo eliminados —
-     la sección mapa fue reemplazada por el roadmap animado */
+  /* ScrollExpandMedia / HeroTrail eliminados — hero reemplazado por cinematic */
 });
 
 /* ============================================================
@@ -1991,3 +1989,251 @@ function initNewsletter() {
   });
 }
 
+/* ============================================================
+   HERO CINEMATIC
+   - Texto: palabras aparecen una a una (como en el diseño de referencia)
+   - Canvas WebGL: cuadrícula de puntos + línea de escaneo roja animada
+   - Imagen: parallax suave con el movimiento del mouse
+   ============================================================ */
+function initHeroCinematic() {
+  var section   = document.querySelector('.hero-cinematic');
+  var canvas    = document.getElementById('heroCinCanvas');
+  var imgEl     = document.getElementById('heroCinImg');
+  var scrollBtn = document.getElementById('heroCinScrollBtn');
+
+  if (!section) return;
+
+  /* ── Texto: palabras una a una ── */
+  initHeroCinText();
+
+  /* ── Botón scroll: lleva al siguiente bloque ── */
+  if (scrollBtn) {
+    scrollBtn.addEventListener('click', function () {
+      var quiz = document.getElementById('quiz-aventurero');
+      var nosotros = document.getElementById('nosotros');
+      var destino  = quiz || nosotros;
+      if (destino) {
+        destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  /* ── Parallax de imagen con mouse / touch ── */
+  var ptrX = 0, ptrY = 0, curX = 0, curY = 0;
+  var STRENGTH = 20; /* px de desplazamiento máximo */
+
+  if (imgEl && window.matchMedia &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+
+    window.addEventListener('mousemove', function (e) {
+      ptrX = (e.clientX / window.innerWidth  - 0.5) * 2;
+      ptrY = (e.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', function (e) {
+      var t = e.touches[0];
+      ptrX = (t.clientX / window.innerWidth  - 0.5) * 2;
+      ptrY = (t.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+  }
+
+  /* ── WebGL: puntos + scan ── */
+  if (!canvas) return;
+
+  var gl = canvas.getContext('webgl') ||
+           canvas.getContext('experimental-webgl');
+
+  if (!gl) { canvas.style.display = 'none'; return; }
+
+  /* Vertex shader — quad de pantalla completa */
+  var vertSrc = [
+    'attribute vec2 aPos;',
+    'void main() {',
+    '  gl_Position = vec4(aPos, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  /* Fragment shader — cuadrícula de puntos + línea de escaneo */
+  var fragSrc = [
+    'precision mediump float;',
+    'uniform float uProgress;',   /* posición del scan 0→1 */
+    'uniform vec2  uResolution;', /* tamaño del canvas */
+
+    /* Hash determinista para brillo de cada celda */
+    'float hash(vec2 p) {',
+    '  vec2 q = fract(p * vec2(127.1, 311.7));',
+    '  q += dot(q, q + 43.7);',
+    '  return fract(q.x * q.y);',
+    '}',
+
+    'void main() {',
+    '  vec2 uv = gl_FragCoord.xy / uResolution;',
+    '  uv.y = 1.0 - uv.y;', /* Origen arriba */
+
+    /* UV con corrección de aspecto para cuadrícula cuadrada */
+    '  float aspect = uResolution.x / uResolution.y;',
+    '  vec2 tUv = vec2(uv.x * aspect, uv.y);',
+
+    /* Cuadrícula de puntos */
+    '  float tiling  = 80.0;',
+    '  vec2 cellUv   = tUv * tiling;',
+    '  vec2 tiledUv  = mod(cellUv, 2.0) - 1.0;',
+    '  float brite   = hash(floor(cellUv / 2.0));',
+    '  float dist    = length(tiledUv);',
+    '  float dotVal  = smoothstep(0.5, 0.43, dist) * brite;',
+
+    /* Flujo de scan: puntos cercanos al progreso brillan */
+    '  float flow    = 1.0 - smoothstep(0.0, 0.048, abs(uv.y - uProgress));',
+    '  float redDots = dotVal * flow;',
+
+    /* Puntos ambientales muy sutiles (siempre visibles) */
+    '  float ambient = dotVal * 0.06;',
+
+    /* Color: rojo puro en scan, gris ultra-sutil en reposo */
+    '  vec3 col = vec3(',
+    '    redDots + ambient * 0.22,',
+    '    ambient * 0.03,',
+    '    ambient * 0.03',
+    '  );',
+
+    /* Brillo de la línea de escaneo */
+    '  float scanGlow = smoothstep(0.07, 0.0, abs(uv.y - uProgress)) * 0.28;',
+    '  col += vec3(scanGlow * 0.9, scanGlow * 0.04, scanGlow * 0.04);',
+
+    '  float a = min(1.0, redDots * 1.7 + ambient + scanGlow);',
+    '  gl_FragColor = vec4(col, a);',
+    '}'
+  ].join('\n');
+
+  /* Compilar shader */
+  function makeShader(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+  }
+
+  var vert = makeShader(gl.VERTEX_SHADER,   vertSrc);
+  var frag = makeShader(gl.FRAGMENT_SHADER, fragSrc);
+  if (!vert || !frag) { canvas.style.display = 'none'; return; }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, vert);
+  gl.attachShader(prog, frag);
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { canvas.style.display = 'none'; return; }
+  gl.useProgram(prog);
+
+  /* Quad de pantalla completa (2 triángulos) */
+  var quad = new Float32Array([-1, -1,  1, -1,  -1, 1,  1, 1]);
+  var buf  = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
+
+  var posLoc  = gl.getAttribLocation(prog,  'aPos');
+  var progLoc = gl.getUniformLocation(prog, 'uProgress');
+  var resLoc  = gl.getUniformLocation(prog, 'uResolution');
+
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  /* Redimensionar canvas al tamaño de la sección */
+  function resize() {
+    canvas.width  = section.offsetWidth;
+    canvas.height = section.offsetHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  /* ── Bucle de animación unificado ── */
+  var t0 = performance.now();
+  var paused = window.matchMedia &&
+               window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function loop() {
+    requestAnimationFrame(loop);
+    var t = (performance.now() - t0) / 1000;
+
+    /* Parallax imagen */
+    if (!paused && imgEl) {
+      curX += (ptrX - curX) * 0.065;
+      curY += (ptrY - curY) * 0.065;
+      imgEl.style.transform =
+        'translate(' + (-curX * STRENGTH) + 'px, ' + (-curY * STRENGTH) + 'px)';
+    }
+
+    /* WebGL scan + dots */
+    var progress = paused ? 0 : Math.sin(t * 0.5) * 0.5 + 0.5;
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform1f(progLoc, progress);
+    gl.uniform2f(resLoc, canvas.width, canvas.height);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  loop();
+}
+
+/* ── Animación de texto: palabras una a una ── */
+function initHeroCinText() {
+  var titleEl = document.getElementById('heroCinTitle');
+  var subEl   = document.getElementById('heroCinSub');
+  if (!titleEl) return;
+
+  var lang  = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+  var wEs   = ['Descubre', 'una', 'de', 'las', 'ciudades', 'más', 'icónicas',
+               'y', 'emocionantes', 'del', 'mundo'];
+  var wEn   = ['Discover', 'one', 'of', 'the', 'most', 'iconic', 'and',
+               'exciting', 'cities', 'in', 'the', 'world'];
+  var words = lang === 'en' ? wEn : wEs;
+
+  /* Con motion reducido: mostrar todo de golpe */
+  var reduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduced) {
+    titleEl.textContent = words.join(' ');
+    if (subEl) { subEl.style.opacity = '1'; subEl.style.transform = 'none'; }
+    return;
+  }
+
+  /* Construir un span por palabra */
+  titleEl.innerHTML = '';
+  var spans = [];
+  for (var i = 0; i < words.length; i++) {
+    var sp = document.createElement('span');
+    sp.className   = 'hero-cin__word';
+    sp.textContent = words[i];
+    titleEl.appendChild(sp);
+    spans.push(sp);
+    if (i < words.length - 1) {
+      titleEl.appendChild(document.createTextNode(' ')); /* espacio */
+    }
+  }
+
+  /* Animar cada palabra con su delay */
+  var BASE  = 350;  /* ms antes de empezar */
+  var STEP  = 175;  /* ms entre palabras */
+
+  for (var j = 0; j < spans.length; j++) {
+    (function (el, delay) {
+      setTimeout(function () {
+        el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+        el.style.opacity    = '1';
+        el.style.transform  = 'translateY(0)';
+      }, delay);
+    })(spans[j], BASE + j * STEP);
+  }
+
+  /* Subtítulo: aparece al terminar el título */
+  var subDelay = BASE + words.length * STEP + 450;
+  setTimeout(function () {
+    if (subEl) {
+      subEl.style.transition = 'opacity 0.9s ease, transform 0.7s ease';
+      subEl.style.opacity    = '1';
+      subEl.style.transform  = 'translateY(0)';
+    }
+  }, subDelay);
+}
