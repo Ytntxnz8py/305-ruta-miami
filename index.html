@@ -133,26 +133,35 @@
 
   <main>
 
-    <!-- ===== HERO CINEMATIC — parallax + WebGL dots + scan line ===== -->
-    <section class="hero-cinematic" id="inicio" aria-label="Hero principal">
+    <!-- ===== HERO PARALLAX — multicapa con profundidad 3D al mover el mouse ===== -->
+    <section class="hero-parallax" id="inicio" aria-label="Hero principal">
 
-      <!-- Imagen de fondo con parallax suave vía CSS transform -->
-      <div class="hero-cin__img-wrap" aria-hidden="true">
-        <img class="hero-cin__img" id="heroCinImg"
-             src="assets/images/hero/hero-04.jpg"
-             alt="Miami — paisaje al atardecer"
+      <!-- Vignette radial: oscurece bordes para legibilidad (z-index alto, estático) -->
+      <div class="hero-px__radial" aria-hidden="true"></div>
+
+      <!-- Capa 1: imagen de fondo — más lenta = sensación de lejanía -->
+      <div class="hero-px__layer" id="hpxBg"
+           data-spx="0.03" data-spy="0.038" data-spz="0" data-rot="0"
+           aria-hidden="true">
+        <img class="hero-px__img"
+             src="assets/images/destinos/biscayne/hero.jpg"
+             alt="Aguas turquesas del Biscayne — Miami"
              width="1920" height="1080"
              fetchpriority="high" decoding="async" />
       </div>
 
-      <!-- Canvas WebGL: cuadrícula de puntos roja + línea de escaneo animada -->
-      <canvas class="hero-cin__canvas" id="heroCinCanvas" aria-hidden="true"></canvas>
+      <!-- Capa 2: niebla oceánica superior (CSS gradient, velocidad media) -->
+      <div class="hero-px__layer hero-px__mist hero-px__mist--top" id="hpxMistTop"
+           data-spx="0.16" data-spy="0.10" data-spz="0" data-rot="0"
+           aria-hidden="true"></div>
 
-      <!-- Vignette: degrada los bordes para que el texto sea legible -->
-      <div class="hero-cin__vignette" aria-hidden="true"></div>
+      <!-- Capa 3: niebla de base — la más próxima, la más rápida -->
+      <div class="hero-px__layer hero-px__mist hero-px__mist--bot" id="hpxMistBot"
+           data-spx="0.25" data-spy="0.28" data-spz="0" data-rot="0"
+           aria-hidden="true"></div>
 
-      <!-- Tags flotantes en la parte superior -->
-      <div class="hero-cin__tags" aria-hidden="true">
+      <!-- Tags flotantes en la parte superior (estáticos, solo fade-in) -->
+      <div class="hero-px__tags" aria-hidden="true">
         <span class="hero-tag"><span class="lang-es">✨ Aventuras</span><span class="lang-en">✨ Adventures</span></span>
         <span class="hero-tag"><span class="lang-es">🌊 Playas</span><span class="lang-en">🌊 Beaches</span></span>
         <span class="hero-tag"><span class="lang-es">☀️ Sol todo el año</span><span class="lang-en">☀️ Year-round sun</span></span>
@@ -160,20 +169,21 @@
         <span class="hero-tag"><span class="lang-es">🐠 Arrecifes</span><span class="lang-en">🐠 Reefs</span></span>
       </div>
 
-      <!-- Contenido central: título + subtítulo + social proof -->
-      <div class="hero-cin__content">
+      <!-- Texto central — parallax propio, distinto al fondo -->
+      <div class="hero-px__text" id="hpxText"
+           data-spx="0.07" data-spy="0.05" data-spz="0.08" data-rot="0.04">
 
-        <!-- H1 real (texto inyectado por JS, palabra a palabra) -->
-        <h1 class="hero-cin__title" id="heroCinTitle"
+        <!-- H1: texto inyectado por JS, palabra a palabra -->
+        <h1 class="hero-px__title" id="heroPxTitle"
             aria-label="Descubre una de las ciudades más icónicas y emocionantes del mundo"></h1>
 
-        <!-- Subtítulo — animado por CSS tras el título -->
-        <p class="hero-cin__sub" id="heroCinSub">
+        <!-- Subtítulo -->
+        <p class="hero-px__sub" id="heroPxSub">
           <span class="lang-es">Bienvenido a la ciudad del sol, aguas turquesas y paisajes de ensueño</span>
           <span class="lang-en">Welcome to the city of sun, turquoise waters and dreamlike landscapes</span>
         </p>
 
-        <!-- Contador de visitantes -->
+        <!-- Contador de visitantes activos -->
         <div class="hero-social-proof" id="heroSocialProof">
           <span class="hero-sp-dot" aria-hidden="true"></span>
           <strong class="hero-sp-count" id="heroVisitCount">847</strong>
@@ -183,16 +193,16 @@
           </span>
         </div>
 
-      </div><!-- /hero-cin__content -->
+      </div><!-- /hero-px__text -->
 
       <!-- Botón scroll al siguiente bloque -->
-      <button class="hero-cin__scroll-btn" id="heroCinScrollBtn" type="button"
+      <button class="hero-px__scroll-btn" id="heroCinScrollBtn" type="button"
               aria-label="Explorar destinos">
-        <span class="hero-cin__scroll-label">
+        <span class="hero-px__scroll-label">
           <span class="lang-es">Descubre Miami</span>
           <span class="lang-en">Explore Miami</span>
         </span>
-        <span class="hero-cin__scroll-arrow" aria-hidden="true">
+        <span class="hero-px__scroll-arrow" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
             <path d="M11 5V17" stroke="white" stroke-width="2" stroke-linecap="round"/>
             <path d="M6 12L11 17L16 12" stroke="white" stroke-width="2" stroke-linecap="round"/>

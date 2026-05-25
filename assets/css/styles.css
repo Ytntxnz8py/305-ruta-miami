@@ -1,6 +1,6 @@
-/* =========================================
-   EXPLORA MIAMI — styles.css
-   Paleta tropical · Mobile-first
+﻿/* =========================================
+   EXPLORA MIAMI â€” styles.css
+   Paleta tropical Â· Mobile-first
    Fuentes: Playfair Display + Inter (Google)
 ========================================= */
 
@@ -17,7 +17,7 @@
   /* Texto */
   --texto-oscuro: #1a2a3a;
   --texto-medio:  #4a6070;
-  --texto-suave:  #4a6f82; /* era #8aacba — contraste 2.27:1, falla WCAG AA → 5.4:1 ✓ */
+  --texto-suave:  #4a6f82; /* era #8aacba â€” contraste 2.27:1, falla WCAG AA â†’ 5.4:1 âœ“ */
 
   /* Bordes y sombras */
   --borde:         rgba(0, 188, 212, 0.18);
@@ -26,7 +26,7 @@
   --sombra-hover:  0 22px 56px rgba(0, 188, 212, 0.28), 0 8px 20px rgba(0, 188, 212, 0.14);
   --sombra-tierra: 0 22px 56px rgba(124, 179, 66, 0.26), 0 8px 20px rgba(124, 179, 66, 0.14);
 
-  /* Tipografía */
+  /* TipografÃ­a */
   --fuente-titulo: 'Playfair Display', Georgia, serif;
   --fuente-cuerpo: 'Inter', 'Helvetica Neue', sans-serif;
 
@@ -36,7 +36,7 @@
   --max:       1200px;
   --seccion-py: 5.5rem;
 
-  /* Escala tipográfica */
+  /* Escala tipogrÃ¡fica */
   --text-xs:   0.75rem;
   --text-sm:   0.875rem;
   --text-base: 1rem;
@@ -56,7 +56,7 @@
 /* ===== RESET ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* overflow-x en <html> (no en body) — la spec CSS propaga overflow de html
+/* overflow-x en <html> (no en body) â€” la spec CSS propaga overflow de html
    al viewport sin crear un scroll-container adicional, preservando sticky */
 html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 
@@ -65,8 +65,8 @@ body {
   background-color: var(--blanco-arena);
   color: var(--texto-oscuro);
   line-height: 1.65;
-  /* overflow-x: hidden removido — estaba en body y convertía overflow-y:visible
-     en overflow-y:auto, haciendo de body un scroll-container que rompía sticky */
+  /* overflow-x: hidden removido â€” estaba en body y convertÃ­a overflow-y:visible
+     en overflow-y:auto, haciendo de body un scroll-container que rompÃ­a sticky */
 }
 
 img  { display: block; max-width: 100%; }
@@ -77,10 +77,10 @@ ul   { list-style: none; }
 html.lang-en .lang-es { display: none; }
 html.lang-es .lang-en { display: none; }
 
-/* ===== ANIMACIÓN FADE-UP ===== */
+/* ===== ANIMACIÃ“N FADE-UP ===== */
 .fade-up {
   opacity: 0;
-  transform: translateY(20px); /* era 44px — demasiado brusco */
+  transform: translateY(20px); /* era 44px â€” demasiado brusco */
   transition: opacity 0.6s cubic-bezier(0.2, 0, 0, 1), transform 0.6s cubic-bezier(0.2, 0, 0, 1);
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -132,7 +132,7 @@ html.lang-es .lang-en { display: none; }
   transform: translateY(-2px);
 }
 
-/* Títulos de sección */
+/* TÃ­tulos de secciÃ³n */
 .seccion-titulo {
   font-family: var(--fuente-titulo);
   font-style: italic;
@@ -143,7 +143,7 @@ html.lang-es .lang-en { display: none; }
   margin-bottom: 1rem;
   line-height: 1.15;
 }
-/* Línea decorativa tropical bajo cada título de sección */
+/* LÃ­nea decorativa tropical bajo cada tÃ­tulo de secciÃ³n */
 .seccion-titulo::after {
   content: '';
   display: block;
@@ -224,7 +224,7 @@ html.lang-es .lang-en { display: none; }
 .header__menu-btn.abierto span:nth-child(2) { opacity: 0; }
 .header__menu-btn.abierto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Nav móvil */
+/* Nav mÃ³vil */
 .header__nav {
   position: absolute;
   top: 100%; left: 0; right: 0;
@@ -249,7 +249,7 @@ html.lang-es .lang-en { display: none; }
 }
 .header__enlace:hover { color: var(--turquesa); }
 
-/* Link CTA "Para empresas" en el navbar — ANUNCIANTES */
+/* Link CTA "Para empresas" en el navbar â€” ANUNCIANTES */
 .header__enlace--cta {
   background: linear-gradient(135deg, var(--coral), var(--turquesa));
   -webkit-background-clip: text;
@@ -264,7 +264,7 @@ html.lang-es .lang-en { display: none; }
   color: inherit; /* sin sobrescribir el gradient text */
 }
 
-/* Botón de idioma */
+/* BotÃ³n de idioma */
 .header__lang-btn {
   background: var(--turquesa);
   color: #fff;
@@ -299,7 +299,7 @@ html.lang-es .lang-en { display: none; }
   .header__enlace  { font-size: 0.9rem; padding: 0.35rem 0.8rem; }
 }
 
-/* ===== HERO TRAIL — ImageTrail ===== */
+/* ===== HERO TRAIL â€” ImageTrail ===== */
 /* Hero blanco arena con trail de fotos siguiendo el cursor. */
 
 .hero-arc {
@@ -316,7 +316,7 @@ html.lang-es .lang-en { display: none; }
   color: var(--texto-oscuro);
 }
 
-/* Contenedor del trail de imágenes */
+/* Contenedor del trail de imÃ¡genes */
 .hero-trail {
   position: absolute;
   inset: 0;
@@ -348,7 +348,7 @@ html.lang-es .lang-en { display: none; }
   padding: 2rem 1.5rem;
 }
 
-/* Etiqueta superior — tema claro */
+/* Etiqueta superior â€” tema claro */
 .hero-arc__etiqueta {
   display: inline-block;
   font-size: 0.78rem;
@@ -365,7 +365,7 @@ html.lang-es .lang-en { display: none; }
   animation: hero-fade-in 700ms var(--ease) forwards 0.3s;
 }
 
-/* Título shutter */
+/* TÃ­tulo shutter */
 .hero-arc__titulo {
   font-family: var(--fuente-titulo);
   font-size: clamp(2.2rem, 6vw, 4.8rem);
@@ -394,7 +394,7 @@ html.lang-es .lang-en { display: none; }
 }
 @keyframes shutter-up { to { transform: translateY(0); } }
 
-/* Tagline — Miami style: fino, naranja/mostaza, cursiva */
+/* Tagline â€” Miami style: fino, naranja/mostaza, cursiva */
 .hero-arc__tagline {
   font-family: var(--fuente-titulo);
   font-style: italic;
@@ -472,7 +472,7 @@ html.lang-es .lang-en { display: none; }
   .hfa-item { animation: none !important; opacity: 0.65 !important; }
 }
 
-/* ===== HERO — Foto icónica Miami (local, uso libre) ===== */
+/* ===== HERO â€” Foto icÃ³nica Miami (local, uso libre) ===== */
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -485,7 +485,7 @@ html.lang-es .lang-en { display: none; }
   pointer-events: none;
 }
 
-/* ===== HERO — Frases emotivas flotantes ===== */
+/* ===== HERO â€” Frases emotivas flotantes ===== */
 .hero-frases-ambient {
   position: absolute;
   inset: 0;
@@ -519,13 +519,13 @@ html.lang-es .lang-en { display: none; }
   100% { opacity: 0.68; transform: translateX(-50%) translateY(0); }
 }
 
-/* ===== SECCIÓN INTRO ===== */
+/* ===== SECCIÃ“N INTRO ===== */
 .seccion-intro {
   background: var(--blanco-arena);
   padding: var(--seccion-py) 1.5rem;
 }
 
-/* ---- Animación: título "¿Por qué Explora Miami?" ---- */
+/* ---- AnimaciÃ³n: tÃ­tulo "Â¿Por quÃ© Explora Miami?" ---- */
 @keyframes tituloSlideIn {
   from {
     opacity: 0;
@@ -539,7 +539,7 @@ html.lang-es .lang-en { display: none; }
   }
 }
 
-/* Línea gradiente que crece bajo el título */
+/* LÃ­nea gradiente que crece bajo el tÃ­tulo */
 @keyframes tituloLineaReveal {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
@@ -549,7 +549,7 @@ html.lang-es .lang-en { display: none; }
   animation: tituloSlideIn 0.75s cubic-bezier(0.2, 0, 0, 1) 0.12s both;
 }
 
-/* Línea decorativa bajo el título */
+/* LÃ­nea decorativa bajo el tÃ­tulo */
 .si-layout .seccion-intro__titulo {
   position: relative;
   padding-bottom: 0.55rem;
@@ -571,7 +571,7 @@ html.lang-es .lang-en { display: none; }
   animation: tituloLineaReveal 0.6s cubic-bezier(0.2, 0, 0, 1) 0.6s both;
 }
 
-/* Reduced motion — sin animación */
+/* Reduced motion â€” sin animaciÃ³n */
 @media (prefers-reduced-motion: reduce) {
   .si-col-texto.visible .seccion-intro__titulo,
   .si-col-texto.visible .seccion-intro__titulo::after {
@@ -602,7 +602,7 @@ html.lang-es .lang-en { display: none; }
   background: linear-gradient(145deg, #ffffff 0%, var(--blanco-arena) 100%);
   border-radius: var(--radio);
   border: 1px solid rgba(0, 188, 212, 0.14);
-  transition: transform 0.32s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.32s cubic-bezier(0.2, 0, 0, 1); /* era ease — asimétrico */
+  transition: transform 0.32s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.32s cubic-bezier(0.2, 0, 0, 1); /* era ease â€” asimÃ©trico */
 }
 .intro-card:hover {
   transform: translateY(-8px);
@@ -610,10 +610,10 @@ html.lang-es .lang-en { display: none; }
   border-color: rgba(0, 188, 212, 0.32);
 }
 .intro-card__icono  { font-size: 2.5rem; margin-bottom: 1rem; }
-.intro-card__titulo { font-family: var(--fuente-titulo); font-style: italic; font-weight: 600; font-size: 1.25rem; margin-bottom: 0.5rem; } /* era 400 — trazo muy fino a este tamaño */
+.intro-card__titulo { font-family: var(--fuente-titulo); font-style: italic; font-weight: 600; font-size: 1.25rem; margin-bottom: 0.5rem; } /* era 400 â€” trazo muy fino a este tamaÃ±o */
 .intro-card__texto  { font-size: 0.95rem; color: var(--texto-medio); line-height: 1.65; }
 
-/* ===== SECCIÓN DESTINOS ===== */
+/* ===== SECCIÃ“N DESTINOS ===== */
 .seccion-destinos {
   background: var(--blanco-arena);
   padding: var(--seccion-py) 1.5rem;
@@ -640,24 +640,24 @@ html.lang-es .lang-en { display: none; }
 .filtros__btn:hover          { border-color: var(--turquesa); color: var(--turquesa); transform: translateY(-2px); }
 .filtros__btn--activo        { background-color: var(--turquesa); border-color: var(--turquesa); color: #fff; }
 
-/* ── Carrusel de destinos ── */
+/* â”€â”€ Carrusel de destinos â”€â”€ */
 .destinos-carousel-wrap {
   position: relative;
 }
 
-/* Contenedor de tarjetas — scroll horizontal con snap */
+/* Contenedor de tarjetas â€” scroll horizontal con snap */
 .destinos-grid {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
   gap: 1.25rem;
-  padding: 0.25rem 1.5rem 1rem; /* padding mínimo — sin espacio vertical extra */
+  padding: 0.25rem 1.5rem 1rem; /* padding mÃ­nimo â€” sin espacio vertical extra */
   scroll-snap-type: x mandatory;
   scroll-padding-left: 1.5rem;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
   scroll-behavior: smooth;
-  /* Ocultar scrollbar completamente — la navegación la hacen los dots */
+  /* Ocultar scrollbar completamente â€” la navegaciÃ³n la hacen los dots */
   scrollbar-width: none;
   overflow-y: visible;
 }
@@ -669,7 +669,7 @@ html.lang-es .lang-en { display: none; }
   flex: 0 0 0.5rem;
 }
 
-/* Indicadores de posición (dots) */
+/* Indicadores de posiciÃ³n (dots) */
 .destinos-dots {
   display: flex;
   justify-content: center;
@@ -713,7 +713,7 @@ html.lang-es .lang-en { display: none; }
   background: linear-gradient(163deg, var(--coral, #FF6B6B) 0%, var(--turquesa, #00BCD4) 100%);
   border-radius: 26px;
   padding: 2px;
-  /* Sin overflow:hidden — permite que sombras sean visibles */
+  /* Sin overflow:hidden â€” permite que sombras sean visibles */
   transition: box-shadow 0.35s cubic-bezier(0.2, 0, 0, 1);
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -722,7 +722,7 @@ html.lang-es .lang-en { display: none; }
   }
 }
 
-/* Cada tarjeta dentro del wrapper — ocupa todo el ancho */
+/* Cada tarjeta dentro del wrapper â€” ocupa todo el ancho */
 .destinos-grid .destino-card {
   width: 100%;
 }
@@ -733,7 +733,7 @@ html.lang-es .lang-en { display: none; }
   border-radius: 24px; /* rounded-3xl equivalente */
   overflow: hidden;
   border: none; /* borde reemplazado por el wrapper con gradiente */
-  height: 420px;       /* altura fija como en el diseño de referencia */
+  height: 420px;       /* altura fija como en el diseÃ±o de referencia */
   display: flex;
   flex-direction: column;
   transition: box-shadow 0.38s cubic-bezier(0.2, 0, 0, 1);
@@ -744,14 +744,14 @@ html.lang-es .lang-en { display: none; }
 /* Imagen */
 .destino-card__img-cont {
   position: relative;
-  height: 192px; /* h-48 del diseño de referencia */
+  height: 192px; /* h-48 del diseÃ±o de referencia */
   overflow: hidden;
   flex-shrink: 0;
 }
 .destino-card__img      { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
 .destino-card:hover .destino-card__img { transform: scale(1.10); }
 
-/* Gradiente oscuro desde abajo (como el diseño de referencia) */
+/* Gradiente oscuro desde abajo (como el diseÃ±o de referencia) */
 .destino-card__img-cont::after {
   content: '';
   position: absolute;
@@ -769,7 +769,7 @@ html.lang-es .lang-en { display: none; }
 }
 .destino-card:hover .destino-card__img-cont::after { opacity: 0.40; }
 
-/* Overlay de hover — aparece centrado sobre la imagen al pasar el ratón */
+/* Overlay de hover â€” aparece centrado sobre la imagen al pasar el ratÃ³n */
 .destino-card__img-overlay {
   position: absolute;
   inset: 0;
@@ -785,10 +785,10 @@ html.lang-es .lang-en { display: none; }
 }
 .destino-card:hover .destino-card__img-overlay { opacity: 1; }
 
-/* En táctil no hay hover — el card entero es clickeable */
+/* En tÃ¡ctil no hay hover â€” el card entero es clickeable */
 @media (hover: none) { .destino-card__img-overlay { display: none; } }
 
-/* Botón de acción dentro del overlay */
+/* BotÃ³n de acciÃ³n dentro del overlay */
 .destino-card__overlay-btn {
   display: inline-flex;
   align-items: center;
@@ -825,16 +825,16 @@ html.lang-es .lang-en { display: none; }
   -webkit-backdrop-filter: blur(4px);
 }
 .destino-card__badge--tipo { left: 0.85rem; }
-.destino-card__badge--dif  { display: none; } /* eliminado — reemplazado por calificación estrellas */
+.destino-card__badge--dif  { display: none; } /* eliminado â€” reemplazado por calificaciÃ³n estrellas */
 
 .destino-card__badge--mar    { background-color: var(--turquesa); color: #fff; }
 .destino-card__badge--tierra { background-color: var(--verde-tierra); color: #fff; }
-.destino-card__badge--facil    { color: #388E3C; }                 /* contraste 4.54:1 ✓ */
-.destino-card__badge--moderado { color: #A04800; }                 /* era #F57C00 — 2.57:1 ✗ → 5.8:1 ✓ */
-.destino-card__badge--dificil  { color: var(--coral-oscura); }    /* era #FF6B6B — 2.64:1 ✗ → 5.15:1 ✓ */
+.destino-card__badge--facil    { color: #388E3C; }                 /* contraste 4.54:1 âœ“ */
+.destino-card__badge--moderado { color: #A04800; }                 /* era #F57C00 â€” 2.57:1 âœ— â†’ 5.8:1 âœ“ */
+.destino-card__badge--dificil  { color: var(--coral-oscura); }    /* era #FF6B6B â€” 2.64:1 âœ— â†’ 5.15:1 âœ“ */
 
-/* Calificación Google — esquina inferior derecha de la imagen
-   (abajo para no chocar con el badge de tipo que está arriba a la izquierda) */
+/* CalificaciÃ³n Google â€” esquina inferior derecha de la imagen
+   (abajo para no chocar con el badge de tipo que estÃ¡ arriba a la izquierda) */
 .destino-card__rating {
   position: absolute;
   bottom: 0.75rem;
@@ -855,7 +855,7 @@ html.lang-es .lang-en { display: none; }
 }
 .destino-card__stars { font-size: 0.65rem; letter-spacing: -0.5px; }
 
-/* Info — flex-col con espacio distribuido como en el diseño de referencia */
+/* Info â€” flex-col con espacio distribuido como en el diseÃ±o de referencia */
 .destino-card__info {
   padding: 1.5rem;
   display: flex;
@@ -867,7 +867,7 @@ html.lang-es .lang-en { display: none; }
   overflow: hidden; /* captura cualquier desbordamiento residual */
 }
 
-/* Sección superior: título + descripción */
+/* SecciÃ³n superior: tÃ­tulo + descripciÃ³n */
 .destino-card__info-top {
   display: flex;
   flex-direction: column;
@@ -887,7 +887,7 @@ html.lang-es .lang-en { display: none; }
 }
 .destino-card:hover .destino-card__nombre { color: var(--turquesa, #00BCD4); }
 
-/* Descripción con recorte de 2 líneas — 3 líneas desbordaba con títulos de 2 líneas */
+/* DescripciÃ³n con recorte de 2 lÃ­neas â€” 3 lÃ­neas desbordaba con tÃ­tulos de 2 lÃ­neas */
 .destino-card__desc {
   font-size: 0.875rem;
   color: var(--texto-medio);
@@ -898,7 +898,7 @@ html.lang-es .lang-en { display: none; }
   overflow: hidden;
 }
 
-/* Barra inferior — separador + precio + horarios */
+/* Barra inferior â€” separador + precio + horarios */
 /* margin-top eliminado: justify-content:space-between ya distribuye el espacio */
 .destino-card__meta-bar {
   border-top: 1px solid rgba(0, 188, 212, 0.14);
@@ -915,9 +915,9 @@ html.lang-es .lang-en { display: none; }
 
 .destino-card__btn { align-self: flex-start; font-size: 0.87rem; padding: 0.55rem 1.3rem; }
 
-/* ===== SECCIÓN MAPA ===== */
+/* ===== SECCIÃ“N MAPA ===== */
 /* ============================================
-   SECCIÓN MAPA REDISEÑADA — Globo Canvas + Leaflet
+   SECCIÃ“N MAPA REDISEÃ‘ADA â€” Globo Canvas + Leaflet
    ============================================ */
 .seccion-mapa {
   position: relative;
@@ -949,7 +949,7 @@ html.lang-es .lang-en { display: none; }
 }
 
 /* ---- COLUMNA GLOBO ---- */
-/* Fondo claro — el globo cobe.js es blanco */
+/* Fondo claro â€” el globo cobe.js es blanco */
 .mapa-globo-wrap {
   background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%) !important;
   border-radius: 24px;
@@ -978,7 +978,7 @@ html.lang-es .lang-en { display: none; }
   color: rgba(30, 50, 100, 0.55);
 }
 
-/* Canvas con fade-in — cobe lo pinta en su propio loop */
+/* Canvas con fade-in â€” cobe lo pinta en su propio loop */
 .mapa-globo-canvas {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -1000,7 +1000,7 @@ html.lang-es .lang-en { display: none; }
   gap: 0.45rem;
 }
 
-/* Chips — tema claro sobre fondo claro */
+/* Chips â€” tema claro sobre fondo claro */
 .mapa-ref-chip {
   font-size: 0.68rem;
   font-weight: 500;
@@ -1102,7 +1102,7 @@ html.lang-es .lang-en { display: none; }
   .mapa-globo-canvas { animation: none !important; }
 }
 
-/* ===== SECCIÓN TRABAJA CON NOSOTROS ===== */
+/* ===== SECCIÃ“N TRABAJA CON NOSOTROS ===== */
 .seccion-trabaja {
   background: var(--blanco-arena);
   padding: var(--seccion-py) 1.5rem;
@@ -1142,7 +1142,7 @@ html.lang-es .lang-en { display: none; }
   display: inline-flex; align-items: center; gap: 0.28rem;
 }
 
-/* Efecto vibración al hover */
+/* Efecto vibraciÃ³n al hover */
 @keyframes pillWiggle {
   0%   { transform: rotate(0deg) scale(1); }
   12%  { transform: rotate(-4deg) scale(1.06) translateY(-2px); }
@@ -1208,7 +1208,7 @@ html.lang-es .lang-en { display: none; }
   box-shadow: var(--sombra-card);
 }
 
-.form-grupo { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.125rem; } /* era 1.1rem — número sucio */
+.form-grupo { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.125rem; } /* era 1.1rem â€” nÃºmero sucio */
 
 .form-grupo label {
   font-size: 0.85rem;
@@ -1250,7 +1250,7 @@ html.lang-es .lang-en { display: none; }
   margin-top: 0.5rem;
 }
 
-/* Mensaje de éxito */
+/* Mensaje de Ã©xito */
 .form-exito {
   display: none;
   flex-direction: column;
@@ -1273,7 +1273,7 @@ html.lang-es .lang-en { display: none; }
 
 /* ===== FOOTER ===== */
 .footer {
-  background: linear-gradient(160deg, var(--footer-ini) 0%, var(--footer-mid) 45%, var(--footer-fin) 100%); /* hex → variables */
+  background: linear-gradient(160deg, var(--footer-ini) 0%, var(--footer-mid) 45%, var(--footer-fin) 100%); /* hex â†’ variables */
   color: rgba(255,253,247,0.82);
   padding: 4.5rem 1.5rem 0;
 }
@@ -1331,7 +1331,7 @@ html.lang-es .lang-en { display: none; }
 .footer__inferior a:hover { opacity: 1; }
 
 /* ===================================================
-   MODAL DE DESTINO — pantalla completa
+   MODAL DE DESTINO â€” pantalla completa
    Se abre al hacer clic en una tarjeta de destino
 =================================================== */
 
@@ -1341,7 +1341,7 @@ html.lang-es .lang-en { display: none; }
   inset: 0;
   z-index: 200;
   display: flex;
-  align-items: flex-end;      /* Entra desde abajo en móvil */
+  align-items: flex-end;      /* Entra desde abajo en mÃ³vil */
   justify-content: center;
   opacity: 0;
   pointer-events: none;
@@ -1378,7 +1378,7 @@ html.lang-es .lang-en { display: none; }
   max-height: 92vh;
   overflow-y: auto;
   overflow-x: hidden;
-  transform: translateY(40px); /* era 60px — offset inicial excesivo */
+  transform: translateY(40px); /* era 60px â€” offset inicial excesivo */
   transition: transform 0.35s cubic-bezier(0.34, 1.26, 0.64, 1);
   /* Scrollbar discreta */
   scrollbar-width: thin;
@@ -1393,7 +1393,7 @@ html.lang-es .lang-en { display: none; }
 }
 .modal-destino.abierto .modal-panel { transform: translateY(0); }
 
-/* Botón cerrar (X) fijo en la esquina superior derecha del panel */
+/* BotÃ³n cerrar (X) fijo en la esquina superior derecha del panel */
 .modal-cerrar {
   position: sticky;
   top: 0.75rem;
@@ -1415,10 +1415,10 @@ html.lang-es .lang-en { display: none; }
 }
 .modal-cerrar:hover { background: var(--coral); color: #fff; transform: rotate(90deg); }
 
-/* ---- Galería de fotos ---- */
+/* ---- GalerÃ­a de fotos ---- */
 .modal-galeria { width: 100%; overflow: hidden; }
 
-/* Grid: foto grande izquierda + dos pequeñas derecha */
+/* Grid: foto grande izquierda + dos pequeÃ±as derecha */
 .modal-galeria-grid {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -1459,11 +1459,11 @@ html.lang-es .lang-en { display: none; }
   padding: 2rem 2rem 3rem;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem; /* era 2rem — igual al padding lateral, genera compresión visual */
+  gap: 2.5rem; /* era 2rem â€” igual al padding lateral, genera compresiÃ³n visual */
 }
 @media (max-width: 540px) { .modal-cuerpo { padding: 1.5rem 1.25rem 2.5rem; } }
 
-/* ---- Encabezado: badges + título + texto ---- */
+/* ---- Encabezado: badges + tÃ­tulo + texto ---- */
 .modal-encabezado { display: flex; flex-direction: column; gap: 0.85rem; }
 
 .modal-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
@@ -1482,7 +1482,7 @@ html.lang-es .lang-en { display: none; }
 .modal-badge--moderado { color: #F57C00; border-color: rgba(245,124,0,0.25); background: rgba(245,124,0,0.08); }
 .modal-badge--dificil  { color: var(--coral); border-color: rgba(255,107,107,0.25); background: rgba(255,107,107,0.08); }
 
-/* Título del modal en Playfair italic */
+/* TÃ­tulo del modal en Playfair italic */
 .modal-nombre {
   font-family: var(--fuente-titulo);
   font-style: italic;
@@ -1492,7 +1492,7 @@ html.lang-es .lang-en { display: none; }
   line-height: 1.15;
 }
 
-/* Descripción corta: texto más prominente */
+/* DescripciÃ³n corta: texto mÃ¡s prominente */
 .modal-desc-corta {
   font-size: 1.05rem;
   font-weight: 600;
@@ -1500,14 +1500,14 @@ html.lang-es .lang-en { display: none; }
   line-height: 1.6;
 }
 
-/* Descripción larga: texto narrativo completo */
+/* DescripciÃ³n larga: texto narrativo completo */
 .modal-desc-larga {
   font-size: 0.95rem;
   color: var(--texto-medio);
   line-height: 1.75;
 }
 
-/* ---- Datos prácticos ---- */
+/* ---- Datos prÃ¡cticos ---- */
 .modal-datos-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1540,7 +1540,7 @@ html.lang-es .lang-en { display: none; }
 .modal-dato a { color: var(--turquesa); }
 .modal-dato a:hover { text-decoration: underline; }
 
-/* ---- Cómo llegar ---- */
+/* ---- CÃ³mo llegar ---- */
 .modal-llegar { display: flex; flex-direction: column; gap: 0.6rem; }
 
 .modal-llegar-texto {
@@ -1553,7 +1553,7 @@ html.lang-es .lang-en { display: none; }
   padding: 1rem 1.25rem;
 }
 
-/* ---- Subtítulos de sección dentro del modal ---- */
+/* ---- SubtÃ­tulos de secciÃ³n dentro del modal ---- */
 .modal-subtitulo {
   font-family: var(--fuente-titulo);
   font-style: italic;
@@ -1575,7 +1575,7 @@ html.lang-es .lang-en { display: none; }
 }
 @media (min-width: 640px) { .modal-mapa-iframe { height: 360px; } }
 
-/* ---- Reseñas de visitantes ---- */
+/* ---- ReseÃ±as de visitantes ---- */
 .modal-resenas-grid {
   display: flex;
   flex-direction: column;
@@ -1583,7 +1583,7 @@ html.lang-es .lang-en { display: none; }
 }
 
 .modal-resena {
-  /* Borde gradiente coral→turquesa via padding-box/border-box */
+  /* Borde gradiente coralâ†’turquesa via padding-box/border-box */
   background:
     linear-gradient(145deg, #fff, var(--blanco-arena)) padding-box,
     linear-gradient(163deg, var(--coral, #FF6B6B) 0%, var(--turquesa, #00BCD4) 100%) border-box;
@@ -1605,7 +1605,7 @@ html.lang-es .lang-en { display: none; }
   width: 44px; height: 44px;
   border-radius: 50%;
   flex-shrink: 0;
-  /* Sobreescrito más abajo para avatares con inicial */
+  /* Sobreescrito mÃ¡s abajo para avatares con inicial */
 }
 
 .modal-resena__nombre {
@@ -1635,7 +1635,7 @@ html.lang-es .lang-en { display: none; }
 /* Cursor pointer en tarjetas clickeables */
 .destino-card { cursor: pointer; }
 
-/* ===== GALERÍA CON NAVEGACIÓN PREV/NEXT ===== */
+/* ===== GALERÃA CON NAVEGACIÃ“N PREV/NEXT ===== */
 .modal-galeria-principal {
   position: relative;
   width: 100%;
@@ -1710,7 +1710,7 @@ html.lang-es .lang-en { display: none; }
 .modal-thumb--activa { border-color: var(--turquesa); opacity: 1; }
 .modal-thumb:hover { opacity: 0.9; }
 
-/* ===== BOTONES DE ACCIÓN DEL MODAL ===== */
+/* ===== BOTONES DE ACCIÃ“N DEL MODAL ===== */
 .modal-acciones {
   display: flex;
   flex-wrap: wrap;
@@ -1739,7 +1739,7 @@ html.lang-es .lang-en { display: none; }
   box-shadow: 0 4px 14px rgba(76,175,80,0.30);
 }
 .modal-accion-btn--apple {
-  background: linear-gradient(135deg, #1a2a3a, #0d1f30); /* era #1C1C1E — negro puro fuera de paleta */
+  background: linear-gradient(135deg, #1a2a3a, #0d1f30); /* era #1C1C1E â€” negro puro fuera de paleta */
   color: #fff;
   box-shadow: 0 4px 14px rgba(0,0,0,0.20);
 }
@@ -1754,7 +1754,7 @@ html.lang-es .lang-en { display: none; }
   border: 2px solid var(--turquesa);
 }
 
-/* ===== BADGE MEJOR ÉPOCA ===== */
+/* ===== BADGE MEJOR Ã‰POCA ===== */
 .modal-badge--epoca {
   background: rgba(255,179,0,0.12);
   color: #9a6700;
@@ -1774,7 +1774,7 @@ html.lang-es .lang-en { display: none; }
   line-height: 1.5;
 }
 
-/* Avatar de reseña con inicial (círculo de color en lugar de foto) */
+/* Avatar de reseÃ±a con inicial (cÃ­rculo de color en lugar de foto) */
 .modal-resena__avatar {
   width: 40px; height: 40px;
   border-radius: 50%;
@@ -1786,13 +1786,13 @@ html.lang-es .lang-en { display: none; }
   font-family: 'Playfair Display', Georgia, serif;
 }
 
-/* ===== MODAL REVIEW TEXT — sin italic en cuerpo pequeño ===== */
+/* ===== MODAL REVIEW TEXT â€” sin italic en cuerpo pequeÃ±o ===== */
 .modal-resena__texto {
-  font-style: normal; /* era italic — reduce legibilidad en Inter pequeño */
+  font-style: normal; /* era italic â€” reduce legibilidad en Inter pequeÃ±o */
 }
 
 /* ================================================================
-   PREFERS-REDUCED-MOTION — accesibilidad (BLOCKER)
+   PREFERS-REDUCED-MOTION â€” accesibilidad (BLOCKER)
    Desactiva todas las animaciones y transiciones para usuarios
    que han indicado preferencia de movimiento reducido.
 ================================================================ */
@@ -1816,14 +1816,14 @@ html.lang-es .lang-en { display: none; }
 
 /* ================================================================
    TASTE-SKILL SOFT PASS
-   Variante: tropical moderno · sin plantilla genérica
-   Toca solo tipografía, espaciado, composición y jerarquía visual.
+   Variante: tropical moderno Â· sin plantilla genÃ©rica
+   Toca solo tipografÃ­a, espaciado, composiciÃ³n y jerarquÃ­a visual.
    No se modifica HTML ni JS.
 ================================================================ */
 
-/* ---- TIPOGRAFÍA: jerarquía más intencional ---- */
+/* ---- TIPOGRAFÃA: jerarquÃ­a mÃ¡s intencional ---- */
 
-/* Títulos de sección: tracking negativo + subrayado más vibrante */
+/* TÃ­tulos de secciÃ³n: tracking negativo + subrayado mÃ¡s vibrante */
 .seccion-titulo {
   font-size: clamp(2rem, 4.5vw, 3.2rem);
   letter-spacing: -0.025em;
@@ -1835,7 +1835,7 @@ html.lang-es .lang-en { display: none; }
   background: linear-gradient(90deg, var(--turquesa) 0%, var(--mostaza) 55%, var(--coral) 100%);
 }
 
-/* Subtítulo: Inter 500 — sale del look de plantilla */
+/* SubtÃ­tulo: Inter 500 â€” sale del look de plantilla */
 .seccion-subtitulo {
   font-size: 1.075rem;
   font-weight: 500;
@@ -1844,7 +1844,7 @@ html.lang-es .lang-en { display: none; }
   color: var(--texto-medio);
 }
 
-/* Nombre de tarjeta: más presencia */
+/* Nombre de tarjeta: mÃ¡s presencia */
 .destino-card__nombre {
   font-size: 1.22rem;
   letter-spacing: -0.015em;
@@ -1855,9 +1855,9 @@ html.lang-es .lang-en { display: none; }
   letter-spacing: -0.025em;
 }
 
-/* ---- INTRO CARDS: identidad de color por posición ---- */
+/* ---- INTRO CARDS: identidad de color por posiciÃ³n ---- */
 
-/* Turquesa, Mostaza, Coral — cada card tiene su personalidad */
+/* Turquesa, Mostaza, Coral â€” cada card tiene su personalidad */
 .seccion-intro__grid .intro-card:nth-child(1) {
   background: linear-gradient(150deg, rgba(0,188,212,0.08) 0%, #ffffff 52%);
   border: 1px solid rgba(0,188,212,0.18);
@@ -1874,7 +1874,7 @@ html.lang-es .lang-en { display: none; }
   border-top: 3px solid var(--coral);
 }
 
-/* Icono más grande y con margen propio */
+/* Icono mÃ¡s grande y con margen propio */
 .intro-card__icono {
   font-size: 2.75rem;
   margin-bottom: 1.25rem;
@@ -1883,14 +1883,14 @@ html.lang-es .lang-en { display: none; }
 
 /* ---- DESTINO CARDS: acento de color por tipo que se revela ---- */
 
-/* Estado base: línea de color sutil como huella de identidad */
+/* Estado base: lÃ­nea de color sutil como huella de identidad */
 .destino-card[data-tipo="mar"] {
   border-top: 3px solid rgba(0,188,212,0.18);
 }
 .destino-card[data-tipo="tierra"] {
   border-top: 3px solid rgba(124,179,66,0.22);
 }
-/* En hover se intensifica — ya sabías que era especial */
+/* En hover se intensifica â€” ya sabÃ­as que era especial */
 .destino-card[data-tipo="mar"]:hover {
   border-top-color: var(--turquesa);
 }
@@ -1898,12 +1898,12 @@ html.lang-es .lang-en { display: none; }
   border-top-color: var(--verde-tierra);
 }
 
-/* Más breathing room en el cuerpo de la tarjeta */
+/* MÃ¡s breathing room en el cuerpo de la tarjeta */
 .destino-card__info {
   padding: 1.75rem;   /* era 1.5rem */
 }
 
-/* Overlay sutil en imagen en hover — da profundidad sin oscurecer */
+/* Overlay sutil en imagen en hover â€” da profundidad sin oscurecer */
 .destino-card__img-cont::after {
   content: '';
   position: absolute;
@@ -1917,7 +1917,7 @@ html.lang-es .lang-en { display: none; }
   opacity: 1;
 }
 
-/* ---- FILTROS: botón activo más prominente ---- */
+/* ---- FILTROS: botÃ³n activo mÃ¡s prominente ---- */
 .filtros__btn--activo {
   box-shadow: 0 4px 18px rgba(0,188,212,0.30);
   letter-spacing: 0.01em;
@@ -1967,7 +1967,7 @@ html.lang-es .lang-en { display: none; }
   flex-shrink: 0;
 }
 
-/* Form card: sombra más dramática para separar del fondo */
+/* Form card: sombra mÃ¡s dramÃ¡tica para separar del fondo */
 .form-card {
   box-shadow: 0 16px 56px rgba(0,188,212,0.12), 0 4px 16px rgba(0,0,0,0.06);
 }
@@ -1989,35 +1989,35 @@ html.lang-es .lang-en { display: none; }
 .header__enlace:hover::after { transform: scaleX(1); }
 .header__enlace:hover { color: var(--texto-oscuro); } /* override turquesa, el subrayado ya habla */
 
-/* ---- FOOTER: mejor jerarquía de marca ---- */
+/* ---- FOOTER: mejor jerarquÃ­a de marca ---- */
 .footer__tagline {
   font-size: 0.875rem;
   font-style: italic;
   line-height: 1.55;
   opacity: 0.72;
-  max-width: 22ch;   /* evita líneas largas sueltas */
+  max-width: 22ch;   /* evita lÃ­neas largas sueltas */
 }
 
-/* Enlace de footer: underline en hover más limpio */
+/* Enlace de footer: underline en hover mÃ¡s limpio */
 .footer__enlace:hover {
   text-decoration: underline;
   text-decoration-color: rgba(0,188,212,0.5);
   text-underline-offset: 3px;
 }
 
-/* ---- MODAL: badge dif más refinado ---- */
+/* ---- MODAL: badge dif mÃ¡s refinado ---- */
 .modal-badge--dif {
   background: rgba(242,246,250,0.98);
   border: 1px solid #dde8f0;
   color: var(--texto-medio);
 }
 
-/* ---- STAT DECORATIVE: sección intro más generosa ---- */
+/* ---- STAT DECORATIVE: secciÃ³n intro mÃ¡s generosa ---- */
 .seccion-intro__contenedor {
-  padding-top: 0.5rem;  /* respira un poco más del fade-in */
+  padding-top: 0.5rem;  /* respira un poco mÃ¡s del fade-in */
 }
 
-/* ---- RESPONSIVE: ajustes móvil ---- */
+/* ---- RESPONSIVE: ajustes mÃ³vil ---- */
 @media (max-width: 640px) {
   .seccion-titulo { letter-spacing: -0.015em; }
   .destino-card__info { padding: 1.5rem; }
@@ -2025,9 +2025,9 @@ html.lang-es .lang-en { display: none; }
 }
 
 /* ================================================================
-   PREMIUM 3D REDESIGN — Nivel Agencia $20K
-   glassmorphism · dark ocean · cinematic scroll · 3D mouse tilt
-   No modifica HTML ni lógica JS existente.
+   PREMIUM 3D REDESIGN â€” Nivel Agencia $20K
+   glassmorphism Â· dark ocean Â· cinematic scroll Â· 3D mouse tilt
+   No modifica HTML ni lÃ³gica JS existente.
 ================================================================ */
 
 /* --- Tokens premium --- */
@@ -2043,14 +2043,14 @@ html.lang-es .lang-en { display: none; }
   --ocean-fin:     #051822;
 }
 
-/* --- SECCIÓN DESTINOS: dark ocean --- */
+/* --- SECCIÃ“N DESTINOS: dark ocean --- */
 .seccion-destinos {
   background: linear-gradient(160deg, var(--ocean-ini) 0%, var(--ocean-mid) 48%, var(--ocean-fin) 100%);
   position: relative;
   overflow: hidden;
 }
 
-/* Luces de ambiente — coral y turquesa difuminadas en el fondo */
+/* Luces de ambiente â€” coral y turquesa difuminadas en el fondo */
 .seccion-destinos::before {
   content: '';
   position: absolute;
@@ -2066,7 +2066,7 @@ html.lang-es .lang-en { display: none; }
 /* Todo el contenido flota sobre la capa de fondo */
 .seccion-destinos > * { position: relative; z-index: 1; }
 
-/* Título y subtítulo adaptados al fondo oscuro */
+/* TÃ­tulo y subtÃ­tulo adaptados al fondo oscuro */
 .seccion-destinos .seccion-titulo        { color: #fff; }
 .seccion-destinos .seccion-subtitulo     { color: rgba(255, 255, 255, 0.72); }
 .seccion-destinos .seccion-titulo::after {
@@ -2107,7 +2107,7 @@ html.lang-es .lang-en { display: none; }
   position: relative;
 }
 
-/* Sheen diagonal — brillo interno de glass */
+/* Sheen diagonal â€” brillo interno de glass */
 .destino-card::before {
   content: '';
   position: absolute;
@@ -2126,7 +2126,7 @@ html.lang-es .lang-en { display: none; }
 }
 .destino-card:hover::before { opacity: 1; }
 
-/* Líneas de color por tipo — más visibles en fondo oscuro */
+/* LÃ­neas de color por tipo â€” mÃ¡s visibles en fondo oscuro */
 .destino-card[data-tipo="mar"]    { border-top: 3px solid rgba(0, 188, 212, 0.60) !important; }
 .destino-card[data-tipo="tierra"] { border-top: 3px solid rgba(124, 179, 66, 0.55) !important; }
 .destino-card[data-tipo="mar"]:hover    { border-top-color: var(--turquesa)    !important; }
@@ -2143,7 +2143,7 @@ html.lang-es .lang-en { display: none; }
   overflow: hidden;
 }
 
-/* Overlay imagen más oscuro para contraste con texto */
+/* Overlay imagen mÃ¡s oscuro para contraste con texto */
 .destino-card__img-cont::after {
   background: linear-gradient(180deg, transparent 25%, rgba(0, 10, 20, 0.55) 100%) !important;
   opacity: 1 !important;
@@ -2153,7 +2153,7 @@ html.lang-es .lang-en { display: none; }
 .destino-card__badge--mar    { background: rgba(0, 188, 212, 0.88); }
 .destino-card__badge--tierra { background: rgba(99, 162, 40, 0.88); }
 
-/* Botón CTA glass dentro de la card */
+/* BotÃ³n CTA glass dentro de la card */
 .destino-card .btn--primario,
 .destino-card__btn {
   background: linear-gradient(135deg, rgba(0, 188, 212, 0.80) 0%, rgba(0, 140, 170, 0.72) 100%) !important;
@@ -2182,8 +2182,8 @@ html.lang-es .lang-en { display: none; }
   }
 }
 
-/* --- ANIMACIÓN CINEMATIC DE ENTRADA --- */
-/* Override del fade-up genérico para cards de destino */
+/* --- ANIMACIÃ“N CINEMATIC DE ENTRADA --- */
+/* Override del fade-up genÃ©rico para cards de destino */
 #destinosGrid .destino-card-wrap.fade-up {
   opacity: 0;
   transform: translateY(55px) rotateX(14deg);
@@ -2221,7 +2221,7 @@ html.lang-es .lang-en { display: none; }
   }
 }
 
-/* --- 3D MOUSE TILT: clase añadida por JS en mousemove --- */
+/* --- 3D MOUSE TILT: clase aÃ±adida por JS en mousemove --- */
 /* El JS setea style.transform directamente; esta clase solo mejora la sombra */
 .destino-card.tilt-active {
   box-shadow:
@@ -2231,7 +2231,7 @@ html.lang-es .lang-en { display: none; }
   transition: box-shadow 0.15s ease !important;
 }
 
-/* Transición suave al abandonar la card (reset del tilt) */
+/* TransiciÃ³n suave al abandonar la card (reset del tilt) */
 .destino-card:not(.tilt-active) {
   transition:
     opacity   0.80s cubic-bezier(0.2, 0, 0, 1),
@@ -2267,13 +2267,13 @@ html.lang-es .lang-en { display: none; }
 
 /* ================================================================
    REDESIGN PREMIUM FASE 2
-   taste-skill soft · efectos 21st.dev · motion profesional
-   fusion visual · ui-ux-pro-max
-   Sin frameworks — CSS/JS puro — Comentarios en espanol
+   taste-skill soft Â· efectos 21st.dev Â· motion profesional
+   fusion visual Â· ui-ux-pro-max
+   Sin frameworks â€” CSS/JS puro â€” Comentarios en espanol
 ================================================================ */
 
 /* ================================================================
-   PASO 1 — TASTE-SKILL SOFT: estilo visual base
+   PASO 1 â€” TASTE-SKILL SOFT: estilo visual base
 ================================================================ */
 
 /* Intro cards: border-top con color por posicion */
@@ -2313,7 +2313,7 @@ button { transition: transform 0.10s cubic-bezier(0.2,0,0,1); }
 button:active { transform: scale(0.98); }
 
 /* ================================================================
-   PASO 2 — EFECTOS 21st.dev convertidos a Vanilla CSS/JS
+   PASO 2 â€” EFECTOS 21st.dev convertidos a Vanilla CSS/JS
 ================================================================ */
 
 /* H2 BLUR REVEAL: todos los titulos entran desde blur */
@@ -2323,7 +2323,7 @@ button:active { transform: scale(0.98); }
 }
 .h2-reveal.visible { filter: blur(0px); }
 
-/* Subrayado que crece — solo h2 sin clase seccion-titulo */
+/* Subrayado que crece â€” solo h2 sin clase seccion-titulo */
 h2.h2-reveal:not(.seccion-titulo)::after {
   content: '';
   display: block;
@@ -2360,7 +2360,7 @@ h2.h2-reveal:not(.seccion-titulo).visible::after { width: 56px; }
   to   { transform: rotate(360deg); }
 }
 
-/* Chips del mapa: fade-in escalonado — JS anade .visible */
+/* Chips del mapa: fade-in escalonado â€” JS anade .visible */
 .mapa-marcador {
   opacity: 0;
   transform: translateY(14px);
@@ -2386,7 +2386,7 @@ h2.h2-reveal:not(.seccion-titulo).visible::after { width: 56px; }
   100% { opacity: 0.85; transform: scale(1.02); }
 }
 
-/* Beneficios: fade-up escalonado — JS anade .visible */
+/* Beneficios: fade-up escalonado â€” JS anade .visible */
 .trabaja-beneficio {
   opacity: 0;
   transform: translateY(18px);
@@ -2396,7 +2396,7 @@ h2.h2-reveal:not(.seccion-titulo).visible::after { width: 56px; }
 .trabaja-beneficio.visible { opacity: 1; transform: translateY(0); }
 
 /* ================================================================
-   PASO 3 — MOTION PROFESIONAL (emil-design-eng)
+   PASO 3 â€” MOTION PROFESIONAL (emil-design-eng)
 ================================================================ */
 
 /* Hover states inmediatos (<100ms) */
@@ -2425,7 +2425,7 @@ h2.h2-reveal:not(.seccion-titulo).visible::after { width: 56px; }
 .modal-cerrar:active { transform: rotate(90deg) scale(0.95) !important; }
 
 /* ================================================================
-   PASO 4 — FUSION VISUAL ENTRE SECCIONES
+   PASO 4 â€” FUSION VISUAL ENTRE SECCIONES
 ================================================================ */
 
 /* Divs de transicion: 120px de degradado suave */
@@ -2453,7 +2453,7 @@ h2.h2-reveal:not(.seccion-titulo).visible::after { width: 56px; }
 }
 
 /* ================================================================
-   PASO 5 — UI-UX-PRO-MAX: experiencia final
+   PASO 5 â€” UI-UX-PRO-MAX: experiencia final
 ================================================================ */
 
 /* IMAGE SKELETON: shimmer turquesa mientras carga */
@@ -2516,7 +2516,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   .h2-reveal             { filter: none !important; transition: none !important; }
   h2.h2-reveal::after    { transition: none !important; }
 
-  /* Radar y puntos estáticos */
+  /* Radar y puntos estÃ¡ticos */
   .mapa-radar-wrap::before  { animation: none !important; }
   .seccion-trabaja::before  { animation: none !important; }
 
@@ -2529,7 +2529,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ================================================================
-   FADE-BANDS — Transiciones suaves entre secciones
+   FADE-BANDS â€” Transiciones suaves entre secciones
    Divs independientes con gradiente exacto entre colores adyacentes.
 ================================================================ */
 
@@ -2546,7 +2546,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   outline: none;
 }
 
-/* Hero → Intro */
+/* Hero â†’ Intro */
 .fade-hero-intro {
   background: linear-gradient(
     to bottom,
@@ -2556,7 +2556,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   margin-top: -80px;
 }
 
-/* Intro → Destinos */
+/* Intro â†’ Destinos */
 .fade-intro-dest {
   background: linear-gradient(
     to bottom,
@@ -2565,7 +2565,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   );
 }
 
-/* Destinos → Mapa */
+/* Destinos â†’ Mapa */
 .fade-dest-mapa {
   background: linear-gradient(
     to bottom,
@@ -2574,7 +2574,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   );
 }
 
-/* Mapa → Trabaja */
+/* Mapa â†’ Trabaja */
 .fade-mapa-trabaja {
   background: linear-gradient(
     to bottom,
@@ -2583,7 +2583,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   );
 }
 
-/* Trabaja → Footer */
+/* Trabaja â†’ Footer */
 .fade-trabaja-foot {
   background: linear-gradient(
     to bottom,
@@ -2594,7 +2594,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 
 
 /* =================================================================
-   LANDING BLANCO ARENA — Toda la página al mismo color base
+   LANDING BLANCO ARENA â€” Toda la pÃ¡gina al mismo color base
    Override definitivo sobre Premium 3D y otros passes anteriores.
 ================================================================= */
 
@@ -2612,7 +2612,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   display: none !important;
 }
 
-/* --- Títulos y subtítulos: color oscuro en todas las secciones --- */
+/* --- TÃ­tulos y subtÃ­tulos: color oscuro en todas las secciones --- */
 .seccion-destinos .seccion-titulo,
 .seccion-destinos .seccion-subtitulo {
   color: var(--texto-oscuro) !important;
@@ -2654,20 +2654,20 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 .destino-card__desc      { color: var(--texto-medio)  !important; }
 .destino-card__meta-item { color: var(--texto-medio)  !important; }
 
-/* Imagen de las cards: altura reducida para tarjetas más compactas */
+/* Imagen de las cards: altura reducida para tarjetas mÃ¡s compactas */
 .destino-card__img-cont  { height: 190px !important; }
 
-/* Grid: más separación entre tarjetas */
+/* Grid: mÃ¡s separaciÃ³n entre tarjetas */
 #destinosGrid            { gap: 3.2rem 2rem !important; }
 
 /* --- Fade bands: no necesarias con un solo color de fondo --- */
 .fade-band { height: 0 !important; overflow: hidden !important; }
 
 /* ============================================================
-   DISEÑO MIAMI — Subtítulos finos, naranja/mostaza + Mapa v3
+   DISEÃ‘O MIAMI â€” SubtÃ­tulos finos, naranja/mostaza + Mapa v3
    ============================================================ */
 
-/* --- Hero: tagline Miami — gradiente naranja→mostaza --- */
+/* --- Hero: tagline Miami â€” gradiente naranjaâ†’mostaza --- */
 .hero-arc__tagline {
   background: linear-gradient(100deg, var(--coral) 0%, var(--mostaza) 100%);
   -webkit-background-clip: text;
@@ -2677,7 +2677,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   margin-bottom: 2rem !important;
 }
 
-/* --- Hero: etiqueta "Miami · South Florida" — acento mostaza --- */
+/* --- Hero: etiqueta "Miami Â· South Florida" â€” acento mostaza --- */
 .hero-arc__etiqueta {
   color: var(--mostaza) !important;
   border-color: rgba(255, 179, 0, 0.30) !important;
@@ -2685,19 +2685,19 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   font-weight: 500 !important;
 }
 
-/* --- Frases ambient: naranja cálido en vez de texto-suave --- */
+/* --- Frases ambient: naranja cÃ¡lido en vez de texto-suave --- */
 .hfa-item { color: var(--coral) !important; }
 @keyframes hfa-aparece {
   0%   { opacity: 0; transform: translateX(-50%) translateY(10px); }
   100% { opacity: 0.60; transform: translateX(-50%) translateY(0); }
 }
 
-/* --- Título hero: un pelo más cercano al tagline --- */
+/* --- TÃ­tulo hero: un pelo mÃ¡s cercano al tagline --- */
 .hero-arc__titulo { margin-bottom: 0.9rem !important; }
 
-/* --- Sección Mapa: grid — Leaflet más ancho que el globo --- */
+/* --- SecciÃ³n Mapa: grid â€” Leaflet mÃ¡s ancho que el globo --- */
 .mapa-grid {
-  grid-template-columns: 1fr 1.55fr !important;  /* globo pequeño | leaflet grande */
+  grid-template-columns: 1fr 1.55fr !important;  /* globo pequeÃ±o | leaflet grande */
   gap: 2.5rem !important;
   align-items: center !important;
 }
@@ -2736,7 +2736,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 /* --- Chips de referencia: limpios, sin exceso --- */
 .mapa-referencias { margin-top: 1rem !important; }
 
-/* --- Sección mapa: título y subtítulo legibles --- */
+/* --- SecciÃ³n mapa: tÃ­tulo y subtÃ­tulo legibles --- */
 .seccion-mapa .seccion-titulo {
   color: var(--texto-oscuro) !important;
   text-shadow: none !important;
@@ -2759,7 +2759,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ===================================================
-   ANIMATED ROADMAP — AnimatedRoadmap port vanilla JS
+   ANIMATED ROADMAP â€” AnimatedRoadmap port vanilla JS
    Paleta oficial Explora Miami
    =================================================== */
 
@@ -2775,7 +2775,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   margin: 0 auto;
 }
 
-/* ── Encabezado ── */
+/* â”€â”€ Encabezado â”€â”€ */
 .rdm-encabezado {
   text-align: center;
   margin-bottom: 3rem;
@@ -2795,7 +2795,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   background-clip: text;
 }
 
-/* ── Canvas principal — proporción 8:5 ── */
+/* â”€â”€ Canvas principal â€” proporciÃ³n 8:5 â”€â”€ */
 .rdm-canvas {
   position: relative;
   width: 100%;
@@ -2814,7 +2814,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
     0 8px 40px rgba(0,0,0,0.05);
 }
 
-/* ── SVG overlay ── */
+/* â”€â”€ SVG overlay â”€â”€ */
 .rdm-svg {
   position: absolute;
   inset: 0;
@@ -2824,7 +2824,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   pointer-events: none;
 }
 
-/* ── Milestone (contenedor del punto) ── */
+/* â”€â”€ Milestone (contenedor del punto) â”€â”€ */
 .rdm-milestone {
   position: absolute;
   width: 14px;
@@ -2843,7 +2843,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   scale: 1;
 }
 
-/* ── Ring pulsante detrás del dot ── */
+/* â”€â”€ Ring pulsante detrÃ¡s del dot â”€â”€ */
 .rdm-ring {
   position: absolute;
   width: 30px;
@@ -2864,7 +2864,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   100% { transform: translate(-50%,-50%) scale(2.8); opacity: 0; }
 }
 
-/* ── Dot central ── */
+/* â”€â”€ Dot central â”€â”€ */
 .rdm-dot {
   position: absolute;
   inset: 0;
@@ -2882,7 +2882,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   box-shadow: 0 0 0 2px var(--turquesa), 0 4px 12px rgba(0,188,212,0.50);
 }
 
-/* ── Bubble (etiqueta del destino) ── */
+/* â”€â”€ Bubble (etiqueta del destino) â”€â”€ */
 .rdm-bubble {
   position: absolute;
   top: 50%;
@@ -2905,7 +2905,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 .rdm-bubble--left  { right: calc(100% + 10px); }
 .rdm-bubble--right { left:  calc(100% + 10px); }
 
-/* ── Leyenda ── */
+/* â”€â”€ Leyenda â”€â”€ */
 .rdm-leyenda {
   display: flex;
   gap: 1.8rem;
@@ -2945,7 +2945,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   flex-shrink: 0;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 560px) {
   .rdm-bubble { font-size: 0.60rem; padding: 0.2rem 0.5rem; }
   .rdm-bubble--left  { right: calc(100% + 7px); }
@@ -2955,23 +2955,23 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   .rdm-ring  { width: 22px; height: 22px; }
 }
 
-/* Ocultar labels en pantallas muy pequeñas */
+/* Ocultar labels en pantallas muy pequeÃ±as */
 @media (max-width: 380px) {
   .rdm-bubble { display: none; }
 }
 
-/* ── Reduced motion ── */
+/* â”€â”€ Reduced motion â”€â”€ */
 @media (prefers-reduced-motion: reduce) {
   .rdm-ring      { animation: none !important; opacity: 0 !important; }
   .rdm-milestone { transition: none !important; }
 }
 
 /* ============================================================
-   HERO FOTO DOMINANTE v3 — foto directamente en .hero-arc
+   HERO FOTO DOMINANTE v3 â€” foto directamente en .hero-arc
    Sin div intermedio, sin problemas de stacking/opacity
    ============================================================ */
 
-/* Foto + overlay de gradiente en una sola declaración sobre .hero-arc */
+/* Foto + overlay de gradiente en una sola declaraciÃ³n sobre .hero-arc */
 .hero-arc {
   background-image:
     linear-gradient(
@@ -2988,7 +2988,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   background-color: #05131e !important;
 }
 
-/* El div .hero-bg ya no es necesario — lo ocultamos */
+/* El div .hero-bg ya no es necesario â€” lo ocultamos */
 .hero-bg { display: none !important; }
 
 /* Contenido: sobre la foto */
@@ -3010,17 +3010,17 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   TÍTULO HERO — SpinningText (port React → vanilla SVG)
-   Texto "Explora Miami • South Florida" girando en círculo
+   TÃTULO HERO â€” SpinningText (port React â†’ vanilla SVG)
+   Texto "Explora Miami â€¢ South Florida" girando en cÃ­rculo
    ============================================================ */
 
-/* Rotación continua — equivale al animate-spin de Tailwind */
+/* RotaciÃ³n continua â€” equivale al animate-spin de Tailwind */
 @keyframes hero-spin-anim {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 
-/* Contenedor del SVG: centrado, tamaño fijo */
+/* Contenedor del SVG: centrado, tamaÃ±o fijo */
 .hero-spin-wrapper {
   display: flex !important;
   align-items: center !important;
@@ -3039,7 +3039,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   overflow: visible !important;
 }
 
-/* El <g> que gira — transform-origin al centro del viewBox 100×100 */
+/* El <g> que gira â€” transform-origin al centro del viewBox 100Ã—100 */
 .hero-spin-group {
   transform-origin: 50px 50px !important;
   animation: hero-spin-anim 12s linear infinite !important;
@@ -3067,7 +3067,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   }
 }
 
-/* Mobile: ligeramente más pequeño */
+/* Mobile: ligeramente mÃ¡s pequeÃ±o */
 @media (max-width: 480px) {
   .hero-spin-wrapper {
     width: 168px !important;
@@ -3075,7 +3075,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   }
 }
 
-/* ── Tagline: trazo fino blanco ── */
+/* â”€â”€ Tagline: trazo fino blanco â”€â”€ */
 .hero-arc__tagline {
   background: none !important;
   -webkit-background-clip: initial !important;
@@ -3087,7 +3087,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   font-size: clamp(0.92rem, 1.4vw, 1.12rem) !important;
 }
 
-/* ── Etiqueta "Miami · South Florida": glassmorphism ── */
+/* â”€â”€ Etiqueta "Miami Â· South Florida": glassmorphism â”€â”€ */
 .hero-arc__etiqueta {
   color: rgba(255,255,255,0.78) !important;
   border-color: rgba(255,255,255,0.24) !important;
@@ -3099,7 +3099,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   display: none; /* eyebrow replaces this label */
 }
 
-/* ── Eyebrow: — South Florida — ── */
+/* â”€â”€ Eyebrow: â€” South Florida â€” â”€â”€ */
 .hero-eyebrow {
   display: flex;
   align-items: center;
@@ -3123,7 +3123,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   white-space: nowrap;
 }
 
-/* ── Tags organizados en fila ── */
+/* â”€â”€ Tags organizados en fila â”€â”€ */
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
@@ -3159,8 +3159,8 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   ROADMAP — Ref landmarks (lugares icónicos secundarios)
-   Dot mostaza pequeño, sin anillo pulsante
+   ROADMAP â€” Ref landmarks (lugares icÃ³nicos secundarios)
+   Dot mostaza pequeÃ±o, sin anillo pulsante
    ============================================================ */
 
 .rdm-milestone--ref {
@@ -3185,7 +3185,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   box-shadow: 0 1px 6px rgba(0,0,0,0.07) !important;
 }
 
-/* Leyenda: punto mostaza para lugares icónicos */
+/* Leyenda: punto mostaza para lugares icÃ³nicos */
 .rdm-leyenda-dot--ref {
   background: var(--mostaza) !important;
   width: 8px !important;
@@ -3208,11 +3208,11 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   ROADMAP TOOLTIP — Tarjeta flotante al pasar el cursor
-   Glassmorphism · coral/mostaza accent · 16s cubic-bezier
+   ROADMAP TOOLTIP â€” Tarjeta flotante al pasar el cursor
+   Glassmorphism Â· coral/mostaza accent Â· 16s cubic-bezier
    ============================================================ */
 
-/* Los milestones son interactivos — sin ícono ? del navegador */
+/* Los milestones son interactivos â€” sin Ã­cono ? del navegador */
 .rdm-milestone { cursor: pointer !important; }
 
 /* Tarjeta tooltip (fixed, creada por JS) */
@@ -3245,7 +3245,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   transform: translateY(0) scale(1);
 }
 
-/* Barra de color coral→mostaza */
+/* Barra de color coralâ†’mostaza */
 .rdm-tooltip__barra {
   width: 24px;
   height: 2.5px;
@@ -3264,7 +3264,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   letter-spacing: 0.01em;
 }
 
-/* Descripción de ~30 palabras */
+/* DescripciÃ³n de ~30 palabras */
 .rdm-tooltip__desc {
   font-size: 0.645rem;
   color: var(--texto-medio);
@@ -3272,13 +3272,13 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   margin: 0;
 }
 
-/* Ocultar en pantallas táctiles — tooltip no aplica */
+/* Ocultar en pantallas tÃ¡ctiles â€” tooltip no aplica */
 @media (hover: none) {
   .rdm-tooltip { display: none !important; }
 }
 
 /* ============================================================
-   ROADMAP — Contraste de puntos y etiquetas sobre fondo arena
+   ROADMAP â€” Contraste de puntos y etiquetas sobre fondo arena
    ============================================================ */
 
 /* Dots primarios (tierra + mar): anillo blanco + sombra oscura */
@@ -3300,7 +3300,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   border-color: transparent !important;
 }
 
-/* Etiquetas (bubble) con fondo sólido y contraste mejorado */
+/* Etiquetas (bubble) con fondo sÃ³lido y contraste mejorado */
 .rdm-bubble {
   background: rgba(255,255,255,0.96) !important;
   color: var(--texto-oscuro) !important;
@@ -3310,11 +3310,11 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   METAL BUTTONS — Port del componente MetalButton (React)
-   Gradientes metálicos + estados press/hover + variantes Miami
+   METAL BUTTONS â€” Port del componente MetalButton (React)
+   Gradientes metÃ¡licos + estados press/hover + variantes Miami
    ============================================================ */
 
-/* ── WRAPPER — padding 1.25px actúa como border gradiente ── */
+/* â”€â”€ WRAPPER â€” padding 1.25px actÃºa como border gradiente â”€â”€ */
 .metal-btn-wrap {
   position: relative;
   display: inline-flex;
@@ -3328,7 +3328,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   box-shadow: 0 3px 8px rgba(0,0,0,0.10);
 }
 
-/* ── INNER RING — anillo interior a 1px del borde ── */
+/* â”€â”€ INNER RING â€” anillo interior a 1px del borde â”€â”€ */
 .metal-btn-inner {
   position: absolute;
   inset: 1px;
@@ -3339,7 +3339,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   background: linear-gradient(to bottom, #FAFAFA, #3E3E3E, #E5E5E5);
 }
 
-/* ── SUPERFICIE del botón / enlace ── */
+/* â”€â”€ SUPERFICIE del botÃ³n / enlace â”€â”€ */
 .metal-btn {
   position: relative;
   z-index: 10;
@@ -3372,7 +3372,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 .metal-btn:focus-visible { outline: 2px solid var(--turquesa); outline-offset: 3px; }
 
-/* ── SHINE — destelllo blanco al presionar ── */
+/* â”€â”€ SHINE â€” destelllo blanco al presionar â”€â”€ */
 .metal-btn-shine {
   pointer-events: none;
   position: absolute;
@@ -3385,7 +3385,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   background: linear-gradient(to right, transparent, rgba(245,245,245,0.55), transparent);
 }
 
-/* ── HOVER GLOW — gradiente suave al hovear ── */
+/* â”€â”€ HOVER GLOW â€” gradiente suave al hovear â”€â”€ */
 .metal-btn-hover-glow {
   pointer-events: none;
   position: absolute;
@@ -3397,7 +3397,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   z-index: 15;
 }
 
-/* ── ESTADOS ─────────────────────────── */
+/* â”€â”€ ESTADOS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .metal-btn-wrap.is-pressed {
   transform: translateY(2.5px) scale(0.99) !important;
   box-shadow: 0 1px 2px rgba(0,0,0,0.15) !important;
@@ -3410,7 +3410,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 .metal-btn-wrap.is-hovered .metal-btn         { filter: brightness(1.03); }
 .metal-btn-wrap.is-hovered .metal-btn-hover-glow { opacity: 1; }
 
-/* ── VARIANTE CORAL (Ver destinos, Enviar mensaje) ── */
+/* â”€â”€ VARIANTE CORAL (Ver destinos, Enviar mensaje) â”€â”€ */
 .metal-btn-wrap[data-variant="coral"] {
   background: linear-gradient(to bottom, #5A0000, #FF9090);
   box-shadow: 0 3px 10px rgba(192,57,43,0.22);
@@ -3427,7 +3427,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   color: #fff;
 }
 
-/* ── VARIANTE TURQUESA (Ver mapa, Filtro Mar) ── */
+/* â”€â”€ VARIANTE TURQUESA (Ver mapa, Filtro Mar) â”€â”€ */
 .metal-btn-wrap[data-variant="turquesa"] {
   background: linear-gradient(to bottom, #003840, #70D8E0);
   box-shadow: 0 3px 10px rgba(0,150,180,0.22);
@@ -3444,7 +3444,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   color: #fff;
 }
 
-/* ── VARIANTE TIERRA (Filtro Tierra) ── */
+/* â”€â”€ VARIANTE TIERRA (Filtro Tierra) â”€â”€ */
 .metal-btn-wrap[data-variant="tierra"] {
   background: linear-gradient(to bottom, #1A3A00, #88C066);
   box-shadow: 0 3px 10px rgba(70,120,30,0.20);
@@ -3461,7 +3461,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   color: #fff;
 }
 
-/* ── VARIANTE GOLD (Reseñas) ── */
+/* â”€â”€ VARIANTE GOLD (ReseÃ±as) â”€â”€ */
 .metal-btn-wrap[data-variant="gold"] {
   background: linear-gradient(to bottom, #917100, #EAD98F);
   box-shadow: 0 3px 10px rgba(145,113,0,0.22);
@@ -3478,7 +3478,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   color: #1a0f00;
 }
 
-/* ── VARIANTE ICON (Cerrar modal ✕, Idioma) ── */
+/* â”€â”€ VARIANTE ICON (Cerrar modal âœ•, Idioma) â”€â”€ */
 .metal-btn-wrap[data-variant="icon"] {
   background: linear-gradient(to bottom, #222, #888);
   border-radius: 50%;
@@ -3499,13 +3499,13 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   text-shadow: 0 -1px 0 rgb(60 60 60);
 }
 
-/* ── ESTADO ACTIVO (filtro seleccionado) ── */
+/* â”€â”€ ESTADO ACTIVO (filtro seleccionado) â”€â”€ */
 .metal-btn-wrap.is-active {
   box-shadow: 0 0 0 2px rgba(255,255,255,0.85), 0 4px 14px rgba(0,0,0,0.22) !important;
 }
 .metal-btn-wrap.is-active .metal-btn { filter: brightness(1.08); }
 
-/* ── TAMAÑOS ── */
+/* â”€â”€ TAMAÃ‘OS â”€â”€ */
 .metal-btn-wrap[data-size="sm"] .metal-btn {
   height: 36px;
   padding: 0.3rem 1rem;
@@ -3524,7 +3524,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   width: 100%;
 }
 
-/* ── IDIOMA HEADER — compact pill ── */
+/* â”€â”€ IDIOMA HEADER â€” compact pill â”€â”€ */
 .metal-btn-wrap.header-lang-wrap {
   border-radius: 999px;
 }
@@ -3540,18 +3540,18 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   letter-spacing: 0.06em;
 }
 
-/* ── BOTONES DEL MODAL (acciones) ── */
+/* â”€â”€ BOTONES DEL MODAL (acciones) â”€â”€ */
 .modal-acciones { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.2rem 0; }
 .modal-acciones .metal-btn-wrap { flex: 1 1 auto; min-width: 120px; }
 .modal-acciones .metal-btn { width: 100%; font-size: 0.78rem; height: 38px; }
 
-/* ── MÓVIL ── */
+/* â”€â”€ MÃ“VIL â”€â”€ */
 @media (max-width: 480px) {
   .metal-btn { height: 40px; padding: 0.42rem 1.1rem; font-size: 0.82rem; }
   .metal-btn-wrap[data-size="lg"] .metal-btn { height: 46px; padding: 0.5rem 1.4rem; font-size: 0.92rem; }
 }
 
-/* ── REDUCCIÓN DE MOVIMIENTO ── */
+/* â”€â”€ REDUCCIÃ“N DE MOVIMIENTO â”€â”€ */
 @media (prefers-reduced-motion: reduce) {
   .metal-btn-wrap,
   .metal-btn,
@@ -3560,7 +3560,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   .metal-btn-hover-glow { transition: none !important; }
 }
 
-/* Posicionar el wrapper del botón cerrar en el modal */
+/* Posicionar el wrapper del botÃ³n cerrar en el modal */
 .modal-cerrar-wrap {
   position: absolute !important;
   top: 1rem !important;
@@ -3571,7 +3571,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 /* Filtros: alinear metal wrappers en flex */
 .filtros { display: flex; gap: 0.55rem; flex-wrap: wrap; align-items: center; justify-content: center; }
 
-/* Botón "Ver destino" en cards de destinos */
+/* BotÃ³n "Ver destino" en cards de destinos */
 .destino-card__btn-wrap {
   margin-top: auto;
   align-self: flex-start;
@@ -3583,19 +3583,19 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   SHINE BORDER — Port de ShineBorder (React / MagicUI)
-   Borde de luz giratoria animada — animated radial-gradient mask
+   SHINE BORDER â€” Port de ShineBorder (React / MagicUI)
+   Borde de luz giratoria animada â€” animated radial-gradient mask
    Aplica a: tarjetas de destino + panel del modal
    ============================================================ */
 
-/* Keyframe principal: mueve el radial-gradient en 300%×300% */
+/* Keyframe principal: mueve el radial-gradient en 300%Ã—300% */
 @keyframes shine-pulse {
   0%   { background-position: 0%   0%;   }
   50%  { background-position: 100% 100%; }
   100% { background-position: 0%   0%;   }
 }
 
-/* ── TARJETAS DE DESTINO — usa ::after (::before ocupado por sheen) ── */
+/* â”€â”€ TARJETAS DE DESTINO â€” usa ::after (::before ocupado por sheen) â”€â”€ */
 .destino-card::after {
   content: '';
   position: absolute;
@@ -3605,7 +3605,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   /* Ancho del borde = padding del pseudo-elemento */
   padding: 1px;
 
-  /* Gradiente radial que barre el borde — colores Miami */
+  /* Gradiente radial que barre el borde â€” colores Miami */
   background-image: radial-gradient(
     transparent, transparent,
     #FF6B6B, #00BCD4, #FFB300,
@@ -3613,7 +3613,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   );
   background-size: 300% 300%;
 
-  /* Máscara: solo muestra la zona del padding (el "borde") */
+  /* MÃ¡scara: solo muestra la zona del padding (el "borde") */
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -3629,7 +3629,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   z-index: 2;
 }
 
-/* ── PANEL DEL MODAL — restructurar para overflow correcto ── */
+/* â”€â”€ PANEL DEL MODAL â€” restructurar para overflow correcto â”€â”€ */
 /* El panel pasa a flex-column; solo .modal-cuerpo hace scroll */
 .modal-panel {
   overflow: hidden !important;   /* ::before necesita clip limpio */
@@ -3639,7 +3639,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 .modal-cuerpo {
   flex: 1 1 auto !important;
   overflow-y: auto !important;
-  min-height: 0 !important;     /* crítico para flex + overflow */
+  min-height: 0 !important;     /* crÃ­tico para flex + overflow */
 }
 .modal-galeria {
   flex-shrink: 0 !important;
@@ -3653,7 +3653,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   border-radius: inherit;
   padding: 2px;
 
-  /* Coral + turquesa + mostaza — más intensos para el modal */
+  /* Coral + turquesa + mostaza â€” mÃ¡s intensos para el modal */
   background-image: radial-gradient(
     transparent, transparent,
     rgba(255,107,107,0.95),
@@ -3678,7 +3678,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   z-index: 0;
 }
 
-/* Tooltip del roadmap — borde shine sutil (::before libre) */
+/* Tooltip del roadmap â€” borde shine sutil (::before libre) */
 .rdm-tooltip {
   position: fixed !important;  /* ya lo tiene */
 }
@@ -3712,7 +3712,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   z-index: 0;
 }
 
-/* Reducción de movimiento: congelar en posición inicial */
+/* ReducciÃ³n de movimiento: congelar en posiciÃ³n inicial */
 @media (prefers-reduced-motion: reduce) {
   .destino-card::after,
   .modal-panel::before,
@@ -3723,11 +3723,11 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   INTRO SECTION — ShuffleHero 2-col layout
-   Texto izquierda · Grid 4×3 de tarjetas mini barajables (derecha)
+   INTRO SECTION â€” ShuffleHero 2-col layout
+   Texto izquierda Â· Grid 4Ã—3 de tarjetas mini barajables (derecha)
    ============================================================ */
 
-/* Contenedor: 2 columnas con alineación centrada */
+/* Contenedor: 2 columnas con alineaciÃ³n centrada */
 .seccion-intro__contenedor.si-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3738,7 +3738,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   text-align: left;
 }
 
-/* ── Columna izquierda ── */
+/* â”€â”€ Columna izquierda â”€â”€ */
 .si-col-texto {
   display: flex;
   flex-direction: column;
@@ -3760,7 +3760,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   background: rgba(0,188,212,0.08);
 }
 
-/* Override centrado del título en este contexto */
+/* Override centrado del tÃ­tulo en este contexto */
 .si-layout .seccion-intro__titulo {
   text-align: left;
   margin-bottom: 0;
@@ -3811,12 +3811,12 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   text-shadow: 0 1px 8px rgba(255,253,247,0.7);
 }
 
-/* ── Columna derecha: grid de tarjetas ── */
+/* â”€â”€ Columna derecha: grid de tarjetas â”€â”€ */
 .si-col-grid {
   position: relative;
 }
 
-/* Grid 4 columnas × 3 filas */
+/* Grid 4 columnas Ã— 3 filas */
 .shuffle-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -3894,7 +3894,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   opacity: 0.9;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 900px) {
   .seccion-intro__contenedor.si-layout {
     grid-template-columns: 1fr;
@@ -3921,7 +3921,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   SCROLL EXPAND MEDIA — port vanilla del componente React
+   SCROLL EXPAND MEDIA â€” port vanilla del componente React
    El hero se convierte en una tarjeta que se expande con el scroll
    ============================================================ */
 
@@ -3931,7 +3931,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   position: relative;
 }
 
-/* Sección: sticky — se queda pegada al top mientras el wrapper pasa */
+/* SecciÃ³n: sticky â€” se queda pegada al top mientras el wrapper pasa */
 .sem-section {
   position: sticky;
   top: 0;
@@ -3944,7 +3944,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   background: #05131e;
 }
 
-/* Fondo foto Miami con overlay — JS anima opacity de 1 → 0 */
+/* Fondo foto Miami con overlay â€” JS anima opacity de 1 â†’ 0 */
 .sem-bg {
   position: absolute;
   inset: 0;
@@ -3965,7 +3965,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   will-change: opacity;
 }
 
-/* Título partido — centrado, z-index sobre la tarjeta */
+/* TÃ­tulo partido â€” centrado, z-index sobre la tarjeta */
 .sem-title-wrap {
   position: absolute;
   top: 50%;
@@ -3981,7 +3981,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   overflow: hidden;
 }
 
-/* Cada palabra del título — JS aplica translateX inline */
+/* Cada palabra del tÃ­tulo â€” JS aplica translateX inline */
 .sem-title-word {
   font-family: var(--fuente-titulo);
   font-size: clamp(3.2rem, 9vw, 7.5rem);
@@ -3996,7 +3996,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   will-change: transform;
 }
 
-/* Tarjeta de medios — JS controla width / height / border-radius inline */
+/* Tarjeta de medios â€” JS controla width / height / border-radius inline */
 .sem-media-wrap {
   position: relative;
   z-index: 10;
@@ -4021,7 +4021,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   -webkit-user-drag: none;
 }
 
-/* Contenido (tags) — aparece tras expansión completa */
+/* Contenido (tags) â€” aparece tras expansiÃ³n completa */
 .sem-content {
   position: absolute;
   bottom: 2.5rem;
@@ -4049,7 +4049,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   z-index: 5;
 }
 
-/* Mobile: tarjeta más pequeña por defecto (JS también lo ajusta) */
+/* Mobile: tarjeta mÃ¡s pequeÃ±a por defecto (JS tambiÃ©n lo ajusta) */
 @media (max-width: 640px) {
   .sem-title-word {
     font-size: clamp(2.4rem, 11vw, 3.6rem);
@@ -4067,9 +4067,9 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* =====================================================
-   FLOATING PILL NAV — fn-* classes
-   Porta React AnimatedNavFramer → vanilla ES5 / CSS puro
-   Funciona en index.html — usa las vars de styles.css
+   FLOATING PILL NAV â€” fn-* classes
+   Porta React AnimatedNavFramer â†’ vanilla ES5 / CSS puro
+   Funciona en index.html â€” usa las vars de styles.css
 ===================================================== */
 .fn-wrap {
   position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%);
@@ -4138,7 +4138,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   -webkit-text-fill-color: transparent; font-weight: 700;
 }
 .fn__link--back { color: rgba(26, 42, 53, 0.52); font-size: 0.8rem; }
-.fn__link--back::before { content: '← '; }
+.fn__link--back::before { content: 'â† '; }
 
 /* Language button */
 .fn__lang {
@@ -4196,10 +4196,10 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 .fn__dd-link--active { color: var(--turquesa); font-weight: 600; }
 .fn__dd-link--cta { color: var(--coral); font-weight: 700; }
 .fn__dd-link--back { color: rgba(26, 42, 53, 0.50); font-size: 0.84rem; }
-.fn__dd-link--back::before { content: '← '; }
+.fn__dd-link--back::before { content: 'â† '; }
 .fn__dd-sep { height: 1px; background: rgba(0, 188, 212, 0.10); margin: 0.35rem 0.5rem; }
 
-/* Mobile: always collapsed → dropdown */
+/* Mobile: always collapsed â†’ dropdown */
 @media (max-width: 768px) {
   .fn { width: 48px !important; cursor: pointer; }
   .fn__logo,
@@ -4215,7 +4215,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ===================================================================
-   LANG TOGGLE — botón de idioma en el dropdown móvil
+   LANG TOGGLE â€” botÃ³n de idioma en el dropdown mÃ³vil
 ================================================================= */
 .fn__dd-lang-btn {
   display: flex; align-items: center; gap: 0.6rem;
@@ -4233,7 +4233,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 .fn__dd-lang-label { line-height: 1; }
 
 /* ===================================================================
-   FADE BANDS — Ajustar a blanco-arena para consistencia visual
+   FADE BANDS â€” Ajustar a blanco-arena para consistencia visual
 ================================================================= */
 .fade-mapa-trabaja {
   background: linear-gradient(to bottom, var(--azul-cielo), var(--blanco-arena)) !important;
@@ -4243,13 +4243,13 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ===================================================================
-   MAPA DE DESTINOS — reducir solapamiento de bubbles
+   MAPA DE DESTINOS â€” reducir solapamiento de bubbles
 ================================================================= */
 /* Desktop: mostrar bubble solo en hover del milestone */
 .rdm-bubble {
   transition: opacity 0.18s ease, transform 0.18s ease;
 }
-/* Móvil: ocultar bubbles por defecto, mostrar solo al tocar */
+/* MÃ³vil: ocultar bubbles por defecto, mostrar solo al tocar */
 @media (max-width: 768px) {
   .rdm-bubble {
     opacity: 0;
@@ -4262,29 +4262,29 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
     pointer-events: auto;
     z-index: 20;
   }
-  /* Solo mostrar dots en móvil por defecto (más limpio) */
+  /* Solo mostrar dots en mÃ³vil por defecto (mÃ¡s limpio) */
   .rdm-dot { width: 9px; height: 9px; }
 }
 
 /* ===================================================================
-   BUG FIX — fn-wrap: hamburguesa flotante no debe aparecer en desktop
-   Confirmado en auditoría: posición fixed 48×56px en viewport ≥768px
+   BUG FIX â€” fn-wrap: hamburguesa flotante no debe aparecer en desktop
+   Confirmado en auditorÃ­a: posiciÃ³n fixed 48Ã—56px en viewport â‰¥768px
 =================================================================== */
 @media (min-width: 768px) {
-  /* En desktop la pill nav se muestra completa — el icono ☰ es móvil-only */
+  /* En desktop la pill nav se muestra completa â€” el icono â˜° es mÃ³vil-only */
   .fn-wrap {
     display: none !important;
   }
 }
 @media (max-width: 767px) {
-  /* En móvil: visible como hamburguesa */
+  /* En mÃ³vil: visible como hamburguesa */
   .fn-wrap {
     display: block;
   }
 }
 
 /* ===================================================================
-   BUG FIX — ShuffleGrid: imágenes cortadas en móvil (Bug 4)
+   BUG FIX â€” ShuffleGrid: imÃ¡genes cortadas en mÃ³vil (Bug 4)
 =================================================================== */
 @media (max-width: 640px) {
   .shuffle-grid {
@@ -4298,7 +4298,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   }
 }
 
-/* Cards de destino — imagen no se corta en ningún tamaño */
+/* Cards de destino â€” imagen no se corta en ningÃºn tamaÃ±o */
 .destino-card__foto,
 .destino-card__imagen,
 .destino-media img,
@@ -4339,7 +4339,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   HERO SOCIAL PROOF — contador de visitantes activos
+   HERO SOCIAL PROOF â€” contador de visitantes activos
    ============================================================ */
 .hero-social-proof {
   display: inline-flex;
@@ -4383,7 +4383,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   QUIZ AVENTURERO — #quiz-aventurero
+   QUIZ AVENTURERO â€” #quiz-aventurero
    ============================================================ */
 .seccion-quiz {
   background: var(--blanco-arena, #FFFDF7);
@@ -4614,7 +4614,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   .quiz-dest-chip:hover { transform: none; }
 }
 
-/* Botón resetear */
+/* BotÃ³n resetear */
 .quiz-reset {
   display: inline-block;
   font-family: var(--sans);
@@ -4635,7 +4635,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   POR QUÉ MIAMI — #por-que-miami — 6 stats
+   POR QUÃ‰ MIAMI â€” #por-que-miami â€” 6 stats
    ============================================================ */
 .seccion-stats {
   background: var(--blanco-arena, #FFFDF7);
@@ -4745,7 +4745,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   NEWSLETTER — #newsletter
+   NEWSLETTER â€” #newsletter
    ============================================================ */
 .seccion-newsletter {
   background: linear-gradient(135deg,
@@ -4842,7 +4842,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   margin: 0.75rem 0 0;
 }
 
-/* Estado de éxito */
+/* Estado de Ã©xito */
 .newsletter-exito {
   display: flex;
   flex-direction: column;
@@ -4892,69 +4892,98 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* ============================================================
-   HERO CINEMATIC — nuevo hero principal
-   Imagen parallax + canvas WebGL dots + scan line roja
+   HERO PARALLAX — multicapa con profundidad 3D
+   Diseño: múltiples capas posicionadas como el ref. component
+   Mouse parallax: perspective(2300px) + rotateY + translate
    ============================================================ */
-.hero-cinematic {
+
+/* Contenedor principal */
+.hero-parallax {
   position: relative;
   height: 100vh;
   min-height: 580px;
   overflow: hidden;
   background: var(--ocean-ini, #071e2b);
-  /* Crea stacking context propio para mix-blend-mode del canvas */
-  isolation: isolate;
 }
 
-/* Envoltura de imagen: margen extra para el movimiento parallax */
-.hero-cin__img-wrap {
+/* Vignette radial: oscurece bordes para mejorar legibilidad del texto */
+.hero-px__radial {
   position: absolute;
-  inset: -6%;
-  z-index: 1;
-  overflow: hidden;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+    rgba(0,0,0,0) 55%, rgba(0,0,0,0.72) 100%);
 }
 
-.hero-cin__img {
+/* Cada capa parallax: posición absoluta, JS sobreescribe el transform */
+.hero-px__layer {
+  position: absolute;
+  pointer-events: none;
+  /* Transición suave: 450ms igual que el componente de referencia */
+  transition: transform 450ms cubic-bezier(0.2,0,0,1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-px__layer { transition: none; }
+}
+
+/* Imagen de fondo principal — más ancha que el viewport para poder panear */
+#hpxBg {
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 160vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+}
+
+.hero-px__img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
-  will-change: transform;
 }
 
-/* Canvas WebGL — dots rojas + scan line, screen blended sobre imagen */
-.hero-cin__canvas {
-  position: absolute;
-  inset: 0;
+/* Capas de niebla oceánica — gradientes CSS que se mueven a velocidades distintas */
+.hero-px__mist {
+  width: 200vw;
+  height: 70vh;
+  border-radius: 50%;
+}
+
+/* Niebla superior: cyan sutil, movimiento medio */
+.hero-px__mist--top {
+  top: calc(50% - 100px);
+  left: 50%;
   z-index: 2;
-  mix-blend-mode: screen;
-  pointer-events: none;
-  display: block;
+  background: radial-gradient(ellipse at center,
+    rgba(0, 188, 212, 0.10) 0%,
+    rgba(7, 30, 43, 0.38)   60%,
+    transparent             100%);
+  transform: translate(-50%, -50%);
 }
 
-/* Vignette: degrada bordes para legibilidad del texto */
-.hero-cin__vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  background:
-    linear-gradient(to bottom,
-      rgba(7, 30, 43, 0.55)  0%,
-      rgba(7, 30, 43, 0.08) 35%,
-      rgba(7, 30, 43, 0.08) 60%,
-      rgba(7, 30, 43, 0.72) 100%),
-    radial-gradient(ellipse at center,
-      transparent 38%, rgba(7, 30, 43, 0.42) 100%);
-  pointer-events: none;
+/* Niebla inferior: azul oscuro, la más próxima → la más rápida */
+.hero-px__mist--bot {
+  top: calc(100% - 180px);
+  left: 50%;
+  z-index: 4;
+  background: radial-gradient(ellipse at center,
+    rgba(7, 30, 43, 0.72) 0%,
+    rgba(7, 30, 43, 0.45) 50%,
+    transparent           100%);
+  transform: translate(-50%, -50%);
 }
 
-/* Tags flotantes en la parte superior */
-.hero-cin__tags {
+/* Tags flotantes en la parte superior — fade-in CSS, posición fija */
+.hero-px__tags {
   position: absolute;
   top: 88px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 4;
+  z-index: 110;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -4962,46 +4991,49 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   padding: 0 1.5rem;
   pointer-events: none;
   opacity: 0;
-  animation: cinTagsFade 0.9s ease 2.8s forwards;
+  animation: pxTagsFade 0.9s ease 2.8s forwards;
 }
 
-@keyframes cinTagsFade {
-  to { opacity: 1; }
-}
+@keyframes pxTagsFade { to { opacity: 1; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-cin__tags { animation: none; opacity: 1; }
+  .hero-px__tags { animation: none; opacity: 1; }
 }
 
-/* Contenido central: flex column centrado */
-.hero-cin__content {
+/* Texto central: parallax propio — diferente al fondo */
+.hero-px__text {
   position: absolute;
-  inset: 0;
-  z-index: 4;
+  top: calc(50% - 100px);
+  left: 50%;
+  z-index: 9;
+  text-align: center;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  transition: transform 450ms cubic-bezier(0.2,0,0,1);
+  width: min(720px, 92vw);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 5rem 2rem 6rem;
-  gap: 1.1rem;
-  pointer-events: none;
+  gap: 1rem;
 }
 
-/* Título H1 — palabras inyectadas por JS una a una */
-.hero-cin__title {
+@media (prefers-reduced-motion: reduce) {
+  .hero-px__text { transition: none; }
+}
+
+/* H1: font-black, gran tamaño, line-height apretado como el componente de referencia */
+.hero-px__title {
   font-family: var(--serif, 'Playfair Display', Georgia, serif);
-  font-size: clamp(2rem, 5.5vw, 4.2rem);
-  font-weight: 600;
+  font-size: clamp(2.2rem, 6vw, 4.8rem);
+  font-weight: 900;
   color: #ffffff;
-  line-height: 1.18;
-  text-shadow: 0 2px 28px rgba(7, 30, 43, 0.65);
-  max-width: 860px;
+  line-height: 1.05;
+  text-shadow: 0 2px 32px rgba(7,30,43,0.7);
   margin: 0;
 }
 
 /* Cada palabra del título — animada individualmente por JS */
-.hero-cin__word {
+.hero-px__word {
   display: inline-block;
   opacity: 0;
   transform: translateY(22px);
@@ -5009,53 +5041,49 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-cin__word {
+  .hero-px__word {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
 }
 
-/* Subtítulo — aparece después del título */
-.hero-cin__sub {
+/* Subtítulo */
+.hero-px__sub {
   font-family: var(--sans, 'Inter', system-ui, sans-serif);
-  font-size: clamp(0.92rem, 2vw, 1.2rem);
+  font-size: clamp(0.92rem, 2vw, 1.15rem);
   font-weight: 400;
-  color: rgba(255, 253, 247, 0.80);
-  text-shadow: 0 1px 14px rgba(7, 30, 43, 0.5);
-  max-width: 560px;
+  color: rgba(255, 253, 247, 0.82);
+  text-shadow: 0 1px 14px rgba(7,30,43,0.5);
   margin: 0;
+  max-width: 520px;
   opacity: 0;
   transform: translateY(14px);
   will-change: opacity, transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-cin__sub {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+  .hero-px__sub { opacity: 1 !important; transform: none !important; }
 }
 
-/* Social proof dentro del hero cinematic */
-.hero-cinematic .hero-social-proof {
-  margin-top: 0.25rem;
-  pointer-events: auto;
+/* Social proof dentro del hero parallax */
+.hero-parallax .hero-social-proof {
+  margin-top: 0.15rem;
   opacity: 0;
-  animation: cinTagsFade 0.8s ease 3.6s forwards;
+  animation: pxTagsFade 0.8s ease 3.6s forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-cinematic .hero-social-proof { animation: none; opacity: 1; }
+  .hero-parallax .hero-social-proof { animation: none; opacity: 1; }
 }
 
-/* Botón scroll to next section */
-.hero-cin__scroll-btn {
+/* Botón scroll hacia el siguiente bloque */
+.hero-px__scroll-btn {
   position: absolute;
   bottom: 2.25rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 4;
+  z-index: 110;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -5064,47 +5092,42 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   border: none;
   cursor: pointer;
   color: rgba(255, 253, 247, 0.78);
-  font-family: var(--sans);
+  font-family: var(--sans, 'Inter', system-ui, sans-serif);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   opacity: 0;
-  animation: cinTagsFade 0.8s ease 3.8s forwards;
+  animation: pxTagsFade 0.8s ease 3.8s forwards;
   transition: color 0.2s;
   white-space: nowrap;
 }
 
-.hero-cin__scroll-btn:hover {
-  color: rgba(255, 253, 247, 1);
-}
+.hero-px__scroll-btn:hover { color: rgba(255,253,247,1); }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-cin__scroll-btn { animation: none; opacity: 1; }
+  .hero-px__scroll-btn { animation: none; opacity: 1; }
 }
 
 /* Flecha del botón scroll */
-.hero-cin__scroll-arrow {
+.hero-px__scroll-arrow {
   display: flex;
   align-items: center;
-  animation: cinArrowBounce 1.8s ease-in-out 4s infinite;
+  animation: pxArrowBounce 1.8s ease-in-out 4s infinite;
 }
 
-@keyframes cinArrowBounce {
+@keyframes pxArrowBounce {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(6px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-cin__scroll-arrow { animation: none; }
+  .hero-px__scroll-arrow { animation: none; }
 }
 
 /* Responsive */
 @media (max-width: 640px) {
-  .hero-cin__content {
-    padding: 5rem 1.25rem 6rem;
-    gap: 0.9rem;
-  }
-  .hero-cin__tags { top: 72px; }
-  .hero-cin__scroll-btn { bottom: 1.5rem; }
+  .hero-px__tags   { top: 72px; }
+  .hero-px__scroll-btn { bottom: 1.5rem; }
+  .hero-px__text   { top: 50%; }
 }
