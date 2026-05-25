@@ -2373,7 +2373,7 @@ p  { font-weight: 300; }
 
 /* ── 1. Sección — fondo claro ── */
 .seccion-precios {
-  padding: 4.5rem 1.5rem 5.5rem;
+  padding: 3.8rem 1.5rem 4.7rem;
   background: var(--blanco-arena, #FFFDF7);
   position: relative;
   overflow: hidden;
@@ -2387,7 +2387,7 @@ p  { font-weight: 300; }
   max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
 }
 
-.seccion-precios__encabezado { text-align: center; margin-bottom: 1.8rem; }
+.seccion-precios__encabezado { text-align: center; margin-bottom: 1.5rem; }
 
 .seccion-precios__eyebrow {
   display: inline-block;
@@ -2398,19 +2398,19 @@ p  { font-weight: 300; }
 
 .seccion-precios__titulo {
   font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15;
-  color: var(--tinta); margin-bottom: 0.5rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem); line-height: 1.15;
+  color: var(--tinta); margin-bottom: 0.4rem;
 }
 
 .seccion-precios__sub {
-  font-size: 0.9rem; font-weight: 300; line-height: 1.6;
+  font-size: 0.78rem; font-weight: 300; line-height: 1.6;
   color: var(--texto-medio); max-width: 520px; margin: 0 auto;
 }
 
 /* ── 3. Toggle mensual/anual ── */
 .precios-toggle {
   display: flex; justify-content: center; gap: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.7rem;
 }
 
 .precios-toggle__btn {
@@ -2440,7 +2440,7 @@ p  { font-weight: 300; }
 .seccion-precios .precios-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.1rem;
+  gap: 0.9rem;
   align-items: center;
 }
 
@@ -2467,8 +2467,8 @@ p  { font-weight: 300; }
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
   border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 1rem;
-  padding: 1.4rem 1.4rem 1.6rem;
+  border-radius: 0.85rem;
+  padding: 1.2rem 1.2rem 1.35rem;
   position: relative;
   overflow: hidden;
   transform-style: flat;
@@ -2495,11 +2495,11 @@ p  { font-weight: 300; }
   font-family: var(--sans);
   font-style: normal;
   font-weight: 200;
-  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-size: clamp(0.9rem, 1.3vw, 1.06rem);
   letter-spacing: -0.01em;
   line-height: 1.1;
   text-transform: none;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
   color: var(--tinta);
 }
 
@@ -2517,20 +2517,20 @@ p  { font-weight: 300; }
   font-family: var(--sans);
   font-style: normal;
   font-weight: 200;
-  font-size: clamp(1.65rem, 2.4vw, 2rem);
+  font-size: clamp(1.4rem, 2.0vw, 1.7rem);
   letter-spacing: -0.03em;
   color: var(--tinta);
   transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 .precio-card__periodo {
-  font-size: 0.8rem; font-weight: 300;
+  font-size: 0.68rem; font-weight: 300;
   color: var(--texto-medio);
 }
 
 .precio-card__tagline {
-  font-size: 0.78rem; font-weight: 300; font-style: normal;
-  color: var(--texto-suave); line-height: 1.4; margin-top: 0.3rem;
+  font-size: 0.66rem; font-weight: 300; font-style: normal;
+  color: var(--texto-suave); line-height: 1.4; margin-top: 0.25rem;
 }
 
 /* ── 9. Divisor degradado — tonos oscuros ── */
@@ -2542,35 +2542,35 @@ p  { font-weight: 300; }
     rgba(26,42,53,0.18) 50%,
     rgba(26,42,53,0.10) 80%,
     transparent 100%);
-  margin: 0.75rem 0 0.65rem;
+  margin: 0.64rem 0 0.55rem;
   flex-shrink: 0;
 }
 
 /* ── 10. Lista de features ── */
 .precio-card__lista {
   list-style: none;
-  margin-bottom: 1.2rem;
-  display: flex; flex-direction: column; gap: 0.36rem;
+  margin-bottom: 1rem;
+  display: flex; flex-direction: column; gap: 0.3rem;
   flex: 1;
 }
 
 .precio-card__lista li {
-  display: flex; align-items: center; gap: 0.42rem;
-  font-size: 0.78rem; font-weight: 300;
+  display: flex; align-items: center; gap: 0.36rem;
+  font-size: 0.67rem; font-weight: 300;
   color: var(--texto-medio); line-height: 1.4;
 }
 
 /* ── 11. SVG check icon — todos turquesa, sin animación ── */
 .precio-check {
   flex-shrink: 0;
-  width: 13px; height: 13px;
+  width: 11px; height: 11px;
   display: inline-flex; align-items: center; justify-content: center;
   background: none;
   border-radius: 0;
   color: var(--turquesa);
 }
 
-.precio-check svg { width: 13px; height: 13px; }
+.precio-check svg { width: 11px; height: 11px; }
 
 /* Todos turquesa */
 .precio-check--turquesa,
@@ -2585,9 +2585,9 @@ p  { font-weight: 300; }
   position: absolute;
   top: -1px; right: 1rem; left: auto;
   transform: none;
-  padding: 0.2rem 0.7rem;
-  border-radius: 0 0 8px 8px;
-  font-size: 0.62rem; font-weight: 700;
+  padding: 0.17rem 0.6rem;
+  border-radius: 0 0 7px 7px;
+  font-size: 0.55rem; font-weight: 700;
   letter-spacing: 0.08em; text-transform: uppercase;
   white-space: nowrap;
 }
@@ -2661,7 +2661,7 @@ p  { font-weight: 300; }
 /* ── 18. Mobile — sin scale en destacada ── */
 @media (max-width: 900px) {
   .pc-wrap { perspective: none; }
-  .seccion-precios { padding: 3rem 1rem 3.5rem; }
+  .seccion-precios { padding: 2.6rem 1rem 3rem; }
   .seccion-precios .precio-card--destacada { transform: none; }
   .seccion-precios .precio-card--destacada:hover { transform: none; }
 }
