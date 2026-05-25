@@ -1,0 +1,536 @@
+/* ============================================================
+   FOOTER CINEMÁTICO — Explora Miami
+   Diseño premium con reveal por scroll, aurora ambiental
+   y navegación en pildoras glass.
+   ============================================================ */
+
+/* ── Variables propias del footer ── */
+.cf-footer {
+  --cf-bg-a:   #071e2b;
+  --cf-bg-b:   #092637;
+  --cf-bg-c:   #051820;
+  --cf-text:   rgba(255, 253, 247, 0.90);
+  --cf-dim:    rgba(255, 253, 247, 0.42);
+  --cf-glass:  rgba(255, 253, 247, 0.055);
+  --cf-glass-h: rgba(255, 253, 247, 0.09);
+  --cf-border:  rgba(0, 188, 212, 0.14);
+  --cf-border-h: rgba(0, 188, 212, 0.34);
+  --cf-coral:  #FF6B6B;
+  --cf-teal:   #00BCD4;
+  --cf-gold:   #FFB300;
+  --cf-ease:   cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ── Contenedor principal ── */
+.cf-footer {
+  position: relative;
+  min-height: 100svh;
+  min-height: 100vh;       /* fallback iOS < 15.4 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background: linear-gradient(
+    160deg,
+    var(--cf-bg-a) 0%,
+    var(--cf-bg-b) 55%,
+    var(--cf-bg-c) 100%
+  );
+  color: var(--cf-text);
+  font-family: var(--sans, 'Inter', system-ui, sans-serif);
+}
+
+/* ─────────────────────────────────────────────────
+   CAPAS DE FONDO
+───────────────────────────────────────────────── */
+
+/* Aurora: blobs de luz ambiental animados */
+.cf-aurora {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.cf-aurora::before,
+.cf-aurora::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+/* Blob coral — esquina superior izquierda */
+.cf-aurora::before {
+  width: 55vw;
+  height: 55vw;
+  top: -15%;
+  left: -18%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 107, 107, 0.14) 0%,
+    transparent 65%
+  );
+  animation: cf-aurora-a 18s ease-in-out infinite alternate;
+}
+/* Blob turquesa — esquina inferior derecha */
+.cf-aurora::after {
+  width: 62vw;
+  height: 62vw;
+  bottom: -8%;
+  right: -22%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 188, 212, 0.16) 0%,
+    transparent 65%
+  );
+  animation: cf-aurora-b 22s ease-in-out infinite alternate;
+}
+@keyframes cf-aurora-a {
+  from { transform: translate(0, 0)   scale(1);    }
+  to   { transform: translate(6%, 8%) scale(1.12); }
+}
+@keyframes cf-aurora-b {
+  from { transform: translate(0, 0)    scale(1);   }
+  to   { transform: translate(-8%, -6%) scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cf-aurora::before,
+  .cf-aurora::after { animation: none; }
+}
+
+/* Rejilla de puntos */
+.cf-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(0, 188, 212, 0.11) 1px, transparent 1px);
+  background-size: 36px 36px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 20%,
+    black 80%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 20%,
+    black 80%,
+    transparent 100%
+  );
+}
+
+/* ─────────────────────────────────────────────────
+   TEXTO GIGANTE "MIAMI" — marca de agua decorativa
+───────────────────────────────────────────────── */
+.cf-bg-text {
+  position: absolute;
+  bottom: -0.08em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
+  font-size: clamp(7rem, 26vw, 24rem);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 0.8;
+  white-space: nowrap;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 188, 212, 0.09);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 188, 212, 0.07) 0%,
+    transparent 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ─────────────────────────────────────────────────
+   MARQUESINA DIAGONAL
+───────────────────────────────────────────────── */
+.cf-marquee-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  transform: rotate(-2.2deg) scaleX(1.08);
+  border-top: 1px solid rgba(0, 188, 212, 0.14);
+  border-bottom: 1px solid rgba(0, 188, 212, 0.14);
+  background: rgba(7, 30, 43, 0.60);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 0.72rem 0;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.cf-marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: cf-marquee-scroll 38s linear infinite;
+  will-change: transform;
+}
+
+@keyframes cf-marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+  }
+}
+
+.cf-marquee-set {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding-right: 1.4rem;
+}
+
+/* Texto de la marquesina */
+.cf-ms {
+  font-family: var(--sans, 'Inter', system-ui, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 253, 247, 0.50);
+}
+
+/* Separadores ✦ */
+.cf-md { font-size: 0.52rem; color: var(--cf-teal); opacity: 0.85; }
+.cf-md[data-color="coral"]   { color: var(--cf-coral);  }
+.cf-md[data-color="mostaza"] { color: var(--cf-gold);   }
+
+/* ─────────────────────────────────────────────────
+   ZONA CENTRAL — contenido del footer
+───────────────────────────────────────────────── */
+.cf-main {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6.5rem 1.5rem 1.8rem;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Logo ── */
+.cf-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cf-logo {
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: opacity 0.22s var(--cf-ease);
+  display: inline-flex;
+  gap: 0;
+}
+.cf-logo:hover { opacity: 0.72; }
+.cf-logo__e { color: var(--cf-teal); }
+.cf-logo__m { color: var(--cf-gold); }
+
+.cf-tagline {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--cf-dim);
+  margin: 0;
+}
+
+/* ── Titular de llamada a la acción ── */
+.cf-headline {
+  font-family: var(--serif, 'Playfair Display', Georgia, serif);
+  font-style: italic;
+  font-size: clamp(2.8rem, 8vw, 7.2rem);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  margin: 0;
+  background: linear-gradient(
+    145deg,
+    #FFFDF7       0%,
+    var(--cf-teal)  45%,
+    var(--cf-coral) 78%,
+    #FFFDF7       100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: cf-gradient-drift 9s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 44px rgba(0, 188, 212, 0.13));
+}
+@keyframes cf-gradient-drift {
+  from { background-position: 0%   50%; }
+  to   { background-position: 100% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cf-headline {
+    animation: none;
+    background-position: 0% 50%;
+  }
+}
+
+/* ── Fila del CTA ── */
+.cf-cta-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* ─────────────────────────────────────────────────
+   NAVEGACIÓN EN PILDORAS GLASS
+───────────────────────────────────────────────── */
+.cf-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cf-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.52rem 1.1rem;
+  border-radius: 999px;
+  font-family: var(--sans, 'Inter', system-ui, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 253, 247, 0.68);
+  text-decoration: none;
+  background: var(--cf-glass);
+  border: 1px solid var(--cf-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  white-space: nowrap;
+  /* transform se sobreescribe por el efecto magnético en JS */
+  transition: color 0.22s var(--cf-ease),
+              background 0.22s var(--cf-ease),
+              border-color 0.22s var(--cf-ease),
+              box-shadow 0.22s var(--cf-ease);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 253, 247, 0.06);
+}
+.cf-pill:hover {
+  color: #FFFDF7;
+  background: var(--cf-glass-h);
+  border-color: var(--cf-border-h);
+  box-shadow:
+    0 4px 22px rgba(0, 188, 212, 0.18),
+    inset 0 1px 0 rgba(255, 253, 247, 0.12);
+}
+
+/* ─────────────────────────────────────────────────
+   REDES SOCIALES
+───────────────────────────────────────────────── */
+.cf-socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.cf-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-family: var(--sans, 'Inter', system-ui, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 253, 247, 0.55);
+  text-decoration: none;
+  background: var(--cf-glass);
+  border: 1px solid rgba(255, 253, 247, 0.08);
+  transition: color 0.22s var(--cf-ease),
+              background 0.22s var(--cf-ease),
+              border-color 0.22s var(--cf-ease);
+}
+.cf-social:hover {
+  color: #FFFDF7;
+  background: var(--cf-glass-h);
+  border-color: rgba(255, 253, 247, 0.20);
+}
+.cf-social__label { font-size: 0.75rem; }
+
+/* ─────────────────────────────────────────────────
+   BARRA INFERIOR
+───────────────────────────────────────────────── */
+.cf-bottom {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 2rem 1.8rem;
+  border-top: 1px solid rgba(0, 188, 212, 0.10);
+}
+
+/* Copyright */
+.cf-copy {
+  font-size: 0.71rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--cf-dim);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cf-admin {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.38;
+  transition: opacity 0.2s, color 0.2s;
+}
+.cf-admin:hover { opacity: 1; color: var(--cf-teal); }
+
+/* Badge "hecho con amor" */
+.cf-love {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cf-dim);
+  background: var(--cf-glass);
+  border: 1px solid rgba(255, 253, 247, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 253, 247, 0.05);
+  cursor: default;
+}
+
+/* Corazón latiendo */
+.cf-heart {
+  font-size: 0.88rem;
+  color: var(--cf-coral);
+  display: inline-block;
+  animation: cf-heartbeat 2.2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+@keyframes cf-heartbeat {
+  0%,  100% { transform: scale(1); }
+  12%        { transform: scale(1.38); }
+  20%        { transform: scale(1); }
+  28%        { transform: scale(1.18); }
+  36%        { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cf-heart { animation: none; }
+}
+
+/* Botón volver arriba */
+.cf-totop {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--cf-border);
+  background: var(--cf-glass);
+  color: var(--cf-dim);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* el transform magnético se gestiona por JS */
+  transition: color 0.22s var(--cf-ease),
+              background 0.22s var(--cf-ease),
+              border-color 0.22s var(--cf-ease);
+}
+.cf-totop:hover {
+  color: #FFFDF7;
+  background: var(--cf-glass-h);
+  border-color: var(--cf-border-h);
+}
+.cf-totop:hover svg {
+  transform: translateY(-2px);
+  transition: transform 0.28s var(--cf-ease);
+}
+.cf-totop svg { transition: transform 0.28s var(--cf-ease); }
+
+/* ─────────────────────────────────────────────────
+   REVEAL DE ENTRADA (IntersectionObserver)
+───────────────────────────────────────────────── */
+.cf-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.78s var(--cf-ease),
+              transform 0.78s var(--cf-ease);
+}
+.cf-reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delays escalonados por posición en el DOM */
+.cf-main > .cf-reveal:nth-child(1) { transition-delay: 0.05s; }
+.cf-main > .cf-reveal:nth-child(2) { transition-delay: 0.14s; }
+.cf-main > .cf-reveal:nth-child(3) { transition-delay: 0.23s; }
+.cf-main > .cf-reveal:nth-child(4) { transition-delay: 0.32s; }
+.cf-main > .cf-reveal:nth-child(5) { transition-delay: 0.41s; }
+
+.cf-bottom.cf-reveal { transition-delay: 0.50s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cf-main   { gap: 1.8rem; padding: 6rem 1.2rem 1.5rem; }
+  .cf-bottom { padding: 1.2rem 1.2rem 2rem; }
+}
+
+@media (max-width: 480px) {
+  .cf-main    { gap: 1.5rem; padding: 6rem 1rem 1.2rem; }
+  .cf-headline { font-size: clamp(2.4rem, 11vw, 3.8rem); }
+  .cf-bottom  {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.85rem;
+    padding: 1rem 1rem 2.2rem;
+  }
+  .cf-copy    { justify-content: center; }
+  .cf-marquee-wrap { margin-top: 1rem; }
+}
