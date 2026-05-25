@@ -5,7 +5,7 @@
    Comentarios en español
 ========================================= */
 
-/* ===== DATOS DE DESTINOS (9 destinos reales verificados) ===== */
+/* ===== DATOS DE DESTINOS ===== */
 var DESTINOS_DEFAULT = [
   {
     id: 1,
@@ -1357,16 +1357,16 @@ function initRoadmapTooltip() {
 
 /* ===== SHUFFLE GRID — port vanilla de React ShuffleHero ===== */
 /*
- * 12 tarjetas mini (9 destinos + 3 bonus) en una grilla 4×3.
- * Se barajan con animación FLIP (First–Last–Invert–Play) al hacer scroll
- * mientras la sección está en el viewport.
+ * Tarjetas mini en una grilla que se baraja con animación FLIP
+ * (First–Last–Invert–Play) al hacer scroll mientras la sección
+ * está en el viewport.
  */
 function initShuffleGrid() {
   var container = document.getElementById('shuffleGrid');
   var section   = document.getElementById('nosotros');
   if (!container || !section) return;
 
-  /* ── Datos: 9 destinos reales + 3 imágenes bonus = 12 tarjetas ── */
+  /* ── Datos: destinos reales + imágenes bonus ── */
   var cardData = [
     { id:'d1', es:'Everglades',     en:'Everglades',    foto: DESTINOS_DEFAULT[0] ? DESTINOS_DEFAULT[0].foto : '', tipo:'tierra' },
     { id:'d2', es:'John Pennekamp', en:'John Pennekamp',foto: DESTINOS_DEFAULT[1] ? DESTINOS_DEFAULT[1].foto : '', tipo:'mar' },
