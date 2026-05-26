@@ -545,8 +545,11 @@ p  { font-weight: 300; }
   .hero-left .hero-replay     { justify-content: center; }
   .hero-left .hero-shutter    { justify-content: center; text-align: center; }
   .hero-right {
-    flex: 0 0 100%; max-width: 100%; width: 100%;
+    /* flex-basis absoluto — evita que 100% resuelva a 0 en contenedor columna sin altura fija */
+    flex: 0 0 auto;
+    width: 100%; max-width: 100%;
     height: 280px;
+    min-height: 280px; /* salvaguarda adicional */
   }
   .hero-img-card { width: 175px; height: 245px; margin-left: -87px; margin-top: -122px; }
 }
