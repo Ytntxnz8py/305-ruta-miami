@@ -4953,7 +4953,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 /* Tags flotantes en la parte superior — fade-in CSS, posición fija */
 .hero-px__tags {
   position: absolute;
-  top: 88px;
+  top: calc(var(--nav-h, 68px) + 40px); /* navbar real + 40px holgura */
   left: 50%;
   transform: translateX(-50%);
   z-index: 110;
@@ -4976,8 +4976,9 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 /* Texto central: parallax propio — diferente al fondo */
 .hero-px__text {
   position: absolute;
-  /* Centrado en el eje vertical — título largo de varias líneas + subtítulo + social proof */
-  top: 50%;
+  /* Centrado en el área visible (viewport - navbar):
+     desplazamos el centro down por la mitad de la altura del navbar */
+  top: calc(50% + var(--nav-h, 68px) / 2);
   left: 50%;
   z-index: 9;
   text-align: center;
@@ -5101,9 +5102,8 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 
 /* Responsive móvil */
 @media (max-width: 640px) {
-  .hero-px__tags       { top: 72px; }
   .hero-px__scroll-btn { bottom: 1.5rem; }
-  /* En móvil el título ocupa más líneas — se centra con translate ya definido */
+  /* En móvil el título ocupa más líneas */
   .hero-px__text { gap: 1rem; }
 }
 

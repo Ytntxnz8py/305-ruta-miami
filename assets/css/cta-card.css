@@ -234,6 +234,14 @@
     align-items: stretch;
   }
 
+  /* Botón MetalButton ocupa todo el ancho en móvil */
+  .cta-card__action .metal-btn-wrap {
+    width: 100%;
+  }
+  .cta-card__action .metal-btn-wrap .metal-btn {
+    width: 100%;
+  }
+
   .cta-card__desc { max-width: none; }
 
   .cta-card--newsletter .newsletter-input-wrap {

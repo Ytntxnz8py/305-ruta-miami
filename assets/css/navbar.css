@@ -4,6 +4,9 @@
    Funciona en todas las páginas. Drawer móvil bajo 900px.
    ============================================================ */
 
+/* Fallback hasta que JS mida la altura real del navbar */
+:root { --nav-h: 68px; }
+
 /* ---------- Sistema bilingüe global ----------
    navbar.css se carga en TODAS las páginas, por eso las reglas
    .lang-* viven aquí (antes vivían solo en styles.css y el blog

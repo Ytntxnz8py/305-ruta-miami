@@ -307,14 +307,15 @@ a.footer__enlace:hover { color: var(--blanco-arena); }
    ════════════════════════════════════════ */
 .blog-hero {
   background: var(--blanco-arena);
-  padding: 4rem 1.5rem 3rem;
+  /* navbar real + 40px holgura (var seteada por navbar.js en onReady) */
+  padding: calc(var(--nav-h, 68px) + 40px) 1.5rem 3rem;
   min-height: auto;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 @media (max-width: 640px) {
-  .blog-hero { padding: 2.5rem 1.25rem 2rem; }
+  .blog-hero { padding: calc(var(--nav-h, 68px) + 32px) 1.25rem 2rem; }
 }
 /* Fondo plano blanco arena (sin puntos) */
 .blog-hero::before {
@@ -853,7 +854,8 @@ a.footer__enlace:hover { color: var(--blanco-arena); }
    ════════════════════════════════════════════════════════════════ */
 .blog-hero {
   background: var(--blanco-arena);
-  padding: 4.5rem 1.5rem 5rem;
+  /* navbar real (--nav-h medido por JS) + 40px holgura */
+  padding: calc(var(--nav-h, 68px) + 40px) 1.5rem 5rem;
   text-align: left;
   overflow: hidden;
   position: relative;
@@ -1084,7 +1086,7 @@ a.footer__enlace:hover { color: var(--blanco-arena); }
 
 /* Responsive: stack vertical en móvil */
 @media (max-width: 900px) {
-  .blog-hero { padding: 3rem 1.25rem 3.5rem; }
+  .blog-hero { padding: calc(var(--nav-h, 68px) + 32px) 1.25rem 3.5rem; }
   .blog-hero__inner {
     grid-template-columns: 1fr;
     gap: 2rem;

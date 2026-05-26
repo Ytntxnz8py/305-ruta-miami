@@ -26,6 +26,15 @@
 
     if (!nav) return;
 
+    /* ===== Altura real del navbar → variable CSS ===== */
+    /* Permite que cualquier sección hero se posicione exactamente */
+    function actualizarNavHeight() {
+      var h = nav.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--nav-h', Math.round(h) + 'px');
+    }
+    actualizarNavHeight();
+    window.addEventListener('resize', actualizarNavHeight, { passive: true });
+
     /* ===== Scroll hide/show ===== */
     var lastY      = window.pageYOffset || 0;
     var threshold  = 80;
