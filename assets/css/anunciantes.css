@@ -3083,14 +3083,16 @@ p  { font-weight: 300; }
   80%, 100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
 }
 
-/* Anillo orbital */
+/* Anillo orbital — elipse que coincide con la trayectoria de los nodos.
+   Dimensiones: width = 2*RADIUS, height = width * Y_SCALE */
 .orbital-ring {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 420px; height: 420px;
+  /* desktop: RADIUS=200 → width=400px, height=400*0.42=168px */
+  width: 400px; height: 168px;
   border-radius: 50%;
-  border: 1px dashed rgba(0, 188, 212, 0.22);
+  border: 1px dashed rgba(0, 188, 212, 0.28);
   pointer-events: none;
 }
 
@@ -3100,7 +3102,10 @@ p  { font-weight: 300; }
   top: 50%; left: 50%;
   width: 44px; height: 44px;
   margin: -22px 0 0 -22px;
-  transition: transform 0.7s cubic-bezier(0.2, 0, 0, 1), opacity 0.5s ease;
+  /* Sin transition en transform/opacity: rAF es quien anima — CSS transition
+     y rAF en la misma propiedad se interfieren causando el efecto tembloroso */
+  transition: none;
+  will-change: transform, opacity;
   cursor: pointer;
   background: transparent;
   border: none;
@@ -3292,12 +3297,14 @@ p  { font-weight: 300; }
 /* Responsive */
 @media (max-width: 768px) {
   .orbital-stage { height: 480px; }
-  .orbital-ring  { width: 320px; height: 320px; }
+  /* RADIUS_MOBILE=130 → width=260, height=260*0.62=161 */
+  .orbital-ring  { width: 260px; height: 161px; }
   .orbital-card  { width: 240px; top: calc(100% + 28px); }
 }
 @media (max-width: 480px) {
   .orbital-stage { height: 420px; }
-  .orbital-ring  { width: 260px; height: 260px; }
+  /* RADIUS_SMALL=100 → width=200, height=200*0.62=124 */
+  .orbital-ring  { width: 200px; height: 124px; }
   .orbital-node  { width: 38px; height: 38px; margin: -19px 0 0 -19px; }
   .orbital-node__dot   { font-size: 1rem; }
   .orbital-node__label { font-size: 0.62rem; }

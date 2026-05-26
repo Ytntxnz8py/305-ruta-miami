@@ -960,22 +960,31 @@
 
 /* ============================================
    LÍNEA DE TIEMPO ORBITAL — Para empresas
-   IIFE vanilla ES5
+   IIFE vanilla ES5 — rAF + elipse 3D
    ============================================ */
 (function initOrbital() {
   'use strict';
 
-  var RADIUS = 200;
+  /* Radio en px según viewport */
+  var RADIUS        = 200;
   var RADIUS_MOBILE = 130;
-  var ROTATION_STEP = 0.3;
-  var ROTATION_INTERVAL = 50;
+  var RADIUS_SMALL  = 100;
 
-  var stage = null;
-  var nodes = [];          // refs DOM { id, el }
+  /* Velocidad en grados/segundo — uniforme en cualquier pantalla */
+  var DEG_PER_SEC = 15;
+
+  /* Aplanamiento vertical (simula perspectiva 3D):
+     Y_SCALE = 0 → línea horizontal; 1 → círculo perfecto */
+  var Y_SCALE        = 0.42;   /* desktop */
+  var Y_SCALE_MOBILE = 0.62;   /* móvil  */
+
+  var stage      = null;
+  var nodes      = [];          /* refs DOM { id, el } */
   var rotationAngle = 0;
   var autoRotate = true;
-  var rotationTimer = null;
-  var activeId = null;
+  var animFrameId  = null;      /* handle de rAF (reemplaza setInterval) */
+  var lastTs       = null;      /* timestamp del frame anterior */
+  var activeId   = null;
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Data: 6 nodos bilingües — sin compromisos numéricos */
@@ -1031,18 +1040,30 @@
   ];
 
   function getRadius() {
-    return window.innerWidth < 480 ? 100 : (window.innerWidth < 768 ? RADIUS_MOBILE : RADIUS);
+    var w = window.innerWidth;
+    return w < 480 ? RADIUS_SMALL : (w < 768 ? RADIUS_MOBILE : RADIUS);
+  }
+
+  function getYScale() {
+    return window.innerWidth < 768 ? Y_SCALE_MOBILE : Y_SCALE;
   }
 
   function calculatePosition(index, total) {
-    var angle = ((index / total) * 360 + rotationAngle) % 360;
-    var radian = (angle * Math.PI) / 180;
-    var r = getRadius();
-    var x = r * Math.cos(radian);
-    var y = r * Math.sin(radian);
-    var zIndex = Math.round(100 + 50 * Math.cos(radian));
-    var opacity = Math.max(0.45, Math.min(1, 0.45 + 0.55 * ((1 + Math.sin(radian)) / 2)));
-    return { x: x, y: y, zIndex: zIndex, opacity: opacity };
+    var angle  = ((index / total) * 360 + rotationAngle) % 360;
+    var rad    = (angle * Math.PI) / 180;
+    var r      = getRadius();
+    var ys     = getYScale();
+    var x      = r * Math.cos(rad);
+    var y      = r * Math.sin(rad) * ys;   /* elipse aplastada = perspectiva 3D */
+    /* depth 0=fondo(arriba) 1=frente(abajo) */
+    var depth  = (1 + Math.sin(rad)) / 2;
+    return {
+      x      : x,
+      y      : y,
+      zIndex : Math.round(10 + 90 * depth),
+      opacity: 0.45 + 0.55 * depth,
+      scale  : 0.72 + 0.28 * depth          /* más pequeño atrás, más grande adelante */
+    };
   }
 
   function getItem(id) {
@@ -1092,12 +1113,14 @@
 
   function updatePositions() {
     for (var i = 0; i < nodes.length; i++) {
-      var n = nodes[i];
+      var n   = nodes[i];
       var pos = calculatePosition(i, nodes.length);
-      var isExpanded = (n.id === activeId);
-      n.el.style.transform = 'translate(' + pos.x + 'px, ' + pos.y + 'px)';
-      n.el.style.zIndex = isExpanded ? 300 : pos.zIndex;
-      n.el.style.opacity = isExpanded ? 1 : pos.opacity;
+      var isExp = (n.id === activeId);
+      /* Nodo activo: escala neutral (el dot interno ya hace scale vía CSS) */
+      var sc = isExp ? 1.0 : pos.scale;
+      n.el.style.transform = 'translate(' + pos.x.toFixed(2) + 'px,' + pos.y.toFixed(2) + 'px) scale(' + sc.toFixed(3) + ')';
+      n.el.style.zIndex    = isExp ? '300' : String(pos.zIndex);
+      n.el.style.opacity   = isExp ? '1'   : pos.opacity.toFixed(3);
     }
   }
 
@@ -1234,16 +1257,26 @@
     if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
   }
 
+  /* ── Loop rAF: tiempo-basado, 60fps, sincronizado con repaint ── */
+  function tick(ts) {
+    if (!autoRotate) { animFrameId = null; lastTs = null; return; }
+    if (lastTs === null) lastTs = ts;
+    var dt = ts - lastTs;
+    if (dt > 100) dt = 100;               /* evita salto grande al volver de otra pestaña */
+    lastTs = ts;
+    rotationAngle = (rotationAngle + DEG_PER_SEC * dt / 1000) % 360;
+    updatePositions();
+    animFrameId = requestAnimationFrame(tick);
+  }
+
   function startRotation() {
-    if (rotationTimer) return;
-    rotationTimer = setInterval(function () {
-      if (!autoRotate) return;
-      rotationAngle = (rotationAngle + ROTATION_STEP) % 360;
-      updatePositions();
-    }, ROTATION_INTERVAL);
+    if (animFrameId) return;
+    lastTs = null;
+    animFrameId = requestAnimationFrame(tick);
   }
   function stopRotation() {
-    if (rotationTimer) { clearInterval(rotationTimer); rotationTimer = null; }
+    if (animFrameId) { cancelAnimationFrame(animFrameId); animFrameId = null; }
+    lastTs = null;
   }
 
   function onResize() { updatePositions(); }
