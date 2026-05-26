@@ -2216,7 +2216,10 @@ p  { font-weight: 300; }
 @media (max-width: 600px) {
   .seccion-hero {
     min-height: auto !important;
-    padding: 6rem 1.25rem 4rem !important;
+    /* padding-bottom 7rem da holgura suficiente para las tarjetas rotadas */
+    padding: 6rem 1.25rem 7rem !important;
+    /* overflow visible en móvil: las tarjetas no quedan cortadas en ningún dispositivo */
+    overflow: visible !important;
   }
   /* Tarjetas fotográficas: reduce translate para evitar clipping */
   .hero-img-card--back  {
@@ -2349,10 +2352,10 @@ p  { font-weight: 300; }
 ================================================================= */
 @media (max-width: 768px) {
   .seccion-hero {
-    padding-bottom: 5rem !important;
+    padding-bottom: 7rem !important;
+    overflow: visible !important;
   }
   .hero-right {
-    /* Restringe altura máxima en móvil para evitar overflow */
     max-height: 320px;
     overflow: visible;
   }
