@@ -2184,41 +2184,14 @@ html.lang-es .lang-en { display: none; }
 
 /* --- ANIMACIÃ“N CINEMATIC DE ENTRADA --- */
 /* Override del fade-up genÃ©rico para cards de destino */
+/* Entrada simple: solo opacidad — evita clipping vertical del carrusel */
 #destinosGrid .destino-card-wrap.fade-up {
   opacity: 0;
-  transform: translateY(55px) rotateX(14deg);
-  transform-origin: center bottom;
-  transition: opacity 0.80s cubic-bezier(0.2, 0, 0, 1),
-              transform 0.80s cubic-bezier(0.2, 0, 0, 1);
+  transition: opacity 0.65s cubic-bezier(0.2, 0, 0, 1);
 }
 
 #destinosGrid .destino-card-wrap.fade-up.visible {
   opacity: 1;
-  transform: translateY(0) rotateX(0deg);
-}
-
-/* Entrada escalonada: izquierda / centro / derecha */
-@media (min-width: 768px) {
-  #destinosGrid .destino-card-wrap:nth-child(3n+1).fade-up {
-    transform: translateY(40px) rotateX(8deg) rotateY(-10deg);
-  }
-  #destinosGrid .destino-card-wrap:nth-child(3n+1).fade-up.visible {
-    transform: translateY(0) rotateX(0deg) rotateY(0deg);
-  }
-
-  #destinosGrid .destino-card-wrap:nth-child(3n+2).fade-up {
-    transform: translateY(80px) rotateX(18deg);
-  }
-  #destinosGrid .destino-card-wrap:nth-child(3n+2).fade-up.visible {
-    transform: translateY(0) rotateX(0deg);
-  }
-
-  #destinosGrid .destino-card-wrap:nth-child(3n+3).fade-up {
-    transform: translateY(40px) rotateX(8deg) rotateY(10deg);
-  }
-  #destinosGrid .destino-card-wrap:nth-child(3n+3).fade-up.visible {
-    transform: translateY(0) rotateX(0deg) rotateY(0deg);
-  }
 }
 
 /* --- 3D MOUSE TILT: clase aÃ±adida por JS en mousemove --- */
@@ -2241,16 +2214,11 @@ html.lang-es .lang-en { display: none; }
 
 /* --- REDUCED MOTION: desactiva animaciones 3D --- */
 @media (prefers-reduced-motion: reduce) {
-  #destinosGrid .destino-card-wrap.fade-up,
-  #destinosGrid .destino-card-wrap:nth-child(3n+1).fade-up,
-  #destinosGrid .destino-card-wrap:nth-child(3n+2).fade-up,
-  #destinosGrid .destino-card-wrap:nth-child(3n+3).fade-up {
-    transform: translateY(20px) !important;
+  #destinosGrid .destino-card-wrap.fade-up {
     opacity: 0;
   }
 
   #destinosGrid .destino-card-wrap.fade-up.visible {
-    transform: none !important;
     opacity: 1;
   }
 
