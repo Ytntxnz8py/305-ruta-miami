@@ -3811,7 +3811,83 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   text-shadow: 0 1px 8px rgba(255,253,247,0.7);
 }
 
-/* â”€â”€ Columna derecha: grid de tarjetas â”€â”€ */
+/* Stats embebidos en columna izquierda */
+.si-stats-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-top: 0.6rem;
+}
+.si-stats-divider::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,107,107,0.28));
+}
+.si-stats-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,107,107,0.28), transparent);
+}
+
+.si-stats-mini {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.si-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.12rem;
+  padding: 0.75rem 0.7rem 0.65rem;
+  background: #ffffff;
+  border: 1px solid rgba(26,42,53,0.07);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(26,42,53,0.04);
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.2,0,0,1), box-shadow 0.25s;
+}
+.si-stat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(26,42,53,0.08);
+}
+@media (prefers-reduced-motion: reduce) {
+  .si-stat { transition: none; }
+  .si-stat:hover { transform: none; }
+}
+
+.si-stat__num {
+  font-family: var(--fuente-titulo);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-weight: 400;
+  color: var(--turquesa);
+  line-height: 1;
+}
+.si-stat__label {
+  font-size: 0.72rem;
+  color: var(--texto-medio);
+  line-height: 1.35;
+}
+.si-stat__ico {
+  position: absolute;
+  bottom: 0.45rem;
+  right: 0.6rem;
+  font-size: 1.2rem;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+/* Columna derecha: grid de tarjetas */
 .si-col-grid {
   position: relative;
 }
@@ -3822,7 +3898,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 7px;
-  height: 430px;
+  height: 520px;
 }
 
 /* Tarjeta mini */
@@ -3905,6 +3981,8 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   .si-layout .seccion-intro__titulo { text-align: center; }
   .si-feature { text-align: left; }
   .shuffle-grid { height: 300px; gap: 5px; }
+  .si-stats-divider { justify-content: center; }
+  .si-stats-mini { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 480px) {
@@ -3914,6 +3992,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
     height: 320px;
     gap: 4px;
   }
+  .si-stats-mini { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {
