@@ -1,116 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Inicio -->
+  <!-- PÁGINAS PRINCIPALES -->
   <url>
     <loc>https://ytntxnz8py.github.io/mi-tienda/</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Blog listing -->
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/anunciantes.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <url>
     <loc>https://ytntxnz8py.github.io/mi-tienda/blog.html</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Artículos de blog -->
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/blog/kayak-miami-principiantes.html</loc>
-    <lastmod>2026-05-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/blog/buceo-key-largo-guia.html</loc>
-    <lastmod>2026-05-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/blog/everglades-un-dia.html</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Destinos -->
+  <!-- DESTINOS INDIVIDUALES -->
   <url>
     <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/everglades.html</loc>
-    <lastmod>2026-05-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/john-pennekamp.html</loc>
-    <lastmod>2026-05-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/biscayne.html</loc>
-    <lastmod>2026-05-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/bill-baggs.html</loc>
-    <lastmod>2026-05-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/virginia-key.html</loc>
-    <lastmod>2026-05-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/crandon-park.html</loc>
-    <lastmod>2026-05-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/matheson-hammock.html</loc>
-    <lastmod>2026-05-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/oleta-river.html</loc>
-    <lastmod>2026-05-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/arch-creek.html</loc>
-    <lastmod>2026-05-24</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Páginas comerciales / legales -->
   <url>
-    <loc>https://ytntxnz8py.github.io/mi-tienda/anunciantes.html</loc>
-    <lastmod>2026-05-24</lastmod>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/john-pennekamp.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/biscayne.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/bill-baggs.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/oleta-river.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/virginia-key.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/matheson-hammock.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/crandon-park.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/destinos/arch-creek.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ARTÍCULOS DEL BLOG -->
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/blog/buceo-key-largo-guia.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/blog/everglades-un-dia.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://ytntxnz8py.github.io/mi-tienda/blog/kayak-miami-principiantes.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- PÁGINAS LEGALES -->
   <url>
     <loc>https://ytntxnz8py.github.io/mi-tienda/privacidad.html</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
   <url>
     <loc>https://ytntxnz8py.github.io/mi-tienda/terminos.html</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- NO INCLUIR:
+    - admin.html            → tiene meta robots noindex
+    - aventura.html         → página "próximamente", sin contenido real
+    - comida.html           → página "próximamente", sin contenido real
+    - preview-imagenes.html → herramienta de desarrollo interna
+  -->
 
 </urlset>

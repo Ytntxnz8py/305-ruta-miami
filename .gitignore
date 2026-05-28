@@ -22,16 +22,28 @@ Virginia Key Beach Park/
 .env.*.local
 
 # Claves y secretos
+*secret*
+*credentials*
 *.key
 *.pem
 *.p12
 *.pfx
+service-account*.json
 
 # OS / editor
 .DS_Store
 Thumbs.db
-.vscode/
+desktop.ini
+.vscode/settings.json
+*.suo
 .idea/
+
+# Logs y temporales
+*.log
+npm-debug.log*
+
+# Archivos archivados localmente
+_archivo/
 
 # Herramientas de desarrollo local (no van a GitHub Pages)
 .claude/
@@ -40,3 +52,8 @@ Thumbs.db
 
 # Node (por si acaso)
 node_modules/
+
+# Carpetas de trabajo y borradores
+-hero/
+REPORTE_*.md
+IMAGENES_PROPUESTAS.md
