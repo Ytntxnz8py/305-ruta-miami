@@ -5,6 +5,34 @@
    Comentarios en español
 ========================================= */
 
+/* ===== PLACEHOLDER DE FOTO (CC0 pendiente) =====
+   Genera una imagen SVG inline tintada por categoria. No depende de la red
+   (nunca se rompe en GitHub Pages) y se auto-documenta como "reemplazar".
+   El dueño sustituye estas por fotos CC0 (Unsplash/Pexels) antes del merge. */
+function phFoto(cat, label) {
+  var col = ({
+    playa: '#00BCD4', buceo: '#0097A7', pesca: '#FFB300',
+    exploracion: '#7CB342', bares: '#FF6B6B'
+  })[cat] || '#00BCD4';
+  var safe = String(label).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  var svg =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">' +
+      '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0" stop-color="' + col + '" stop-opacity="0.20"/>' +
+        '<stop offset="1" stop-color="' + col + '" stop-opacity="0.06"/>' +
+      '</linearGradient></defs>' +
+      '<rect width="800" height="600" fill="#FFFDF7"/>' +
+      '<rect width="800" height="600" fill="url(#g)"/>' +
+      '<rect x="22" y="22" width="756" height="556" rx="26" fill="none" stroke="' + col + '" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="11 11"/>' +
+      '<rect x="338" y="206" width="124" height="92" rx="14" fill="none" stroke="' + col + '" stroke-width="6"/>' +
+      '<rect x="372" y="190" width="56" height="20" rx="7" fill="' + col + '"/>' +
+      '<circle cx="400" cy="252" r="26" fill="' + col + '"/>' +
+      '<text x="400" y="372" font-family="Georgia, serif" font-size="40" font-style="italic" fill="#1a2a3a" text-anchor="middle">' + safe + '</text>' +
+      '<text x="400" y="414" font-family="Inter, Helvetica, sans-serif" font-size="20" fill="#4a6f82" text-anchor="middle">Foto CC0 pendiente</text>' +
+    '</svg>';
+  return 'data:image/svg+xml,' + encodeURIComponent(svg);
+}
+
 /* ===== DATOS DE DESTINOS ===== */
 var DESTINOS_DEFAULT = [
   {
@@ -29,6 +57,7 @@ var DESTINOS_DEFAULT = [
     precio: '$35 / vehículo (7 días)', precio_en: '$35 / vehicle (7 days)',
     horarios: '24h (Shark Valley: 8am–6pm)', horarios_en: '24h (Shark Valley: 8am–6pm)',
     tipo: 'tierra', tipo_es: 'Senderismo · Kayak', tipo_en: 'Hiking · Kayak',
+    categoria: 'exploracion', categoria_es: 'Exploración', categoria_en: 'Exploration',
     telefono: '(305) 242-7700',
     web_oficial: 'https://www.nps.gov/ever/',
     mejor_epoca: 'Nov–Abr (temporada seca)', mejor_epoca_en: 'Nov–Apr (dry season)',
@@ -80,6 +109,7 @@ var DESTINOS_DEFAULT = [
     precio: '$8 / persona + tours desde $32', precio_en: '$8 / person + tours from $32',
     horarios: '8am–sunset', horarios_en: '8am–sunset',
     tipo: 'mar', tipo_es: 'Buceo · Snorkeling', tipo_en: 'Diving · Snorkeling',
+    categoria: 'buceo', categoria_es: 'Buceo', categoria_en: 'Diving',
     telefono: '(305) 451-6300',
     web_oficial: 'https://www.floridastateparks.org/parks-and-trails/john-pennekamp-coral-reef-state-park',
     mejor_epoca: 'Mar–Jun (visibilidad máxima)', mejor_epoca_en: 'Mar–Jun (peak visibility)',
@@ -131,6 +161,7 @@ var DESTINOS_DEFAULT = [
     precio: 'Entrada gratis · Tours: $45–$65', precio_en: 'Free entry · Tours: $45–$65',
     horarios: '7am–5:30pm (Visitor Center)', horarios_en: '7am–5:30pm (Visitor Center)',
     tipo: 'mar', tipo_es: 'Kayak · Snorkeling · Buceo', tipo_en: 'Kayak · Snorkeling · Diving',
+    categoria: 'buceo', categoria_es: 'Buceo', categoria_en: 'Diving',
     telefono: '(305) 230-1144',
     web_oficial: 'https://www.nps.gov/bisc/',
     mejor_epoca: 'Nov–Abr (aguas más tranquilas)', mejor_epoca_en: 'Nov–Apr (calmer waters)',
@@ -182,6 +213,7 @@ var DESTINOS_DEFAULT = [
     precio: '$8 / vehículo (hasta 8 pers)', precio_en: '$8 / vehicle (up to 8 people)',
     horarios: '8am–sunset', horarios_en: '8am–sunset',
     tipo: 'mar', tipo_es: 'Playa · Ciclismo · Snorkeling', tipo_en: 'Beach · Cycling · Snorkeling',
+    categoria: 'playa', categoria_es: 'Playa', categoria_en: 'Beach',
     telefono: '(305) 361-5811',
     web_oficial: 'https://www.floridastateparks.org/parks-and-trails/bill-baggs-cape-florida-state-park',
     mejor_epoca: 'Oct–May (temporada baja y aguas tranquilas)', mejor_epoca_en: 'Oct–May (off-season, calm waters)',
@@ -233,6 +265,7 @@ var DESTINOS_DEFAULT = [
     precio: '$6 / vehículo', precio_en: '$6 / vehicle',
     horarios: '8am–sunset', horarios_en: '8am–sunset',
     tipo: 'tierra', tipo_es: 'Kayak · Mountain Bike', tipo_en: 'Kayak · Mountain Bike',
+    categoria: 'exploracion', categoria_es: 'Exploración', categoria_en: 'Exploration',
     telefono: '(305) 919-1846',
     web_oficial: 'https://www.floridastateparks.org/parks-and-trails/oleta-river-state-park',
     mejor_epoca: 'Oct–Abr (temperaturas más frescas)', mejor_epoca_en: 'Oct–Apr (cooler temperatures)',
@@ -282,6 +315,7 @@ var DESTINOS_DEFAULT = [
     precio: '$8 / vehículo', precio_en: '$8 / vehicle',
     horarios: '7am–7pm (8pm jun–ago)', horarios_en: '7am–7pm (8pm Jun–Aug)',
     tipo: 'mar', tipo_es: 'Paddle Board · Kayak · Playa', tipo_en: 'Paddle Board · Kayak · Beach',
+    categoria: 'playa', categoria_es: 'Playa', categoria_en: 'Beach',
     telefono: '(305) 960-4600',
     web_oficial: 'https://www.virginiakeybeachpark.net/',
     mejor_epoca: 'Nov–May (temporada baja)', mejor_epoca_en: 'Nov–May (off-season)',
@@ -331,6 +365,7 @@ var DESTINOS_DEFAULT = [
     precio: '$8 / vehículo', precio_en: '$8 / vehicle',
     horarios: 'Sunrise–sunset', horarios_en: 'Sunrise–sunset',
     tipo: 'mar', tipo_es: 'Playa · Snorkeling · Kayak', tipo_en: 'Beach · Snorkeling · Kayak',
+    categoria: 'playa', categoria_es: 'Playa', categoria_en: 'Beach',
     telefono: '(305) 665-5475',
     web_oficial: 'https://www.miamidade.gov/parks/matheson-hammock.asp',
     mejor_epoca: 'Nov–May (menor afluencia)', mejor_epoca_en: 'Nov–May (fewer crowds)',
@@ -381,6 +416,7 @@ var DESTINOS_DEFAULT = [
     precio: '$8 / vehículo', precio_en: '$8 / vehicle',
     horarios: '8am–sunset', horarios_en: '8am–sunset',
     tipo: 'mar', tipo_es: 'Playa · Kayak · Naturaleza', tipo_en: 'Beach · Kayak · Nature',
+    categoria: 'playa', categoria_es: 'Playa', categoria_en: 'Beach',
     telefono: '(305) 361-5421',
     web_oficial: 'https://www.miamidade.gov/parks/crandon.asp',
     mejor_epoca: 'Nov–May (temporada alta en aguas)', mejor_epoca_en: 'Nov–May (peak water conditions)',
@@ -432,6 +468,7 @@ var DESTINOS_DEFAULT = [
     precio: 'Gratis (donaciones bienvenidas)', precio_en: 'Free (donations welcome)',
     horarios: '9am–5pm (Mar–Dom)', horarios_en: '9am–5pm (Tue–Sun)',
     tipo: 'tierra', tipo_es: 'Senderismo · Arqueología', tipo_en: 'Hiking · Archaeology',
+    categoria: 'exploracion', categoria_es: 'Exploración', categoria_en: 'Exploration',
     telefono: '(305) 944-6111',
     web_oficial: 'https://www.miamidade.gov/parks/arch-creek.asp',
     mejor_epoca: 'Oct–Abr (aves migratorias en temporada)', mejor_epoca_en: 'Oct–Apr (migratory bird season)',
@@ -460,11 +497,316 @@ var DESTINOS_DEFAULT = [
         texto_en: 'I took my 7 and 10-year-old kids and it was perfect for them. The stone arch impressed them. The park has educational activities for children on weekends. Free, educational and beautiful — what more could you ask for?'
       }
     ]
+  },
+
+  /* ============================================================
+     12 DESTINOS NUEVOS — etapa categorías (lugares reales)
+     Fotos: placeholder phFoto() — el dueño reemplaza con CC0 antes del merge.
+     rating: null y resenas: [] (sin datos inventados).
+     ============================================================ */
+
+  /* ---------- PLAYA ---------- */
+  {
+    id: 10,
+    nombre_es: 'South Beach (Lummus Park)', nombre_en: 'South Beach (Lummus Park)',
+    descripcion_es: 'La playa más icónica de Miami: arena clara, aguas cálidas y el distrito Art Déco a un paso, con sus torres de salvavidas de colores.',
+    descripcion_en: 'Miami\'s most iconic beach: pale sand, warm water and the Art Deco district steps away, with its colorful lifeguard towers.',
+    descripcion_larga_es: 'South Beach es el tramo de costa más famoso de Miami Beach, frente a Lummus Park y el histórico distrito Art Déco de Ocean Drive. Sus aguas turquesas y su arena ancha la hacen ideal para nadar, tomar el sol y caminar junto a las icónicas casetas de salvavidas pintadas en tonos pastel. El paseo peatonal de Lummus Park conecta cafés, palmeras y zonas verdes a lo largo de Ocean Drive. Es de acceso público y gratuito, con socorristas durante el día.',
+    descripcion_larga_en: 'South Beach is the most famous stretch of Miami Beach, fronting Lummus Park and the historic Art Deco district of Ocean Drive. Its turquoise water and wide sand make it ideal for swimming, sunbathing and strolling past the iconic pastel-painted lifeguard towers. The Lummus Park promenade links cafes, palms and green areas along Ocean Drive. Public and free, with lifeguards on duty during the day.',
+    como_llegar_es: 'En el corazón de Miami Beach, sobre Ocean Drive entre las calles 5 y 14. Desde el centro de Miami: 15–20 min por el MacArthur Causeway (I-395). Estacionamiento de pago en garajes municipales y rutas de autobús South Beach Local.',
+    como_llegar_en: 'In the heart of Miami Beach, along Ocean Drive between 5th and 14th streets. From downtown Miami: 15–20 min via the MacArthur Causeway (I-395). Paid parking in municipal garages and South Beach Local bus routes.',
+    foto: phFoto('playa', 'South Beach'),
+    galeria: [ phFoto('playa', 'South Beach') ],
+    lat: 25.7826, lng: -80.1300,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Gratis', precio_en: 'Free',
+    horarios: 'Playa 5am–medianoche', horarios_en: 'Beach 5am–midnight',
+    tipo: 'mar', tipo_es: 'Playa · Art Déco', tipo_en: 'Beach · Art Deco',
+    categoria: 'playa', categoria_es: 'Playa', categoria_en: 'Beach',
+    telefono: '', web_oficial: 'https://www.miamibeachfl.gov/',
+    mejor_epoca: 'Todo el año', mejor_epoca_en: 'Year-round',
+    google_maps_url: 'https://maps.google.com/maps?q=South+Beach+Lummus+Park+Ocean+Drive+Miami+Beach+FL+33139',
+    apple_maps_url: 'https://maps.apple.com/?q=South+Beach+Miami&ll=25.7826,-80.1300',
+    resenas_url: '',
+    rating: null, activo: true, resenas: []
+  },
+
+  /* ---------- BUCEO ---------- */
+  {
+    id: 11,
+    nombre_es: 'Neptune Memorial Reef', nombre_en: 'Neptune Memorial Reef',
+    descripcion_es: 'Arrecife artificial inspirado en la Atlántida, a unos 12 metros de profundidad frente a Key Biscayne. Solo accesible por barco con operadores de buceo.',
+    descripcion_en: 'An artificial reef inspired by Atlantis, about 40 ft deep off Key Biscayne. Accessible only by boat with dive operators.',
+    descripcion_larga_es: 'El Neptune Memorial Reef es uno de los arrecifes artificiales más grandes del mundo, ubicado a 3.25 millas al este de Key Biscayne. Diseñado como una ciudad submarina al estilo de la Atlántida, con columnas, arcos y leones de bronce, funciona además como un osario marino que ha creado un próspero hábitat para corales y peces. A unos 12 metros de profundidad, es un sitio popular tanto para buceadores certificados como para snorkelistas avanzados, siempre con operadores autorizados que salen en barco.',
+    descripcion_larga_en: 'Neptune Memorial Reef is one of the world\'s largest artificial reefs, located 3.25 miles east of Key Biscayne. Designed as an Atlantis-style underwater city with columns, arches and bronze lions, it also serves as a marine memorial that has created a thriving habitat for corals and fish. At about 40 ft deep, it is a popular site for certified divers and advanced snorkelers, always reached by boat with licensed operators.',
+    como_llegar_es: 'Mar adentro, 3.25 millas al este de Key Biscayne. Solo se llega en barco con operadores de buceo autorizados que salen desde marinas de Miami y Key Biscayne. No hay acceso desde la orilla.',
+    como_llegar_en: 'Offshore, 3.25 miles east of Key Biscayne. Reached only by boat with licensed dive operators departing from Miami and Key Biscayne marinas. No shore access.',
+    foto: phFoto('buceo', 'Neptune Memorial Reef'),
+    galeria: [ phFoto('buceo', 'Neptune Memorial Reef') ],
+    lat: 25.6919, lng: -80.0939,
+    dificultad_es: 'Avanzado (buceo certificado)', dificultad_en: 'Advanced (certified diving)', dificultad_clase: 'dificil',
+    precio: 'Según operador', precio_en: 'Varies by operator',
+    horarios: 'Según tour', horarios_en: 'Per tour',
+    tipo: 'mar', tipo_es: 'Buceo · Arrecife artificial', tipo_en: 'Diving · Artificial reef',
+    categoria: 'buceo', categoria_es: 'Buceo', categoria_en: 'Diving',
+    telefono: '', web_oficial: 'https://www.nmreef.com/',
+    mejor_epoca: 'May–Sep (aguas cálidas)', mejor_epoca_en: 'May–Sep (warm water)',
+    google_maps_url: 'https://maps.google.com/maps?q=Neptune+Memorial+Reef+Key+Biscayne+FL',
+    apple_maps_url: 'https://maps.apple.com/?q=Neptune+Memorial+Reef&ll=25.6919,-80.0939',
+    resenas_url: '',
+    rating: null, activo: true, resenas: []
+  },
+  {
+    id: 12,
+    nombre_es: 'Half Moon Wreck Preserve', nombre_en: 'Half Moon Wreck Preserve',
+    descripcion_es: 'Yate alemán hundido en 1930, hoy preserva arqueológica estatal en aguas someras entre Virginia Key y Key Biscayne. Ideal para snorkel y buceo somero.',
+    descripcion_en: 'A German yacht sunk in 1930, now a state archaeological preserve in shallow water between Virginia Key and Key Biscayne. Great for snorkeling and shallow diving.',
+    descripcion_larga_es: 'El Half Moon fue un elegante yate de regata alemán construido en 1908 que terminó hundido en 1930 cerca de Key Biscayne. Hoy es una de las Preservas Arqueológicas Subacuáticas de Florida: sus restos descansan en aguas someras y forman un arrecife vivo poblado de peces tropicales. Su poca profundidad lo hace accesible para snorkelistas y buceadores principiantes que llegan en barco o kayak. Por ser sitio protegido, no se puede extraer nada — solo observar y fotografiar.',
+    descripcion_larga_en: 'The Half Moon was an elegant German racing yacht built in 1908 that sank in 1930 near Key Biscayne. Today it is one of Florida\'s Underwater Archaeological Preserves: its remains rest in shallow water and form a living reef teeming with tropical fish. Its shallow depth makes it accessible to snorkelers and beginner divers arriving by boat or kayak. As a protected site, nothing may be removed — only observed and photographed.',
+    como_llegar_es: 'En el agua entre Virginia Key y Key Biscayne, cerca del canal de Bear Cut. Se llega en barco o kayak; varios operadores de Miami ofrecen salidas. No hay acceso desde la orilla.',
+    como_llegar_en: 'In the water between Virginia Key and Key Biscayne, near the Bear Cut channel. Reached by boat or kayak; several Miami operators offer trips. No shore access.',
+    foto: phFoto('buceo', 'Half Moon Wreck'),
+    galeria: [ phFoto('buceo', 'Half Moon Wreck') ],
+    lat: 25.6950, lng: -80.1300,
+    dificultad_es: 'Intermedio (snorkel/buceo somero)', dificultad_en: 'Intermediate (snorkel/shallow dive)', dificultad_clase: 'moderado',
+    precio: 'Gratis (preserva pública)', precio_en: 'Free (public preserve)',
+    horarios: 'Horas de luz', horarios_en: 'Daylight hours',
+    tipo: 'mar', tipo_es: 'Buceo · Naufragio histórico', tipo_en: 'Diving · Historic wreck',
+    categoria: 'buceo', categoria_es: 'Buceo', categoria_en: 'Diving',
+    telefono: '', web_oficial: '',
+    mejor_epoca: 'May–Sep (aguas cálidas)', mejor_epoca_en: 'May–Sep (warm water)',
+    google_maps_url: 'https://maps.google.com/maps?q=Half+Moon+Wreck+Preserve+Key+Biscayne+FL',
+    apple_maps_url: 'https://maps.apple.com/?q=Half+Moon+Wreck&ll=25.6950,-80.1300',
+    resenas_url: '',
+    rating: null, activo: true, resenas: []
+  },
+
+  /* ---------- PESCA ---------- */
+  {
+    id: 13,
+    nombre_es: 'South Pointe Park Pier', nombre_en: 'South Pointe Park Pier',
+    descripcion_es: 'Muelle público sobre Government Cut, en la punta sur de Miami Beach. Pesca de orilla, faro histórico y vistas de los cruceros que entran y salen del puerto.',
+    descripcion_en: 'Public pier over Government Cut, at the southern tip of Miami Beach. Shore fishing, a historic lighthouse and views of cruise ships entering and leaving the port.',
+    descripcion_larga_es: 'El muelle de South Pointe Park se adentra sobre Government Cut, el canal por el que pasan los enormes cruceros del puerto de Miami. Es un punto clásico de pesca de orilla, gratuito y abierto al público, con barandas amplias, bancas y un faro histórico cercano. Al amanecer y al atardecer se llena de pescadores locales que buscan snook, jurel y pámpano. El parque que lo rodea tiene césped, duchas y un paseo junto al mar.',
+    descripcion_larga_en: 'The South Pointe Park pier reaches out over Government Cut, the channel where Miami\'s huge cruise ships pass. It is a classic shore-fishing spot, free and open to the public, with wide railings, benches and a nearby historic lighthouse. At sunrise and sunset it fills with local anglers after snook, jack and pompano. The surrounding park has lawns, showers and a seaside promenade.',
+    como_llegar_es: 'En el extremo sur de Miami Beach, al final de Washington Ave. Desde el centro de Miami: 15–20 min por el MacArthur Causeway. Estacionamiento de pago junto al parque.',
+    como_llegar_en: 'At the southern end of Miami Beach, at the foot of Washington Ave. From downtown Miami: 15–20 min via the MacArthur Causeway. Paid parking next to the park.',
+    foto: phFoto('pesca', 'South Pointe Pier'),
+    galeria: [ phFoto('pesca', 'South Pointe Pier') ],
+    lat: 25.7680, lng: -80.1342,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Gratis', precio_en: 'Free',
+    horarios: 'Amanecer–atardecer', horarios_en: 'Sunrise–sunset',
+    tipo: 'mar', tipo_es: 'Pesca de orilla · Paseo', tipo_en: 'Shore fishing · Promenade',
+    categoria: 'pesca', categoria_es: 'Pesca', categoria_en: 'Fishing',
+    telefono: '', web_oficial: 'https://www.miamibeachfl.gov/',
+    mejor_epoca: 'Todo el año', mejor_epoca_en: 'Year-round',
+    google_maps_url: 'https://maps.google.com/maps?q=South+Pointe+Park+Pier+1+Washington+Ave+Miami+Beach+FL+33139',
+    apple_maps_url: 'https://maps.apple.com/?q=South+Pointe+Park+Pier&ll=25.7680,-80.1342',
+    resenas_url: '',
+    rating: null, activo: true, resenas: []
+  },
+  {
+    id: 14,
+    nombre_es: 'Haulover Park (Jetty)', nombre_en: 'Haulover Park (Jetty)',
+    descripcion_es: 'Jetty de pesca junto al Haulover Inlet, en uso desde 1927. Punto popular para pesca de roca y surf fishing, junto a una de las playas más extensas del condado.',
+    descripcion_en: 'A fishing jetty by the Haulover Inlet, in use since 1927. A popular spot for rock and surf fishing, next to one of the county\'s longest beaches.',
+    descripcion_larga_es: 'Haulover Park ocupa una franja de costa entre el océano y la bahía, atravesada por el Haulover Inlet. Su jetty de rocas, en uso desde 1927, es un imán para pescadores que aprovechan la corriente del inlet para capturar snook, róbalo y jurel. El parque del condado ofrece además playa amplia, alquiler de kayaks, marina y zonas de pícnic. La pesca desde la orilla y el jetty es gratuita; el estacionamiento se paga.',
+    descripcion_larga_en: 'Haulover Park occupies a strip of coast between the ocean and the bay, crossed by the Haulover Inlet. Its rock jetty, in use since 1927, is a magnet for anglers who work the inlet current for snook, sea bass and jack. The county park also offers a wide beach, kayak rentals, a marina and picnic areas. Fishing from the shore and jetty is free; parking is paid.',
+    como_llegar_es: 'En 10800 Collins Ave, Miami Beach. Desde el centro de Miami: 25–30 min por la I-95 y Collins Ave. Estacionamiento de pago del condado dentro del parque.',
+    como_llegar_en: 'At 10800 Collins Ave, Miami Beach. From downtown Miami: 25–30 min via I-95 and Collins Ave. Paid county parking inside the park.',
+    foto: phFoto('pesca', 'Haulover Jetty'),
+    galeria: [ phFoto('pesca', 'Haulover Jetty') ],
+    lat: 25.9040, lng: -80.1230,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Gratis (estacionamiento aparte)', precio_en: 'Free (parking extra)',
+    horarios: 'Amanecer–atardecer', horarios_en: 'Sunrise–sunset',
+    tipo: 'mar', tipo_es: 'Pesca de roca · Surf fishing', tipo_en: 'Rock fishing · Surf fishing',
+    categoria: 'pesca', categoria_es: 'Pesca', categoria_en: 'Fishing',
+    telefono: '', web_oficial: 'https://www.miamidade.gov/parks/haulover.asp',
+    mejor_epoca: 'Todo el año', mejor_epoca_en: 'Year-round',
+    google_maps_url: 'https://maps.google.com/maps?q=Haulover+Park+10800+Collins+Ave+Miami+Beach+FL+33154',
+    apple_maps_url: 'https://maps.apple.com/?q=Haulover+Park&ll=25.9040,-80.1230',
+    resenas_url: '',
+    rating: null, activo: true, resenas: []
+  },
+  {
+    id: 15,
+    nombre_es: 'Rickenbacker Causeway', nombre_en: 'Rickenbacker Causeway',
+    descripcion_es: 'Pesca de orilla clásica camino a Key Biscayne, con vistas al skyline de Miami. Tramos de costa accesibles a pie a lo largo del puente.',
+    descripcion_en: 'Classic shore fishing on the way to Key Biscayne, with views of the Miami skyline. Walkable coastal stretches along the causeway.',
+    descripcion_larga_es: 'El Rickenbacker Causeway conecta Miami con Virginia Key y Key Biscayne, y sus orillas son uno de los lugares de pesca de orilla más queridos de la ciudad. A lo largo del puente hay tramos de playa y rocas donde los locales lanzan la caña con el skyline de Miami de fondo. También es un punto popular para kitesurf, ciclismo y picnic. La pesca de orilla es gratuita; el causeway cobra un peaje de entrada en auto.',
+    descripcion_larga_en: 'The Rickenbacker Causeway connects Miami to Virginia Key and Key Biscayne, and its shores are one of the city\'s best-loved shore-fishing spots. Along the bridge there are stretches of beach and rock where locals cast their lines with the Miami skyline behind them. It is also a popular spot for kitesurfing, cycling and picnics. Shore fishing is free; the causeway charges a toll for cars.',
+    como_llegar_es: 'Acceso por el Rickenbacker Causeway desde Brickell/Coconut Grove hacia Key Biscayne. Desde el centro de Miami: 10–15 min. Peaje de entrada en auto; estacionamiento a lo largo de la vía.',
+    como_llegar_en: 'Access via the Rickenbacker Causeway from Brickell/Coconut Grove toward Key Biscayne. From downtown Miami: 10–15 min. Toll for cars; parking along the road.',
+    foto: phFoto('pesca', 'Rickenbacker Causeway'),
+    galeria: [ phFoto('pesca', 'Rickenbacker Causeway') ],
+    lat: 25.7470, lng: -80.1700,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Gratis (peaje del causeway en auto)', precio_en: 'Free (causeway toll for cars)',
+    horarios: '24h', horarios_en: '24h',
+    tipo: 'mar', tipo_es: 'Pesca de orilla · Skyline', tipo_en: 'Shore fishing · Skyline',
+    categoria: 'pesca', categoria_es: 'Pesca', categoria_en: 'Fishing',
+    telefono: '', web_oficial: 'https://www.miamidade.gov/parks/rickenbacker.asp',
+    mejor_epoca: 'Todo el año', mejor_epoca_en: 'Year-round',
+    google_maps_url: 'https://maps.google.com/maps?q=Rickenbacker+Causeway+Key+Biscayne+FL',
+    apple_maps_url: 'https://maps.apple.com/?q=Rickenbacker+Causeway&ll=25.7470,-80.1700',
+    resenas_url: '',
+    rating: null, activo: true, resenas: []
+  },
+  {
+    id: 16,
+    nombre_es: 'Newport Fishing Pier', nombre_en: 'Newport Fishing Pier',
+    descripcion_es: 'Muelle de pesca popular en Sunny Isles Beach, abierto al público. Punto habitual para surf fishing y para ver el amanecer sobre el Atlántico.',
+    descripcion_en: 'A popular fishing pier in Sunny Isles Beach, open to the public. A regular spot for surf fishing and for watching the sunrise over the Atlantic.',
+    descripcion_larga_es: 'El Newport Fishing Pier se extiende sobre el Atlántico en Sunny Isles Beach, junto al histórico Newport Beachside Resort. Es uno de los pocos muelles de pesca que quedan en la zona norte de Miami-Dade, frecuentado por pescadores que buscan pámpano, mackerel y snapper. Se paga una pequeña tarifa de muelle para pescar. Su orientación al este lo convierte en un lugar privilegiado para ver el amanecer sobre el mar.',
+    descripcion_larga_en: 'The Newport Fishing Pier stretches over the Atlantic in Sunny Isles Beach, next to the historic Newport Beachside Resort. It is one of the few fishing piers left in northern Miami-Dade, frequented by anglers after pompano, mackerel and snapper. A small pier fee is charged to fish. Its eastern orientation makes it a prime spot to watch the sunrise over the sea.',
+    como_llegar_es: 'En 16701 Collins Ave, Sunny Isles Beach. Desde el centro de Miami: 30–35 min por la I-95 y Collins Ave. Estacionamiento de pago cercano.',
+    como_llegar_en: 'At 16701 Collins Ave, Sunny Isles Beach. From downtown Miami: 30–35 min via I-95 and Collins Ave. Paid parking nearby.',
+    foto: phFoto('pesca', 'Newport Pier'),
+    galeria: [ phFoto('pesca', 'Newport Pier') ],
+    lat: 25.9290, lng: -80.1210,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Tarifa de muelle', precio_en: 'Pier fee',
+    horarios: 'Consultar horario', horarios_en: 'Check hours',
+    tipo: 'mar', tipo_es: 'Pesca de muelle · Amanecer', tipo_en: 'Pier fishing · Sunrise',
+    categoria: 'pesca', categoria_es: 'Pesca', categoria_en: 'Fishing',
+    telefono: '', web_oficial: '',
+    mejor_epoca: 'Todo el año', mejor_epoca_en: 'Year-round',
+    google_maps_url: 'https://maps.google.com/maps?q=Newport+Fishing+Pier+16701+Collins+Ave+Sunny+Isles+Beach+FL+33160',
+    apple_maps_url: 'https://maps.apple.com/?q=Newport+Fishing+Pier&ll=25.9290,-80.1210',
+    resenas_url: '',
+    rating: null, activo: true, resenas: []
+  },
+
+  /* ---------- EXPLORACIÓN ---------- */
+  {
+    id: 17,
+    nombre_es: 'Deering Estate', nombre_en: 'Deering Estate',
+    descripcion_es: 'Finca histórica frente a Biscayne Bay que combina arquitectura de los años 20, bosque nativo y sitios arqueológicos de miles de años de antigüedad.',
+    descripcion_en: 'A historic bayfront estate combining 1920s architecture, native forest and archaeological sites thousands of years old.',
+    descripcion_larga_es: 'El Deering Estate, antigua residencia invernal del industrial Charles Deering, es hoy un sitio cultural y natural protegido sobre Biscayne Bay. En sus 180 hectáreas conviven la mansión Stone House y la Richmond Cottage, manglares, pinares de pino de Dade y un bosque tropical, además de sitios arqueológicos Tequesta y un yacimiento paleontológico con restos de fauna de la Edad de Hielo. Ofrece senderos, recorridos guiados, kayak y programas educativos. La entrada es pagada.',
+    descripcion_larga_en: 'The Deering Estate, former winter residence of industrialist Charles Deering, is today a protected cultural and natural site on Biscayne Bay. Its 450 acres hold the Stone House and Richmond Cottage, mangroves, Dade pine rockland and tropical forest, plus Tequesta archaeological sites and a paleontological deposit with Ice Age fauna remains. It offers trails, guided tours, kayaking and educational programs. Admission is paid.',
+    como_llegar_es: 'En 16701 SW 72nd Ave, Miami (Palmetto Bay). Desde el centro de Miami: 25–30 min por la US-1 Sur. Estacionamiento gratuito en el sitio.',
+    como_llegar_en: 'At 16701 SW 72nd Ave, Miami (Palmetto Bay). From downtown Miami: 25–30 min via US-1 South. Free on-site parking.',
+    foto: phFoto('exploracion', 'Deering Estate'),
+    galeria: [ phFoto('exploracion', 'Deering Estate') ],
+    lat: 25.6170, lng: -80.3082,
+    dificultad_es: 'Fácil — Moderado', dificultad_en: 'Easy — Moderate', dificultad_clase: 'facil',
+    precio: '~$15 entrada', precio_en: '~$15 admission',
+    horarios: '10am–5pm', horarios_en: '10am–5pm',
+    tipo: 'tierra', tipo_es: 'Historia · Naturaleza · Arqueología', tipo_en: 'History · Nature · Archaeology',
+    categoria: 'exploracion', categoria_es: 'Exploración', categoria_en: 'Exploration',
+    telefono: '', web_oficial: 'https://deeringestate.org/',
+    mejor_epoca: 'Nov–Abr (temporada seca)', mejor_epoca_en: 'Nov–Apr (dry season)',
+    google_maps_url: 'https://maps.google.com/maps?q=Deering+Estate+16701+SW+72nd+Ave+Miami+FL+33157',
+    apple_maps_url: 'https://maps.apple.com/?q=Deering+Estate&ll=25.6170,-80.3082',
+    resenas_url: '',
+    rating: null, activo: true, resenas: []
+  },
+
+  /* ---------- BARES Y RESTAURANTES (contenido editorial temporal) ---------- */
+  /* EDITORIAL — reemplazar por cliente pagado. Marcados con es_editorial: true. */
+  {
+    id: 18,
+    nombre_es: 'Versailles', nombre_en: 'Versailles',
+    descripcion_es: 'El restaurante cubano más emblemático de Miami desde 1971, corazón de la Calle Ocho y parada obligada para un cafecito y comida cubana auténtica.',
+    descripcion_en: 'Miami\'s most emblematic Cuban restaurant since 1971, the heart of Calle Ocho and a must-stop for a cafecito and authentic Cuban food.',
+    descripcion_larga_es: 'Versailles es mucho más que un restaurante: es un símbolo de la comunidad cubana de Miami. Abierto en 1971 en plena Calle Ocho de Little Havana, su ventanita de café es punto de encuentro político y social donde se debate, se celebra y se toma cafecito a toda hora. Su menú es un recorrido por la cocina cubana clásica: ropa vieja, lechón, croquetas, pastelitos y flan. Las salas con espejos al estilo del palacio francés que le da nombre completan una experiencia icónica de Miami.',
+    descripcion_larga_en: 'Versailles is much more than a restaurant: it is a symbol of Miami\'s Cuban community. Opened in 1971 in the heart of Little Havana\'s Calle Ocho, its coffee window is a political and social gathering point where people debate, celebrate and drink cafecito at all hours. Its menu is a tour of classic Cuban cuisine: ropa vieja, lechon, croquetas, pastelitos and flan. The mirrored dining rooms echoing the French palace it is named after complete an iconic Miami experience.',
+    como_llegar_es: 'En 3555 SW 8th St, Little Havana. Desde el centro de Miami: 10–15 min por la SW 8th St (Calle Ocho). Estacionamiento propio.',
+    como_llegar_en: 'At 3555 SW 8th St, Little Havana. From downtown Miami: 10–15 min via SW 8th St (Calle Ocho). On-site parking.',
+    foto: phFoto('bares', 'Versailles'),
+    galeria: [ phFoto('bares', 'Versailles') ],
+    lat: 25.7651, lng: -80.2178,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Consumo', precio_en: 'Varies',
+    horarios: 'Consultar horario', horarios_en: 'Check hours',
+    tipo: 'tierra', tipo_es: 'Restaurante cubano · Landmark', tipo_en: 'Cuban restaurant · Landmark',
+    categoria: 'bares', categoria_es: 'Bares y Restaurantes', categoria_en: 'Bars & Restaurants',
+    telefono: '', web_oficial: 'https://www.versaillesrestaurant.com/',
+    mejor_epoca: 'Todo el año', mejor_epoca_en: 'Year-round',
+    google_maps_url: 'https://maps.google.com/maps?q=Versailles+Restaurant+3555+SW+8th+St+Miami+FL+33135',
+    apple_maps_url: 'https://maps.apple.com/?q=Versailles+Restaurant+Miami&ll=25.7651,-80.2178',
+    resenas_url: '',
+    rating: null, activo: true, es_editorial: true, resenas: []
+  },
+  {
+    id: 19,
+    nombre_es: 'Joe\'s Stone Crab', nombre_en: 'Joe\'s Stone Crab',
+    descripcion_es: 'Institución de Miami Beach desde 1913, famosa por sus garras de stone crab. Una de las mesas más históricas y queridas de la ciudad.',
+    descripcion_en: 'A Miami Beach institution since 1913, famous for its stone crab claws. One of the city\'s most historic and beloved tables.',
+    descripcion_larga_es: 'Joe\'s Stone Crab abrió en 1913 y es uno de los restaurantes más legendarios de Miami Beach. Su especialidad son las garras de stone crab de Florida, servidas frías con su famosa salsa de mostaza, disponibles principalmente durante la temporada de octubre a mayo. El comedor clásico, el servicio impecable y las largas esperas sin reserva son parte del ritual. Más de un siglo después, sigue siendo una parada de peregrinaje para locales y visitantes amantes del marisco.',
+    descripcion_larga_en: 'Joe\'s Stone Crab opened in 1913 and is one of Miami Beach\'s most legendary restaurants. Its specialty is Florida stone crab claws, served cold with its famous mustard sauce, available mainly during the October to May season. The classic dining room, impeccable service and long no-reservation waits are part of the ritual. More than a century on, it remains a pilgrimage stop for locals and visiting seafood lovers.',
+    como_llegar_es: 'En 11 Washington Ave, South Beach. Desde el centro de Miami: 15–20 min por el MacArthur Causeway. Servicio de valet y estacionamiento cercano.',
+    como_llegar_en: 'At 11 Washington Ave, South Beach. From downtown Miami: 15–20 min via the MacArthur Causeway. Valet service and nearby parking.',
+    foto: phFoto('bares', 'Joe\'s Stone Crab'),
+    galeria: [ phFoto('bares', 'Joe\'s Stone Crab') ],
+    lat: 25.7689, lng: -80.1347,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Consumo (alto)', precio_en: 'Varies (upscale)',
+    horarios: 'Temporada stone crab oct–may', horarios_en: 'Stone crab season Oct–May',
+    tipo: 'tierra', tipo_es: 'Marisquería · Landmark', tipo_en: 'Seafood · Landmark',
+    categoria: 'bares', categoria_es: 'Bares y Restaurantes', categoria_en: 'Bars & Restaurants',
+    telefono: '', web_oficial: 'https://www.joesstonecrab.com/',
+    mejor_epoca: 'Oct–May (temporada)', mejor_epoca_en: 'Oct–May (season)',
+    google_maps_url: 'https://maps.google.com/maps?q=Joes+Stone+Crab+11+Washington+Ave+Miami+Beach+FL+33139',
+    apple_maps_url: 'https://maps.apple.com/?q=Joes+Stone+Crab&ll=25.7689,-80.1347',
+    resenas_url: '',
+    rating: null, activo: true, es_editorial: true, resenas: []
+  },
+  {
+    id: 20,
+    nombre_es: 'Ball & Chain', nombre_en: 'Ball & Chain',
+    descripcion_es: 'Bar histórico de música en vivo en plena Calle Ocho, con raíces en los años 30. Mojitos, salsa en vivo y el espíritu de Little Havana.',
+    descripcion_en: 'A historic live-music bar in the heart of Calle Ocho, with roots in the 1930s. Mojitos, live salsa and the spirit of Little Havana.',
+    descripcion_larga_es: 'Ball & Chain abrió originalmente en 1935 y, tras décadas y varias reinvenciones, renació como uno de los locales de música en vivo más vibrantes de Little Havana. En su escenario y su jardín-pérgola con forma de piña suenan salsa, son y jazz casi cada noche. Es un punto central de la Calle Ocho para tomar un mojito, bailar y empaparse de la cultura cubana de Miami. Su historia incluye haber recibido a leyendas del jazz a mediados del siglo XX.',
+    descripcion_larga_en: 'Ball & Chain originally opened in 1935 and, after decades and several reinventions, was reborn as one of Little Havana\'s most vibrant live-music venues. Salsa, son and jazz play almost every night on its stage and its pineapple-shaped pergola garden. It is a Calle Ocho centerpiece for a mojito, dancing and soaking up Miami\'s Cuban culture. Its history includes hosting jazz legends in the mid-20th century.',
+    como_llegar_es: 'En 1513 SW 8th St, Little Havana. Desde el centro de Miami: 10–15 min por la SW 8th St (Calle Ocho). Estacionamiento en la calle y lotes cercanos.',
+    como_llegar_en: 'At 1513 SW 8th St, Little Havana. From downtown Miami: 10–15 min via SW 8th St (Calle Ocho). Street parking and nearby lots.',
+    foto: phFoto('bares', 'Ball & Chain'),
+    galeria: [ phFoto('bares', 'Ball & Chain') ],
+    lat: 25.7651, lng: -80.2196,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Consumo', precio_en: 'Varies',
+    horarios: 'Consultar horario', horarios_en: 'Check hours',
+    tipo: 'tierra', tipo_es: 'Bar · Música en vivo', tipo_en: 'Bar · Live music',
+    categoria: 'bares', categoria_es: 'Bares y Restaurantes', categoria_en: 'Bars & Restaurants',
+    telefono: '', web_oficial: 'https://ballandchainmiami.com/',
+    mejor_epoca: 'Todo el año', mejor_epoca_en: 'Year-round',
+    google_maps_url: 'https://maps.google.com/maps?q=Ball+and+Chain+1513+SW+8th+St+Miami+FL+33135',
+    apple_maps_url: 'https://maps.apple.com/?q=Ball+and+Chain+Miami&ll=25.7651,-80.2196',
+    resenas_url: '',
+    rating: null, activo: true, es_editorial: true, resenas: []
+  },
+  {
+    id: 21,
+    nombre_es: 'Mango\'s Tropical Cafe', nombre_en: 'Mango\'s Tropical Cafe',
+    descripcion_es: 'Ícono de la vida nocturna de Ocean Drive: shows de baile en vivo, ritmos latinos y energía tropical en el corazón de South Beach.',
+    descripcion_en: 'An icon of Ocean Drive nightlife: live dance shows, Latin rhythms and tropical energy in the heart of South Beach.',
+    descripcion_larga_es: 'Mango\'s Tropical Cafe es uno de los locales más reconocibles de Ocean Drive desde 1991. Su mezcla de restaurante, bar y espectáculo en vivo lo convirtió en sinónimo de la noche de South Beach: bailarines sobre la barra, shows de samba y salsa, y música latina hasta la madrugada. Su fachada abierta a Ocean Drive es parte del paisaje del distrito Art Déco. Es una parada clásica para quienes buscan fiesta y ambiente tropical en Miami Beach.',
+    descripcion_larga_en: 'Mango\'s Tropical Cafe is one of Ocean Drive\'s most recognizable venues since 1991. Its blend of restaurant, bar and live show made it synonymous with South Beach nightlife: dancers on the bar, samba and salsa shows, and Latin music into the early hours. Its open facade onto Ocean Drive is part of the Art Deco district scenery. It is a classic stop for those after a party and tropical atmosphere in Miami Beach.',
+    como_llegar_es: 'En 900 Ocean Dr, South Beach. Desde el centro de Miami: 15–20 min por el MacArthur Causeway. Estacionamiento de pago en garajes cercanos.',
+    como_llegar_en: 'At 900 Ocean Dr, South Beach. From downtown Miami: 15–20 min via the MacArthur Causeway. Paid parking in nearby garages.',
+    foto: phFoto('bares', 'Mango\'s Tropical Cafe'),
+    galeria: [ phFoto('bares', 'Mango\'s Tropical Cafe') ],
+    lat: 25.7805, lng: -80.1300,
+    dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
+    precio: 'Cover + consumo', precio_en: 'Cover + drinks',
+    horarios: 'Consultar horario', horarios_en: 'Check hours',
+    tipo: 'tierra', tipo_es: 'Bar · Show en vivo', tipo_en: 'Bar · Live show',
+    categoria: 'bares', categoria_es: 'Bares y Restaurantes', categoria_en: 'Bars & Restaurants',
+    telefono: '', web_oficial: 'https://www.mangos.com/',
+    mejor_epoca: 'Todo el año', mejor_epoca_en: 'Year-round',
+    google_maps_url: 'https://maps.google.com/maps?q=Mangos+Tropical+Cafe+900+Ocean+Dr+Miami+Beach+FL+33139',
+    apple_maps_url: 'https://maps.apple.com/?q=Mangos+Tropical+Cafe&ll=25.7805,-80.1300',
+    resenas_url: '',
+    rating: null, activo: true, es_editorial: true, resenas: []
   }
 ];
 
 /* Versión de los datos — incrementar cada vez que cambie DESTINOS_DEFAULT */
-var DESTINOS_VERSION = 5;
+var DESTINOS_VERSION = 6;
 
 /* Mapa de IDs de destino → rutas de páginas HTML reales */
 var DESTINO_URLS = {
@@ -560,7 +902,7 @@ function renderDestinos(filtro) {
   if (!grid) return;
 
   var lista = obtenerDestinos().filter(function (d) {
-    return d.activo && (filtro === 'todos' || d.tipo === filtro);
+    return d.activo && (filtro === 'todos' || d.categoria === filtro);
   });
 
   var langCur = (typeof IDIOMA_ACTUAL !== 'undefined') ? IDIOMA_ACTUAL : 'es';
@@ -612,9 +954,9 @@ function renderDestinos(filtro) {
           /* ── Imagen con overlay de hover ── */
           '<div class="destino-card__img-cont">' +
             '<img src="' + d.foto + '" alt="' + d.nombre_es + '" class="destino-card__img" loading="lazy" />' +
-            '<span class="destino-card__badge destino-card__badge--tipo destino-card__badge--' + d.tipo + '">' +
-              '<span class="lang-es">' + d.tipo_es + '</span>' +
-              '<span class="lang-en">' + d.tipo_en + '</span>' +
+            '<span class="destino-card__badge destino-card__badge--tipo destino-card__badge--' + (d.categoria || d.tipo) + '">' +
+              '<span class="lang-es">' + (d.categoria_es || d.tipo_es) + '</span>' +
+              '<span class="lang-en">' + (d.categoria_en || d.tipo_en) + '</span>' +
             '</span>' +
             (ratingNum
               ? '<span class="destino-card__rating" aria-label="Calificacion Google ' + ratingNum + '">' +

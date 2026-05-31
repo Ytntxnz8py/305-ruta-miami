@@ -829,6 +829,12 @@ html.lang-es .lang-en { display: none; }
 
 .destino-card__badge--mar    { background-color: var(--turquesa); color: #fff; }
 .destino-card__badge--tierra { background-color: var(--verde-tierra); color: #fff; }
+/* Badges de categoria (sistema nuevo) — colores de la paleta del sitio */
+.destino-card__badge--playa       { background-color: var(--turquesa); color: #fff; }
+.destino-card__badge--buceo       { background-color: var(--turquesa-oscura); color: #fff; }
+.destino-card__badge--pesca       { background-color: var(--mostaza); color: #3a2c00; }   /* texto oscuro — contraste AA sobre mostaza */
+.destino-card__badge--exploracion { background-color: var(--verde-tierra); color: #fff; }
+.destino-card__badge--bares       { background-color: var(--coral); color: #fff; }
 .destino-card__badge--facil    { color: #388E3C; }                 /* contraste 4.54:1 âœ“ */
 .destino-card__badge--moderado { color: #A04800; }                 /* era #F57C00 â€” 2.57:1 âœ— â†’ 5.8:1 âœ“ */
 .destino-card__badge--dificil  { color: var(--coral-oscura); }    /* era #FF6B6B â€” 2.64:1 âœ— â†’ 5.15:1 âœ“ */
@@ -2152,6 +2158,12 @@ html.lang-es .lang-en { display: none; }
 /* Badges tipo en fondo oscuro */
 .destino-card__badge--mar    { background: rgba(0, 188, 212, 0.88); }
 .destino-card__badge--tierra { background: rgba(99, 162, 40, 0.88); }
+/* Badges de categoria sobre imagen (sistema nuevo) */
+.destino-card__badge--playa       { background: rgba(0, 188, 212, 0.90); }
+.destino-card__badge--buceo       { background: rgba(0, 122, 138, 0.92); }
+.destino-card__badge--pesca       { background: rgba(255, 179, 0, 0.92); color: #3a2c00; }
+.destino-card__badge--exploracion { background: rgba(99, 162, 40, 0.90); }
+.destino-card__badge--bares       { background: rgba(255, 107, 107, 0.92); }
 
 /* BotÃ³n CTA glass dentro de la card */
 .destino-card .btn--primario,
