@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Panel · Portal de clientes · Explora Miami</title>
+
+  <!-- Aplica idioma guardado antes del render para evitar flash -->
+  <script>
+    (function () {
+      try {
+        var l = localStorage.getItem('em_idioma') || 'es';
+        document.documentElement.classList.add('lang-' + l);
+        document.documentElement.lang = l;
+      } catch (e) {
+        document.documentElement.classList.add('lang-es');
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/portal.css" />
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="panel-topbar">
+    <a class="portal-logo" href="../index.html" aria-label="Explora Miami">
+      <span class="portal-logo__e">Explora</span><span class="portal-logo__m">Miami</span>
+    </a>
+    <div class="panel-topbar__right">
+      <button class="portal-lang portal-lang--oscuro" type="button" data-portal-lang
+              aria-label="Cambiar idioma / Change language">EN</button>
+      <!-- FASE 1: "Cerrar sesión" solo vuelve al login (sin sesión real aún) -->
+      <a class="portal-btn portal-btn--ghost" href="index.html">
+        <span class="lang-es">Cerrar sesión</span>
+        <span class="lang-en">Sign out</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="panel-shell">
+
+    <div class="panel-bienvenida">
+      <h1 class="panel-bienvenida__titulo">
+        <span class="lang-es">Tu panel</span>
+        <span class="lang-en">Your dashboard</span>
+      </h1>
+      <p class="panel-bienvenida__sub">
+        <span class="lang-es">Bienvenido a tu portal de cliente Explora Miami.</span>
+        <span class="lang-en">Welcome to your Explora Miami client portal.</span>
+      </p>
+    </div>
+
+    <!-- ===== PESTAÑAS ===== -->
+    <div class="panel-tabs" role="tablist" aria-label="Secciones del panel">
+      <button class="panel-tab" type="button" role="tab" data-tab="dashboard" id="tab-dashboard"
+              aria-controls="vista-dashboard">
+        <span class="lang-es">Dashboard</span><span class="lang-en">Dashboard</span>
+      </button>
+      <button class="panel-tab" type="button" role="tab" data-tab="listing" id="tab-listing"
+              aria-controls="vista-listing">
+        <span class="lang-es">Mi Listing</span><span class="lang-en">My Listing</span>
+      </button>
+      <button class="panel-tab" type="button" role="tab" data-tab="plan" id="tab-plan"
+              aria-controls="vista-plan">
+        <span class="lang-es">Mi Plan</span><span class="lang-en">My Plan</span>
+      </button>
+      <button class="panel-tab" type="button" role="tab" data-tab="soporte" id="tab-soporte"
+              aria-controls="vista-soporte">
+        <span class="lang-es">Soporte</span><span class="lang-en">Support</span>
+      </button>
+    </div>
+
+    <!-- ===== VISTA: DASHBOARD ===== -->
+    <section class="panel-vista" data-vista="dashboard" id="vista-dashboard"
+             role="tabpanel" aria-labelledby="tab-dashboard">
+
+      <div class="metricas-grid">
+        <div class="metrica-card">
+          <div class="metrica-card__label"><span class="metrica-card__ico">👁️</span>
+            <span class="lang-es">Vistas del listing</span><span class="lang-en">Listing views</span>
+          </div>
+          <div class="metrica-card__valor">—</div>
+          <div class="metrica-card__nota">
+            <span class="lang-es">Sin datos aún</span><span class="lang-en">No data yet</span>
+          </div>
+        </div>
+        <div class="metrica-card">
+          <div class="metrica-card__label"><span class="metrica-card__ico">🔗</span>
+            <span class="lang-es">Clics a tu web</span><span class="lang-en">Website clicks</span>
+          </div>
+          <div class="metrica-card__valor">—</div>
+          <div class="metrica-card__nota">
+            <span class="lang-es">Sin datos aún</span><span class="lang-en">No data yet</span>
+          </div>
+        </div>
+        <div class="metrica-card">
+          <div class="metrica-card__label"><span class="metrica-card__ico">📍</span>
+            <span class="lang-es">Clics a Google Maps</span><span class="lang-en">Google Maps clicks</span>
+          </div>
+          <div class="metrica-card__valor">—</div>
+          <div class="metrica-card__nota">
+            <span class="lang-es">Sin datos aún</span><span class="lang-en">No data yet</span>
+          </div>
+        </div>
+        <div class="metrica-card">
+          <div class="metrica-card__label"><span class="metrica-card__ico">📞</span>
+            <span class="lang-es">Clics al teléfono</span><span class="lang-en">Phone clicks</span>
+          </div>
+          <div class="metrica-card__valor">—</div>
+          <div class="metrica-card__nota">
+            <span class="lang-es">Sin datos aún</span><span class="lang-en">No data yet</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="estado-vacio">
+        <div class="grafico-box">
+          <div>
+            <div class="estado-vacio__ico">📈</div>
+            <h2 class="estado-vacio__titulo">
+              <span class="lang-es">Aún no hay datos de visitas</span>
+              <span class="lang-en">No visit data yet</span>
+            </h2>
+            <p class="estado-vacio__texto">
+              <span class="lang-es">Tus métricas aparecerán aquí cuando tu listing reciba tráfico. La gráfica de evolución se mostrará automáticamente.</span>
+              <span class="lang-en">Your metrics will appear here once your listing receives traffic. The evolution chart will display automatically.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VISTA: MI LISTING ===== -->
+    <section class="panel-vista" data-vista="listing" id="vista-listing"
+             role="tabpanel" aria-labelledby="tab-listing" hidden>
+
+      <span class="listing-estado">
+        <span class="listing-estado__dot"></span>
+        <span class="lang-es">Listing sin publicar</span>
+        <span class="lang-en">Listing not published</span>
+      </span>
+
+      <!-- FASE 1: formulario visual. No guarda datos (sin backend). -->
+      <form class="listing-form" onsubmit="return false;">
+        <div class="listing-grid">
+
+          <div class="portal-field listing-col-full">
+            <label class="portal-label">
+              <span class="lang-es">Nombre del negocio</span><span class="lang-en">Business name</span>
+            </label>
+            <input class="portal-input" type="text"
+                   data-ph-es="Ej. Miami Kayak Tours" data-ph-en="E.g. Miami Kayak Tours"
+                   placeholder="Ej. Miami Kayak Tours" />
+          </div>
+
+          <div class="portal-field">
+            <label class="portal-label">
+              <span class="lang-es">Descripción (Español)</span><span class="lang-en">Description (Spanish)</span>
+            </label>
+            <textarea class="portal-textarea"
+                      data-ph-es="Describe tu experiencia en español…" data-ph-en="Describe your experience in Spanish…"
+                      placeholder="Describe tu experiencia en español…"></textarea>
+          </div>
+
+          <div class="portal-field">
+            <label class="portal-label">
+              <span class="lang-es">Descripción (Inglés)</span><span class="lang-en">Description (English)</span>
+            </label>
+            <textarea class="portal-textarea"
+                      data-ph-es="Describe tu experiencia en inglés…" data-ph-en="Describe your experience in English…"
+                      placeholder="Describe tu experiencia en inglés…"></textarea>
+          </div>
+
+          <div class="portal-field">
+            <label class="portal-label">
+              <span class="lang-es">Categoría</span><span class="lang-en">Category</span>
+            </label>
+            <select class="portal-select">
+              <option value="" data-i18n-es="Selecciona una categoría" data-i18n-en="Select a category">Selecciona una categoría</option>
+              <option value="kayak" data-i18n-es="Kayak / Paddle" data-i18n-en="Kayak / Paddle">Kayak / Paddle</option>
+              <option value="buceo" data-i18n-es="Buceo / Snorkel" data-i18n-en="Diving / Snorkel">Buceo / Snorkel</option>
+              <option value="senderismo" data-i18n-es="Senderismo" data-i18n-en="Hiking">Senderismo</option>
+              <option value="tours" data-i18n-es="Tours / Excursiones" data-i18n-en="Tours / Excursions">Tours / Excursiones</option>
+              <option value="otro" data-i18n-es="Otro" data-i18n-en="Other">Otro</option>
+            </select>
+          </div>
+
+          <div class="portal-field">
+            <label class="portal-label">
+              <span class="lang-es">Tipo</span><span class="lang-en">Type</span>
+            </label>
+            <select class="portal-select">
+              <option value="" data-i18n-es="Selecciona el tipo" data-i18n-en="Select type">Selecciona el tipo</option>
+              <option value="mar" data-i18n-es="🌊 Mar" data-i18n-en="🌊 Sea">🌊 Mar</option>
+              <option value="tierra" data-i18n-es="🏔️ Tierra" data-i18n-en="🏔️ Land">🏔️ Tierra</option>
+            </select>
+          </div>
+
+          <div class="portal-field listing-col-full">
+            <label class="portal-label">
+              <span class="lang-es">Foto principal</span><span class="lang-en">Main photo</span>
+            </label>
+            <div class="upload-zona">
+              <div class="upload-zona__ico">🖼️</div>
+              <div class="upload-zona__texto">
+                <span class="lang-es">Arrastra una imagen o haz clic para subir</span>
+                <span class="lang-en">Drag an image or click to upload</span>
+              </div>
+              <div class="upload-zona__nota">
+                <span class="lang-es">Subida disponible próximamente</span>
+                <span class="lang-en">Upload available soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="portal-field listing-col-full">
+            <label class="portal-label">
+              <span class="lang-es">Galería de fotos</span><span class="lang-en">Photo gallery</span>
+            </label>
+            <div class="upload-zona">
+              <div class="upload-zona__ico">📸</div>
+              <div class="upload-zona__texto">
+                <span class="lang-es">Añade hasta 6 fotos de tu experiencia</span>
+                <span class="lang-en">Add up to 6 photos of your experience</span>
+              </div>
+              <div class="upload-zona__nota">
+                <span class="lang-es">Subida disponible próximamente</span>
+                <span class="lang-en">Upload available soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="portal-field">
+            <label class="portal-label">
+              <span class="lang-es">Teléfono público</span><span class="lang-en">Public phone</span>
+            </label>
+            <input class="portal-input" type="tel"
+                   data-ph-es="+1 (305) 000-0000" data-ph-en="+1 (305) 000-0000"
+                   placeholder="+1 (305) 000-0000" />
+          </div>
+
+          <div class="portal-field">
+            <label class="portal-label">
+              <span class="lang-es">Sitio web</span><span class="lang-en">Website</span>
+            </label>
+            <input class="portal-input" type="url"
+                   data-ph-es="https://tu-negocio.com" data-ph-en="https://your-business.com"
+                   placeholder="https://tu-negocio.com" />
+          </div>
+
+          <div class="portal-field">
+            <label class="portal-label">
+              <span class="lang-es">Horarios</span><span class="lang-en">Hours</span>
+            </label>
+            <input class="portal-input" type="text"
+                   data-ph-es="Ej. Lun–Dom 8:00–18:00" data-ph-en="E.g. Mon–Sun 8:00–18:00"
+                   placeholder="Ej. Lun–Dom 8:00–18:00" />
+          </div>
+
+          <div class="portal-field">
+            <label class="portal-label">
+              <span class="lang-es">Ubicación</span><span class="lang-en">Location</span>
+            </label>
+            <input class="portal-input" type="text"
+                   data-ph-es="Dirección o enlace de Google Maps" data-ph-en="Address or Google Maps link"
+                   placeholder="Dirección o enlace de Google Maps" />
+          </div>
+
+        </div>
+
+        <div class="listing-acciones">
+          <button class="portal-btn portal-btn--primario" type="submit">
+            <span class="lang-es">Guardar cambios</span>
+            <span class="lang-en">Save changes</span>
+          </button>
+          <a class="portal-btn portal-btn--ghost" href="../index.html#destinos">
+            <span class="lang-es">Ver mi listing en el directorio</span>
+            <span class="lang-en">View my listing in the directory</span>
+          </a>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== VISTA: MI PLAN ===== -->
+    <section class="panel-vista" data-vista="plan" id="vista-plan"
+             role="tabpanel" aria-labelledby="tab-plan" hidden>
+
+      <div class="estado-vacio">
+        <div class="estado-vacio__ico">💼</div>
+        <h2 class="estado-vacio__titulo">
+          <span class="lang-es">Sin plan activo</span>
+          <span class="lang-en">No active plan</span>
+        </h2>
+        <p class="estado-vacio__texto">
+          <span class="lang-es">Aún no tienes un plan contratado. Cuando actives uno, aquí verás tu plan, el precio y la fecha de renovación.</span>
+          <span class="lang-en">You don't have a plan yet. Once you activate one, you'll see your plan, price and renewal date here.</span>
+        </p>
+
+        <div class="plan-instrucciones">
+          <div class="plan-paso">
+            <span class="plan-paso__num">1</span>
+            <span>
+              <span class="lang-es">Revisa los planes disponibles en la página Para empresas.</span>
+              <span class="lang-en">Review the available plans on the For businesses page.</span>
+            </span>
+          </div>
+          <div class="plan-paso">
+            <span class="plan-paso__num">2</span>
+            <span>
+              <span class="lang-es">Contáctanos para activar el plan que mejor se ajuste a tu negocio.</span>
+              <span class="lang-en">Contact us to activate the plan that best fits your business.</span>
+            </span>
+          </div>
+          <div class="plan-paso">
+            <span class="plan-paso__num">3</span>
+            <span>
+              <span class="lang-es">Tu plan y facturación aparecerán automáticamente en esta sección.</span>
+              <span class="lang-en">Your plan and billing will appear automatically in this section.</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="listing-acciones" style="justify-content:center;">
+          <a class="portal-btn portal-btn--primario" href="../anunciantes.html" style="width:auto;">
+            <span class="lang-es">Ver planes</span>
+            <span class="lang-en">View plans</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VISTA: SOPORTE ===== -->
+    <section class="panel-vista" data-vista="soporte" id="vista-soporte"
+             role="tabpanel" aria-labelledby="tab-soporte" hidden>
+
+      <h2 class="panel-seccion-titulo">
+        <span class="lang-es">¿Necesitas ayuda?</span>
+        <span class="lang-en">Need help?</span>
+      </h2>
+
+      <div class="soporte-grid">
+        <div class="soporte-card">
+          <div class="soporte-card__ico">💬</div>
+          <div class="soporte-card__titulo">WhatsApp</div>
+          <p class="soporte-card__texto">
+            <span class="lang-es">Respuesta rápida en horario laboral.</span>
+            <span class="lang-en">Quick reply during business hours.</span>
+          </p>
+          <span class="soporte-card__link">
+            <span class="lang-es">Número por confirmar</span>
+            <span class="lang-en">Number to be confirmed</span>
+          </span>
+        </div>
+
+        <div class="soporte-card">
+          <div class="soporte-card__ico">✉️</div>
+          <div class="soporte-card__titulo">Email</div>
+          <p class="soporte-card__texto">
+            <span class="lang-es">Para consultas detalladas y documentos.</span>
+            <span class="lang-en">For detailed questions and documents.</span>
+          </p>
+          <span class="soporte-card__link">
+            <span class="lang-es">Correo por confirmar</span>
+            <span class="lang-en">Email to be confirmed</span>
+          </span>
+        </div>
+
+        <div class="soporte-card">
+          <div class="soporte-card__ico">📖</div>
+          <div class="soporte-card__titulo">
+            <span class="lang-es">Guía</span><span class="lang-en">Guide</span>
+          </div>
+          <p class="soporte-card__texto">
+            <span class="lang-es">Aprende a sacar el máximo a tu listing.</span>
+            <span class="lang-en">Learn how to get the most from your listing.</span>
+          </p>
+          <a class="soporte-card__link" href="../anunciantes.html">
+            <span class="lang-es">Ver Para empresas →</span>
+            <span class="lang-en">See For businesses →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="assets/portal.js"></script>
+</body>
+</html>
