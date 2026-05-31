@@ -5,34 +5,6 @@
    Comentarios en español
 ========================================= */
 
-/* ===== PLACEHOLDER DE FOTO (CC0 pendiente) =====
-   Genera una imagen SVG inline tintada por categoria. No depende de la red
-   (nunca se rompe en GitHub Pages) y se auto-documenta como "reemplazar".
-   El dueño sustituye estas por fotos CC0 (Unsplash/Pexels) antes del merge. */
-function phFoto(cat, label) {
-  var col = ({
-    playa: '#00BCD4', buceo: '#0097A7', pesca: '#FFB300',
-    exploracion: '#7CB342', bares: '#FF6B6B'
-  })[cat] || '#00BCD4';
-  var safe = String(label).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  var svg =
-    '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">' +
-      '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">' +
-        '<stop offset="0" stop-color="' + col + '" stop-opacity="0.20"/>' +
-        '<stop offset="1" stop-color="' + col + '" stop-opacity="0.06"/>' +
-      '</linearGradient></defs>' +
-      '<rect width="800" height="600" fill="#FFFDF7"/>' +
-      '<rect width="800" height="600" fill="url(#g)"/>' +
-      '<rect x="22" y="22" width="756" height="556" rx="26" fill="none" stroke="' + col + '" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="11 11"/>' +
-      '<rect x="338" y="206" width="124" height="92" rx="14" fill="none" stroke="' + col + '" stroke-width="6"/>' +
-      '<rect x="372" y="190" width="56" height="20" rx="7" fill="' + col + '"/>' +
-      '<circle cx="400" cy="252" r="26" fill="' + col + '"/>' +
-      '<text x="400" y="372" font-family="Georgia, serif" font-size="40" font-style="italic" fill="#1a2a3a" text-anchor="middle">' + safe + '</text>' +
-      '<text x="400" y="414" font-family="Inter, Helvetica, sans-serif" font-size="20" fill="#4a6f82" text-anchor="middle">Foto CC0 pendiente</text>' +
-    '</svg>';
-  return 'data:image/svg+xml,' + encodeURIComponent(svg);
-}
-
 /* ===== DATOS DE DESTINOS ===== */
 var DESTINOS_DEFAULT = [
   {
@@ -501,7 +473,7 @@ var DESTINOS_DEFAULT = [
 
   /* ============================================================
      12 DESTINOS NUEVOS — etapa categorías (lugares reales)
-     Fotos: placeholder phFoto() — el dueño reemplaza con CC0 antes del merge.
+     Fotos: CC0 curadas en assets/images/destinos/[slug]/ (optimizadas <800KB).
      rating: null y resenas: [] (sin datos inventados).
      ============================================================ */
 
@@ -515,8 +487,15 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'South Beach is the most famous stretch of Miami Beach, fronting Lummus Park and the historic Art Deco district of Ocean Drive. Its turquoise water and wide sand make it ideal for swimming, sunbathing and strolling past the iconic pastel-painted lifeguard towers. The Lummus Park promenade links cafes, palms and green areas along Ocean Drive. Public and free, with lifeguards on duty during the day.',
     como_llegar_es: 'En el corazón de Miami Beach, sobre Ocean Drive entre las calles 5 y 14. Desde el centro de Miami: 15–20 min por el MacArthur Causeway (I-395). Estacionamiento de pago en garajes municipales y rutas de autobús South Beach Local.',
     como_llegar_en: 'In the heart of Miami Beach, along Ocean Drive between 5th and 14th streets. From downtown Miami: 15–20 min via the MacArthur Causeway (I-395). Paid parking in municipal garages and South Beach Local bus routes.',
-    foto: phFoto('playa', 'South Beach'),
-    galeria: [ phFoto('playa', 'South Beach') ],
+    foto: 'assets/images/destinos/south-beach/south-beach-1.jpg',
+    galeria: [
+      'assets/images/destinos/south-beach/south-beach-1.jpg',
+      'assets/images/destinos/south-beach/south-beach-2.jpg',
+      'assets/images/destinos/south-beach/south-beach-3.jpg',
+      'assets/images/destinos/south-beach/south-beach-4.jpg',
+      'assets/images/destinos/south-beach/south-beach-5.jpg',
+      'assets/images/destinos/south-beach/south-beach-6.jpg'
+    ],
     lat: 25.7826, lng: -80.1300,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
     precio: 'Gratis', precio_en: 'Free',
@@ -541,8 +520,13 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'Neptune Memorial Reef is one of the world\'s largest artificial reefs, located 3.25 miles east of Key Biscayne. Designed as an Atlantis-style underwater city with columns, arches and bronze lions, it also serves as a marine memorial that has created a thriving habitat for corals and fish. At about 40 ft deep, it is a popular site for certified divers and advanced snorkelers, always reached by boat with licensed operators.',
     como_llegar_es: 'Mar adentro, 3.25 millas al este de Key Biscayne. Solo se llega en barco con operadores de buceo autorizados que salen desde marinas de Miami y Key Biscayne. No hay acceso desde la orilla.',
     como_llegar_en: 'Offshore, 3.25 miles east of Key Biscayne. Reached only by boat with licensed dive operators departing from Miami and Key Biscayne marinas. No shore access.',
-    foto: phFoto('buceo', 'Neptune Memorial Reef'),
-    galeria: [ phFoto('buceo', 'Neptune Memorial Reef') ],
+    foto: 'assets/images/destinos/neptune-reef/neptune-reef-1.jpg',
+    galeria: [
+      'assets/images/destinos/neptune-reef/neptune-reef-1.jpg',
+      'assets/images/destinos/neptune-reef/neptune-reef-2.jpg',
+      'assets/images/destinos/neptune-reef/neptune-reef-3.jpg',
+      'assets/images/destinos/neptune-reef/neptune-reef-4.jpg'
+    ],
     lat: 25.6919, lng: -80.0939,
     dificultad_es: 'Avanzado (buceo certificado)', dificultad_en: 'Advanced (certified diving)', dificultad_clase: 'dificil',
     precio: 'Según operador', precio_en: 'Varies by operator',
@@ -565,8 +549,11 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'The Half Moon was an elegant German racing yacht built in 1908 that sank in 1930 near Key Biscayne. Today it is one of Florida\'s Underwater Archaeological Preserves: its remains rest in shallow water and form a living reef teeming with tropical fish. Its shallow depth makes it accessible to snorkelers and beginner divers arriving by boat or kayak. As a protected site, nothing may be removed — only observed and photographed.',
     como_llegar_es: 'En el agua entre Virginia Key y Key Biscayne, cerca del canal de Bear Cut. Se llega en barco o kayak; varios operadores de Miami ofrecen salidas. No hay acceso desde la orilla.',
     como_llegar_en: 'In the water between Virginia Key and Key Biscayne, near the Bear Cut channel. Reached by boat or kayak; several Miami operators offer trips. No shore access.',
-    foto: phFoto('buceo', 'Half Moon Wreck'),
-    galeria: [ phFoto('buceo', 'Half Moon Wreck') ],
+    foto: 'assets/images/destinos/half-moon-wreck/half-moon-wreck-1.jpg',
+    galeria: [
+      'assets/images/destinos/half-moon-wreck/half-moon-wreck-1.jpg',
+      'assets/images/destinos/half-moon-wreck/half-moon-wreck-2.jpg'
+    ],
     lat: 25.6950, lng: -80.1300,
     dificultad_es: 'Intermedio (snorkel/buceo somero)', dificultad_en: 'Intermediate (snorkel/shallow dive)', dificultad_clase: 'moderado',
     precio: 'Gratis (preserva pública)', precio_en: 'Free (public preserve)',
@@ -591,8 +578,10 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'The South Pointe Park pier reaches out over Government Cut, the channel where Miami\'s huge cruise ships pass. It is a classic shore-fishing spot, free and open to the public, with wide railings, benches and a nearby historic lighthouse. At sunrise and sunset it fills with local anglers after snook, jack and pompano. The surrounding park has lawns, showers and a seaside promenade.',
     como_llegar_es: 'En el extremo sur de Miami Beach, al final de Washington Ave. Desde el centro de Miami: 15–20 min por el MacArthur Causeway. Estacionamiento de pago junto al parque.',
     como_llegar_en: 'At the southern end of Miami Beach, at the foot of Washington Ave. From downtown Miami: 15–20 min via the MacArthur Causeway. Paid parking next to the park.',
-    foto: phFoto('pesca', 'South Pointe Pier'),
-    galeria: [ phFoto('pesca', 'South Pointe Pier') ],
+    foto: 'assets/images/destinos/south-pointe-pier/south-pointe-pier-1.jpg',
+    galeria: [
+      'assets/images/destinos/south-pointe-pier/south-pointe-pier-1.jpg'
+    ],
     lat: 25.7680, lng: -80.1342,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
     precio: 'Gratis', precio_en: 'Free',
@@ -615,8 +604,11 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'Haulover Park occupies a strip of coast between the ocean and the bay, crossed by the Haulover Inlet. Its rock jetty, in use since 1927, is a magnet for anglers who work the inlet current for snook, sea bass and jack. The county park also offers a wide beach, kayak rentals, a marina and picnic areas. Fishing from the shore and jetty is free; parking is paid.',
     como_llegar_es: 'En 10800 Collins Ave, Miami Beach. Desde el centro de Miami: 25–30 min por la I-95 y Collins Ave. Estacionamiento de pago del condado dentro del parque.',
     como_llegar_en: 'At 10800 Collins Ave, Miami Beach. From downtown Miami: 25–30 min via I-95 and Collins Ave. Paid county parking inside the park.',
-    foto: phFoto('pesca', 'Haulover Jetty'),
-    galeria: [ phFoto('pesca', 'Haulover Jetty') ],
+    foto: 'assets/images/destinos/haulover/haulover-1.jpg',
+    galeria: [
+      'assets/images/destinos/haulover/haulover-1.jpg',
+      'assets/images/destinos/haulover/haulover-2.jpg'
+    ],
     lat: 25.9040, lng: -80.1230,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
     precio: 'Gratis (estacionamiento aparte)', precio_en: 'Free (parking extra)',
@@ -639,8 +631,11 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'The Rickenbacker Causeway connects Miami to Virginia Key and Key Biscayne, and its shores are one of the city\'s best-loved shore-fishing spots. Along the bridge there are stretches of beach and rock where locals cast their lines with the Miami skyline behind them. It is also a popular spot for kitesurfing, cycling and picnics. Shore fishing is free; the causeway charges a toll for cars.',
     como_llegar_es: 'Acceso por el Rickenbacker Causeway desde Brickell/Coconut Grove hacia Key Biscayne. Desde el centro de Miami: 10–15 min. Peaje de entrada en auto; estacionamiento a lo largo de la vía.',
     como_llegar_en: 'Access via the Rickenbacker Causeway from Brickell/Coconut Grove toward Key Biscayne. From downtown Miami: 10–15 min. Toll for cars; parking along the road.',
-    foto: phFoto('pesca', 'Rickenbacker Causeway'),
-    galeria: [ phFoto('pesca', 'Rickenbacker Causeway') ],
+    foto: 'assets/images/destinos/rickenbacker-causeway/rickenbacker-causeway-1.jpg',
+    galeria: [
+      'assets/images/destinos/rickenbacker-causeway/rickenbacker-causeway-1.jpg',
+      'assets/images/destinos/rickenbacker-causeway/rickenbacker-causeway-2.jpg'
+    ],
     lat: 25.7470, lng: -80.1700,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
     precio: 'Gratis (peaje del causeway en auto)', precio_en: 'Free (causeway toll for cars)',
@@ -663,8 +658,13 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'The Newport Fishing Pier stretches over the Atlantic in Sunny Isles Beach, next to the historic Newport Beachside Resort. It is one of the few fishing piers left in northern Miami-Dade, frequented by anglers after pompano, mackerel and snapper. A small pier fee is charged to fish. Its eastern orientation makes it a prime spot to watch the sunrise over the sea.',
     como_llegar_es: 'En 16701 Collins Ave, Sunny Isles Beach. Desde el centro de Miami: 30–35 min por la I-95 y Collins Ave. Estacionamiento de pago cercano.',
     como_llegar_en: 'At 16701 Collins Ave, Sunny Isles Beach. From downtown Miami: 30–35 min via I-95 and Collins Ave. Paid parking nearby.',
-    foto: phFoto('pesca', 'Newport Pier'),
-    galeria: [ phFoto('pesca', 'Newport Pier') ],
+    foto: 'assets/images/destinos/newport-pier/newport-pier-1.jpg',
+    galeria: [
+      'assets/images/destinos/newport-pier/newport-pier-1.jpg',
+      'assets/images/destinos/newport-pier/newport-pier-2.jpg',
+      'assets/images/destinos/newport-pier/newport-pier-3.jpg',
+      'assets/images/destinos/newport-pier/newport-pier-4.jpg'
+    ],
     lat: 25.9290, lng: -80.1210,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
     precio: 'Tarifa de muelle', precio_en: 'Pier fee',
@@ -689,8 +689,11 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'The Deering Estate, former winter residence of industrialist Charles Deering, is today a protected cultural and natural site on Biscayne Bay. Its 450 acres hold the Stone House and Richmond Cottage, mangroves, Dade pine rockland and tropical forest, plus Tequesta archaeological sites and a paleontological deposit with Ice Age fauna remains. It offers trails, guided tours, kayaking and educational programs. Admission is paid.',
     como_llegar_es: 'En 16701 SW 72nd Ave, Miami (Palmetto Bay). Desde el centro de Miami: 25–30 min por la US-1 Sur. Estacionamiento gratuito en el sitio.',
     como_llegar_en: 'At 16701 SW 72nd Ave, Miami (Palmetto Bay). From downtown Miami: 25–30 min via US-1 South. Free on-site parking.',
-    foto: phFoto('exploracion', 'Deering Estate'),
-    galeria: [ phFoto('exploracion', 'Deering Estate') ],
+    foto: 'assets/images/destinos/deering-estate/deering-estate-1.jpg',
+    galeria: [
+      'assets/images/destinos/deering-estate/deering-estate-1.jpg',
+      'assets/images/destinos/deering-estate/deering-estate-2.jpg'
+    ],
     lat: 25.6170, lng: -80.3082,
     dificultad_es: 'Fácil — Moderado', dificultad_en: 'Easy — Moderate', dificultad_clase: 'facil',
     precio: '~$15 entrada', precio_en: '~$15 admission',
@@ -716,8 +719,10 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'Versailles is much more than a restaurant: it is a symbol of Miami\'s Cuban community. Opened in 1971 in the heart of Little Havana\'s Calle Ocho, its coffee window is a political and social gathering point where people debate, celebrate and drink cafecito at all hours. Its menu is a tour of classic Cuban cuisine: ropa vieja, lechon, croquetas, pastelitos and flan. The mirrored dining rooms echoing the French palace it is named after complete an iconic Miami experience.',
     como_llegar_es: 'En 3555 SW 8th St, Little Havana. Desde el centro de Miami: 10–15 min por la SW 8th St (Calle Ocho). Estacionamiento propio.',
     como_llegar_en: 'At 3555 SW 8th St, Little Havana. From downtown Miami: 10–15 min via SW 8th St (Calle Ocho). On-site parking.',
-    foto: phFoto('bares', 'Versailles'),
-    galeria: [ phFoto('bares', 'Versailles') ],
+    foto: 'assets/images/destinos/versailles/versailles-1.jpg',
+    galeria: [
+      'assets/images/destinos/versailles/versailles-1.jpg'
+    ],
     lat: 25.7651, lng: -80.2178,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
     precio: 'Consumo', precio_en: 'Varies',
@@ -740,8 +745,10 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'Joe\'s Stone Crab opened in 1913 and is one of Miami Beach\'s most legendary restaurants. Its specialty is Florida stone crab claws, served cold with its famous mustard sauce, available mainly during the October to May season. The classic dining room, impeccable service and long no-reservation waits are part of the ritual. More than a century on, it remains a pilgrimage stop for locals and visiting seafood lovers.',
     como_llegar_es: 'En 11 Washington Ave, South Beach. Desde el centro de Miami: 15–20 min por el MacArthur Causeway. Servicio de valet y estacionamiento cercano.',
     como_llegar_en: 'At 11 Washington Ave, South Beach. From downtown Miami: 15–20 min via the MacArthur Causeway. Valet service and nearby parking.',
-    foto: phFoto('bares', 'Joe\'s Stone Crab'),
-    galeria: [ phFoto('bares', 'Joe\'s Stone Crab') ],
+    foto: 'assets/images/destinos/joes-stone-crab/joes-stone-crab-1.jpg',
+    galeria: [
+      'assets/images/destinos/joes-stone-crab/joes-stone-crab-1.jpg'
+    ],
     lat: 25.7689, lng: -80.1347,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
     precio: 'Consumo (alto)', precio_en: 'Varies (upscale)',
@@ -764,8 +771,11 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'Ball & Chain originally opened in 1935 and, after decades and several reinventions, was reborn as one of Little Havana\'s most vibrant live-music venues. Salsa, son and jazz play almost every night on its stage and its pineapple-shaped pergola garden. It is a Calle Ocho centerpiece for a mojito, dancing and soaking up Miami\'s Cuban culture. Its history includes hosting jazz legends in the mid-20th century.',
     como_llegar_es: 'En 1513 SW 8th St, Little Havana. Desde el centro de Miami: 10–15 min por la SW 8th St (Calle Ocho). Estacionamiento en la calle y lotes cercanos.',
     como_llegar_en: 'At 1513 SW 8th St, Little Havana. From downtown Miami: 10–15 min via SW 8th St (Calle Ocho). Street parking and nearby lots.',
-    foto: phFoto('bares', 'Ball & Chain'),
-    galeria: [ phFoto('bares', 'Ball & Chain') ],
+    foto: 'assets/images/destinos/ball-and-chain/ball-and-chain-1.jpg',
+    galeria: [
+      'assets/images/destinos/ball-and-chain/ball-and-chain-1.jpg',
+      'assets/images/destinos/ball-and-chain/ball-and-chain-2.jpg'
+    ],
     lat: 25.7651, lng: -80.2196,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
     precio: 'Consumo', precio_en: 'Varies',
@@ -788,8 +798,10 @@ var DESTINOS_DEFAULT = [
     descripcion_larga_en: 'Mango\'s Tropical Cafe is one of Ocean Drive\'s most recognizable venues since 1991. Its blend of restaurant, bar and live show made it synonymous with South Beach nightlife: dancers on the bar, samba and salsa shows, and Latin music into the early hours. Its open facade onto Ocean Drive is part of the Art Deco district scenery. It is a classic stop for those after a party and tropical atmosphere in Miami Beach.',
     como_llegar_es: 'En 900 Ocean Dr, South Beach. Desde el centro de Miami: 15–20 min por el MacArthur Causeway. Estacionamiento de pago en garajes cercanos.',
     como_llegar_en: 'At 900 Ocean Dr, South Beach. From downtown Miami: 15–20 min via the MacArthur Causeway. Paid parking in nearby garages.',
-    foto: phFoto('bares', 'Mango\'s Tropical Cafe'),
-    galeria: [ phFoto('bares', 'Mango\'s Tropical Cafe') ],
+    foto: 'assets/images/destinos/mangos/mangos-1.jpg',
+    galeria: [
+      'assets/images/destinos/mangos/mangos-1.jpg'
+    ],
     lat: 25.7805, lng: -80.1300,
     dificultad_es: 'Fácil', dificultad_en: 'Easy', dificultad_clase: 'facil',
     precio: 'Cover + consumo', precio_en: 'Cover + drinks',
