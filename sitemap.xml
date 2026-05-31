@@ -126,8 +126,6 @@
 
   <!-- NO INCLUIR:
     - admin.html            → tiene meta robots noindex
-    - aventura.html         → página "próximamente", sin contenido real
-    - comida.html           → página "próximamente", sin contenido real
     - preview-imagenes.html → herramienta de desarrollo interna
   -->
 

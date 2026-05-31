@@ -2044,6 +2044,7 @@ document.addEventListener('DOMContentLoaded', function () {
   registrarVisita();
   renderDestinos();
   initDestCarousel();
+  aplicarFiltroDesdeURL();    /* ?cat= en la URL aplica el filtro de categoría */
   initScrollAnimation();
   initHeroParallax();        /* hero parallax multicapa — profundidad 3D con mouse */
   initShuffleGrid();         /* intro shuffle grid 4×3 — barajado con scroll */
@@ -2055,6 +2056,23 @@ document.addEventListener('DOMContentLoaded', function () {
   initNewsletter();          /* formulario de newsletter */
   /* ScrollExpandMedia / HeroTrail eliminados — hero reemplazado por cinematic */
 });
+
+/* ===== FILTRO DESDE LA URL (?cat=categoria) =====
+   Permite enlazar a la home con un filtro de categoría ya aplicado,
+   p.ej. desde el desplegable del navbar: index.html?cat=playa#destinos */
+function aplicarFiltroDesdeURL() {
+  var validas = { playa: 1, buceo: 1, pesca: 1, exploracion: 1, bares: 1 };
+  var cat = '';
+  try {
+    cat = (new URLSearchParams(window.location.search).get('cat') || '').toLowerCase();
+  } catch (e) {
+    var m = window.location.search.match(/[?&]cat=([^&]+)/);
+    cat = m ? decodeURIComponent(m[1]).toLowerCase() : '';
+  }
+  if (!cat || !validas[cat]) return;
+  var btn = document.querySelector('.filtros__btn[data-filtro="' + cat + '"]');
+  if (btn) { btn.click(); }   /* reutiliza toda la lógica del botón de filtro */
+}
 
 /* ============================================================
    QUIZ_DEST_URLS — mapa nombre → URL, exclusivo del quiz
