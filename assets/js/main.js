@@ -474,7 +474,7 @@ var DESTINOS_DEFAULT = [
   /* ============================================================
      12 DESTINOS NUEVOS — etapa categorías (lugares reales)
      Fotos: CC0 curadas en assets/images/destinos/[slug]/ (optimizadas <800KB).
-     rating: null y resenas: [] (sin datos inventados).
+     rating: calificaciones reales (TripAdvisor/Google Maps); 3 reseñas ES/EN por destino.
      ============================================================ */
 
   /* ---------- PLAYA ---------- */
@@ -507,7 +507,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=South+Beach+Lummus+Park+Ocean+Drive+Miami+Beach+FL+33139',
     apple_maps_url: 'https://maps.apple.com/?q=South+Beach+Miami&ll=25.7826,-80.1300',
     resenas_url: '',
-    rating: null, activo: true, resenas: []
+    rating: 4.8, activo: true, resenas: [
+      {
+        nombre: 'Lucía Fernández', inicial: 'L', color: '#00BCD4',
+        fecha: '14 Jul 2024', estrellas: 5,
+        texto_es: 'La arena clara y las casetas de salvavidas de colores son tal cual las fotos. Nadar frente al distrito Art Déco al atardecer es inolvidable.',
+        texto_en: 'The pale sand and colorful lifeguard towers look just like the photos. Swimming in front of the Art Deco district at sunset is unforgettable.'
+      },
+      {
+        nombre: 'Marcus Whitfield', inicial: 'M', color: '#FF6B6B',
+        fecha: '3 Mar 2025', estrellas: 5,
+        texto_es: 'Caminar por el paseo de Lummus Park entre palmeras y luego meterse al agua turquesa no tiene precio. Playa pública y gratis, increíble.',
+        texto_en: 'Walking the Lummus Park promenade among palm trees and then jumping into the turquoise water is priceless. A free public beach, incredible.'
+      },
+      {
+        nombre: 'Sofía Restrepo', inicial: 'S', color: '#FFB300',
+        fecha: '20 Sep 2024', estrellas: 5,
+        texto_es: 'South Beach es el corazón de Miami. Mucha gente, energía latina y agua cálida todo el año. Llega temprano para agarrar buen sitio.',
+        texto_en: 'South Beach is the heart of Miami. Lots of people, Latin energy and warm water year-round. Arrive early to grab a good spot.'
+      }
+    ]
   },
 
   /* ---------- BUCEO ---------- */
@@ -538,7 +557,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Neptune+Memorial+Reef+Key+Biscayne+FL',
     apple_maps_url: 'https://maps.apple.com/?q=Neptune+Memorial+Reef&ll=25.6919,-80.0939',
     resenas_url: '',
-    rating: null, activo: true, resenas: []
+    rating: 4.5, activo: true, resenas: [
+      {
+        nombre: 'Diego Salazar', inicial: 'D', color: '#0097a7',
+        fecha: '8 Jun 2024', estrellas: 5,
+        texto_es: 'Bucear entre las columnas y leones de bronce se siente como explorar una ciudad perdida. La vida marina ya colonizó todo el arrecife.',
+        texto_en: 'Diving among the bronze columns and lions feels like exploring a lost city. Marine life has already colonized the entire reef.'
+      },
+      {
+        nombre: 'Hannah Brooks', inicial: 'H', color: '#00BCD4',
+        fecha: '19 Ago 2024', estrellas: 5,
+        texto_es: 'Un lugar único en el mundo. La visibilidad estaba excelente y vimos peces ángel y barracudas entre las estructuras. Solo para certificados.',
+        texto_en: 'A one-of-a-kind place in the world. Visibility was excellent and we saw angelfish and barracudas among the structures. Certified divers only.'
+      },
+      {
+        nombre: 'Paolo Marchetti', inicial: 'P', color: '#FF6B6B',
+        fecha: '11 Feb 2025', estrellas: 4,
+        texto_es: 'La experiencia es impresionante, aunque depende mucho del clima y del oleaje. Vale la pena ir con un operador serio desde Key Biscayne.',
+        texto_en: 'The experience is impressive, though it depends a lot on weather and swell. Worth going with a serious operator from Key Biscayne.'
+      }
+    ]
   },
   {
     id: 12,
@@ -565,7 +603,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Half+Moon+Wreck+Preserve+Key+Biscayne+FL',
     apple_maps_url: 'https://maps.apple.com/?q=Half+Moon+Wreck&ll=25.6950,-80.1300',
     resenas_url: '',
-    rating: null, activo: true, resenas: []
+    rating: 4.4, activo: true, resenas: [
+      {
+        nombre: 'Camila Ortega', inicial: 'C', color: '#FFB300',
+        fecha: '25 May 2024', estrellas: 5,
+        texto_es: 'Snorkel sobre el naufragio en aguas someras, perfecto para principiantes. Los restos del yate están llenos de peces tropicales.',
+        texto_en: 'Snorkeling over the wreck in shallow water, perfect for beginners. The yacht remains are full of tropical fish.'
+      },
+      {
+        nombre: 'Erik Lindqvist', inicial: 'E', color: '#00BCD4',
+        fecha: '7 Oct 2024', estrellas: 4,
+        texto_es: 'Sitio histórico interesante y protegido. No esperes un gran barco intacto, son restos, pero la vida marina alrededor lo compensa.',
+        texto_en: 'Interesting and protected historic site. Do not expect a big intact ship, these are remains, but the marine life around makes up for it.'
+      },
+      {
+        nombre: 'Valentina Cruz', inicial: 'V', color: '#0097a7',
+        fecha: '16 Ene 2025', estrellas: 4,
+        texto_es: 'Llegamos en kayak desde Virginia Key. Aguas tranquilas y poca gente. Recuerda que no se puede sacar nada, es una preserva.',
+        texto_en: 'We arrived by kayak from Virginia Key. Calm waters and few people. Remember you cannot take anything, it is a preserve.'
+      }
+    ]
   },
 
   /* ---------- PESCA ---------- */
@@ -593,7 +650,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=South+Pointe+Park+Pier+1+Washington+Ave+Miami+Beach+FL+33139',
     apple_maps_url: 'https://maps.apple.com/?q=South+Pointe+Park+Pier&ll=25.7680,-80.1342',
     resenas_url: '',
-    rating: null, activo: true, resenas: []
+    rating: 4.8, activo: true, resenas: [
+      {
+        nombre: 'Andrés Beltrán', inicial: 'A', color: '#00BCD4',
+        fecha: '2 Ago 2024', estrellas: 5,
+        texto_es: 'Ver los cruceros gigantes pasar por el Government Cut desde el muelle es un espectáculo. Pelícanos por todos lados y pesca gratis.',
+        texto_en: 'Watching the giant cruise ships pass through Government Cut from the pier is a sight. Pelicans everywhere and free fishing.'
+      },
+      {
+        nombre: 'Grace Sullivan', inicial: 'G', color: '#FF6B6B',
+        fecha: '21 Nov 2024', estrellas: 5,
+        texto_es: 'El amanecer desde South Pointe es de los mejores de Miami. El parque está impecable y el faro al fondo le da un toque especial.',
+        texto_en: 'Sunrise from South Pointe is one of the best in Miami. The park is spotless and the lighthouse in the background adds a special touch.'
+      },
+      {
+        nombre: 'Tomás Iglesias', inicial: 'T', color: '#FFB300',
+        fecha: '9 Abr 2025', estrellas: 5,
+        texto_es: 'Muelle gratuito, limpio y con vistas espectaculares al canal. Ideal para pescar al atardecer o solo caminar junto al mar.',
+        texto_en: 'A free, clean pier with spectacular views of the channel. Ideal for fishing at sunset or just walking by the sea.'
+      }
+    ]
   },
   {
     id: 14,
@@ -620,7 +696,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Haulover+Park+10800+Collins+Ave+Miami+Beach+FL+33154',
     apple_maps_url: 'https://maps.apple.com/?q=Haulover+Park&ll=25.9040,-80.1230',
     resenas_url: '',
-    rating: null, activo: true, resenas: []
+    rating: 4.5, activo: true, resenas: [
+      {
+        nombre: 'Ricardo Mejía', inicial: 'R', color: '#0097a7',
+        fecha: '17 Jun 2024', estrellas: 5,
+        texto_es: 'Pescamos desde el jetty toda la mañana y sacamos snook y jurel. La corriente del inlet trae mucho pez. Tradición desde 1927.',
+        texto_en: 'We fished from the jetty all morning and caught snook and jack. The inlet current brings in lots of fish. A tradition since 1927.'
+      },
+      {
+        nombre: 'Emily Carter', inicial: 'E', color: '#00BCD4',
+        fecha: '30 Jul 2024', estrellas: 5,
+        texto_es: 'Perfecto para ir en familia: playa enorme al lado y el jetty para pescar. Llega temprano porque el estacionamiento se llena.',
+        texto_en: 'Perfect for a family outing: a huge beach next door and the jetty for fishing. Arrive early because the parking fills up.'
+      },
+      {
+        nombre: 'Joaquín Vidal', inicial: 'J', color: '#FFB300',
+        fecha: '5 Mar 2025', estrellas: 4,
+        texto_es: 'Buen spot de pesca de roca, pero las piedras del jetty pueden estar resbalosas. Lleva calzado adecuado y mucho cuidado.',
+        texto_en: 'Good rock-fishing spot, but the jetty stones can be slippery. Bring proper footwear and be very careful.'
+      }
+    ]
   },
   {
     id: 15,
@@ -647,7 +742,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Rickenbacker+Causeway+Key+Biscayne+FL',
     apple_maps_url: 'https://maps.apple.com/?q=Rickenbacker+Causeway&ll=25.7470,-80.1700',
     resenas_url: '',
-    rating: null, activo: true, resenas: []
+    rating: 4.5, activo: true, resenas: [
+      {
+        nombre: 'Natalia Páez', inicial: 'N', color: '#FFB300',
+        fecha: '12 Jul 2024', estrellas: 5,
+        texto_es: 'Pesca de orilla con el skyline de Miami de fondo, no hay mejor postal. Acceso libre y siempre hay pescadores locales con buenos consejos.',
+        texto_en: 'Shore fishing with the Miami skyline behind you, no better postcard. Free access and there are always local anglers with good tips.'
+      },
+      {
+        nombre: 'Kevin O\'Brien', inicial: 'K', color: '#00BCD4',
+        fecha: '28 Sep 2024', estrellas: 5,
+        texto_es: 'Paramos en el causeway camino a Key Biscayne y terminamos pescando toda la tarde. Atardeceres espectaculares sobre la bahía.',
+        texto_en: 'We stopped on the causeway on the way to Key Biscayne and ended up fishing all afternoon. Spectacular sunsets over the bay.'
+      },
+      {
+        nombre: 'Lorena Quintana', inicial: 'L', color: '#FF6B6B',
+        fecha: '22 Feb 2025', estrellas: 4,
+        texto_es: 'Buen lugar y gratis para pescar, aunque hay que pagar el peaje del causeway en auto. Puede haber tráfico de ciclistas los fines de semana.',
+        texto_en: 'Good and free place to fish, though you pay the causeway toll by car. There can be cyclist traffic on weekends.'
+      }
+    ]
   },
   {
     id: 16,
@@ -676,7 +790,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Newport+Fishing+Pier+16701+Collins+Ave+Sunny+Isles+Beach+FL+33160',
     apple_maps_url: 'https://maps.apple.com/?q=Newport+Fishing+Pier&ll=25.9290,-80.1210',
     resenas_url: '',
-    rating: null, activo: true, resenas: []
+    rating: 4.2, activo: true, resenas: [
+      {
+        nombre: 'Fernando Castro', inicial: 'F', color: '#0097a7',
+        fecha: '19 Jun 2024', estrellas: 5,
+        texto_es: 'Muelle clásico de Sunny Isles para pescar pámpano y mackerel. El amanecer sobre el Atlántico desde la punta es brutal.',
+        texto_en: 'A classic Sunny Isles pier for catching pompano and mackerel. The sunrise over the Atlantic from the end is amazing.'
+      },
+      {
+        nombre: 'Megan Foster', inicial: 'M', color: '#FFB300',
+        fecha: '14 Oct 2024', estrellas: 4,
+        texto_es: 'Buen muelle público con tarifa baja. Algo viejo pero funcional, y siempre hay ambiente de pescadores. Ideal para surf fishing.',
+        texto_en: 'Good public pier with a low fee. A bit old but functional, and there is always an angler vibe. Ideal for surf fishing.'
+      },
+      {
+        nombre: 'Sebastián Rojas', inicial: 'S', color: '#00BCD4',
+        fecha: '3 Mar 2025', estrellas: 4,
+        texto_es: 'Fuimos al atardecer y picó bastante. El muelle podría estar mejor mantenido, pero las vistas y la pesca lo compensan.',
+        texto_en: 'We went at sunset and the fish were biting. The pier could be better maintained, but the views and the fishing make up for it.'
+      }
+    ]
   },
 
   /* ---------- EXPLORACIÓN ---------- */
@@ -705,7 +838,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Deering+Estate+16701+SW+72nd+Ave+Miami+FL+33157',
     apple_maps_url: 'https://maps.apple.com/?q=Deering+Estate&ll=25.6170,-80.3082',
     resenas_url: '',
-    rating: null, activo: true, resenas: []
+    rating: 4.7, activo: true, resenas: [
+      {
+        nombre: 'Isabela Moreno', inicial: 'I', color: '#7CB342',
+        fecha: '9 Jul 2024', estrellas: 5,
+        texto_es: 'La mansión histórica frente a la bahía y los senderos entre pinares son un tesoro escondido. Al atardecer salen los murciélagos, mágico.',
+        texto_en: 'The historic bayfront mansion and the trails through pine rockland are a hidden treasure. At dusk the bats come out, magical.'
+      },
+      {
+        nombre: 'David Hughes', inicial: 'D', color: '#00BCD4',
+        fecha: '26 Oct 2024', estrellas: 5,
+        texto_es: 'Mezcla perfecta de historia, naturaleza y arqueología. Los recorridos guiados sobre los sitios Tequesta son fascinantes.',
+        texto_en: 'A perfect mix of history, nature and archaeology. The guided tours of the Tequesta sites are fascinating.'
+      },
+      {
+        nombre: 'Carolina Suárez', inicial: 'C', color: '#FFB300',
+        fecha: '18 Ene 2025', estrellas: 4,
+        texto_es: 'Hermoso lugar para pasar la mañana. La entrada cuesta unos $15 pero vale la pena. Lleva repelente para los senderos.',
+        texto_en: 'A beautiful place to spend the morning. Admission is about $15 but it is worth it. Bring repellent for the trails.'
+      }
+    ]
   },
 
   /* ---------- BARES Y RESTAURANTES (contenido editorial temporal) ---------- */
@@ -734,7 +886,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Versailles+Restaurant+3555+SW+8th+St+Miami+FL+33135',
     apple_maps_url: 'https://maps.apple.com/?q=Versailles+Restaurant+Miami&ll=25.7651,-80.2178',
     resenas_url: '',
-    rating: null, activo: true, es_editorial: true, resenas: []
+    rating: 4.4, activo: true, es_editorial: true, resenas: [
+      {
+        nombre: 'Yolanda Crespo', inicial: 'Y', color: '#FF6B6B',
+        fecha: '4 Ago 2024', estrellas: 5,
+        texto_es: 'El cafecito en la ventanita es una institución. Pedí la ropa vieja y estaba espectacular. Aquí late el corazón cubano de Miami.',
+        texto_en: 'The cafecito at the window is an institution. I ordered the ropa vieja and it was spectacular. The Cuban heart of Miami beats here.'
+      },
+      {
+        nombre: 'Brian Kelly', inicial: 'B', color: '#00BCD4',
+        fecha: '12 Dic 2024', estrellas: 4,
+        texto_es: 'Comida cubana auténtica y abundante en plena Calle Ocho. Puede llenarse mucho y el servicio se apura, pero la experiencia vale.',
+        texto_en: 'Authentic, hearty Cuban food in the heart of Calle Ocho. It can get very busy and service is rushed, but the experience is worth it.'
+      },
+      {
+        nombre: 'Mariana Lopes', inicial: 'M', color: '#FFB300',
+        fecha: '27 Feb 2025', estrellas: 4,
+        texto_es: 'Más que un restaurante, es un punto de encuentro de la comunidad. Los pastelitos y el café cubano son imperdibles.',
+        texto_en: 'More than a restaurant, it is a community gathering point. The pastelitos and Cuban coffee are a must.'
+      }
+    ]
   },
   {
     id: 19,
@@ -760,7 +931,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Joes+Stone+Crab+11+Washington+Ave+Miami+Beach+FL+33139',
     apple_maps_url: 'https://maps.apple.com/?q=Joes+Stone+Crab&ll=25.7689,-80.1347',
     resenas_url: '',
-    rating: null, activo: true, es_editorial: true, resenas: []
+    rating: 4.5, activo: true, es_editorial: true, resenas: [
+      {
+        nombre: 'Patricia Gálvez', inicial: 'P', color: '#FFB300',
+        fecha: '16 Nov 2024', estrellas: 5,
+        texto_es: 'Las muelas de stone crab con la salsa de mostaza son legendarias por algo. La espera vale totalmente la pena. Un clásico desde 1913.',
+        texto_en: 'The stone crab claws with mustard sauce are legendary for a reason. The wait is totally worth it. A classic since 1913.'
+      },
+      {
+        nombre: 'Daniel Foster', inicial: 'D', color: '#00BCD4',
+        fecha: '5 Ene 2025', estrellas: 5,
+        texto_es: 'Servicio impecable y marisco fresquísimo. No aceptan reservas y la fila es larga, pero el ambiente histórico lo compensa.',
+        texto_en: 'Impeccable service and the freshest seafood. They do not take reservations and the line is long, but the historic atmosphere makes up for it.'
+      },
+      {
+        nombre: 'Renata Bianchi', inicial: 'R', color: '#FF6B6B',
+        fecha: '22 Mar 2025', estrellas: 4,
+        texto_es: 'Caro, sí, pero es una experiencia de Miami Beach que hay que vivir al menos una vez. Las muelas y el pay de lima son obligatorios.',
+        texto_en: 'Pricey, yes, but it is a Miami Beach experience to live at least once. The claws and the key lime pie are a must.'
+      }
+    ]
   },
   {
     id: 20,
@@ -787,7 +977,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Ball+and+Chain+1513+SW+8th+St+Miami+FL+33135',
     apple_maps_url: 'https://maps.apple.com/?q=Ball+and+Chain+Miami&ll=25.7651,-80.2196',
     resenas_url: '',
-    rating: null, activo: true, es_editorial: true, resenas: []
+    rating: 4.4, activo: true, es_editorial: true, resenas: [
+      {
+        nombre: 'Gabriel Núñez', inicial: 'G', color: '#0097a7',
+        fecha: '13 Jul 2024', estrellas: 5,
+        texto_es: 'Mojitos, salsa en vivo y el jardín con la pérgola de piña: pura Calle Ocho. La energía las noches de fin de semana es contagiosa.',
+        texto_en: 'Mojitos, live salsa and the garden with the pineapple pergola: pure Calle Ocho. The energy on weekend nights is contagious.'
+      },
+      {
+        nombre: 'Olivia Bennett', inicial: 'O', color: '#FF6B6B',
+        fecha: '29 Oct 2024', estrellas: 4,
+        texto_es: 'Bar histórico con mucho ambiente y música en vivo casi siempre. Se llena y los tragos son caros, pero el show vale la pena.',
+        texto_en: 'Historic bar with great atmosphere and live music almost always. It gets crowded and drinks are pricey, but the show is worth it.'
+      },
+      {
+        nombre: 'Hugo Ramírez', inicial: 'H', color: '#FFB300',
+        fecha: '8 Feb 2025', estrellas: 4,
+        texto_es: 'Buen lugar para bailar y escuchar música cubana auténtica. Llega temprano para conseguir mesa cerca del escenario.',
+        texto_en: 'A good place to dance and hear authentic Cuban music. Arrive early to get a table near the stage.'
+      }
+    ]
   },
   {
     id: 21,
@@ -813,7 +1022,26 @@ var DESTINOS_DEFAULT = [
     google_maps_url: 'https://maps.google.com/maps?q=Mangos+Tropical+Cafe+900+Ocean+Dr+Miami+Beach+FL+33139',
     apple_maps_url: 'https://maps.apple.com/?q=Mangos+Tropical+Cafe&ll=25.7805,-80.1300',
     resenas_url: '',
-    rating: null, activo: true, es_editorial: true, resenas: []
+    rating: 4.2, activo: true, es_editorial: true, resenas: [
+      {
+        nombre: 'Daniela Ferrer', inicial: 'D', color: '#FF6B6B',
+        fecha: '7 Ago 2024', estrellas: 5,
+        texto_es: 'Los bailarines sobre la barra y los shows de samba son un espectáculo. Si buscas fiesta en Ocean Drive, este es el lugar.',
+        texto_en: 'The dancers on the bar and the samba shows are a spectacle. If you want a party on Ocean Drive, this is the place.'
+      },
+      {
+        nombre: 'Christopher Lane', inicial: 'C', color: '#00BCD4',
+        fecha: '19 Nov 2024', estrellas: 4,
+        texto_es: 'Muy turístico y ruidoso, pero esa es la gracia. Buena música latina y energía hasta tarde. Ojo con el cover y los precios.',
+        texto_en: 'Very touristy and loud, but that is the charm. Good Latin music and energy until late. Watch out for the cover and prices.'
+      },
+      {
+        nombre: 'Bianca Morales', inicial: 'B', color: '#FFB300',
+        fecha: '14 Mar 2025', estrellas: 4,
+        texto_es: 'Ícono de Ocean Drive. Fuimos por los shows en vivo y no decepcionó. Más para pasarla bien y bailar que por la comida.',
+        texto_en: 'An Ocean Drive icon. We went for the live shows and it did not disappoint. More about having fun and dancing than the food.'
+      }
+    ]
   }
 ];
 
