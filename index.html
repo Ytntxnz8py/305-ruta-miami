@@ -1125,12 +1125,7 @@
         mapBrightness: 9,
         baseColor:   [0.72, 0.82, 0.95],   /* colores Miami actuales */
         glowColor:   [0.18, 0.60, 0.90],
-        markerColor: [1, 0.42, 0.42],      /* coral — punto bajo cada emoji */
-        markerElevation: 0.1,
-        /* Un marcador (punto) por cada emoji, en su lat/lng */
-        markers: emojiData.map(function (d) {
-          return { location: [d.lat, d.lng], size: 0.04 };
-        })
+        markers:     []         /* sin puntos — solo los emojis flotantes */
       });
 
       /* Incremento FIJO por frame → velocidad angular constante = movimiento
