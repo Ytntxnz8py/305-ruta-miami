@@ -818,7 +818,7 @@ var DESTINOS_DEFAULT = [
 ];
 
 /* Versión de los datos — incrementar cada vez que cambie DESTINOS_DEFAULT */
-var DESTINOS_VERSION = 6;
+var DESTINOS_VERSION = 7;
 
 /* Mapa de IDs de destino → rutas de páginas HTML reales */
 var DESTINO_URLS = {
