@@ -1054,11 +1054,10 @@
     }
 
     /* ── Estado del globo ─────────────────────────────────────────────── */
-    /* Velocidad en rad/segundo (independiente del frame rate → fluido y
-       consistente en pantallas de 60 y 120 Hz). ~0.24 rad/s era el valor
-       previo (0.004/frame · 60fps); subido para girar un poco más rápido. */
-    const RAD_PER_SEC = 0.16;
-    const THETA_BASE  = 0.2;
+    /* Incremento de rotación por frame (radianes). Fijo = velocidad
+       constante = movimiento suave. Calmado para que se vea fluido. */
+    const SPEED      = 0.0035;
+    const THETA_BASE = 0.2;
 
     let globe       = null;
     let animId      = null;
@@ -1129,26 +1128,18 @@
         markers:     []
       });
 
-      var lastTs = null;
-      function animate(ts) {
-        if (typeof ts !== 'number') {
-          ts = (window.performance && performance.now) ? performance.now() : 0;
-        }
-        if (lastTs === null) lastTs = ts;
-        var dt = (ts - lastTs) / 1000;     /* segundos desde el frame previo */
-        lastTs = ts;
-        if (dt > 0.05) dt = 0.05;          /* cap apretado: tras un frame lento avanza poco (sin saltos) */
-        if (!paused && !prefersReduced) {
-          phi += RAD_PER_SEC * dt;
-          if (phi > 6.28318530718) phi -= 6.28318530718;  /* acota a 2π — evita crecer sin límite */
-        }
+      /* Incremento FIJO por frame → velocidad angular constante = movimiento
+         perfectamente suave a 60fps (el delta-time introducía micro-jitter
+         del timestamp que se veía como rotación "forzada"). */
+      function animate() {
+        if (!paused && !prefersReduced) phi += SPEED;
         const curPhi   = phi + phiOffset + dragPhi;
         const curTheta = THETA_BASE + thetaOffset + dragTheta;
         globe.update({ phi: curPhi, theta: curTheta });
         if (!prefersReduced) updateEmojis(curPhi, curTheta);
         animId = requestAnimationFrame(animate);
       }
-      animate();   /* primer frame síncrono (render inmediato); luego se auto-agenda con RAF */
+      animate();
 
       setTimeout(function() { canvas.style.opacity = '1'; });
     }
