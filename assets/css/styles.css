@@ -5276,30 +5276,20 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 }
 
 /* Emojis flotantes — posicionados por JS (proyección 3D→2D).
-   left/top y opacity se actualizan en el RAF loop;
-   translate centra el emoji sobre el punto del marcador. */
+   JS escribe transform (compositado, sin reflow) cada frame; la centratura
+   -50%/-50% va incluida en ese transform. */
 .globo-emoji {
   position: absolute;
-  top: 0; left: 0;           /* punto base; JS sobreescribe ambos    */
-  translate: -50% -50%;      /* centra el emoji SOBRE el punto del globo */
+  top: 0; left: 0;           /* ancla; JS posiciona con transform    */
   font-size: 1.05rem;        /* más pequeño — queda dentro del globo */
   line-height: 1;
-  filter: url(#globo-sticker)
-          drop-shadow(0 2px 8px rgba(26, 42, 53, 0.3));
+  /* Halo blanco tipo sticker — text-shadow (barato) reemplaza el filtro
+     SVG feMorphology, que repintaba carísimo en cada frame */
+  text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 1px 3px rgba(26, 42, 53, 0.4);
   pointer-events: none;
   opacity: 0;                /* JS controla visibilidad              */
   transition: opacity 0.25s ease;
-  animation: globo-float 3s ease-in-out infinite;
-  will-change: left, top;
-}
-
-@keyframes globo-float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-3px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .globo-emoji { animation: none; }
+  will-change: transform;
 }
 
 #globoCanvas {

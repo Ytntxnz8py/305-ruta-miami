@@ -591,24 +591,6 @@
         <!-- Columna derecha: canvas del globo + emojis flotantes -->
         <div class="globo-canvas-wrap">
 
-          <!-- Filtro SVG: contorno blanco estilo sticker para los emojis -->
-          <svg width="0" height="0" aria-hidden="true" focusable="false"
-               style="position:absolute;overflow:hidden">
-            <defs>
-              <filter id="globo-sticker">
-                <feMorphology in="SourceAlpha" result="dilated"
-                              operator="dilate" radius="2"/>
-                <feFlood flood-color="#ffffff" result="color"/>
-                <feComposite in="color" in2="dilated"
-                             operator="in" result="outline"/>
-                <feMerge>
-                  <feMergeNode in="outline"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-          </svg>
-
           <canvas id="globoCanvas" width="600" height="600"
                   aria-label="Globo 3D interactivo — Miami marcada en coral"></canvas>
 
@@ -1093,22 +1075,24 @@
     const emojiDivs = Array.from(
       canvas.closest('.globo-canvas-wrap').querySelectorAll('.globo-emoji'));
 
-    /* ── Actualiza posición de cada emoji ────────────────────────────── */
+    /* ── Actualiza posición de cada emoji ──────────────────────────────
+       Usa transform (compositado por GPU, sin reflow) en vez de left/top
+       (propiedades de layout → reflow cada frame). La opacidad solo se
+       escribe cuando cambia la visibilidad, no en cada frame. */
+    var emojiVis = [];
     function updateEmojis(curPhi, curTheta) {
       const w = canvas.offsetWidth;
       if (w === 0) return;
-      emojiDivs.forEach(function(el) {
-        const lat = parseFloat(el.dataset.lat);
-        const lng = parseFloat(el.dataset.lng);
-        const p   = project(lat, lng, curPhi, curTheta, w);
+      for (var i = 0; i < emojiDivs.length; i++) {
+        var el = emojiDivs[i];
+        var p  = project(parseFloat(el.dataset.lat), parseFloat(el.dataset.lng), curPhi, curTheta, w);
         if (p.visible) {
-          el.style.opacity = '1';
-          el.style.left    = p.x + 'px';
-          el.style.top     = p.y + 'px';
-        } else {
-          el.style.opacity = '0';
+          el.style.transform = 'translate3d(' + p.x + 'px,' + p.y + 'px,0) translate(-50%,-50%)';
+          if (emojiVis[i] !== true) { el.style.opacity = '1'; emojiVis[i] = true; }
+        } else if (emojiVis[i] !== false) {
+          el.style.opacity = '0'; emojiVis[i] = false;
         }
-      });
+      }
     }
 
     /* ── Inicialización ──────────────────────────────────────────────── */
@@ -1119,7 +1103,9 @@
       const w = canvas.offsetWidth;
       if (w === 0 || globe) return;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      /* dpr capeado a 1.5 (en vez de 2) — menos píxeles a renderizar por
+         frame, clave para fluidez en móviles y pantallas retina */
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
       globe = createGlobe(canvas, {
         devicePixelRatio: dpr,
@@ -1129,7 +1115,7 @@
         theta:  THETA_BASE,
         dark:          0,
         diffuse:       1.5,
-        mapSamples:    16000,
+        mapSamples:    12000,   /* 16000 → 12000: menos puntos, gira más fluido */
         mapBrightness: 8,
         baseColor:   [0.72, 0.82, 0.95],
         glowColor:   [0.18, 0.60, 0.90],
