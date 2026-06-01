@@ -1057,7 +1057,7 @@
     /* Velocidad en rad/segundo (independiente del frame rate → fluido y
        consistente en pantallas de 60 y 120 Hz). ~0.24 rad/s era el valor
        previo (0.004/frame · 60fps); subido para girar un poco más rápido. */
-    const RAD_PER_SEC = 0.36;
+    const RAD_PER_SEC = 0.16;
     const THETA_BASE  = 0.2;
 
     let globe       = null;
@@ -1072,25 +1072,31 @@
     const prefersReduced = window.matchMedia(
       '(prefers-reduced-motion: reduce)').matches;
 
-    const emojiDivs = Array.from(
-      canvas.closest('.globo-canvas-wrap').querySelectorAll('.globo-emoji'));
+    /* Pre-parseo lat/lng una sola vez (evita parseFloat × 38 por frame) */
+    var emojiData = Array.prototype.map.call(
+      canvas.closest('.globo-canvas-wrap').querySelectorAll('.globo-emoji'),
+      function(el) {
+        return { el: el, lat: parseFloat(el.dataset.lat), lng: parseFloat(el.dataset.lng), vis: null };
+      });
+
+    /* Ancho del globo cacheado — NO se lee canvas.offsetWidth por frame
+       (esa lectura forzaba un layout síncrono cada frame → tirones).
+       Se actualiza en init() y en resize. */
+    var globeW = 0;
+    window.addEventListener('resize', function() { globeW = canvas.offsetWidth; }, { passive: true });
 
     /* ── Actualiza posición de cada emoji ──────────────────────────────
-       Usa transform (compositado por GPU, sin reflow) en vez de left/top
-       (propiedades de layout → reflow cada frame). La opacidad solo se
-       escribe cuando cambia la visibilidad, no en cada frame. */
-    var emojiVis = [];
+       transform (compositado por GPU, sin reflow); opacidad solo al cambiar. */
     function updateEmojis(curPhi, curTheta) {
-      const w = canvas.offsetWidth;
-      if (w === 0) return;
-      for (var i = 0; i < emojiDivs.length; i++) {
-        var el = emojiDivs[i];
-        var p  = project(parseFloat(el.dataset.lat), parseFloat(el.dataset.lng), curPhi, curTheta, w);
+      if (globeW === 0) return;
+      for (var i = 0; i < emojiData.length; i++) {
+        var d = emojiData[i];
+        var p = project(d.lat, d.lng, curPhi, curTheta, globeW);
         if (p.visible) {
-          el.style.transform = 'translate3d(' + p.x + 'px,' + p.y + 'px,0) translate(-50%,-50%)';
-          if (emojiVis[i] !== true) { el.style.opacity = '1'; emojiVis[i] = true; }
-        } else if (emojiVis[i] !== false) {
-          el.style.opacity = '0'; emojiVis[i] = false;
+          d.el.style.transform = 'translate3d(' + p.x + 'px,' + p.y + 'px,0) translate(-50%,-50%)';
+          if (d.vis !== true) { d.el.style.opacity = '1'; d.vis = true; }
+        } else if (d.vis !== false) {
+          d.el.style.opacity = '0'; d.vis = false;
         }
       }
     }
@@ -1102,6 +1108,7 @@
     function init() {
       const w = canvas.offsetWidth;
       if (w === 0 || globe) return;
+      globeW = w;   /* cachea el ancho para updateEmojis (sin lectura por frame) */
 
       /* dpr capeado a 1.5 (en vez de 2) — menos píxeles a renderizar por
          frame, clave para fluidez en móviles y pantallas retina */
@@ -1130,8 +1137,11 @@
         if (lastTs === null) lastTs = ts;
         var dt = (ts - lastTs) / 1000;     /* segundos desde el frame previo */
         lastTs = ts;
-        if (dt > 0.1) dt = 0.1;            /* cap tras pestaña inactiva — evita saltos */
-        if (!paused && !prefersReduced) phi += RAD_PER_SEC * dt;
+        if (dt > 0.05) dt = 0.05;          /* cap apretado: tras un frame lento avanza poco (sin saltos) */
+        if (!paused && !prefersReduced) {
+          phi += RAD_PER_SEC * dt;
+          if (phi > 6.28318530718) phi -= 6.28318530718;  /* acota a 2π — evita crecer sin límite */
+        }
         const curPhi   = phi + phiOffset + dragPhi;
         const curTheta = THETA_BASE + thetaOffset + dragTheta;
         globe.update({ phi: curPhi, theta: curTheta });
