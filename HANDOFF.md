@@ -1,9 +1,9 @@
 > ⭐ FUENTE DE VERDAD ÚNICA del proyecto. Si existe otro documento de contexto, este tiene prioridad.
 > Actualiza ESTE archivo cada vez que cambie la arquitectura, precios, estructura de archivos o stack.
-> Última actualización confirmada: 27 mayo 2026
+> Última actualización confirmada: 31 mayo 2026
 
 # HANDOFF — Explora Miami
-> Estado del proyecto al **27 mayo 2026** · 175 commits · GitHub Pages
+> Estado del proyecto al **31 mayo 2026** · GitHub Pages
 
 ---
 
@@ -26,7 +26,7 @@ URL live: `https://ytntxnz8py.github.io/mi-tienda/`
 | JS | `var`, function declarations, **sin arrow functions**, **sin template literals** |
 | Deploy | **GitHub Pages** — rama `main`, repo `Ytntxnz8py/mi-tienda` |
 | Fuentes | Playfair Display · Cormorant Garamond · Inter (Google Fonts CDN) |
-| Analytics | Google Analytics `G-7HMBMBQNQZ` ⚠️ pendiente reemplazar por ID real |
+| Analytics | Google Analytics `G-7HMBMBQNQZ` — ID real confirmado y activo. Propiedad verificada el 28 mayo 2026. |
 | Schema | JSON-LD en `index.html` (WebSite + Organization + ItemList) |
 | i18n | Bilingüe ES/EN — toggle en navbar, estado en `localStorage('em_idioma')` |
 
@@ -83,15 +83,12 @@ URL live: `https://ytntxnz8py.github.io/mi-tienda/`
 ```
 explora-miami/
 │
-├── index.html                  # Landing principal — 9 tarjetas destino
+├── index.html                  # Landing — 21 destinos en carrusel filtrable por categoría
 ├── blog.html                   # Hub de artículos
-├── anunciantes.html            # Para empresas (B2B)
-├── comida.html                 # (stub — contenido pendiente)
-├── aventura.html               # (stub — contenido pendiente)
+├── anunciantes.html            # Para empresas (B2B) + acceso al portal de clientes
 ├── admin.html                  # Panel admin (protegido por contraseña)
 ├── privacidad.html             # Política de privacidad
 ├── terminos.html               # Términos de uso
-├── preview-imagenes.html       # Herramienta interna de preview
 │
 ├── destinos/                   # 9 páginas de destino individuales
 │   ├── everglades.html
@@ -108,6 +105,11 @@ explora-miami/
 │   ├── buceo-key-largo-guia.html
 │   ├── everglades-un-dia.html
 │   └── kayak-miami-principiantes.html
+│
+├── portal/                     # Portal de clientes (Fase 1 — cáscara visual, sin auth)
+│   ├── index.html              # Login (solo UI)
+│   ├── panel.html              # Dashboard · Mi Listing · Mi Plan · Soporte
+│   └── assets/                 # portal.css + portal.js (i18n + pestañas)
 │
 ├── assets/
 │   ├── css/
@@ -137,6 +139,8 @@ explora-miami/
 │       ├── cta-card.js         # IntersectionObserver para CTA
 │       ├── analytics.js        # Tracking custom (clics, visitas)
 │       └── admin-config.js     # Panel admin
+│   │
+│   └── images/destinos/<slug>/ # Fotos CC0 de los 12 destinos nuevos (optimizadas <800KB)
 │
 └── _privado/                   # ⛔ NUNCA commits — .gitignore
     ├── admin-secret.txt        # ADMIN_PASS=miami2026
@@ -155,6 +159,8 @@ explora-miami/
 - **Variante oscura:** `.em-nav.em-nav--dark-hero` para heroes con fondo oscuro — vuelve a claro al scrollear
 - **Drawer móvil:** activo bajo 900px, animado con backdrop, cierre por Escape
 - **Toggle idioma:** muestra el idioma destino (botón dice "EN" cuando estás en ES); delega a `window.cambiarIdioma()` si existe, o fallback localStorage
+- **Ítems:** Inicio · Destinos ▾ · Blog · Privacidad · Términos · [Para empresas] · EN — **eliminados Aventura y Comida**
+- **Desplegable "Destinos" (`navbar.js`):** progressive enhancement — convierte el link "Destinos" en un menú accesible con las 5 categorías (Playa · Buceo · Pesca · Exploración · Bares y Restaurantes). Cada ítem enlaza a `index.html?cat=<categoria>#destinos` (en subpáginas usa `../`). En el drawer móvil las categorías aparecen como sub-enlaces. Accesible: `aria-haspopup`/`aria-expanded`, Escape, flechas; cierra al clic fuera
 
 **Clases estado:**
 ```
@@ -239,8 +245,8 @@ html:not(.lang-es):not(.lang-en) .lang-en → oculto por defecto (evita flash)
 
 ## 7. Datos de destinos
 
-Los 9 destinos viven en `DESTINOS_DEFAULT` dentro de `main.js` (líneas 9–464).
-Cada objeto tiene:
+Los **21 destinos** (9 originales con id 1–9 + 12 nuevos con id 10–21) viven en
+`DESTINOS_DEFAULT` dentro de `main.js`. Cada objeto tiene:
 
 ```javascript
 {
@@ -248,22 +254,33 @@ Cada objeto tiene:
   descripcion_es, descripcion_en,        // corta (tarjeta)
   descripcion_larga_es, descripcion_larga_en, // larga (modal)
   como_llegar_es, como_llegar_en,
-  foto, galeria[],                        // URLs Wikipedia
+  foto, galeria[],                        // 9 orig: URLs Wikipedia · 12 nuevos: assets/images/destinos/<slug>/
   lat, lng,
   dificultad_es, dificultad_en, dificultad_clase,
   precio, precio_en, horarios, horarios_en,
-  tipo,                                   // 'mar' | 'tierra'
-  tipo_es, tipo_en,
+  tipo, tipo_es, tipo_en,                 // 'mar' | 'tierra' — legacy (badge modal + shuffle grid)
+  categoria, categoria_es, categoria_en,  // 'playa'|'buceo'|'pesca'|'exploracion'|'bares' — filtro + badge tarjeta
   telefono, web_oficial,
   mejor_epoca, mejor_epoca_en,
   google_maps_url, apple_maps_url, resenas_url,
-  rating,                                 // Google Maps mayo 2026
+  rating,                                 // calificación general real (Google Maps / TripAdvisor)
+  es_editorial,                           // true en los 4 bares — reemplazar por cliente pagado
   activo,
   resenas: [{ nombre, inicial, color, fecha, estrellas, texto_es, texto_en }]
 }
 ```
 
-**Versioning:** `DESTINOS_VERSION = 5` — auto-migra datos en localStorage si la versión es inferior.
+**Categorías (reemplazaron Tierra/Mar)** — filtro `d.categoria === filtro`, badge con color de paleta:
+- 🏖️ **Playa** (turquesa) · 🤿 **Buceo** (turquesa oscura) · 🎣 **Pesca** (mostaza)
+  · 🧭 **Exploración** (verde) · 🍹 **Bares y Restaurantes** (coral, 4 editoriales)
+
+**Reseñas:** los 9 originales tienen reseñas reales; los 12 nuevos llevan `resenas: []` y
+el modal muestra **estado vacío**: calificación general (`rating`) + invitación a ser el
+primero en reseñar + botón a Google Maps (reutiliza clases del modal, sin CSS nuevo).
+
+**Versioning:** `DESTINOS_VERSION = 7` — auto-migra datos en localStorage si la versión es
+inferior. ⚠️ **Subir SIEMPRE este número al cambiar `DESTINOS_DEFAULT`** (fotos, textos,
+ratings, reseñas), o los usuarios con caché no verán los cambios.
 
 **Caché localStorage:** `em_destinos` + `em_destinos_version`
 
@@ -280,6 +297,10 @@ Cada objeto tiene:
 ---
 
 ## 9. Avances recientes (últimos 15 commits)
+
+| Fecha / Commit | Descripción |
+|---|---|
+| **31 mayo 2026** | **Etapa 1 completa:** 21 destinos, 5 categorías, fotos CC0, ratings reales, navbar dropdown, portal Fase 1 |
 
 | Commit | Descripción |
 |---|---|
@@ -307,7 +328,7 @@ Cada objeto tiene:
 
 | Problema | Ubicación | Descripción |
 |---|---|---|
-| Google Analytics placeholder | `index.html:78` | `G-7HMBMBQNQZ` es placeholder — no trackea tráfico real hasta reemplazar por ID real |
+| ~~Google Analytics placeholder~~ | `index.html:78` | `G-7HMBMBQNQZ` — ID real confirmado y activo. Propiedad verificada el 28 mayo 2026. ✅ |
 | Admin password client-side | `admin.js:8` | `var ADMIN_PASS = 'miami2026'` visible en fuente — MVP only, no producción |
 | Open Graph image | `index.html:17` | Apunta a `istockphoto-155372056-612x612.jpg` — imagen no branded, pendiente reemplazar |
 | Canonical URL | Todas las páginas | Apunta a `/mi-tienda/` (nombre del repo) — no es un dominio propio |
@@ -316,11 +337,10 @@ Cada objeto tiene:
 
 | Problema | Ubicación | Descripción |
 |---|---|---|
-| Fotos de destinos — Wikipedia | `main.js DESTINOS_DEFAULT` | Todas las imágenes son URLs de Wikipedia — pueden desaparecer; migrar a `/assets/images/` |
-| `comida.html` stub | `comida.html` | Página referenciada en el navbar pero sin contenido real |
-| `aventura.html` stub | `aventura.html` | Ídem |
-| Modal legacy vs. páginas HTML | `main.js:571-602` | Los 9 destinos tienen páginas propias pero el código aún mantiene el sistema de modal como fallback — duplicidad de lógica |
-| Rating hardcoded | `main.js` cada destino | `/* Google Maps — mayo 2026 */` — ratings estáticos, no se actualizan |
+| Fotos de los 9 originales — Wikipedia | `main.js DESTINOS_DEFAULT` | Los **9 originales** aún usan URLs de Wikipedia (pueden romperse en GitHub Pages); los **12 nuevos** ya están en `assets/images/destinos/`. Pendiente migrar los 9 originales también |
+| Modal legacy vs. páginas HTML | `main.js` | Los 9 originales tienen página propia (`DESTINO_URLS`); los 12 nuevos abren con el modal (fallback). Duplicidad de lógica que conviene unificar |
+| Rating estático | `main.js` cada destino | `rating` fijo (Google Maps / TripAdvisor), no se actualiza solo |
+| Bares editoriales | `main.js id 18–21` | Versailles, Joe's, Ball & Chain, Mango's con `es_editorial: true` — reemplazar por clientes pagados |
 
 ### 🟠 Diseño / UX
 
@@ -328,7 +348,6 @@ Cada objeto tiene:
 |---|---|---|
 | Estrellas de rating — emojis ⭐ | `main.js:547-552` + `styles.css` | Las tarjetas usan `⭐⭐⭐⭐⭐` como emojis Unicode — se ven distinto en cada OS; pendiente migrar a SVG o CSS stars |
 | `meta-icono` con emojis | `main.js:645-653` | Iconos 💲 ⏰ renderizados como emojis — inconsistente entre plataformas |
-| `preview-imagenes.html` | raíz del proyecto | Herramienta de desarrollo expuesta públicamente |
 | Tarjeta Matheson Hammock | `main.js id:7` | Solo 2 fotos en galería (vs 4 en otros destinos) |
 | Tarjeta Virginia Key | `main.js id:6` | Solo 2 fotos en galería |
 
@@ -339,7 +358,7 @@ Cada objeto tiene:
 | SEO | `hreflang` alternates no configurados (ES vs EN) |
 | Favicon | Falta favicon del proyecto |
 | `robots.txt` | No existe — indexación no controlada |
-| Sitemap | No existe `sitemap.xml` |
+| Sitemap | ✅ `sitemap.xml` existe (16 URLs reales; admin y portal excluidos) |
 | Lazy loading | `loading="lazy"` en tarjetas pero no en imágenes above-the-fold |
 | Error de font en `styles.css` | Comentario dice "Abril Fatface + Nunito" pero las fuentes cargadas son Playfair Display + Inter — artefacto de iteración previa |
 
@@ -416,22 +435,28 @@ padding-top: calc(var(--nav-h, 68px) + 32px);  /* blog */
 
 ## 14. Próximos pasos recomendados
 
-### Prioridad alta
-1. **Reemplazar `G-7HMBMBQNQZ`** por el Measurement ID real en todas las páginas (actualmente solo en `index.html`)
-2. **Migrar imágenes de Wikipedia** a `/assets/images/` — copiar las 9×4 fotos localmente
-3. **Estrellas de rating SVG** — reemplazar emojis `⭐` por SVG o CSS puro para consistencia cross-platform
-4. **Contenido de `comida.html` y `aventura.html`** — actualmente stubs sin contenido
+### ✅ Etapa 1 — completada (31 mayo 2026)
+- ✅ Nuevo sistema de categorías (5 categorías) con navbar dropdown
+- ✅ 12 destinos nuevos con datos reales, fotos CC0 (`assets/images/destinos/`) y calificaciones
+- ✅ Navbar limpiado — eliminadas Aventura y Comida (páginas + referencias)
+- ✅ Portal de clientes Fase 1 (cáscara visual) + botón de acceso en `anunciantes.html`
+- ✅ Seguridad: `.gitignore` reforzado, contraseña admin fuera de pantalla, archivos privados
+- ✅ `sitemap.xml`, `README.md`, `CLAUDE.md` archivado, `preview-imagenes.html` retirado
+- ✅ Google Analytics `G-7HMBMBQNQZ` confirmado activo (28 mayo 2026)
 
-### Prioridad media
-5. **Dominio propio** — configurar CNAME en GitHub Pages y actualizar todos los canonicals
-6. **Favicon** del proyecto
-7. **`robots.txt` + `sitemap.xml`** — mejorar indexación SEO
-8. **`hreflang` alternates** — declarar ES y EN en `<head>` de cada página
+### ⏳ Etapa 2 — siguiente: Dominio propio
+- ⏳ Comprar `exploramiami.com` (Namecheap)
+- ⏳ Configurar `CNAME` en GitHub Pages
+- ⏳ Renombrar repo `mi-tienda` → `explora-miami`
+- ⏳ Actualizar todas las URLs canónicas y `sitemap.xml` al nuevo dominio
 
-### Prioridad baja
-9. **Eliminar sistema modal legacy** de `main.js` — ya no se usa, todos los destinos tienen página propia
-10. **Migrar admin a servidor** con autenticación real (actualmente MVP client-side)
-11. **`preview-imagenes.html`** — ocultar de producción o eliminar
+### Backlog (post-Etapa 2)
+- **Migrar fotos de los 9 originales** de Wikipedia a `/assets/images/destinos/`
+- **Portal Fase 2** — auth real + datos (Supabase) + pagos (Stripe); activar login
+- **Estrellas de rating SVG** — reemplazar emojis `⭐` por SVG/CSS (consistencia cross-platform)
+- **Favicon**, **`robots.txt`**, **`hreflang` alternates** (ES/EN)
+- **Eliminar sistema modal legacy** una vez todos los destinos tengan página propia
+- **Migrar admin a servidor** con autenticación real
 
 ---
 
@@ -456,4 +481,16 @@ git add .    # ídem
 
 ---
 
-*Generado el 27 mayo 2026 — Claude Sonnet 4.6*
+## 16. Portal de clientes (Fase 1)
+
+- **Ubicación:** `/portal/` — `index.html` (login) + `panel.html` (dashboard) + `assets/` (`portal.css` + `portal.js`)
+- **Estado:** **Fase 1 completa** — cáscara visual con 4 secciones: **Dashboard · Mi Listing · Mi Plan · Soporte**, todas con estados vacíos (sin datos inventados)
+- **Diseño:** autónomo, reutiliza los tokens del sitio (paleta, Playfair + Inter, glassmorphism); bilingüe ES/EN con la misma clave `localStorage('em_idioma')`
+- **Login:** **solo visual** — acepta cualquier dato y navega a `panel.html`. **Sin autenticación real**
+- **Link público:** **activo** — botón **"Acceder a mi portal"** (variant `gold`/mostaza) en el hero de `anunciantes.html`, junto a "Ver planes y precios". Los enlaces del navbar/drawer quedan comentados (`PENDIENTE FASE 2`)
+- **Pendiente Fase 2:** autenticación real + base de datos (Supabase) + pagos (Stripe)
+- **Rama original:** `feature/portal-clientes` (mergeada a `main`)
+
+---
+
+*Generado el 27 mayo 2026 · actualizado el 31 mayo 2026 — Claude*
