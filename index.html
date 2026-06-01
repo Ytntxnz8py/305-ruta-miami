@@ -1062,7 +1062,9 @@
       const qz = st * ry + ct * rz;
 
       /* Visibilidad: qx > 0 → cara frontal visible */
-      const r   = size / 2;
+      /* Radio < size/2 para que los emojis queden DENTRO del globo
+         (el borde del canvas incluye margen de glow, no la esfera) */
+      const r   = size * 0.42;
       const sx  = size / 2 + qz * r;   /* +Z → derecha en pantalla */
       const sy  = size / 2 - qy * r;   /* +Y → arriba en pantalla  */
 

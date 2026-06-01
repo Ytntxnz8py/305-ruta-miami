@@ -5281,8 +5281,8 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 .globo-emoji {
   position: absolute;
   top: 0; left: 0;           /* punto base; JS sobreescribe ambos    */
-  translate: -50% -115%;     /* centra X, eleva Y sobre el marcador  */
-  font-size: 1.55rem;
+  translate: -50% -50%;      /* centra el emoji SOBRE el punto del globo */
+  font-size: 1.05rem;        /* más pequeño — queda dentro del globo */
   line-height: 1;
   filter: url(#globo-sticker)
           drop-shadow(0 2px 8px rgba(26, 42, 53, 0.3));
@@ -5295,7 +5295,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 
 @keyframes globo-float {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-5px); }
+  50%       { transform: translateY(-3px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -5379,6 +5379,11 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
   /* Canvas más grande en móvil — deja 2rem de margen a cada lado */
   #globoCanvas {
     max-width: min(320px, calc(100vw - 4rem));
+  }
+
+  /* Emojis proporcionales al globo más pequeño */
+  .globo-emoji {
+    font-size: 0.85rem;
   }
 
   .globo-stats {
