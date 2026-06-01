@@ -41,9 +41,12 @@ var TEXTOS = {
     /* Destinos */
     destinos_titulo: 'Destinos en Miami',
     destinos_sub:    'Descubre las mejores experiencias outdoor de South Florida',
-    filtro_todos:    'Todos',
-    filtro_tierra:   '🏔️ Tierra',
-    filtro_mar:      '🌊 Mar',
+    filtro_todos:        'Todos',
+    filtro_playa:        '🏖️ Playa',
+    filtro_buceo:        '🤿 Buceo',
+    filtro_pesca:        '🎣 Pesca',
+    filtro_exploracion:  '🧭 Exploración',
+    filtro_bares:        '🍹 Bares y Restaurantes',
     card_ver_mapa:   'Ver en mapa',
 
     /* Mapa */
@@ -111,9 +114,12 @@ var TEXTOS = {
     /* Destinations */
     destinos_titulo: 'Miami Destinations',
     destinos_sub:    'Discover the best outdoor experiences in South Florida',
-    filtro_todos:    'All',
-    filtro_tierra:   '🏔️ Land',
-    filtro_mar:      '🌊 Sea',
+    filtro_todos:        'All',
+    filtro_playa:        '🏖️ Beach',
+    filtro_buceo:        '🤿 Diving',
+    filtro_pesca:        '🎣 Fishing',
+    filtro_exploracion:  '🧭 Exploration',
+    filtro_bares:        '🍹 Bars & Restaurants',
     card_ver_mapa:   'View on map',
 
     /* Map */

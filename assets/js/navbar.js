@@ -89,6 +89,102 @@
       document.documentElement.style.overflow = '';
     }
 
+    /* ===== Desplegable "Destinos" con las 5 categorías =====
+       Progressive enhancement: el HTML mantiene un link simple "Destinos"
+       como fallback; aquí lo convertimos en un menú accesible. Se aplica
+       igual en todas las páginas (el navbar está duplicado en cada una). */
+    var CATS_NAV = [
+      { cat: 'playa',       es: '🏖️ Playa',                en: '🏖️ Beach',             emoji: '🏖️', esN: 'Playa',                enN: 'Beach' },
+      { cat: 'buceo',       es: '🤿 Buceo',                en: '🤿 Diving',            emoji: '🤿', esN: 'Buceo',                enN: 'Diving' },
+      { cat: 'pesca',       es: '🎣 Pesca',                en: '🎣 Fishing',           emoji: '🎣', esN: 'Pesca',                enN: 'Fishing' },
+      { cat: 'exploracion', es: '🧭 Exploración',          en: '🧭 Exploration',       emoji: '🧭', esN: 'Exploración',          enN: 'Exploration' },
+      { cat: 'bares',       es: '🍹 Bares y Restaurantes',  en: '🍹 Bars & Restaurants', emoji: '🍹', esN: 'Bares y Restaurantes',  enN: 'Bars & Restaurants' }
+    ];
+
+    function prefijoIndex(href) {
+      var i = href.indexOf('index.html');
+      return i >= 0 ? href.substring(0, i) : '';
+    }
+
+    function construirDropdownDestinos() {
+      /* --- Desktop: navbar --- */
+      var destLink = nav.querySelector('.em-nav__links a.em-nav__link[href*="#destinos"]');
+      if (destLink && destLink.parentNode) {
+        var prefix = prefijoIndex(destLink.getAttribute('href') || '');
+        var li = destLink.parentNode;
+        var nuevo = document.createElement('li');
+        nuevo.className = 'em-nav__item em-nav__item--dropdown';
+        var html =
+          '<button type="button" class="em-nav__dropdown-toggle" aria-haspopup="true" aria-expanded="false">' +
+            '<span class="lang-es">Destinos</span><span class="lang-en">Destinations</span>' +
+            '<span class="em-nav__caret" aria-hidden="true"></span>' +
+          '</button>' +
+          '<ul class="em-nav__menu" role="menu">';
+        for (var k = 0; k < CATS_NAV.length; k++) {
+          var c = CATS_NAV[k];
+          html +=
+            '<li role="none"><a role="menuitem" class="em-nav__menu-link" ' +
+              'href="' + prefix + 'index.html?cat=' + c.cat + '#destinos">' +
+              '<span class="lang-es">' + c.es + '</span><span class="lang-en">' + c.en + '</span>' +
+            '</a></li>';
+        }
+        html += '</ul>';
+        nuevo.innerHTML = html;
+        li.parentNode.replaceChild(nuevo, li);
+
+        var toggle = nuevo.querySelector('.em-nav__dropdown-toggle');
+        var items  = nuevo.querySelectorAll('.em-nav__menu-link');
+        function abrirMenu()  { nuevo.classList.add('is-open');    toggle.setAttribute('aria-expanded', 'true'); }
+        function cerrarMenu() { nuevo.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); }
+
+        toggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (nuevo.classList.contains('is-open')) cerrarMenu(); else abrirMenu();
+        });
+        /* Click fuera cierra */
+        document.addEventListener('click', function (e) {
+          if (!nuevo.classList.contains('is-open')) return;
+          if (nuevo.contains(e.target)) return;
+          cerrarMenu();
+        });
+        /* Teclado: Escape cierra; flechas navegan los items */
+        nuevo.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' || e.keyCode === 27) { cerrarMenu(); toggle.focus(); return; }
+          if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (!nuevo.classList.contains('is-open')) abrirMenu();
+            var arr = Array.prototype.slice.call(items);
+            var idx = arr.indexOf(document.activeElement);
+            var next = e.key === 'ArrowDown' ? (idx + 1) % arr.length : (idx - 1 + arr.length) % arr.length;
+            if (idx === -1) next = 0;
+            arr[next].focus();
+          }
+        });
+        for (var m = 0; m < items.length; m++) {
+          items[m].addEventListener('click', function () { cerrarMenu(); });
+        }
+      }
+
+      /* --- Móvil: drawer (categorías como sub-enlaces tras "Destinos") --- */
+      if (drawer) {
+        var dDest = drawer.querySelector('a.em-drawer__link[href*="#destinos"]');
+        if (dDest && dDest.parentNode) {
+          var dprefix = prefijoIndex(dDest.getAttribute('href') || '');
+          var ref = dDest.nextSibling;
+          for (var n = 0; n < CATS_NAV.length; n++) {
+            var cc = CATS_NAV[n];
+            var a = document.createElement('a');
+            a.className = 'em-drawer__link em-drawer__sublink';
+            a.setAttribute('href', dprefix + 'index.html?cat=' + cc.cat + '#destinos');
+            a.innerHTML = '<span class="em-drawer__emoji">' + cc.emoji + '</span>' +
+                          '<span class="lang-es">' + cc.esN + '</span><span class="lang-en">' + cc.enN + '</span>';
+            dDest.parentNode.insertBefore(a, ref);
+          }
+        }
+      }
+    }
+    construirDropdownDestinos();
+
     if (burger) {
       burger.addEventListener('click', function () {
         var open = burger.getAttribute('aria-expanded') === 'true';
