@@ -1056,7 +1056,7 @@
     /* ── Estado del globo ─────────────────────────────────────────────── */
     /* Incremento de rotación por frame (radianes). Fijo = velocidad
        constante = movimiento suave. Calmado para que se vea fluido. */
-    const SPEED      = 0.0035;
+    const SPEED      = 0.003;
     const THETA_BASE = 0.2;
 
     let globe       = null;
@@ -1121,11 +1121,16 @@
         theta:  THETA_BASE,
         dark:          0,
         diffuse:       1.5,
-        mapSamples:    12000,   /* 16000 → 12000: menos puntos, gira más fluido */
-        mapBrightness: 8,
-        baseColor:   [0.72, 0.82, 0.95],
+        mapSamples:    12000,   /* menos puntos → gira más fluido */
+        mapBrightness: 9,
+        baseColor:   [0.72, 0.82, 0.95],   /* colores Miami actuales */
         glowColor:   [0.18, 0.60, 0.90],
-        markers:     []
+        markerColor: [1, 0.42, 0.42],      /* coral — punto bajo cada emoji */
+        markerElevation: 0.1,
+        /* Un marcador (punto) por cada emoji, en su lat/lng */
+        markers: emojiData.map(function (d) {
+          return { location: [d.lat, d.lng], size: 0.04 };
+        })
       });
 
       /* Incremento FIJO por frame → velocidad angular constante = movimiento

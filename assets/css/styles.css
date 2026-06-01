@@ -5281,7 +5281,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 .globo-emoji {
   position: absolute;
   top: 0; left: 0;           /* ancla; JS posiciona con transform    */
-  font-size: 1.2rem;         /* tamaño legible, queda dentro del globo */
+  font-size: 1.4rem;         /* tamaño legible, queda dentro del globo */
   line-height: 1;
   /* Halo blanco tipo sticker — text-shadow (barato) reemplaza el filtro
      SVG feMorphology, que repintaba carísimo en cada frame */
@@ -5373,7 +5373,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--radio-btn); }
 
   /* Emojis proporcionales al globo más pequeño */
   .globo-emoji {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .globo-stats {
