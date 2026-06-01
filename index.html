@@ -1072,8 +1072,11 @@
     }
 
     /* ── Estado del globo ─────────────────────────────────────────────── */
-    const SPEED      = 0.004;   /* rotación auto — visible en móvil       */
-    const THETA_BASE = 0.2;
+    /* Velocidad en rad/segundo (independiente del frame rate → fluido y
+       consistente en pantallas de 60 y 120 Hz). ~0.24 rad/s era el valor
+       previo (0.004/frame · 60fps); subido para girar un poco más rápido. */
+    const RAD_PER_SEC = 0.36;
+    const THETA_BASE  = 0.2;
 
     let globe       = null;
     let animId      = null;
@@ -1133,15 +1136,23 @@
         markers:     []
       });
 
-      function animate() {
-        if (!paused && !prefersReduced) phi += SPEED;
+      var lastTs = null;
+      function animate(ts) {
+        if (typeof ts !== 'number') {
+          ts = (window.performance && performance.now) ? performance.now() : 0;
+        }
+        if (lastTs === null) lastTs = ts;
+        var dt = (ts - lastTs) / 1000;     /* segundos desde el frame previo */
+        lastTs = ts;
+        if (dt > 0.1) dt = 0.1;            /* cap tras pestaña inactiva — evita saltos */
+        if (!paused && !prefersReduced) phi += RAD_PER_SEC * dt;
         const curPhi   = phi + phiOffset + dragPhi;
         const curTheta = THETA_BASE + thetaOffset + dragTheta;
         globe.update({ phi: curPhi, theta: curTheta });
         if (!prefersReduced) updateEmojis(curPhi, curTheta);
         animId = requestAnimationFrame(animate);
       }
-      animate();
+      animate();   /* primer frame síncrono (render inmediato); luego se auto-agenda con RAF */
 
       setTimeout(function() { canvas.style.opacity = '1'; });
     }
