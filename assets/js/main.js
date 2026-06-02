@@ -1,5 +1,5 @@
 /* =========================================
-   EXPLORA MIAMI — main.js
+   305 RUTA MIAMI — main.js
    Lógica del sitio público
    JS puro, sin librerías externas
    Comentarios en español
@@ -1532,8 +1532,8 @@ function initHeroTrail() {
     /* Si contiene SVG (SpinningText) o texto estático, no sobreescribir */
     if (titulo.querySelector('svg') || titulo.textContent.trim() !== '') return;
     titulo.innerHTML = '';
-    titulo.setAttribute('aria-label', 'EXPLORA MIAMI');
-    'EXPLORA MIAMI'.split('').forEach(function(c, i) {
+    titulo.setAttribute('aria-label', '305 RUTA MIAMI');
+    '305 RUTA MIAMI'.split('').forEach(function(c, i) {
       if (c === ' ') {
         var sp = document.createElement('span');
         sp.style.cssText = 'display:inline-block;width:0.28em';

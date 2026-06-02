@@ -1,6 +1,6 @@
 /* ============================================================
    LIQUID TILT — Efecto 3D en botones
-   Explora Miami · ES5 · sin frameworks
+   305 Ruta Miami · ES5 · sin frameworks
 
    Cuando el cursor entra en un botón, este se inclina hacia
    el punto de contacto simulando un objeto físico en el espacio.

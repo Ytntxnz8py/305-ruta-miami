@@ -1,5 +1,5 @@
 /* ============================================================
-   EXPLORA MIAMI — PORTAL DE CLIENTES · portal.js
+   305 RUTA MIAMI — PORTAL DE CLIENTES · portal.js
    FASE 1 — Cáscara visual (sin backend)
 
    Responsabilidades de esta fase:

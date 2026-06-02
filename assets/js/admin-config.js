@@ -1,5 +1,5 @@
 /* =========================================
-   EXPLORA MIAMI — admin-config.js
+   305 RUTA MIAMI — admin-config.js
    Configuración pública del panel admin
    SIN contraseñas ni credenciales privadas
    Las credenciales privadas están en _privado/

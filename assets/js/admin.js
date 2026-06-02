@@ -1,5 +1,5 @@
 /* =========================================
-   EXPLORA MIAMI — admin.js v2.0
+   305 RUTA MIAMI — admin.js v2.0
    Centro de Comando — Panel de administración
    Comentarios en español — ES5 (var, sin arrow functions)
 ========================================= */
@@ -772,8 +772,8 @@ function toggleActivo(id) {
    TAB: EDITOR SITIO
 ============================================================ */
 var CONFIG_DEFAULTS = {
-  hero_titulo_es:     'EXPLORA MIAMI',
-  hero_titulo_en:     'EXPLORE MIAMI',
+  hero_titulo_es:     '305 RUTA MIAMI',
+  hero_titulo_en:     '305 RUTA MIAMI',
   hero_tagline_es:    'Tu próxima aventura empieza aquí',
   hero_tagline_en:    'Your next adventure starts here',
   intro_sub_es:       'La guía definitiva para aventureros en South Florida',
@@ -952,7 +952,7 @@ function exportarContactos() {
   var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   var url  = URL.createObjectURL(blob);
   var a    = document.createElement('a');
-  a.href = url; a.download = 'mensajes-explora-miami.csv'; a.click();
+  a.href = url; a.download = 'mensajes-305-ruta-miami.csv'; a.click();
   URL.revokeObjectURL(url);
 }
 

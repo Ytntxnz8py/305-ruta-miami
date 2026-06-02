@@ -1,6 +1,6 @@
 /* ============================================
    METAL BUTTON — JS universal
-   Explora Miami · Componente compartido ES5
+   305 Ruta Miami · Componente compartido ES5
    Cargado en TODAS las páginas del proyecto
    ============================================ */
 (function() {

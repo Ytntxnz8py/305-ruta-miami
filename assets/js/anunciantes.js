@@ -1,5 +1,5 @@
 /* =========================================
-   EXPLORA MIAMI — anunciantes.js
+   305 RUTA MIAMI — anunciantes.js
    Página de ventas B2B para anunciantes
    ES5 puro, IIFE, sin librerías externas
 ========================================= */
