@@ -1,5 +1,5 @@
 /* ============================================
-   GALERÍA SELECTOR — Explora Miami
+   GALERÍA SELECTOR — 305 Ruta Miami
    Acordeón interactivo de paneles fotográficos
    Desktop: expansión horizontal
    Móvil:   expansión vertical

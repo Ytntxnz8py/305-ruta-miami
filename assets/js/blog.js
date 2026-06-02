@@ -1,6 +1,6 @@
 /* ============================================
    BLOG — JS compartido índice + artículos
-   Explora Miami · blog.js
+   305 Ruta Miami · blog.js
    ES5 puro — sin const/let, sin arrow functions
    ============================================ */
 

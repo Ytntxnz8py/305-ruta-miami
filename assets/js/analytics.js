@@ -1,5 +1,5 @@
 /* =========================================
-   EXPLORA MIAMI — analytics.js
+   305 RUTA MIAMI — analytics.js
    Tracking de eventos Google Analytics 4
    Requiere que GA4 (gtag.js) esté cargado en el <head>
    Documentación: analytics.google.com/analytics/web/

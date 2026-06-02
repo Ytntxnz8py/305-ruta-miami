@@ -4,7 +4,7 @@
    hero_scroll, form_*, trabaja_* */
 
 /* =========================================
-   EXPLORA MIAMI — i18n.js
+   305 RUTA MIAMI — i18n.js
    Sistema de internacionalización ES / EN
    Técnica: clase CSS lang-es / lang-en en <html>
    + data-i18n para texto estático
@@ -22,14 +22,14 @@ var TEXTOS = {
     nav_empresas: 'Para empresas',
 
     /* Hero */
-    hero_titulo:       'EXPLORA MIAMI',
+    hero_titulo:       '305 RUTA MIAMI',
     hero_tagline:      'Tu próxima aventura empieza aquí',
     hero_btn_destinos: 'Ver destinos',
     hero_btn_mapa:     'Ver mapa',
     hero_scroll:       'Desliza',
 
     /* Intro */
-    intro_titulo:    '¿Por qué Explora Miami?',
+    intro_titulo:    '¿Por qué 305 Ruta Miami?',
     intro_sub:       'La guía definitiva para aventureros en South Florida',
     intro_c1_titulo: 'Destinos Verificados',
     intro_c1_texto:  'Aventuras verificadas en los mejores rincones de Miami y sus alrededores.',
@@ -82,7 +82,7 @@ var TEXTOS = {
     footer_tagline:   'Tu próxima aventura empieza aquí',
     footer_nav:       'Navegación',
     footer_destinos:  'Destinos',
-    footer_copyright: '© 2026 Explora Miami. Todos los derechos reservados.',
+    footer_copyright: '© 2026 305 Ruta Miami. Todos los derechos reservados.',
   },
 
   en: {
@@ -95,14 +95,14 @@ var TEXTOS = {
     nav_empresas: 'For businesses',
 
     /* Hero */
-    hero_titulo:       'EXPLORE MIAMI',
+    hero_titulo:       '305 RUTA MIAMI',
     hero_tagline:      'Your next adventure starts here',
     hero_btn_destinos: 'See destinations',
     hero_btn_mapa:     'View map',
     hero_scroll:       'Scroll',
 
     /* Intro */
-    intro_titulo:    'Why Explora Miami?',
+    intro_titulo:    'Why 305 Ruta Miami?',
     intro_sub:       'The ultimate guide for adventurers in South Florida',
     intro_c1_titulo: 'Verified Destinations',
     intro_c1_texto:  'Verified adventures in the best spots around Miami and beyond.',
@@ -155,7 +155,7 @@ var TEXTOS = {
     footer_tagline:   'Your next adventure starts here',
     footer_nav:       'Navigation',
     footer_destinos:  'Destinations',
-    footer_copyright: '© 2026 Explora Miami. All rights reserved.',
+    footer_copyright: '© 2026 305 Ruta Miami. All rights reserved.',
   }
 };
 

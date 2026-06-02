@@ -1,20 +1,21 @@
 > ⭐ FUENTE DE VERDAD ÚNICA del proyecto. Si existe otro documento de contexto, este tiene prioridad.
 > Actualiza ESTE archivo cada vez que cambie la arquitectura, precios, estructura de archivos o stack.
-> Última actualización confirmada: 31 mayo 2026
+> Última actualización confirmada: 1 junio 2026
 
-# HANDOFF — Explora Miami
-> Estado del proyecto al **31 mayo 2026** · GitHub Pages
+# HANDOFF — 305 Ruta Miami
+> Estado del proyecto al **1 junio 2026** · GitHub Pages · dominio propio
 
 ---
 
 ## 1. Qué es el proyecto
 
-**Explora Miami** es un directorio de experiencias outdoor en Miami y South Florida.
+**305 Ruta Miami** es un directorio de experiencias outdoor en Miami y South Florida.
 Público: viajeros hispanos + angloparlantes que buscan actividades en la naturaleza.
 Modelo de negocio: B2C orgánico + B2B (empresas de tours que contratan espacio en la
 página `anunciantes.html`).
 
-URL live: `https://ytntxnz8py.github.io/mi-tienda/`
+URL live: `https://305rutamiami.com/`
+(Antes `Explora Miami` — rebrand por conflicto de marca, 1 junio 2026.)
 
 ---
 
@@ -24,7 +25,7 @@ URL live: `https://ytntxnz8py.github.io/mi-tienda/`
 |---|---|
 | Lenguaje | HTML5 + CSS3 + **ES5 puro** (sin frameworks, sin build) |
 | JS | `var`, function declarations, **sin arrow functions**, **sin template literals** |
-| Deploy | **GitHub Pages** — rama `main`, repo `Ytntxnz8py/mi-tienda` |
+| Deploy | **GitHub Pages** — rama `main`, dominio propio `305rutamiami.com` (CNAME). Repo `Ytntxnz8py/mi-tienda` (rename a `305-ruta-miami` pendiente, manual) |
 | Fuentes | Playfair Display · Cormorant Garamond · Inter (Google Fonts CDN) |
 | Analytics | Google Analytics `G-7HMBMBQNQZ` — ID real confirmado y activo. Propiedad verificada el 28 mayo 2026. |
 | Schema | JSON-LD en `index.html` (WebSite + Organization + ItemList) |
@@ -210,7 +211,7 @@ Usado en: `blog.html` (CTA empresas) y `index.html` (newsletter).
 
 ### 5.6 Orbital 3D (`anunciantes.js` + `anunciantes.css`)
 
-Animación orbital en la sección "Cómo trabaja Explora Miami":
+Animación orbital en la sección "Cómo trabaja 305 Ruta Miami":
 
 - Motor: `requestAnimationFrame` (rAF) con timestamp — **reemplazó setInterval en commit 6be6f07**
 - Velocidad: `DEG_PER_SEC = 15` — constante independiente de frame rate
@@ -300,6 +301,7 @@ ratings, reseñas), o los usuarios con caché no verán los cambios.
 
 | Fecha / Commit | Descripción |
 |---|---|
+| **1 junio 2026** | **Rebrand `Explora Miami` → `305 Ruta Miami`** + dominio propio `305rutamiami.com` (canonical, OG, Schema, sitemap, robots, CNAME) |
 | **31 mayo 2026** | **Etapa 1 completa:** 21 destinos, 5 categorías, fotos CC0, ratings reales, navbar dropdown, portal Fase 1 |
 
 | Commit | Descripción |
@@ -444,11 +446,11 @@ padding-top: calc(var(--nav-h, 68px) + 32px);  /* blog */
 - ✅ `sitemap.xml`, `README.md`, `CLAUDE.md` archivado, `preview-imagenes.html` retirado
 - ✅ Google Analytics `G-7HMBMBQNQZ` confirmado activo (28 mayo 2026)
 
-### ⏳ Etapa 2 — siguiente: Dominio propio
-- ⏳ Comprar `exploramiami.com` (Namecheap)
-- ⏳ Configurar `CNAME` en GitHub Pages
-- ⏳ Renombrar repo `mi-tienda` → `explora-miami`
-- ⏳ Actualizar todas las URLs canónicas y `sitemap.xml` al nuevo dominio
+### ✅ Etapa 2 — Dominio propio + rebrand (1 junio 2026)
+- ✅ Dominio `305rutamiami.com` comprado y apuntando a GitHub Pages (`CNAME`)
+- ✅ **Rebrand `Explora Miami` → `305 Ruta Miami`** (conflicto de marca): nombre, logo (305Ruta + Miami), títulos, meta, i18n
+- ✅ Canonical, OG, Twitter, Schema, `sitemap.xml`, `robots.txt` → `305rutamiami.com`
+- ⏳ **Pendiente manual:** renombrar repo `mi-tienda` → `305-ruta-miami` (GitHub Settings) + `git remote set-url`
 
 ### Backlog (post-Etapa 2)
 - **Migrar fotos de los 9 originales** de Wikipedia a `/assets/images/destinos/`

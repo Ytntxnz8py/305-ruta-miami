@@ -1,5 +1,5 @@
 /* ============================================================
-   NAVBAR UNIVERSAL — Explora Miami
+   NAVBAR UNIVERSAL — 305 Ruta Miami
    ES5 puro (var, sin arrow functions, sin template literals)
    - Hide-on-scroll (threshold 80px). Siempre visible si scrollY <= 10.
    - Drawer móvil con backdrop.

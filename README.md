@@ -1,8 +1,8 @@
-# Explora Miami
+# 305 Ruta Miami
 
 Directorio bilingüe (ES/EN) de experiencias outdoor en Miami y South Florida.
 
-🌐 **Sitio live:** [ytntxnz8py.github.io/mi-tienda](https://ytntxnz8py.github.io/mi-tienda/)
+🌐 **Sitio live:** [305rutamiami.com](https://305rutamiami.com/)
 
 ---
 
@@ -30,7 +30,7 @@ Modelo de negocio: directorio de listings para empresas de turismo outdoor + afi
 ## Estructura
 
 ```
-explora-miami/
+305-ruta-miami/
 ├── index.html              # Landing principal
 ├── anunciantes.html        # Para empresas (B2B)
 ├── blog.html               # Hub de artículos
