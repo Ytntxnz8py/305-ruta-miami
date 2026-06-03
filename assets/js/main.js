@@ -2096,7 +2096,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initRoadmap();
   initRoadmapTooltip();
   initMetalButtons();
-  initHeroSocialProof();     /* contador de visitantes en el hero */
   initQuizAventurero();      /* quiz de 3 pasos */
   initNewsletter();          /* formulario de newsletter */
   /* ScrollExpandMedia / HeroTrail eliminados — hero reemplazado por cinematic */
@@ -2135,48 +2134,10 @@ var QUIZ_DEST_URLS = {
   'Arch Creek Park':                      'destinos/arch-creek.html'
 };
 
-/* ============================================================
-   HERO SOCIAL PROOF — contador de visitantes activos
-   Lee localStorage.em_visitas (escrito por registrarVisita)
-   Muestra como mínimo 847 para credibilidad social
-   ============================================================ */
-function initHeroSocialProof() {
-  var el = document.getElementById('heroVisitCount');
-  if (!el) return;
-
-  var base    = 847;
-  var visitas = parseInt(localStorage.getItem('em_visitas'), 10) || 0;
-  var total   = Math.max(base, base + visitas);
-
-  /* Animación de conteo rápida (500ms) */
-  var duracion  = 800;
-  var inicio    = Date.now();
-  var inicioNum = Math.max(0, total - 120);
-
-  function animar() {
-    var progreso = Math.min(1, (Date.now() - inicio) / duracion);
-    var ease     = 1 - Math.pow(1 - progreso, 3); /* ease-out cubic */
-    var valor    = Math.round(inicioNum + (total - inicioNum) * ease);
-    el.textContent = valor.toLocaleString();
-    if (progreso < 1) {
-      requestAnimationFrame(animar);
-    }
-  }
-
-  /* Solo anima si el hero ya está visible (tras la expansión) */
-  var semContent = document.getElementById('semContent');
-  if (semContent && window.IntersectionObserver) {
-    var obs = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        animar();
-        obs.disconnect();
-      }
-    }, { threshold: 0.5 });
-    obs.observe(semContent);
-  } else {
-    el.textContent = total.toLocaleString();
-  }
-}
+/* El contador "847 aventureros" del hero se eliminó: era un número
+   inventado (847 + visitas locales), sin conexión real con GA4.
+   Reemplazado por una invitación honesta en index.html. Si en el futuro
+   hay un endpoint público con el dato real de GA, se puede reintroducir. */
 
 /* ============================================================
    QUIZ AVENTURERO — 3 pasos, 4 opciones cada uno
