@@ -1,6 +1,10 @@
 # ===== PRIVADO: NUNCA subir a GitHub =====
 _privado/
 
+# Config del admin con el secreto del proxy GA — fuera del repo público.
+# Copiar de admin-config.example.js y rellenar localmente (no se commitea).
+assets/js/admin-config.js
+
 # Carpetas originales de fotos (fuentes crudas — ya organizadas en assets/images/destinos/)
 /hero/
 Arch Creek Park/

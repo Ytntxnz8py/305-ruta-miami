@@ -6,10 +6,13 @@
 
 /* ===== CONSTANTES Y ESTADO ===== */
 var ADMIN_PASS = 'miami2026';
-/* GAS_SECRET se lee desde admin-config.js → ADMIN_CONFIG.GAS_SECRET */
+/* GAS_SECRET se lee SOLO desde admin-config.js (gitignored, no en el repo
+   público). Sin él, GAS_SECRET queda vacío y las llamadas al proxy GA4
+   reciben "Unauthorized" → el admin cae a métricas de localStorage.
+   NUNCA hardcodear el secreto aquí (este archivo es público). */
 var GAS_SECRET = (typeof ADMIN_CONFIG !== 'undefined' && ADMIN_CONFIG.GAS_SECRET)
   ? ADMIN_CONFIG.GAS_SECRET
-  : 'explora_miami_gas_2026';
+  : '';
 var DESTINOS_VERSION = 3;  /* debe coincidir con main.js */
 var MAX_INTENTOS = 5;
 
