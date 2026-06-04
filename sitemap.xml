@@ -143,6 +143,34 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://305rutamiami.com/destinos/versailles.html</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/joes-stone-crab.html</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/ball-and-chain.html</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/mangos-tropical-cafe.html</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- ARTÍCULOS DEL BLOG -->
   <url>
     <loc>https://305rutamiami.com/blog/buceo-key-largo-guia.html</loc>
