@@ -838,7 +838,11 @@ var DESTINO_URLS = {
   14: 'destinos/haulover-park.html',
   15: 'destinos/rickenbacker-causeway.html',
   16: 'destinos/newport-fishing-pier.html',
-  17: 'destinos/deering-estate.html'
+  17: 'destinos/deering-estate.html',
+  18: 'destinos/versailles.html',
+  19: 'destinos/joes-stone-crab.html',
+  20: 'destinos/ball-and-chain.html',
+  21: 'destinos/mangos-tropical-cafe.html'
 };
 
 /* Obtiene destinos de localStorage; migra automáticamente si la versión es antigua */
