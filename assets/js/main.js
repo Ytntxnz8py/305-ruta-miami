@@ -830,7 +830,15 @@ var DESTINO_URLS = {
   6: 'destinos/virginia-key.html',
   7: 'destinos/matheson-hammock.html',
   8: 'destinos/crandon-park.html',
-  9: 'destinos/arch-creek.html'
+  9: 'destinos/arch-creek.html',
+  10: 'destinos/south-beach.html',
+  11: 'destinos/neptune-memorial-reef.html',
+  12: 'destinos/half-moon-wreck.html',
+  13: 'destinos/south-pointe-park.html',
+  14: 'destinos/haulover-park.html',
+  15: 'destinos/rickenbacker-causeway.html',
+  16: 'destinos/newport-fishing-pier.html',
+  17: 'destinos/deering-estate.html'
 };
 
 /* Obtiene destinos de localStorage; migra automáticamente si la versión es antigua */

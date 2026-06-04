@@ -4,21 +4,21 @@
   <!-- PÁGINAS PRINCIPALES -->
   <url>
     <loc>https://305rutamiami.com/</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/anunciantes.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/blog.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -26,85 +26,141 @@
   <!-- DESTINOS INDIVIDUALES -->
   <url>
     <loc>https://305rutamiami.com/destinos/everglades.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/destinos/john-pennekamp.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/destinos/biscayne.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/destinos/bill-baggs.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/destinos/oleta-river.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/destinos/virginia-key.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/destinos/matheson-hammock.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/destinos/crandon-park.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/destinos/arch-creek.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/south-beach.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/neptune-memorial-reef.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/half-moon-wreck.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/south-pointe-park.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/haulover-park.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/rickenbacker-causeway.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/newport-fishing-pier.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://305rutamiami.com/destinos/deering-estate.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- ARTÍCULOS DEL BLOG -->
   <url>
     <loc>https://305rutamiami.com/blog/buceo-key-largo-guia.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/blog/everglades-un-dia.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/blog/kayak-miami-principiantes.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -112,14 +168,14 @@
   <!-- PÁGINAS LEGALES -->
   <url>
     <loc>https://305rutamiami.com/privacidad.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://305rutamiami.com/terminos.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
