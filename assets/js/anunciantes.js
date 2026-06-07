@@ -283,9 +283,12 @@
   }
 
   /* ===== FORMULARIO DE CONTACTO ===== */
+  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mojzezpz';
+
   function initFormContacto() {
     var form  = document.getElementById('formEmpresas');
     var exito = document.getElementById('formEmpresasExito');
+    var error = document.getElementById('formEmpresasError');
     if (!form) return;
 
     var campos = form.querySelectorAll('input[required], select[required], textarea[required]');
@@ -323,34 +326,38 @@
       campos.forEach(function (campo) { if (!validateField(campo)) allValid = false; });
       if (!allValid) return;
 
-      function val(name) {
-        var el = form.querySelector('[name="' + name + '"]');
-        return el ? el.value : '';
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      if (error) error.style.display = 'none';
+
+      function mostrarError() {
+        if (submitBtn) submitBtn.disabled = false;
+        if (error) {
+          error.style.display = '';
+          error.setAttribute('aria-live', 'assertive');
+        }
       }
 
-      var data = {
-        nombre:  val('nombre'),
-        empresa: val('empresa'),
-        email:   val('email'),
-        tel:     val('tel'),
-        tipo:    val('tipo'),
-        mensaje: val('mensaje'),
-        fecha:   new Date().toISOString()
-      };
-
-      try {
-        var lista = [];
-        try { lista = JSON.parse(localStorage.getItem('em_contactos_empresas') || '[]'); }
-        catch (e2) { lista = []; }
-        lista.push(data);
-        localStorage.setItem('em_contactos_empresas', JSON.stringify(lista));
-      } catch (err) { /* continúa sin localStorage */ }
-
-      form.style.display = 'none';
-      if (exito) {
-        exito.removeAttribute('style');
-        exito.setAttribute('aria-live', 'polite');
-      }
+      /* Envío real a Formspree (no localStorage): solo mostramos éxito si entrega de verdad */
+      fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function (response) {
+        if (response.ok) {
+          form.style.display = 'none';
+          if (error) error.style.display = 'none';
+          if (exito) {
+            exito.removeAttribute('style');
+            exito.setAttribute('aria-live', 'polite');
+          }
+          form.reset();
+        } else {
+          mostrarError();
+        }
+      }).catch(function () {
+        mostrarError();
+      });
     });
   }
 

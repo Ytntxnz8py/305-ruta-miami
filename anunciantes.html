@@ -1122,7 +1122,7 @@
 
             <p class="contacto-aside__nota">
               <span class="lang-es">¿Prefieres escribirnos directamente?</span><span class="lang-en">Prefer to email us directly?</span><br />
-              <a href="mailto:hola@305rutamiami.com" class="contacto-aside__email">hola@305rutamiami.com</a>
+              <a href="mailto:contacto@305rutamiami.com" class="contacto-aside__email">contacto@305rutamiami.com</a>
             </p>
 
           </aside><!-- /.contacto-aside -->
@@ -1131,6 +1131,9 @@
           <div class="contacto-form-col fade-up" style="transition-delay:0.2s">
 
             <form id="formEmpresas" class="form-moderno" novalidate aria-label="Formulario de contacto para anunciantes">
+
+              <!-- Anti-spam honeypot (Formspree): oculto, no debe completarse -->
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
 
               <!-- Sección 1: Tu información -->
               <div class="fm-seccion">
@@ -1216,8 +1219,15 @@
             <!-- Estado de éxito (oculto hasta envío) -->
             <div id="formEmpresasExito" class="form-exito" style="display:none" role="status">
               <div class="form-exito__check" aria-hidden="true">✓</div>
-              <h3 class="form-exito__titulo"><span class="lang-es">¡Mensaje enviado!</span><span class="lang-en">Message sent!</span></h3>
-              <p class="form-exito__texto"><span class="lang-es">Nos pondremos en contacto contigo en menos de 24 horas. Revisa tu email — también te mandamos una confirmación.</span><span class="lang-en">We'll be in touch within 24 hours. Check your email — we also sent a confirmation.</span></p>
+              <h3 class="form-exito__titulo"><span class="lang-es">¡Gracias!</span><span class="lang-en">Thank you!</span></h3>
+              <p class="form-exito__texto"><span class="lang-es">Recibí tu información y te contactaré pronto al correo que dejaste.</span><span class="lang-en">I got your info and I'll reach out soon to the email you provided.</span></p>
+            </div>
+
+            <!-- Estado de error (oculto hasta fallo de envío) -->
+            <div id="formEmpresasError" class="form-exito" style="display:none" role="alert">
+              <div class="form-exito__check" aria-hidden="true" style="background:var(--coral)">!</div>
+              <h3 class="form-exito__titulo"><span class="lang-es">No se pudo enviar</span><span class="lang-en">Couldn't send</span></h3>
+              <p class="form-exito__texto"><span class="lang-es">Escríbeme directo a <a href="mailto:contacto@305rutamiami.com">contacto@305rutamiami.com</a> o inténtalo de nuevo.</span><span class="lang-en">Email me directly at <a href="mailto:contacto@305rutamiami.com">contacto@305rutamiami.com</a> or try again.</span></p>
             </div>
 
           </div><!-- /.contacto-form-col -->
