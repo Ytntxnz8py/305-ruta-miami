@@ -2335,8 +2335,8 @@ function initNewsletter() {
      (El antiguo localStorage.em_newsletter ya no aplica: el dato vive en Brevo.) */
   try {
     if (sessionStorage.getItem('em_newsletter_ok')) {
-      form.classList.add('quiz-paso--oculto');
-      exito.classList.remove('quiz-paso--oculto');
+      form.style.display = 'none';
+      exito.removeAttribute('style');
       return;
     }
   } catch (eGate) { /* sin sessionStorage, seguimos normal */ }
@@ -2358,11 +2358,11 @@ function initNewsletter() {
 
     var btn = form.querySelector('button[type="submit"]');
     if (btn) btn.disabled = true;
-    if (error) error.classList.add('quiz-paso--oculto');
+    if (error) error.style.display = 'none';
 
     function mostrarError() {
       if (btn) btn.disabled = false;
-      if (error) error.classList.remove('quiz-paso--oculto');
+      if (error) error.removeAttribute('style');
     }
 
     /* Idioma activo para el campo locale de Brevo */
@@ -2384,8 +2384,8 @@ function initNewsletter() {
       if (!res.ok) { mostrarError(); return; }
 
       /* Éxito real: transición + GA4 + gate de sesión */
-      form.classList.add('quiz-paso--oculto');
-      exito.classList.remove('quiz-paso--oculto');
+      form.style.display = 'none';
+      exito.removeAttribute('style');
       try { sessionStorage.setItem('em_newsletter_ok', '1'); } catch (eSes) {}
 
       if (typeof trackEvent === 'function') {

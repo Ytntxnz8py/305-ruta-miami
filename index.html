@@ -678,16 +678,17 @@
                 <span class="lang-es">Sin spam. Cancela cuando quieras.</span>
                 <span class="lang-en">No spam. Cancel anytime.</span>
               </p>
-              <!-- Error de envío (oculto hasta fallo; reusa el estilo del disclaimer) -->
-              <p class="newsletter-disclaimer quiz-paso--oculto" id="newsletterError" role="alert">
+              <!-- Error de envío (display:none inline — .quiz-paso--oculto pierde contra
+                   .newsletter-exito{display:flex} por orden de cascada; patrón de anunciantes) -->
+              <p class="newsletter-disclaimer" id="newsletterError" role="alert" style="display:none">
                 <span class="lang-es">No pudimos procesar tu suscripción. Inténtalo de nuevo.</span>
                 <span class="lang-en">We couldn't process your subscription. Please try again.</span>
               </p>
             </form>
 
-            <!-- Estado de éxito (oculto por JS; doble opt-in: pide confirmar por correo) -->
-            <div class="newsletter-exito quiz-paso--oculto" id="newsletterExito"
-                 aria-live="polite">
+            <!-- Estado de éxito (nace oculto con display:none inline; doble opt-in) -->
+            <div class="newsletter-exito" id="newsletterExito"
+                 aria-live="polite" style="display:none">
               <span class="newsletter-exito__ico" aria-hidden="true">📬</span>
               <strong class="newsletter-exito__titulo">
                 <span class="lang-es">¡Casi listo!</span>
