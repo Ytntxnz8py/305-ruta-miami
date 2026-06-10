@@ -98,6 +98,15 @@
       document.documentElement.classList.add('lang-' + lang);
     })();
   </script>
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7HMBMBQNQZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7HMBMBQNQZ');
+  </script>
+
 </head>
 <body>
 
@@ -406,22 +415,12 @@
           </p>
         </div>
 
-        <!-- Toggle mensual/anual (ahorra 20%) -->
+        <!-- Banda de precio de fundador (sustituye al antiguo toggle mensual/anual) -->
         <div class="precios-toggle fade-up">
-          <button class="precios-toggle__btn precios-toggle__btn--activo"
-                  id="btnMensual" onclick="togglePrecio('mensual')">
-            <span class="lang-es">Mensual</span>
-            <span class="lang-en">Monthly</span>
-          </button>
-          <button class="precios-toggle__btn"
-                  id="btnAnual" onclick="togglePrecio('anual')">
-            <span class="lang-es">Anual</span>
-            <span class="lang-en">Annual</span>
-            <span class="precios-toggle__badge">
-              <span class="lang-es">Ahorra 20%</span>
-              <span class="lang-en">Save 20%</span>
-            </span>
-          </button>
+          <span class="precios-toggle__btn precios-toggle__btn--activo">
+            <span class="lang-es">🔒 Precio de fundador — congela esta tarifa de por vida</span>
+            <span class="lang-en">🔒 Founder pricing — lock this rate for life</span>
+          </span>
         </div>
 
         <!-- Grid 3 cards -->
@@ -434,12 +433,12 @@
             <div class="precio-card__header">
               <span class="precio-card__nombre"><span class="lang-es">Esencial</span><span class="lang-en">Essential</span></span>
               <div class="precio-card__precio">
-                <span class="precio-card__monto" data-mensual="149" data-anual="119">$149</span>
+                <span class="precio-card__monto">$99</span>
                 <span class="precio-card__periodo"><span class="lang-es">/mes</span><span class="lang-en">/mo</span></span>
               </div>
               <p class="precio-card__tagline">
-                <span class="lang-es">Todo lo que necesitas para entrar al mapa</span>
-                <span class="lang-en">Everything you need to get on the map</span>
+                <span class="lang-es">Tu negocio en el directorio bilingüe, con ficha y página propia.</span>
+                <span class="lang-en">Your business in the bilingual directory, with its own card and page.</span>
               </p>
             </div>
 
@@ -447,17 +446,15 @@
 
             <ul class="precio-card__lista">
               <li><span class="precio-check precio-check--turquesa" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Card en el grid principal de destinos</span><span class="lang-en">Card in the main destinations grid</span></li>
+                  <span class="lang-es">Ficha bilingüe (ES/EN) en el directorio y página de detalle propia</span><span class="lang-en">Bilingual (ES/EN) card in the directory and its own detail page</span></li>
               <li><span class="precio-check precio-check--turquesa" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Galería de 2 fotos</span><span class="lang-en">Gallery with 2 photos</span></li>
+                  <span class="lang-es">2 a 3 fotos y descripción corta</span><span class="lang-en">2–3 photos and a short description</span></li>
               <li><span class="precio-check precio-check--turquesa" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Descripción corta en español e inglés</span><span class="lang-en">Short description in Spanish and English</span></li>
+                  <span class="lang-es">Datos prácticos: horarios, precio, teléfono y enlace a tu web</span><span class="lang-en">Practical info: hours, pricing, phone and a link to your website</span></li>
               <li><span class="precio-check precio-check--turquesa" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Precio y horarios visibles</span><span class="lang-en">Pricing and hours visible</span></li>
+                  <span class="lang-es">Botones a Google Maps y a tu sitio web</span><span class="lang-en">Buttons to Google Maps and your website</span></li>
               <li><span class="precio-check precio-check--turquesa" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Botón Google Maps</span><span class="lang-en">Google Maps button</span></li>
-              <li><span class="precio-check precio-check--turquesa" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Reporte de clics mensual básico</span><span class="lang-en">Basic monthly click report</span></li>
+                  <span class="lang-es">Reporte mensual simple de visitas</span><span class="lang-en">Simple monthly visits report</span></li>
             </ul>
 
             <div class="precio-card__cta">
@@ -485,12 +482,12 @@
             <div class="precio-card__header">
               <span class="precio-card__nombre">Profesional</span>
               <div class="precio-card__precio">
-                <span class="precio-card__monto" data-mensual="249" data-anual="199">$249</span>
+                <span class="precio-card__monto">$149</span>
                 <span class="precio-card__periodo"><span class="lang-es">/mes</span><span class="lang-en">/mo</span></span>
               </div>
               <p class="precio-card__tagline">
-                <span class="lang-es">Te destacas. Te eligen sobre la competencia.</span>
-                <span class="lang-en">Stand out. Get chosen over the competition.</span>
+                <span class="lang-es">Más visibilidad: galería, WhatsApp, destacado y tu Perfil de Google optimizado.</span>
+                <span class="lang-en">More visibility: gallery, WhatsApp, featured placement and your optimized Google Profile.</span>
               </p>
             </div>
 
@@ -498,25 +495,19 @@
 
             <ul class="precio-card__lista">
               <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Todo lo de Esencial, más:</span><span class="lang-en">Everything in Essential, plus:</span></li>
+                  <span class="lang-es">Todo lo del Esencial</span><span class="lang-en">Everything in Essential</span></li>
               <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Galería ampliada a 4 fotos</span><span class="lang-en">Expanded gallery — 4 photos</span></li>
+                  <span class="lang-es">Galería de 4 fotos y descripción larga ES/EN</span><span class="lang-en">4-photo gallery and long ES/EN description</span></li>
               <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Descripción completa larga ES + EN</span><span class="lang-en">Full long description ES + EN</span></li>
+                  <span class="lang-es">Botón de WhatsApp directo</span><span class="lang-en">Direct WhatsApp button</span></li>
               <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Botones Google Maps + Apple Maps + sitio web</span><span class="lang-en">Google Maps + Apple Maps + website buttons</span></li>
+                  <span class="lang-es">Insignia "Destacado" y posición preferente</span><span class="lang-en">"Featured" badge and priority placement</span></li>
               <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Botón WhatsApp directo en tu página</span><span class="lang-en">Direct WhatsApp button on your page</span></li>
+                  <span class="lang-es">Configuración y optimización inicial de tu Perfil de Google Business (una vez)</span><span class="lang-en">Initial setup and optimization of your Google Business Profile (one time)</span></li>
               <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Badge "Destacado" en tu card del directorio</span><span class="lang-en">"Featured" badge on your directory card</span></li>
+                  <span class="lang-es">Sello "Recomendado por 305 Ruta Miami" y código QR a tu ficha</span><span class="lang-en">"Recommended by 305 Ruta Miami" seal and a QR code to your card</span></li>
               <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Posición preferencial en el grid</span><span class="lang-en">Priority position in the grid</span></li>
-              <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Reseñas de visitantes en tu página</span><span class="lang-en">Visitor reviews on your page</span></li>
-              <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Mención en newsletter mensual</span><span class="lang-en">Monthly newsletter mention</span></li>
-              <li><span class="precio-check precio-check--mostaza" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Reporte detallado — clics por botón</span><span class="lang-en">Detailed report — clicks per button</span></li>
+                  <span class="lang-es">Reporte mensual detallado</span><span class="lang-en">Detailed monthly report</span></li>
             </ul>
 
             <div class="precio-card__cta">
@@ -544,12 +535,12 @@
             <div class="precio-card__header">
               <span class="precio-card__nombre">Élite</span>
               <div class="precio-card__precio">
-                <span class="precio-card__monto" data-mensual="399" data-anual="319">$399</span>
+                <span class="precio-card__monto">$249</span>
                 <span class="precio-card__periodo"><span class="lang-es">/mes</span><span class="lang-en">/mo</span></span>
               </div>
               <p class="precio-card__tagline">
-                <span class="lang-es">El referente de tu categoría en Miami.</span>
-                <span class="lang-en">The benchmark of your category in Miami.</span>
+                <span class="lang-es">Máxima exposición: top de tu categoría, portada, artículo en el blog y soporte prioritario.</span>
+                <span class="lang-en">Maximum exposure: top of your category, homepage presence, a blog article and priority support.</span>
               </p>
             </div>
 
@@ -557,21 +548,17 @@
 
             <ul class="precio-card__lista">
               <li><span class="precio-check precio-check--coral" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Todo lo de Profesional, más:</span><span class="lang-en">Everything in Professional, plus:</span></li>
+                  <span class="lang-es">Todo lo del Profesional</span><span class="lang-en">Everything in Professional</span></li>
               <li><span class="precio-check precio-check--coral" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Posición fija permanente — primeras 3 cards</span><span class="lang-en">Permanent fixed position — top 3 cards</span></li>
+                  <span class="lang-es">Posición fija en lo más alto de su categoría y presencia en portada</span><span class="lang-en">Fixed position at the top of your category and homepage presence</span></li>
               <li><span class="precio-check precio-check--coral" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Badge "Referente Miami" exclusivo en tu card</span><span class="lang-en">Exclusive "Miami Referent" badge on your card</span></li>
+                  <span class="lang-es">Insignia exclusiva "Referente"</span><span class="lang-en">Exclusive "Referente" badge</span></li>
               <li><span class="precio-check precio-check--coral" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Página extendida con sección "Nuestra historia"</span><span class="lang-en">Extended page with "Our story" section</span></li>
+                  <span class="lang-es">Un artículo sobre tu negocio en el blog (una vez)</span><span class="lang-en">An article about your business on the blog (one time)</span></li>
               <li><span class="precio-check precio-check--coral" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Artículo editorial sobre tu negocio en el blog</span><span class="lang-en">Editorial article about your business on the blog</span></li>
+                  <span class="lang-es">Sección extendida "Nuestra historia" (una vez)</span><span class="lang-en">Extended "Our story" section (one time)</span></li>
               <li><span class="precio-check precio-check--coral" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Analítica avanzada — origen, comportamiento, conversiones</span><span class="lang-en">Advanced analytics — source, behavior, conversions</span></li>
-              <li><span class="precio-check precio-check--coral" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Gerente de cuenta dedicado</span><span class="lang-en">Dedicated account manager</span></li>
-              <li><span class="precio-check precio-check--coral" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-                  <span class="lang-es">Llamada mensual de 30 min — revisión de resultados</span><span class="lang-en">Monthly 30-min call — results review</span></li>
+                  <span class="lang-es">Soporte prioritario por WhatsApp y correo</span><span class="lang-en">Priority support via WhatsApp and email</span></li>
             </ul>
 
             <div class="precio-card__cta">
@@ -596,11 +583,6 @@
         <p class="precios-nota fade-up">
           <span class="lang-es">Precios en USD. Sin contrato de permanencia. Cancela en cualquier momento con 7 días de anticipación.</span>
           <span class="lang-en">Prices in USD. No long-term contract. Cancel anytime with 7 days' notice.</span>
-          <br>
-          <span class="precios-nota__anual" id="notaAnual" style="display:none">
-            <span class="lang-es">* Precio anual facturado en un solo pago: Esencial $1,428/año · Profesional $2,388/año · Élite $3,828/año</span>
-            <span class="lang-en">* Annual price billed as a single payment: Essential $1,428/yr · Professional $2,388/yr · Élite $3,828/yr</span>
-          </span>
         </p>
 
       </div>
@@ -1210,8 +1192,8 @@
               </div>
 
               <p class="form-legal">
-                <span class="lang-es">Al enviar, tu información se guarda localmente para que nuestro equipo pueda contactarte. No compartimos tus datos con terceros.</span>
-                <span class="lang-en">When you submit, your information is saved locally so our team can contact you. We don't share your data with third parties.</span>
+                <span class="lang-es">Al enviar, recibimos tu información por correo para poder contactarte. No compartimos tus datos con terceros.</span>
+                <span class="lang-en">When you submit, we receive your information by email so we can contact you. We do not share your data with third parties.</span>
               </p>
 
             </form>
@@ -1328,20 +1310,6 @@
         </a>
       </nav>
 
-      <div class="cf-socials cf-reveal">
-        <a href="#" class="cf-social cf-magnetic" aria-label="Instagram">
-          <span aria-hidden="true">📸</span>
-          <span class="cf-social__label">Instagram</span>
-        </a>
-        <a href="#" class="cf-social cf-magnetic" aria-label="TikTok">
-          <span aria-hidden="true">🎵</span>
-          <span class="cf-social__label">TikTok</span>
-        </a>
-        <a href="#" class="cf-social cf-magnetic" aria-label="Facebook">
-          <span aria-hidden="true">👍</span>
-          <span class="cf-social__label">Facebook</span>
-        </a>
-      </div>
 
     </div>
 

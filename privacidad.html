@@ -59,6 +59,15 @@
   <script>
     document.documentElement.classList.add('lang-' + (localStorage.getItem('em_idioma') || 'es'));
   </script>
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7HMBMBQNQZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7HMBMBQNQZ');
+  </script>
+
 </head>
 <body>
 
@@ -155,8 +164,8 @@
 
     <h2><span class="lang-es">7. Servicios de terceros</span><span class="lang-en">7. Third-party services</span></h2>
     <p>
-      <span class="lang-es">El sitio puede usar mapas embebidos de Google Maps y vídeos de YouTube. Estos proveedores tienen sus propias políticas de privacidad, que te recomendamos revisar.</span>
-      <span class="lang-en">The site may use embedded Google Maps and YouTube videos. These providers have their own privacy policies, which we recommend reviewing.</span>
+      <span class="lang-es">El sitio puede usar mapas embebidos de Google Maps y vídeos de YouTube. Además, los formularios de contacto se procesan a través de Formspree, un procesador externo que nos reenvía tu mensaje por correo. Estos proveedores tienen sus propias políticas de privacidad, que te recomendamos revisar.</span>
+      <span class="lang-en">The site may use embedded Google Maps and YouTube videos. In addition, contact forms are processed through Formspree, an external processor that forwards your message to us by email. These providers have their own privacy policies, which we recommend reviewing.</span>
     </p>
 
     <h2><span class="lang-es">8. Cambios en esta política</span><span class="lang-en">8. Changes to this policy</span></h2>
@@ -262,20 +271,6 @@
         </a>
       </nav>
 
-      <div class="cf-socials cf-reveal">
-        <a href="#" class="cf-social cf-magnetic" aria-label="Instagram">
-          <span aria-hidden="true">📸</span>
-          <span class="cf-social__label">Instagram</span>
-        </a>
-        <a href="#" class="cf-social cf-magnetic" aria-label="TikTok">
-          <span aria-hidden="true">🎵</span>
-          <span class="cf-social__label">TikTok</span>
-        </a>
-        <a href="#" class="cf-social cf-magnetic" aria-label="Facebook">
-          <span aria-hidden="true">👍</span>
-          <span class="cf-social__label">Facebook</span>
-        </a>
-      </div>
 
     </div>
 

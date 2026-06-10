@@ -1,7 +1,7 @@
 {
-  "name": "explora-miami",
+  "name": "305-ruta-miami",
   "version": "1.0.0",
-  "description": "Directorio de experiencias outdoor en Miami — sitio estático HTML/CSS/JS",
+  "description": "Directorio de pesca y experiencias en Miami — sitio estático HTML/CSS/JS",
   "scripts": {
     "start": "node .claude/server.js",
     "dev": "node .claude/server.js"
