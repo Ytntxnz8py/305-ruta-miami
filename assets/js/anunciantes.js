@@ -435,72 +435,8 @@
     window.replayHeroShutter = play;
   }
 
-  /* ===== PRICING TOGGLE — mensual / anual con número animado ===== */
-  function initPricingToggle() {
-    var monthBtn = document.getElementById('pricingMonthly');
-    var yearBtn  = document.getElementById('pricingYearly');
-    var slider   = document.getElementById('pricingSlider');
-    if (!monthBtn || !yearBtn || !slider) return;
-
-    /* Mueve el slider blanco bajo el botón activo */
-    function positionSlider(btn) {
-      slider.style.width     = btn.offsetWidth  + 'px';
-      /* btn.offsetLeft ya incluye el padding del toggle; el slider empieza en left:4px, ajustamos */
-      slider.style.transform = 'translateX(' + (btn.offsetLeft - 4) + 'px)';
-    }
-
-    /* Anima el dígito con ease-out cubic (mismo patrón que initCounters) */
-    function animateNum(el, from, to) {
-      var dur   = 420;
-      var start = null;
-      function tick(now) {
-        if (!start) start = now;
-        var t     = Math.min((now - start) / dur, 1);
-        var eased = 1 - Math.pow(1 - t, 3);
-        el.textContent = Math.round(from + (to - from) * eased);
-        if (t < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-
-    /* Actualiza todos los precios y sufijos */
-    function updatePrices(isYearly) {
-      document.querySelectorAll('.precio-valor[data-monthly]').forEach(function (el) {
-        var from = parseInt(el.textContent, 10);
-        var to   = parseInt(isYearly ? el.dataset.yearly : el.dataset.monthly, 10);
-        if (from === to) return;
-        /* Fade out → actualiza → fade in con animación */
-        el.classList.add('is-switching');
-        var elRef = el;
-        setTimeout(function () {
-          elRef.classList.remove('is-switching');
-          animateNum(elRef, from, to);
-        }, 130);
-      });
-
-      document.querySelectorAll('.precio-periodo[data-monthly]').forEach(function (el) {
-        el.textContent = isYearly ? el.dataset.yearly : el.dataset.monthly;
-      });
-
-      var nota = document.getElementById('precioAnualNota');
-      if (nota) nota.style.display = isYearly ? 'block' : 'none';
-    }
-
-    function activateBtn(active, inactive, isYearly) {
-      active.classList.add('is-active');
-      inactive.classList.remove('is-active');
-      active.setAttribute('aria-pressed', 'true');
-      inactive.setAttribute('aria-pressed', 'false');
-      positionSlider(active);
-      updatePrices(isYearly);
-    }
-
-    monthBtn.addEventListener('click', function () { activateBtn(monthBtn, yearBtn, false); });
-    yearBtn.addEventListener('click',  function () { activateBtn(yearBtn, monthBtn, true);  });
-
-    /* Posición inicial del slider (debe pintarse el layout primero) */
-    requestAnimationFrame(function () { positionSlider(monthBtn); });
-  }
+  /* (initPricingToggle eliminado en Fase 2 — JS muerto: usaba #pricingMonthly/
+     #pricingYearly/#pricingSlider, que nunca existieron en el HTML) */
 
   /* ===== SMOOTH SCROLL para anclas internas ===== */
   function initSmoothScroll() {
@@ -752,7 +688,6 @@
     initCardTilts();
     initFolders();
     initParaQuien();
-    initPricingToggle();
     initPreciosCarousel();
     initAccordion();
     initFormContacto();
