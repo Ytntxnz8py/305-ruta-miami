@@ -522,49 +522,8 @@
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  /* ===== TOGGLE PRECIO mensual / anual (3 tiers) ===== */
-  /* Llamado desde onclick="togglePrecio('mensual'|'anual')" */
-  window.togglePrecio = function (modo) {
-    var esAnual = (modo === 'anual');
-
-    /* Botones del toggle */
-    var btnM = document.getElementById('btnMensual');
-    var btnA = document.getElementById('btnAnual');
-    if (btnM) btnM.classList.toggle('precios-toggle__btn--activo', !esAnual);
-    if (btnA) btnA.classList.toggle('precios-toggle__btn--activo',  esAnual);
-
-    /* Nota de precios anuales */
-    var nota = document.getElementById('notaAnual');
-    if (nota) nota.style.display = esAnual ? 'inline' : 'none';
-
-    /* Anima cada precio con ease-out cubic */
-    document.querySelectorAll('.precio-card__monto[data-mensual]').forEach(function (el) {
-      var from   = parseInt(el.textContent.replace(/[^0-9]/g, ''), 10) || 0;
-      var to     = parseInt(esAnual ? el.dataset.anual : el.dataset.mensual, 10) || 0;
-      if (from === to) return;
-
-      /* Fade-out → cuenta → fade-in */
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(6px)';
-      var elRef = el;
-      setTimeout(function () {
-        elRef.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
-        elRef.style.opacity = '1';
-        elRef.style.transform = 'translateY(0)';
-
-        var dur   = 380;
-        var start = null;
-        function tick(now) {
-          if (!start) start = now;
-          var t     = Math.min((now - start) / dur, 1);
-          var eased = 1 - Math.pow(1 - t, 3);
-          elRef.textContent = '$' + Math.round(from + (to - from) * eased);
-          if (t < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      }, 120);
-    });
-  };
+  /* (togglePrecio eliminado en Fase 2 — el toggle mensual/anual se retiró en Fase 1;
+     la función quedó sin invocarse desde el HTML) */
 
   /* ===== ANIMATED FOLDER STEPS ===== */
   /*
