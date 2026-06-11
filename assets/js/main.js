@@ -2319,20 +2319,27 @@ function initQuizAventurero() {
 }
 
 /* ============================================================
-   NEWSLETTER — validación y guardado en localStorage
+   NEWSLETTER — envío real a Brevo (doble opt-in)
    ============================================================ */
 function initNewsletter() {
   var form    = document.getElementById('newsletterForm');
   var input   = document.getElementById('newsletterEmail');
   var exito   = document.getElementById('newsletterExito');
+  var error   = document.getElementById('newsletterError');
   if (!form || !input || !exito) return;
 
-  /* Si ya se suscribió antes, mostrar éxito directamente */
-  if (localStorage.getItem('em_newsletter')) {
-    form.classList.add('quiz-paso--oculto');
-    exito.classList.remove('quiz-paso--oculto');
-    return;
-  }
+  /* Endpoint del formulario de Brevo (isAjax=1 → respuesta JSON, sin redirección) */
+  var BREVO_URL = 'https://1f0804b8.sibforms.com/serve/MUIFAMHsKBp6b48jTywAuOIwrJgarTbPV16MVnZcJWwwwPkA-en12k2mR87l-Y505Fhs-1-ayrehSPWjk-IaR2kUYvAFpSr1uykFRpCxt6KWWXQOkZBhtAA81R5c17s4LvVJMZhHyWwtgTGYRCMqC2k59zIJ4xuOS2xNbuG4CDF_-CIUNYdYO2qYVqQfcvxWNWNNer21X7OwWygDzg==?isAjax=1';
+
+  /* Gate solo de sesión: no re-mostrar el form tras suscribirse en esta visita.
+     (El antiguo localStorage.em_newsletter ya no aplica: el dato vive en Brevo.) */
+  try {
+    if (sessionStorage.getItem('em_newsletter_ok')) {
+      form.style.display = 'none';
+      exito.removeAttribute('style');
+      return;
+    }
+  } catch (eGate) { /* sin sessionStorage, seguimos normal */ }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -2349,21 +2356,47 @@ function initNewsletter() {
       return;
     }
 
-    /* Guardar en localStorage (no se envía a ningún servidor) */
-    localStorage.setItem('em_newsletter', email);
-    localStorage.setItem('em_newsletter_fecha', new Date().toISOString());
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn) btn.disabled = true;
+    if (error) error.style.display = 'none';
 
-    /* Transición a estado de éxito */
-    form.classList.add('quiz-paso--oculto');
-    exito.classList.remove('quiz-paso--oculto');
-
-    /* Evento GA4 */
-    if (typeof trackEvent === 'function') {
-      trackEvent('newsletter_signup', {
-        event_category: 'Newsletter',
-        event_label: 'index'
-      });
+    function mostrarError() {
+      if (btn) btn.disabled = false;
+      if (error) error.removeAttribute('style');
     }
+
+    /* Idioma activo para el campo locale de Brevo */
+    var lang = document.documentElement.classList.contains('lang-en') ? 'en' : 'es';
+
+    /* Envío real: EMAIL + honeypot vacío + locale, en form-urlencoded */
+    var cuerpo = 'EMAIL=' + encodeURIComponent(email) +
+                 '&email_address_check=' +
+                 '&locale=' + lang;
+
+    fetch(BREVO_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+      },
+      body: cuerpo
+    }).then(function (res) {
+      if (!res.ok) { mostrarError(); return; }
+
+      /* Éxito real: transición + GA4 + gate de sesión */
+      form.style.display = 'none';
+      exito.removeAttribute('style');
+      try { sessionStorage.setItem('em_newsletter_ok', '1'); } catch (eSes) {}
+
+      if (typeof trackEvent === 'function') {
+        trackEvent('newsletter_signup', {
+          event_category: 'Newsletter',
+          event_label: 'index'
+        });
+      }
+    }).catch(function () {
+      mostrarError();
+    });
   });
 }
 

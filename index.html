@@ -678,19 +678,25 @@
                 <span class="lang-es">Sin spam. Cancela cuando quieras.</span>
                 <span class="lang-en">No spam. Cancel anytime.</span>
               </p>
+              <!-- Error de envío (display:none inline — .quiz-paso--oculto pierde contra
+                   .newsletter-exito{display:flex} por orden de cascada; patrón de anunciantes) -->
+              <p class="newsletter-disclaimer" id="newsletterError" role="alert" style="display:none">
+                <span class="lang-es">No pudimos procesar tu suscripción. Inténtalo de nuevo.</span>
+                <span class="lang-en">We couldn't process your subscription. Please try again.</span>
+              </p>
             </form>
 
-            <!-- Estado de éxito (oculto por JS) -->
-            <div class="newsletter-exito quiz-paso--oculto" id="newsletterExito"
-                 aria-live="polite">
-              <span class="newsletter-exito__ico" aria-hidden="true">🎉</span>
+            <!-- Estado de éxito (nace oculto con display:none inline; doble opt-in) -->
+            <div class="newsletter-exito" id="newsletterExito"
+                 aria-live="polite" style="display:none">
+              <span class="newsletter-exito__ico" aria-hidden="true">📬</span>
               <strong class="newsletter-exito__titulo">
-                <span class="lang-es">¡Ya eres parte del clan!</span>
-                <span class="lang-en">You're part of the crew!</span>
+                <span class="lang-es">¡Casi listo!</span>
+                <span class="lang-en">Almost done!</span>
               </strong>
               <p class="newsletter-exito__sub">
-                <span class="lang-es">Pronto recibirás las mejores aventuras de Miami.</span>
-                <span class="lang-en">You'll soon receive the best Miami adventures.</span>
+                <span class="lang-es">Revisa tu correo y confirma tu suscripción.</span>
+                <span class="lang-en">Check your email to confirm your subscription.</span>
               </p>
             </div>
 
