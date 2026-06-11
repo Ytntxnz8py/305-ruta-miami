@@ -184,6 +184,35 @@
   border-radius: 999px;
 }
 
+/* ===== 5. Momento de profundidad (dark ocean) — ÚNICA banda oscura ===== */
+.pesca-profundidad {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(165deg, var(--ocean-ini) 0%, var(--ocean-mid) 55%, var(--ocean-fin) 100%);
+  padding: 4rem 1.5rem;
+}
+/* Textura de agua: 15% opacidad, detrás de todo (z-index 0), nunca sobre el texto */
+.pesca-profundidad__textura {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+  pointer-events: none;
+}
+.pesca-profundidad__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+/* Cabecera clara sobre fondo oscuro (contraste AA verificado) */
+.pesca-profundidad .pesca-section__eyebrow { color: #8fd6e6; }
+.pesca-profundidad .pesca-section__titulo  { color: #ffffff; }
+.pesca-profundidad .pesca-section__sub     { color: rgba(255,255,255,0.82); }
+
 /* ===== Movimiento reducido ===== */
 @media (prefers-reduced-motion: reduce) {
   .pesca-cal__item,
