@@ -49,6 +49,9 @@ npm-debug.log*
 # Archivos archivados localmente
 _archivo/
 
+# HANDOFF viejo (superado por CLAUDE.md; contiene ADMIN_PASS — fuera del repo)
+HANDOFF.md
+
 # Herramientas de desarrollo local (no van a GitHub Pages)
 .claude/
 *.bat
