@@ -200,6 +200,12 @@ html { overflow-x: hidden; }
   box-shadow: 0 10px 22px rgba(255, 107, 107, 0.38);
 }
 
+/* "Para empresas" como enlace discreto (patrón Airbnb), no botón.
+   Color = valor de --texto-medio (#4a6070); contraste AA sobre fondo claro. */
+.em-nav__link--muted { color: #4a6070; font-weight: 500; }
+.em-nav__link--muted:hover { color: #00BCD4; background: rgba(0, 188, 212, 0.10); }
+.em-drawer__link--muted { color: #4a6070; }
+
 /* Botón idioma */
 .em-nav__lang {
   display: inline-flex;
