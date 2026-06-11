@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Pesca en Miami — Especies, temporadas y tipos de salida | 305 Ruta Miami</title>
+  <meta name="description"
+    content="Guía honesta de pesca en Miami: calendario de especies y temporadas pico, tipos de salida (bahía, arrecife, offshore), licencias y reglas oficiales de FWC." />
+
+  <link rel="canonical" href="https://305rutamiami.com/pesca.html" />
+
+  <!-- Open Graph (og:image pendiente de foto branded) -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://305rutamiami.com/pesca.html" />
+  <meta property="og:title"       content="Pesca en Miami — Guía de especies, temporadas y salidas" />
+  <meta property="og:description" content="Calendario de especies, tipos de salida, licencias y reglas oficiales de FWC. Datos reales, sin promesas." />
+  <meta property="og:locale"      content="es_US" />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Hojas de estilo (reusa navbar/destino/metal-button/cta-card/footer; pesca.css es lo nuevo) -->
+  <link rel="stylesheet" href="assets/css/navbar.css" />
+  <link rel="stylesheet" href="assets/css/destino.css" />
+  <link rel="stylesheet" href="assets/css/metal-button.css" />
+  <link rel="stylesheet" href="assets/css/liquid-btn.css" />
+  <link rel="stylesheet" href="assets/css/cta-card.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
+  <link rel="stylesheet" href="assets/css/pesca.css" />
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7HMBMBQNQZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7HMBMBQNQZ');
+  </script>
+
+  <!-- Aplica idioma antes del primer render (evita flash) -->
+  <script>
+    document.documentElement.classList.add('lang-' + (localStorage.getItem('em_idioma') || 'es'));
+  </script>
+</head>
+<body>
+
+  <!-- Sprite de icono (set consistente: un solo icono de pez para todo el calendario) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="ico-pez" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12c-2.2 2.6-5.6 4.2-9 4.2S5.2 14.6 3 12c2.2-2.6 5.6-4.2 9-4.2S18.8 9.4 21 12z" />
+      <path d="M3 12 0.8 9.6M3 12 0.8 14.4" />
+      <circle cx="17" cy="11" r="0.7" fill="currentColor" stroke="none" />
+    </symbol>
+  </svg>
+
+  <!-- ===== NAVBAR UNIVERSAL ===== -->
+  <nav class="em-nav" aria-label="Navegación principal">
+    <a class="em-nav__logo" href="index.html" aria-label="305 Ruta Miami — Inicio">
+      <span class="em-nav__logo-e">305Ruta</span><span class="em-nav__logo-m">Miami</span>
+    </a>
+    <ul class="em-nav__links">
+      <li><a class="em-nav__link" href="index.html"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a></li>
+      <li><a class="em-nav__link" href="index.html#destinos"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a></li>
+      <li><a class="em-nav__link" href="blog.html">Blog</a></li>
+      <li><span class="em-nav__sep" aria-hidden="true"></span></li>
+      <li><a class="em-nav__link" href="privacidad.html"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a></li>
+      <li><a class="em-nav__link" href="terminos.html"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a></li>
+    </ul>
+    <a class="em-nav__cta" href="anunciantes.html"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a>
+    <button class="em-nav__lang" type="button" aria-label="Cambiar idioma">EN</button>
+    <button class="em-nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="em-drawer__backdrop" aria-hidden="true"></div>
+  <aside class="em-drawer" aria-label="Menú móvil">
+    <a class="em-drawer__link" href="index.html"><span class="em-drawer__emoji">🏠</span><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+    <a class="em-drawer__link" href="index.html#destinos"><span class="em-drawer__emoji">📍</span><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a>
+    <a class="em-drawer__link" href="blog.html"><span class="em-drawer__emoji">📖</span>Blog</a>
+    <a class="em-drawer__link" href="privacidad.html"><span class="em-drawer__emoji">🔒</span><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
+    <a class="em-drawer__link" href="terminos.html"><span class="em-drawer__emoji">📋</span><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
+    <hr class="em-drawer__sep" />
+    <a class="em-drawer__cta" href="anunciantes.html"><span class="lang-es">Para empresas →</span><span class="lang-en">For businesses →</span></a>
+    <div class="em-drawer__lang">
+      <button class="em-drawer__lang-btn" type="button" data-lang="es">ES</button>
+      <button class="em-drawer__lang-btn" type="button" data-lang="en">EN</button>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ===== 1 · HERO CLARO ===== -->
+    <header class="pesca-hero" id="inicio">
+      <img class="pesca-hero__foto lang-es" src="assets/images/pesca/anita-denunzio-1TIiE-y30nE-unsplash.jpg" alt="Aguas turquesas y someras junto a una playa de arena blanca, con una lancha pequeña" fetchpriority="high" decoding="async" />
+      <img class="pesca-hero__foto lang-en" src="assets/images/pesca/anita-denunzio-1TIiE-y30nE-unsplash.jpg" alt="Shallow turquoise waters by a white-sand beach, with a small boat" fetchpriority="high" decoding="async" />
+      <div class="pesca-hero__velo" aria-hidden="true"></div>
+      <div class="pesca-hero__inner">
+        <nav class="destino-breadcrumb" aria-label="Ruta de navegación">
+          <a href="index.html"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></span>
+        </nav>
+        <h1 class="pesca-hero__titulo">
+          <span class="lang-es">Pesca en Miami</span>
+          <span class="lang-en">Fishing in Miami</span>
+        </h1>
+        <p class="pesca-hero__tagline">
+          <span class="lang-es">De los flats de la bahía al borde del Gulf Stream. Qué se pesca, cuándo, y cómo salir bien preparado: una guía honesta, hecha para planear.</span>
+          <span class="lang-en">From the bay flats to the edge of the Gulf Stream. What bites, when, and how to head out prepared: an honest guide, built for planning.</span>
+        </p>
+      </div>
+    </header>
+
+    <!-- ===== 2 · DISCLAIMER (reusa dato-card--tip) ===== -->
+    <section class="pesca-section pesca-section--alt" aria-label="Aviso sobre las temporadas">
+      <div class="pesca-wrap pesca-wrap--angosto">
+        <div class="dato-card dato-card--tip">
+          <span class="dato-card__icono" aria-hidden="true">⚠️</span>
+          <p class="dato-card__sub">
+            <span class="lang-es">Las temporadas de abajo son ventanas generales, no garantías. Los peces son organismos vivos: se mueven según el agua, la temperatura y el clima, y un gran día puede caer fuera de su mes «pico». Úsalo para planear, no como promesa. Para tallas, vedas y límites de captura vigentes —que sí cambian por ley— consulta siempre la fuente oficial antes de salir.</span>
+            <span class="lang-en">The seasons below are general windows, not guarantees. Fish are living creatures: they move with the water, temperature and weather, and a great day can fall outside its "peak" month. Use it to plan, not as a promise. For current sizes, closures and bag limits —which do change by law— always check the official source before heading out.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3 · CALENDARIO DE ESPECIES (icono+texto, set consistente) ===== -->
+    <section class="pesca-section" id="calendario" aria-label="Calendario de especies">
+      <div class="pesca-wrap">
+        <div class="pesca-section__head">
+          <span class="pesca-section__eyebrow"><span class="lang-es">Calendario</span><span class="lang-en">Calendar</span></span>
+          <h2 class="pesca-section__titulo"><span class="lang-es">Qué se pesca y cuándo</span><span class="lang-en">What bites and when</span></h2>
+          <p class="pesca-section__sub"><span class="lang-es">Ventanas pico aproximadas para Miami y Biscayne Bay. Léelo junto al aviso de arriba.</span><span class="lang-en">Approximate peak windows for Miami and Biscayne Bay. Read it alongside the note above.</span></p>
+        </div>
+
+        <div class="pesca-cal">
+
+          <!-- Pez vela -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre"><span class="lang-es">Pez vela</span><span class="lang-en">Sailfish</span></div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">Dic–mar</span><span class="lang-en">Dec–Mar</span></span>
+                <span class="pesca-cal__zona">Offshore</span>
+                <span class="pesca-cal__detalle"><span class="lang-es">Borde del Gulf Stream · pico variable según el año</span><span class="lang-en">Gulf Stream edge · peak varies by year</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dorado (mahi) -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre"><span class="lang-es">Dorado (mahi)</span><span class="lang-en">Mahi-mahi (dolphinfish)</span></div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">Abr–jul</span><span class="lang-en">Apr–Jul</span></span>
+                <span class="pesca-cal__zona">Offshore</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wahoo -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre">Wahoo</div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">Jun–sep</span><span class="lang-en">Jun–Sep</span></span>
+                <span class="pesca-cal__zona">Offshore</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Atún (blackfin) -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre"><span class="lang-es">Atún (blackfin)</span><span class="lang-en">Blackfin tuna</span></div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">Primavera–verano</span><span class="lang-en">Spring–summer</span></span>
+                <span class="pesca-cal__zona">Offshore</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pez espada -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre"><span class="lang-es">Pez espada</span><span class="lang-en">Swordfish</span></div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">Ago–nov</span><span class="lang-en">Aug–Nov</span></span>
+                <span class="pesca-cal__zona">Offshore</span>
+                <span class="pesca-cal__detalle"><span class="lang-es">Aguas profundas · nocturno · algo todo el año</span><span class="lang-en">Deep water · nocturnal · some year-round</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarpon -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre">Tarpon</div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">Mar–jun</span><span class="lang-en">Mar–Jun</span></span>
+                <span class="pesca-cal__zona pesca-cal__zona--bahia"><span class="lang-es">Bahía</span><span class="lang-en">Bay</span></span>
+                <span class="pesca-cal__detalle"><span class="lang-es">Puentes e inlets</span><span class="lang-en">Bridges and inlets</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Róbalo -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre"><span class="lang-es">Róbalo</span><span class="lang-en">Snook</span></div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">Primavera e inicio de otoño</span><span class="lang-en">Spring &amp; early fall</span></span>
+                <span class="pesca-cal__zona pesca-cal__zona--bahia"><span class="lang-es">Bahía</span><span class="lang-en">Bay</span></span>
+                <span class="pesca-cal__detalle"><span class="lang-es">Manglar, bocas de canal, inlets</span><span class="lang-en">Mangrove, canal mouths, inlets</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mero -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre"><span class="lang-es">Mero</span><span class="lang-en">Grouper</span></div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">May–dic</span><span class="lang-en">May–Dec</span></span>
+                <span class="pesca-cal__zona pesca-cal__zona--arrecife"><span class="lang-es">Arrecife</span><span class="lang-en">Reef</span></span>
+                <span class="pesca-cal__detalle"><span class="lang-es">Arrecife y pecios</span><span class="lang-en">Reef and wrecks</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pargo -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre"><span class="lang-es">Pargo</span><span class="lang-en">Snapper</span></div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">Verano</span><span class="lang-en">Summer</span></span>
+                <span class="pesca-cal__zona pesca-cal__zona--arrecife"><span class="lang-es">Arrecife</span><span class="lang-en">Reef</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tiburón / barracuda -->
+          <div class="pesca-cal__item">
+            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+            <div class="pesca-cal__cuerpo">
+              <div class="pesca-cal__nombre"><span class="lang-es">Tiburón / barracuda</span><span class="lang-en">Shark / barracuda</span></div>
+              <div class="pesca-cal__datos">
+                <span class="pesca-cal__ventana"><span class="lang-es">Todo el año</span><span class="lang-en">Year-round</span></span>
+                <span class="pesca-cal__zona pesca-cal__zona--variado"><span class="lang-es">Variado</span><span class="lang-en">Varied</span></span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.pesca-cal -->
+      </div>
+    </section>
+
+    <!-- ===== 4 · TIPOS DE SALIDA — aguas claras (reusa .rel-card) ===== -->
+    <section class="pesca-section pesca-section--alt" id="salidas" aria-label="Tipos de salida — aguas claras">
+      <div class="pesca-wrap">
+        <div class="pesca-section__head">
+          <span class="pesca-section__eyebrow"><span class="lang-es">Tipos de salida</span><span class="lang-en">Trip types</span></span>
+          <h2 class="pesca-section__titulo"><span class="lang-es">Aguas calmas y arrecife</span><span class="lang-en">Calm waters and reef</span></h2>
+          <p class="pesca-section__sub"><span class="lang-es">Las salidas más accesibles, cerca de la costa.</span><span class="lang-en">The most accessible trips, close to shore.</span></p>
+        </div>
+
+        <div class="pesca-salidas">
+
+          <!-- Bahía / flats -->
+          <article class="rel-card">
+            <div class="rel-card__img-wrap">
+              <img class="lang-es" src="assets/images/pesca/ibrahim-shabil-g93dqazELTU-unsplash.jpg" alt="Lancha de pesca sobre aguas someras y cristalinas" loading="lazy" width="600" height="450" />
+              <img class="lang-en" src="assets/images/pesca/ibrahim-shabil-g93dqazELTU-unsplash.jpg" alt="Fishing skiff over shallow, crystal-clear water" loading="lazy" width="600" height="450" />
+            </div>
+            <div class="rel-card__body">
+              <span class="rel-card__badge rel-card__badge--mar"><span class="lang-es">Bahía / flats</span><span class="lang-en">Bay / flats</span></span>
+              <h3 class="rel-card__titulo"><span class="lang-es">Aguas calmas, pesca ligera</span><span class="lang-en">Calm waters, light tackle</span></h3>
+              <p class="rel-card__meta"><span class="lang-es">Pesca ligera en aguas calmas. Buena para principiantes.</span><span class="lang-en">Light tackle in calm waters. Good for beginners.</span></p>
+              <ul class="pesca-salida__lista" aria-label="Especies típicas">
+                <li class="pesca-salida__tag">Tarpon</li>
+                <li class="pesca-salida__tag"><span class="lang-es">Róbalo</span><span class="lang-en">Snook</span></li>
+                <li class="pesca-salida__tag">Bonefish</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Arrecife -->
+          <article class="rel-card">
+            <div class="rel-card__img-wrap">
+              <img class="lang-es" src="assets/images/pesca/laura-labrie-da1p4CRYGW0-unsplash.jpg" alt="Bote anclado sobre un arrecife somero visible bajo el agua clara" loading="lazy" width="600" height="450" />
+              <img class="lang-en" src="assets/images/pesca/laura-labrie-da1p4CRYGW0-unsplash.jpg" alt="Boat anchored over a shallow reef visible beneath clear water" loading="lazy" width="600" height="450" />
+            </div>
+            <div class="rel-card__body">
+              <span class="rel-card__badge rel-card__badge--mar"><span class="lang-es">Arrecife</span><span class="lang-en">Reef</span></span>
+              <h3 class="rel-card__titulo"><span class="lang-es">Acción constante</span><span class="lang-en">Constant action</span></h3>
+              <p class="rel-card__meta"><span class="lang-es">Ideal para llevar pescado a casa.</span><span class="lang-en">Ideal to bring fish home.</span></p>
+              <ul class="pesca-salida__lista" aria-label="Especies típicas">
+                <li class="pesca-salida__tag"><span class="lang-es">Pargo</span><span class="lang-en">Snapper</span></li>
+                <li class="pesca-salida__tag"><span class="lang-es">Mero</span><span class="lang-en">Grouper</span></li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5 · MOMENTO DE PROFUNDIDAD (dark ocean) — offshore + nocturna ===== -->
+    <section class="pesca-profundidad" id="profundidad" aria-label="Aguas profundas — offshore y nocturna">
+      <!-- Textura de agua a 15% (decorativa, detrás; nunca sobre el texto) -->
+      <img class="pesca-profundidad__textura" src="assets/images/pesca/galih-jelih-34o1Vk7d9Go-unsplash.jpg" alt="" aria-hidden="true" loading="lazy" />
+      <div class="pesca-profundidad__inner">
+        <div class="pesca-section__head">
+          <span class="pesca-section__eyebrow"><span class="lang-es">Aguas profundas</span><span class="lang-en">Deep water</span></span>
+          <h2 class="pesca-section__titulo"><span class="lang-es">El Gulf Stream, a tiro de Miami</span><span class="lang-en">The Gulf Stream, within reach of Miami</span></h2>
+          <p class="pesca-section__sub"><span class="lang-es">Donde el agua se hace azul profundo: mar abierto de día y pesca nocturna.</span><span class="lang-en">Where the water turns deep blue: open ocean by day and night fishing.</span></p>
+        </div>
+
+        <div class="pesca-salidas">
+
+          <!-- Offshore / Gulf Stream -->
+          <article class="rel-card">
+            <div class="rel-card__img-wrap">
+              <img class="lang-es" src="assets/images/pesca/wahyu-praditya-PqXJCXzaDr4-unsplash.jpg" alt="Mar abierto azul profundo con botes de pesca a lo lejos" loading="lazy" width="600" height="450" />
+              <img class="lang-en" src="assets/images/pesca/wahyu-praditya-PqXJCXzaDr4-unsplash.jpg" alt="Deep blue open sea with fishing boats in the distance" loading="lazy" width="600" height="450" />
+            </div>
+            <div class="rel-card__body">
+              <span class="rel-card__badge rel-card__badge--mar"><span class="lang-es">Offshore / Gulf Stream</span><span class="lang-en">Offshore / Gulf Stream</span></span>
+              <h3 class="rel-card__titulo"><span class="lang-es">Mar abierto, agua azul</span><span class="lang-en">Open ocean, blue water</span></h3>
+              <p class="rel-card__meta"><span class="lang-es">Trolling y kite. El Gulf Stream pasa cerca de Miami, así que el agua profunda está a tiro.</span><span class="lang-en">Trolling and kite fishing. The Gulf Stream runs close to Miami, so deep water is within reach.</span></p>
+              <ul class="pesca-salida__lista" aria-label="Especies típicas">
+                <li class="pesca-salida__tag"><span class="lang-es">Vela</span><span class="lang-en">Sailfish</span></li>
+                <li class="pesca-salida__tag"><span class="lang-es">Dorado</span><span class="lang-en">Mahi</span></li>
+                <li class="pesca-salida__tag">Wahoo</li>
+                <li class="pesca-salida__tag"><span class="lang-es">Atún</span><span class="lang-en">Tuna</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Nocturna -->
+          <article class="rel-card">
+            <div class="rel-card__img-wrap">
+              <img class="lang-es" src="assets/images/pesca/quino-al-tFItY1tk4eQ-unsplash.jpg" alt="Bote de pesca de noche con sus luces encendidas sobre el agua oscura" loading="lazy" width="600" height="450" />
+              <img class="lang-en" src="assets/images/pesca/quino-al-tFItY1tk4eQ-unsplash.jpg" alt="Fishing boat at night with its lights on over dark water" loading="lazy" width="600" height="450" />
+            </div>
+            <div class="rel-card__body">
+              <span class="rel-card__badge rel-card__badge--mar"><span class="lang-es">Nocturna</span><span class="lang-en">Night</span></span>
+              <h3 class="rel-card__titulo"><span class="lang-es">Pesca de noche</span><span class="lang-en">Night fishing</span></h3>
+              <p class="rel-card__meta"><span class="lang-es">Pez espada en aguas profundas.</span><span class="lang-en">Swordfish in deep water.</span></p>
+              <ul class="pesca-salida__lista" aria-label="Especies típicas">
+                <li class="pesca-salida__tag"><span class="lang-es">Pez espada</span><span class="lang-en">Swordfish</span></li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6 · LICENCIAS (vuelve a base clara, reusa .dato-card) ===== -->
+    <section class="pesca-section" id="licencias" aria-label="Licencias de pesca">
+      <div class="pesca-wrap">
+        <div class="pesca-section__head">
+          <span class="pesca-section__eyebrow"><span class="lang-es">Licencias</span><span class="lang-en">Licenses</span></span>
+          <h2 class="pesca-section__titulo"><span class="lang-es">¿Necesitas licencia?</span><span class="lang-en">Do you need a license?</span></h2>
+          <p class="pesca-section__sub"><span class="lang-es">Depende de cómo salgas. Lo esencial, con los enlaces oficiales.</span><span class="lang-en">It depends on how you go out. The essentials, with official links.</span></p>
+        </div>
+
+        <div class="destino-datos__grid">
+
+          <div class="dato-card">
+            <span class="dato-card__icono" aria-hidden="true">⛴️</span>
+            <h3 class="dato-card__titulo"><span class="lang-es">En un charter</span><span class="lang-en">On a charter</span></h3>
+            <span class="dato-card__valor"><span class="lang-es">No necesitas la tuya</span><span class="lang-en">You don't need your own</span></span>
+            <span class="dato-card__sub"><span class="lang-es">Con un charter con licencia FWC válida, el pasajero queda cubierto por la del barco (hasta el cupo de pasajeros). La exención termina al bajar del barco.</span><span class="lang-en">On a charter with a valid FWC license, the passenger is covered by the vessel's license (up to its passenger limit). The exemption ends when you step off the boat.</span></span>
+          </div>
+
+          <div class="dato-card">
+            <span class="dato-card__icono" aria-hidden="true">🎫</span>
+            <h3 class="dato-card__titulo"><span class="lang-es">Por tu cuenta</span><span class="lang-en">On your own</span></h3>
+            <span class="dato-card__valor"><span class="lang-es">Agua salada</span><span class="lang-en">Saltwater</span></span>
+            <span class="dato-card__sub"><span class="lang-es">Residente $17/año · no residente $47/año. Menores de 16 y residentes de 65+ no pagan.</span><span class="lang-en">Resident $17/yr · non-resident $47/yr. Under 16 and residents 65+ are exempt.</span></span>
+          </div>
+
+          <div class="dato-card dato-card--tip">
+            <span class="dato-card__icono" aria-hidden="true">🔗</span>
+            <h3 class="dato-card__titulo"><span class="lang-es">Comprar o verificar</span><span class="lang-en">Buy or verify</span></h3>
+            <span class="dato-card__sub"><span class="lang-es">Portal oficial: <a href="https://gooutdoorsflorida.com" target="_blank" rel="noopener">GoOutdoorsFlorida.com</a>, o la app <strong>Fish|Hunt FL</strong>.</span><span class="lang-en">Official portal: <a href="https://gooutdoorsflorida.com" target="_blank" rel="noopener">GoOutdoorsFlorida.com</a>, or the <strong>Fish|Hunt FL</strong> app.</span></span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7 · REGLAS (cubo volátil — SIN números, solo enlaces) ===== -->
+    <section class="pesca-section pesca-section--alt" id="reglas" aria-label="Reglas de captura">
+      <div class="pesca-wrap pesca-wrap--angosto">
+        <div class="dato-card dato-card--tip">
+          <span class="dato-card__icono" aria-hidden="true">📋</span>
+          <h3 class="dato-card__titulo"><span class="lang-es">Qué se queda y qué se suelta</span><span class="lang-en">What to keep and what to release</span></h3>
+          <p class="dato-card__sub">
+            <span class="lang-es">Las tallas, vedas y límites cambian por especie y temporada, y los fija FWC. Antes de salir, consúltalos en la fuente oficial: <a href="https://myfwc.com/fishing/saltwater/recreational/" target="_blank" rel="noopener">Regulaciones recreativas de agua salada de FWC</a> y la app <strong>Fish Rules</strong> (regla vigente por especie y ubicación). En charter, tu capitán te guía sobre qué se queda y qué se suelta.</span>
+            <span class="lang-en">Sizes, closures and limits change by species and season, and are set by FWC. Before heading out, check them at the official source: <a href="https://myfwc.com/fishing/saltwater/recreational/" target="_blank" rel="noopener">FWC saltwater recreational regulations</a> and the <strong>Fish Rules</strong> app (current rule by species and location). On a charter, your captain guides you on what to keep and what to release.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8 · CTA a anunciantes (reusa .seccion-cta-card) ===== -->
+    <section class="seccion-cta-card" id="anunciate" aria-label="Anuncia tu charter en 305 Ruta Miami">
+      <div class="cta-card cta-card--blog">
+        <div class="cta-card__glow" aria-hidden="true"></div>
+        <div class="cta-card__inner">
+          <div class="cta-card__text">
+            <span class="cta-card__eyebrow">
+              <span class="lang-es">🎣 ¿Tienes un charter en Miami?</span>
+              <span class="lang-en">🎣 Run a charter in Miami?</span>
+            </span>
+            <h2 class="cta-card__titulo">
+              <span class="lang-es">Aparece aquí, frente a quien ya está planeando salir</span>
+              <span class="lang-en">Show up here, in front of people already planning a trip</span>
+            </h2>
+            <p class="cta-card__desc">
+              <span class="lang-es">Charters de pesca, renta de botes y jet ski: suma tu negocio al directorio bilingüe de Miami y aparece frente a quienes buscan salir al agua.</span>
+              <span class="lang-en">Fishing charters, boat rentals and jet ski: add your business to Miami's bilingual directory and show up in front of people looking to get on the water.</span>
+            </p>
+          </div>
+          <div class="cta-card__action">
+            <div class="metal-btn-wrap" data-variant="coral" data-size="lg">
+              <div class="metal-btn-inner"></div>
+              <a href="anunciantes.html#precios" class="metal-btn" style="text-decoration:none">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span class="lang-es">Ver planes y precios →</span>
+                <span class="lang-en">See plans and pricing →</span>
+              </a>
+            </div>
+            <p class="cta-card__meta">
+              <span class="lang-es">Desde $99/mes. Sin contratos, activo en 48h.</span>
+              <span class="lang-en">From $99/mo. No contracts, live in 48h.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ===== FOOTER CINEMÁTICO ===== -->
+  <footer class="cf-footer cf-footer--compact cf-footer--mini" id="contacto" role="contentinfo" aria-label="Pie de página">
+
+    <div class="cf-aurora" aria-hidden="true"></div>
+    <div class="cf-grid"   aria-hidden="true"></div>
+    <div class="cf-bg-text" aria-hidden="true" role="presentation">MIAMI</div>
+
+    <div class="cf-marquee-wrap" aria-hidden="true">
+      <div class="cf-marquee-track">
+        <div class="cf-marquee-set">
+          <span class="cf-ms">South Florida Outdoor</span><span class="cf-md">✦</span>
+          <span class="cf-ms">Naturaleza sin límites</span><span class="cf-md" data-color="coral">✦</span>
+          <span class="cf-ms">Biscayne Bay</span><span class="cf-md" data-color="mostaza">✦</span>
+          <span class="cf-ms">Glades &amp; Ocean</span><span class="cf-md">✦</span>
+          <span class="cf-ms">Miami Adventure</span><span class="cf-md" data-color="coral">✦</span>
+          <span class="cf-ms">Wild &amp; Free</span><span class="cf-md" data-color="mostaza">✦</span>
+          <span class="cf-ms">305 Ruta Miami</span><span class="cf-md">✦</span>
+        </div>
+        <div class="cf-marquee-set" aria-hidden="true">
+          <span class="cf-ms">South Florida Outdoor</span><span class="cf-md">✦</span>
+          <span class="cf-ms">Naturaleza sin límites</span><span class="cf-md" data-color="coral">✦</span>
+          <span class="cf-ms">Biscayne Bay</span><span class="cf-md" data-color="mostaza">✦</span>
+          <span class="cf-ms">Glades &amp; Ocean</span><span class="cf-md">✦</span>
+          <span class="cf-ms">Miami Adventure</span><span class="cf-md" data-color="coral">✦</span>
+          <span class="cf-ms">Wild &amp; Free</span><span class="cf-md" data-color="mostaza">✦</span>
+          <span class="cf-ms">305 Ruta Miami</span><span class="cf-md">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-main">
+
+      <div class="cf-logo-wrap cf-reveal">
+        <a href="index.html" class="cf-logo" aria-label="305 Ruta Miami — Inicio">
+          <span class="cf-logo__e">305Ruta</span><span class="cf-logo__m">Miami</span>
+        </a>
+        <p class="cf-tagline">
+          <span class="lang-es">Tu próxima aventura empieza aquí</span>
+          <span class="lang-en">Your next adventure starts here</span>
+        </p>
+      </div>
+
+      <h2 class="cf-headline cf-reveal">
+        <span class="lang-es">¿Listos para<br>explorar?</span>
+        <span class="lang-en">Ready to<br>explore?</span>
+      </h2>
+
+      <div class="cf-cta-row cf-reveal">
+        <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
+          <div class="metal-btn-inner"></div>
+          <a href="index.html#destinos" class="metal-btn" style="text-decoration:none">
+            <div class="metal-btn-shine"></div>
+            <div class="metal-btn-hover-glow"></div>
+            <span class="lang-es">Ver destinos &nbsp;→</span>
+            <span class="lang-en">See destinations &nbsp;→</span>
+          </a>
+        </div>
+      </div>
+
+      <nav class="cf-nav cf-reveal" aria-label="Navegación rápida del pie de página">
+        <a href="index.html"       class="cf-pill cf-magnetic"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+        <a href="blog.html"        class="cf-pill cf-magnetic">Blog</a>
+        <a href="anunciantes.html" class="cf-pill cf-magnetic"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a>
+        <a href="privacidad.html"  class="cf-pill cf-magnetic"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
+        <a href="terminos.html"    class="cf-pill cf-magnetic"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
+      </nav>
+
+    </div>
+
+    <div class="cf-bottom cf-reveal">
+      <p class="cf-copy">
+        <span data-i18n="footer_copyright">© 2026 305 Ruta Miami. Todos los derechos reservados.</span>
+        <a href="admin.html" class="cf-admin" aria-label="Panel de administración">Admin</a>
+      </p>
+      <div class="cf-love" role="note">
+        <span class="lang-es">Hecho con</span><span class="lang-en">Made with</span>
+        <span class="cf-heart" aria-hidden="true">❤</span>
+        <span class="lang-es">en Miami</span><span class="lang-en">in Miami</span>
+      </div>
+      <button class="cf-totop cf-magnetic" id="cfToTop" type="button" aria-label="Volver al inicio de la página">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
+    </div>
+
+  </footer>
+
+  <!-- ===== FOOTER: reveal + magnético + scroll-to-top — ES5 ===== -->
+  <script>
+  (function() {
+    'use strict';
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reveals = document.querySelectorAll('.cf-reveal');
+    if (window.IntersectionObserver) {
+      var revealObs = new IntersectionObserver(function(entries) {
+        Array.prototype.forEach.call(entries, function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('cf-reveal--visible');
+            revealObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.10 });
+      Array.prototype.forEach.call(reveals, function(el) { revealObs.observe(el); });
+    } else {
+      Array.prototype.forEach.call(reveals, function(el) { el.classList.add('cf-reveal--visible'); });
+    }
+    if (!prefersReduced) {
+      var magnetics = document.querySelectorAll('.cf-magnetic');
+      Array.prototype.forEach.call(magnetics, function(el) {
+        el.addEventListener('mouseenter', function() {
+          el.style.transition = 'transform 0.18s cubic-bezier(0.2,0,0,1),color 0.22s cubic-bezier(0.2,0,0,1),background 0.22s cubic-bezier(0.2,0,0,1),border-color 0.22s cubic-bezier(0.2,0,0,1),box-shadow 0.22s cubic-bezier(0.2,0,0,1)';
+        });
+        el.addEventListener('mousemove', function(e) {
+          var rect = el.getBoundingClientRect();
+          var dx = (e.clientX - rect.left - rect.width  / 2) * 0.28;
+          var dy = (e.clientY - rect.top  - rect.height / 2) * 0.28;
+          el.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+        });
+        el.addEventListener('mouseleave', function() {
+          el.style.transition = 'transform 0.65s cubic-bezier(0.2,0,0,1),color 0.22s cubic-bezier(0.2,0,0,1),background 0.22s cubic-bezier(0.2,0,0,1),border-color 0.22s cubic-bezier(0.2,0,0,1),box-shadow 0.22s cubic-bezier(0.2,0,0,1)';
+          el.style.transform = 'translate(0,0)';
+        });
+      });
+    }
+    var toTop = document.getElementById('cfToTop');
+    if (toTop) { toTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
+  }());
+  </script>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/navbar.js"></script>
+  <script src="assets/js/metal-button.js"></script>
+  <script src="assets/js/liquid-tilt.js"></script>
+  <script src="assets/js/cta-card.js"></script>
+
+</body>
+</html>
