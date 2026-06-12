@@ -1,6 +1,6 @@
 # CLAUDE.md — 305 Ruta Miami
 > **Fuente de verdad ÚNICA y VIVA del proyecto.** Si otro documento contradice a este, este gana.
-> Última actualización: 11 junio 2026. Tras cada fase completada, actualizar la sección "Estado".
+> Última actualización: 12 junio 2026. Tras cada fase completada, actualizar la sección "Estado".
 > PROHIBIDO guardar secretos aquí (contraseñas, llaves, tokens). Este archivo se commitea al repo público.
 
 ---
@@ -85,14 +85,15 @@ Secretos: viven SOLO en `_privado/` (gitignored) o en los paneles de cada servic
 **Completado:** Supabase Módulos 1-2 (7 tablas + RLS + triggers + auth + admin creado) ·
 Fase 1 entera (GA4 en todas las páginas, precios verdaderos + banda fundador, copy honesto,
 disclaimer Formspree, newsletter→Brevo con doble opt-in + gracias.html, dominio autenticado,
-repo limpio). 21 páginas de destinos vivas.
+repo limpio). 21 páginas de destinos vivas. F2 categorías náuticas · F3 hub `/pesca` vivo ·
+**F4 COMPLETA:** frontend conectado a Supabase (fetch ES5 + anon key pública en
+`assets/js/pesca-charters.js`), 3 charters curados sembrados (con `zona`, `atiende_es`),
+grants modelo mínimo seguro (anon+authenticated solo leen negocios/categorias/planes),
+RLS verificada en vivo (clientes/suscripciones/pagos = permission denied para anon).
+`archivos` queda sin grant para anon; se le dará GRANT cuando el frontend muestre
+galerías (F7/Lote C). Pendiente F7: vista `negocios_publicos` para filtrar columnas.
 
 **Pendiente, en orden (una fase = una rama):**
-- **F2** Categorías náuticas: `renta-botes` y `jetski` en Supabase + charters/botes/jetski en anunciantes
-  (sección "¿encaja aquí?" + formulario). Incluye micro-fixes: badge fundador que se parte en móvil,
-  "panel de anunciante" → "reporte mensual", JS muerto de togglePrecio.
-- **F3** Hub `/pesca` — LA guía de pesca de Miami (laboratorio de la dirección de diseño v1).
-- **F4** Conexión Supabase: anon key + fetch ES5 + sembrar 2-3 charters reales + RLS verificada en vivo.
 - **F5** Index gira al mar (solo-visitante) + página `/destinos` con selector y buscador.
 - **F6** Blog de pesca (artículos cola larga, continuo).
 - **F7** Stripe COMPLETO: 7a auth portal/admin (Supabase Auth — aquí se rota y cierra el ADMIN_PASS),
@@ -105,7 +106,7 @@ GAS a marca 305 · mover repo fuera de OneDrive si reaparece el error mmap de gi
 
 ---
 
-## 7. Dirección de diseño v1 (EN EXPLORACIÓN — se valida en el hub de pesca, F3)
+## 7. Dirección de diseño v1 (SUPERADA — ver §7b "Ley de diseño v2"; se conserva como historia)
 
 - **Una página, un público:** index = solo visitante; anunciantes = solo B2B; portal = solo clientes.
 - Base CLARA y aireada (blanco-arena); blanco puro #FFF para tarjetas/cuadros de contenido.
@@ -119,6 +120,35 @@ GAS a marca 305 · mover repo fuera de OneDrive si reaparece el error mmap de gi
   aguas claras → azul profundo.
 - Regla anti-deuda: cada pass de diseño REEMPLAZA al anterior, no se apila. Revisión de identidad
   solo entre fases, nunca a mitad de una.
+
+---
+
+## 7b. Ley de diseño v2 (APROBADA — rige todo rediseño desde F4)
+
+**Tokens base:**
+- Fondo `#FFF` puro · hairline `#EAEAEA` · radio `12px` · UNA sombra, solo en hover.
+- Tipografía: Playfair SOLO en H1/H2; todo lo demás Inter.
+- Color de acción visitante: `#007487`. Color de acción B2B: `#C0392B` — SOLO en
+  anunciantes + el "susurro" B2B; jamás en páginas de visitante.
+- Mostaza: SOLO para el badge "Destacado". Chips de categoría: pasteles.
+
+**Componentes:**
+- Tarjeta de destino: foto 1:1 + título + 1 línea. Grid `minmax(182px, 1fr)`.
+- Heroes compactos (no pantallas completas de hero).
+- Etiqueta B2B: ES "Anuncia tu negocio" / EN "List your business".
+
+**Kill list (eliminar al pasar por cada página):**
+quiz · números inventados/∞ · globo de emojis · marquesina · emojis de UI (→ SVG) ·
+botones metálicos/tilt/shine · lenguaje auto-certificante de cara al público.
+
+**Contrato de no-ruptura (verificar tras cada pass):**
+preservar selectores que usa `analytics.js` · sistema i18n (`.lang-es`/`.lang-en`) ·
+formularios (Formspree/Brevo) · JSON-LD, canonical, OG y URLs · fetch de charters
+(`pesca-charters.js` y la sección `#nautico`).
+
+**Lotes de aplicación (en orden):**
+- **A** index + tokens globales · **B** anunciantes (listing explotado) ·
+- **C** hub pesca + especies · **D** destinos · **E** blog + legales + barrido final.
 
 ---
 
