@@ -242,6 +242,19 @@
 .especie-prosa a { color: var(--turquesa-oscuro); }
 /* Tarjeta del calendario como enlace a su página de especie */
 a.pesca-cal__item { text-decoration: none; color: inherit; }
+/* Miniatura de foto en el calendario (reemplaza el icono SVG) */
+img.pesca-cal__icon { width: 50px; height: 36px; object-fit: cover; border-radius: 6px; flex: 0 0 auto; margin-top: 1px; }
+/* Foto grande de la especie en el hero */
+.especie-hero__foto {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 0 auto 1.3rem;
+  box-shadow: 0 12px 32px -14px rgba(26,42,53,0.3);
+}
 
 /* ===== Movimiento reducido ===== */
 @media (prefers-reduced-motion: reduce) {
