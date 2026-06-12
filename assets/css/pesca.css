@@ -216,6 +216,46 @@
 .pesca-profundidad .pesca-section__titulo  { color: #ffffff; }
 .pesca-profundidad .pesca-section__sub     { color: rgba(255,255,255,0.82); }
 
+/* ===== 9. Páginas de especie (plantilla) ===== */
+.especie-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--blanco-arena);
+  padding: calc(var(--nav-h, 68px) + 3.5rem) 1.5rem 2.6rem;
+  text-align: center;
+}
+.especie-hero__atmosfera {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(90% 70% at 50% -10%, rgba(0,188,212,0.10), transparent 60%);
+}
+.especie-hero__inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+.especie-hero .destino-breadcrumb { justify-content: center; color: var(--texto-suave); }
+.especie-hero .destino-breadcrumb a { color: var(--texto-medio); }
+.especie-hero .destino-breadcrumb a:hover { color: var(--turquesa); }
+.especie-hero__icono { width: 60px; height: 60px; color: var(--turquesa-oscuro); margin: 0 auto 0.9rem; display: block; }
+.especie-hero__nombre { font-family: var(--serif); font-size: clamp(2rem, 6vw, 3rem); line-height: 1.1; color: var(--tinta); margin: 0; }
+.especie-hero__en { display: block; font-family: var(--sans); font-weight: 300; font-size: 1rem; color: var(--texto-suave); margin-top: 0.45rem; letter-spacing: 0.02em; }
+.especie-prosa { max-width: 680px; }
+.especie-prosa p { color: var(--texto-medio); line-height: 1.75; font-weight: 300; margin: 0 0 1rem; }
+.especie-prosa p:last-child { margin-bottom: 0; }
+.especie-prosa strong { color: var(--tinta); font-weight: 600; }
+.especie-prosa a { color: var(--turquesa-oscuro); }
+/* Tarjeta del calendario como enlace a su página de especie */
+a.pesca-cal__item { text-decoration: none; color: inherit; }
+/* Miniatura de foto en el calendario (reemplaza el icono SVG) */
+img.pesca-cal__icon { width: 50px; height: 36px; object-fit: cover; border-radius: 6px; flex: 0 0 auto; margin-top: 1px; }
+/* Foto grande de la especie en el hero */
+.especie-hero__foto {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 0 auto 1.3rem;
+  box-shadow: 0 12px 32px -14px rgba(26,42,53,0.3);
+}
+
 /* ===== Movimiento reducido ===== */
 @media (prefers-reduced-motion: reduce) {
   .pesca-cal__item,

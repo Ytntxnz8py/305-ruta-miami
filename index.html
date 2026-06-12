@@ -101,6 +101,7 @@
       <span class="em-nav__logo-e">305Ruta</span><span class="em-nav__logo-m">Miami</span>
     </a>
     <ul class="em-nav__links">
+      <li><a class="em-nav__link" href="pesca.html"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></a></li>
       <li><a class="em-nav__link" href="index.html"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a></li>
       <li><a class="em-nav__link" href="index.html#destinos"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a></li>
       <li><a class="em-nav__link" href="blog.html">Blog</a></li>
@@ -108,7 +109,7 @@
       <li><a class="em-nav__link" href="privacidad.html"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a></li>
       <li><a class="em-nav__link" href="terminos.html"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a></li>
     </ul>
-    <a class="em-nav__cta" href="anunciantes.html"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a>
+    <a class="em-nav__link em-nav__link--muted" href="anunciantes.html"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a>
     <button class="em-nav__lang" type="button" aria-label="Cambiar idioma">EN</button>
     <button class="em-nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -116,13 +117,14 @@
   </nav>
   <div class="em-drawer__backdrop" aria-hidden="true"></div>
   <aside class="em-drawer" aria-label="Menú móvil">
+    <a class="em-drawer__link" href="pesca.html"><span class="em-drawer__emoji">🎣</span><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></a>
     <a class="em-drawer__link" href="index.html"><span class="em-drawer__emoji">🏠</span><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
     <a class="em-drawer__link" href="index.html#destinos"><span class="em-drawer__emoji">📍</span><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a>
     <a class="em-drawer__link" href="blog.html"><span class="em-drawer__emoji">📖</span>Blog</a>
     <a class="em-drawer__link" href="privacidad.html"><span class="em-drawer__emoji">🔒</span><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
     <a class="em-drawer__link" href="terminos.html"><span class="em-drawer__emoji">📋</span><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
     <hr class="em-drawer__sep"/>
-    <a class="em-drawer__cta" href="anunciantes.html"><span class="lang-es">Para empresas →</span><span class="lang-en">For businesses →</span></a>
+    <a class="em-drawer__link em-drawer__link--muted" href="anunciantes.html"><span class="lang-es">Para empresas →</span><span class="lang-en">For businesses →</span></a>
     <div class="em-drawer__lang">
       <button class="em-drawer__lang-btn" type="button" data-lang="es">ES</button>
       <button class="em-drawer__lang-btn" type="button" data-lang="en">EN</button>
@@ -453,6 +455,35 @@
     </section>
 
 
+    <!-- ===== BLOQUE DESTACADO: Guía de pesca (reusa cta-card) ===== -->
+    <section class="seccion-cta-card" id="pesca-destacado" aria-label="La guía de pesca de Miami">
+      <div class="cta-card cta-card--blog">
+        <div class="cta-card__glow" aria-hidden="true"></div>
+        <div class="cta-card__inner">
+          <img src="assets/images/pesca/anita-denunzio-1TIiE-y30nE-unsplash.jpg"
+               alt="Aguas turquesas y someras junto a una playa, con una lancha de pesca"
+               loading="lazy"
+               style="display:block;width:100%;max-width:300px;aspect-ratio:4/3;object-fit:cover;border-radius:14px;flex:0 0 auto" />
+          <div class="cta-card__text">
+            <span class="cta-card__eyebrow"><span class="lang-es">🎣 Guía</span><span class="lang-en">🎣 Guide</span></span>
+            <h2 class="cta-card__titulo"><span class="lang-es">La guía de pesca de Miami</span><span class="lang-en">The Miami Fishing Guide</span></h2>
+            <p class="cta-card__desc"><span class="lang-es">De los flats de la bahía al Gulf Stream: qué se pesca, cuándo y cómo salir bien preparado.</span><span class="lang-en">From the bay flats to the Gulf Stream: what's biting, when, and how to go out prepared.</span></p>
+          </div>
+          <div class="cta-card__action">
+            <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
+              <div class="metal-btn-inner"></div>
+              <a href="pesca.html" class="metal-btn" style="text-decoration:none">
+                <div class="metal-btn-shine"></div>
+                <div class="metal-btn-hover-glow"></div>
+                <span class="lang-es">Explorar la guía →</span>
+                <span class="lang-en">Explore the guide →</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Fusión visual: Intro (blanco arena) → Destinos (dark ocean) -->
     <div class="fade-band fade-intro-dest" aria-hidden="true"></div>
 
@@ -750,6 +781,20 @@
 
         </div><!-- /trabaja-teaser -->
 
+      </div>
+    </section>
+
+    <!-- ===== BANDA B2B DISCRETA (pre-footer, patrón Airbnb: blanco, sombra suave, sin MetalButton) ===== -->
+    <section aria-label="Para negocios de Miami" style="padding:2.5rem 1.5rem">
+      <div style="max-width:760px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.06);padding:1.4rem 1.6rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.8rem">
+        <p style="margin:0;font-size:0.98rem;color:#4a6070;line-height:1.5">
+          <span class="lang-es">¿Tienes un charter, renta de botes o negocio en Miami?</span>
+          <span class="lang-en">Run a charter, boat rental, or business in Miami?</span>
+        </p>
+        <a href="anunciantes.html" style="font-weight:600;color:#00788a;text-decoration:none;white-space:nowrap">
+          <span class="lang-es">Aparece en la guía →</span>
+          <span class="lang-en">Get listed →</span>
+        </a>
       </div>
     </section>
 

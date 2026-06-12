@@ -52,14 +52,6 @@
 </head>
 <body>
 
-  <!-- Sprite de icono (set consistente: un solo icono de pez para todo el calendario) -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <symbol id="ico-pez" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12c-2.2 2.6-5.6 4.2-9 4.2S5.2 14.6 3 12c2.2-2.6 5.6-4.2 9-4.2S18.8 9.4 21 12z" />
-      <path d="M3 12 0.8 9.6M3 12 0.8 14.4" />
-      <circle cx="17" cy="11" r="0.7" fill="currentColor" stroke="none" />
-    </symbol>
-  </svg>
 
   <!-- ===== NAVBAR UNIVERSAL ===== -->
   <nav class="em-nav" aria-label="Navegación principal">
@@ -67,6 +59,7 @@
       <span class="em-nav__logo-e">305Ruta</span><span class="em-nav__logo-m">Miami</span>
     </a>
     <ul class="em-nav__links">
+      <li><a class="em-nav__link" href="pesca.html"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></a></li>
       <li><a class="em-nav__link" href="index.html"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a></li>
       <li><a class="em-nav__link" href="index.html#destinos"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a></li>
       <li><a class="em-nav__link" href="blog.html">Blog</a></li>
@@ -74,7 +67,7 @@
       <li><a class="em-nav__link" href="privacidad.html"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a></li>
       <li><a class="em-nav__link" href="terminos.html"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a></li>
     </ul>
-    <a class="em-nav__cta" href="anunciantes.html"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a>
+    <a class="em-nav__link em-nav__link--muted" href="anunciantes.html"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a>
     <button class="em-nav__lang" type="button" aria-label="Cambiar idioma">EN</button>
     <button class="em-nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -82,13 +75,14 @@
   </nav>
   <div class="em-drawer__backdrop" aria-hidden="true"></div>
   <aside class="em-drawer" aria-label="Menú móvil">
+    <a class="em-drawer__link" href="pesca.html"><span class="em-drawer__emoji">🎣</span><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></a>
     <a class="em-drawer__link" href="index.html"><span class="em-drawer__emoji">🏠</span><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
     <a class="em-drawer__link" href="index.html#destinos"><span class="em-drawer__emoji">📍</span><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a>
     <a class="em-drawer__link" href="blog.html"><span class="em-drawer__emoji">📖</span>Blog</a>
     <a class="em-drawer__link" href="privacidad.html"><span class="em-drawer__emoji">🔒</span><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
     <a class="em-drawer__link" href="terminos.html"><span class="em-drawer__emoji">📋</span><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
     <hr class="em-drawer__sep" />
-    <a class="em-drawer__cta" href="anunciantes.html"><span class="lang-es">Para empresas →</span><span class="lang-en">For businesses →</span></a>
+    <a class="em-drawer__link em-drawer__link--muted" href="anunciantes.html"><span class="lang-es">Para empresas →</span><span class="lang-en">For businesses →</span></a>
     <div class="em-drawer__lang">
       <button class="em-drawer__lang-btn" type="button" data-lang="es">ES</button>
       <button class="em-drawer__lang-btn" type="button" data-lang="en">EN</button>
@@ -144,8 +138,8 @@
         <div class="pesca-cal">
 
           <!-- Pez vela -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/pez-vela.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/pez-vela-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre"><span class="lang-es">Pez vela</span><span class="lang-en">Sailfish</span></div>
               <div class="pesca-cal__datos">
@@ -154,11 +148,11 @@
                 <span class="pesca-cal__detalle"><span class="lang-es">Borde del Gulf Stream · pico variable según el año</span><span class="lang-en">Gulf Stream edge · peak varies by year</span></span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Dorado (mahi) -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/dorado.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/dorado-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre"><span class="lang-es">Dorado (mahi)</span><span class="lang-en">Mahi-mahi (dolphinfish)</span></div>
               <div class="pesca-cal__datos">
@@ -166,11 +160,11 @@
                 <span class="pesca-cal__zona">Offshore</span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Wahoo -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/wahoo.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/wahoo-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre">Wahoo</div>
               <div class="pesca-cal__datos">
@@ -178,11 +172,11 @@
                 <span class="pesca-cal__zona">Offshore</span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Atún (blackfin) -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/atun-blackfin.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/atun-blackfin-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre"><span class="lang-es">Atún (blackfin)</span><span class="lang-en">Blackfin tuna</span></div>
               <div class="pesca-cal__datos">
@@ -190,11 +184,11 @@
                 <span class="pesca-cal__zona">Offshore</span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Pez espada -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/pez-espada.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/pez-espada-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre"><span class="lang-es">Pez espada</span><span class="lang-en">Swordfish</span></div>
               <div class="pesca-cal__datos">
@@ -203,11 +197,11 @@
                 <span class="pesca-cal__detalle"><span class="lang-es">Aguas profundas · nocturno · algo todo el año</span><span class="lang-en">Deep water · nocturnal · some year-round</span></span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Tarpon -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/tarpon.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/tarpon-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre">Tarpon</div>
               <div class="pesca-cal__datos">
@@ -216,11 +210,11 @@
                 <span class="pesca-cal__detalle"><span class="lang-es">Puentes e inlets</span><span class="lang-en">Bridges and inlets</span></span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Róbalo -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/robalo.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/robalo-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre"><span class="lang-es">Róbalo</span><span class="lang-en">Snook</span></div>
               <div class="pesca-cal__datos">
@@ -229,11 +223,11 @@
                 <span class="pesca-cal__detalle"><span class="lang-es">Manglar, bocas de canal, inlets</span><span class="lang-en">Mangrove, canal mouths, inlets</span></span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Mero -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/mero.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/mero-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre"><span class="lang-es">Mero</span><span class="lang-en">Grouper</span></div>
               <div class="pesca-cal__datos">
@@ -242,11 +236,11 @@
                 <span class="pesca-cal__detalle"><span class="lang-es">Arrecife y pecios</span><span class="lang-en">Reef and wrecks</span></span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Pargo -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/pargo.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/pargo-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre"><span class="lang-es">Pargo</span><span class="lang-en">Snapper</span></div>
               <div class="pesca-cal__datos">
@@ -254,11 +248,11 @@
                 <span class="pesca-cal__zona pesca-cal__zona--arrecife"><span class="lang-es">Arrecife</span><span class="lang-en">Reef</span></span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Tiburón / barracuda -->
-          <div class="pesca-cal__item">
-            <svg class="pesca-cal__icon" aria-hidden="true"><use href="#ico-pez" /></svg>
+          <a class="pesca-cal__item" href="pesca/especies/tiburon-barracuda.html">
+            <img class="pesca-cal__icon" src="assets/images/pesca/tiburon-barracuda-thumb.jpg" alt="" loading="lazy" width="50" height="36" />
             <div class="pesca-cal__cuerpo">
               <div class="pesca-cal__nombre"><span class="lang-es">Tiburón / barracuda</span><span class="lang-en">Shark / barracuda</span></div>
               <div class="pesca-cal__datos">
@@ -266,7 +260,7 @@
                 <span class="pesca-cal__zona pesca-cal__zona--variado"><span class="lang-es">Variado</span><span class="lang-en">Varied</span></span>
               </div>
             </div>
-          </div>
+          </a>
 
         </div><!-- /.pesca-cal -->
       </div>
@@ -418,6 +412,84 @@
           <p class="dato-card__sub">
             <span class="lang-es">Las tallas, vedas y límites cambian por especie y temporada, y los fija FWC. Antes de salir, consúltalos en la fuente oficial: <a href="https://myfwc.com/fishing/saltwater/recreational/" target="_blank" rel="noopener">Regulaciones recreativas de agua salada de FWC</a> y la app <strong>Fish Rules</strong> (regla vigente por especie y ubicación). En charter, tu capitán te guía sobre qué se queda y qué se suelta.</span>
             <span class="lang-en">Sizes, closures and limits change by species and season, and are set by FWC. Before heading out, check them at the official source: <a href="https://myfwc.com/fishing/saltwater/recreational/" target="_blank" rel="noopener">FWC saltwater recreational regulations</a> and the <strong>Fish Rules</strong> app (current rule by species and location). On a charter, your captain guides you on what to keep and what to release.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6b · DÓNDE PESCAR EN MIAMI (destinos reales, reusa .rel-card) ===== -->
+    <section class="pesca-section" id="lugares" aria-label="Dónde pescar en Miami">
+      <div class="pesca-wrap">
+        <div class="pesca-section__head">
+          <span class="pesca-section__eyebrow"><span class="lang-es">Lugares</span><span class="lang-en">Spots</span></span>
+          <h2 class="pesca-section__titulo"><span class="lang-es">Dónde pescar en Miami</span><span class="lang-en">Where to fish in Miami</span></h2>
+          <p class="pesca-section__sub"><span class="lang-es">Muelles, jetties y puentes con acceso público, ya en la guía.</span><span class="lang-en">Public-access piers, jetties and bridges, already in the guide.</span></p>
+        </div>
+        <div class="pesca-salidas">
+
+          <a class="rel-card" href="destinos/south-pointe-park.html">
+            <div class="rel-card__img-wrap">
+              <img src="assets/images/destinos/south-pointe-pier/south-pointe-pier-1.jpg" alt="South Pointe Park Pier, South Beach" loading="lazy" width="600" height="450" />
+            </div>
+            <div class="rel-card__body">
+              <span class="rel-card__badge rel-card__badge--mar"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></span>
+              <h3 class="rel-card__titulo">South Pointe Park Pier</h3>
+              <p class="rel-card__meta"><span class="lang-es">Muelle de pesca en la punta de South Beach.</span><span class="lang-en">Fishing pier at the tip of South Beach.</span></p>
+            </div>
+          </a>
+
+          <a class="rel-card" href="destinos/haulover-park.html">
+            <div class="rel-card__img-wrap">
+              <img src="assets/images/destinos/haulover/haulover-1.jpg" alt="Haulover Park, jetty e inlet" loading="lazy" width="600" height="450" />
+            </div>
+            <div class="rel-card__body">
+              <span class="rel-card__badge rel-card__badge--mar"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></span>
+              <h3 class="rel-card__titulo">Haulover Park (Jetty)</h3>
+              <p class="rel-card__meta"><span class="lang-es">Jetty e inlet, pesca desde la orilla.</span><span class="lang-en">Jetty and inlet, shore fishing.</span></p>
+            </div>
+          </a>
+
+          <a class="rel-card" href="destinos/rickenbacker-causeway.html">
+            <div class="rel-card__img-wrap">
+              <img src="assets/images/destinos/rickenbacker-causeway/rickenbacker-causeway-1.jpg" alt="Rickenbacker Causeway hacia Key Biscayne" loading="lazy" width="600" height="450" />
+            </div>
+            <div class="rel-card__body">
+              <span class="rel-card__badge rel-card__badge--mar"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></span>
+              <h3 class="rel-card__titulo">Rickenbacker Causeway</h3>
+              <p class="rel-card__meta"><span class="lang-es">Pesca desde el puente hacia Key Biscayne.</span><span class="lang-en">Bridge fishing toward Key Biscayne.</span></p>
+            </div>
+          </a>
+
+          <a class="rel-card" href="destinos/newport-fishing-pier.html">
+            <div class="rel-card__img-wrap">
+              <img src="assets/images/destinos/newport-pier/newport-pier-1.jpg" alt="Newport Fishing Pier, Sunny Isles" loading="lazy" width="600" height="450" />
+            </div>
+            <div class="rel-card__body">
+              <span class="rel-card__badge rel-card__badge--mar"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></span>
+              <h3 class="rel-card__titulo">Newport Fishing Pier</h3>
+              <p class="rel-card__meta"><span class="lang-es">Muelle de pesca en Sunny Isles.</span><span class="lang-en">Fishing pier in Sunny Isles.</span></p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7b · CHARTERS, BOTES Y JETSKI (estado vacío honesto, sin placeholders) ===== -->
+    <section class="pesca-section pesca-section--alt" id="nautico" aria-label="Charters, botes y jetski">
+      <div class="pesca-wrap pesca-wrap--angosto">
+        <div class="dato-card dato-card--tip">
+          <span class="dato-card__icono" aria-hidden="true">⚓</span>
+          <h3 class="dato-card__titulo"><span class="lang-es">Charters, botes y jetski</span><span class="lang-en">Charters, boats &amp; jet ski</span></h3>
+          <p class="dato-card__sub">
+            <span class="lang-es">Estamos seleccionando los mejores charters y operadores náuticos de Miami para esta guía. Solo recomendaremos negocios verificados — datos reales o nada.</span>
+            <span class="lang-en">We're hand-picking Miami's best charters and boat operators for this guide. We only recommend verified businesses — real data or nothing.</span>
+          </p>
+          <p class="dato-card__sub" style="margin-top:0.8rem">
+            <a href="anunciantes.html" style="font-weight:600;color:var(--turquesa-oscuro);text-decoration:none">
+              <span class="lang-es">¿Tienes un charter? Aparece aquí →</span>
+              <span class="lang-en">Run a charter? Get listed here →</span>
+            </a>
           </p>
         </div>
       </div>
