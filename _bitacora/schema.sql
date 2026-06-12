@@ -1,11 +1,19 @@
 -- ============================================================================
 -- 305 RUTA MIAMI — Esquema de base de datos (Supabase / PostgreSQL)
 -- ============================================================================
--- Estado: Modulo 2 (base de datos) completo y verificado.
+-- Estado: referencia REPRODUCIBLE al cierre de Fase 4 (12 junio 2026).
 -- Este archivo recrea TODO el esquema sobre una base de datos vacia, en orden:
---   1) Tablas   2) Funciones   3) Disparadores   4) Reglas RLS   5) Datos semilla
+--   1) Tablas   2) Funciones   3) Disparadores   4) Reglas RLS + Grants   5) Datos semilla
 -- Ejecutar de arriba a abajo en el SQL Editor de Supabase.
 -- Comentarios en espanol. Convencion: etiquetas y nombres internos sin acentos.
+--
+-- CHANGELOG (los deltas historicos viven en _bitacora/fase*.sql; aqui consolidados):
+--   12 jun 2026 (F4): columnas negocios.zona y negocios.atiende_es · grants modelo
+--     minimo seguro (anon+authenticated solo leen negocios/categorias/planes) ·
+--     siembra de 3 charters curados (solo en fase4-charters.sql, NO aqui: son datos
+--     vivos de produccion, no esquema).
+--   jun 2026 (F2): categorias renta-botes y jetski (ocultas) · reorden del conjunto
+--     (pesca primero, cluster nautico arriba).
 -- ============================================================================
 
 
@@ -56,10 +64,12 @@ create table public.negocios (
   whatsapp              text,
   web                   text,
   direccion             text,
+  zona                  text,                             -- F4: zona/marina legible (ej. "Biscayne Bay")
   lat                   numeric,
   lng                   numeric,
   horarios              text,
   precio_desde          text,
+  atiende_es            boolean not null default false,   -- F4: atiende en espanol (badge en el hub)
   destacado             boolean not null default false,
   activo                boolean not null default false,  -- nace OCULTO; se publica al pagar
   creado_en             timestamptz not null default now(),
@@ -335,6 +345,20 @@ create policy "archivos_borrar"
   using ( public.es_admin() or public.es_dueno_negocio(negocio_id) );
 
 
+-- --- GRANTS — modelo minimo seguro (F4) ---
+-- Una politica RLS NO basta por si sola: sin GRANT SELECT el rol recibe
+-- 42501 "permission denied for table". Lectura abierta SOLO a las 3 tablas
+-- de cara al publico; la RLS sigue filtrando filas (negocios -> activo=true).
+-- clientes / suscripciones / pagos / archivos quedan SIN grant a proposito
+-- (doble candado: ni grant ni RLS para anon). 'archivos' recibira su grant
+-- cuando el frontend muestre galerias (F7 / Lote C).
+
+grant usage  on schema public        to anon, authenticated;
+grant select on public.negocios      to anon, authenticated;
+grant select on public.categorias    to anon, authenticated;
+grant select on public.planes        to anon, authenticated;
+
+
 -- ============================================================================
 -- 5) DATOS SEMILLA (reales)
 -- ============================================================================
@@ -373,13 +397,17 @@ insert into public.planes (id, nombre, precio, descripcion, beneficios, activo) 
  ], true)
 on conflict (id) do nothing;
 
--- CATEGORIAS
+-- CATEGORIAS — cluster nautico arriba (F2). renta-botes y jetski nacen ocultas
+-- (activo=false): se venden a anunciantes ya, pero no se muestran al visitante
+-- hasta tener contenido.
 insert into public.categorias (id, nombre_es, nombre_en, orden, activo) values
-('playa',              'Playa',                'Beach',              1, true),
-('buceo',              'Buceo',                'Diving',             2, true),
-('pesca',              'Pesca',                'Fishing',            3, true),
-('exploracion',        'Exploracion',          'Exploration',        4, true),
-('bares-restaurantes', 'Bares y Restaurantes', 'Bars & Restaurants', 5, true)
+('pesca',              'Pesca',                'Fishing',            1, true),
+('renta-botes',        'Renta de Botes',       'Boat Rentals',       2, false),
+('jetski',             'Jet Ski',              'Jet Ski',            3, false),
+('playa',              'Playa',                'Beach',              4, true),
+('buceo',              'Buceo',                'Diving',             5, true),
+('exploracion',        'Exploracion',          'Exploration',        6, true),
+('bares-restaurantes', 'Bares y Restaurantes', 'Bars & Restaurants', 7, true)
 on conflict (id) do nothing;
 
 -- ============================================================================
