@@ -111,3 +111,24 @@ where not exists (
 --
 -- Fin de Fase 4, paso 2.
 -- ============================================================================
+
+
+-- ============================================================================
+-- 5) GRANTS — modelo minimo seguro (aprobado por Calixto, Fase 4)
+-- ============================================================================
+-- Una politica RLS NO basta por si sola: sin GRANT SELECT el rol anon recibe
+-- 42501 "permission denied for table". Abrimos lectura SOLO a las 3 tablas de
+-- cara al publico; la RLS existente sigue filtrando filas (negocios -> solo
+-- activo=true; categorias/planes -> using(true)).
+-- clientes / suscripciones / pagos / archivos quedan SIN grant a proposito
+-- (doble candado: ni grant ni RLS para anon). 'archivos' recibira su grant
+-- cuando el frontend muestre galerias (F7 / Lote C).
+-- 'authenticated' recibe el mismo SELECT: un dueno logueado lee su propio
+-- negocio via RLS, el resto sigue cubierto por las politicas existentes.
+-- Idempotente: re-ejecutar GRANT sobre lo ya concedido no rompe nada.
+
+grant usage  on schema public        to anon, authenticated;
+grant select on public.negocios      to anon, authenticated;
+grant select on public.categorias    to anon, authenticated;
+grant select on public.planes        to anon, authenticated;
+-- ============================================================================
