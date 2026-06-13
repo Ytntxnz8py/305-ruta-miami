@@ -189,6 +189,33 @@ body.v2 {
 /* ---- barra de categorias (Pesca primero) ---- */
 .v2 .v2-destinos { padding-bottom: clamp(2rem,5vw,3.5rem); }
 .v2 .v2-cats { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: clamp(1.4rem,3vw,2rem); }
+
+/* ---- Barra COLAPSABLE (coreografia Airbnb) — SOLO el index (.is-anim).
+   Sticky bajo la nav (--nav-h lo pone navbar.js). Al bajar se encoge (scale) y
+   aparece una pildora blanca; al subir se re-expande. SOLO transform + paint
+   (background/box-shadow), nunca height/layout, para no trabar el scroll.
+   Los filtros (.filtros__btn) siguen vivos en ambos estados (no cambia el DOM). ---- */
+.v2 .v2-cats.is-anim {
+  position: sticky;
+  top: calc(var(--nav-h, 60px) + 8px);
+  z-index: 25;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto; margin-right: auto;
+  border-radius: 999px;
+  transform-origin: top center;
+  transition: transform .28s ease, background-color .28s ease, box-shadow .28s ease;
+}
+.v2 .v2-cats.is-anim.is-collapsed {
+  transform: scale(0.86);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 6px 20px -10px rgba(26, 42, 53, 0.28);
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Sin coreografia: barra estable y legible (sticky sigue; sin encoger ni pildora). */
+  .v2 .v2-cats.is-anim { transition: none; }
+  .v2 .v2-cats.is-anim.is-collapsed { transform: none; background: transparent; box-shadow: none; }
+}
 /* Boton de categoria: iconos SUELTOS, sin disco ni borde, fundidos al fondo
    blanco. Solo un gris muy claro (--banda) al hover/activo, NO un marco. */
 .v2 .v2-cat {

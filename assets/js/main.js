@@ -2108,6 +2108,30 @@ function initBarraIconos() {
   obs.observe(bar);
 }
 
+/* Barra de categorias COLAPSABLE (coreografia Airbnb). Solo el index (.is-anim).
+   Al bajar añade .is-collapsed (la CSS la encoge con transform); al subir lo quita.
+   Histeresis (180/120) para no parpadear en el umbral. Scroll con rAF + passive.
+   La CSS cubre reduced-motion (barra estable). Los filtros siguen vivos: no
+   cambia el DOM, solo una clase visual. */
+function initBarraColapsable() {
+  var bar = document.querySelector('.v2-cats.is-anim');
+  if (!bar) return;
+  var ticking = false, colapsada = false;
+  function update() {
+    var y = window.pageYOffset || 0;
+    var should = colapsada ? (y > 120) : (y > 180);
+    if (should !== colapsada) {
+      colapsada = should;
+      bar.classList.toggle('is-collapsed', colapsada);
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  update();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   leerConfigSitio();
   registrarVisita();
@@ -2123,6 +2147,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initQuizAventurero();      /* quiz de 3 pasos */
   initNewsletter();          /* formulario de newsletter */
   initBarraIconos();         /* entrada bounce-in de los iconos de la barra (index) */
+  initBarraColapsable();     /* coreografia colapsable de la barra al hacer scroll (index) */
   /* ScrollExpandMedia / HeroTrail eliminados — hero reemplazado por cinematic */
 });
 
