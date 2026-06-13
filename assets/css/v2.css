@@ -54,7 +54,8 @@
   /* Forma y elevacion */
   --radio-v2:     12px;            /* radio maximo del sistema */
   --radio-v2-sm:  10px;
-  --sombra-v2:    0 6px 20px -8px rgba(26, 42, 53, 0.18); /* UNICA sombra: hover de tarjeta */
+  --sombra-v2-suave: 0 1px 4px rgba(26, 42, 53, 0.07); /* reposo: apenas visible */
+  --sombra-v2:    0 8px 24px -8px rgba(26, 42, 53, 0.20); /* hover: se intensifica */
 
   /* Tipografia */
   --serif-v2: 'Playfair Display', Georgia, serif;  /* SOLO H1/H2 */
@@ -236,9 +237,11 @@ body.v2 {
 
 /* ---- GRID + TARJETA compacta (Airbnb-pequeña, AJUSTE 2) ---- */
 .v2 .v2-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(182px, 1fr)); gap: clamp(0.8rem,1.5vw,1.2rem); }
-.v2 .v2-card { display: block; color: inherit; border-radius: var(--radio-v2); transition: transform 0.25s ease, box-shadow 0.25s ease; }
-.v2 .v2-card:hover { transform: translateY(-2px); box-shadow: var(--sombra-v2); }
-.v2 .v2-card__media { position: relative; aspect-ratio: 1 / 1; border-radius: var(--radio-v2); overflow: hidden; background: var(--banda); }
+.v2 .v2-card { display: block; color: inherit; border-radius: var(--radio-v2); transition: transform 0.25s ease; }
+.v2 .v2-card:hover { transform: translateY(-2px); }
+/* Sombra en la FOTO (no bajo el texto): sutil en reposo, se intensifica al hover (+ el lift). */
+.v2 .v2-card__media { position: relative; aspect-ratio: 1 / 1; border-radius: var(--radio-v2); overflow: hidden; background: var(--banda); box-shadow: var(--sombra-v2-suave); transition: box-shadow 0.25s ease; }
+.v2 .v2-card:hover .v2-card__media { box-shadow: var(--sombra-v2); }
 .v2 .v2-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
 .v2 .v2-card:hover .v2-card__img { transform: scale(1.04); }
 .v2 .v2-card__chip {
