@@ -934,6 +934,16 @@ function generarEstrellas(rating) {
 
 /* ===== RENDER DE TARJETAS DE DESTINO ===== */
 var filtroActivo = 'todos';
+var terminoBusqueda = '';   /* /destinos: termino del buscador de texto (cliente) */
+
+/* Coincidencia de busqueda por texto (nombre/zona/categoria), case-insensitive. */
+function coincideBusqueda(d, q) {
+  var campos = [d.nombre_es, d.nombre_en, d.zona, d.categoria_es, d.categoria_en];
+  for (var i = 0; i < campos.length; i++) {
+    if (campos[i] && String(campos[i]).toLowerCase().indexOf(q) !== -1) return true;
+  }
+  return false;
+}
 
 function renderDestinos(filtro) {
   filtro = filtro || filtroActivo;
@@ -943,11 +953,23 @@ function renderDestinos(filtro) {
   /* En el index (#destinosGrid con data-home="1") solo se muestran los destinos
      de la curaduria destacado_home; en /destinos se muestran todos los activos. */
   var soloDestacados = grid.getAttribute('data-home') === '1';
+  var q = (terminoBusqueda || '').trim().toLowerCase();
   var lista = obtenerDestinos().filter(function (d) {
     if (!d.activo) return false;
     if (soloDestacados && !d.destacado_home) return false;
-    return (filtro === 'todos' || d.categoria === filtro);
+    if (filtro !== 'todos' && d.categoria !== filtro) return false;
+    if (q && !coincideBusqueda(d, q)) return false;
+    return true;
   });
+
+  /* Estado vacio honesto (busqueda/filtro sin resultados) — relevante en /destinos. */
+  if (!lista.length) {
+    grid.innerHTML = '<p class="v2-grid__vacio">' +
+      '<span class="lang-es">No encontramos destinos con esos filtros.</span>' +
+      '<span class="lang-en">No destinations match those filters.</span></p>';
+    initScrollAnimation();
+    return;
+  }
 
   var langCur = (typeof IDIOMA_ACTUAL !== 'undefined') ? IDIOMA_ACTUAL : 'es';
   var ariaPref = (langCur === 'en') ? 'View details of ' : 'Ver detalles de ';

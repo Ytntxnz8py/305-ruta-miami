@@ -219,6 +219,12 @@ body.v2 {
 .v2 .v2-card__meta { font-size: 0.78rem; color: var(--texto-suave); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .v2 .v2-vertodos { text-align: center; margin-top: clamp(1.4rem,3vw,2rem); }
 
+/* ---- buscador de /destinos + estado vacio ---- */
+.v2 .v2-buscador { display: flex; justify-content: center; max-width: 520px; margin: 0 auto clamp(1.2rem,3vw,1.8rem); }
+.v2 .v2-buscador input { width: 100%; padding: 0.7rem 1rem; border: 1px solid var(--linea); border-radius: var(--radio-v2); font-size: 0.95rem; font-family: inherit; color: var(--tinta); background: #fff; }
+.v2 .v2-buscador input:focus { outline: none; border-color: var(--accion-visitante); }
+.v2 .v2-grid__vacio { grid-column: 1 / -1; text-align: center; color: var(--texto-suave); padding: 2.5rem 1rem; }
+
 /* ---- BANDA PESCA (sobria) ---- */
 .v2 .v2-pesca { background: var(--banda); border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
 .v2 .v2-pesca__inner { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(1.2rem,3vw,2.4rem); padding: clamp(1.8rem,4vw,2.8rem) clamp(1rem,4vw,2rem); }
