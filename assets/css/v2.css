@@ -137,8 +137,153 @@ body.v2 {
 }
 
 /* ============================================================
-   4) COMPONENTES v2  — se añaden en el Commit 2 (index) y
-      Commit 3 (/destinos): nav fina, hero compacto, barra de
-      categorias, tarjeta de destino compacta, banda Pesca,
-      newsletter de una linea, footer sobrio, buscador.
+   4) COMPONENTES v2  (Lote A: index + /destinos)
    ============================================================ */
+
+/* ---- contenedor + utilidades ---- */
+.v2 .v2-wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+.v2 .v2-eyebrow {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accion-visitante); margin-bottom: 0.5rem;
+}
+.v2 .v2-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.7rem 1.3rem; border-radius: var(--radio-v2);
+  background: var(--accion-visitante); color: #fff;
+  font-weight: 600; font-size: 0.92rem; border: none; cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.v2 .v2-btn:hover { background: var(--accion-visitante-h); transform: translateY(-1px); color: #fff; }
+
+/* ---- HERO compacto (foto redondeada con titulo encima) ---- */
+.v2 .v2-hero { padding: 1.4rem clamp(1rem,4vw,2rem) 0; }
+.v2 .v2-hero__media {
+  position: relative; max-width: 1200px; margin: 0 auto;
+  border-radius: var(--radio-v2); overflow: hidden; aspect-ratio: 16 / 7;
+}
+.v2 .v2-hero__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.v2 .v2-hero__overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: flex-end; gap: 0.55rem;
+  padding: clamp(1.2rem, 4vw, 2.6rem);
+  background: linear-gradient(0deg, rgba(12,22,32,0.66) 0%, rgba(12,22,32,0.14) 46%, transparent 74%);
+}
+.v2 .v2-hero__titulo { color: #fff; font-size: clamp(1.7rem, 4.2vw, 3rem); max-width: 17ch; margin: 0; }
+.v2 .v2-hero__sub { color: rgba(255,255,255,0.92); font-size: clamp(0.95rem, 2vw, 1.12rem); max-width: 46ch; margin: 0; }
+.v2 .v2-hero__cta { margin-top: 0.4rem; }
+
+/* ---- cabecera de seccion ---- */
+.v2 .v2-sec-head { text-align: center; max-width: 60ch; margin: 0 auto clamp(1.2rem,3vw,2rem); padding-top: clamp(2rem,5vw,3.4rem); }
+.v2 .v2-sec-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+.v2 .v2-sec-sub { color: var(--texto-suave); margin-top: 0.4rem; font-size: 0.98rem; }
+
+/* ---- barra de categorias (Pesca primero) ---- */
+.v2 .v2-destinos { padding-bottom: clamp(2rem,5vw,3.5rem); }
+.v2 .v2-cats { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: clamp(1.4rem,3vw,2rem); }
+.v2 .v2-cat {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 0.9rem; border-radius: 999px;
+  border: 1px solid var(--linea); background: #fff;
+  color: var(--texto); font-size: 0.85rem; font-weight: 500; font-family: inherit; cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+}
+.v2 .v2-cat__ico { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+.v2 .v2-cat:hover { border-color: var(--accion-visitante); color: var(--accion-visitante); }
+.v2 .v2-cat.filtros__btn--activo { background: var(--accion-visitante); border-color: var(--accion-visitante); color: #fff; }
+
+/* ---- GRID + TARJETA compacta (Airbnb-pequeña, AJUSTE 2) ---- */
+.v2 .v2-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(182px, 1fr)); gap: clamp(0.8rem,1.5vw,1.2rem); }
+.v2 .v2-card { display: block; color: inherit; border-radius: var(--radio-v2); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.v2 .v2-card:hover { transform: translateY(-2px); box-shadow: var(--sombra-v2); }
+.v2 .v2-card__media { position: relative; aspect-ratio: 1 / 1; border-radius: var(--radio-v2); overflow: hidden; background: var(--banda); }
+.v2 .v2-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+.v2 .v2-card:hover .v2-card__img { transform: scale(1.04); }
+.v2 .v2-card__chip {
+  position: absolute; top: 8px; left: 8px; font-size: 0.68rem; font-weight: 600;
+  padding: 0.18rem 0.5rem; border-radius: 999px;
+  background: var(--chip-otro-bg); color: var(--chip-otro-tx);
+}
+.v2 .v2-card__chip--pesca { background: var(--chip-pesca-bg); color: var(--chip-pesca-tx); }
+.v2 .v2-card__chip--playa { background: var(--chip-playa-bg); color: var(--chip-playa-tx); }
+.v2 .v2-card__chip--buceo { background: var(--chip-buceo-bg); color: var(--chip-buceo-tx); }
+.v2 .v2-card__chip--exploracion { background: var(--chip-exploracion-bg); color: var(--chip-exploracion-tx); }
+.v2 .v2-card__chip--bares { background: var(--chip-bares-bg); color: var(--chip-bares-tx); }
+/* Badge "Destacado" (unico uso de mostaza) — solo destinos de pago (dormido por ahora). */
+.v2 .v2-card__badge {
+  position: absolute; top: 8px; right: 8px; font-size: 0.66rem; font-weight: 700;
+  padding: 0.18rem 0.5rem; border-radius: 999px;
+  background: var(--destacado-bg); color: var(--destacado-tx);
+}
+.v2 .v2-card__titulo { font-size: 0.89rem; font-weight: 600; color: var(--tinta); margin: 0.55rem 0 0.15rem; line-height: 1.25; }
+.v2 .v2-card__meta { font-size: 0.78rem; color: var(--texto-suave); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.v2 .v2-vertodos { text-align: center; margin-top: clamp(1.4rem,3vw,2rem); }
+
+/* ---- BANDA PESCA (sobria) ---- */
+.v2 .v2-pesca { background: var(--banda); border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
+.v2 .v2-pesca__inner { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(1.2rem,3vw,2.4rem); padding: clamp(1.8rem,4vw,2.8rem) clamp(1rem,4vw,2rem); }
+.v2 .v2-pesca__img { width: clamp(220px, 38%, 420px); aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radio-v2); flex: 0 0 auto; }
+.v2 .v2-pesca__text { flex: 1 1 280px; }
+.v2 .v2-pesca__text h2 { font-size: clamp(1.4rem,2.6vw,1.9rem); margin: 0 0 0.5rem; }
+.v2 .v2-pesca__text p { color: var(--texto); margin: 0 0 1rem; max-width: 52ch; }
+
+/* ---- NEWSLETTER de una linea (IDs/Brevo intactos) ---- */
+.v2 .v2-news { padding: clamp(2.4rem,5vw,3.6rem) 0; }
+.v2 .v2-news__inner { max-width: 760px; text-align: center; }
+.v2 .v2-news__text h2 { font-size: clamp(1.4rem,2.6vw,1.9rem); margin: 0 0 0.4rem; }
+.v2 .v2-news__sub { color: var(--texto-suave); margin: 0 0 1.2rem; }
+/* flex-direction/align/padding explicitos: anulan el .newsletter-form viejo (column). */
+.v2 .v2-news__form { display: flex; flex-direction: row; align-items: center; gap: 0.5rem; justify-content: center; flex-wrap: wrap; padding: 0; }
+.v2 .v2-news__input { flex: 1 1 260px; max-width: 340px; padding: 0.7rem 1rem; border: 1px solid var(--linea); border-radius: var(--radio-v2); font-size: 0.95rem; font-family: inherit; color: var(--tinta); background: #fff; }
+.v2 .v2-news__input:focus { outline: none; border-color: var(--accion-visitante); }
+.v2 .v2-news__err { color: #b3261e; margin: 0.8rem 0 0; font-size: 0.86rem; }
+.v2 .v2-news__ok { margin-top: 1rem; color: var(--tinta); display: flex; flex-direction: column; gap: 0.25rem; align-items: center; }
+.v2 .v2-news__okmsg { color: var(--texto-suave); font-size: 0.9rem; }
+
+/* ---- FOOTER sobrio ---- */
+.v2 .v2-footer { background: var(--banda); border-top: 1px solid var(--linea); }
+.v2 .v2-footer__top { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: flex-start; padding: clamp(2rem,4vw,3rem) clamp(1rem,4vw,2rem) 1.4rem; }
+.v2 .v2-footer__logo { font-family: var(--serif-v2); font-size: 1.25rem; font-weight: 600; color: var(--tinta); }
+.v2 .v2-footer__logo span { color: var(--accion-visitante); font-style: italic; }
+.v2 .v2-footer__tag { color: var(--texto-suave); font-size: 0.9rem; margin-top: 0.3rem; }
+.v2 .v2-footer__nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+.v2 .v2-footer__nav a { color: var(--texto); font-size: 0.9rem; }
+.v2 .v2-footer__nav a:hover { color: var(--accion-visitante); }
+.v2 .v2-footer__bottom { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; padding: 1rem clamp(1rem,4vw,2rem) 1.6rem; border-top: 1px solid var(--linea); }
+.v2 .v2-footer__copy { color: var(--texto-suave); font-size: 0.84rem; margin: 0; }
+.v2 .v2-footer__admin { color: var(--texto-suave); margin-left: 0.6rem; }
+.v2 .v2-footer__admin:hover { color: var(--accion-visitante); }
+.v2 .v2-totop { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--linea); background: #fff; color: var(--tinta); cursor: pointer; font-size: 1rem; line-height: 1; }
+.v2 .v2-totop:hover { border-color: var(--accion-visitante); color: var(--accion-visitante); }
+
+/* ---- NAV override: navbar.css es compartido y hardcodeado; bajo .v2 lo forzamos
+        sobrio (blanco + hairline), sin tocar las otras paginas. ---- */
+.v2 .em-nav,
+.v2 .em-nav.em-nav--dark-hero { background: #fff; box-shadow: 0 1px 0 var(--linea); }
+.v2 .em-nav__logo-e,
+.v2 .em-nav.em-nav--dark-hero .em-nav__logo-e { color: var(--tinta); }
+.v2 .em-nav__logo-m,
+.v2 .em-nav.em-nav--dark-hero .em-nav__logo-m { color: var(--accion-visitante); }
+.v2 .em-nav__link,
+.v2 .em-nav.em-nav--dark-hero .em-nav__link { color: var(--texto); }
+.v2 .em-nav__link:hover,
+.v2 .em-nav.em-nav--dark-hero .em-nav__link:hover { color: var(--accion-visitante); background: transparent; }
+.v2 .em-nav__link.is-active { color: var(--tinta); background: transparent; font-weight: 600; }
+.v2 .em-nav__link--muted,
+.v2 .em-drawer__link--muted { color: var(--accion-visitante); font-weight: 600; }
+.v2 .em-nav__lang { background: #fff; color: var(--tinta); border: 1px solid var(--linea); }
+.v2 .em-nav__lang:hover { background: var(--accion-visitante); color: #fff; border-color: var(--accion-visitante); }
+.v2 .em-nav.em-nav--dark-hero .em-nav__burger span { background: var(--tinta); }
+.v2 .em-drawer__link:hover,
+.v2 .em-drawer__link.is-active { color: var(--accion-visitante); }
+
+/* ---- MODAL (Lote A: solo des-metalizar cerrar + quitar side-stripe; restyle pleno -> Lote D) ---- */
+.v2 .v2-modal-cerrar {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--linea); background: #fff; color: var(--tinta);
+  font-size: 1.05rem; line-height: 1; cursor: pointer;
+}
+.v2 .v2-modal-cerrar:hover { border-color: var(--accion-visitante); color: var(--accion-visitante); }
+/* Anti-patron impeccable (b): el side-stripe border-left:3px pasa a borde completo + tinte. */
+.v2 .modal-llegar-texto { border-left: none; border: 1px solid var(--linea); border-radius: var(--radio-v2); background: var(--banda); }

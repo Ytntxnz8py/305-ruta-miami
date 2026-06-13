@@ -8,7 +8,7 @@
 /* ===== DATOS DE DESTINOS ===== */
 var DESTINOS_DEFAULT = [
   {
-    id: 1,
+    id: 1, destacado_home: true,
     nombre_es: 'Everglades National Park',
     nombre_en: 'Everglades National Park',
     descripcion_es: 'El humedal subtropical más grande de EE.UU. — kayak, senderismo y avistamiento de caimanes, manatíes y aves exóticas en un ecosistema único declarado Patrimonio de la UNESCO.',
@@ -60,7 +60,7 @@ var DESTINOS_DEFAULT = [
     ]
   },
   {
-    id: 2,
+    id: 2, destacado_home: true,
     nombre_es: 'John Pennekamp Coral Reef State Park',
     nombre_en: 'John Pennekamp Coral Reef State Park',
     descripcion_es: 'El primer parque marino de EE.UU. — buceo y snorkeling sobre el único arrecife de coral vivo de tierra firme en el país, con aguas cristalinas y vida marina espectacular en Key Largo.',
@@ -164,7 +164,7 @@ var DESTINOS_DEFAULT = [
     ]
   },
   {
-    id: 4,
+    id: 4, destacado_home: true,
     nombre_es: 'Bill Baggs Cape Florida State Park',
     nombre_en: 'Bill Baggs Cape Florida State Park',
     descripcion_es: 'Una de las mejores playas de Florida (Top 10 nacional) con el faro más antiguo del sur de Florida (1825). Snorkeling, ciclismo y pícnic al sur de Key Biscayne, a 20 min del centro de Miami.',
@@ -479,7 +479,7 @@ var DESTINOS_DEFAULT = [
 
   /* ---------- PLAYA ---------- */
   {
-    id: 10,
+    id: 10, destacado_home: true,
     nombre_es: 'South Beach (Lummus Park)', nombre_en: 'South Beach (Lummus Park)',
     descripcion_es: 'La playa más icónica de Miami: arena clara, aguas cálidas y el distrito Art Déco a un paso, con sus torres de salvavidas de colores.',
     descripcion_en: 'Miami\'s most iconic beach: pale sand, warm water and the Art Deco district steps away, with its colorful lifeguard towers.',
@@ -512,7 +512,7 @@ var DESTINOS_DEFAULT = [
 
   /* ---------- BUCEO ---------- */
   {
-    id: 11,
+    id: 11, destacado_home: true,
     nombre_es: 'Neptune Memorial Reef', nombre_en: 'Neptune Memorial Reef',
     descripcion_es: 'Arrecife artificial inspirado en la Atlántida, a unos 12 metros de profundidad frente a Key Biscayne. Solo accesible por barco con operadores de buceo.',
     descripcion_en: 'An artificial reef inspired by Atlantis, about 40 ft deep off Key Biscayne. Accessible only by boat with dive operators.',
@@ -570,7 +570,7 @@ var DESTINOS_DEFAULT = [
 
   /* ---------- PESCA ---------- */
   {
-    id: 13,
+    id: 13, destacado_home: true,
     nombre_es: 'South Pointe Park Pier', nombre_en: 'South Pointe Park Pier',
     descripcion_es: 'Muelle público sobre Government Cut, en la punta sur de Miami Beach. Pesca de orilla, faro histórico y vistas de los cruceros que entran y salen del puerto.',
     descripcion_en: 'Public pier over Government Cut, at the southern tip of Miami Beach. Shore fishing, a historic lighthouse and views of cruise ships entering and leaving the port.',
@@ -596,7 +596,7 @@ var DESTINOS_DEFAULT = [
     rating: 4.8, activo: true, resenas: []
   },
   {
-    id: 14,
+    id: 14, destacado_home: true,
     nombre_es: 'Haulover Park (Jetty)', nombre_en: 'Haulover Park (Jetty)',
     descripcion_es: 'Jetty de pesca junto al Haulover Inlet, en uso desde 1927. Punto popular para pesca de roca y surf fishing, junto a una de las playas más extensas del condado.',
     descripcion_en: 'A fishing jetty by the Haulover Inlet, in use since 1927. A popular spot for rock and surf fishing, next to one of the county\'s longest beaches.',
@@ -623,7 +623,7 @@ var DESTINOS_DEFAULT = [
     rating: 4.5, activo: true, resenas: []
   },
   {
-    id: 15,
+    id: 15, destacado_home: true,
     nombre_es: 'Rickenbacker Causeway', nombre_en: 'Rickenbacker Causeway',
     descripcion_es: 'Pesca de orilla clásica camino a Key Biscayne, con vistas al skyline de Miami. Tramos de costa accesibles a pie a lo largo del puente.',
     descripcion_en: 'Classic shore fishing on the way to Key Biscayne, with views of the Miami skyline. Walkable coastal stretches along the causeway.',
@@ -681,7 +681,7 @@ var DESTINOS_DEFAULT = [
 
   /* ---------- EXPLORACIÓN ---------- */
   {
-    id: 17,
+    id: 17, destacado_home: true,
     nombre_es: 'Deering Estate', nombre_en: 'Deering Estate',
     descripcion_es: 'Finca histórica frente a Biscayne Bay que combina arquitectura de los años 20, bosque nativo y sitios arqueológicos de miles de años de antigüedad.',
     descripcion_en: 'A historic bayfront estate combining 1920s architecture, native forest and archaeological sites thousands of years old.',
@@ -737,7 +737,7 @@ var DESTINOS_DEFAULT = [
     rating: 4.4, activo: true, es_editorial: true, resenas: []
   },
   {
-    id: 19,
+    id: 19, destacado_home: true,
     nombre_es: 'Joe\'s Stone Crab', nombre_en: 'Joe\'s Stone Crab',
     descripcion_es: 'Institución de Miami Beach desde 1913, famosa por sus garras de stone crab. Una de las mesas más históricas y queridas de la ciudad.',
     descripcion_en: 'A Miami Beach institution since 1913, famous for its stone crab claws. One of the city\'s most historic and beloved tables.',
@@ -818,7 +818,7 @@ var DESTINOS_DEFAULT = [
 ];
 
 /* Versión de los datos — incrementar cada vez que cambie DESTINOS_DEFAULT */
-var DESTINOS_VERSION = 7;
+var DESTINOS_VERSION = 8;   /* v2 Lote A: +campo destacado_home en 10 destinos curados */
 
 /* Mapa de IDs de destino → rutas de páginas HTML reales */
 var DESTINO_URLS = {
@@ -878,6 +878,21 @@ function registrarClic(idDestino) {
   localStorage.setItem('em_clics', JSON.stringify(clics));
 }
 
+/* Clic en tarjeta de destino: dispara los DOS sistemas, sin tocar la funcion
+   compartida registrarClic.
+   - registrarClic(id): contador local (localStorage) que lee el panel admin. INTACTO.
+   - trackDestinationClick(nombre, categoria): evento GA4 'destination_click'. Estaba
+     definido pero nunca se llamaba (muerto); aqui se reconecta (Lote A v2).
+   Resuelve nombre/categoria del objeto destino, asi no se interpola el nombre (con
+   apostrofes como "Joe's") en el onclick inline. */
+function clicDestino(idDestino) {
+  registrarClic(idDestino);
+  if (typeof trackDestinationClick === 'function') {
+    var d = obtenerDestinos().filter(function (x) { return x.id === idDestino; })[0];
+    if (d) { trackDestinationClick(d.nombre_es, d.categoria); }
+  }
+}
+
 /* ===== 3D MOUSE TILT ===== */
 /* Añade efecto de inclinación 3D en hover sobre cada card de destino.
    Solo activo si el usuario no prefiere movimiento reducido. */
@@ -925,113 +940,71 @@ function renderDestinos(filtro) {
   var grid = document.getElementById('destinosGrid');
   if (!grid) return;
 
+  /* En el index (#destinosGrid con data-home="1") solo se muestran los destinos
+     de la curaduria destacado_home; en /destinos se muestran todos los activos. */
+  var soloDestacados = grid.getAttribute('data-home') === '1';
   var lista = obtenerDestinos().filter(function (d) {
-    return d.activo && (filtro === 'todos' || d.categoria === filtro);
+    if (!d.activo) return false;
+    if (soloDestacados && !d.destacado_home) return false;
+    return (filtro === 'todos' || d.categoria === filtro);
   });
 
   var langCur = (typeof IDIOMA_ACTUAL !== 'undefined') ? IDIOMA_ACTUAL : 'es';
   var ariaPref = (langCur === 'en') ? 'View details of ' : 'Ver detalles de ';
   grid.innerHTML = lista.map(function (d, i) {
-    var delay = (i % 3) * 0.12;
-    /* Si existe página real, usarla; si no, abrir modal legacy */
+    var delay = (i % 4) * 0.06;
     var url = DESTINO_URLS[d.id] || '';
-    var cardClick = url
-      ? 'onclick="registrarClic(' + d.id + '); window.location.href=\'' + url + '\';"' +
-        ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){registrarClic(' + d.id + ');window.location.href=\'' + url + '\'}"'
-      : 'onclick="registrarClic(' + d.id + '); abrirModal(' + d.id + ');"' +
-        ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){registrarClic(' + d.id + ');abrirModal(' + d.id + ')}"';
-    var btnHtml = url
-      ? '<a href="' + url + '" class="metal-btn destino-card__btn" onclick="event.stopPropagation(); registrarClic(' + d.id + ');">' +
-          '<div class="metal-btn-shine"></div>' +
-          '<div class="metal-btn-hover-glow"></div>' +
-          '<span class="lang-es">Ver destino →</span>' +
-          '<span class="lang-en">View destination →</span>' +
-        '</a>'
-      : '<button class="metal-btn destino-card__btn" onclick="event.stopPropagation(); registrarClic(' + d.id + '); abrirModal(' + d.id + ');">' +
-          '<div class="metal-btn-shine"></div>' +
-          '<div class="metal-btn-hover-glow"></div>' +
-          '<span class="lang-es">Ver destino</span>' +
-          '<span class="lang-en">View destination</span>' +
-        '</button>';
-    /* Estrellas Google Maps */
-    var estrellas = generarEstrellas(d.rating || 4.5);
-    var ratingNum = d.rating ? String(d.rating) : '';
+    var cat = d.categoria || d.tipo || 'otro';
 
-    /* Botón del overlay de imagen (hover) */
-    var overlayBtn = url
-      ? '<a href="' + url + '" class="destino-card__overlay-btn" onclick="event.stopPropagation(); registrarClic(' + d.id + ');">' +
-          '<span class="lang-es">Ver destino →</span>' +
-          '<span class="lang-en">View destination →</span>' +
-        '</a>'
-      : '<button class="destino-card__overlay-btn" onclick="event.stopPropagation(); registrarClic(' + d.id + '); abrirModal(' + d.id + ');">' +
-          '<span class="lang-es">Ver destino →</span>' +
-          '<span class="lang-en">View destination →</span>' +
-        '</button>';
+    /* Meta: UNA sola linea (zona si existe, si no precio). Datos estaticos de
+       confianza (DESTINOS_DEFAULT) — misma politica de no-escape del render previo. */
+    var metaEs = (d.zona ? d.zona + ' · ' : '') + (d.precio || '');
+    var metaEn = (d.zona ? d.zona + ' · ' : '') + (d.precio_en || d.precio || '');
 
-    return (
-      /* Wrapper de borde gradiente — contiene la tarjeta */
-      '<div class="destino-card-wrap fade-up" style="transition-delay:' + delay + 's">' +
-        '<article class="destino-card" data-tipo="' + d.tipo + '" ' +
-                 cardClick + ' role="button" tabindex="0" ' +
-                 'aria-label="' + ariaPref + (langCur === 'en' ? d.nombre_en : d.nombre_es) + '">' +
+    var chip =
+      '<span class="v2-card__chip v2-card__chip--' + cat + '">' +
+        '<span class="lang-es">' + (d.categoria_es || d.tipo_es || '') + '</span>' +
+        '<span class="lang-en">' + (d.categoria_en || d.tipo_en || '') + '</span>' +
+      '</span>';
 
-          /* ── Imagen con overlay de hover ── */
-          '<div class="destino-card__img-cont">' +
-            '<img src="' + d.foto + '" alt="' + d.nombre_es + '" class="destino-card__img" loading="lazy" />' +
-            '<span class="destino-card__badge destino-card__badge--tipo destino-card__badge--' + (d.categoria || d.tipo) + '">' +
-              '<span class="lang-es">' + (d.categoria_es || d.tipo_es) + '</span>' +
-              '<span class="lang-en">' + (d.categoria_en || d.tipo_en) + '</span>' +
-            '</span>' +
-            (ratingNum
-              ? '<span class="destino-card__rating" aria-label="Calificacion Google ' + ratingNum + '">' +
-                  '<span class="destino-card__stars" aria-hidden="true">' + estrellas + '</span>' +
-                  '<span>' + ratingNum + '</span>' +
-                '</span>'
-              : '') +
-            /* Overlay semitransparente con botón centrado (visible al hacer hover) */
-            '<div class="destino-card__img-overlay" aria-hidden="true">' +
-              overlayBtn +
-            '</div>' +
-          '</div>' +
+    /* Badge "Destacado" SOLO si el destino es de pago (d.destacado === true).
+       Mecanismo listo pero dormido (ningun destino lo tiene aun). NO depende de
+       destacado_home (eso es curaduria de portada, no pago). */
+    var badge = (d.destacado === true)
+      ? '<span class="v2-card__badge"><span class="lang-es">Destacado</span><span class="lang-en">Featured</span></span>'
+      : '';
 
-          /* ── Contenido: título/desc arriba, meta abajo ── */
-          '<div class="destino-card__info">' +
-            '<div class="destino-card__info-top">' +
-              '<h3 class="destino-card__nombre">' +
-                '<span class="lang-es">' + d.nombre_es + '</span>' +
-                '<span class="lang-en">' + d.nombre_en + '</span>' +
-              '</h3>' +
-              '<p class="destino-card__desc">' +
-                '<span class="lang-es">' + d.descripcion_es + '</span>' +
-                '<span class="lang-en">' + d.descripcion_en + '</span>' +
-              '</p>' +
-            '</div>' +
-            '<div class="destino-card__meta-bar">' +
-              '<div class="destino-card__meta">' +
-                '<span class="destino-card__meta-item"><span class="meta-icono">💲</span>' +
-                  '<span class="lang-es">' + d.precio + '</span>' +
-                  '<span class="lang-en">' + (d.precio_en || d.precio) + '</span>' +
-                '</span>' +
-                '<span class="destino-card__meta-item"><span class="meta-icono">⏰</span>' +
-                  '<span class="lang-es">' + d.horarios + '</span>' +
-                  '<span class="lang-en">' + (d.horarios_en || d.horarios) + '</span>' +
-                '</span>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
+    var inner =
+      '<div class="v2-card__media">' +
+        '<img class="v2-card__img" src="' + d.foto + '" alt="' + d.nombre_es + '" loading="lazy" width="400" height="400" />' +
+        chip + badge +
+      '</div>' +
+      '<h3 class="v2-card__titulo">' +
+        '<span class="lang-es">' + d.nombre_es + '</span>' +
+        '<span class="lang-en">' + d.nombre_en + '</span>' +
+      '</h3>' +
+      '<p class="v2-card__meta">' +
+        '<span class="lang-es">' + metaEs + '</span>' +
+        '<span class="lang-en">' + metaEn + '</span>' +
+      '</p>';
 
-        '</article>' +
-      '</div>'
-    );
+    var label = ariaPref + (langCur === 'en' ? d.nombre_en : d.nombre_es);
+    var delayAttr = ' style="transition-delay:' + delay + 's"';
+
+    /* Toda la tarjeta es el enlace (sin boton "ver mas", sin overlay).
+       clicDestino(id) = registrarClic (panel admin, intacto) + trackDestinationClick (GA4). */
+    if (url) {
+      return '<a class="v2-card fade-up"' + delayAttr + ' href="' + url + '" ' +
+        'onclick="clicDestino(' + d.id + ')" aria-label="' + label + '">' + inner + '</a>';
+    }
+    return '<div class="v2-card fade-up"' + delayAttr + ' role="button" tabindex="0" ' +
+      'onclick="clicDestino(' + d.id + '); abrirModal(' + d.id + ')" ' +
+      'onkeydown="if(event.key===\'Enter\'||event.key===\' \'){clicDestino(' + d.id + ');abrirModal(' + d.id + ')}" ' +
+      'aria-label="' + label + '">' + inner + '</div>';
   }).join('');
 
   initScrollAnimation();
-  initMetalButtons(grid);   /* Metal press/hover en botones "Ver destino" */
-
-  /* Activa tilt 3D en cada card renderizada */
-  grid.querySelectorAll('.destino-card').forEach(function (card) {
-    bindCardTilt(card);
-  });
+  /* v2: la tarjeta compacta no usa MetalButton ni tilt 3D — solo lift+zoom por CSS. */
 }
 
 /* ===== GALERÍA: ESTADO GLOBAL ===== */

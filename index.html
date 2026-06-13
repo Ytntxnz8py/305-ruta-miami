@@ -75,7 +75,7 @@
   <link rel="stylesheet" href="assets/css/footer.css" />
   <link rel="stylesheet" href="assets/css/cta-card.css" />
   <!-- Sistema visual v2 (Ley de diseño v2 §7b). Va LA ULTIMA para ganar la cascada.
-       Se activa al poner class="v2" en <body> (Commit 2). -->
+       Se activa con la clase v2 en el body (Commit 2). -->
   <link rel="stylesheet" href="assets/css/v2.css" />
 
   <!-- ⚠️ REEMPLAZAR: Cambiar G-7HMBMBQNQZ por el Measurement ID real -->
@@ -93,10 +93,7 @@
     document.documentElement.classList.add('lang-' + (localStorage.getItem('em_idioma') || 'es'));
   </script>
 </head>
-<body>
-
-  <!-- H1 oculto para SEO (el hero visual no usa h1 textual) -->
-  <h1 class="visually-hidden">305 Ruta Miami — Directorio de Experiencias Outdoor en South Florida</h1>
+<body class="v2">
 
   <!-- ===== NAVBAR UNIVERSAL ===== -->
   <nav class="em-nav" aria-label="Navegación principal">
@@ -106,13 +103,13 @@
     <ul class="em-nav__links">
       <li><a class="em-nav__link" href="pesca.html"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></a></li>
       <li><a class="em-nav__link" href="index.html"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a></li>
-      <li><a class="em-nav__link" href="index.html#destinos"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a></li>
+      <li><a class="em-nav__link" href="destinos.html"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a></li>
       <li><a class="em-nav__link" href="blog.html">Blog</a></li>
       <li><span class="em-nav__sep" aria-hidden="true"></span></li>
       <li><a class="em-nav__link" href="privacidad.html"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a></li>
       <li><a class="em-nav__link" href="terminos.html"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a></li>
     </ul>
-    <a class="em-nav__link em-nav__link--muted" href="anunciantes.html"><span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span></a>
+    <a class="em-nav__link em-nav__link--muted" href="anunciantes.html"><span class="lang-es">Anuncia tu negocio</span><span class="lang-en">List your business</span></a>
     <button class="em-nav__lang" type="button" aria-label="Cambiar idioma">EN</button>
     <button class="em-nav__burger" type="button" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -120,14 +117,14 @@
   </nav>
   <div class="em-drawer__backdrop" aria-hidden="true"></div>
   <aside class="em-drawer" aria-label="Menú móvil">
-    <a class="em-drawer__link" href="pesca.html"><span class="em-drawer__emoji">🎣</span><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></a>
-    <a class="em-drawer__link" href="index.html"><span class="em-drawer__emoji">🏠</span><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
-    <a class="em-drawer__link" href="index.html#destinos"><span class="em-drawer__emoji">📍</span><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a>
-    <a class="em-drawer__link" href="blog.html"><span class="em-drawer__emoji">📖</span>Blog</a>
-    <a class="em-drawer__link" href="privacidad.html"><span class="em-drawer__emoji">🔒</span><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
-    <a class="em-drawer__link" href="terminos.html"><span class="em-drawer__emoji">📋</span><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
+    <a class="em-drawer__link" href="pesca.html"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></a>
+    <a class="em-drawer__link" href="index.html"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+    <a class="em-drawer__link" href="destinos.html"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a>
+    <a class="em-drawer__link" href="blog.html">Blog</a>
+    <a class="em-drawer__link" href="privacidad.html"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
+    <a class="em-drawer__link" href="terminos.html"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
     <hr class="em-drawer__sep"/>
-    <a class="em-drawer__link em-drawer__link--muted" href="anunciantes.html"><span class="lang-es">Para empresas →</span><span class="lang-en">For businesses →</span></a>
+    <a class="em-drawer__link em-drawer__link--muted" href="anunciantes.html"><span class="lang-es">Anuncia tu negocio</span><span class="lang-en">List your business</span></a>
     <div class="em-drawer__lang">
       <button class="em-drawer__lang-btn" type="button" data-lang="es">ES</button>
       <button class="em-drawer__lang-btn" type="button" data-lang="en">EN</button>
@@ -136,810 +133,127 @@
 
   <main>
 
-    <!-- ===== HERO PARALLAX — multicapa con profundidad 3D al mover el mouse ===== -->
-    <section class="hero-parallax" id="inicio" aria-label="Hero principal">
-
-      <!-- Capa 1: imagen de fondo — se desplaza con el mouse (parallax lento) -->
-      <div class="hero-px__layer" id="hpxBg"
-           data-spx="0.03" data-spy="0.038" data-spz="0" data-rot="0"
-           aria-hidden="true">
-        <img class="hero-px__img"
-             src="assets/images/hero/hero-miami-night.jpg"
-             alt="Skyline de Miami de noche — luces reflejadas en la bahía"
-             width="1920" height="1080"
-             fetchpriority="high" decoding="async" />
+    <!-- ===== HERO COMPACTO v2 ===== -->
+    <section class="v2-hero" id="inicio" aria-label="Bienvenida">
+      <div class="v2-hero__media">
+        <img class="v2-hero__img" src="assets/images/hero/hero-miami-night.jpg"
+             alt="Skyline de Miami al atardecer sobre la bahía"
+             width="1600" height="900" fetchpriority="high" decoding="async" />
+        <div class="v2-hero__overlay">
+          <h1 class="v2-hero__titulo">
+            <span class="lang-es">Tu próxima aventura en Miami empieza aquí</span>
+            <span class="lang-en">Your next Miami adventure starts here</span>
+          </h1>
+          <p class="v2-hero__sub">
+            <span class="lang-es">Playas, pesca, buceo y naturaleza — encuentra tu destino en minutos.</span>
+            <span class="lang-en">Beaches, fishing, diving and nature — find your spot in minutes.</span>
+          </p>
+          <a class="v2-btn v2-hero__cta" href="#destinos">
+            <span class="lang-es">Explorar destinos</span><span class="lang-en">Explore destinations</span>
+          </a>
+        </div>
       </div>
+    </section>
 
-      <!-- Degradado base solo para legibilidad del texto (inferior) -->
-      <div class="hero-px__text-fade" aria-hidden="true"></div>
+    <!-- ===== DESTINOS DESTACADOS v2 ===== -->
+    <section class="v2-destinos" id="destinos" aria-label="Destinos destacados">
+      <div class="v2-wrap">
+        <div class="v2-sec-head">
+          <h2 data-i18n="destinos_titulo">Destinos en Miami</h2>
+          <p class="v2-sec-sub" data-i18n="destinos_sub">Descubre las mejores experiencias outdoor de South Florida</p>
+        </div>
 
-      <!-- Tags flotantes en la parte superior (estáticos, solo fade-in) -->
-      <div class="hero-px__tags" aria-hidden="true">
-        <span class="hero-tag"><span class="lang-es">✨ Aventuras</span><span class="lang-en">✨ Adventures</span></span>
-        <span class="hero-tag"><span class="lang-es">🌊 Playas</span><span class="lang-en">🌊 Beaches</span></span>
-        <span class="hero-tag"><span class="lang-es">☀️ Sol todo el año</span><span class="lang-en">☀️ Year-round sun</span></span>
-        <span class="hero-tag"><span class="lang-es">🌿 Naturaleza</span><span class="lang-en">🌿 Nature</span></span>
-        <span class="hero-tag"><span class="lang-es">🐠 Arrecifes</span><span class="lang-en">🐠 Reefs</span></span>
+        <!-- Barra de categorias (Pesca primero). Conserva .filtros__btn + data-filtro
+             (filter_click de analytics + logica de renderDestinos). El icono SVG es
+             hermano del texto; las etiquetas usan .lang-es/.lang-en (sin emojis). -->
+        <div class="v2-cats filtros" role="group" aria-label="Filtrar destinos">
+          <button class="v2-cat filtros__btn filtros__btn--activo" data-filtro="todos"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h6v6H4zM14 5h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg><span class="v2-cat__txt"><span class="lang-es">Todos</span><span class="lang-en">All</span></span></button>
+          <button class="v2-cat filtros__btn" data-filtro="pesca"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12c4-5 11-5 15 0-4 5-11 5-15 0z"/><path d="M18 12l3-2.5v5z"/></svg><span class="v2-cat__txt"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></span></button>
+          <button class="v2-cat filtros__btn" data-filtro="playa"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg><span class="v2-cat__txt"><span class="lang-es">Playa</span><span class="lang-en">Beach</span></span></button>
+          <button class="v2-cat filtros__btn" data-filtro="buceo"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9c2.5-2.5 5-2.5 7.5 0S14 11 16.5 9 21.5 7 22 9M2 15c2.5-2.5 5-2.5 7.5 0S14 17 16.5 15 21.5 13 22 15"/></svg><span class="v2-cat__txt"><span class="lang-es">Buceo</span><span class="lang-en">Diving</span></span></button>
+          <button class="v2-cat filtros__btn" data-filtro="exploracion"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16 8l-2.5 5.5L8 16l2.5-5.5z"/></svg><span class="v2-cat__txt"><span class="lang-es">Exploración</span><span class="lang-en">Exploration</span></span></button>
+          <button class="v2-cat filtros__btn" data-filtro="bares"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12l-6 7zM12 11v7M8 21h8"/></svg><span class="v2-cat__txt"><span class="lang-es">Bares</span><span class="lang-en">Food</span></span></button>
+        </div>
+
+        <!-- data-home="1": el render solo muestra la curaduria destacado_home. -->
+        <div class="v2-grid" id="destinosGrid" data-home="1" aria-live="polite"></div>
+
+        <div class="v2-vertodos">
+          <a class="v2-link" href="destinos.html">
+            <span class="lang-es">Ver todos los destinos →</span><span class="lang-en">See all destinations →</span>
+          </a>
+        </div>
       </div>
+    </section>
 
-      <!-- Texto central — parallax propio, distinto al fondo -->
-      <div class="hero-px__text" id="hpxText"
-           data-spx="0.07" data-spy="0.05" data-spz="0.08" data-rot="0.04">
+    <!-- ===== BANDA PESCA v2 (sobria) ===== -->
+    <section class="v2-pesca" id="pesca-destacado" aria-label="La guía de pesca de Miami">
+      <div class="v2-wrap v2-pesca__inner">
+        <img class="v2-pesca__img"
+             src="assets/images/pesca/anita-denunzio-1TIiE-y30nE-unsplash.jpg"
+             alt="Aguas someras junto a la playa con una lancha de pesca"
+             loading="lazy" width="480" height="360" />
+        <div class="v2-pesca__text">
+          <span class="v2-eyebrow"><span class="lang-es">Guía</span><span class="lang-en">Guide</span></span>
+          <h2><span class="lang-es">La guía de pesca de Miami</span><span class="lang-en">The Miami Fishing Guide</span></h2>
+          <p><span class="lang-es">De los flats de la bahía al Gulf Stream: qué se pesca, cuándo y cómo salir bien preparado.</span><span class="lang-en">From the bay flats to the Gulf Stream: what's biting, when, and how to go out prepared.</span></p>
+          <a class="v2-btn" href="pesca.html"><span class="lang-es">Explorar la guía →</span><span class="lang-en">Explore the guide →</span></a>
+        </div>
+      </div>
+    </section>
 
-        <!-- H1: texto inyectado por JS, palabra a palabra -->
-        <h1 class="hero-px__title" id="heroPxTitle"
-            aria-label="Descubre una de las ciudades más icónicas y emocionantes del mundo"></h1>
-
-        <!-- Subtítulo -->
-        <p class="hero-px__sub" id="heroPxSub">
-          <span class="lang-es">Bienvenido a la ciudad del sol, aguas turquesas y paisajes de ensueño</span>
-          <span class="lang-en">Welcome to the city of sun, turquoise waters and dreamlike landscapes</span>
+    <!-- ===== NEWSLETTER v2 (una linea, IDs y Brevo intactos) ===== -->
+    <section class="v2-news" id="newsletter" aria-label="Newsletter">
+      <div class="v2-wrap v2-news__inner">
+        <div class="v2-news__text">
+          <h2><span class="lang-es">Lo mejor de Miami outdoor, en tu correo</span><span class="lang-en">The best of Miami outdoors, in your inbox</span></h2>
+          <p class="v2-news__sub"><span class="lang-es">Guías y rutas, sin spam. Cancela cuando quieras.</span><span class="lang-en">Guides and routes, no spam. Cancel anytime.</span></p>
+        </div>
+        <form class="v2-news__form newsletter-form" id="newsletterForm" novalidate autocomplete="off" aria-label="Formulario newsletter">
+          <input class="v2-news__input newsletter-input" id="newsletterEmail" type="email"
+                 autocomplete="email" required placeholder="tu@email.com" aria-label="Tu correo electrónico" />
+          <button class="v2-btn newsletter-submit" type="submit">
+            <span class="lang-es">Suscribirme</span><span class="lang-en">Subscribe</span>
+          </button>
+        </form>
+        <p class="v2-news__err newsletter-disclaimer" id="newsletterError" role="alert" style="display:none">
+          <span class="lang-es">No pudimos procesar tu suscripción. Inténtalo de nuevo.</span>
+          <span class="lang-en">We couldn't process your subscription. Please try again.</span>
         </p>
-
-        <!-- Invitación (sin métrica inventada — el contador anterior era falso) -->
-        <div class="hero-social-proof" id="heroSocialProof">
-          <span class="hero-sp-dot" aria-hidden="true"></span>
-          <span class="hero-sp-text">
-            <span class="lang-es">Únete a los exploradores de Miami</span>
-            <span class="lang-en">Join Miami's explorers</span>
-          </span>
+        <div class="v2-news__ok newsletter-exito" id="newsletterExito" aria-live="polite" style="display:none">
+          <strong><span class="lang-es">¡Casi listo!</span><span class="lang-en">Almost done!</span></strong>
+          <span class="v2-news__okmsg"><span class="lang-es">Revisa tu correo y confirma tu suscripción.</span><span class="lang-en">Check your email to confirm your subscription.</span></span>
         </div>
-
-      </div><!-- /hero-px__text -->
-
-      <!-- Botón scroll al siguiente bloque -->
-      <button class="hero-px__scroll-btn" id="heroCinScrollBtn" type="button"
-              aria-label="Explorar destinos">
-        <span class="hero-px__scroll-label">
-          <span class="lang-es">Descubre Miami</span>
-          <span class="lang-en">Explore Miami</span>
-        </span>
-        <span class="hero-px__scroll-arrow" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
-            <path d="M11 5V17" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            <path d="M6 12L11 17L16 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </span>
-      </button>
-
-    </section>
-
-    <!-- Fusión visual: Hero (oscuro) → Intro (blanco arena) -->
-    <div class="fade-band fade-hero-intro" aria-hidden="true"></div>
-
-    <!-- ===== QUIZ AVENTURERO ===== -->
-    <section class="seccion-quiz" id="quiz-aventurero" aria-label="Quiz del aventurero">
-      <div class="quiz-contenedor">
-
-        <!-- Encabezado -->
-        <div class="quiz-encabezado fade-up">
-          <h2 class="quiz-titulo">
-            <span class="lang-es">¿Qué aventurero eres?</span>
-            <span class="lang-en">What kind of adventurer are you?</span>
-          </h2>
-          <p class="quiz-subtitulo">
-            <span class="lang-es">3 preguntas para encontrar tu destino perfecto en Miami</span>
-            <span class="lang-en">3 questions to find your perfect Miami destination</span>
-          </p>
-        </div>
-
-        <!-- Barra de progreso -->
-        <div class="quiz-progreso fade-up" style="transition-delay:0.08s" aria-hidden="true">
-          <div class="quiz-progreso-barra" id="quizBarra" style="width:33%"></div>
-        </div>
-        <p class="quiz-paso-label" id="quizPasoLabel" aria-live="polite">
-          <span class="lang-es">Pregunta 1 de 3</span>
-          <span class="lang-en">Question 1 of 3</span>
-        </p>
-
-        <!-- Panel de preguntas -->
-        <div class="quiz-panel" id="quizPanel" aria-live="polite">
-
-          <!-- Paso 1: Ambiente ideal -->
-          <div class="quiz-paso" id="quizPaso1">
-            <p class="quiz-pregunta">
-              <span class="lang-es">¿Cuál es tu ambiente ideal?</span>
-              <span class="lang-en">What's your ideal environment?</span>
-            </p>
-            <div class="quiz-opciones">
-              <button class="quiz-opcion" type="button" data-paso="1" data-valor="mar">
-                <span class="quiz-opcion__ico">🌊</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">Agua y arrecifes</span>
-                  <span class="lang-en">Water and reefs</span>
-                </span>
-              </button>
-              <button class="quiz-opcion" type="button" data-paso="1" data-valor="tierra">
-                <span class="quiz-opcion__ico">🌿</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">Selva y manglares</span>
-                  <span class="lang-en">Jungle and mangroves</span>
-                </span>
-              </button>
-              <button class="quiz-opcion" type="button" data-paso="1" data-valor="ciudad">
-                <span class="quiz-opcion__ico">🌆</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">Ciudad y cultura</span>
-                  <span class="lang-en">City and culture</span>
-                </span>
-              </button>
-              <button class="quiz-opcion" type="button" data-paso="1" data-valor="aventura">
-                <span class="quiz-opcion__ico">⚡</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">Emoción pura</span>
-                  <span class="lang-en">Pure thrill</span>
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Paso 2: Con quién -->
-          <div class="quiz-paso quiz-paso--oculto" id="quizPaso2">
-            <p class="quiz-pregunta">
-              <span class="lang-es">¿Con quién exploras?</span>
-              <span class="lang-en">Who do you explore with?</span>
-            </p>
-            <div class="quiz-opciones">
-              <button class="quiz-opcion" type="button" data-paso="2" data-valor="mar">
-                <span class="quiz-opcion__ico">👤</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">Solo/a</span>
-                  <span class="lang-en">Solo</span>
-                </span>
-              </button>
-              <button class="quiz-opcion" type="button" data-paso="2" data-valor="tierra">
-                <span class="quiz-opcion__ico">👫</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">En pareja</span>
-                  <span class="lang-en">With partner</span>
-                </span>
-              </button>
-              <button class="quiz-opcion" type="button" data-paso="2" data-valor="aventura">
-                <span class="quiz-opcion__ico">👨‍👩‍👧‍👦</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">En familia</span>
-                  <span class="lang-en">With family</span>
-                </span>
-              </button>
-              <button class="quiz-opcion" type="button" data-paso="2" data-valor="ciudad">
-                <span class="quiz-opcion__ico">🤝</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">Con amigos</span>
-                  <span class="lang-en">With friends</span>
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Paso 3: Tiempo disponible -->
-          <div class="quiz-paso quiz-paso--oculto" id="quizPaso3">
-            <p class="quiz-pregunta">
-              <span class="lang-es">¿Cuánto tiempo tienes?</span>
-              <span class="lang-en">How much time do you have?</span>
-            </p>
-            <div class="quiz-opciones">
-              <button class="quiz-opcion" type="button" data-paso="3" data-valor="ciudad">
-                <span class="quiz-opcion__ico">⏱️</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">2-3 horas</span>
-                  <span class="lang-en">2-3 hours</span>
-                </span>
-              </button>
-              <button class="quiz-opcion" type="button" data-paso="3" data-valor="mar">
-                <span class="quiz-opcion__ico">🌅</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">Medio día</span>
-                  <span class="lang-en">Half a day</span>
-                </span>
-              </button>
-              <button class="quiz-opcion" type="button" data-paso="3" data-valor="tierra">
-                <span class="quiz-opcion__ico">☀️</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">Día completo</span>
-                  <span class="lang-en">Full day</span>
-                </span>
-              </button>
-              <button class="quiz-opcion" type="button" data-paso="3" data-valor="aventura">
-                <span class="quiz-opcion__ico">🏕️</span>
-                <span class="quiz-opcion__texto">
-                  <span class="lang-es">Fin de semana</span>
-                  <span class="lang-en">Weekend</span>
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Resultado -->
-          <div class="quiz-paso quiz-paso--oculto quiz-resultado" id="quizResultado">
-            <div class="quiz-resultado__icono" id="quizResultIco" aria-hidden="true">🌊</div>
-            <h3 class="quiz-resultado__tipo" id="quizResultTipo"></h3>
-            <p class="quiz-resultado__desc" id="quizResultDesc"></p>
-            <div class="quiz-resultado__destinos" id="quizResultDestinos"></div>
-            <!-- Botón resetear -->
-            <button class="quiz-reset" id="quizReset" type="button">
-              <span class="lang-es">← Volver a empezar</span>
-              <span class="lang-en">← Start over</span>
-            </button>
-          </div>
-
-        </div><!-- /quiz-panel -->
-
-      </div>
-    </section>
-
-    <!-- ===== INTRO: 3 highlights ===== -->
-    <section class="seccion-intro" id="nosotros">
-
-      <!-- Layout 2 columnas: texto (izq) + shuffle grid (der) -->
-      <div class="seccion-intro__contenedor si-layout">
-
-        <!-- Columna izquierda: texto -->
-        <div class="si-col-texto fade-up">
-          <span class="si-eyebrow"><span class="lang-es">South Florida</span><span class="lang-en">South Florida</span></span>
-          <h2 class="seccion-intro__titulo" data-i18n="intro_titulo">¿Por qué 305 Ruta Miami?</h2>
-          <p class="si-desc" data-i18n="intro_sub">La guía definitiva para aventureros en South Florida</p>
-          <div class="si-features">
-            <div class="si-feature">
-              <span class="si-feature__ico">🌊</span>
-              <div>
-                <strong class="si-feature__titulo" data-i18n="intro_c1_titulo">Destinos Verificados</strong>
-                <p class="si-feature__texto" data-i18n="intro_c1_texto">Aventuras verificadas en los mejores rincones de Miami y sus alrededores.</p>
-              </div>
-            </div>
-            <div class="si-feature">
-              <span class="si-feature__ico">🗺️</span>
-              <div>
-                <strong class="si-feature__titulo" data-i18n="intro_c2_titulo">Guías Locales</strong>
-                <p class="si-feature__texto" data-i18n="intro_c2_texto">Expertos que conocen cada sendero, bahía y arrecife del sur de Florida.</p>
-              </div>
-            </div>
-            <div class="si-feature">
-              <span class="si-feature__ico">🌿</span>
-              <div>
-                <strong class="si-feature__titulo" data-i18n="intro_c3_titulo">Naturaleza Pura</strong>
-                <p class="si-feature__texto" data-i18n="intro_c3_texto">Desde los Everglades hasta South Beach — aventura en cada destino.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Divisor stats -->
-          <div class="si-stats-divider">
-            <span class="lang-es">Miami en números</span>
-            <span class="lang-en">Miami by the numbers</span>
-          </div>
-
-          <!-- 5 stats compactos -->
-          <div class="si-stats-mini">
-
-            <div class="si-stat fade-up" style="transition-delay:0.22s">
-              <span class="si-stat__num">365</span>
-              <span class="si-stat__label lang-es">días de sol</span>
-              <span class="si-stat__label lang-en">sunny days</span>
-              <span class="si-stat__ico" aria-hidden="true">☀️</span>
-            </div>
-
-            <div class="si-stat fade-up" style="transition-delay:0.28s">
-              <span class="si-stat__num">∞</span>
-              <span class="si-stat__label lang-es">destinos</span>
-              <span class="si-stat__label lang-en">destinations</span>
-              <span class="si-stat__ico" aria-hidden="true">📍</span>
-            </div>
-
-            <div class="si-stat fade-up" style="transition-delay:0.34s">
-              <span class="si-stat__num">1h</span>
-              <span class="si-stat__label lang-es">al más lejano</span>
-              <span class="si-stat__label lang-en">to farthest</span>
-              <span class="si-stat__ico" aria-hidden="true">🚗</span>
-            </div>
-
-            <div class="si-stat fade-up" style="transition-delay:0.40s">
-              <span class="si-stat__num">$0</span>
-              <span class="si-stat__label lang-es">entrada 2 parques</span>
-              <span class="si-stat__label lang-en">2 free parks</span>
-              <span class="si-stat__ico" aria-hidden="true">🎟️</span>
-            </div>
-
-            <div class="si-stat fade-up" style="transition-delay:0.46s">
-              <span class="si-stat__num">ES/EN</span>
-              <span class="si-stat__label lang-es">bilingüe</span>
-              <span class="si-stat__label lang-en">bilingual</span>
-              <span class="si-stat__ico" aria-hidden="true">🌐</span>
-            </div>
-
-          </div><!-- /si-stats-mini -->
-        </div>
-
-        <!-- Columna derecha: 12 tarjetas mini que se barajan con el scroll -->
-        <div class="si-col-grid fade-up" style="transition-delay:0.18s">
-          <div class="shuffle-grid" id="shuffleGrid" aria-label="Destinos Miami" role="list"></div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ===== BLOQUE DESTACADO: Guía de pesca (reusa cta-card) ===== -->
-    <section class="seccion-cta-card" id="pesca-destacado" aria-label="La guía de pesca de Miami">
-      <div class="cta-card cta-card--blog">
-        <div class="cta-card__glow" aria-hidden="true"></div>
-        <div class="cta-card__inner">
-          <img src="assets/images/pesca/anita-denunzio-1TIiE-y30nE-unsplash.jpg"
-               alt="Aguas turquesas y someras junto a una playa, con una lancha de pesca"
-               loading="lazy"
-               style="display:block;width:100%;max-width:300px;aspect-ratio:4/3;object-fit:cover;border-radius:14px;flex:0 0 auto" />
-          <div class="cta-card__text">
-            <span class="cta-card__eyebrow"><span class="lang-es">🎣 Guía</span><span class="lang-en">🎣 Guide</span></span>
-            <h2 class="cta-card__titulo"><span class="lang-es">La guía de pesca de Miami</span><span class="lang-en">The Miami Fishing Guide</span></h2>
-            <p class="cta-card__desc"><span class="lang-es">De los flats de la bahía al Gulf Stream: qué se pesca, cuándo y cómo salir bien preparado.</span><span class="lang-en">From the bay flats to the Gulf Stream: what's biting, when, and how to go out prepared.</span></p>
-          </div>
-          <div class="cta-card__action">
-            <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
-              <div class="metal-btn-inner"></div>
-              <a href="pesca.html" class="metal-btn" style="text-decoration:none">
-                <div class="metal-btn-shine"></div>
-                <div class="metal-btn-hover-glow"></div>
-                <span class="lang-es">Explorar la guía →</span>
-                <span class="lang-en">Explore the guide →</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Fusión visual: Intro (blanco arena) → Destinos (dark ocean) -->
-    <div class="fade-band fade-intro-dest" aria-hidden="true"></div>
-
-    <!-- ===== DESTINOS: 6 tarjetas renderizadas por JS ===== -->
-    <section class="seccion-destinos" id="destinos">
-      <div class="seccion-destinos__contenedor">
-
-        <div class="seccion-destinos__encabezado">
-          <h2 class="seccion-titulo fade-up" data-i18n="destinos_titulo">Destinos en Miami</h2>
-          <p class="seccion-subtitulo" data-i18n="destinos_sub">Descubre las mejores experiencias outdoor de South Florida</p>
-        </div>
-
-        <!-- Filtros — Metal buttons -->
-        <div class="filtros" role="group" aria-label="Filtrar destinos">
-          <div class="metal-btn-wrap is-active" data-variant="default" data-size="sm">
-            <div class="metal-btn-inner"></div>
-            <button class="metal-btn filtros__btn filtros__btn--activo" data-filtro="todos" data-i18n="filtro_todos">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              Todos
-            </button>
-          </div>
-          <div class="metal-btn-wrap" data-variant="turquesa" data-size="sm">
-            <div class="metal-btn-inner"></div>
-            <button class="metal-btn filtros__btn" data-filtro="playa" data-i18n="filtro_playa">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              🏖️ Playa
-            </button>
-          </div>
-          <div class="metal-btn-wrap" data-variant="dark" data-size="sm">
-            <div class="metal-btn-inner"></div>
-            <button class="metal-btn filtros__btn" data-filtro="buceo" data-i18n="filtro_buceo">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              🤿 Buceo
-            </button>
-          </div>
-          <div class="metal-btn-wrap" data-variant="gold" data-size="sm">
-            <div class="metal-btn-inner"></div>
-            <button class="metal-btn filtros__btn" data-filtro="pesca" data-i18n="filtro_pesca">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              🎣 Pesca
-            </button>
-          </div>
-          <div class="metal-btn-wrap" data-variant="tierra" data-size="sm">
-            <div class="metal-btn-inner"></div>
-            <button class="metal-btn filtros__btn" data-filtro="exploracion" data-i18n="filtro_exploracion">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              🧭 Exploración
-            </button>
-          </div>
-          <div class="metal-btn-wrap" data-variant="coral" data-size="sm">
-            <div class="metal-btn-inner"></div>
-            <button class="metal-btn filtros__btn" data-filtro="bares" data-i18n="filtro_bares">
-              <div class="metal-btn-shine"></div>
-              <div class="metal-btn-hover-glow"></div>
-              🍹 Bares y Restaurantes
-            </button>
-          </div>
-        </div>
-
-        <!-- Carrusel de destinos -->
-        <div class="destinos-carousel-wrap">
-          <div class="destinos-grid" id="destinosGrid" aria-live="polite"></div>
-          <!-- Indicadores de posición — reemplazan las flechas -->
-          <div class="destinos-dots" id="destinosDots"
-               role="tablist" aria-label="Indicadores de destino"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Fusión visual: Destinos (dark ocean) → Mapa (azul cielo) -->
-    <div class="fade-band fade-dest-mapa" aria-hidden="true"></div>
-
-    <!-- ===== GLOBO COBE 3D ===== -->
-    <section class="seccion-globo" id="mapa" aria-labelledby="globo-titulo">
-      <div class="globo-inner">
-
-        <!-- Columna izquierda: texto y estadísticas -->
-        <div class="globo-texto fade-up">
-
-          <p class="globo-eyebrow">
-            <span class="lang-es">Miami · 25°N 80°W</span>
-            <span class="lang-en">Miami · 25°N 80°W</span>
-          </p>
-
-          <h2 class="seccion-titulo" id="globo-titulo">
-            <span class="lang-es">En el centro<br>del mundo</span>
-            <span class="lang-en">At the center<br>of the world</span>
-          </h2>
-
-          <p class="globo-desc">
-            <span class="lang-es">Miami es el punto donde el Atlántico se encuentra con el Caribe, la energía latina con el dinamismo norteamericano. El mejor punto de partida para explorar la naturaleza salvaje de Florida.</span>
-            <span class="lang-en">Miami is where the Atlantic meets the Caribbean, Latin energy meets American dynamism. The best starting point to explore Florida's wild nature.</span>
-          </p>
-
-          <!-- Estadísticas del ecosistema -->
-          <div class="globo-stats">
-            <div class="globo-stat">
-              <span class="globo-stat__num">∞</span>
-              <span class="globo-stat__label">
-                <span class="lang-es">destinos outdoor</span>
-                <span class="lang-en">outdoor destinations</span>
-              </span>
-            </div>
-            <div class="globo-stat">
-              <span class="globo-stat__num">2</span>
-              <span class="globo-stat__label">
-                <span class="lang-es">parques nacionales</span>
-                <span class="lang-en">national parks</span>
-              </span>
-            </div>
-            <div class="globo-stat">
-              <span class="globo-stat__num">∞</span>
-              <span class="globo-stat__label">
-                <span class="lang-es">aventuras</span>
-                <span class="lang-en">adventures</span>
-              </span>
-            </div>
-          </div>
-
-        </div><!-- /globo-texto -->
-
-        <!-- Columna derecha: canvas del globo + emojis flotantes -->
-        <div class="globo-canvas-wrap">
-
-          <canvas id="globoCanvas" width="600" height="600"
-                  aria-label="Globo 3D interactivo — Miami marcada en coral"></canvas>
-
-          <!-- Emojis: posicionados por JS via proyección 3D→2D en el RAF loop.
-               data-lat / data-lng son las coordenadas geográficas del punto. -->
-          <!-- América del Norte -->
-          <div class="globo-emoji" data-lat="25.77"  data-lng="-80.19" aria-hidden="true">🌴</div>
-          <div class="globo-emoji" data-lat="40.71"  data-lng="-74.01" aria-hidden="true">🗽</div>
-          <div class="globo-emoji" data-lat="34.05"  data-lng="-118.24" aria-hidden="true">🎬</div>
-          <div class="globo-emoji" data-lat="43.65"  data-lng="-79.38" aria-hidden="true">🍁</div>
-          <!-- México y Caribe -->
-          <div class="globo-emoji" data-lat="19.43"  data-lng="-99.13" aria-hidden="true">🌮</div>
-          <div class="globo-emoji" data-lat="21.16"  data-lng="-86.85" aria-hidden="true">🏝️</div>
-          <div class="globo-emoji" data-lat="18.47"  data-lng="-66.11" aria-hidden="true">🌊</div>
-          <!-- Suramérica -->
-          <div class="globo-emoji" data-lat="4.71"   data-lng="-74.07" aria-hidden="true">🌺</div>
-          <div class="globo-emoji" data-lat="-22.91" data-lng="-43.17" aria-hidden="true">⚽</div>
-          <div class="globo-emoji" data-lat="-23.55" data-lng="-46.63" aria-hidden="true">☀️</div>
-          <div class="globo-emoji" data-lat="-34.60" data-lng="-58.38" aria-hidden="true">🥩</div>
-          <!-- Europa -->
-          <div class="globo-emoji" data-lat="51.51"  data-lng="-0.13"  aria-hidden="true">✈️</div>
-          <div class="globo-emoji" data-lat="48.86"  data-lng="2.35"   aria-hidden="true">🗼</div>
-          <div class="globo-emoji" data-lat="40.42"  data-lng="-3.70"  aria-hidden="true">💃</div>
-          <!-- África y Oriente Medio -->
-          <div class="globo-emoji" data-lat="-1.29"  data-lng="36.82"  aria-hidden="true">🦁</div>
-          <div class="globo-emoji" data-lat="25.20"  data-lng="55.27"  aria-hidden="true">🌙</div>
-          <!-- Asia y Oceanía -->
-          <div class="globo-emoji" data-lat="35.69"  data-lng="139.69" aria-hidden="true">🌸</div>
-          <div class="globo-emoji" data-lat="1.35"   data-lng="103.82" aria-hidden="true">🦁</div>
-          <div class="globo-emoji" data-lat="-33.87" data-lng="151.21" aria-hidden="true">🐨</div>
-
-          <p class="globo-hint" aria-hidden="true">
-            <span class="lang-es">Arrastra para girar</span>
-            <span class="lang-en">Drag to rotate</span>
-          </p>
-        </div>
-
-      </div><!-- /globo-inner -->
-
-      <!-- ===== MARQUESINA DE DESTINOS — generada por JS ===== -->
-      <div class="gm-wrap" id="gmWrap" aria-hidden="true">
-        <div class="gm-inner" id="gmInner">
-          <!-- Las pildoras se inyectan desde el script ES5 -->
-        </div>
-      </div>
-
-    </section>
-
-
-    <!-- ===== NEWSLETTER ===== -->
-    <section class="seccion-cta-card seccion-newsletter" id="newsletter" aria-label="Newsletter">
-      <div class="cta-card cta-card--newsletter">
-
-        <!-- Luz ambiental de fondo -->
-        <div class="cta-card__glow" aria-hidden="true"></div>
-
-        <div class="cta-card__inner">
-
-          <!-- Columna izquierda: mensaje -->
-          <div class="cta-card__text">
-            <span class="cta-card__eyebrow" aria-hidden="true">📬</span>
-            <h2 class="cta-card__titulo newsletter-titulo">
-              <span class="lang-es">Aventuras en tu bandeja de entrada</span>
-              <span class="lang-en">Adventures in your inbox</span>
-            </h2>
-            <p class="cta-card__desc newsletter-sub">
-              <span class="lang-es">Guías exclusivas, rutas secretas y ofertas locales. Sin spam, solo la mejor Miami outdoor.</span>
-              <span class="lang-en">Exclusive guides, hidden routes and local deals. No spam, just the best Miami outdoors.</span>
-            </p>
-          </div>
-
-          <!-- Columna derecha: formulario -->
-          <div class="cta-card__action">
-
-            <!-- Formulario activo -->
-            <form class="newsletter-form" id="newsletterForm"
-                  novalidate autocomplete="off" aria-label="Formulario newsletter">
-              <div class="newsletter-input-wrap">
-                <input class="newsletter-input" id="newsletterEmail" type="email"
-                       autocomplete="email" required
-                       placeholder="tu@email.com" aria-label="Tu correo electrónico" />
-                <div class="metal-btn-wrap newsletter-btn-wrap" data-variant="turquesa" data-size="md">
-                  <div class="metal-btn-inner"></div>
-                  <button class="metal-btn newsletter-submit" type="submit">
-                    <div class="metal-btn-shine"></div>
-                    <div class="metal-btn-hover-glow"></div>
-                    <span class="lang-es">Suscribirme →</span>
-                    <span class="lang-en">Subscribe →</span>
-                  </button>
-                </div>
-              </div>
-              <p class="newsletter-disclaimer">
-                <span class="lang-es">Sin spam. Cancela cuando quieras.</span>
-                <span class="lang-en">No spam. Cancel anytime.</span>
-              </p>
-              <!-- Error de envío (display:none inline — .quiz-paso--oculto pierde contra
-                   .newsletter-exito{display:flex} por orden de cascada; patrón de anunciantes) -->
-              <p class="newsletter-disclaimer" id="newsletterError" role="alert" style="display:none">
-                <span class="lang-es">No pudimos procesar tu suscripción. Inténtalo de nuevo.</span>
-                <span class="lang-en">We couldn't process your subscription. Please try again.</span>
-              </p>
-            </form>
-
-            <!-- Estado de éxito (nace oculto con display:none inline; doble opt-in) -->
-            <div class="newsletter-exito" id="newsletterExito"
-                 aria-live="polite" style="display:none">
-              <span class="newsletter-exito__ico" aria-hidden="true">📬</span>
-              <strong class="newsletter-exito__titulo">
-                <span class="lang-es">¡Casi listo!</span>
-                <span class="lang-en">Almost done!</span>
-              </strong>
-              <p class="newsletter-exito__sub">
-                <span class="lang-es">Revisa tu correo y confirma tu suscripción.</span>
-                <span class="lang-en">Check your email to confirm your subscription.</span>
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Fusión visual: Mapa (azul cielo) → Trabaja (verde tropical) -->
-    <div class="fade-band fade-mapa-trabaja" aria-hidden="true"></div>
-
-    <!-- ===== TRABAJA CON NOSOTROS ===== -->
-    <section class="seccion-trabaja" id="trabaja">
-      <div class="seccion-trabaja__contenedor">
-
-        <!-- Teaser B2B — enlaza a anunciantes.html -->
-        <div class="trabaja-teaser">
-
-          <div class="trabaja-teaser__badge fade-up" aria-hidden="true">🏄 Para empresas</div>
-
-          <h2 class="seccion-titulo trabaja-teaser__titulo fade-up" style="transition-delay:0.06s">
-            <span class="lang-es">¿Tienes un negocio outdoor en Miami?</span>
-            <span class="lang-en">Do you have an outdoor business in Miami?</span>
-          </h2>
-
-          <p class="trabaja-teaser__sub fade-up" style="transition-delay:0.12s">
-            <span class="lang-es">Tu empresa frente a miles de aventureros desde <strong>$99/mes</strong>. Sin contratos, activo en 48h.</span>
-            <span class="lang-en">Your business in front of thousands of adventurers from <strong>$99/mo</strong>. No contracts, live in 48h.</span>
-          </p>
-
-          <!-- Beneficios rápidos -->
-          <div class="trabaja-teaser__pills fade-up" style="transition-delay:0.18s" aria-hidden="true">
-            <span class="trabaja-teaser__pill">✓ Card en el directorio</span>
-            <span class="trabaja-teaser__pill">✓ Página de detalle</span>
-            <span class="trabaja-teaser__pill">✓ ES &amp; EN</span>
-            <span class="trabaja-teaser__pill">✓ Métricas mensuales</span>
-          </div>
-
-          <!-- CTA -->
-          <div class="trabaja-teaser__cta fade-up" style="transition-delay:0.24s">
-            <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
-              <div class="metal-btn-inner"></div>
-              <a href="anunciantes.html" class="metal-btn">
-                <div class="metal-btn-shine"></div>
-                <div class="metal-btn-hover-glow"></div>
-                <span class="lang-es">Ver planes y precios →</span>
-                <span class="lang-en">See plans and pricing →</span>
-              </a>
-            </div>
-          </div>
-
-        </div><!-- /trabaja-teaser -->
-
-      </div>
-    </section>
-
-    <!-- ===== BANDA B2B DISCRETA (pre-footer, patrón Airbnb: blanco, sombra suave, sin MetalButton) ===== -->
-    <section aria-label="Para negocios de Miami" style="padding:2.5rem 1.5rem">
-      <div style="max-width:760px;margin:0 auto;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.06);padding:1.4rem 1.6rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.8rem">
-        <p style="margin:0;font-size:0.98rem;color:#4a6070;line-height:1.5">
-          <span class="lang-es">¿Tienes un charter, renta de botes o negocio en Miami?</span>
-          <span class="lang-en">Run a charter, boat rental, or business in Miami?</span>
-        </p>
-        <a href="anunciantes.html" style="font-weight:600;color:#00788a;text-decoration:none;white-space:nowrap">
-          <span class="lang-es">Aparece en la guía →</span>
-          <span class="lang-en">Get listed →</span>
-        </a>
       </div>
     </section>
 
   </main>
 
-  <!-- Fusión visual: Trabaja (verde tropical) → Footer (turquesa oscuro) -->
-  <div class="fade-band fade-trabaja-foot" aria-hidden="true"></div>
-
-  <!-- ===== FOOTER ===== -->
-  <!-- ===== FOOTER CINEMÁTICO ===== -->
-  <footer class="cf-footer" id="contacto" role="contentinfo" aria-label="Pie de página">
-
-    <!-- Capas de fondo decorativas -->
-    <div class="cf-aurora" aria-hidden="true"></div>
-    <div class="cf-grid"   aria-hidden="true"></div>
-
-    <!-- Marca de agua tipográfica -->
-    <div class="cf-bg-text" aria-hidden="true" role="presentation">MIAMI</div>
-
-    <!-- ── Marquesina diagonal ── -->
-    <div class="cf-marquee-wrap" aria-hidden="true">
-      <div class="cf-marquee-track">
-        <div class="cf-marquee-set">
-          <span class="cf-ms">South Florida Outdoor</span>
-          <span class="cf-md">✦</span>
-          <span class="cf-ms">Naturaleza sin límites</span>
-          <span class="cf-md" data-color="coral">✦</span>
-          <span class="cf-ms">Biscayne Bay</span>
-          <span class="cf-md" data-color="mostaza">✦</span>
-          <span class="cf-ms">Glades &amp; Ocean</span>
-          <span class="cf-md">✦</span>
-          <span class="cf-ms">Miami Adventure</span>
-          <span class="cf-md" data-color="coral">✦</span>
-          <span class="cf-ms">Wild &amp; Free</span>
-          <span class="cf-md" data-color="mostaza">✦</span>
-          <span class="cf-ms">305 Ruta Miami</span>
-          <span class="cf-md">✦</span>
-        </div>
-        <!-- Copia para loop continuo sin salto -->
-        <div class="cf-marquee-set" aria-hidden="true">
-          <span class="cf-ms">South Florida Outdoor</span>
-          <span class="cf-md">✦</span>
-          <span class="cf-ms">Naturaleza sin límites</span>
-          <span class="cf-md" data-color="coral">✦</span>
-          <span class="cf-ms">Biscayne Bay</span>
-          <span class="cf-md" data-color="mostaza">✦</span>
-          <span class="cf-ms">Glades &amp; Ocean</span>
-          <span class="cf-md">✦</span>
-          <span class="cf-ms">Miami Adventure</span>
-          <span class="cf-md" data-color="coral">✦</span>
-          <span class="cf-ms">Wild &amp; Free</span>
-          <span class="cf-md" data-color="mostaza">✦</span>
-          <span class="cf-ms">305 Ruta Miami</span>
-          <span class="cf-md">✦</span>
-        </div>
+  <!-- ===== FOOTER SOBRIO v2 ===== -->
+  <footer class="v2-footer" id="contacto" role="contentinfo" aria-label="Pie de página">
+    <div class="v2-wrap v2-footer__top">
+      <div class="v2-footer__brand">
+        <a href="index.html" class="v2-footer__logo" aria-label="305 Ruta Miami — Inicio">305Ruta<span>Miami</span></a>
+        <p class="v2-footer__tag"><span class="lang-es">Tu próxima aventura empieza aquí</span><span class="lang-en">Your next adventure starts here</span></p>
       </div>
-    </div>
-
-    <!-- ── Zona central ── -->
-    <div class="cf-main">
-
-      <!-- Logo + tagline -->
-      <div class="cf-logo-wrap cf-reveal">
-        <a href="index.html" class="cf-logo" aria-label="305 Ruta Miami — Inicio">
-          <span class="cf-logo__e">305Ruta</span><span class="cf-logo__m">Miami</span>
-        </a>
-        <p class="cf-tagline">
-          <span class="lang-es">Tu próxima aventura empieza aquí</span>
-          <span class="lang-en">Your next adventure starts here</span>
-        </p>
-      </div>
-
-      <!-- Titular CTA -->
-      <h2 class="cf-headline cf-reveal">
-        <span class="lang-es">¿Listos para<br>explorar?</span>
-        <span class="lang-en">Ready to<br>explore?</span>
-      </h2>
-
-      <!-- Botón principal — MetalButton turquesa -->
-      <div class="cf-cta-row cf-reveal">
-        <div class="metal-btn-wrap" data-variant="turquesa" data-size="lg">
-          <div class="metal-btn-inner"></div>
-          <a href="#destinos" class="metal-btn">
-            <div class="metal-btn-shine"></div>
-            <div class="metal-btn-hover-glow"></div>
-            <span class="lang-es">Ver destinos &nbsp;→</span>
-            <span class="lang-en">See destinations &nbsp;→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Navegación rápida — mismo árbol que el navbar, sin Destinos -->
-      <nav class="cf-nav cf-reveal" aria-label="Navegación rápida del pie de página">
-        <a href="index.html"       class="cf-pill cf-magnetic">
-          <span class="lang-es">Inicio</span><span class="lang-en">Home</span>
-        </a>
-        <a href="blog.html"        class="cf-pill cf-magnetic">Blog</a>
-        <a href="anunciantes.html" class="cf-pill cf-magnetic">
-          <span class="lang-es">Para empresas</span><span class="lang-en">For businesses</span>
-        </a>
-        <a href="privacidad.html"  class="cf-pill cf-magnetic">
-          <span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span>
-        </a>
-        <a href="terminos.html"    class="cf-pill cf-magnetic">
-          <span class="lang-es">Términos</span><span class="lang-en">Terms</span>
-        </a>
+      <nav class="v2-footer__nav" aria-label="Navegación del pie de página">
+        <a href="index.html"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a>
+        <a href="destinos.html"><span class="lang-es">Destinos</span><span class="lang-en">Destinations</span></a>
+        <a href="pesca.html"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></a>
+        <a href="blog.html">Blog</a>
+        <a href="anunciantes.html"><span class="lang-es">Anuncia tu negocio</span><span class="lang-en">List your business</span></a>
+        <a href="privacidad.html"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
+        <a href="terminos.html"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
       </nav>
-
-      <!-- Redes sociales -->
-
     </div>
-
-    <!-- ── Barra inferior ── -->
-    <div class="cf-bottom cf-reveal">
-
-      <!-- Copyright + admin -->
-      <p class="cf-copy">
+    <div class="v2-wrap v2-footer__bottom">
+      <p class="v2-footer__copy">
         <span data-i18n="footer_copyright">© 2026 305 Ruta Miami. Todos los derechos reservados.</span>
-        <a href="admin.html" class="cf-admin" aria-label="Panel de administración">Admin</a>
+        <a href="admin.html" class="v2-footer__admin" aria-label="Panel de administración">Admin</a>
       </p>
-
-      <!-- Badge hecho con amor -->
-      <div class="cf-love" role="note">
-        <span class="lang-es">Hecho con</span>
-        <span class="lang-en">Made with</span>
-        <span class="cf-heart" aria-hidden="true">❤</span>
-        <span class="lang-es">en Miami</span>
-        <span class="lang-en">in Miami</span>
-      </div>
-
-      <!-- Volver arriba -->
-      <button class="cf-totop cf-magnetic" id="cfToTop" type="button"
-              aria-label="Volver al inicio de la página">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2.5"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
-      </button>
-
+      <button class="v2-totop" type="button" aria-label="Volver arriba"
+              onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
     </div>
-
   </footer>
 
   <!-- ===== MODAL DE DESTINO — pantalla completa ===== -->
@@ -950,17 +264,10 @@
     <!-- Panel principal del modal -->
     <div class="modal-panel">
 
-      <!-- Botón cerrar — Metal icon -->
-      <div class="metal-btn-wrap modal-cerrar-wrap" data-variant="icon">
-        <div class="metal-btn-inner"></div>
-        <button class="metal-btn modal-cerrar" id="modalCerrar" aria-label="Cerrar modal">
-          <div class="metal-btn-shine"></div>
-          ✕
-        </button>
-      </div>
+      <!-- Boton cerrar simple (v2) -->
+      <button class="modal-cerrar v2-modal-cerrar" id="modalCerrar" type="button" aria-label="Cerrar modal">✕</button>
 
-      <!-- Galería de fotos -->
-      <div class="modal-galeria" id="modalGaleria"></div>
+            <div class="modal-galeria" id="modalGaleria"></div>
 
       <!-- Cuerpo scrolleable -->
       <div class="modal-cuerpo">
