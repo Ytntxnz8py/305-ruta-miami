@@ -2091,6 +2091,23 @@ function initDestCarousel() {
   buildDots();
 }
 
+/* Dispara la entrada bounce-in de los iconos de la barra de categorias al entrar
+   en viewport (UNA vez). Solo actua donde existe .v2-cats.is-anim (el index v2);
+   en otras paginas (sin .is-anim) no hace nada. Si no hay IntersectionObserver,
+   activa directo. La contraparte reduced-motion la cubre el CSS. */
+function initBarraIconos() {
+  var bar = document.querySelector('.v2-cats.is-anim');
+  if (!bar) return;
+  function play() { bar.classList.add('play'); }
+  if (!window.IntersectionObserver) { play(); return; }
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { play(); obs.disconnect(); }
+    });
+  }, { threshold: 0.4 });
+  obs.observe(bar);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   leerConfigSitio();
   registrarVisita();
@@ -2105,6 +2122,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initMetalButtons();
   initQuizAventurero();      /* quiz de 3 pasos */
   initNewsletter();          /* formulario de newsletter */
+  initBarraIconos();         /* entrada bounce-in de los iconos de la barra (index) */
   /* ScrollExpandMedia / HeroTrail eliminados — hero reemplazado por cinematic */
 });
 
