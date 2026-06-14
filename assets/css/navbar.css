@@ -415,6 +415,13 @@ html { overflow-x: hidden; }
   .em-nav__lang { display: none; }
 }
 
+/* En moviles estrechos basta el simbolo: se oculta el wordmark para que el
+   enlace "Anuncia tu negocio" + la hamburguesa no se solapen con el logo. */
+@media (max-width: 560px) {
+  .em-nav__logo-e,
+  .em-nav__logo-m { display: none; }
+}
+
 @media (min-width: 901px) {
   .em-drawer,
   .em-drawer__backdrop { display: none !important; }
