@@ -114,12 +114,30 @@
 
         <!-- Barra de categorias (Pesca primero). Conserva .filtros__btn + data-filtro. -->
         <div class="v2-cats filtros" role="group" aria-label="Filtrar destinos">
-          <button class="v2-cat filtros__btn filtros__btn--activo" data-filtro="todos"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h6v6H4zM14 5h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg><span class="v2-cat__txt"><span class="lang-es">Todos</span><span class="lang-en">All</span></span></button>
-          <button class="v2-cat filtros__btn" data-filtro="pesca"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12c4-5 11-5 15 0-4 5-11 5-15 0z"/><path d="M18 12l3-2.5v5z"/></svg><span class="v2-cat__txt"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></span></button>
-          <button class="v2-cat filtros__btn" data-filtro="playa"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg><span class="v2-cat__txt"><span class="lang-es">Playa</span><span class="lang-en">Beach</span></span></button>
-          <button class="v2-cat filtros__btn" data-filtro="buceo"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9c2.5-2.5 5-2.5 7.5 0S14 11 16.5 9 21.5 7 22 9M2 15c2.5-2.5 5-2.5 7.5 0S14 17 16.5 15 21.5 13 22 15"/></svg><span class="v2-cat__txt"><span class="lang-es">Buceo</span><span class="lang-en">Diving</span></span></button>
-          <button class="v2-cat filtros__btn" data-filtro="exploracion"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16 8l-2.5 5.5L8 16l2.5-5.5z"/></svg><span class="v2-cat__txt"><span class="lang-es">Exploración</span><span class="lang-en">Exploration</span></span></button>
-          <button class="v2-cat filtros__btn" data-filtro="bares"><svg class="v2-cat__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12l-6 7zM12 11v7M8 21h8"/></svg><span class="v2-cat__txt"><span class="lang-es">Bares</span><span class="lang-en">Food</span></span></button>
+          <button class="v2-cat filtros__btn filtros__btn--activo" data-filtro="todos">
+            <span class="ico"><svg viewBox="0 0 28 28" fill="none" stroke="#74848f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h6v6H5zM17 6h6v6h-6zM5 16h6v6H5zM17 16h6v6h-6z"/></svg></span>
+            <span class="v2-cat__txt"><span class="lang-es">Todos</span><span class="lang-en">All</span></span>
+          </button>
+          <button class="v2-cat filtros__btn" data-filtro="pesca">
+            <span class="ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><defs><linearGradient id="cat-pe" x1="4" y1="9" x2="24" y2="20" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A5B"/><stop offset="1" stop-color="#E0561F"/></linearGradient></defs><g class="bob"><path d="M4 14c3.2-4.6 7.5-5.6 11.2-3.6 1.3.7 2.4 1.7 3.2 3 .85-1.3 1.9-2.3 3.2-3-.65 3.6-.65 5.6 0 9-1.3-.7-2.35-1.7-3.2-3-.8 1.3-1.9 2.3-3.2 3C11.5 19.6 7.2 18.6 4 14Z" fill="url(#cat-pe)"/><path d="M4 14c3.2-4.6 7.5-5.6 11.2-3.6 1.3.7 2.4 1.7 3.2 3" stroke="#FFF" stroke-width="0.7" stroke-linecap="round" opacity="0.5"/><circle cx="8" cy="13" r="1.05" fill="#FFF"/><circle cx="8.2" cy="13.1" r="0.5" fill="#7A2E12"/></g></svg></span>
+            <span class="v2-cat__txt"><span class="lang-es">Pesca</span><span class="lang-en">Fishing</span></span>
+          </button>
+          <button class="v2-cat filtros__btn" data-filtro="playa">
+            <span class="ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><defs><radialGradient id="cat-su" cx="0.5" cy="0.45" r="0.55"><stop stop-color="#FFD66B"/><stop offset="1" stop-color="#F5A623"/></radialGradient></defs><g class="spin"><g stroke="#F5A623" stroke-width="1.7" stroke-linecap="round"><path d="M14 2.5v2.6M14 22.9v2.6M2.5 14h2.6M22.9 14h2.6M5.8 5.8l1.85 1.85M20.35 20.35l1.85 1.85M22.2 5.8l-1.85 1.85M7.65 20.35L5.8 22.2"/></g></g><circle cx="14" cy="14" r="5.6" fill="url(#cat-su)"/><circle cx="12" cy="12" r="1.7" fill="#FFF" opacity="0.55"/></svg></span>
+            <span class="v2-cat__txt"><span class="lang-es">Playa</span><span class="lang-en">Beach</span></span>
+          </button>
+          <button class="v2-cat filtros__btn" data-filtro="buceo">
+            <span class="ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><defs><linearGradient id="cat-bu" x1="6" y1="9" x2="22" y2="19" gradientUnits="userSpaceOnUse"><stop stop-color="#34C5DE"/><stop offset="1" stop-color="#0E8FA8"/></linearGradient></defs><circle class="rise" cx="20.5" cy="9" r="1.6" fill="#7ED4E6"/><path d="M5.5 12c0-1.5 1.2-2.6 2.7-2.6h11.6c1.5 0 2.7 1.1 2.7 2.6 0 3.3-1.5 5.9-4.8 5.9-2 0-2.9-1.4-3.7-2.8-.3-.6-1.2-.6-1.5 0-.8 1.4-1.7 2.8-3.7 2.8-3.3 0-2.6-2.6-2.6-5.9Z" fill="url(#cat-bu)"/><rect x="7.5" y="8.3" width="13" height="2" rx="1" fill="#0E8FA8"/><path d="M17 13c1.5 0 2-1.2 2.1-2.3" stroke="#FFF" stroke-width="1" stroke-linecap="round" opacity="0.65"/></svg></span>
+            <span class="v2-cat__txt"><span class="lang-es">Buceo</span><span class="lang-en">Diving</span></span>
+          </button>
+          <button class="v2-cat filtros__btn" data-filtro="exploracion">
+            <span class="ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><defs><linearGradient id="cat-ex" x1="5" y1="6" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#5BB85C"/><stop offset="1" stop-color="#2F7D32"/></linearGradient></defs><g class="swing"><path d="M8.5 4.5c1 0 1.6.6 1.6 1.7 0 1.6-.3 3.1.4 4.4.5 1 1.5 1.7 2.9 2.4 2.6 1.3 5.6 2.3 7.3 3.6 1 .8 1.3 1.7 1.3 2.9v1.3c0 .6-.5 1.1-1.1 1.1H6c-.7 0-1.2-.5-1.2-1.2V6.2c0-1 .6-1.7 1.6-1.7h2.1Z" fill="url(#cat-ex)"/><path d="M10.1 11.4c.5.9 1.4 1.6 2.7 2.2" stroke="#FFF" stroke-width="0.8" stroke-linecap="round" opacity="0.45"/><circle cx="7.4" cy="14.6" r="0.7" fill="#FFF" opacity="0.55"/><circle cx="7.4" cy="16.8" r="0.7" fill="#FFF" opacity="0.55"/></g><path d="M4.8 22.2h18.4" stroke="#2F7D32" stroke-width="2" stroke-linecap="round"/></svg></span>
+            <span class="v2-cat__txt"><span class="lang-es">Exploración</span><span class="lang-en">Exploration</span></span>
+          </button>
+          <button class="v2-cat filtros__btn" data-filtro="bares">
+            <span class="ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><defs><linearGradient id="cat-ba" x1="8" y1="7" x2="20" y2="16" gradientUnits="userSpaceOnUse"><stop stop-color="#E96196"/><stop offset="1" stop-color="#C13768"/></linearGradient></defs><g class="sway"><circle class="rise" cx="11" cy="6" r="1.2" fill="#F3A9C6"/><path d="M7 8.5h14l-6 7v6h3" stroke="url(#cat-ba)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 9.7h10L14 14 9 9.7Z" fill="url(#cat-ba)"/></g></svg></span>
+            <span class="v2-cat__txt"><span class="lang-es">Bares</span><span class="lang-en">Food</span></span>
+          </button>
         </div>
 
         <!-- Sin data-home: el render muestra TODOS los destinos activos. -->
