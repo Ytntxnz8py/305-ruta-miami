@@ -1,6 +1,6 @@
 # CLAUDE.md — 305 Ruta Miami
 > **Fuente de verdad ÚNICA y VIVA del proyecto.** Si otro documento contradice a este, este gana.
-> Última actualización: 12 junio 2026. Tras cada fase completada, actualizar la sección "Estado".
+> Última actualización: 14 junio 2026 (cierre del pulido del index v2). Tras cada fase completada, actualizar la sección "Estado".
 > PROHIBIDO guardar secretos aquí (contraseñas, llaves, tokens). Este archivo se commitea al repo público.
 
 ---
@@ -52,6 +52,9 @@ Secretos: viven SOLO en `_privado/` (gitignored) o en los paneles de cada servic
 - Campo de rating en código = `rating` (no `calificacion`).
 - Fotos: convención `nombre--autor.jpg` para atribución; fuentes CC0 (Unsplash/Pexels/Pixabay/NPS/Wikimedia
   verificando licencia). Licencias del hero en `assets/images/hero/CREDITOS.md`.
+- **Fotos de especies (pesca):** son ORIGINALES creadas por Calixto (autor = dueño del proyecto), por lo
+  que NO requieren atribución de terceros ni la convención `nombre--autor`. Único filtro pendiente:
+  verificación propia de que cada foto corresponde a la especie correcta.
 
 ---
 
@@ -93,6 +96,18 @@ RLS verificada en vivo (clientes/suscripciones/pagos = permission denied para an
 `archivos` queda sin grant para anon; se le dará GRANT cuando el frontend muestre
 galerías (F7/Lote C). Pendiente F7: vista `negocios_publicos` para filtrar columnas.
 
+**Diseño v2 — Lote A (index + `/destinos`) COMPLETO.** Index migrado al sistema v2 (Airbnb-limpio) +
+nueva página `/destinos`. Pulido final del index cerrado, verificado en móvil y escritorio:
+- Iconos v3 de categoría: SVG con color, bounce-in al cargar, gesto SOLO al hover (la bota patea en exploración).
+- Sistema ÚNICO de color de categorías: cada chip usa el color de su icono — pesca coral, playa dorado,
+  buceo turquesa, exploración verde, bares rosa.
+- Tarjetas con sombra al hover y esquinas más redondeadas.
+- Hero rediseñado: foto reducida + cuadro de texto sobrepuesto con sombra fija.
+- Barra de categorías colapsable al scroll (coreografía tipo Airbnb).
+- Evento `destination_click` RECONECTADO (estaba muerto desde antes del rediseño).
+- Ajuste móvil posterior: tarjetas a 2 columnas (no 1 gigante), hero con aire (el cuadro no tapa la foto)
+  y fotos de especies cortadas RE-ENCUADRADAS (la caja toma el ratio real de la imagen: el pez se ve completo).
+
 **Pendiente, en orden (una fase = una rama):**
 - **F5** Index gira al mar (solo-visitante) + página `/destinos` con selector y buscador.
 - **F6** Blog de pesca (artículos cola larga, continuo).
@@ -100,6 +115,20 @@ galerías (F7/Lote C). Pendiente F7: vista `negocios_publicos` para filtrar colu
   7b Checkout (Edge Function), 7c webhooks → `suscripciones`/`pagos` automáticos.
 - **F8** Flujos Brevo: bienvenida automática + newsletter mensual + plantilla DOI con marca.
 - **F9** Kit de venta + publicidad (solo cuando todo lo anterior esté firme).
+- **Lote SEO (arrancar pronto, corre en paralelo — el SEO tarda meses):** optimizar meta-descriptions,
+  títulos y schema de TODAS las páginas (nuevas y existentes); actualizar `sitemap.xml`; registrar en
+  Google Search Console para indexación; definir `og:image` por página (foto de Miami + logo, 1200×630)
+  y favicon de marca (imagen cuadrada original de Calixto, 512×512; fondo transparente si se quiere
+  redondo). Objetivo doble: indexación en buscadores Y citabilidad por motores de IA (misma base:
+  contenido claro + datos estructurados). Absorbe el pendiente menor de `og:image`/favicon.
+
+**Decisión de producto PENDIENTE — Élite automático en destacados de portada:** cuando un negocio con
+plan Élite esté activo, debe aparecer automáticamente en los destinos destacados del index y desplazar a
+uno de los destinos curados (`destacado_home`) NO patrocinados. Preguntas abiertas: nº de slots Élite en
+portada · comportamiento cuando hay más Élite que slots (rotación/orden) · fuente de datos del grid (hoy
+`DESTINOS_DEFAULT` en JS; probablemente requiere migrar el grid del index a Supabase, como el hub de
+pesca). Distinguir SIEMPRE `destacado_home` (curatorial) de `destacado` (plan pago). Abordar junto con la
+migración del index a Supabase, post-Stripe.
 
 **Pendientes menores anotados:** og:image propia (falta foto elegida) · renombrar propiedad GA4 e infra
 GAS a marca 305 · mover repo fuera de OneDrive si reaparece el error mmap de git.
@@ -147,8 +176,8 @@ formularios (Formspree/Brevo) · JSON-LD, canonical, OG y URLs · fetch de chart
 (`pesca-charters.js` y la sección `#nautico`).
 
 **Lotes de aplicación (en orden):**
-- **A** index + tokens globales · **B** anunciantes (listing explotado) ·
-- **C** hub pesca + especies · **D** destinos · **E** blog + legales + barrido final.
+- **A** index + `/destinos` + tokens globales ✅ **COMPLETO** · **B** anunciantes (listing explotado) ·
+- **C** hub pesca + especies · **D** páginas de destino individuales · **E** blog + legales + barrido final.
 
 ---
 
