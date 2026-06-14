@@ -393,15 +393,18 @@ body.v2 {
 
   /* Hero (opcion B): el cuadro flotante absoluto tapaba casi toda la
      foto reducida (280px de alto). En movil la foto recupera un alto
-     propio y el cuadro baja al flujo normal, solapando apenas el borde
-     inferior (efecto tarjeta) en lugar de cubrir la imagen. */
+     propio y el cuadro baja al flujo normal. Solapa SOLO un poco la foto
+     y trae mas aire interno (sobre todo arriba) para que el titulo no
+     quede pegado al borde de la imagen. */
   .v2 .v2-hero { padding-top: 1rem; }
   .v2 .v2-hero__media { height: auto; }
   .v2 .v2-hero__img { height: clamp(190px, 52vw, 280px); }
   .v2 .v2-hero__box {
     position: static;
     max-width: 100%;
-    margin: -1.6rem 0.7rem 0;
+    margin: -0.5rem 0.9rem 0;
+    padding: 1.6rem 1.3rem 1.4rem;
     box-shadow: 0 10px 26px -16px rgba(26, 42, 53, 0.30);
   }
+  .v2 .v2-hero__titulo { margin-bottom: 0.5rem; }
 }
