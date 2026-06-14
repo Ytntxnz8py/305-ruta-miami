@@ -44,7 +44,10 @@ function trackEvent(nombreEvento, parametros) {
 (function () {
   if (!window.IntersectionObserver) return;
 
-  var secciones = ['inicio', 'nosotros', 'destinos', 'mapa', 'trabaja', 'contacto'];
+  /* v2 (Lote A): IDs reales del index nuevo. Se quitaron 'nosotros' y 'mapa'
+     (secciones eliminadas) y 'trabaja' (B2B fuera del index); se añadieron
+     'pesca-destacado' y 'newsletter'. El observer ignora los ausentes. */
+  var secciones = ['inicio', 'destinos', 'pesca-destacado', 'newsletter', 'contacto'];
 
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {

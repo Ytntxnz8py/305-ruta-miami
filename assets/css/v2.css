@@ -1,0 +1,372 @@
+/* ============================================================================
+   305 RUTA MIAMI — Sistema visual v2 (Ley de diseño v2, CLAUDE.md §7b)
+   ----------------------------------------------------------------------------
+   Limpio tipo Airbnb: fondo blanco, color SOLO funcional, una sola sombra.
+   Lote A: index + /destinos. El resto del sitio sigue en el sistema viejo
+   hasta su lote (incoherencia temporal esperada y aceptada).
+
+   AISLAMIENTO: todo se aplica bajo la clase .v2 (en <body>). Las hojas
+   compartidas (navbar.css, footer.css, styles.css) tienen hex hardcodeado y
+   las cargan otras paginas; al scopear bajo .v2 NO las tocamos: solo las
+   sobre-escribimos en las paginas que llevan la clase .v2. Asi el index v2 no
+   hereda NINGUN color viejo y las demas paginas quedan intactas.
+
+   Esta hoja se carga LA ULTIMA en el <head> para ganar la cascada.
+   ============================================================================ */
+
+/* ============================================================
+   1) TOKENS v2  (nombres de la Ley de diseño v2)
+   ============================================================ */
+:root {
+  /* Superficies */
+  --blanco:       #FFFFFF;   /* fondo unico del sitio publico */
+  --banda:        #FAFAF8;   /* bandas/seccion alterna sutil */
+  --linea:        #EAEAEA;   /* hairline: bordes finos, separadores */
+
+  /* Tinta y texto */
+  --tinta:        #1a2a3a;   /* titulos y texto fuerte */
+  --texto:        #3d5061;   /* cuerpo */
+  --texto-suave:  #74848f;   /* meta, secundario (override del viejo en .v2) */
+
+  /* Accion */
+  --accion-visitante: #007487;  /* UNICO color de accion del sitio publico */
+  --accion-visitante-h: #00606f;/* hover de la accion visitante */
+  /* --accion-empresa NO se usa en el cuerpo del index (AJUSTE 1). Reservado a
+     anunciantes y al enlace B2B discreto. Definido para /destinos y futuro. */
+  --accion-empresa:   #C0392B;
+
+  /* Destacado (UNICO uso de mostaza: badge de destino de pago) */
+  --destacado-bg: #FBF3DB;
+  --destacado-tx: #956400;
+
+  /* Chips de categoria — pasteles lavados.
+     NOTA: no existe archivo piloto-v2 en el repo; estos son mi interpretacion.
+     Calixto puede sustituirlos por los valores exactos del piloto. */
+  /* Sistema UNICO de color de categoria = los 5 colores de los iconos v3.
+     El chip de cada tarjeta usa el color de su icono (tinte claro + texto oscuro). */
+  --chip-pesca-bg:       #FDEBE2;  --chip-pesca-tx:       #C2461A;  /* coral naranja */
+  --chip-playa-bg:       #FDF4DD;  --chip-playa-tx:       #9A6A07;  /* dorado */
+  --chip-buceo-bg:       #E2F4F8;  --chip-buceo-tx:       #0E7E94;  /* turquesa */
+  --chip-exploracion-bg: #E8F4E8;  --chip-exploracion-tx: #2F7D32;  /* verde */
+  --chip-bares-bg:       #FBE9F0;  --chip-bares-tx:       #B23463;  /* rosa */
+  --chip-otro-bg:        #F2F4F5;  --chip-otro-tx:        #51606B;  /* neutro (Todos) */
+
+  /* Forma y elevacion */
+  --radio-v2:     12px;            /* radio maximo del sistema */
+  --radio-v2-sm:  10px;
+  --sombra-v2-suave: 0 1px 4px rgba(26, 42, 53, 0.07); /* reposo: apenas visible */
+  --sombra-v2:    0 8px 24px -8px rgba(26, 42, 53, 0.20); /* hover: se intensifica */
+
+  /* Tipografia */
+  --serif-v2: 'Playfair Display', Georgia, serif;  /* SOLO H1/H2 */
+  --sans-v2:  'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ============================================================
+   2) BASE  (scopeada a .v2 — no afecta a otras paginas)
+   ============================================================ */
+body.v2 {
+  background: var(--blanco);
+  color: var(--texto);
+  font-family: var(--sans-v2);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Playfair SOLO en H1/H2; el resto hereda Inter. */
+.v2 h1,
+.v2 h2 {
+  font-family: var(--serif-v2);
+  color: var(--tinta);
+  font-weight: 600;
+  line-height: 1.15;
+}
+.v2 h3,
+.v2 h4,
+.v2 h5,
+.v2 h6 {
+  font-family: var(--sans-v2);
+  color: var(--tinta);
+  font-weight: 600;
+}
+
+.v2 a { color: inherit; text-decoration: none; }
+
+/* Enlaces de accion visitante (texto) */
+.v2 .v2-link {
+  color: var(--accion-visitante);
+  font-weight: 600;
+}
+.v2 .v2-link:hover { color: var(--accion-visitante-h); }
+
+/* Foco visible accesible y consistente en todo el sistema v2 */
+.v2 a:focus-visible,
+.v2 button:focus-visible,
+.v2 input:focus-visible {
+  outline: 2px solid var(--accion-visitante);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.v2 ::selection { background: rgba(0, 116, 135, 0.16); }
+
+/* Reveal base del sistema v2 (la contraparte reduced-motion va abajo) */
+.v2 .v2-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.2, 0, 0, 1),
+              transform 0.5s cubic-bezier(0.2, 0, 0, 1);
+}
+.v2 .v2-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   3) ACCESIBILIDAD — prefers-reduced-motion
+   Cubre el reveal y cualquier hover/transform del sistema v2.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .v2 .v2-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .v2 *,
+  .v2 *::before,
+  .v2 *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   4) COMPONENTES v2  (Lote A: index + /destinos)
+   ============================================================ */
+
+/* ---- contenedor + utilidades ---- */
+.v2 .v2-wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+.v2 .v2-eyebrow {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accion-visitante); margin-bottom: 0.5rem;
+}
+.v2 .v2-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.7rem 1.3rem; border-radius: var(--radio-v2);
+  background: var(--accion-visitante); color: #fff;
+  font-weight: 600; font-size: 0.92rem; border: none; cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.v2 .v2-btn:hover { background: var(--accion-visitante-h); transform: translateY(-1px); color: #fff; }
+
+/* ---- HERO (opcion B): foto REDUCIDA + cuadro blanco flotante con el texto.
+   SIN animacion de entrada. El texto va en cuadro opaco (contraste garantizado),
+   nunca directamente sobre la foto. La foto se clipa con su propio border-radius
+   (sin overflow:hidden) para que el cuadro pueda sobresalir sin recortarse. ---- */
+.v2 .v2-hero { max-width: 1040px; margin: 0 auto; padding: 1.4rem clamp(1rem,4vw,2rem) 0; }
+.v2 .v2-hero__media { position: relative; height: clamp(280px, 40vw, 420px); }
+.v2 .v2-hero__img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: var(--radio-v2); }
+.v2 .v2-hero__box {
+  position: absolute;
+  left: clamp(1rem, 4vw, 2.4rem);
+  bottom: clamp(1rem, 4vw, 2.4rem);
+  max-width: min(440px, 86%);
+  background: #fff;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-v2);
+  box-shadow: 0 14px 34px -14px rgba(26, 42, 53, 0.30); /* sutil, FIJA */
+  padding: clamp(1.1rem, 3vw, 1.7rem);
+}
+.v2 .v2-hero__titulo { font-family: var(--serif-v2); color: var(--tinta); font-size: clamp(1.35rem, 3vw, 2rem); line-height: 1.15; margin: 0 0 0.4rem; }
+.v2 .v2-hero__sub { color: var(--texto); font-size: clamp(0.92rem, 1.6vw, 1.04rem); line-height: 1.5; margin: 0 0 1rem; }
+.v2 .v2-hero__cta { margin: 0; }
+
+/* ---- cabecera de seccion ---- */
+.v2 .v2-sec-head { text-align: center; max-width: 60ch; margin: 0 auto clamp(1.2rem,3vw,2rem); padding-top: clamp(2rem,5vw,3.4rem); }
+.v2 .v2-sec-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+.v2 .v2-sec-sub { color: var(--texto-suave); margin-top: 0.4rem; font-size: 0.98rem; }
+
+/* ---- barra de categorias (Pesca primero) ---- */
+.v2 .v2-destinos { padding-bottom: clamp(2rem,5vw,3.5rem); }
+.v2 .v2-cats { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: clamp(1.4rem,3vw,2rem); }
+
+/* ---- Barra COLAPSABLE (coreografia Airbnb) — SOLO el index (.is-anim).
+   Sticky bajo la nav (--nav-h lo pone navbar.js). Al bajar se encoge (scale) y
+   aparece una pildora blanca; al subir se re-expande. SOLO transform + paint
+   (background/box-shadow), nunca height/layout, para no trabar el scroll.
+   Los filtros (.filtros__btn) siguen vivos en ambos estados (no cambia el DOM). ---- */
+.v2 .v2-cats.is-anim {
+  position: sticky;
+  top: calc(var(--nav-h, 60px) + 8px);
+  z-index: 25;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto; margin-right: auto;
+  border-radius: 999px;
+  transform-origin: top center;
+  transition: transform .28s ease, background-color .28s ease, box-shadow .28s ease;
+}
+.v2 .v2-cats.is-anim.is-collapsed {
+  transform: scale(0.86);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 6px 20px -10px rgba(26, 42, 53, 0.28);
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Sin coreografia: barra estable y legible (sticky sigue; sin encoger ni pildora). */
+  .v2 .v2-cats.is-anim { transition: none; }
+  .v2 .v2-cats.is-anim.is-collapsed { transform: none; background: transparent; box-shadow: none; }
+}
+/* Boton de categoria: iconos SUELTOS, sin disco ni borde, fundidos al fondo
+   blanco. Solo un gris muy claro (--banda) al hover/activo, NO un marco. */
+.v2 .v2-cat {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.45rem 0.7rem; border-radius: var(--radio-v2);
+  border: none; background: transparent;
+  color: var(--texto); font-size: 0.85rem; font-weight: 500; font-family: inherit; cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.v2 .v2-cat:hover { background: var(--banda); }
+.v2 .v2-cat.filtros__btn--activo { background: var(--banda); color: var(--tinta); font-weight: 600; }
+/* /destinos aun usa .v2-cat__ico (iconos simples); el index usa .ico (iconos v3). */
+.v2 .v2-cat__ico { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+
+/* ---- Iconos v3 de la barra (index) ---- */
+.v2 .v2-cat .ico { width: 26px; height: 26px; display: block; flex: 0 0 auto; }
+.v2 .v2-cat .ico svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+/* Entrada bounce-in UNA vez. La dispara .play (JS la añade al entrar la barra en
+   viewport). Solo bajo .is-anim: si el JS no corre, los iconos quedan visibles. */
+.v2 .v2-cats.is-anim .v2-cat .ico { opacity: 0; }
+.v2 .v2-cats.is-anim.play .v2-cat:nth-child(1) .ico { animation: ico-bounceIn .65s cubic-bezier(0.34,1.56,0.64,1) .05s forwards; }
+.v2 .v2-cats.is-anim.play .v2-cat:nth-child(2) .ico { animation: ico-bounceIn .65s cubic-bezier(0.34,1.56,0.64,1) .13s forwards; }
+.v2 .v2-cats.is-anim.play .v2-cat:nth-child(3) .ico { animation: ico-bounceIn .65s cubic-bezier(0.34,1.56,0.64,1) .21s forwards; }
+.v2 .v2-cats.is-anim.play .v2-cat:nth-child(4) .ico { animation: ico-bounceIn .65s cubic-bezier(0.34,1.56,0.64,1) .29s forwards; }
+.v2 .v2-cats.is-anim.play .v2-cat:nth-child(5) .ico { animation: ico-bounceIn .65s cubic-bezier(0.34,1.56,0.64,1) .37s forwards; }
+.v2 .v2-cats.is-anim.play .v2-cat:nth-child(6) .ico { animation: ico-bounceIn .65s cubic-bezier(0.34,1.56,0.64,1) .45s forwards; }
+@keyframes ico-bounceIn {
+  0%   { opacity: 0; transform: scale(0.3) translateY(8px); }
+  60%  { opacity: 1; transform: scale(1.12) translateY(-3px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Gesto SOLO al hover (no loop). transform-box: fill-box para que las rotaciones
+   giren sobre el centro del icono (no del lienzo SVG). */
+.v2 .v2-cat:hover .bob   { animation: ico-bob 1.4s ease-in-out; }
+.v2 .v2-cat:hover .spin  { animation: ico-spin 1.2s ease-in-out; transform-origin: center; transform-box: fill-box; }
+.v2 .v2-cat:hover .rise  { animation: ico-rise 1.3s ease-out; }
+.v2 .v2-cat:hover .swing { animation: ico-swing 1.3s ease-in-out; transform-origin: center 4px; transform-box: fill-box; }
+.v2 .v2-cat:hover .sway  { animation: ico-sway 1.4s ease-in-out; transform-origin: center bottom; transform-box: fill-box; }
+@keyframes ico-bob   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+@keyframes ico-spin  { to { transform: rotate(360deg); } }
+@keyframes ico-rise  { 0% { transform: translateY(2px); opacity: 0; } 40% { opacity: .9; } 100% { transform: translateY(-7px); opacity: 0; } }
+@keyframes ico-swing { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-7deg); } 75% { transform: rotate(7deg); } }
+@keyframes ico-sway  { 0%,100% { transform: rotate(0); } 30% { transform: rotate(-5deg); } 70% { transform: rotate(5deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .v2 .v2-cats.is-anim .v2-cat .ico { opacity: 1 !important; animation: none !important; }
+  .v2 .bob, .v2 .spin, .v2 .rise, .v2 .swing, .v2 .sway { animation: none !important; }
+}
+
+/* ---- GRID + TARJETA compacta (Airbnb-pequeña, AJUSTE 2) ---- */
+.v2 .v2-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(182px, 1fr)); gap: clamp(0.8rem,1.5vw,1.2rem); }
+.v2 .v2-card { display: block; color: inherit; border-radius: var(--radio-v2); transition: transform 0.25s ease; }
+.v2 .v2-card:hover { transform: translateY(-2px); }
+/* Sombra en la FOTO (no bajo el texto): sutil en reposo, se intensifica al hover (+ el lift). */
+.v2 .v2-card__media { position: relative; aspect-ratio: 1 / 1; border-radius: var(--radio-v2); overflow: hidden; background: var(--banda); box-shadow: var(--sombra-v2-suave); transition: box-shadow 0.25s ease; }
+.v2 .v2-card:hover .v2-card__media { box-shadow: var(--sombra-v2); }
+.v2 .v2-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+.v2 .v2-card:hover .v2-card__img { transform: scale(1.04); }
+.v2 .v2-card__chip {
+  position: absolute; top: 8px; left: 8px; font-size: 0.68rem; font-weight: 600;
+  padding: 0.18rem 0.5rem; border-radius: 999px;
+  background: var(--chip-otro-bg); color: var(--chip-otro-tx);
+}
+.v2 .v2-card__chip--pesca { background: var(--chip-pesca-bg); color: var(--chip-pesca-tx); }
+.v2 .v2-card__chip--playa { background: var(--chip-playa-bg); color: var(--chip-playa-tx); }
+.v2 .v2-card__chip--buceo { background: var(--chip-buceo-bg); color: var(--chip-buceo-tx); }
+.v2 .v2-card__chip--exploracion { background: var(--chip-exploracion-bg); color: var(--chip-exploracion-tx); }
+.v2 .v2-card__chip--bares { background: var(--chip-bares-bg); color: var(--chip-bares-tx); }
+/* Badge "Destacado" (unico uso de mostaza) — solo destinos de pago (dormido por ahora). */
+.v2 .v2-card__badge {
+  position: absolute; top: 8px; right: 8px; font-size: 0.66rem; font-weight: 700;
+  padding: 0.18rem 0.5rem; border-radius: 999px;
+  background: var(--destacado-bg); color: var(--destacado-tx);
+}
+.v2 .v2-card__titulo { font-size: 0.89rem; font-weight: 600; color: var(--tinta); margin: 0.55rem 0 0.15rem; line-height: 1.25; }
+.v2 .v2-card__meta { font-size: 0.78rem; color: var(--texto-suave); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.v2 .v2-vertodos { text-align: center; margin-top: clamp(1.4rem,3vw,2rem); }
+
+/* ---- buscador de /destinos + estado vacio ---- */
+.v2 .v2-buscador { display: flex; justify-content: center; max-width: 520px; margin: 0 auto clamp(1.2rem,3vw,1.8rem); }
+.v2 .v2-buscador input { width: 100%; padding: 0.7rem 1rem; border: 1px solid var(--linea); border-radius: var(--radio-v2); font-size: 0.95rem; font-family: inherit; color: var(--tinta); background: #fff; }
+.v2 .v2-buscador input:focus { outline: none; border-color: var(--accion-visitante); }
+.v2 .v2-grid__vacio { grid-column: 1 / -1; text-align: center; color: var(--texto-suave); padding: 2.5rem 1rem; }
+
+/* ---- BANDA PESCA (sobria) ---- */
+.v2 .v2-pesca { background: var(--banda); border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
+.v2 .v2-pesca__inner { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(1.2rem,3vw,2.4rem); padding: clamp(1.8rem,4vw,2.8rem) clamp(1rem,4vw,2rem); }
+.v2 .v2-pesca__img { width: clamp(220px, 38%, 420px); aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radio-v2); flex: 0 0 auto; }
+.v2 .v2-pesca__text { flex: 1 1 280px; }
+.v2 .v2-pesca__text h2 { font-size: clamp(1.4rem,2.6vw,1.9rem); margin: 0 0 0.5rem; }
+.v2 .v2-pesca__text p { color: var(--texto); margin: 0 0 1rem; max-width: 52ch; }
+
+/* ---- NEWSLETTER de una linea (IDs/Brevo intactos) ---- */
+.v2 .v2-news { padding: clamp(2.4rem,5vw,3.6rem) 0; }
+.v2 .v2-news__inner { max-width: 760px; text-align: center; }
+.v2 .v2-news__text h2 { font-size: clamp(1.4rem,2.6vw,1.9rem); margin: 0 0 0.4rem; }
+.v2 .v2-news__sub { color: var(--texto-suave); margin: 0 0 1.2rem; }
+/* flex-direction/align/padding explicitos: anulan el .newsletter-form viejo (column). */
+.v2 .v2-news__form { display: flex; flex-direction: row; align-items: center; gap: 0.5rem; justify-content: center; flex-wrap: wrap; padding: 0; }
+.v2 .v2-news__input { flex: 1 1 260px; max-width: 340px; padding: 0.7rem 1rem; border: 1px solid var(--linea); border-radius: var(--radio-v2); font-size: 0.95rem; font-family: inherit; color: var(--tinta); background: #fff; }
+.v2 .v2-news__input:focus { outline: none; border-color: var(--accion-visitante); }
+.v2 .v2-news__err { color: #b3261e; margin: 0.8rem 0 0; font-size: 0.86rem; }
+.v2 .v2-news__ok { margin-top: 1rem; color: var(--tinta); display: flex; flex-direction: column; gap: 0.25rem; align-items: center; }
+.v2 .v2-news__okmsg { color: var(--texto-suave); font-size: 0.9rem; }
+
+/* ---- FOOTER sobrio ---- */
+.v2 .v2-footer { background: var(--banda); border-top: 1px solid var(--linea); }
+.v2 .v2-footer__top { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: flex-start; padding: clamp(2rem,4vw,3rem) clamp(1rem,4vw,2rem) 1.4rem; }
+.v2 .v2-footer__logo { font-family: var(--serif-v2); font-size: 1.25rem; font-weight: 600; color: var(--tinta); }
+.v2 .v2-footer__logo span { color: var(--accion-visitante); font-style: italic; }
+.v2 .v2-footer__tag { color: var(--texto-suave); font-size: 0.9rem; margin-top: 0.3rem; }
+.v2 .v2-footer__nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+.v2 .v2-footer__nav a { color: var(--texto); font-size: 0.9rem; }
+.v2 .v2-footer__nav a:hover { color: var(--accion-visitante); }
+.v2 .v2-footer__bottom { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; padding: 1rem clamp(1rem,4vw,2rem) 1.6rem; border-top: 1px solid var(--linea); }
+.v2 .v2-footer__copy { color: var(--texto-suave); font-size: 0.84rem; margin: 0; }
+.v2 .v2-footer__admin { color: var(--texto-suave); margin-left: 0.6rem; }
+.v2 .v2-footer__admin:hover { color: var(--accion-visitante); }
+.v2 .v2-totop { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--linea); background: #fff; color: var(--tinta); cursor: pointer; font-size: 1rem; line-height: 1; }
+.v2 .v2-totop:hover { border-color: var(--accion-visitante); color: var(--accion-visitante); }
+
+/* ---- NAV override: navbar.css es compartido y hardcodeado; bajo .v2 lo forzamos
+        sobrio (blanco + hairline), sin tocar las otras paginas. ---- */
+.v2 .em-nav,
+.v2 .em-nav.em-nav--dark-hero { background: #fff; box-shadow: 0 1px 0 var(--linea); }
+.v2 .em-nav__logo-e,
+.v2 .em-nav.em-nav--dark-hero .em-nav__logo-e { color: var(--tinta); }
+.v2 .em-nav__logo-m,
+.v2 .em-nav.em-nav--dark-hero .em-nav__logo-m { color: var(--accion-visitante); }
+.v2 .em-nav__link,
+.v2 .em-nav.em-nav--dark-hero .em-nav__link { color: var(--texto); }
+.v2 .em-nav__link:hover,
+.v2 .em-nav.em-nav--dark-hero .em-nav__link:hover { color: var(--accion-visitante); background: transparent; }
+.v2 .em-nav__link.is-active { color: var(--tinta); background: transparent; font-weight: 600; }
+.v2 .em-nav__link--muted,
+.v2 .em-drawer__link--muted { color: var(--accion-visitante); font-weight: 600; }
+.v2 .em-nav__lang { background: #fff; color: var(--tinta); border: 1px solid var(--linea); }
+.v2 .em-nav__lang:hover { background: var(--accion-visitante); color: #fff; border-color: var(--accion-visitante); }
+.v2 .em-nav.em-nav--dark-hero .em-nav__burger span { background: var(--tinta); }
+.v2 .em-drawer__link:hover,
+.v2 .em-drawer__link.is-active { color: var(--accion-visitante); }
+
+/* ---- MODAL (Lote A: solo des-metalizar cerrar + quitar side-stripe; restyle pleno -> Lote D) ---- */
+.v2 .v2-modal-cerrar {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--linea); background: #fff; color: var(--tinta);
+  font-size: 1.05rem; line-height: 1; cursor: pointer;
+}
+.v2 .v2-modal-cerrar:hover { border-color: var(--accion-visitante); color: var(--accion-visitante); }
+/* Anti-patron impeccable (b): el side-stripe border-left:3px pasa a borde completo + tinte. */
+.v2 .modal-llegar-texto { border-left: none; border: 1px solid var(--linea); border-radius: var(--radio-v2); background: var(--banda); }
