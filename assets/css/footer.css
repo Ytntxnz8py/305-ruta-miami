@@ -255,6 +255,8 @@
 .cf-logo:hover { opacity: 0.72; }
 .cf-logo__e { color: var(--cf-teal); }
 .cf-logo__m { color: var(--cf-gold); }
+/* Sello de marca (reemplaza el wordmark de texto en el footer cinematico). */
+.cf-logo__img { height: 72px; width: auto; display: block; }
 
 .cf-tagline {
   font-size: 0.82rem;

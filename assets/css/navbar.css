@@ -51,7 +51,7 @@ html { overflow-x: hidden; }
 /* Logo */
 .em-nav__logo {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.15rem;
   text-decoration: none;
   font-family: 'Playfair Display', 'Cormorant Garamond', serif;
@@ -63,6 +63,15 @@ html { overflow-x: hidden; }
 }
 .em-nav__logo-e { color: #0a3d4f; }
 .em-nav__logo-m { color: #00BCD4; font-style: italic; }
+/* Simbolo (marlin) a la izquierda del wordmark — Opcion A. La imagen ya trae
+   aire a su derecha; altura contenida para no agrandar la altura del navbar. */
+.em-nav__logo-img {
+  height: 34px;
+  width: auto;
+  aspect-ratio: 2 / 1;
+  display: block;
+  flex: 0 0 auto;
+}
 
 /* Links desktop */
 .em-nav__links {
@@ -404,6 +413,13 @@ html { overflow-x: hidden; }
   .em-nav__sep { display: none; }
   .em-nav__burger { display: inline-block; }
   .em-nav__lang { display: none; }
+}
+
+/* En moviles estrechos basta el simbolo: se oculta el wordmark para que el
+   enlace "Anuncia tu negocio" + la hamburguesa no se solapen con el logo. */
+@media (max-width: 560px) {
+  .em-nav__logo-e,
+  .em-nav__logo-m { display: none; }
 }
 
 @media (min-width: 901px) {
