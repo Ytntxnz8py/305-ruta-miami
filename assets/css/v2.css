@@ -370,3 +370,41 @@ body.v2 {
 .v2 .v2-modal-cerrar:hover { border-color: var(--accion-visitante); color: var(--accion-visitante); }
 /* Anti-patron impeccable (b): el side-stripe border-left:3px pasa a borde completo + tinte. */
 .v2 .modal-llegar-texto { border-left: none; border: 1px solid var(--linea); border-radius: var(--radio-v2); background: var(--banda); }
+
+/* ============================================================
+   5) RESPONSIVE MOVIL  (<=560px)
+   El sistema v2 se afino para escritorio; estos ajustes evitan que
+   en el telefono las tarjetas se vuelvan gigantes (la rejilla
+   colapsaba a 1 columna) y que el cuadro del hero tape la foto.
+   Solo afecta al movil: el escritorio queda intacto.
+   ============================================================ */
+@media (max-width: 560px) {
+
+  /* Tarjetas: forzar 2 columnas. Con minmax(182px,1fr) el auto-fill
+     colapsaba a 1 columna por debajo de ~409px y cada tarjeta llenaba
+     todo el ancho (foto cuadrada gigante).
+     minmax(0,1fr) (no 1fr): permite que las pistas bajen de su contenido
+     min-content; sin el 0, el meta con white-space:nowrap inflaba las
+     columnas y desbordaba el ancho (scroll horizontal). */
+  .v2 .v2-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+
+  /* Hero (opcion B): el cuadro flotante absoluto tapaba casi toda la
+     foto reducida (280px de alto). En movil la foto recupera un alto
+     propio y el cuadro baja al flujo normal. Solapa SOLO un poco la foto
+     y trae mas aire interno (sobre todo arriba) para que el titulo no
+     quede pegado al borde de la imagen. */
+  .v2 .v2-hero { padding-top: 1rem; }
+  .v2 .v2-hero__media { height: auto; }
+  .v2 .v2-hero__img { height: clamp(190px, 52vw, 280px); }
+  .v2 .v2-hero__box {
+    position: static;
+    max-width: 100%;
+    margin: -0.5rem 0.9rem 0;
+    padding: 1.6rem 1.3rem 1.4rem;
+    box-shadow: 0 10px 26px -16px rgba(26, 42, 53, 0.30);
+  }
+  .v2 .v2-hero__titulo { margin-bottom: 0.5rem; }
+}
