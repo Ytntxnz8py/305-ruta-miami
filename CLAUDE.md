@@ -1,6 +1,6 @@
 # CLAUDE.md — 305 Ruta Miami
 > **Fuente de verdad ÚNICA y VIVA del proyecto.** Si otro documento contradice a este, este gana.
-> Última actualización: 14 junio 2026 (cierre del pulido del index v2). Tras cada fase completada, actualizar la sección "Estado".
+> Última actualización: 14 junio 2026 (logo y favicon de marca integrados en todo el sitio). Tras cada fase completada, actualizar la sección "Estado".
 > PROHIBIDO guardar secretos aquí (contraseñas, llaves, tokens). Este archivo se commitea al repo público.
 
 ---
@@ -108,6 +108,14 @@ nueva página `/destinos`. Pulido final del index cerrado, verificado en móvil 
 - Ajuste móvil posterior: tarjetas a 2 columnas (no 1 gigante), hero con aire (el cuadro no tapa la foto)
   y fotos de especies cortadas RE-ENCUADRADAS (la caja toma el ratio real de la imagen: el pez se ve completo).
 
+**Marca — logo y favicon en todo el sitio COMPLETO** (rama `feat/logo-favicon`). Sistema de marca aplicado a las 42 páginas públicas:
+- **Navbar:** símbolo `logo-horizontal.png` (marlin) + wordmark "305RutaMiami" en Playfair real al lado (Opción A); imagen decorativa, el `<a>` lo nombra con `aria-label`. En móvil (<560px) se muestra SOLO el símbolo, para no solapar con "Anuncia tu negocio".
+- **Footer:** `logo-sello.png` reemplaza el wordmark de texto en los DOS sistemas (v2-footer ×2 a 48px, cf-footer ×40 a 72px).
+- **Favicon:** set completo (`favicon.ico` + PNG 16/32/48/180/192/512) enlazado en el `<head>` de las 42 (ico + png 32/16 + apple-touch 180).
+- **og:image:** `logo-limpio.png` en index/destinos/anunciantes (sustituye el istockphoto genérico) + twitter:image; añadido en gracias/privacidad/terminos. Se RESPETARON las og:image propias y buenas: `og-pesca` (hub + 10 especies) y las fotos hero de los 21 destinos y el blog.
+- **Rutas ABSOLUTAS** (`/assets/images/logo/...`): sirven igual en raíz, `/destinos/` y `/pesca/especies/` (verificado `200` en las tres profundidades). Funciona por el dominio apex; se romperían solo en un sub-path tipo `usuario.github.io/repo/`.
+- Archivos de marca en `assets/images/logo/` (10 archivos). Maestro original: `logo-oficial.png` (raíz, sin trackear).
+
 **Pendiente, en orden (una fase = una rama):**
 - **F5** Index gira al mar (solo-visitante) + página `/destinos` con selector y buscador.
 - **F6** Blog de pesca (artículos cola larga, continuo).
@@ -117,10 +125,11 @@ nueva página `/destinos`. Pulido final del index cerrado, verificado en móvil 
 - **F9** Kit de venta + publicidad (solo cuando todo lo anterior esté firme).
 - **Lote SEO (arrancar pronto, corre en paralelo — el SEO tarda meses):** optimizar meta-descriptions,
   títulos y schema de TODAS las páginas (nuevas y existentes); actualizar `sitemap.xml`; registrar en
-  Google Search Console para indexación; definir `og:image` por página (foto de Miami + logo, 1200×630)
-  y favicon de marca (imagen cuadrada original de Calixto, 512×512; fondo transparente si se quiere
-  redondo). Objetivo doble: indexación en buscadores Y citabilidad por motores de IA (misma base:
-  contenido claro + datos estructurados). Absorbe el pendiente menor de `og:image`/favicon.
+  Google Search Console para indexación. Favicon de marca = HECHO (set completo). og:image base = HECHO
+  (`logo-limpio` en index/destinos/anunciantes, respetando `og-pesca`). **Pendiente del lote:** sustituir
+  ese logo por una `og:image` de **foto 1200×630 con el logo encima**, por página o por sección (el logo
+  es solución temporal de marca, no la óptima para compartir). Objetivo doble: indexación en buscadores
+  Y citabilidad por motores de IA (misma base: contenido claro + datos estructurados).
 
 **Decisión de producto PENDIENTE — Élite automático en destacados de portada:** cuando un negocio con
 plan Élite esté activo, debe aparecer automáticamente en los destinos destacados del index y desplazar a
