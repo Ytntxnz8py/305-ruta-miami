@@ -39,7 +39,7 @@ var TEXTOS = {
     intro_c3_texto:  'Desde los Everglades hasta South Beach — aventura en cada destino.',
 
     /* Destinos */
-    destinos_titulo: 'Destinos en Miami',
+    destinos_titulo: 'Destinos más destacados',
     destinos_sub:    'Descubre las mejores experiencias outdoor de South Florida',
     filtro_todos:        'Todos',
     filtro_playa:        '🏖️ Playa',
@@ -112,7 +112,7 @@ var TEXTOS = {
     intro_c3_texto:  'From the Everglades to South Beach — adventure at every destination.',
 
     /* Destinations */
-    destinos_titulo: 'Miami Destinations',
+    destinos_titulo: 'Featured destinations',
     destinos_sub:    'Discover the best outdoor experiences in South Florida',
     filtro_todos:        'All',
     filtro_playa:        '🏖️ Beach',
